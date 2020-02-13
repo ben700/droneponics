@@ -34,13 +34,13 @@ def connect_handler():
 @blynk.handle_event('write V38')
 def v38_write_handler(pin, value):
     button_state = value[0]
-    print("read" + button_state)
+    print("write " + button_state)
     
     
 @blynk.handle_event('read V38')
 def v38_read_handler(pin, value):
     button_state = value[0]
-    print("read" + button_state)
+    print("read " + button_state)
 
 @blynk.handle_event("disconnect")
 def connect_handler():
