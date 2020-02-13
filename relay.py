@@ -1,10 +1,11 @@
-import BlynkLib
+import blynklib
+from time import sleep
 
-BLYNK_AUTH = '00vIt07mIauITIq4q_quTOakFvcvpgGb' #piClearEnv
+BLYNK_AUTH = 'GP_sDPLJqyEN7jky9_zcQVSkgiyx-AeW' #motherLights
 
 
 # Initialize Blynk
-blynk = BlynkLib.Blynk(BLYNK_AUTH)
+blynk = blynklib.Blynk(BLYNK_AUTH)
 
 
 import RPi.GPIO as GPIO
@@ -19,7 +20,7 @@ GPIO.output(26, GPIO.HIGH)
 @blynk.handle_event("connect")
 def connect_handler():
     print('SCRIPT_START')
-    for pin in range(3):
+    for pin in range(40):
         print('Syncing virtual pin {}'.format(pin))
         blynk.virtual_sync(pin)
 
@@ -31,13 +32,13 @@ def connect_handler():
         
         
 @blynk.handle_event('write V38')
-def write_handler(pin, value):
+def v38_write_handler(pin, value):
     button_state = value[0]
     print("read" + button_state)
     
     
 @blynk.handle_event('read V38')
-def write_handler(pin, value):
+def v38_read_handler(pin, value):
     button_state = value[0]
     print("read" + button_state)
 
