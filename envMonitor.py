@@ -21,6 +21,8 @@ from ctypes import c_short
 from ctypes import c_byte
 from ctypes import c_ubyte
 import mh_z19
+import BlynkLib
+import BlynkTimer
 
 # The ID and range of a sample spreadsheet.
 #BLYNK_AUTH = 'pHjiH8dnAW3NrkAPSNTcVKsfa7BAdnBP' envLogger5
@@ -181,7 +183,7 @@ def blynk_data():
     blynk.virtual_write(6, str("{0:.2f}".format(humidity)))
     blynk.virtual_write(7, str("{0:.2f}".format(tslData['full'])))
     blynk.virtual_write(8, str("{0:.2f}".format(tslData['lux'])))           
-    blynk.virtual_write(9, ("{0:.2f}".format(tslData['ir']))))
+    blynk.virtual_write(9, ("{0:.2f}".format(tslData['ir'])))
     blynk.virtual_write(10, mhz19b['co2'])
     
 
