@@ -7,6 +7,7 @@ blynk = BlynkLib.Blynk(BLYNK_AUTH)
 
 import RPi.GPIO as GPIO
 GPIO.setmode(GPIO.BOARD)
+GPIO.setwarnings(False)
 GPIO.setup(26, GPIO.OUT)
 
 @blynk.on("connected")
