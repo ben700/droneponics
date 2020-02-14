@@ -11,11 +11,15 @@ GPIO.setup(26, GPIO.OUT)
 
 @blynk.on("connected")
 def connect_handler():
-   blynk.virtual_sync(38)
+   blynk.sync_virtual(38)
         
 @blynk.on("V38")
-def v38_write_handler(pin, value):
-    GPIO.output(26,value[0])
+def V28Pressed(value):
+    if(value[0] == '1'):
+        print("Lights turned on")
+        GPIO.output(26,1)
+    else:
+        print("Lights turned off")
     
 ###########################################################
 # infinite loop that waits for event
