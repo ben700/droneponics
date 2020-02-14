@@ -29,6 +29,13 @@ import mh_z19
 #BLYNK_AUTH = 'FnSZls3WUdCbWmDJvfnjz3f83Sm70HqI' envLogger2
 BLYNK_AUTH = 'ZDy8p4aFPCKGwQhafv4jwUT6TpCY9CyP' #envLogger1
 
+# Initialize Blynk
+blynk = BlynkLib.Blynk(BLYNK_AUTH)
+
+# Create BlynkTimer Instance
+timer = BlynkTimer()
+
+
 DEVICE = 0x77 # Default device I2C address
 tsl = tsl2591()  # initialize
 
