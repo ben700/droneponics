@@ -22,7 +22,7 @@ from ctypes import c_byte
 from ctypes import c_ubyte
 import mh_z19
 import BlynkLib
-import BlynkTimer
+from BlynkTimer import BlynkTimer
 
 # The ID and range of a sample spreadsheet.
 #BLYNK_AUTH = 'pHjiH8dnAW3NrkAPSNTcVKsfa7BAdnBP' envLogger5
