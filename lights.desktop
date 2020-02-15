@@ -1,0 +1,4 @@
+[Desktop Entry]
+Type=Application
+Name=Lights
+Exec=/usr/bin/python3 /home/pi/dronponics/Lights.py
