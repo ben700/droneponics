@@ -21,13 +21,21 @@ from ctypes import c_short
 from ctypes import c_byte
 from ctypes import c_ubyte
 import mh_z19
+import BlynkLib
+from BlynkTimer import BlynkTimer
 
 # The ID and range of a sample spreadsheet.
 #BLYNK_AUTH = 'pHjiH8dnAW3NrkAPSNTcVKsfa7BAdnBP' envLogger5
 #BLYNK_AUTH = 'pHjiH8dnAW3NrkAPSNTcVKsfa7BAdnBP' envLogger4
 #BLYNK_AUTH = '5P-DiNBQH6_YLNM1aqPEQjorV84i9rfG' envLogger3
-BLYNK_AUTH = 'FnSZls3WUdCbWmDJvfnjz3f83Sm70HqI' envLogger2
+BLYNK_AUTH = 'FnSZls3WUdCbWmDJvfnjz3f83Sm70HqI' #envLogger2
 #BLYNK_AUTH = 'ZDy8p4aFPCKGwQhafv4jwUT6TpCY9CyP' #envLogger1
+
+# Initialize Blynk
+blynk = BlynkLib.Blynk(BLYNK_AUTH)
+
+# Create BlynkTimer Instance
+timer = BlynkTimer()
 
 DEVICE = 0x77 # Default device I2C address
 tsl = tsl2591()  # initialize
@@ -174,8 +182,8 @@ def blynk_data():
     blynk.virtual_write(6, str("{0:.2f}".format(humidity)))
     blynk.virtual_write(7, str("{0:.2f}".format(tslData['full'])))
     blynk.virtual_write(8, str("{0:.2f}".format(tslData['lux'])))           
-    blynk.virtual_write(9, ("{0:.2f}".format(tslData['ir']))))
-    blynk.virtual_write(10, mhz19b['co2'])
+    blynk.virtual_write(9, ("{0:.2f}".format(tslData['ir'])))
+ #   blynk.virtual_write(10, mhz19b['co2'])
     
 
 
