@@ -12,7 +12,7 @@ GPIO.setup(37, GPIO.OUT)
 
 @blynk.on("connected")
 def connect_handler():
-   blynk.sync_virtual(38)
+   blynk.sync_virtual(38,39)
         
 @blynk.on("V38")
 def V38Pressed(value):
