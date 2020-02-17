@@ -1,4 +1,4 @@
 [Desktop Entry]
 Type=Application
 Name=Lights
-Exec=xterm -hold -e '/usr/bin/python3 /home/pi/droneponics/Lights.py'
+Exec=xterm -hold -e '/usr/bin/python3 /home/pi/droneponics/relay.py'
