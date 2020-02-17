@@ -23,6 +23,7 @@ from ctypes import c_ubyte
 import mh_z19
 import BlynkLib
 from BlynkTimer import BlynkTimer
+from datetime import datetime
 
 # The ID and range of a sample spreadsheet.
 #BLYNK_AUTH = 'pHjiH8dnAW3NrkAPSNTcVKsfa7BAdnBP' envLogger5
@@ -176,14 +177,16 @@ def blynk_data():
     tslData = tsl.get_current()
     mhz19b = mh_z19.read()
     
+    now = datetime.now()
  
+    blynk.virtual_write(3, now.strftime("%d/%m/%Y %H:%M:%S"))
     blynk.virtual_write(4, str("{0:.2f}".format(temperature)))
     blynk.virtual_write(5, str("{0:.2f}".format(pressure)))
     blynk.virtual_write(6, str("{0:.2f}".format(humidity)))
     blynk.virtual_write(7, str("{0:.2f}".format(tslData['full'])))
     blynk.virtual_write(8, str("{0:.2f}".format(tslData['lux'])))           
     blynk.virtual_write(9, ("{0:.2f}".format(tslData['ir'])))
- #   blynk.virtual_write(10, mhz19b['co2'])
+    blynk.virtual_write(10, mhz19b['co2'])
     
 
 

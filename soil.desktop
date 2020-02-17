@@ -1,0 +1,4 @@
+[Desktop Entry]
+Type=Application
+Name=soil
+Exec=xterm -hold -e 'sudo /usr/bin/python3 /home/pi/dronponics/soil.py'
