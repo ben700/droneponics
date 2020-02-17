@@ -17,7 +17,7 @@ from datetime import datetime
 #SHraFqInf27JKowTcFZapu0rHH2QGtuO #atlasReservoir
 #XVbhfI6ZYxkqFp7d4RsCIN6Is9YnKp9q #atlasButt
 #00vIt07mIauITIq4q_quTOakFvcvpgGb #dfRobotMonitor
-#GP_sDPLJqyEN7jky9_zcQVSkgiyx-AeW #motherLights
+#\GP_sDPLJqyEN7jky9_zcQVSkgiyx-AeW #motherLights
 
 
 # Initialize Blynk
@@ -29,23 +29,23 @@ timer = BlynkTimer()
 i2c_bus = busio.I2C(SCL, SDA)
 
 ss1 = Seesaw(i2c_bus, addr=0x36)
-ss2 = Seesaw(i2c_bus, addr=0x37)
-ss3 = Seesaw(i2c_bus, addr=0x38)
-ss4 = Seesaw(i2c_bus, addr=0x38)
+#ss2 = Seesaw(i2c_bus, addr=0x37)
+#ss3 = Seesaw(i2c_bus, addr=0x38)
+#ss4 = Seesaw(i2c_bus, addr=0x38)
 
 # Will Print Every 10 Seconds
 def blynk_data():
     now = datetime.now()
     blynk.virtual_write(10, now.strftime("%d/%m/%Y %H:%M:%S"))
     blynk.virtual_write(11, str(s1.moisture_read()))
-    blynk.virtual_write(12, str(s2.get_temp()))
-    blynk.virtual_write(13, str(s2.moisture_read()))
-    blynk.virtual_write(14, str(s2.get_temp()))
-    blynk.virtual_write(15, str(s3.moisture_read()))          
-    blynk.virtual_write(16, str(s3.get_temp()))
-    blynk.virtual_write(17, str(s4.moisture_read()))
-    blynk.virtual_write(18, str(s4.get_temp()))
-    
+    blynk.virtual_write(12, str(s1.get_temp()))
+#    blynk.virtual_write(13, str(s2.moisture_read()))
+ #   blynk.virtual_write(14, str(s2.get_temp()))
+#    blynk.virtual_write(15, str(s3.moisture_read()))          
+#    blynk.virtual_write(16, str(s3.get_temp()))
+#    blynk.virtual_write(17, str(s4.moisture_read()))
+#    blynk.virtual_write(18, str(s4.get_temp()))
+ #   
 
 
 # Add Timers
