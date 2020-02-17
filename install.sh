@@ -9,6 +9,7 @@ sudo pip3 install board
 sudo pip3 install adafruit-circuitpython-bme280
 sudo pip3 install adafruit-circuitpython-lis3dh
 sudo pip3 install mh-z19
+sudo apt-get install lxde
 
 sudo pip3 install adafruit-circuitpython-seesaw
 git submodule init
