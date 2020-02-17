@@ -1,4 +1,6 @@
 import BlynkLib
+from datetime import datetime
+
 
 BLYNK_AUTH = 'GP_sDPLJqyEN7jky9_zcQVSkgiyx-AeW' #motherLights
 
@@ -16,6 +18,8 @@ def connect_handler():
         
 @blynk.on("V38")
 def V38Pressed(value):
+    now = datetime.now()
+    blynk.virtual_write(3, now.strftime("%d/%m/%Y %H:%M:%S"))
     if(value[0] == '1'):
         print("Lights turned on")
         GPIO.output(37,GPIO.HIGH)
