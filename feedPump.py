@@ -20,8 +20,8 @@ SHraFqInf27JKowTcFZapu0rHH2QGtuO #atlasReservoir
 
 sensorFlowmeterPinPump1       = 23
 sensorFlowmeterPinPump2       = 22
-sensorFlowmeterPinPump3       = 27
-sensorFlowmeterPinPump4       = 28
+sensorFlowmeterPinPump3       = 12
+sensorFlowmeterPinPump4       = 18
 
 GPIO.setup(sensorFlowmeterPinPump1,GPIO.IN)
 GPIO.setup(sensorFlowmeterPinPump2,GPIO.IN)
@@ -72,14 +72,20 @@ timer = BlynkTimer()
 def blynk_data():
     now = datetime.now()
     blynk.virtual_write(20, now.strftime("%d/%m/%Y %H:%M:%S"))
-    print(GPIO.input(sensorFlowmeterPinPump1))
-    print(GPIO.input(sensorFlowmeterPinPump2))
-    print(GPIO.input(sensorFlowmeterPinPump3))
-    print(GPIO.input(sensorFlowmeterPinPump4))
     
-    Pump1Flow = GPIO.ouput(Pump1)
     
-    print(Pump1Flow)
+    
+    Pump1Flow = GPIO.input(sensorFlowmeterPinPump1)
+    Pump2Flow = GPIO.input(sensorFlowmeterPinPump1)
+    Pump3Flow = GPIO.input(sensorFlowmeterPinPump1)
+    Pump4Flow = GPIO.input(sensorFlowmeterPinPump1)
+    
+    print("Flow 1: " + str(Pump1Flow))
+    print("Flow 2: " + str(Pump2Flow))
+    print("Flow 3: " + str(Pump3Flow))
+    print("Flow 4: " + str(Pump4Flow))
+    
+    print(GPIO.ouput(Pump1))
     print(GPIO.ouput(Pump2))
     print(GPIO.ouput(Pump3))
     print(GPIO.ouput(Pump4))
