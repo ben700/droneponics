@@ -30,6 +30,16 @@ GPIO.setup(sensorFlowmeterPinPump4,GPIO.IN)
 
 
 
+Pump1Flow = 0
+Pump2Flow = 0
+Pump3Flow = 0
+Pump4Flow = 0
+Pump1BackupFlow = 0
+Pump2BackupFlow = 0
+Pump3BackupFlow = 0
+Pump4BackupFlow = 0
+
+
 Pump1 = 27
 Pump2 = 21
 Pump3 = 13 
@@ -67,7 +77,9 @@ def blynk_data():
     print(GPIO.input(sensorFlowmeterPinPump3))
     print(GPIO.input(sensorFlowmeterPinPump4))
     
-    print(GPIO.ouput(Pump1))
+    Pump1Flow = GPIO.ouput(Pump1)
+    
+    print(Pump1Flow)
     print(GPIO.ouput(Pump2))
     print(GPIO.ouput(Pump3))
     print(GPIO.ouput(Pump4))
