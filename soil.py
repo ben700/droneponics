@@ -8,7 +8,7 @@ from datetime import datetime
 
 #pHjiH8dnAW3NrkAPSNTcVKsfa7BAdnBP #soilogger3
 #pHjiH8dnAW3NrkAPSNTcVKsfa7BAdnBP #soilogger2
-5P-DiNBQH6_YLNM1aqPEQjorV84i9rfG #soilogger1
+BLYNK_AUTH = '5P-DiNBQH6_YLNM1aqPEQjorV84i9rfG' #soilogger1
 #FnSZls3WUdCbWmDJvfnjz3f83Sm70HqI #envLogger2
 #ZDy8p4aFPCKGwQhafv4jwUT6TpCY9CyP #envLogger1
 #e06jzpI2zuRD4KB5eHyHdCQTGFT7einR #dfRobotControl
