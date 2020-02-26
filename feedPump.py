@@ -2,7 +2,9 @@ import time
 from datetime import datetime
 import RPi.GPIO as GPIO
 import time, sys
-GPIO.setmode(GPIO.BOARD)
+import BlynkLib
+from BlynkTimer import BlynkTimer
+GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
 
 #pHjiH8dnAW3NrkAPSNTcVKsfa7BAdnBP #soilogger3
@@ -13,46 +15,42 @@ GPIO.setwarnings(False)
 #e06jzpI2zuRD4KB5eHyHdCQTGFT7einR #dfRobotControl
 ##XQuDhOorEscbMFLzbP1SOebbe39uXbA7 #envMonitor
 #rHuhXZ97FK3_azBlFK1AC4pIPNUxgw7B #envControl
-SHraFqInf27JKowTcFZapu0rHH2QGtuO #atlasReservoir
+BLYNK_AUTH = 'SHraFqInf27JKowTcFZapu0rHH2QGtuO' #atlasReservoir
 #XVbhfI6ZYxkqFp7d4RsCIN6Is9YnKp9q #atlasButt
 #00vIt07mIauITIq4q_quTOakFvcvpgGb #dfRobotMonitor
 #GP_sDPLJqyEN7jky9_zcQVSkgiyx-AeW #motherLights
 
-sensorFlowmeterPinPump1       = 23
-sensorFlowmeterPinPump2       = 22
-sensorFlowmeterPinPump3       = 12
+sensorFlowmeterPinPump1       = 9
+sensorFlowmeterPinPump2       = 11
+sensorFlowmeterPinPump3       = 17
 sensorFlowmeterPinPump4       = 18
+waterLevel = 10 
 
 GPIO.setup(sensorFlowmeterPinPump1,GPIO.IN)
 GPIO.setup(sensorFlowmeterPinPump2,GPIO.IN)
 GPIO.setup(sensorFlowmeterPinPump3,GPIO.IN)
 GPIO.setup(sensorFlowmeterPinPump4,GPIO.IN)
+GPIO.setup(waterLevel,GPIO.IN)
 
 
-
-Pump1Flow = 0
-Pump2Flow = 0
-Pump3Flow = 0
-Pump4Flow = 0
-Pump1BackupFlow = 0
-Pump2BackupFlow = 0
-Pump3BackupFlow = 0
-Pump4BackupFlow = 0
-
-
-Pump1 = 27
-Pump2 = 21
+Pump1 = 8
+Pump2 = 27
 Pump3 = 13 
-Pump4 = 26
-Pump1Backup = 25
-Pump2Backup = 16
-Pump3Backup = 20
-Pump4Backup = 19
+Pump4 = 25
+Pump1Backup = 7
+Pump2Backup = 21
+Pump3Backup = 26
+Pump4Backup = 16
 
 GPIO.setup(Pump1,GPIO.OUT)
 GPIO.setup(Pump2,GPIO.OUT)
 GPIO.setup(Pump3,GPIO.OUT)
 GPIO.setup(Pump4,GPIO.OUT)
+
+GPIO.output(Pump1, GPIO.LOW)
+GPIO.output(Pump2, GPIO.LOW)
+GPIO.output(Pump3, GPIO.LOW)
+GPIO.output(Pump4, GPIO.LOW)
 
 GPIO.setup(Pump1Backup,GPIO.OUT)
 GPIO.setup(Pump2Backup,GPIO.OUT)
@@ -60,6 +58,10 @@ GPIO.setup(Pump3Backup,GPIO.OUT)
 GPIO.setup(Pump4Backup,GPIO.OUT)
 
 
+GPIO.output(Pump1Backup, GPIO.LOW)
+GPIO.output(Pump2Backup, GPIO.LOW)
+GPIO.output(Pump3Backup, GPIO.LOW)
+GPIO.output(Pump4Backup, GPIO.LOW)
 
 # Initialize Blynk
 blynk = BlynkLib.Blynk(BLYNK_AUTH)
@@ -72,34 +74,17 @@ timer = BlynkTimer()
 def blynk_data():
     now = datetime.now()
     blynk.virtual_write(20, now.strftime("%d/%m/%Y %H:%M:%S"))
-    
-    
-    
-    Pump1Flow = GPIO.input(sensorFlowmeterPinPump1)
-    Pump2Flow = GPIO.input(sensorFlowmeterPinPump1)
-    Pump3Flow = GPIO.input(sensorFlowmeterPinPump1)
-    Pump4Flow = GPIO.input(sensorFlowmeterPinPump1)
-    
-    print("Flow 1: " + str(Pump1Flow))
-    print("Flow 2: " + str(Pump2Flow))
-    print("Flow 3: " + str(Pump3Flow))
-    print("Flow 4: " + str(Pump4Flow))
-    
-    print(GPIO.ouput(Pump1))
-    print(GPIO.ouput(Pump2))
-    print(GPIO.ouput(Pump3))
-    print(GPIO.ouput(Pump4))
 
-    print(GPIO.ouput(Pump1Backup))
-    print(GPIO.ouput(Pump2Backup))
-    print(GPIO.ouput(Pump3Backup))
-    print(GPIO.ouput(Pump4Backup))
-
+   
+    print("Time updated : " + now.strftime("%d/%m/%Y %H:%M:%S"))
+    
     
     blynk.virtual_write(21, GPIO.input(sensorFlowmeterPinPump1))
     blynk.virtual_write(22, GPIO.input(sensorFlowmeterPinPump2))
     blynk.virtual_write(23, GPIO.input(sensorFlowmeterPinPump3))
     blynk.virtual_write(24, GPIO.input(sensorFlowmeterPinPump4))
+    blynk.virtual_write(25, GPIO.input(waterLevel))
+    
 
 
 # Add Timers
