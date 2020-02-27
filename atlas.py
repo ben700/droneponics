@@ -43,26 +43,49 @@ blynk = BlynkLib.Blynk(BLYNK_AUTH)
 # Create BlynkTimer Instance
 timer = BlynkTimer()
 
-#61 - Dissolved Oxygen
+#61 - Dissolved Oxygen 97 (0x61)
 #62 - OPR
-#63 - PH 
-#64 - EC
+#63 - PH    99 (0x63)
+#64 - EC   100 (0x64)
+#66 - Temp 102 (0x66)
 #67 - pump
 #68 - flow
 #69 - co2
 #70 - colour
 #6A - pressure
 device = AtlasI2C()
-temp = AtlasI2C(102, "EC")
-ec = AtlasI2C(100,"PH")
-ph = AtlasI2C(99, "TEMP")
+temp = AtlasI2C(102, "TEMP")
+ec = AtlasI2C(100,"EC")
+ph = AtlasI2C(99, "PH")
+do = AtlasI2C(97, "DO")
+
 
 print(device.list_i2c_devices())
+print("Temp Device Info = " + temp.query("i")
+print("pH Device Info = " + ph.query("i")
+print("EC Device Info = " + ec.query("i")
+#print("DO Device Info = " + ec.query("i")      
 
+print("Temp Cal = " + temp.query("Cal,?")
+print("Temp Scale = " + temp.query("S,?")
+      
+print("pH Cal = " + ph.query("Cal,?")
+print("pH Temp Cal = " + ph.query("T,?")
+
+print("EC Cal = " + ec.query("Cal,?")
+print("EC Temp Cal = " + ec.query("Cal,?")
+print("EC Probe Type = " + ec.query("K,?")
+
+#print("DO Cal = " + do.query("Cal,?")     
+#print("EC Temp Cal = " + do.query("Cal,?")
+#print("DO Salinity Cal = " + do.query("S,?")
+#print("DO Pressure Cal = " + do.query("P,?")
+      
 cTemp = temp.query("R,")
 print("Temp = " + cTemp)
-print("EC = " + ec.query("R,"))
-print("PH = " + ph.query("R,"))
+print("EC = " + ec.query("RT,"+cTemp))
+print("PH = " + ph.query("RT,"+cTemp))
+print("DO = " + d0.query("RT,"+cTemp))
 
 
 
