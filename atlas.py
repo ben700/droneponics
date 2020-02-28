@@ -48,7 +48,7 @@ timer = BlynkTimer()
 #63 - PH    99 (0x63)
 #64 - EC   100 (0x64)
 #66 - Temp 102 (0x66)
-#67 - pump
+#67 - pump 103 (0x67)
 #68 - flow 104 (0x68)
 #69 - co2
 #70 - colour 112 (0x70)
@@ -57,39 +57,48 @@ device = AtlasI2C()
 temp = AtlasI2C(102, "TEMP")
 ec = AtlasI2C(100,"EC")
 ph = AtlasI2C(99, "PH")
-do = AtlasI2C(97, "DO")
-flow = AtlasI2C(104, "FLOW")
+#do = AtlasI2C(97, "DO")
+#flow = AtlasI2C(104, "FLOW")
+#pump = AtlasI2C(103, "PUMP")
 
 print(device.list_i2c_devices())
-print("Temp Device Info = " + temp.query("i")
-print("pH Device Info = " + ph.query("i")
-print("EC Device Info = " + ec.query("i")
-#print("DO Device Info = " + do.query("i")      
-#print("Flow Device Info = " + flow.query("i")      
+print("Temp Device Info = " + temp.query("i"))
+print("pH Device Info = " + ph.query("i"))
+print("EC Device Info = " + ec.query("i"))
+#print("DO Device Info = " + do.query("i"))      
+#print("Flow Device Info = " + flow.query("i"))      
 
       
-print("Temp Cal = " + temp.query("Cal,?")
-print("Temp Scale = " + temp.query("S,?")
+print("Temp Cal = " + temp.query("Cal,?"))
+print("Temp Scale = " + temp.query("S,?"))
       
-print("pH Cal = " + ph.query("Cal,?")
-print("pH Temp Cal = " + ph.query("T,?")
+print("pH Cal = " + ph.query("Cal,?"))
+print("pH Temp Cal = " + ph.query("T,?"))
 
-print("EC Cal = " + ec.query("Cal,?")
-print("EC Temp Cal = " + ec.query("Cal,?")
-print("EC Probe Type = " + ec.query("K,?")
+print("EC Cal = " + ec.query("Cal,?"))
+print("EC Temp Cal = " + ec.query("Cal,?"))
+print("EC Probe Type = " + ec.query("K,?"))
 
-#print("DO Cal = " + do.query("Cal,?")     
-#print("DO Temp Cal = " + do.query("Cal,?")
-#print("DO Salinity Cal = " + do.query("S,?")
-#print("DO Pressure Cal = " + do.query("P,?")
+#print("DO Cal = " + do.query("Cal,?"))     
+#print("DO Temp Cal = " + do.query("Cal,?"))
+#print("DO Salinity Cal = " + do.query("S,?"))
+#print("DO Pressure Cal = " + do.query("P,?"))
 
-#print("Flow Meter Type = " + flow.query("Set,?")
-#print("Flow number of K Values = " + flow.query("K,?")  #returns the number of K values stored
-#print("Flow K Values = " + flow.query("K,all")  #query the programmed K-value(s)
-#print("Flow Rate = " + flow.query("Frp,?")
-#print("Flow Rate Time Base = " + flow.query("Vp,?")
-#print("Flow Resistors = " + flow.query("P,?") #pull-up or pull-down resistors
-      
+#print("Flow Meter Type = " + flow.query("Set,?"))
+#print("Flow number of K Values = " + flow.query("K,?"))  #returns the number of K values stored
+#print("Flow K Values = " + flow.query("K,all"))  #query the programmed K-value(s)
+#print("Flow Rate = " + flow.query("Frp,?"))
+#print("Flow Rate Time Base = " + flow.query("Vp,?"))
+#print("Flow Resistors = " + flow.query("P,?")) #pull-up or pull-down resistors
+    
+#print("Pump Cal = " + pump.query("Cal,?"))
+#print("Pump Voltage Check = " + pump.query("PV,?"))
+#print("Pump Dispense Status = " + pump.query("D,?"))
+#print("Pump maximum possible flow rate = " + pump.query("DC,?")) # maximum flow rate is determined after calibration.
+#print("Pump Pause Status = " + pump.query("P,?"))
+#print("Pump total volume dispensed = " + pump.query("TV,?")) #shows total volume dispensed  
+#print("Pump absolute value of the total volume dispensed  = " + pump.query("ATV,?")) #absolute value of the total volume dispensed 
+    
       
       
 cTemp = temp.query("R,")

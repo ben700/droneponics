@@ -24,33 +24,44 @@ device = AtlasI2C()
 temp = AtlasI2C(102, "TEMP")
 ec = AtlasI2C(100,"EC")
 ph = AtlasI2C(99, "PH")
-do = AtlasI2C(97, "DO")
-flow = AtlasI2C(104, "FLOW")
+#do = AtlasI2C(97, "DO")
+#flow = AtlasI2C(104, "FLOW")
+#pump = AtlasI2C(103, "PUMP")
 
 
 print(device.list_i2c_devices())
-print("Temp Device Info = " + temp.query("i")
-print("pH Device Info = " + ph.query("i")
-print("EC Device Info = " + ec.query("i")
-#print("DO Device Info = " + ec.query("i") 
-#print("Flow Device Info = " + flow.query("i")      
-      
+print("Temp Device Info = " + temp.query("i"))
+print("pH Device Info = " + ph.query("i"))
+print("EC Device Info = " + ec.query("i"))
+#print("DO Device Info = " + ec.query("i")) 
+#print("Flow Device Info = " + flow.query("i"))      
+#print("Pump Device Info = " + pump.query("i"))      
 
-print("Temp Cal = " + temp.query("Cal,?")
-print("Temp Scale = " + temp.query("S,?")
+print("Temp Cal = " + temp.query("Cal,?"))
+print("Temp Scale = " + temp.query("S,?"))
       
-print("pH Cal = " + ph.query("Cal,?")
-print("pH Temp Cal = " + ph.query("T,?")
+print("pH Cal = " + ph.query("Cal,?"))
+print("pH Temp Cal = " + ph.query("T,?"))
 
-print("EC Cal = " + ec.query("Cal,?")
-print("EC Temp Cal = " + ec.query("Cal,?")
-print("EC Probe Type = " + ec.query("K,?")
+print("EC Cal = " + ec.query("Cal,?"))
+print("EC Temp Cal = " + ec.query("Cal,?"))
+print("EC Probe Type = " + ec.query("K,?"))
 
-#print("DO Cal = " + do.query("Cal,?")     
-#print("DO Temp Cal = " + do.query("Cal,?")
-#print("DO Salinity Cal = " + do.query("S,?")
-#print("DO Pressure Cal = " + do.query("P,?")
-      
+#print("DO Cal = " + do.query("Cal,?"))     
+#print("DO Temp Cal = " + do.query("Cal,?"))
+#print("DO Salinity Cal = " + do.query("S,?"))
+#print("DO Pressure Cal = " + do.query("P,?"))
+ 
+    
+    
+#print("Pump Cal = " + pump.query("Cal,?"))
+#print("Pump Dispense Status = " + pump.query("D,?"))
+#print("Pump maximum possible flow rate = " + pump.query("DC,?")) # maximum flow rate is determined after calibration.
+#print("Pump Pause Status = " + pump.query("P,?"))
+#print("Pump total volume dispensed = " + pump.query("TV,?")) #shows total volume dispensed  
+#print("Pump absolute value of the total volume dispensed  = " + pump.query("ATV,?")) #absolute value of the total volume dispensed 
+        
+       
 #temp.query("Cal,clear")
 #temp.query("Cal,t") #t = any temperature
       
@@ -84,4 +95,10 @@ print("EC Probe Type = " + ec.query("K,?")
 #flow.query("K,clear") #clear all programmed K-values
 #flow.query("K,0.36666,1") #for flow meters with 1 K value
       
-      
+#pump.query("Clear")  #clears the total dispensed volume     
+#pump.query("Cal,clear") #delete calibration data
+#pump.query("D,10") #Dose 10ml
+#pump.query("Cal,v") #v = corrected volume
+#pump.query("D,10,10") #Dose 10ml over 10min
+#pump.query("Cal,v") #v = corrected volume
+
