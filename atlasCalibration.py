@@ -25,13 +25,16 @@ temp = AtlasI2C(102, "TEMP")
 ec = AtlasI2C(100,"EC")
 ph = AtlasI2C(99, "PH")
 do = AtlasI2C(97, "DO")
+flow = AtlasI2C(104, "FLOW")
 
 
 print(device.list_i2c_devices())
 print("Temp Device Info = " + temp.query("i")
 print("pH Device Info = " + ph.query("i")
 print("EC Device Info = " + ec.query("i")
-#print("DO Device Info = " + ec.query("i")      
+#print("DO Device Info = " + ec.query("i") 
+#print("Flow Device Info = " + flow.query("i")      
+      
 
 print("Temp Cal = " + temp.query("Cal,?")
 print("Temp Scale = " + temp.query("S,?")
@@ -44,7 +47,7 @@ print("EC Temp Cal = " + ec.query("Cal,?")
 print("EC Probe Type = " + ec.query("K,?")
 
 #print("DO Cal = " + do.query("Cal,?")     
-#print("EC Temp Cal = " + do.query("Cal,?")
+#print("DO Temp Cal = " + do.query("Cal,?")
 #print("DO Salinity Cal = " + do.query("S,?")
 #print("DO Pressure Cal = " + do.query("P,?")
       
@@ -66,9 +69,19 @@ print("EC Probe Type = " + ec.query("K,?")
 #ph.query("Cal,high,10") #three point calibration at highpoint 
       
       
-      
-      
 #do.query("Cal,clear")
 #do.query("Cal") #calibrate to atmospheric oxygen levels
 #do.query("Cal,0") #calibrate device to 0 dissolved oxygen
 
+#flow.query("Frp,s") #calculate flow rate per second
+#flow.query("Frp,m") #calculate flow rate per min
+#flow.query("Frp,h") #calculate flow rate per hour
+#flow.query("Clear") #Clearing the total volume
+#flow.query("Set,3/8") #set to 3/8” flow meter
+#flow.query("Set,1/4") #set to 1/4” flow meter
+#flow.query("Set,1/2") #set to 1/2” flow meter
+#flow.query("Set,3/4") #set to 3/4” flow meter
+#flow.query("K,clear") #clear all programmed K-values
+#flow.query("K,0.36666,1") #for flow meters with 1 K value
+      
+      

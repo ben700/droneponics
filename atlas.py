@@ -49,23 +49,25 @@ timer = BlynkTimer()
 #64 - EC   100 (0x64)
 #66 - Temp 102 (0x66)
 #67 - pump
-#68 - flow
+#68 - flow 104 (0x68)
 #69 - co2
-#70 - colour
+#70 - colour 112 (0x70)
 #6A - pressure
 device = AtlasI2C()
 temp = AtlasI2C(102, "TEMP")
 ec = AtlasI2C(100,"EC")
 ph = AtlasI2C(99, "PH")
 do = AtlasI2C(97, "DO")
-
+flow = AtlasI2C(104, "FLOW")
 
 print(device.list_i2c_devices())
 print("Temp Device Info = " + temp.query("i")
 print("pH Device Info = " + ph.query("i")
 print("EC Device Info = " + ec.query("i")
-#print("DO Device Info = " + ec.query("i")      
+#print("DO Device Info = " + do.query("i")      
+#print("Flow Device Info = " + flow.query("i")      
 
+      
 print("Temp Cal = " + temp.query("Cal,?")
 print("Temp Scale = " + temp.query("S,?")
       
@@ -77,9 +79,18 @@ print("EC Temp Cal = " + ec.query("Cal,?")
 print("EC Probe Type = " + ec.query("K,?")
 
 #print("DO Cal = " + do.query("Cal,?")     
-#print("EC Temp Cal = " + do.query("Cal,?")
+#print("DO Temp Cal = " + do.query("Cal,?")
 #print("DO Salinity Cal = " + do.query("S,?")
 #print("DO Pressure Cal = " + do.query("P,?")
+
+#print("Flow Meter Type = " + flow.query("Set,?")
+#print("Flow number of K Values = " + flow.query("K,?")  #returns the number of K values stored
+#print("Flow K Values = " + flow.query("K,all")  #query the programmed K-value(s)
+#print("Flow Rate = " + flow.query("Frp,?")
+#print("Flow Rate Time Base = " + flow.query("Vp,?")
+#print("Flow Resistors = " + flow.query("P,?") #pull-up or pull-down resistors
+      
+      
       
 cTemp = temp.query("R,")
 print("Temp = " + cTemp)
