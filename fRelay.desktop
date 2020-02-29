@@ -1,0 +1,4 @@
+[Desktop Entry]
+Type=Application
+Name=fRelay
+Exec=xterm -hold -e '/usr/bin/python3 /home/pi/dronponics/fRelay.py'
