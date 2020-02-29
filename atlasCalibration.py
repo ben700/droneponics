@@ -21,9 +21,9 @@ from AtlasI2C import (
 #70 - colour
 #6A - pressure
 device = AtlasI2C()
-temp = AtlasI2C(102, "TEMP")
-ec = AtlasI2C(100,"EC")
-ph = AtlasI2C(99, "PH")
+temp = AtlasI2C(102)
+ec = AtlasI2C(100)
+ph = AtlasI2C(99)
 #do = AtlasI2C(97, "DO")
 #flow = AtlasI2C(104, "FLOW")
 #pump = AtlasI2C(103, "PUMP")
