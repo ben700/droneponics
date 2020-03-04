@@ -28,8 +28,8 @@ from datetime import datetime
 
 # The ID and range of a sample spreadsheet.
 #BLYNK_AUTH = 'pHjiH8dnAW3NrkAPSNTcVKsfa7BAdnBP' #envLogger5
-BLYNK_AUTH = 'pHjiH8dnAW3NrkAPSNTcVKsfa7BAdnBP' #envLogger4
-#BLYNK_AUTH = '5P-DiNBQH6_YLNM1aqPEQjorV84i9rfG' #envLogger3
+#BLYNK_AUTH = 'pHjiH8dnAW3NrkAPSNTcVKsfa7BAdnBP' #envLogger4
+#BLYNK_AUTH = 'Hd6GWt2tJ2Gzun2VA-NxsTL_umv1wPWm' #envLogger3
 #BLYNK_AUTH = 'FnSZls3WUdCbWmDJvfnjz3f83Sm70HqI' #envLogger2
 #BLYNK_AUTH = 'ZDy8p4aFPCKGwQhafv4jwUT6TpCY9CyP' #envLogger1
 
