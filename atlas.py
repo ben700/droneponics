@@ -34,8 +34,8 @@ def get_devices():
 
 
 # The ID and range of a sample spreadsheet.
-BLYNK_AUTH = 'SHraFqInf27JKowTcFZapu0rHH2QGtuO' #atlasReservoir
-#BLYNK_AUTH = 'XVbhfI6ZYxkqFp7d4RsCIN6Is9YnKp9q' #atlasButt
+#BLYNK_AUTH = 'SHraFqInf27JKowTcFZapu0rHH2QGtuO' #atlasReservoir
+BLYNK_AUTH = 'XVbhfI6ZYxkqFp7d4RsCIN6Is9YnKp9q' #atlasButt
 
 # Initialize Blynk
 blynk = BlynkLib.Blynk(BLYNK_AUTH)
@@ -54,30 +54,30 @@ timer = BlynkTimer()
 #70 - colour 112 (0x70)
 #6A - pressure
 device = AtlasI2C()
-temp = AtlasI2C(102, "TEMP")
-ec = AtlasI2C(100,"EC")
-ph = AtlasI2C(99, "PH")
+temp = AtlasI2C(102)
+ec = AtlasI2C(100)
+ph = AtlasI2C(99)
 #do = AtlasI2C(97, "DO")
 #flow = AtlasI2C(104, "FLOW")
 #pump = AtlasI2C(103, "PUMP")
 
-print(device.list_i2c_devices())
-print("Temp Device Info = " + temp.query("i"))
-print("pH Device Info = " + ph.query("i"))
-print("EC Device Info = " + ec.query("i"))
+#print(device.list_i2c_devices())
+#print("Temp Device Info = " + temp.query("i"))
+#print("pH Device Info = " + ph.query("i"))
+#print("EC Device Info = " + ec.query("i"))
 #print("DO Device Info = " + do.query("i"))      
 #print("Flow Device Info = " + flow.query("i"))      
 
       
-print("Temp Cal = " + temp.query("Cal,?"))
-print("Temp Scale = " + temp.query("S,?"))
+#print("Temp Cal = " + temp.query("Cal,?"))
+#print("Temp Scale = " + temp.query("S,?"))
       
-print("pH Cal = " + ph.query("Cal,?"))
-print("pH Temp Cal = " + ph.query("T,?"))
+#print("pH Cal = " + ph.query("Cal,?"))
+#print("pH Temp Cal = " + ph.query("T,?"))
 
-print("EC Cal = " + ec.query("Cal,?"))
-print("EC Temp Cal = " + ec.query("Cal,?"))
-print("EC Probe Type = " + ec.query("K,?"))
+#print("EC Cal = " + ec.query("Cal,?"))
+#print("EC Temp Cal = " + ec.query("Cal,?"))
+#print("EC Probe Type = " + ec.query("K,?"))
 
 #print("DO Cal = " + do.query("Cal,?"))     
 #print("DO Temp Cal = " + do.query("Cal,?"))
@@ -101,11 +101,11 @@ print("EC Probe Type = " + ec.query("K,?"))
     
       
       
-cTemp = temp.query("R,")
+cTemp = temp.query("R").split(":")[1]
 print("Temp = " + cTemp)
-print("EC = " + ec.query("RT,"+cTemp))
-print("PH = " + ph.query("RT,"+cTemp))
-print("DO = " + d0.query("RT,"+cTemp))
+print("EC = " + ec.query("RT,16.699"))
+print("PH = " + ph.query("RT"+cTemp))
+#print("DO = " + d0.query("RT,"+cTemp))
 
 
 
@@ -115,11 +115,11 @@ def blynk_data():
 
     now = datetime.now()
     blynk.virtual_write(3, now.strftime("%d/%m/%Y %H:%M:%S"))
-    cTemp = temp.query("R,")
+    cTemp = temp.query("R,").split(":")[1]
     print("Temp = " + cTemp)
     blynk.virtual_write(4, cTemp)
-    blynk.virtual_write(5, ec.query("R,"))
-    blynk.virtual_write(6, ph.query("R,"))
+    blynk.virtual_write(5, ec.query("RT,"+cTemp).split(":")[1])
+    blynk.virtual_write(6, ph.query("RT,"+cTemp).split(":")[1])
 
 
 

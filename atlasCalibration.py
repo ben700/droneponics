@@ -29,10 +29,10 @@ ph = AtlasI2C(99)
 #pump = AtlasI2C(103, "PUMP")
 
 
-print(device.list_i2c_devices())
-print("Temp Device Info = " + temp.query("i"))
-print("pH Device Info = " + ph.query("i"))
-print("EC Device Info = " + ec.query("i"))
+#print(device.list_i2c_devices())
+#print("Temp Device Info = " + temp.query("i"))
+#print("pH Device Info = " + ph.query("i"))
+#print("EC Device Info = " + ec.query("i"))
 #print("DO Device Info = " + ec.query("i")) 
 #print("Flow Device Info = " + flow.query("i"))      
 #print("Pump Device Info = " + pump.query("i"))      
@@ -63,21 +63,25 @@ print("EC Probe Type = " + ec.query("K,?"))
         
        
 #temp.query("Cal,clear")
-#temp.query("Cal,t") #t = any temperature
-      
+#temp.query("Cal,36.4") #t = any temperature
+print("Temp = " + str(temp.query("R")))      
 
 #ec.query("Cal,clear")
+#ec.query("K,0.1")
+#ec.query("T,15.4")
 #ec.query("Cal,dry") #dry calibration
 #ec.query("Cal,n") #single point calibration, where n = any value
-#ec.query("Cal,low,n") #low end calibration, where n = any value
-#ec.query("Cal,high,n") #high end calibration, where n = any value
-
+#ec.query("Cal,low,84") #low end calibration, where n = any value
+#ec.query("Cal,high,1413") #high end calibration, where n = any value
+print("ec = " + str(ec.query("R")))
 
 
 #ph.query("Cal,clear")
+#ph.query("T,15.4")
 #ph.query("Cal,mid,7") #single point calibration at midpoint
 #ph.query("Cal,low,4")   #two point calibration at lowpoint
 #ph.query("Cal,high,10") #three point calibration at highpoint 
+print("ph = " + str(ph.query("R")))
       
       
 #do.query("Cal,clear")
