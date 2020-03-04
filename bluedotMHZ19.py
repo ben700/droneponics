@@ -24,11 +24,23 @@ import mh_z19
 import BlynkLib
 from BlynkTimer import BlynkTimer
 from datetime import datetime
+import adafruit_tsl2591
 
+# Initialize the I2C bus.
+i2c = busio.I2C(board.SCL, board.SDA)
 
+# Initialize the sensor.
+try:
+   tsl = adafruit_tsl2591.TSL2591(i2c)
+   # You can optionally change the gain and integration time:
+   tsl.gain = adafruit_tsl2591.GAIN_LOW
+   tsl.integration_time = adafruit_tsl2591.INTEGRATIONTIME_100MS
+except:
+    print("Unexpected error:", sys.exc_info()[0])
+    raise
+    
 # The ID and range of a sample spreadsheet.
-#BLYNK_AUTH = 'pHjiH8dnAW3NrkAPSNTcVKsfa7BAdnBP' #envLogger5
-#BLYNK_AUTH = 'pHjiH8dnAW3NrkAPSNTcVKsfa7BAdnBP' #envLogger4
+#BLYNK_AUTH = '4IfX_hzDREonPi_PIDQrETikxc0-XpqI' #envLogger4
 #BLYNK_AUTH = 'Hd6GWt2tJ2Gzun2VA-NxsTL_umv1wPWm' #envLogger3
 #BLYNK_AUTH = 'FnSZls3WUdCbWmDJvfnjz3f83Sm70HqI' #envLogger2
 #BLYNK_AUTH = 'ZDy8p4aFPCKGwQhafv4jwUT6TpCY9CyP' #envLogger1
@@ -40,8 +52,6 @@ blynk = BlynkLib.Blynk(BLYNK_AUTH)
 timer = BlynkTimer()
 
 DEVICE = 0x77 # Default device I2C address
-tsl = tsl2591()  # initialize
-
 
 bus = smbus.SMBus(1) # Rev 2 Pi, Pi 2 & Pi 3 uses bus 1
                      # Rev 1 Pi uses bus 0
@@ -175,21 +185,39 @@ def readBME280All(addr=DEVICE):
 # Will Print Every 10 Seconds
 def blynk_data():
     temperature,pressure,humidity = readBME280All()
-    tslData = tsl.get_current()
-    mhz19b = mh_z19.read()
-    
+    mhz19b = mh_z19.read()    
     now = datetime.now()
  
-    blynk.virtual_write(3, now.strftime("%d/%m/%Y %H:%M:%S"))
-    blynk.virtual_write(4, str("{0:.2f}".format(temperature)))
-    blynk.virtual_write(5, str("{0:.2f}".format(pressure)))
-    blynk.virtual_write(6, str("{0:.2f}".format(humidity)))
-    blynk.virtual_write(7, str("{0:.2f}".format(tslData['full'])))
-    blynk.virtual_write(8, str("{0:.2f}".format(tslData['lux'])))           
-    blynk.virtual_write(9, ("{0:.2f}".format(tslData['ir'])))
-    blynk.virtual_write(10, mhz19b['co2'])
+    blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
+    blynk.virtual_write(1, str("{0:.2f}".format(temperature)))
+    blynk.virtual_write(2, str("{0:.2f}".format(pressure)))
+    blynk.virtual_write(3, str("{0:.2f}".format(humidity)))
     
+    lux = tsl.lux
+    print('Total light: {0}lux'.format(lux))
+    blynk.virtual_write(4, str("{0}".format(lux)))           
+    
+    infrared = tsl.infrared
+    print('Infrared light: {0}'.format(infrared))
+    blynk.virtual_write(5, str("{0}".format(infrared)))
 
+    visible = tsl.visible
+    print('Visible light: {0}'.format(visible))
+    blynk.virtual_write(6, ("{0}".format(visible)))
+    
+    
+    full_spectrum = tsl.full_spectrum
+    print('Full spectrum (IR + visible) light: {0}'.format(full_spectrum))
+    blynk.virtual_write(7, ("{0}".format(full_spectrum)))
+    
+    if mhz19b is not None:
+        blynk.virtual_write(10, mhz19b['co2'])
+        print('CO2: {0}'.format(mhz19b['co2']))
+        
+    else:
+        blynk.virtual_write(11, mhz19b['co2'])
+        print('CO2 sensor has error')
+    
 
 # Add Timers
 timer.set_interval(10, blynk_data)
