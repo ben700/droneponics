@@ -36,7 +36,7 @@ try:
    tsl.gain = adafruit_tsl2591.GAIN_LOW
    tsl.integration_time = adafruit_tsl2591.INTEGRATIONTIME_100MS
 except:
-    print("Unexpected error:", sys.exc_info()[0])
+    print("Unexpected error: Initialize TSL2591")
     raise
     
 # The ID and range of a sample spreadsheet.
@@ -210,12 +210,12 @@ def blynk_data():
     print('Full spectrum (IR + visible) light: {0}'.format(full_spectrum))
     blynk.virtual_write(7, ("{0}".format(full_spectrum)))
     
-    if mhz19b is not None:
+    if (mhz19b is not None):
         blynk.virtual_write(10, mhz19b['co2'])
         print('CO2: {0}'.format(mhz19b['co2']))
         
     else:
-        blynk.virtual_write(11, mhz19b['co2'])
+        blynk.virtual_write(10, 'Error')
         print('CO2 sensor has error')
     
 
