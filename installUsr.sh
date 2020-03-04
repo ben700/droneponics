@@ -1,7 +1,6 @@
 pip3 install blynklib
 
 pip3 install python-tsl2591
-pip3 install board
 pip3 install adafruit-blinka
 
 pip3 install adafruit-circuitpython-bme280
