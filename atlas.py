@@ -304,8 +304,11 @@ def blynk_data():
     blynk.virtual_write(20, cTemp)
     blynk.virtual_write(21, ec.query("RT,"+cTemp).split(":")[1])
     blynk.virtual_write(22, ph.query("RT,"+cTemp).split(":")[1])
-    blynk.virtual_write(25, chan.voltage)
     
+   
+    
+    blynk.virtual_write(25, (chan.voltage-1.5)*100)
+    blynk.virtual_write(26, (chan.voltage-1.5)*12)
     
     
    
