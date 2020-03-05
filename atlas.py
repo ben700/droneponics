@@ -48,7 +48,7 @@ Pump9 = 25
 Pump10 = 24
 
 #setup sensor 2
-GPIO.setup(buttFullSensor, GPIO.IN, GPIO.PUD_DOWN)
+GPIO.setup(buttFullSensor, GPIO.IN, GPIO.PUD_UP)
 GPIO.setup(buttEmptySensor, GPIO.IN, GPIO.PUD_DOWN)
 
 Relay1 = 21
@@ -101,30 +101,8 @@ ads = ADS.ADS1015(i2c)
 
 # Create single-ended input on channel 0
 chan = AnalogIn(ads, ADS.P0)
-print(chan)
-
-def buttEmpty_callback(channel):
-   print(GPIO.input(buttFullSensor))
-   print(GPIO.input(buttEmptySensor))
-   if GPIO.input(buttEmptySensor): 
-      print ("Water butt no longer empty") 
-   else: 
-      turnOffMixer()
-      print ("Water butt empty")
-        
-
-      
-def buttFull_callback(channel): 
-   print(GPIO.input(buttFullSensor))
-   print(GPIO.input(buttEmptySensor))
-   if GPIO.input(buttFullSensor):
-      print ("Water butt now full") 
-   else:
-      print ("Water butt no longer full") 
 
 
-#GPIO.add_event_detect(buttFullSensor, GPIO.BOTH, callback=buttFull_callback) 
-#GPIO.add_event_detect(buttEmptySensor, GPIO.BOTH, callback=buttEmpty_callback) 
 
 # The ID and range of a sample spreadsheet.
 #BLYNK_AUTH = 'SHraFqInf27JKowTcFZapu0rHH2QGtuO' #atlasReservoir
@@ -292,7 +270,7 @@ def turnOffMixer():
    GPIO.output(Relay2,GPIO.HIGH)
    GPIO.output(Relay3,GPIO.HIGH)
    GPIO.output(Relay4,GPIO.HIGH)
-   setLEDsonApp()     
+      
 
 # Will Print Every 10 Seconds
 def blynk_data():
@@ -307,11 +285,23 @@ def blynk_data():
     
    
     
-    blynk.virtual_write(25, (chan.voltage-1.5)*100)
-    blynk.virtual_write(26, (chan.voltage-1.5)*12)
+    blynk.virtual_write(25, str("{0}".format((chan.voltage-1.5)*100))
+    blynk.virtual_write(26, str("{0:.2f}".format((chan.voltage-1.5)*12))
     
+    blynk.virtual_write(27, GPIO.input(buttEmptySensor))
+    blynk.virtual_write(28, GPIO.input(buttFullSensor))
     
    
+
+    if GPIO.input(buttEmptySensor): 
+      print ("Water butt no longer empty") 
+    else: 
+      turnOffMixer()
+      print ("Water butt empty")
+    if GPIO.input(buttFullSensor):
+      print ("Water butt now full") 
+    else:
+      print ("Water butt no longer full") 
 
 
 
