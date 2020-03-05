@@ -13,43 +13,57 @@ from AtlasI2C import (
 	 AtlasI2C
 )
 import RPi.GPIO as GPIO
+import board
+import busio
+import adafruit_ads1x15.ads1015 as ADS
+from adafruit_ads1x15.analog_in import AnalogIn
+
+
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
 
+BLYNK_GREEN     ="#23C48E"
+BLYNK_BLUE      ="#04C0F8"
+BLYNK_YELLOW    ="#ED9D00"
+BLYNK_RED       ="#D3435C"
+BLYNK_DARK_BLUE ="#5F7CD8"
 
-buttFullSensor =  4
-buttEmptySensor = 17
+buttFullSensor =  17
+buttEmptySensor = 4
 
 #pins for solenoid
 solenoidIn = 0
 solenoidOut = 0
 
 
-Pump1 = 0
-Pump2 = 0
-Pump3 = 0
-Pump4 = 0
-Pump5 = 0
-Pump6 = 0
-Pump7 = 0
-Pump8 = 0
-Pump9 = 0
-Pump10 = 0
+Pump1 = 26
+Pump2 = 19
+Pump3 = 13
+Pump4 = 11
+Pump5 = 9
+Pump6 = 10
+Pump7 = 22
+Pump8 = 27
+Pump9 = 25
+Pump10 = 24
 
 #setup sensor 2
 GPIO.setup(buttFullSensor, GPIO.IN, GPIO.PUD_DOWN)
 GPIO.setup(buttEmptySensor, GPIO.IN, GPIO.PUD_DOWN)
 
-Relay1 = 26
-Relay2 = 19
-Relay3 = 13
-Relay4 = 6
+Relay1 = 21
+Relay2 = 20
+Relay3 = 16
+Relay4 = 12
 
 GPIO.setup(Relay1,GPIO.OUT)
 GPIO.setup(Relay2,GPIO.OUT)
 GPIO.setup(Relay3,GPIO.OUT)
 GPIO.setup(Relay4,GPIO.OUT)
-
+GPIO.output(Relay1,GPIO.LOW)
+GPIO.output(Relay2,GPIO.LOW)
+GPIO.output(Relay3,GPIO.LOW)
+GPIO.output(Relay4,GPIO.LOW)
 
 GPIO.setup(solenoidIn,GPIO.OUT)
 GPIO.setup(solenoidOut,GPIO.OUT)
@@ -65,6 +79,8 @@ GPIO.setup(Pump5,GPIO.OUT)
 GPIO.setup(Pump6,GPIO.OUT)
 GPIO.setup(Pump7,GPIO.OUT)
 GPIO.setup(Pump8,GPIO.OUT)
+GPIO.setup(Pump9,GPIO.OUT)
+GPIO.setup(Pump10,GPIO.OUT)
 
 GPIO.output(Pump1,GPIO.HIGH)
 GPIO.output(Pump2,GPIO.HIGH)
@@ -77,8 +93,19 @@ GPIO.output(Pump8,GPIO.HIGH)
 GPIO.output(Pump9,GPIO.HIGH)
 GPIO.output(Pump10,GPIO.HIGH)
 
+# Create the I2C bus
+i2c = busio.I2C(board.SCL, board.SDA)
+
+# Create the ADC object using the I2C bus
+ads = ADS.ADS1015(i2c)
+
+# Create single-ended input on channel 0
+chan = AnalogIn(ads, ADS.P0)
+print(chan)
 
 def buttEmpty_callback(channel):
+   print(GPIO.input(buttFullSensor))
+   print(GPIO.input(buttEmptySensor))
    if GPIO.input(buttEmptySensor): 
       print ("Water butt no longer empty") 
    else: 
@@ -88,14 +115,16 @@ def buttEmpty_callback(channel):
 
       
 def buttFull_callback(channel): 
+   print(GPIO.input(buttFullSensor))
+   print(GPIO.input(buttEmptySensor))
    if GPIO.input(buttFullSensor):
       print ("Water butt now full") 
    else:
       print ("Water butt no longer full") 
 
 
-GPIO.add_event_detect(buttFullSensor, GPIO.BOTH, callback=buttFull_callback) 
-GPIO.add_event_detect(buttEmptySensor, GPIO.BOTH, callback=buttEmpty_callback) 
+#GPIO.add_event_detect(buttFullSensor, GPIO.BOTH, callback=buttFull_callback) 
+#GPIO.add_event_detect(buttEmptySensor, GPIO.BOTH, callback=buttEmpty_callback) 
 
 # The ID and range of a sample spreadsheet.
 #BLYNK_AUTH = 'SHraFqInf27JKowTcFZapu0rHH2QGtuO' #atlasReservoir
@@ -166,59 +195,50 @@ print("PH = " + ph.query("RT"+cTemp))
 
 @blynk.on("V1")
 def buttonV1Pressed(value):
-    blynk.virtual_write(1, str(value[0]))
     if(value[0] == '1'):
         print("Waste turned off")
         GPIO.output(Relay1,GPIO.HIGH)
     else:
         print("Waste turned on")
         GPIO.output(Relay1,GPIO.LOW)
-    setLEDsonApp()
-
+  
 
 @blynk.on("V2")
 def buttonV2Pressed(value):
-    blynk.virtual_write(2, str(value[0]))
     if(value[0] == '1'):
         print("Feed Pump turned off")
         GPIO.output(Relay2,GPIO.HIGH)
     else:
         print("Feed Pump turned on")
         GPIO.output(Relay2,GPIO.LOW)
-    setLEDsonApp()
+  
 
 
 @blynk.on("V3")
 def buttonV3Pressed(value):
-    blynk.virtual_write(3, str(value[0]))
     if(value[0] == '1'):
         print("Air and Mixer turned off")
         GPIO.output(Relay3,GPIO.HIGH)
     else:
         print("Air and Mixer turned on")
         GPIO.output(Relay3,GPIO.LOW)
-    setLEDsonApp()
-
+   
 
 @blynk.on("V4")
 def buttonV4Pressed(value):
-    blynk.virtual_write(4, str(value[0]))
     if(value[0] == '1'):
         print("Pump/UV turned off")
         GPIO.output(Relay4,GPIO.HIGH)
     else:
         print("Pump/UV turned on")
         GPIO.output(Relay4,GPIO.LOW)
-    setLEDsonApp()
 
 @blynk.on("connected")
 def blynk_connected():
     # You can also use blynk.sync_virtual(pin)
     # to sync a specific virtual pin
     print("Updating values from the server...")
-    blynk.sync_virtual(*)
-  
-    for i in range(40) 
+    for i in range(40): 
         result = blynk.sync_virtual(i)
         print("For i = " + str(i) + " the result was "+ str(result))
     
@@ -284,10 +304,11 @@ def blynk_data():
     blynk.virtual_write(20, cTemp)
     blynk.virtual_write(21, ec.query("RT,"+cTemp).split(":")[1])
     blynk.virtual_write(22, ph.query("RT,"+cTemp).split(":")[1])
+    blynk.virtual_write(25, chan.voltage)
     
     
-    setLEDsonApp()
     
+   
 
 
 
