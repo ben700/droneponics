@@ -60,10 +60,10 @@ GPIO.setup(Relay1,GPIO.OUT)
 GPIO.setup(Relay2,GPIO.OUT)
 GPIO.setup(Relay3,GPIO.OUT)
 GPIO.setup(Relay4,GPIO.OUT)
-GPIO.output(Relay1,GPIO.LOW)
-GPIO.output(Relay2,GPIO.LOW)
-GPIO.output(Relay3,GPIO.LOW)
-GPIO.output(Relay4,GPIO.LOW)
+#GPIO.output(Relay1,GPIO.LOW)
+#GPIO.output(Relay2,GPIO.LOW)
+#GPIO.output(Relay3,GPIO.LOW)
+#GPIO.output(Relay4,GPIO.LOW)
 
 GPIO.setup(solenoidIn,GPIO.OUT)
 GPIO.setup(solenoidOut,GPIO.OUT)
@@ -108,11 +108,7 @@ chan = AnalogIn(ads, ADS.P0)
 #BLYNK_AUTH = 'SHraFqInf27JKowTcFZapu0rHH2QGtuO' #atlasReservoir
 BLYNK_AUTH = 'XVbhfI6ZYxkqFp7d4RsCIN6Is9YnKp9q' #atlasButt
 
-# Initialize Blynk
-blynk = BlynkLib.Blynk(BLYNK_AUTH)
 
-# Create BlynkTimer Instance
-timer = BlynkTimer()
 
 #62 - OPR
 #69 - co2
@@ -171,8 +167,15 @@ print("EC = " + ec.query("RT,16.699"))
 print("PH = " + ph.query("RT"+cTemp))
 #print("DO = " + d0.query("RT,"+cTemp))
 
+# Initialize Blynk
+blynk = BlynkLib.Blynk(BLYNK_AUTH)
+
+# Create BlynkTimer Instance
+timer = BlynkTimer()
+
 @blynk.on("V1")
 def buttonV1Pressed(value):
+    blynk.virtual_write(1, str(value[0]))
     if(value[0] == '1'):
         print("Waste turned off")
         GPIO.output(Relay1,GPIO.HIGH)
@@ -284,25 +287,27 @@ def blynk_data():
     blynk.virtual_write(22, ph.query("RT,"+cTemp).split(":")[1])
     
    
+    volt = chan.voltage
     
-    blynk.virtual_write(25, str("{0}".format((chan.voltage-1.5)*100))
-    blynk.virtual_write(26, str("{0:.2f}".format((chan.voltage-1.5)*12))
+    blynk.virtual_write(25, str("{0}".format((volt-1.5)*100))
+    blynk.virtual_write(26, str("{0:.2f}".format((volt-1.5)*12))
     
     blynk.virtual_write(27, GPIO.input(buttEmptySensor))
     blynk.virtual_write(28, GPIO.input(buttFullSensor))
     
-   
-
-    if GPIO.input(buttEmptySensor): 
-      print ("Water butt no longer empty") 
-    else: 
-      turnOffMixer()
-      print ("Water butt empty")
-    if GPIO.input(buttFullSensor):
-      print ("Water butt now full") 
+    if (GPIO.input(buttFullSensor) == GPIO.LOW) :
+       blynk.virtual_write(10,255)
+       blynk.set_property(10, 'color', BLYNK_RED)
     else:
-      print ("Water butt no longer full") 
-
+       blynk.virtual_write(10,255)
+       blynk.set_property(10, 'color', BLYNK_GREEN)
+        
+    if (GPIO.input(buttEmptySensor) == GPIO.LOW) :
+       blynk.virtual_write(11,255)
+       blynk.set_property(11, 'color', BLYNK_RED)
+    else:
+       blynk.virtual_write(11,255)
+       blynk.set_property(11, 'color', BLYNK_GREEN)
 
 
 # Add Timers
