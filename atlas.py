@@ -288,9 +288,9 @@ def blynk_data():
     
    
     volt = chan.voltage
-    
-    blynk.virtual_write(25, str("{0}".format((volt-1.5)*100))
-    blynk.virtual_write(26, str("{0:.2f}".format((volt-1.5)*12))
+    if volt is not None:
+       blynk.virtual_write(25, str("{0}".format((volt-1.5)*100)))
+       blynk.virtual_write(26, str("{0:.2f}".format((volt-1.5)*12)))
     
     blynk.virtual_write(27, GPIO.input(buttEmptySensor))
     blynk.virtual_write(28, GPIO.input(buttFullSensor))
