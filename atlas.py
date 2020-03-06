@@ -18,6 +18,23 @@ import busio
 import adafruit_ads1x15.ads1015 as ADS
 from adafruit_ads1x15.analog_in import AnalogIn
 import os
+import logging
+
+class Dose:
+    def __init__(self, Pump, Dose, Led, name):
+        self.pump = Pump
+        self.dose = Dose
+        self.LED = Led
+        selt.name = name
+
+
+logger = logging.getLogger('doses')
+hdlr = logging.FileHandler('/home/pi/dose.log')
+formatter = logging.Formatter('%(asctime)s %(levelname)s %(message)s')
+hdlr.setFormatter(formatter)
+logger.addHandler(hdlr) 
+logger.setLevel(logging.WARNING)
+
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
@@ -35,6 +52,13 @@ buttEmptySensor = 4
 solenoidIn = 0
 solenoidOut = 0
 
+nutrientMix = []
+nutrientMix.append( Dose(Pump1, 6, 40, "Hydro Grow A")) 
+nutrientMix.append( Dose(Pump2, 6, 41, "Hydro Grow B")) 
+nutrientMix.append( Dose(Pump3, 10, 42, "Root Stimulant"))
+nutrientMix.append( Dose(Pump4, 4, 43, "Enzyme"))
+nutrientMix.append( Dose(Pump5, 1, 44, "Hydro Silicon")) 
+nutrientMix.append( Dose(Pump6, 1, 45, "Pure Clean"))
 
 Pump1 = 26
 Pump2 = 19
@@ -234,13 +258,16 @@ def buttonV4Pressed(value):
 @blynk.on("V30")
 def buttonV30Pressed(value):
     print("Dose Pump 1 Button")
-    blynk.virtual_write(40,255)
-    blynk.set_property(40, 'color', BLYNK_GREEN)
-    GPIO.output(Pump1,GPIO.LOW)
-    time.sleep(Pump1Dose)
-    GPIO.output(Pump1,GPIO.HIGH)
-    blynk.set_property(40, 'color', BLYNK_GREEN)
+    for dose in nutrientMix: 
+       blynk.virtual_write(dose.LED,255)
+       blynk.set_property(dose.LED, 'color', BLYNK_GREEN)
+       GPIO.output(dose.Pump,GPIO.LOW)
+       time.sleep(dose.dose)
+       GPIO.output(dose.pump,GPIO.HIGH)
+       blynk.set_property(dose.LED, 'color', BLYNK_GREEN)
+       logger.info("Dosing " + dose.name +" for " + dose.dose + " using pin " + dose.pump + " and led " + dose.LED) 
        
+        
 @blynk.on("V69")
 def buttonV69Pressed(value):
     print("Dose Line Fill")
@@ -370,7 +397,10 @@ timer.set_interval(10, blynk_data)
 
 
 while True:
-    blynk.run()
-    timer.run()
-
+    try:
+       blynk.run()
+       timer.run()
+    except:
+        logger.error('We have a problem')
+        os.system('sudo reboot')
 
