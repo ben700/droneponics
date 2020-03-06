@@ -47,6 +47,17 @@ Pump8 = 27
 Pump9 = 25
 Pump10 = 24
 
+Pump1Dose = 30 #part A
+Pump2Dose = 30 #part B
+Pump3Dose = 30
+Pump4Dose = 1
+Pump5Dose = 1
+Pump6Dose = 1
+Pump7Dose = 1
+Pump8Dose = 1
+Pump9Dose = 1
+Pump10Dose = 1
+
 #setup sensor 2
 GPIO.setup(buttFullSensor, GPIO.IN, GPIO.PUD_UP)
 GPIO.setup(buttEmptySensor, GPIO.IN, GPIO.PUD_DOWN)
@@ -55,6 +66,10 @@ Relay1 = 21
 Relay2 = 20
 Relay3 = 16
 Relay4 = 12
+
+noisyThingsWhenButtEmpty = [Relay1, Relay2, Relay3]
+
+Mixer = Relay1
 
 GPIO.setup(Relay1,GPIO.OUT)
 GPIO.setup(Relay2,GPIO.OUT)
@@ -214,6 +229,46 @@ def buttonV4Pressed(value):
         print("Pump/UV turned on")
         GPIO.output(Relay4,GPIO.LOW)
 
+
+        
+@blynk.on("V30")
+def buttonV30Pressed(value):
+    print("Dose Pump 1 Button")
+    blynk.virtual_write(40,255)
+    blynk.set_property(40, 'color', BLYNK_GREEN)
+    GPIO.output(Pump1,GPIO.LOW)
+    time.sleep(Pump1Dose)
+    GPIO.output(Pump1,GPIO.HIGH)
+    blynk.set_property(40, 'color', BLYNK_GREEN)
+       
+@blynk.on("V69")
+def buttonV69Pressed(value):
+    print("Dose Line Fill")
+    GPIO.output(Pump1,GPIO.LOW)
+    GPIO.output(Pump2,GPIO.LOW)
+    GPIO.output(Pump3,GPIO.LOW)
+    GPIO.output(Pump4,GPIO.LOW)
+    GPIO.output(Pump5,GPIO.LOW)
+    GPIO.output(Pump6,GPIO.LOW)
+    GPIO.output(Pump7,GPIO.LOW)
+    GPIO.output(Pump8,GPIO.LOW)
+    GPIO.output(Pump9,GPIO.LOW)
+    GPIO.output(Pump10,GPIO.LOW)
+       
+@blynk.on("V70")
+def buttonV69Pressed(value):
+    print("Dose Line Stop All")
+    GPIO.output(Pump1,GPIO.HIGH)
+    GPIO.output(Pump2,GPIO.HIGH)
+    GPIO.output(Pump3,GPIO.HIGH)
+    GPIO.output(Pump4,GPIO.HIGH)
+    GPIO.output(Pump5,GPIO.HIGH)
+    GPIO.output(Pump6,GPIO.HIGH)
+    GPIO.output(Pump7,GPIO.HIGH)
+    GPIO.output(Pump8,GPIO.HIGH)
+    GPIO.output(Pump9,GPIO.HIGH)
+    GPIO.output(Pump10,GPIO.HIGH)    
+        
 @blynk.on("connected")
 def blynk_connected():
     # You can also use blynk.sync_virtual(pin)
@@ -268,11 +323,9 @@ def setLEDsonApp():
        blynk.virtual_write(11,255)
        blynk.set_property(11, 'color', BLYNK_GREEN)
         
-def turnOffMixer(): 
-   GPIO.output(Relay1,GPIO.HIGH)
-   GPIO.output(Relay2,GPIO.HIGH)
-   GPIO.output(Relay3,GPIO.HIGH)
-   GPIO.output(Relay4,GPIO.HIGH)
+def turnOffNoisyThingsWhenButtEmpty(): 
+    for Relay in noisyThingsWhenButtEmpty:
+        GPIO.output(Relay,GPIO.HIGH)
       
 
 # Will Print Every 10 Seconds
@@ -297,17 +350,17 @@ def blynk_data():
     
     if (GPIO.input(buttFullSensor) == GPIO.LOW) :
        blynk.virtual_write(10,255)
-       blynk.set_property(10, 'color', BLYNK_GREEN)
+       blynk.set_property(10, 'color', BLYNK_RED)
     else:
        blynk.virtual_write(10,255)
-       blynk.set_property(10, 'color', BLYNK_RED)
+       blynk.set_property(10, 'color', BLYNK_GREEN)
         
     if (GPIO.input(buttEmptySensor) == GPIO.LOW) :
        blynk.virtual_write(11,255)
-       blynk.set_property(11, 'color', BLYNK_GREEN)
+       blynk.set_property(11, 'color', BLYNK_RED)
     else:
        blynk.virtual_write(11,255)
-       blynk.set_property(11, 'color', BLYNK_RED)
+       blynk.set_property(11, 'color', BLYNK_GREEN)
 
 
 # Add Timers
