@@ -17,7 +17,7 @@ import board
 import busio
 import adafruit_ads1x15.ads1015 as ADS
 from adafruit_ads1x15.analog_in import AnalogIn
-
+import os
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
@@ -256,7 +256,7 @@ def buttonV69Pressed(value):
     GPIO.output(Pump10,GPIO.LOW)
        
 @blynk.on("V70")
-def buttonV69Pressed(value):
+def buttonV70Pressed(value):
     print("Dose Line Stop All")
     GPIO.output(Pump1,GPIO.HIGH)
     GPIO.output(Pump2,GPIO.HIGH)
@@ -268,7 +268,8 @@ def buttonV69Pressed(value):
     GPIO.output(Pump8,GPIO.HIGH)
     GPIO.output(Pump9,GPIO.HIGH)
     GPIO.output(Pump10,GPIO.HIGH)    
-        
+
+    
 @blynk.on("connected")
 def blynk_connected():
     # You can also use blynk.sync_virtual(pin)

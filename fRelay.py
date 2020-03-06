@@ -7,6 +7,7 @@ import RPi.GPIO as GPIO
 import time, sys
 import BlynkLib
 from BlynkTimer import BlynkTimer
+import os
 
 BLYNK_GREEN     ="#23C48E"
 BLYNK_BLUE      ="#04C0F8"
@@ -95,6 +96,10 @@ def buttonV4Pressed(value):
         GPIO.output(Relay4,GPIO.LOW)
     setLEDsonApp()
 
+@blynk.on("V255")
+def buttonV255Pressed(value):
+    os.system('sudo reboot')
+    
 @blynk.on("connected")
 def blynk_connected():
     # You can also use blynk.sync_virtual(pin)
