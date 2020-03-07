@@ -56,6 +56,9 @@ blynk = BlynkLib.Blynk(BLYNK_AUTH)
 # Create BlynkTimer Instance
 timer = BlynkTimer()
 
+now = datetime.now()
+blynk.virtual_write(99, now.strftime("%d/%m/%Y %H:%M:%S"))
+    
 @blynk.on("V255")
 def buttonV255Pressed(value):
     os.system('sudo reboot')
