@@ -212,6 +212,9 @@ blynk = BlynkLib.Blynk(BLYNK_AUTH)
 # Create BlynkTimer Instance
 timer = BlynkTimer()
 
+now = datetime.now()
+blynk.virtual_write(99, now.strftime("%d/%m/%Y %H:%M:%S"))
+
 @blynk.on("V1")
 def buttonV1Pressed(value):
     blynk.virtual_write(1, str(value[0]))
