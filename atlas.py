@@ -52,13 +52,6 @@ buttEmptySensor = 4
 solenoidIn = 0
 solenoidOut = 0
 
-nutrientMix = []
-nutrientMix.append( Dose(Pump1, 6, 40, "Hydro Grow A")) 
-nutrientMix.append( Dose(Pump2, 6, 41, "Hydro Grow B")) 
-nutrientMix.append( Dose(Pump3, 10, 42, "Root Stimulant"))
-nutrientMix.append( Dose(Pump4, 4, 43, "Enzyme"))
-nutrientMix.append( Dose(Pump5, 1, 44, "Hydro Silicon")) 
-nutrientMix.append( Dose(Pump6, 1, 45, "Pure Clean"))
 
 Pump1 = 26
 Pump2 = 19
@@ -90,6 +83,15 @@ Relay1 = 21
 Relay2 = 20
 Relay3 = 16
 Relay4 = 12
+
+nutrientMix = []
+nutrientMix.append( Dose(Pump1, 6, 40, "Hydro Grow A")) 
+nutrientMix.append( Dose(Pump2, 6, 41, "Hydro Grow B")) 
+nutrientMix.append( Dose(Pump3, 10, 42, "Root Stimulant"))
+nutrientMix.append( Dose(Pump4, 4, 43, "Enzyme"))
+nutrientMix.append( Dose(Pump5, 1, 44, "Hydro Silicon")) 
+nutrientMix.append( Dose(Pump6, 1, 45, "Pure Clean"))
+
 
 noisyThingsWhenButtEmpty = [Relay1, Relay2, Relay3]
 
@@ -140,6 +142,8 @@ ads = ADS.ADS1015(i2c)
 
 # Create single-ended input on channel 0
 chan = AnalogIn(ads, ADS.P0)
+
+
 
 
 
