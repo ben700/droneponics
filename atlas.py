@@ -25,7 +25,7 @@ class Dose:
         self.pump = Pump
         self.dose = Dose
         self.LED = Led
-        selt.name = name
+        self.name = name
 
 
 logger = logging.getLogger('doses')
