@@ -303,6 +303,10 @@ def buttonV70Pressed(value):
     GPIO.output(Pump9,GPIO.HIGH)
     GPIO.output(Pump10,GPIO.HIGH)    
 
+        
+@blynk.on("V255")
+def buttonV255Pressed(value):
+    os.system('sudo reboot')
     
 @blynk.on("connected")
 def blynk_connected():
