@@ -95,18 +95,18 @@ setLEDColours()
 
 @blynk.on("V1")
 def buttonV1Pressed(value):
-if(value[0] == '1'):
-     now = datetime.now()
-     blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
-     blynk.virtual_write(98, "User requested dose"  + '\n')
-     for dose in nutrientMix: 
-         blynk.virtual_write(98, "Dosing " + str(dose.name) +" for " + str(dose.dose) + " using pin " + str(dose.pump) + " and led " + str(dose.LED) + '\n')
-         blynk.set_property(dose.LED, 'color', BLYNK_RED)
-         GPIO.output(dose.pump,GPIO.LOW)
-         time.sleep(dose.dose)
-         GPIO.output(dose.pump,GPIO.HIGH)
-         blynk.set_property(dose.LED, 'color', BLYNK_GREEN)
-blynk.virtual_write(1, 0)
+    if(value[0] == '1'):
+         now = datetime.now()
+         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
+         blynk.virtual_write(98, "User requested dose"  + '\n')
+         for dose in nutrientMix: 
+             blynk.virtual_write(98, "Dosing " + str(dose.name) +" for " + str(dose.dose) + " using pin " + str(dose.pump) + " and led " + str(dose.LED) + '\n')
+             blynk.set_property(dose.LED, 'color', BLYNK_RED)
+             GPIO.output(dose.pump,GPIO.LOW)
+             time.sleep(dose.dose)
+             GPIO.output(dose.pump,GPIO.HIGH)
+             blynk.set_property(dose.LED, 'color', BLYNK_GREEN)
+    blynk.virtual_write(1, 0)
     
 @blynk.on("V2")
 def buttonV2Pressed(value):
@@ -121,7 +121,7 @@ def buttonV2Pressed(value):
              time.sleep(dose.dose*10)
              GPIO.output(dose.pump,GPIO.HIGH)
              blynk.set_property(dose.LED, 'color', BLYNK_GREEN)
-         blynk.virtual_write(2, 0)
+     blynk.virtual_write(2, 0)
         
 @blynk.on("V3")
 def buttonV3Pressed(value):
@@ -160,7 +160,6 @@ def buttonV255Pressed(value):
     now = datetime.now()
     blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
     blynk.virtual_write(98, "Update code from github and reboot asked by user" + '\n')
-    blynk.virtual_write(255, 0)
     os.system('sh /home/pi/droneponics/reboot.sh')
     
       
@@ -168,8 +167,5 @@ while True:
     try:
        blynk.run()
     except:
-        try:
-           blynk.virtual_write(98, "Something bad happened so did end of programme reboot")
-        finally:
-           os.system('sh /home/pi/droneponics/reboot.sh')
+       os.system('sh /home/pi/droneponics/reboot.sh')
 
