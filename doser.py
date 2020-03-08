@@ -82,7 +82,8 @@ blynk.virtual_write(98, ("Started as normal"))
 blynk.notify("Rebooted at " + now.strftime("%d/%m/%Y %H:%M:%S"))
 
 for i in LED: 
-    blynk.virtual_write(i, 0)
+    blynk.virtual_write(i, 255)
+    blynk.set_property(i, 'color', BLYNK_GREEN)
         
 @blynk.on("V1")
 def buttonV1Pressed(value):
