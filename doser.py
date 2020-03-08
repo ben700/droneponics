@@ -93,15 +93,14 @@ setLEDColours()
 def buttonV1Pressed(value):
     now = datetime.now()
     blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
-    blynk.virtual_write(98, "User requested dose")
+    blynk.virtual_write(98, "User requested dose" + '\n')
     for dose in nutrientMix: 
-       Blynk.virtualWrite(98, "add", 0, "Dosing",dose.name );
        blynk.set_property(dose.LED, 'color', BLYNK_RED)
        GPIO.output(dose.pump,GPIO.LOW)
        time.sleep(dose.dose)
        GPIO.output(dose.pump,GPIO.HIGH)
        blynk.set_property(dose.LED, 'color', BLYNK_GREEN)
-       blynk.virtual_write(98, "Dosing " + str(dose.name) +" for " + str(dose.dose) + " using pin " + str(dose.pump) + " and led " + str(dose.LED))
+       blynk.virtual_write(98, "Dosing " + str(dose.name) +" for " + str(dose.dose) + " using pin " + str(dose.pump) + " and led " + str(dose.LED) + '\n')
    
     blynk.virtual_write(1, 0)
     
@@ -109,15 +108,14 @@ def buttonV1Pressed(value):
 def buttonV2Pressed(value):
     now = datetime.now()
     blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
-    blynk.virtual_write(98, "User requested dose")
+    blynk.virtual_write(98, "User requested butt dose"  + '\n')
     for dose in nutrientMix: 
-       Blynk.virtualWrite(98, "add", 0, "Dosing",dose.name );
        blynk.set_property(dose.LED, 'color', BLYNK_RED)
        GPIO.output(dose.pump,GPIO.LOW)
        time.sleep(dose.dose*10)
        GPIO.output(dose.pump,GPIO.HIGH)
        blynk.set_property(dose.LED, 'color', BLYNK_GREEN)
-       blynk.virtual_write(98, "Dosing " + str(dose.name) +" for " + str(dose.dose*10) + " using pin " + str(dose.pump) + " and led " + str(dose.LED))
+       blynk.virtual_write(98, "Dosing " + str(dose.name) +" for " + str(dose.dose*10) + " using pin " + str(dose.pump) + " and led " + str(dose.LED) + '\n')
    
     blynk.virtual_write(2, 0)
         
@@ -125,23 +123,23 @@ def buttonV2Pressed(value):
 def buttonV3Pressed(value):
     now = datetime.now()
     blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
-    blynk.virtual_write(98, "User pressed button 3")
+    blynk.virtual_write(98, "User pressed button 3" + '\n')
     if(value[0] == '1'):
-       blynk.virtual_write(98, "Dose Line Stop All at " + now.strftime("%d/%m/%Y %H:%M:%S"))
+       blynk.virtual_write(98, "Dose Line Stop All at " + now.strftime("%d/%m/%Y %H:%M:%S") + '\n')
        GPIO.output(Pump1,GPIO.HIGH)
        GPIO.output(Pump2,GPIO.HIGH)
        GPIO.output(Pump3,GPIO.HIGH)
        GPIO.output(Pump4,GPIO.HIGH)
        GPIO.output(Pump5,GPIO.HIGH)
-       blynk.virtual_write(98, "All pumps stopped") 
+       blynk.virtual_write(98, "All pumps stopped" + '\n') 
     else  :     
-       blynk.virtual_write(98, "Dose Line Stop Fill at " + now.strftime("%d/%m/%Y %H:%M:%S"))
+       blynk.virtual_write(98, "Dose Line Stop Fill at " + now.strftime("%d/%m/%Y %H:%M:%S") + '\n')
        GPIO.output(Pump1,GPIO.LOW)
        GPIO.output(Pump2,GPIO.LOW)
        GPIO.output(Pump3,GPIO.LOW)
        GPIO.output(Pump4,GPIO.LOW)
        GPIO.output(Pump5,GPIO.LOW)
-       blynk.virtual_write(98, "All pumps started")
+       blynk.virtual_write(98, "All pumps started" + '\n')
     setLEDColours()        
     
                
@@ -149,11 +147,11 @@ def buttonV3Pressed(value):
 def buttonV255Pressed(value):
     now = datetime.now()
     blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
-    blynk.virtual_write(98, "Update code from github and reboot asked by user")
+    blynk.virtual_write(98, "Update code from github and reboot asked by user" + '\n')
     blynk.virtual_write(255, 0)
-    os.system("sh uDrone.sh")
-    os.system('sudo reboot')
-        
+    os.system('sh uDrone.sh')
+    os.system('/home/pi/droneponics/reboot.sh')
+    
 def turnOffNoisyThingsWhenButtEmpty(): 
    for Relay in noisyThingsWhenButtEmpty:
        if GPIO.inout(Relay) != GPIO.HIGH : 
@@ -164,24 +162,11 @@ def turnOnNoisyThingsWhenButtNotEmpty():
        if GPIO.inout(Relay) != GPIO.LOW : 
            GPIO.output(Relay,GPIO.LOW)
       
-def DoseNutrients(): 
-    logging.debug("DoseNutrients")
-    now = datetime.now()
-    blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
-    print ("Going to dose butt time is now " + now.strftime("%d/%m/%Y %H:%M:%S"))
-    for dose in nutrientMix:
-        blynk.set_property(dose.LED, 'color', BLYNK_RED)
-        blynk.log_event(dose.name, dose.dose)
-        GPIO.output(dose.pump,GPIO.LOW)
-        time.sleep(dose.Dose)
-        GPIO.output(dose.pump,GPIO.HIGH)
-        blynk.set_property(dose.LED, 'color', BLYNK_RED)
-        print ("Dosed " + dose.name + " for " + dose.Dose + " seconds. Using PIN " + dose.Pump + " and showed using LED" + dose.LED)
-
 while True:
     try:
        blynk.run()
     except:
-        logging.error("Something bad happened so did end of programme reboot")
+        blynk.virtual_write(98, "Something bad happened so did end of programme reboot")
+        os.system("sh uDrone.sh")
         os.system('/home/pi/droneponics/reboot.sh')
 
