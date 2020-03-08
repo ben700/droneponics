@@ -142,16 +142,15 @@ def buttonV3Pressed(value):
        GPIO.output(Pump5,GPIO.LOW)
        blynk.virtual_write(98, "All pumps started")
     setLEDColours()        
-    blynk.virtual_write(3, 0)
     
                
 @blynk.on("V255")
 def buttonV255Pressed(value):
-    
     now = datetime.now()
     blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
-    blynk.virtual_write(98, "Reboot by user")
+    blynk.virtual_write(98, "Update code from github and reboot asked by user")
     blynk.virtual_write(255, 0)
+    os.system("sh uDrone.sh")
     os.system('sudo reboot')
         
 def turnOffNoisyThingsWhenButtEmpty(): 
@@ -183,5 +182,5 @@ while True:
        blynk.run()
     except:
         logging.error("Something bad happened so did end of programme reboot")
-        os.system('sudo reboot')
+        os.system('/home/pi/droneponics/reboot.sh')
 
