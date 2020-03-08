@@ -134,9 +134,9 @@ def buttonV3Pressed(value):
        GPIO.output(Pump4,GPIO.LOW)
        GPIO.output(Pump5,GPIO.LOW)
     for i in LED: 
-       if value[0] == 0:
+       if (value[0] == 0):
             blynk.virtual_write(LED[i], 0)
-         else:
+        else:
             blynk.virtual_write(LED[i], 1)
             
     blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
