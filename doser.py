@@ -78,7 +78,7 @@ blynk = BlynkLib.Blynk('e06jzpI2zuRD4KB5eHyHdCQTGFT7einR')
     
 now = datetime.now()
 blynk.virtual_write(99, now.strftime("%d/%m/%Y %H:%M:%S"))
-blynk.virtual_write(98, ("Started as normal"))
+blynk.virtual_write(98, ("Started as normal" + "/cr"))
 #blynk.notify("Rebooted at " + now.strftime("%d/%m/%Y %H:%M:%S"))
 
 def setLEDColours():
