@@ -97,9 +97,7 @@ def buttonV1Pressed(value):
        GPIO.output(dose.pump,GPIO.HIGH)
        blynk.set_property(dose.LED, 'color', BLYNK_GREEN)
        blynk.virtual_write(98, "Dosing " + str(dose.name) +" for " + str(dose.dose) + " using pin " + str(dose.pump) + " and led " + str(dose.LED))
-        
-        
-        
+   
     blynk.virtual_write(1, 0)
     
 @blynk.on("V2")
@@ -129,6 +127,7 @@ def buttonV3Pressed(value):
        GPIO.output(Pump3,GPIO.HIGH)
        GPIO.output(Pump4,GPIO.HIGH)
        GPIO.output(Pump5,GPIO.HIGH)
+       blynk.virtual_write(98, "All pumps stopped") 
     else  :     
        blynk.virtual_write(98, "Dose Line Stop Fill at " + now.strftime("%d/%m/%Y %H:%M:%S"))
        GPIO.output(Pump1,GPIO.LOW)
@@ -136,6 +135,10 @@ def buttonV3Pressed(value):
        GPIO.output(Pump3,GPIO.LOW)
        GPIO.output(Pump4,GPIO.LOW)
        GPIO.output(Pump5,GPIO.LOW)
+       blynk.virtual_write(98, "All pumps started")
+    
+    
+    blynk.virtual_write(98, "Now LEDS")
     for i in LED: 
        if(value[0] == '1'):
             blynk.virtual_write(LED[i], 0)
