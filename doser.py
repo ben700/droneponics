@@ -121,7 +121,7 @@ def buttonV2Pressed(value):
              time.sleep(dose.dose*10)
              GPIO.output(dose.pump,GPIO.HIGH)
              blynk.set_property(dose.LED, 'color', BLYNK_GREEN)
-     blynk.virtual_write(2, 0)
+    blynk.virtual_write(2, 0)
         
 @blynk.on("V3")
 def buttonV3Pressed(value):
