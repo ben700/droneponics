@@ -55,8 +55,8 @@ nutrientMix = []
 nutrientMix.append( Dose(Pump1, 6, LED[0], "Hydro Grow A")) 
 nutrientMix.append( Dose(Pump2, 6, LED[1], "Hydro Grow B")) 
 nutrientMix.append( Dose(Pump3, 10, LED[2], "Root Stimulant"))
-nutrientMix.append( Dose(Pump4, 4, LED[4], "Enzyme"))
-nutrientMix.append( Dose(Pump5, 1, LED[5], "Hydro Silicon")) 
+nutrientMix.append( Dose(Pump4, 4, LED[3], "Enzyme"))
+nutrientMix.append( Dose(Pump5, 1, LED[4], "Hydro Silicon")) 
 
 GPIO.setup(Pump1,GPIO.OUT)
 GPIO.setup(Pump2,GPIO.OUT)
