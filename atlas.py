@@ -1,5 +1,6 @@
 #!/usr/bin/python
 
+import logging
 import BlynkLib
 from BlynkTimer import BlynkTimer
 from datetime import datetime
@@ -28,12 +29,10 @@ class Dose:
         self.name = name
 
 
-logger = logging.getLogger('doses')
-hdlr = logging.FileHandler('/home/pi/dose.log')
-formatter = logging.Formatter('%(asctime)s %(levelname)s %(message)s')
-hdlr.setFormatter(formatter)
-logger.addHandler(hdlr) 
-logger.setLevel(logging.WARNING)
+LOG_LEVEL = dosesLogging.INFO
+LOG_FILE = "/home/pi/doseslog"
+LOG_FORMAT = "%(asctime)s %(levelname)s %(message)s"
+logging.basicConfig(filename=LOG_FILE, format=LOG_FORMAT, level=LOG_LEVEL)
 
 
 GPIO.setmode(GPIO.BCM)
@@ -165,9 +164,14 @@ ph = AtlasI2C(99)
 #flow = AtlasI2C(104)
 #pump = AtlasI2C(103)
 
-print("Temp Device Info = " + temp.query("i"))
-print("pH Device Info = " + ph.query("i"))
-print("EC Device Info = " + ec.query("i"))
+
+logging.info("Temp Device Info = " + temp.query("i"))
+logging.info("pH Device Info = " + ph.query("i"))
+logging.info("EC Device Info = " + ec.query("i"))
+    
+#print("Temp Device Info = " + temp.query("i"))
+#print("pH Device Info = " + ph.query("i"))
+#print("EC Device Info = " + ec.query("i"))
 #print("DO Device Info = " + do.query("i"))      
 #print("Flow Device Info = " + flow.query("i"))      
 
@@ -218,6 +222,8 @@ timer = BlynkTimer()
 
 now = datetime.now()
 blynk.virtual_write(99, now.strftime("%d/%m/%Y %H:%M:%S"))
+logging.info("Rebooted at " + now.strftime("%d/%m/%Y %H:%M:%S"))
+blynk.notify("Rebooted at " + now.strftime("%d/%m/%Y %H:%M:%S"))
 
 @blynk.on("V1")
 def buttonV1Pressed(value):
@@ -264,7 +270,8 @@ def buttonV4Pressed(value):
         
 @blynk.on("V30")
 def buttonV30Pressed(value):
-    print("Dose Pump 1 Button")
+    logging.info("Dose started at" + now.strftime("%d/%m/%Y %H:%M:%S"))
+    print("Dose started at " + now.strftime("%d/%m/%Y %H:%M:%S"))
     for dose in nutrientMix: 
        blynk.virtual_write(dose.LED,255)
        blynk.set_property(dose.LED, 'color', BLYNK_GREEN)
@@ -273,11 +280,11 @@ def buttonV30Pressed(value):
        GPIO.output(dose.pump,GPIO.HIGH)
        blynk.set_property(dose.LED, 'color', BLYNK_GREEN)
        logger.info("Dosing " + dose.name +" for " + dose.dose + " using pin " + dose.pump + " and led " + dose.LED) 
-       
-        
+    
 @blynk.on("V69")
 def buttonV69Pressed(value):
-    print("Dose Line Fill")
+    logging.info("Dose Line Fill at " + now.strftime("%d/%m/%Y %H:%M:%S"))
+    print("Dose Line Stop Fill at " + now.strftime("%d/%m/%Y %H:%M:%S"))
     GPIO.output(Pump1,GPIO.LOW)
     GPIO.output(Pump2,GPIO.LOW)
     GPIO.output(Pump3,GPIO.LOW)
@@ -291,7 +298,8 @@ def buttonV69Pressed(value):
        
 @blynk.on("V70")
 def buttonV70Pressed(value):
-    print("Dose Line Stop All")
+    logging.info("Dose Line Stop All at " + now.strftime("%d/%m/%Y %H:%M:%S"))
+    print("Dose Line Stop All at " + now.strftime("%d/%m/%Y %H:%M:%S"))
     GPIO.output(Pump1,GPIO.HIGH)
     GPIO.output(Pump2,GPIO.HIGH)
     GPIO.output(Pump3,GPIO.HIGH)
@@ -363,21 +371,45 @@ def setLEDsonApp():
        blynk.set_property(11, 'color', BLYNK_GREEN)
         
 def turnOffNoisyThingsWhenButtEmpty(): 
-    for Relay in noisyThingsWhenButtEmpty:
-        GPIO.output(Relay,GPIO.HIGH)
+   for Relay in noisyThingsWhenButtEmpty:
+       if GPIO.inout(Relay) != GPIO.HIGH : 
+           GPIO.output(Relay,GPIO.HIGH)
       
+def turnOnNoisyThingsWhenButtNotEmpty(): 
+   for Relay in noisyThingsWhenButtEmpty:
+       if GPIO.inout(Relay) != GPIO.LOW : 
+           GPIO.output(Relay,GPIO.LOW)
+      
+def DoseNutrients(): 
+    logging.debug("DoseNutrients")
+    now = datetime.now()
+    blynk.virtual_write(98, now.strftime("%d/%m/%Y %H:%M:%S"))
+    print ("Going to dose butt time is now " + now.strftime("%d/%m/%Y %H:%M:%S"))
+    for dose in nutrientMix:
+        blynk.set_property(dose.LED, 'color', BLYNK_RED)
+        blynk.log_event(dose.name, dose.dose)
+        GPIO.output(dose.pump,GPIO.LOW)
+        time.sleep(dose.Dose)
+        GPIO.output(dose.pump,GPIO.HIGH)
+        blynk.set_property(dose.LED, 'color', BLYNK_RED)
+        print ("Dosed " + dose.name + " for " + dose.Dose + " seconds. Using PIN " + dose.Pump + " and showed using LED" + dose.LED)
 
+        
+        
 # Will Print Every 10 Seconds
 def blynk_data():
-
+    logging.debug("Start of blynk_data")
     now = datetime.now()
     blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
     cTemp = temp.query("R,").split(":")[1]
     print("Temp = " + cTemp)
     blynk.virtual_write(20, cTemp)
-    blynk.virtual_write(21, ec.query("RT,"+cTemp).split(":")[1])
-    blynk.virtual_write(22, ph.query("RT,"+cTemp).split(":")[1])
-    
+    cEC = ec.query("RT,"+cTemp).split(":")[1]
+    blynk.virtual_write(21, cEC)
+    print ("EC  = " + cEC)
+    cPH = ph.query("RT,"+cTemp).split(":")[1]
+    blynk.virtual_write(22, cPH)
+    print ("PH = " + cPH)
    
     volt = chan.voltage
     if volt is not None:
@@ -391,14 +423,16 @@ def blynk_data():
        blynk.virtual_write(10,255)
        blynk.set_property(10, 'color', BLYNK_RED)
     else:
-       blynk.virtual_write(10,255)
        blynk.set_property(10, 'color', BLYNK_GREEN)
+       blynk.virtual_write(10,255)
         
     if (GPIO.input(buttEmptySensor) == GPIO.LOW) :
        blynk.set_property(11, 'color', BLYNK_GREEN)
+       turnOnNoisyThingsWhenButtNotEmpty()
        blynk.virtual_write(11,255)
     else:
        blynk.virtual_write(11,255)
+       turnOffNoisyThingsWhenButtEmpty()
        blynk.set_property(11, 'color', BLYNK_RED)
    
 
@@ -412,6 +446,6 @@ while True:
        blynk.run()
        timer.run()
     except:
-        logger.error('We have a problem')
+        logging.error("Something bad happened to did end of programme reboot")
         os.system('sudo reboot')
 
