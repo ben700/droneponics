@@ -154,10 +154,9 @@ def disconnect_handler():
     
 
     
-@blynk.handle_event('write V1')
+@blynk.handle_event('read V1')
 def buttonV1Pressed(pin, value):
-    
-   _log.info(WRITE_EVENT_PRINT_MSG.format(pin, value))
+    _log.info(READ_PRINT_MSG.format(pin))
    now = datetime.now()
    blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
    blynk.virtual_write(98, "User requested dose"  + '\n')
@@ -177,9 +176,9 @@ def buttonV1Pressed(pin, value):
    blynk.virtual_write(1, 0)
    blynk.virtual_write(98, "Requested dose completed"  + '\n')
     
-@blynk.handle_event('write V2')
+@blynk.handle_event('read V2')
 def buttonV2Pressed(pin, value):
-    _log.info(WRITE_EVENT_PRINT_MSG.format(pin, value))
+    _log.info(READ_PRINT_MSG.format(pin))
     if(value[0] != '1'):
          now = datetime.now()
          blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
@@ -194,9 +193,9 @@ def buttonV2Pressed(pin, value):
     blynk.virtual_write(2, 0)
     blynk.virtual_write(98, "Requested dose butt completed"  + '\n')
         
-@blynk.handle_event('write V3')
+@blynk.handle_event('read V3')
 def buttonV3Pressed(pin, value):
-    _log.info(WRITE_EVENT_PRINT_MSG.format(pin, value))
+    _log.info(READ_PRINT_MSG.format(pin))
     now = datetime.now()
     blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
     blynk.virtual_write(98, "User pressed button 3" + '\n')
@@ -241,6 +240,7 @@ def read_virtual_pin_handler(pin):
 
 @blynk.handle_event('write V6')
 def write_handler(pin, values):
+    _log.info(WRITE_EVENT_PRINT_MSG.format(pin, value))
     header = ''
     result = ''
     delimiter = '{}\n'.format('=' * 30)
@@ -265,8 +265,9 @@ def write_handler(pin, values):
         blynk.virtual_write(pin, output)
         blynk.virtual_write(pin, '\n')
 
-@blynk.handle_event('write V255')
+@blynk.handle_event('read V255')
 def buttonV255Pressed(value):
+    _log.info(READ_PRINT_MSG.format(pin))
     now = datetime.now()
     blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
     blynk.virtual_write(98, "Update code from github and reboot asked by user" + '\n')
