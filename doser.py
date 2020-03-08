@@ -281,9 +281,9 @@ def buttonV255Pressed(value):
 try:
     while True:
         blynk.run()
-    except KeyboardInterrupt:
-        blynk.disconnect()
-        _log.info('SCRIPT WAS INTERRUPTED')
-    finally:                
-         os.system('sh /home/pi/droneponics/reboot.sh')
+except KeyboardInterrupt:
+    blynk.disconnect()
+    _log.info('SCRIPT WAS INTERRUPTED')
+finally:                
+    os.system('sh /home/pi/droneponics/reboot.sh')
 
