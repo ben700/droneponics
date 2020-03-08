@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 
 import blynklib
+import blynktimer
 import logging
 from datetime import datetime
 import io
@@ -83,7 +84,7 @@ GPIO.output(Pump5,GPIO.HIGH)
 BLYNK_AUTH = 'e06jzpI2zuRD4KB5eHyHdCQTGFT7einR' 
 
 # Initialize Blynk
-blynk = blynklib.Blynk(BLYNK_AUTH, heartbeat=15, max_msg_buffer=512, log=_log.info)
+blynk = blynklib.Blynk(BLYNK_AUTH, heartbeat=15, log=_log.info)
 timer = blynktimer.Timer()
 
 APP_CONNECT_PRINT_MSG = '[APP_CONNECT_EVENT]'
