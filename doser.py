@@ -93,9 +93,9 @@ def buttonV1Pressed(value):
     for dose in nutrientMix: 
        #blynk.virtual_write(dose.LED,255)
        blynk.set_property(dose.LED, 'color', BLYNK_RED)
-       GPIO.output(dose.Pump,GPIO.LOW)
+       #GPIO.output(dose.Pump,GPIO.LOW)
        time.sleep(dose.dose)
-       GPIO.output(dose.pump,GPIO.HIGH)
+       #GPIO.output(dose.pump,GPIO.HIGH)
        blynk.set_property(dose.LED, 'color', BLYNK_GREEN)
        #logger.info("Dosing " + dose.name +" for " + dose.dose + " using pin " + dose.pump + " and led " + dose.LED) 
     
