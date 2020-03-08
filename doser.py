@@ -69,19 +69,20 @@ GPIO.output(Pump2,GPIO.HIGH)
 GPIO.output(Pump3,GPIO.HIGH)
 GPIO.output(Pump4,GPIO.HIGH)
 GPIO.output(Pump5,GPIO.HIGH)
-for i in LED: 
-    blynk.virtual_write(LED[i], 0)
 
 
 
 # Initialize Blynk
 blynk = BlynkLib.Blynk('e06jzpI2zuRD4KB5eHyHdCQTGFT7einR')
 
+    
 now = datetime.now()
 blynk.virtual_write(99, now.strftime("%d/%m/%Y %H:%M:%S"))
 blynk.virtual_write(98, ("Started as normal"))
 blynk.notify("Rebooted at " + now.strftime("%d/%m/%Y %H:%M:%S"))
 
+for i in LED: 
+    blynk.virtual_write(LED[i], 0)
         
 @blynk.on("V1")
 def buttonV1Pressed(value):
