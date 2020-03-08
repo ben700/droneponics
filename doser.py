@@ -91,11 +91,10 @@ def buttonV1Pressed(value):
     blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
     blynk.virtual_write(98, "User pressed button 1")
     for dose in nutrientMix: 
-       #blynk.virtual_write(dose.LED,255)
        blynk.set_property(dose.LED, 'color', BLYNK_RED)
-       #GPIO.output(dose.Pump,GPIO.LOW)
+       GPIO.output(dose.pump,GPIO.LOW)
        time.sleep(dose.dose)
-       #GPIO.output(dose.pump,GPIO.HIGH)
+       GPIO.output(dose.pump,GPIO.HIGH)
        blynk.set_property(dose.LED, 'color', BLYNK_GREEN)
        #logger.info("Dosing " + dose.name +" for " + dose.dose + " using pin " + dose.pump + " and led " + dose.LED) 
     
@@ -108,13 +107,12 @@ def buttonV2Pressed(value):
     blynk.virtual_write(98, "User pressed button 2")
     print("Dose started at " + now.strftime("%d/%m/%Y %H:%M:%S"))
     for dose in nutrientMix: 
-       blynk.virtual_write(dose.LED,255)
        blynk.set_property(dose.LED, 'color', BLYNK_GREEN)
-       GPIO.output(dose.Pump,GPIO.LOW)
+       GPIO.output(dose.pump,GPIO.LOW)
        time.sleep(dose.dose*10)
        GPIO.output(dose.pump,GPIO.HIGH)
        blynk.set_property(dose.LED, 'color', BLYNK_GREEN)
-       logger.info("Dosing " + dose.name +" for " + dose.dose + " using pin " + dose.pump + " and led " + dose.LED) 
+       #logger.info("Dosing " + dose.name +" for " + dose.dose + " using pin " + dose.pump + " and led " + dose.LED) 
     blynk.virtual_write(2, 0)
         
 @blynk.on("V3")
@@ -142,7 +140,6 @@ def buttonV3Pressed(value):
             
     blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
     blynk.virtual_write(98, "User pressed button 3")
-    blynk.virtual_write(3, 0)
     
                
 @blynk.on("V255")
