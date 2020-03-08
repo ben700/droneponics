@@ -50,6 +50,15 @@ BLYNK_DARK_BLUE ="#5F7CD8"
 
 colors = {'1': '#FFC300', '0': '#CCCCCC', 'OFFLINE': '#FF0000'}
 
+APP_CONNECT_PRINT_MSG = '[APP_CONNECT_EVENT]'
+APP_DISCONNECT_PRINT_MSG = '[APP_DISCONNECT_EVENT]'
+CONNECT_PRINT_MSG = '[CONNECT_EVENT]'
+DISCONNECT_PRINT_MSG = '[DISCONNECT_EVENT]'
+WRITE_EVENT_PRINT_MSG = "[WRITE_VIRTUAL_PIN_EVENT] Pin: V{} Value: '{}'"
+READ_PRINT_MSG = "[READ_VIRTUAL_PIN_EVENT] Pin: V{}"
+ALLOWED_COMMANDS_LIST = ['ls', 'lsusb', 'ip a', 'ip abc']
+TWEET_MSG = "New value='{}' on VPIN({})"
+
 
 Pump1 = 4
 Pump2 = 27
@@ -81,20 +90,11 @@ GPIO.output(Pump5,GPIO.HIGH)
 
 
 
-BLYNK_AUTH = 'e06jzpI2zuRD4KB5eHyHdCQTGFT7einR' 
+BLYNK_AUTH = "e06jzpI2zuRD4KB5eHyHdCQTGFT7einR" 
 
 # Initialize Blynk
-blynk = blynklib.Blynk(BLYNK_AUTH, heartbeat=15, log=_log.info)
+blynk = blynklib.Blynk(BLYNK_AUTH)
 timer = blynktimer.Timer()
-
-APP_CONNECT_PRINT_MSG = '[APP_CONNECT_EVENT]'
-APP_DISCONNECT_PRINT_MSG = '[APP_DISCONNECT_EVENT]'
-CONNECT_PRINT_MSG = '[CONNECT_EVENT]'
-DISCONNECT_PRINT_MSG = '[DISCONNECT_EVENT]'
-WRITE_EVENT_PRINT_MSG = "[WRITE_VIRTUAL_PIN_EVENT] Pin: V{} Value: '{}'"
-READ_PRINT_MSG = "[READ_VIRTUAL_PIN_EVENT] Pin: V{}"
-ALLOWED_COMMANDS_LIST = ['ls', 'lsusb', 'ip a', 'ip abc']
-TWEET_MSG = "New value='{}' on VPIN({})"
 
 now = datetime.now()
 blynk.virtual_write(99, now.strftime("%d/%m/%Y %H:%M:%S"))
@@ -156,7 +156,7 @@ def disconnect_handler():
     
 @blynk.handle_event('read V1')
 def buttonV1Pressed(pin, value):
-    _log.info(READ_PRINT_MSG.format(pin))
+   _log.info(READ_PRINT_MSG.format(pin))
    now = datetime.now()
    blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
    blynk.virtual_write(98, "User requested dose"  + '\n')
