@@ -90,15 +90,14 @@ def buttonV1Pressed(value):
     now = datetime.now()
     blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
     blynk.virtual_write(98, "User pressed button 1")
-    print("Dose started at " + now.strftime("%d/%m/%Y %H:%M:%S"))
     for dose in nutrientMix: 
-       blynk.virtual_write(dose.LED,255)
-       blynk.set_property(dose.LED, 'color', BLYNK_GREEN)
+       #blynk.virtual_write(dose.LED,255)
+       blynk.set_property(dose.LED, 'color', BLYNK_RED)
        GPIO.output(dose.Pump,GPIO.LOW)
        time.sleep(dose.dose)
        GPIO.output(dose.pump,GPIO.HIGH)
        blynk.set_property(dose.LED, 'color', BLYNK_GREEN)
-       logger.info("Dosing " + dose.name +" for " + dose.dose + " using pin " + dose.pump + " and led " + dose.LED) 
+       #logger.info("Dosing " + dose.name +" for " + dose.dose + " using pin " + dose.pump + " and led " + dose.LED) 
     
     blynk.virtual_write(1, 0)
     
@@ -183,6 +182,6 @@ while True:
     try:
        blynk.run()
     except:
-        logging.error("Something bad happened to did end of programme reboot")
+        logging.error("Something bad happened so did end of programme reboot")
         os.system('sudo reboot')
 
