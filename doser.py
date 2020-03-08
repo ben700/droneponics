@@ -83,6 +83,7 @@ blynk.virtual_write(98, ("Started as normal" + '\n'))
 blynk.virtual_write(1, 0)
 blynk.virtual_write(2, 0)
 blynk.virtual_write(3, 0)
+blynk.virtual_write(255, 0)
     
 def setLEDColours():
     for i in LED: 
@@ -146,7 +147,13 @@ def buttonV3Pressed(value):
        blynk.virtual_write(98, "All pumps started" + '\n')
        for i in LED: 
            blynk.set_property(i, 'color', BLYNK_RED)
-    
+
+        
+@blynk.on("V4")
+def buttonV4Pressed(value):
+    now = datetime.now()
+    blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
+    blynk.virtual_write(98, "User pressed button 4" + '\n')
                
 @blynk.on("V255")
 def buttonV255Pressed(value):
