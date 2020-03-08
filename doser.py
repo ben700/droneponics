@@ -80,10 +80,15 @@ now = datetime.now()
 blynk.virtual_write(99, now.strftime("%d/%m/%Y %H:%M:%S"))
 blynk.virtual_write(98, ("Started as normal"))
 #blynk.notify("Rebooted at " + now.strftime("%d/%m/%Y %H:%M:%S"))
-for i in LED: 
-    blynk.virtual_write(i, 255)
-    blynk.set_property(i, 'color', BLYNK_GREEN)
+
+def setLEDColours():
+    for i in LED: 
+        blynk.virtual_write(i, 255)
+        blynk.set_property(i, 'color', BLYNK_GREEN)
         
+        
+setLEDColours()
+
 @blynk.on("V1")
 def buttonV1Pressed(value):
     now = datetime.now()
@@ -136,15 +141,7 @@ def buttonV3Pressed(value):
        GPIO.output(Pump4,GPIO.LOW)
        GPIO.output(Pump5,GPIO.LOW)
        blynk.virtual_write(98, "All pumps started")
-    
-    
-    blynk.virtual_write(98, "Now LEDS")
-    for i in LED: 
-       if(value[0] == '1'):
-            blynk.virtual_write(LED[i], 0)
-       else:
-            blynk.virtual_write(LED[i], 1)
-            
+    setLEDColours()        
     blynk.virtual_write(3, 0)
     
                
