@@ -89,14 +89,14 @@ for i in LED:
 def buttonV1Pressed(value):
     now = datetime.now()
     blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
-    blynk.virtual_write(98, "User pressed button 1")
+    blynk.virtual_write(98, "User requested dose")
     for dose in nutrientMix: 
        blynk.set_property(dose.LED, 'color', BLYNK_RED)
        GPIO.output(dose.pump,GPIO.LOW)
        time.sleep(dose.dose)
        GPIO.output(dose.pump,GPIO.HIGH)
        blynk.set_property(dose.LED, 'color', BLYNK_GREEN)
-       #logger.info("Dosing " + dose.name +" for " + dose.dose + " using pin " + dose.pump + " and led " + dose.LED) 
+       logger.info("Dosing " + dose.name +" for " + dose.dose + " using pin " + dose.pump + " and led " + dose.LED) 
     
     blynk.virtual_write(1, 0)
     
