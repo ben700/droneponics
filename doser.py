@@ -122,7 +122,7 @@ def buttonV3Pressed(value):
     now = datetime.now()
     blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
     blynk.virtual_write(98, "User pressed button 3")
-    if value[0] == 0:
+    if(value[0] == '1'):
        blynk.virtual_write(98, "Dose Line Stop All at " + now.strftime("%d/%m/%Y %H:%M:%S"))
        GPIO.output(Pump1,GPIO.HIGH)
        GPIO.output(Pump2,GPIO.HIGH)
@@ -137,7 +137,7 @@ def buttonV3Pressed(value):
        GPIO.output(Pump4,GPIO.LOW)
        GPIO.output(Pump5,GPIO.LOW)
     for i in LED: 
-       if (value[0] == 0):
+       if(value[0] == '1'):
             blynk.virtual_write(LED[i], 0)
        else:
             blynk.virtual_write(LED[i], 1)
