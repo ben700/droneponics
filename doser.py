@@ -1,6 +1,5 @@
 #!/usr/bin/python
 
-import logging
 import BlynkLib
 from BlynkTimer import BlynkTimer
 from datetime import datetime
@@ -32,7 +31,7 @@ class Dose:
 LOG_LEVEL = dosesLogging.INFO
 LOG_FILE = "/home/pi/doseslog"
 LOG_FORMAT = "%(asctime)s %(levelname)s %(message)s"
-logging.basicConfig(filename=LOG_FILE, format=LOG_FORMAT, level=LOG_LEVEL)
+#logging.basicConfig(filename=LOG_FILE, format=LOG_FORMAT, level=LOG_LEVEL)
 
 
 GPIO.setmode(GPIO.BCM)
@@ -44,23 +43,20 @@ BLYNK_YELLOW    ="#ED9D00"
 BLYNK_RED       ="#D3435C"
 BLYNK_DARK_BLUE ="#5F7CD8"
 
-#pins for solenoid
-solenoidIn = 0
-solenoidOut = 0
-
 Pump1 = 4
 Pump2 = 27
 Pump3 = 21
 Pump4 = 13
 Pump5 = 26
 
+LED = [10,11,12,13,14]
+
 nutrientMix = []
-nutrientMix.append( Dose(Pump1, 6, 40, "Hydro Grow A")) 
-nutrientMix.append( Dose(Pump2, 6, 41, "Hydro Grow B")) 
-nutrientMix.append( Dose(Pump3, 10, 42, "Root Stimulant"))
-nutrientMix.append( Dose(Pump4, 4, 43, "Enzyme"))
-nutrientMix.append( Dose(Pump5, 1, 44, "Hydro Silicon")) 
-nutrientMix.append( Dose(Pump6, 1, 45, "Pure Clean"))
+nutrientMix.append( Dose(Pump1, 6, LED[0], "Hydro Grow A")) 
+nutrientMix.append( Dose(Pump2, 6, LED[1], "Hydro Grow B")) 
+nutrientMix.append( Dose(Pump3, 10, LED[2], "Root Stimulant"))
+nutrientMix.append( Dose(Pump4, 4, LED[4], "Enzyme"))
+nutrientMix.append( Dose(Pump5, 1, LED[5], "Hydro Silicon")) 
 
 GPIO.setup(Pump1,GPIO.OUT)
 GPIO.setup(Pump2,GPIO.OUT)
@@ -73,8 +69,9 @@ GPIO.output(Pump2,GPIO.HIGH)
 GPIO.output(Pump3,GPIO.HIGH)
 GPIO.output(Pump4,GPIO.HIGH)
 GPIO.output(Pump5,GPIO.HIGH)
+for i in LED: 
+    blynk.virtual_write(LED[i], 0)
 
-# The ID and range of a sample spreadsheet.
 
 
 # Initialize Blynk
@@ -82,13 +79,15 @@ blynk = BlynkLib.Blynk(BLYNK_AUTH)
 
 now = datetime.now()
 blynk.virtual_write(99, now.strftime("%d/%m/%Y %H:%M:%S"))
-logging.info("Rebooted at " + now.strftime("%d/%m/%Y %H:%M:%S"))
+#logging.info("Rebooted at " + now.strftime("%d/%m/%Y %H:%M:%S"))
 blynk.notify("Rebooted at " + now.strftime("%d/%m/%Y %H:%M:%S"))
 
         
-@blynk.on("V30")
-def buttonV30Pressed(value):
-    logging.info("Dose started at" + now.strftime("%d/%m/%Y %H:%M:%S"))
+@blynk.on("V1")
+def buttonV1Pressed(value):
+    now = datetime.now()
+    blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
+    blynk.virtual_write(98, "User pressed button 1")
     print("Dose started at " + now.strftime("%d/%m/%Y %H:%M:%S"))
     for dose in nutrientMix: 
        blynk.virtual_write(dose.LED,255)
@@ -98,30 +97,54 @@ def buttonV30Pressed(value):
        GPIO.output(dose.pump,GPIO.HIGH)
        blynk.set_property(dose.LED, 'color', BLYNK_GREEN)
        logger.info("Dosing " + dose.name +" for " + dose.dose + " using pin " + dose.pump + " and led " + dose.LED) 
-    
-@blynk.on("V69")
-def buttonV69Pressed(value):
-    logging.info("Dose Line Fill at " + now.strftime("%d/%m/%Y %H:%M:%S"))
-    print("Dose Line Stop Fill at " + now.strftime("%d/%m/%Y %H:%M:%S"))
-    GPIO.output(Pump1,GPIO.LOW)
-    GPIO.output(Pump2,GPIO.LOW)
-    GPIO.output(Pump3,GPIO.LOW)
-    GPIO.output(Pump4,GPIO.LOW)
-    GPIO.output(Pump5,GPIO.LOW)
-       
-@blynk.on("V70")
-def buttonV70Pressed(value):
-    logging.info("Dose Line Stop All at " + now.strftime("%d/%m/%Y %H:%M:%S"))
-    print("Dose Line Stop All at " + now.strftime("%d/%m/%Y %H:%M:%S"))
-    GPIO.output(Pump1,GPIO.HIGH)
-    GPIO.output(Pump2,GPIO.HIGH)
-    GPIO.output(Pump3,GPIO.HIGH)
-    GPIO.output(Pump4,GPIO.HIGH)
-    GPIO.output(Pump5,GPIO.HIGH)
 
+@blynk.on("V2")
+def buttonV2Pressed(value):
+    now = datetime.now()
+    blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
+    blynk.virtual_write(98, "User pressed button 2")
+    print("Dose started at " + now.strftime("%d/%m/%Y %H:%M:%S"))
+    for dose in nutrientMix: 
+       blynk.virtual_write(dose.LED,255)
+       blynk.set_property(dose.LED, 'color', BLYNK_GREEN)
+       GPIO.output(dose.Pump,GPIO.LOW)
+       time.sleep(dose.dose*10)
+       GPIO.output(dose.pump,GPIO.HIGH)
+       blynk.set_property(dose.LED, 'color', BLYNK_GREEN)
+       logger.info("Dosing " + dose.name +" for " + dose.dose + " using pin " + dose.pump + " and led " + dose.LED) 
         
+@blynk.on("V3")
+def buttonV3Pressed(value):
+    now = datetime.now()
+    if value[0] == 0:
+       print("Dose Line Stop All at " + now.strftime("%d/%m/%Y %H:%M:%S"))
+       GPIO.output(Pump1,GPIO.HIGH)
+       GPIO.output(Pump2,GPIO.HIGH)
+       GPIO.output(Pump3,GPIO.HIGH)
+       GPIO.output(Pump4,GPIO.HIGH)
+       GPIO.output(Pump5,GPIO.HIGH)
+    else       
+       print("Dose Line Stop Fill at " + now.strftime("%d/%m/%Y %H:%M:%S"))
+       GPIO.output(Pump1,GPIO.LOW)
+       GPIO.output(Pump2,GPIO.LOW)
+       GPIO.output(Pump3,GPIO.LOW)
+       GPIO.output(Pump4,GPIO.LOW)
+       GPIO.output(Pump5,GPIO.LOW)
+    for i in LED: 
+       if value[0] == 0:
+            blynk.virtual_write(LED[i], 0)
+         else
+            blynk.virtual_write(LED[i], 1)
+            
+    blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
+    blynk.virtual_write(98, "User pressed button 3")
+               
 @blynk.on("V255")
 def buttonV255Pressed(value):
+    
+    now = datetime.now()
+    blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
+    blynk.virtual_write(98, "Reboot by user")
     os.system('sudo reboot')
         
 def turnOffNoisyThingsWhenButtEmpty(): 
@@ -137,7 +160,7 @@ def turnOnNoisyThingsWhenButtNotEmpty():
 def DoseNutrients(): 
     logging.debug("DoseNutrients")
     now = datetime.now()
-    blynk.virtual_write(98, now.strftime("%d/%m/%Y %H:%M:%S"))
+    blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
     print ("Going to dose butt time is now " + now.strftime("%d/%m/%Y %H:%M:%S"))
     for dose in nutrientMix:
         blynk.set_property(dose.LED, 'color', BLYNK_RED)
