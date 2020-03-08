@@ -221,7 +221,7 @@ def buttonV3Pressed(pin, value):
 @blynk.handle_event('write V4')
 def write_virtual_pin_handler(pin, value):
     _log.info(WRITE_EVENT_PRINT_MSG.format(pin, value))
-   print(WRITE_EVENT_PRINT_MSG.format(pin, value))
+    print(WRITE_EVENT_PRINT_MSG.format(pin, value))
     now = datetime.now()
     blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
     blynk.virtual_write(98, "User pressed write 4" + '\n')
@@ -261,20 +261,22 @@ def write_handler(pin, values):
         blynk.virtual_write(pin, output)
         blynk.virtual_write(pin, '\n')
 
-@blynk.handle_event('write V*')
-def write_handler(pin, value):
-    _log.info(WRITE_EVENT_PRINT_MSG.format(pin, value))
-    print(WRITE_EVENT_PRINT_MSG.format(pin, value))
-    button_state = value[0]
-    blynk.set_property(pin, 'color', colors[button_state])        
-        
-    
-@blynk.on("V255")
+@blynk.handle_event('write V255')
 def buttonV255Pressed(value):
     now = datetime.now()
     blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
     blynk.virtual_write(98, "Update code from github and reboot asked by user" + '\n')
     os.system('sh /home/pi/droneponics/reboot.sh')
+
+    
+#@blynk.handle_event('write V*')
+#def write_handler(pin, value):
+#    _log.info(WRITE_EVENT_PRINT_MSG.format(pin, value))
+#    print(WRITE_EVENT_PRINT_MSG.format(pin, value))
+#    button_state = value[0]
+#    blynk.set_property(pin, 'color', colors[button_state])        
+        
+
     
 try:
     while True:
