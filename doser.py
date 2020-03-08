@@ -102,7 +102,7 @@ def buttonV1Pressed(value):
              GPIO.output(dose.pump,GPIO.HIGH)
              blynk.set_property(dose.LED, 'color', BLYNK_GREEN)
              blynk.virtual_write(98, "Dosing " + str(dose.name) +" for " + str(dose.dose*10) + " using pin " + str(dose.pump) + " and led " + str(dose.LED) + '\n')
-          blynk.virtual_write(1, 0)
+         blynk.virtual_write(1, 0)
     
 @blynk.on("V2")
 def buttonV2Pressed(value):
