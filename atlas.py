@@ -63,16 +63,6 @@ Pump8 = 27
 Pump9 = 25
 Pump10 = 24
 
-Pump1Dose = 30 #part A
-Pump2Dose = 30 #part B
-Pump3Dose = 30
-Pump4Dose = 1
-Pump5Dose = 1
-Pump6Dose = 1
-Pump7Dose = 1
-Pump8Dose = 1
-Pump9Dose = 1
-Pump10Dose = 1
 
 #setup sensor 2
 GPIO.setup(buttFullSensor, GPIO.IN, GPIO.PUD_UP)
