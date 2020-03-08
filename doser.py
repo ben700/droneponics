@@ -79,8 +79,7 @@ blynk = BlynkLib.Blynk('e06jzpI2zuRD4KB5eHyHdCQTGFT7einR')
 now = datetime.now()
 blynk.virtual_write(99, now.strftime("%d/%m/%Y %H:%M:%S"))
 blynk.virtual_write(98, ("Started as normal"))
-blynk.notify("Rebooted at " + now.strftime("%d/%m/%Y %H:%M:%S"))
-
+#blynk.notify("Rebooted at " + now.strftime("%d/%m/%Y %H:%M:%S"))
 for i in LED: 
     blynk.virtual_write(i, 255)
     blynk.set_property(i, 'color', BLYNK_GREEN)
@@ -91,6 +90,7 @@ def buttonV1Pressed(value):
     blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
     blynk.virtual_write(98, "User requested dose")
     for dose in nutrientMix: 
+       Blynk.virtualWrite(98, "add", 0, "Dosing",dose.name );
        blynk.set_property(dose.LED, 'color', BLYNK_RED)
        GPIO.output(dose.pump,GPIO.LOW)
        time.sleep(dose.dose)
@@ -114,21 +114,23 @@ def buttonV2Pressed(value):
        time.sleep(dose.dose*10)
        GPIO.output(dose.pump,GPIO.HIGH)
        blynk.set_property(dose.LED, 'color', BLYNK_GREEN)
-       #logger.info("Dosing " + dose.name +" for " + dose.dose + " using pin " + dose.pump + " and led " + dose.LED) 
+       blynk.virtual_write(98, "Dosing " + str(dose.name) +" for " + str(dose.dose*10) + " using pin " + str(dose.pump) + " and led " + str(dose.LED))
     blynk.virtual_write(2, 0)
         
 @blynk.on("V3")
 def buttonV3Pressed(value):
     now = datetime.now()
+    blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
+    blynk.virtual_write(98, "User pressed button 3")
     if value[0] == 0:
-       print("Dose Line Stop All at " + now.strftime("%d/%m/%Y %H:%M:%S"))
+       blynk.virtual_write(98, "Dose Line Stop All at " + now.strftime("%d/%m/%Y %H:%M:%S"))
        GPIO.output(Pump1,GPIO.HIGH)
        GPIO.output(Pump2,GPIO.HIGH)
        GPIO.output(Pump3,GPIO.HIGH)
        GPIO.output(Pump4,GPIO.HIGH)
        GPIO.output(Pump5,GPIO.HIGH)
     else  :     
-       print("Dose Line Stop Fill at " + now.strftime("%d/%m/%Y %H:%M:%S"))
+       blynk.virtual_write(98, "Dose Line Stop Fill at " + now.strftime("%d/%m/%Y %H:%M:%S"))
        GPIO.output(Pump1,GPIO.LOW)
        GPIO.output(Pump2,GPIO.LOW)
        GPIO.output(Pump3,GPIO.LOW)
@@ -140,8 +142,7 @@ def buttonV3Pressed(value):
        else:
             blynk.virtual_write(LED[i], 1)
             
-    blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
-    blynk.virtual_write(98, "User pressed button 3")
+    blynk.virtual_write(3, 0)
     
                
 @blynk.on("V255")
