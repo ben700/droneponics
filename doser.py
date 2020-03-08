@@ -97,6 +97,7 @@ def buttonV1Pressed(value):
        GPIO.output(dose.pump,GPIO.HIGH)
        blynk.set_property(dose.LED, 'color', BLYNK_GREEN)
        logger.info("Dosing " + dose.name +" for " + dose.dose + " using pin " + dose.pump + " and led " + dose.LED) 
+    
     blynk.virtual_write(1, 0)
     
 @blynk.on("V2")
