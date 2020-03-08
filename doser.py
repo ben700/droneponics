@@ -75,7 +75,7 @@ for i in LED:
 
 
 # Initialize Blynk
-blynk = BlynkLib.Blynk(BLYNK_AUTH)
+blynk = BlynkLib.Blynk('e06jzpI2zuRD4KB5eHyHdCQTGFT7einR')
 
 now = datetime.now()
 blynk.virtual_write(99, now.strftime("%d/%m/%Y %H:%M:%S"))
