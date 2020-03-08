@@ -21,11 +21,11 @@ import os
 import logging
 
 class Dose:
-    def __init__(self, Pump, Dose, Led, name):
+    def __init__(self, Pump, Dose, Led, Name):
         self.pump = Pump
         self.dose = Dose
         self.LED = Led
-        self.name = name
+        self.name = Name
 
 
 LOG_LEVEL = logging.INFO
@@ -96,8 +96,10 @@ def buttonV1Pressed(value):
        time.sleep(dose.dose)
        GPIO.output(dose.pump,GPIO.HIGH)
        blynk.set_property(dose.LED, 'color', BLYNK_GREEN)
-       blynk.virtual_write(98, "Dosing " + dose.name +" for " + dose.dose + " using pin " + dose.pump + " and led " + dose.LED) 
-    
+       blynk.virtual_write(98, "Dosing " + str(dose.name) +" for " + str(dose.dose) + " using pin " + str(dose.pump) + " and led " + str(dose.LED))
+        
+        
+        
     blynk.virtual_write(1, 0)
     
 @blynk.on("V2")
