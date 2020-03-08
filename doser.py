@@ -166,7 +166,9 @@ while True:
     try:
        blynk.run()
     except:
-        blynk.virtual_write(98, "Something bad happened so did end of programme reboot")
-        os.system("sh uDrone.sh")
-        os.system('/home/pi/droneponics/reboot.sh')
+        try:
+           blynk.virtual_write(98, "Something bad happened so did end of programme reboot")
+        finally:
+           os.system("sh uDrone.sh")
+           os.system('/home/pi/droneponics/reboot.sh')
 
