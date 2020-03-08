@@ -132,15 +132,8 @@ ads = ADS.ADS1015(i2c)
 # Create single-ended input on channel 0
 chan = AnalogIn(ads, ADS.P0)
 
-
-
-
-
 # The ID and range of a sample spreadsheet.
-#BLYNK_AUTH = 'SHraFqInf27JKowTcFZapu0rHH2QGtuO' #atlasReservoir
 BLYNK_AUTH = 'XVbhfI6ZYxkqFp7d4RsCIN6Is9YnKp9q' #atlasButt
-
-
 
 #62 - OPR
 #69 - co2
@@ -153,12 +146,13 @@ ph = AtlasI2C(99)
 #do = AtlasI2C(97)
 #flow = AtlasI2C(104)
 #pump = AtlasI2C(103)
+#colour = AtlasI2C(70)
 
 
 logging.info("Temp Device Info = " + temp.query("i"))
 logging.info("pH Device Info = " + ph.query("i"))
 logging.info("EC Device Info = " + ec.query("i"))
-    
+#print("colour Device Info = " + colour.query("i"))    
 #print("Temp Device Info = " + temp.query("i"))
 #print("pH Device Info = " + ph.query("i"))
 #print("EC Device Info = " + ec.query("i"))
@@ -391,6 +385,8 @@ def blynk_data():
     logging.debug("Start of blynk_data")
     now = datetime.now()
     blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
+    
+    logging.debug("now the t3")
     cTemp = temp.query("R,").split(":")[1]
     print("Temp = " + cTemp)
     blynk.virtual_write(20, cTemp)
@@ -401,21 +397,18 @@ def blynk_data():
     blynk.virtual_write(22, cPH)
     print ("PH = " + cPH)
    
+    logging.debug("now the adc")
+    
     volt = chan.voltage
     if volt is not None:
        blynk.virtual_write(25, str("{0}".format((volt-1.5)*100)))
        blynk.virtual_write(26, str("{0:.2f}".format((volt-1.5)*12)))
-    
+      
+    logging.debug("now the digital single wire")
     blynk.virtual_write(27, GPIO.input(buttEmptySensor))
     blynk.virtual_write(28, GPIO.input(buttFullSensor))
     
-    if (GPIO.input(buttFullSensor) == GPIO.LOW) :
-       blynk.virtual_write(10,255)
-       blynk.set_property(10, 'color', BLYNK_RED)
-    else:
-       blynk.set_property(10, 'color', BLYNK_GREEN)
-       blynk.virtual_write(10,255)
-        
+    logging.debug("make actions for empty butt")
     if (GPIO.input(buttEmptySensor) == GPIO.LOW) :
        blynk.set_property(11, 'color', BLYNK_GREEN)
        turnOnNoisyThingsWhenButtNotEmpty()
@@ -424,11 +417,17 @@ def blynk_data():
        blynk.virtual_write(11,255)
        turnOffNoisyThingsWhenButtEmpty()
        blynk.set_property(11, 'color', BLYNK_RED)
-   
-
+  
+    logging.debug("make actions for full butt")
+    if (GPIO.input(buttFullSensor) == GPIO.LOW) :
+       blynk.virtual_write(10,255)
+       blynk.set_property(10, 'color', BLYNK_RED)
+    else:
+       blynk.set_property(10, 'color', BLYNK_GREEN)
+       blynk.virtual_write(10,255)
+        
 # Add Timers
 timer.set_interval(10, blynk_data)
-
 
 
 while True:
@@ -438,4 +437,8 @@ while True:
     except:
         logging.error("Something bad happened to did end of programme reboot")
         os.system('sudo reboot')
-
+    finally:  
+        logging.error("Running the finally before rebooting")
+        os.system('sudo reboot')
+        
+    
