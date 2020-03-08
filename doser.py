@@ -81,6 +81,7 @@ GPIO.output(Pump5,GPIO.HIGH)
 
 # Initialize Blynk
 blynk = blynklib.Blynk(BLYNK_AUTH, heartbeat=15, max_msg_buffer=512, log=_log.info)
+timer = blynktimer.Timer()
 
 APP_CONNECT_PRINT_MSG = '[APP_CONNECT_EVENT]'
 APP_DISCONNECT_PRINT_MSG = '[APP_DISCONNECT_EVENT]'

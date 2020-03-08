@@ -21,13 +21,20 @@ from ctypes import c_short
 from ctypes import c_byte
 from ctypes import c_ubyte
 import mh_z19
-import BlynkLib
-from BlynkTimer import BlynkTimer
-from datetime import datetime
+import blynklib
+import blynktimer
+import logging
 import adafruit_tsl2591
 import sys
 import os
-        
+  
+# tune console logging
+_log = logging.getLogger('BlynkLog')
+logFormatter = logging.Formatter("%(asctime)s [%(levelname)s]  %(message)s")
+consoleHandler = logging.StreamHandler()
+consoleHandler.setFormatter(logFormatter)
+_log.addHandler(consoleHandler)
+_log.setLevel(logging.DEBUG)
 
 # Initialize the I2C bus.
 i2c = busio.I2C(board.SCL, board.SDA)
@@ -51,10 +58,17 @@ except:
 BLYNK_AUTH = 'ZDy8p4aFPCKGwQhafv4jwUT6TpCY9CyP' #envLogger1
 
 # Initialize Blynk
-blynk = BlynkLib.Blynk(BLYNK_AUTH)
+blynk = blynklib.Blynk(BLYNK_AUTH, heartbeat=15, max_msg_buffer=512, log=_log.info)
+timer = blynktimer.Timer()
 
-# Create BlynkTimer Instance
-timer = BlynkTimer()
+APP_CONNECT_PRINT_MSG = '[APP_CONNECT_EVENT]'
+APP_DISCONNECT_PRINT_MSG = '[APP_DISCONNECT_EVENT]'
+CONNECT_PRINT_MSG = '[CONNECT_EVENT]'
+DISCONNECT_PRINT_MSG = '[DISCONNECT_EVENT]'
+WRITE_EVENT_PRINT_MSG = "[WRITE_VIRTUAL_PIN_EVENT] Pin: V{} Value: '{}'"
+READ_PRINT_MSG = "[READ_VIRTUAL_PIN_EVENT] Pin: V{}"
+ALLOWED_COMMANDS_LIST = ['ls', 'lsusb', 'ip a', 'ip abc']
+TWEET_MSG = "New value='{}' on VPIN({})"
 
 now = datetime.now()
 blynk.virtual_write(99, now.strftime("%d/%m/%Y %H:%M:%S"))

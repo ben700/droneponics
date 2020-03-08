@@ -1,8 +1,8 @@
 #!/usr/bin/python
 
 import logging
-import BlynkLib
-from BlynkTimer import BlynkTimer
+import blynklib
+import blynktimer
 from datetime import datetime
 import io
 import sys
@@ -20,6 +20,14 @@ import adafruit_ads1x15.ads1015 as ADS
 from adafruit_ads1x15.analog_in import AnalogIn
 import os
 import logging
+
+# tune console logging
+_log = logging.getLogger('BlynkLog')
+logFormatter = logging.Formatter("%(asctime)s [%(levelname)s]  %(message)s")
+consoleHandler = logging.StreamHandler()
+consoleHandler.setFormatter(logFormatter)
+_log.addHandler(consoleHandler)
+_log.setLevel(logging.DEBUG)
 
 class Dose:
     def __init__(self, Pump, Dose, Led, name):
@@ -135,6 +143,20 @@ chan = AnalogIn(ads, ADS.P0)
 # The ID and range of a sample spreadsheet.
 BLYNK_AUTH = 'XVbhfI6ZYxkqFp7d4RsCIN6Is9YnKp9q' #atlasButt
 
+# Initialize Blynk
+blynk = blynklib.Blynk(BLYNK_AUTH, heartbeat=15, max_msg_buffer=512, log=_log.info)
+timer = blynktimer.Timer()
+
+APP_CONNECT_PRINT_MSG = '[APP_CONNECT_EVENT]'
+APP_DISCONNECT_PRINT_MSG = '[APP_DISCONNECT_EVENT]'
+CONNECT_PRINT_MSG = '[CONNECT_EVENT]'
+DISCONNECT_PRINT_MSG = '[DISCONNECT_EVENT]'
+WRITE_EVENT_PRINT_MSG = "[WRITE_VIRTUAL_PIN_EVENT] Pin: V{} Value: '{}'"
+READ_PRINT_MSG = "[READ_VIRTUAL_PIN_EVENT] Pin: V{}"
+ALLOWED_COMMANDS_LIST = ['ls', 'lsusb', 'ip a', 'ip abc']
+TWEET_MSG = "New value='{}' on VPIN({})"
+
+
 #62 - OPR
 #69 - co2
 #70 - colour 112 (0x70)
@@ -198,11 +220,6 @@ print("EC = " + ec.query("RT,16.699"))
 print("PH = " + ph.query("RT"+cTemp))
 #print("DO = " + d0.query("RT,"+cTemp))
 
-# Initialize Blynk
-blynk = BlynkLib.Blynk(BLYNK_AUTH)
-
-# Create BlynkTimer Instance
-timer = BlynkTimer()
 
 now = datetime.now()
 blynk.virtual_write(99, now.strftime("%d/%m/%Y %H:%M:%S"))

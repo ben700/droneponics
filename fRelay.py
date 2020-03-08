@@ -5,9 +5,18 @@ import time
 from datetime import datetime
 import RPi.GPIO as GPIO
 import time, sys
-import BlynkLib
-from BlynkTimer import BlynkTimer
+import blynklib
+import blynktimer
+import logging
 import os
+
+# tune console logging
+_log = logging.getLogger('BlynkLog')
+logFormatter = logging.Formatter("%(asctime)s [%(levelname)s]  %(message)s")
+consoleHandler = logging.StreamHandler()
+consoleHandler.setFormatter(logFormatter)
+_log.addHandler(consoleHandler)
+_log.setLevel(logging.DEBUG)
 
 BLYNK_GREEN     ="#23C48E"
 BLYNK_BLUE      ="#04C0F8"
@@ -43,10 +52,17 @@ ss3 = Seesaw(i2c_bus, addr=0x38)
 ss4 = Seesaw(i2c_bus, addr=0x38)
 
 # Initialize Blynk
-blynk = BlynkLib.Blynk(BLYNK_AUTH)
+blynk = blynklib.Blynk(BLYNK_AUTH, heartbeat=15, max_msg_buffer=512, log=_log.info)
+timer = blynktimer.Timer()
 
-# Create BlynkTimer Instance
-timer = BlynkTimer()
+APP_CONNECT_PRINT_MSG = '[APP_CONNECT_EVENT]'
+APP_DISCONNECT_PRINT_MSG = '[APP_DISCONNECT_EVENT]'
+CONNECT_PRINT_MSG = '[CONNECT_EVENT]'
+DISCONNECT_PRINT_MSG = '[DISCONNECT_EVENT]'
+WRITE_EVENT_PRINT_MSG = "[WRITE_VIRTUAL_PIN_EVENT] Pin: V{} Value: '{}'"
+READ_PRINT_MSG = "[READ_VIRTUAL_PIN_EVENT] Pin: V{}"
+ALLOWED_COMMANDS_LIST = ['ls', 'lsusb', 'ip a', 'ip abc']
+TWEET_MSG = "New value='{}' on VPIN({})"
 
 now = datetime.now()
 blynk.virtual_write(99, now.strftime("%d/%m/%Y %H:%M:%S"))
