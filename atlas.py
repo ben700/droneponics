@@ -395,12 +395,12 @@ def blynk_data():
        blynk.set_property(10, 'color', BLYNK_GREEN)
         
     if (GPIO.input(buttEmptySensor) == GPIO.LOW) :
+       blynk.set_property(11, 'color', BLYNK_GREEN)
        blynk.virtual_write(11,255)
-       blynk.set_property(11, 'color', BLYNK_RED)
     else:
        blynk.virtual_write(11,255)
-       blynk.set_property(11, 'color', BLYNK_GREEN)
-
+       blynk.set_property(11, 'color', BLYNK_RED)
+   
 
 # Add Timers
 timer.set_interval(10, blynk_data)
