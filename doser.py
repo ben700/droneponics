@@ -91,33 +91,33 @@ setLEDColours()
 
 @blynk.on("V1")
 def buttonV1Pressed(value):
-    now = datetime.now()
-    blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
-    blynk.virtual_write(98, "User requested dose" + '\n')
-    for dose in nutrientMix: 
-       blynk.set_property(dose.LED, 'color', BLYNK_RED)
-       GPIO.output(dose.pump,GPIO.LOW)
-       time.sleep(dose.dose)
-       GPIO.output(dose.pump,GPIO.HIGH)
-       blynk.set_property(dose.LED, 'color', BLYNK_GREEN)
-       blynk.virtual_write(98, "Dosing " + str(dose.name) +" for " + str(dose.dose) + " using pin " + str(dose.pump) + " and led " + str(dose.LED) + '\n')
-   
-    blynk.virtual_write(1, 0)
+    if(value[0] == '1'):
+         now = datetime.now()
+         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
+         blynk.virtual_write(98, "User requested dose"  + '\n')
+         for dose in nutrientMix: 
+             blynk.set_property(dose.LED, 'color', BLYNK_RED)
+             GPIO.output(dose.pump,GPIO.LOW)
+             time.sleep(dose.dose*10)
+             GPIO.output(dose.pump,GPIO.HIGH)
+             blynk.set_property(dose.LED, 'color', BLYNK_GREEN)
+             blynk.virtual_write(98, "Dosing " + str(dose.name) +" for " + str(dose.dose*10) + " using pin " + str(dose.pump) + " and led " + str(dose.LED) + '\n')
+          blynk.virtual_write(1, 0)
     
 @blynk.on("V2")
 def buttonV2Pressed(value):
-    now = datetime.now()
-    blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
-    blynk.virtual_write(98, "User requested butt dose"  + '\n')
-    for dose in nutrientMix: 
-       blynk.set_property(dose.LED, 'color', BLYNK_RED)
-       GPIO.output(dose.pump,GPIO.LOW)
-       time.sleep(dose.dose*10)
-       GPIO.output(dose.pump,GPIO.HIGH)
-       blynk.set_property(dose.LED, 'color', BLYNK_GREEN)
-       blynk.virtual_write(98, "Dosing " + str(dose.name) +" for " + str(dose.dose*10) + " using pin " + str(dose.pump) + " and led " + str(dose.LED) + '\n')
-   
-    blynk.virtual_write(2, 0)
+    if(value[0] == '1'):
+         now = datetime.now()
+         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
+         blynk.virtual_write(98, "User requested butt dose"  + '\n')
+         for dose in nutrientMix: 
+             blynk.set_property(dose.LED, 'color', BLYNK_RED)
+             GPIO.output(dose.pump,GPIO.LOW)
+             time.sleep(dose.dose*10)
+             GPIO.output(dose.pump,GPIO.HIGH)
+             blynk.set_property(dose.LED, 'color', BLYNK_GREEN)
+             blynk.virtual_write(98, "Dosing " + str(dose.name) +" for " + str(dose.dose*10) + " using pin " + str(dose.pump) + " and led " + str(dose.LED) + '\n')
+          blynk.virtual_write(2, 0)
         
 @blynk.on("V3")
 def buttonV3Pressed(value):
