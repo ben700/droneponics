@@ -79,6 +79,9 @@ GPIO.output(Pump5,GPIO.HIGH)
 
 
 
+
+BLYNK_AUTH = 'e06jzpI2zuRD4KB5eHyHdCQTGFT7einR' 
+
 # Initialize Blynk
 blynk = blynklib.Blynk(BLYNK_AUTH, heartbeat=15, max_msg_buffer=512, log=_log.info)
 timer = blynktimer.Timer()
