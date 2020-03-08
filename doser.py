@@ -79,7 +79,7 @@ blynk = BlynkLib.Blynk('e06jzpI2zuRD4KB5eHyHdCQTGFT7einR')
 
 now = datetime.now()
 blynk.virtual_write(99, now.strftime("%d/%m/%Y %H:%M:%S"))
-#logging.info("Rebooted at " + now.strftime("%d/%m/%Y %H:%M:%S"))
+blynk.virtual_write(98, ("Started as normal"))
 blynk.notify("Rebooted at " + now.strftime("%d/%m/%Y %H:%M:%S"))
 
         
@@ -97,7 +97,8 @@ def buttonV1Pressed(value):
        GPIO.output(dose.pump,GPIO.HIGH)
        blynk.set_property(dose.LED, 'color', BLYNK_GREEN)
        logger.info("Dosing " + dose.name +" for " + dose.dose + " using pin " + dose.pump + " and led " + dose.LED) 
-
+     blynk.virtual_write(1, 0)
+    
 @blynk.on("V2")
 def buttonV2Pressed(value):
     now = datetime.now()
@@ -112,6 +113,7 @@ def buttonV2Pressed(value):
        GPIO.output(dose.pump,GPIO.HIGH)
        blynk.set_property(dose.LED, 'color', BLYNK_GREEN)
        logger.info("Dosing " + dose.name +" for " + dose.dose + " using pin " + dose.pump + " and led " + dose.LED) 
+    blynk.virtual_write(2, 0)
         
 @blynk.on("V3")
 def buttonV3Pressed(value):
@@ -138,6 +140,8 @@ def buttonV3Pressed(value):
             
     blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
     blynk.virtual_write(98, "User pressed button 3")
+    blynk.virtual_write(3, 0)
+    
                
 @blynk.on("V255")
 def buttonV255Pressed(value):
@@ -145,6 +149,7 @@ def buttonV255Pressed(value):
     now = datetime.now()
     blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
     blynk.virtual_write(98, "Reboot by user")
+    blynk.virtual_write(255, 0)
     os.system('sudo reboot')
         
 def turnOffNoisyThingsWhenButtEmpty(): 
