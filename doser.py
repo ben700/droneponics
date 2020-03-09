@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 
 import blynklib
-import blynktimer
+from blynktimer import Timer, TimerError
 import logging
 from datetime import datetime
 import io
@@ -95,23 +95,20 @@ BLYNK_AUTH = 'e06jzpI2zuRD4KB5eHyHdCQTGFT7einR'
 # initialize Blynk
 blynk = blynklib.Blynk(BLYNK_AUTH)
 timer = blynktimer.Timer()
+blynk.run()
 
-@timer.register(vpin_num=8, interval=60, run_once=False)
-def started(vpin_num=1):
+_log.info("Booted")
+blynk.virtual_write(98, "Rebooted"  + '\n')
+blynk.virtual_write(99, now.strftime("%d/%m/%Y %H:%M:%S"))
+    
+
+@timer.register(interval=60, run_once=True)
+def started():
     _log.info("hearbeat")
-    bootup = False
     now = datetime.now()
     blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
-    if bootup : 
-       _log.info("Booted")
-       blynk.virtual_write(98, "Rebooted"  + '\n')
-       blynk.virtual_write(99, now.strftime("%d/%m/%Y %H:%M:%S"))
-    else:
-       now = datetime.now()
-       blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
-       blynk.virtual_write(98, "Heartbeat"  + '\n')
-       blynk.virtual_write(97, now.strftime("%d/%m/%Y %H:%M:%S"))
-      
+    blynk.virtual_write(98, "Heartbeat"  + '\n')
+       
     
 @blynk.handle_event('write V1')
 def buttonV1Pressed(pin, value):
