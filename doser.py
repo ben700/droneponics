@@ -19,7 +19,6 @@ import busio
 import adafruit_ads1x15.ads1015 as ADS
 from adafruit_ads1x15.analog_in import AnalogIn
 import os
-import logging
 
 class Dose:
     def __init__(self, Pump, Dose, Led, Name):
@@ -90,11 +89,11 @@ GPIO.output(Pump5,GPIO.HIGH)
 
 
 
-BLYNK_AUTH = "e06jzpI2zuRD4KB5eHyHdCQTGFT7einR" 
+BLYNK_AUTH = 'e06jzpI2zuRD4KB5eHyHdCQTGFT7einR'
 
-# Initialize Blynk
+# initialize Blynk
 blynk = blynklib.Blynk(BLYNK_AUTH)
-timer = blynktimer.Timer()
+#timer = blynktimer.Timer()
 
 now = datetime.now()
 blynk.virtual_write(99, now.strftime("%d/%m/%Y %H:%M:%S"))
@@ -154,9 +153,9 @@ def disconnect_handler():
     
 
     
-@blynk.handle_event('read V1')
+@blynk.handle_event('write V1')
 def buttonV1Pressed(pin, value):
-   _log.info(READ_PRINT_MSG.format(pin))
+   _log.info(WRITE_EVENT_PRINT_MSG.format(pin, value))
    now = datetime.now()
    blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
    blynk.virtual_write(98, "User requested dose"  + '\n')
@@ -176,9 +175,9 @@ def buttonV1Pressed(pin, value):
    blynk.virtual_write(1, 0)
    blynk.virtual_write(98, "Requested dose completed"  + '\n')
     
-@blynk.handle_event('read V2')
+@blynk.handle_event('write V2')
 def buttonV2Pressed(pin, value):
-    _log.info(READ_PRINT_MSG.format(pin))
+    _log.info(WRITE_EVENT_PRINT_MSG.format(pin, value))
     if(value[0] != '1'):
          now = datetime.now()
          blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
@@ -193,9 +192,9 @@ def buttonV2Pressed(pin, value):
     blynk.virtual_write(2, 0)
     blynk.virtual_write(98, "Requested dose butt completed"  + '\n')
         
-@blynk.handle_event('read V3')
+@blynk.handle_event('write V3')
 def buttonV3Pressed(pin, value):
-    _log.info(READ_PRINT_MSG.format(pin))
+    _log.info(WRITE_EVENT_PRINT_MSG.format(pin, value))
     now = datetime.now()
     blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
     blynk.virtual_write(98, "User pressed button 3" + '\n')
@@ -286,7 +285,7 @@ def buttonV255Pressed(value):
 try:
     while True:
         blynk.run()
-except KeyboardInterrupt:
+except:
     blynk.disconnect()
     _log.info('SCRIPT WAS INTERRUPTED')
 finally:                
