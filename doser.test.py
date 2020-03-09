@@ -24,8 +24,10 @@ class Dose:
     def __init__(self, Pump, Dose, Led, Name):
         self.pump = Pump
         self.dose = Dose
+        self.doseButt = Dose * 10
         self.LED = Led
         self.name = Name
+        
 
 
 # tune console logging
@@ -102,30 +104,79 @@ def buttonV1Pressed(pin, value):
       blynk.virtual_write(98, "User requested dose"  + '\n')
       for dose in nutrientMix: 
          blynk.virtual_write(98, "Dosing " + str(dose.name) +" for " + str(dose.dose) + " using pin " + str(dose.pump) + " and led " + str(dose.LED) + '\n')
+
+         _log.info("Start Dose of " + str(dose.name))
          blynk.set_property(dose.LED, 'color', BLYNK_RED)
          GPIO.output(dose.pump,GPIO.LOW)
+        
+         _log.info("Going to sleep for " + str(dose.dose))
+         time.sleep(dose.dose)
 
-      #@timer.register(vpin_num=110+pin, interval=dose.dose, run_once=True)                                  
-      #timer = blynktimer.Timer()
-      #timer.run() 
-                    
-      #sleep_ms(dose.dose)
-
+         _log.info("Stop Dose of " + str(dose.name))
          GPIO.output(dose.pump,GPIO.HIGH)
          blynk.set_property(dose.LED, 'color', BLYNK_GREEN)
             
             
+   _log.info("Requested dose completed")
    blynk.virtual_write(1, 0)
    blynk.virtual_write(98, "Requested dose completed"  + '\n')
     
     
 @blynk.handle_event('write V2')
 def buttonV2Pressed(pin, value):
-    _log.info(WRITE_EVENT_PRINT_MSG.format(pin, value))
+   _log.info(WRITE_EVENT_PRINT_MSG.format(pin, value))
+   if (value[0] == '1'):
+      now = datetime.now()
+      blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
+      blynk.virtual_write(98, "User requested dose"  + '\n')
+      for dose in nutrientMix: 
+         blynk.virtual_write(98, "Dosing " + str(dose.name) +" for " + str(dose.doseButt) + " using pin " + str(dose.pump) + " and led " + str(dose.LED) + '\n')
+
+         _log.info("Start Dose of " + str(dose.name))
+         blynk.set_property(dose.LED, 'color', BLYNK_RED)
+         GPIO.output(dose.pump,GPIO.LOW)
+        
+         _log.info("Going to sleep for " + str(dose.dose))
+         time.sleep(dose.doseButt)
+
+         _log.info("Stop Dose of " + str(dose.name))
+         GPIO.output(dose.pump,GPIO.HIGH)
+         blynk.set_property(dose.LED, 'color', BLYNK_GREEN)
+      
+    
+      _log.info("Finished For Loop")
+      blynk.virtual_write(2, 0)
+            
+            
+   _log.info("Requested dose completed")
+   blynk.virtual_write(98, "Requested dose completed"  + '\n')
         
 @blynk.handle_event('write V3')
 def buttonV3Pressed(pin, value):
     _log.info(WRITE_EVENT_PRINT_MSG.format(pin, value))
+    now = datetime.now()
+    blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
+    blynk.virtual_write(98, "User pressed button 3" + '\n')
+    if(value[0] == '1'):
+       blynk.virtual_write(98, "Dose Line Stop All at " + now.strftime("%d/%m/%Y %H:%M:%S") + '\n')
+       GPIO.output(Pump1,GPIO.HIGH)
+       GPIO.output(Pump2,GPIO.HIGH)
+       GPIO.output(Pump3,GPIO.HIGH)
+       GPIO.output(Pump4,GPIO.HIGH)
+       GPIO.output(Pump5,GPIO.HIGH)
+       for i in LED: 
+          blynk.set_property(i, 'color', BLYNK_GREEN)
+       blynk.virtual_write(98, "All pumps stopped" + '\n') 
+    else  :     
+       blynk.virtual_write(98, "Dose Line Stop Fill at " + now.strftime("%d/%m/%Y %H:%M:%S") + '\n')
+       GPIO.output(Pump1,GPIO.LOW)
+       GPIO.output(Pump2,GPIO.LOW)
+       GPIO.output(Pump3,GPIO.LOW)
+       GPIO.output(Pump4,GPIO.LOW)
+       GPIO.output(Pump5,GPIO.LOW)
+       blynk.virtual_write(98, "All pumps started" + '\n')
+       for i in LED: 
+           blynk.set_property(i, 'color', BLYNK_RED)
 
         
 # register handler for virtual pin V4 write event
@@ -137,11 +188,26 @@ def write_virtual_pin_handler(pin, value):
 def read_virtual_pin_handler(pin):
     _log.info(READ_PRINT_MSG.format(pin))
 
-    
+@blynk.handle_event('write V255')  
+def buttonV255Pressed(pin, value):
+    _log.info(WRITE_EVENT_PRINT_MSG.format(pin, value))
+    now = datetime.now()
+    try:
+        blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
+        blynk.virtual_write(98, "Update code from github and reboot asked by user" + '\n')
+    except:
+        os.system('sh /home/pi/droneponics/reboot.sh')
     
 ###########################################################
 # infinite loop that waits for event
 ###########################################################
-while True:
-    blynk.run()
+try:
+    while True:
+        blynk.run()
+except:
+    blynk.disconnect()
+    _log.info('SCRIPT WAS INTERRUPTED')
+finally: 
+     _log.info('Could do finally reboot')
+    #os.system('sh /home/pi/droneponics/reboot.sh')
 
