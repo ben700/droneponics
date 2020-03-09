@@ -261,14 +261,12 @@ def blynk_Startep(pin, value):
     blynk.virtual_write(99, now.strftime("%d/%m/%Y %H:%M:%S"))
 
     
-    
-  
-
 while True:
     try:
        _log.info("Start to run Blynk") 
        blynk.run()
        timer.run()
     except:
+        os.system('/home/pi/uDrone.sh')
         os.system('sudo reboot')
 
