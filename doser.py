@@ -89,21 +89,28 @@ GPIO.output(Pump3,GPIO.HIGH)
 GPIO.output(Pump4,GPIO.HIGH)
 GPIO.output(Pump5,GPIO.HIGH)
 
-
+bootup = True
 BLYNK_AUTH = 'e06jzpI2zuRD4KB5eHyHdCQTGFT7einR'
 
 # initialize Blynk
 blynk = blynklib.Blynk(BLYNK_AUTH)
 timer = blynktimer.Timer()
 
-@timer.register(vpin_num=8, interval=4, run_once=True)
+@timer.register(vpin_num=8, interval=60, run_once=False)
 def started(vpin_num=1):
-    _log.info(WRITE_EVENT_PRINT_MSG.format(vpin_num, 0))
+    _log.info("hearbeat")
+    bootup = False
     now = datetime.now()
     blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
-    blynk.virtual_write(98, "Rebooted"  + '\n')
-    blynk.virtual_write(99, now.strftime("%d/%m/%Y %H:%M:%S"))
-    
+    if bootup : 
+       _log.info("Booted")
+       blynk.virtual_write(98, "Rebooted"  + '\n')
+       blynk.virtual_write(99, now.strftime("%d/%m/%Y %H:%M:%S"))
+    else:
+       now = datetime.now()
+       blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
+       blynk.virtual_write(98, "Heartbeat"  + '\n')
+       blynk.virtual_write(97, now.strftime("%d/%m/%Y %H:%M:%S"))
       
     
 @blynk.handle_event('write V1')
