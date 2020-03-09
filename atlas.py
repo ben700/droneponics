@@ -144,7 +144,7 @@ chan = AnalogIn(ads, ADS.P0)
 BLYNK_AUTH = 'XVbhfI6ZYxkqFp7d4RsCIN6Is9YnKp9q' #atlasButt
 
 # Initialize Blynk
-blynk = blynklib.Blynk(BLYNK_AUTH, heartbeat=15, max_msg_buffer=512, log=_log.info)
+blynk = blynklib.Blynk(BLYNK_AUTH, heartbeat=15, log=_log.info)
 timer = blynktimer.Timer()
 
 APP_CONNECT_PRINT_MSG = '[APP_CONNECT_EVENT]'
@@ -171,9 +171,9 @@ ph = AtlasI2C(99)
 #colour = AtlasI2C(70)
 
 
-logging.info("Temp Device Info = " + temp.query("i"))
-logging.info("pH Device Info = " + ph.query("i"))
-logging.info("EC Device Info = " + ec.query("i"))
+_log.info("Temp Device Info = " + temp.query("i"))
+_log.info("pH Device Info = " + ph.query("i"))
+_log.info("EC Device Info = " + ec.query("i"))
 #print("colour Device Info = " + colour.query("i"))    
 #print("Temp Device Info = " + temp.query("i"))
 #print("pH Device Info = " + ph.query("i"))
@@ -222,11 +222,11 @@ print("PH = " + ph.query("RT"+cTemp))
 
 
 now = datetime.now()
-blynk.virtual_write(99, now.strftime("%d/%m/%Y %H:%M:%S"))
-logging.info("Rebooted at " + now.strftime("%d/%m/%Y %H:%M:%S"))
-blynk.notify("Rebooted at " + now.strftime("%d/%m/%Y %H:%M:%S"))
+#blynk.virtual_write(99, now.strftime("%d/%m/%Y %H:%M:%S"))
+_log.info("Rebooted at " + now.strftime("%d/%m/%Y %H:%M:%S"))
+#blynk.notify("Rebooted at " + now.strftime("%d/%m/%Y %H:%M:%S"))
 
-@blynk.on("V1")
+@blynk.handle_event("V1")
 def buttonV1Pressed(value):
     blynk.virtual_write(1, str(value[0]))
     if(value[0] == '1'):
@@ -237,7 +237,7 @@ def buttonV1Pressed(value):
         GPIO.output(Relay1,GPIO.LOW)
   
 
-@blynk.on("V2")
+@blynk.handle_event("V2")
 def buttonV2Pressed(value):
     if(value[0] == '1'):
         print("Feed Pump turned off")
@@ -248,7 +248,7 @@ def buttonV2Pressed(value):
   
 
 
-@blynk.on("V3")
+@blynk.handle_event("V3")
 def buttonV3Pressed(value):
     if(value[0] == '1'):
         print("Air and Mixer turned off")
@@ -269,7 +269,7 @@ def buttonV4Pressed(value):
 
 
         
-@blynk.on("V30")
+@blynk.handle_event("V30")
 def buttonV30Pressed(value):
     logging.info("Dose started at" + now.strftime("%d/%m/%Y %H:%M:%S"))
     print("Dose started at " + now.strftime("%d/%m/%Y %H:%M:%S"))
@@ -282,7 +282,7 @@ def buttonV30Pressed(value):
        blynk.set_property(dose.LED, 'color', BLYNK_GREEN)
        logger.info("Dosing " + dose.name +" for " + dose.dose + " using pin " + dose.pump + " and led " + dose.LED) 
     
-@blynk.on("V69")
+@blynk.handle_event("V69")
 def buttonV69Pressed(value):
     logging.info("Dose Line Fill at " + now.strftime("%d/%m/%Y %H:%M:%S"))
     print("Dose Line Stop Fill at " + now.strftime("%d/%m/%Y %H:%M:%S"))
@@ -297,7 +297,7 @@ def buttonV69Pressed(value):
     GPIO.output(Pump9,GPIO.LOW)
     GPIO.output(Pump10,GPIO.LOW)
        
-@blynk.on("V70")
+@blynk.handle_event("V70")
 def buttonV70Pressed(value):
     logging.info("Dose Line Stop All at " + now.strftime("%d/%m/%Y %H:%M:%S"))
     print("Dose Line Stop All at " + now.strftime("%d/%m/%Y %H:%M:%S"))
@@ -313,11 +313,11 @@ def buttonV70Pressed(value):
     GPIO.output(Pump10,GPIO.HIGH)    
 
         
-@blynk.on("V255")
+@blynk.handle_event("V255")
 def buttonV255Pressed(value):
     os.system('sudo reboot')
     
-@blynk.on("connected")
+@blynk.handle_event("connected")
 def blynk_connected():
     # You can also use blynk.sync_virtual(pin)
     # to sync a specific virtual pin
@@ -398,6 +398,7 @@ def DoseNutrients():
         
         
 # Will Print Every 10 Seconds
+@timer.register(interval=10, run_once=False)
 def blynk_data():
     logging.debug("Start of blynk_data")
     now = datetime.now()
@@ -443,8 +444,6 @@ def blynk_data():
        blynk.set_property(10, 'color', BLYNK_GREEN)
        blynk.virtual_write(10,255)
         
-# Add Timers
-timer.set_interval(10, blynk_data)
 
 
 while True:

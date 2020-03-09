@@ -265,8 +265,10 @@ while True:
     try:
        _log.info("Start to run Blynk") 
        blynk.run()
-       timer.run()
+       timer.run()   
     except:
+        _log.info("Got to the except")
+    finally:
         os.system('/home/pi/uDrone.sh')
         os.system('sudo reboot')
 

@@ -65,11 +65,11 @@ ALLOWED_COMMANDS_LIST = ['ls', 'lsusb', 'ip a', 'ip abc']
 TWEET_MSG = "New value='{}' on VPIN({})"
 
 now = datetime.now()
-blynk.virtual_write(99, now.strftime("%d/%m/%Y %H:%M:%S"))
+#blynk.virtual_write(99, now.strftime("%d/%m/%Y %H:%M:%S"))
 print("Boot time : " + now.strftime("%d/%m/%Y %H:%M:%S"))
     
 
-@blynk.on("V1")
+@blynk.handle_event("V1")
 def buttonV1Pressed(value):
     blynk.virtual_write(1, str(value[0]))
     if(value[0] == '1'):
@@ -81,7 +81,7 @@ def buttonV1Pressed(value):
     setLEDsonApp()
 
 
-@blynk.on("V2")
+@blynk.handle_event("V2")
 def buttonV2Pressed(value):
     blynk.virtual_write(2, str(value[0]))
     if(value[0] == '1'):
@@ -93,7 +93,7 @@ def buttonV2Pressed(value):
     setLEDsonApp()
 
 
-@blynk.on("V3")
+@blynk.handle_event("V3")
 def buttonV3Pressed(value):
     blynk.virtual_write(3, str(value[0]))
     if(value[0] == '1'):
@@ -105,7 +105,7 @@ def buttonV3Pressed(value):
     setLEDsonApp()
 
 
-@blynk.on("V4")
+@blynk.handle_event("V4")
 def buttonV4Pressed(value):
     blynk.virtual_write(4, str(value[0]))
     if(value[0] == '1'):
@@ -116,7 +116,7 @@ def buttonV4Pressed(value):
         GPIO.output(Relay4,GPIO.LOW)
     setLEDsonApp()
 
-@blynk.on("V255")
+@blynk.handle_event("V255")
 def buttonV255Pressed(value):
     os.system('sudo reboot')
     
@@ -160,6 +160,7 @@ def setLEDsonApp():
     
     
 # Will Print Every 10 Seconds
+@timer.register(interval=10, run_once=False)
 def blynk_data():
     now = datetime.now()
     blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
@@ -182,10 +183,6 @@ def blynk_data():
        blynk.virtual_write(18, str(ss4.get_temp()))
        print ("Channel 4 moisture reading is "+str(ss4.moisture_read())+" and Temp is :" +  str("{0:.2f}".format(ss4.get_temp())))
  
-
-
-# Add Timers
-timer.set_interval(10, blynk_data)
 
         
 while True:
