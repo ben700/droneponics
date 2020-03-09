@@ -96,7 +96,7 @@ BLYNK_AUTH = 'e06jzpI2zuRD4KB5eHyHdCQTGFT7einR'
 blynk = blynklib.Blynk(BLYNK_AUTH)
 timer = blynktimer.Timer()
 
-@timer.register(vpin_num=8, interval=4, run_once=False)
+@timer.register(vpin_num=8, interval=4, run_once=True)
 def started(vpin_num=1):
     _log.info(WRITE_EVENT_PRINT_MSG.format(vpin_num, 0))
     now = datetime.now()
