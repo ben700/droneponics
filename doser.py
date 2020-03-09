@@ -97,10 +97,14 @@ blynk = blynklib.Blynk(BLYNK_AUTH)
 timer = blynktimer.Timer()
 
 @timer.register(vpin_num=8, interval=4, run_once=False)
-@timer.register(vpin_num=9, interval=7, run_once=False)
-def write_to_virtual_pin(vpin_num=1):
+def started(vpin_num=1):
     _log.info(WRITE_EVENT_PRINT_MSG.format(vpin_num, 0))
+    now = datetime.now()
+    blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
+    blynk.virtual_write(98, "Rebooted"  + '\n')
+    blynk.virtual_write(99, now.strftime("%d/%m/%Y %H:%M:%S"))
     
+      
     
 @blynk.handle_event('write V1')
 def buttonV1Pressed(pin, value):
@@ -211,6 +215,7 @@ def buttonV255Pressed(pin, value):
 try:
     while True:
         blynk.run()
+        timer.run()
 except:
     blynk.disconnect()
     _log.info('SCRIPT WAS INTERRUPTED')
