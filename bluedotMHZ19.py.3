@@ -213,7 +213,9 @@ def readBME280All(addr=DEVICE):
     
     
 @timer.register(vpin_num=200, interval=10, run_once=False)
-    
+@timer.register(vpin_num=201, interval=1, run_once=True)
+  
+  
 @blynk.handle_event('write V200')    
 # Will Print Every 10 Seconds
 def blynk_data(pin, value):
@@ -256,6 +258,15 @@ def blynk_data(pin, value):
         blynk.virtual_write(100, 'Unexpected error: mhz19b')
         print('Unexpected error: mhz19b')
     
+
+@blynk.handle_event('write V201')    
+# Will Print Every 10 Seconds
+def blynk_Startep(pin, value):
+    _log.info(WRITE_EVENT_PRINT_MSG.format(pin, value))
+    
+    now = datetime.now()
+    blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
+    blynk.virtual_write(99, now.strftime("%d/%m/%Y %H:%M:%S"))
 
 
 while True:
