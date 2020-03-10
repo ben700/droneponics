@@ -180,13 +180,7 @@ def blynk_data():
 while True:
     try:
        blynk.run()
-       if bootup :
-          bootup = False
-          now = datetime.now()
-          blynk.virtual_write(99, now.strftime("%d/%m/%Y %H:%M:%S"))
-          _log.info('Just Booted')
-          
        timer.run()
     except:
        _log.info('Unexpected error')
-       os.system('sh /home/pi/updateDropneponics.sh')
+       os.system('/home/pi/updateDropneponics.sh')
