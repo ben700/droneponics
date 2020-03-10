@@ -59,23 +59,13 @@ TWEET_MSG = "New value='{}' on VPIN({})"
 
 
   
-@timer.register(interval=10, run_once=False)
+@timer.register(vpin_num=9, interval=7, run_once=False)
 def blynk_data(pin, value):
     _log.info(WRITE_EVENT_PRINT_MSG.format(pin, value))
 
  
     
-    
-while True:
-    try:
-       _log.info("Start to run Blynk") 
-       blynk.run()
-       timer.run() 
-       _log.info("End to run Blynk") 
-    except:
-        _log.info("Got to the except")
-    finally:
-        _log.info("Got to the finally")
-        os.system('/home/pi/updateDroneponics.sh')
-        #os.system('sudo reboot')
 
+while True:
+    blynk.run()
+    timer.run()
