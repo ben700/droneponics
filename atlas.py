@@ -40,12 +40,6 @@ class Dose:
         self.name = name
 
 
-LOG_LEVEL = dosesLogging.INFO
-LOG_FILE = "/home/pi/doseslog"
-LOG_FORMAT = "%(asctime)s %(levelname)s %(message)s"
-logging.basicConfig(filename=LOG_FILE, format=LOG_FORMAT, level=LOG_LEVEL)
-
-
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
 
@@ -302,7 +296,7 @@ def rebooter(pin, value):
         
 @blynk.handle_event('write 30')
 def buttonV30Pressed(value):
-    logging.info("Dose started at" + now.strftime("%d/%m/%Y %H:%M:%S"))
+    _log.info("Dose started at" + now.strftime("%d/%m/%Y %H:%M:%S"))
     print("Dose started at " + now.strftime("%d/%m/%Y %H:%M:%S"))
     for dose in nutrientMix: 
        blynk.virtual_write(dose.LED,255)
@@ -311,11 +305,11 @@ def buttonV30Pressed(value):
        time.sleep(dose.dose)
        GPIO.output(dose.pump,GPIO.HIGH)
        blynk.set_property(dose.LED, 'color', BLYNK_GREEN)
-       logger.info("Dosing " + dose.name +" for " + dose.dose + " using pin " + dose.pump + " and led " + dose.LED) 
+       _log.info("Dosing " + dose.name +" for " + dose.dose + " using pin " + dose.pump + " and led " + dose.LED) 
     
 @blynk.handle_event('write 69')
 def buttonV69Pressed(value):
-    logging.info("Dose Line Fill at " + now.strftime("%d/%m/%Y %H:%M:%S"))
+    _log.info("Dose Line Fill at " + now.strftime("%d/%m/%Y %H:%M:%S"))
     print("Dose Line Stop Fill at " + now.strftime("%d/%m/%Y %H:%M:%S"))
     GPIO.output(Pump1,GPIO.LOW)
     GPIO.output(Pump2,GPIO.LOW)
@@ -330,7 +324,7 @@ def buttonV69Pressed(value):
        
 @blynk.handle_event('write 70')
 def buttonV70Pressed(value):
-    logging.info("Dose Line Stop All at " + now.strftime("%d/%m/%Y %H:%M:%S"))
+    _log.info("Dose Line Stop All at " + now.strftime("%d/%m/%Y %H:%M:%S"))
     print("Dose Line Stop All at " + now.strftime("%d/%m/%Y %H:%M:%S"))
     GPIO.output(Pump1,GPIO.HIGH)
     GPIO.output(Pump2,GPIO.HIGH)
