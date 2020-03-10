@@ -204,7 +204,7 @@ def readBME280All(addr=DEVICE):
 
   return temperature/100.0,pressure/100.0,humidity
   
-@blynk.on("V255")
+@blynk.handle_event("V255")
 def buttonV255Pressed(value):
     _log.info("User Reboot")
     os.system('sh /home/pi/updateDropneponics.sh')
