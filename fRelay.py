@@ -10,6 +10,9 @@ import blynktimer
 import logging
 import os
 
+
+bootup = True 
+
 # tune console logging
 _log = logging.getLogger('BlynkLog')
 logFormatter = logging.Formatter("%(asctime)s [%(levelname)s]  %(message)s")
@@ -67,7 +70,7 @@ TWEET_MSG = "New value='{}' on VPIN({})"
 
   
 
-@blynk.handle_event("V1")
+@blynk.handle_event("write V1")
 def buttonV1Pressed(value):
     blynk.virtual_write(1, str(value[0]))
     if(value[0] == '1'):
@@ -79,7 +82,7 @@ def buttonV1Pressed(value):
     setLEDsonApp()
 
 
-@blynk.handle_event("V2")
+@blynk.handle_event("write V2")
 def buttonV2Pressed(value):
     blynk.virtual_write(2, str(value[0]))
     if(value[0] == '1'):
@@ -91,7 +94,7 @@ def buttonV2Pressed(value):
     setLEDsonApp()
 
 
-@blynk.handle_event("V3")
+@blynk.handle_event("write V3")
 def buttonV3Pressed(value):
     blynk.virtual_write(3, str(value[0]))
     if(value[0] == '1'):
@@ -103,7 +106,7 @@ def buttonV3Pressed(value):
     setLEDsonApp()
 
 
-@blynk.handle_event("V4")
+@blynk.handle_event("write V4")
 def buttonV4Pressed(value):
     blynk.virtual_write(4, str(value[0]))
     if(value[0] == '1'):
@@ -147,7 +150,7 @@ def setLEDsonApp():
     
     
     
-@blynk.handle_event("V255")
+@blynk.handle_event("write V255")
 def buttonV255Pressed(value):
     _log.info("User Reboot")
     os.system('sh /home/pi/updateDropneponics.sh')
@@ -155,6 +158,7 @@ def buttonV255Pressed(value):
   
 @timer.register(interval=10, run_once=False)
 def blynk_data():
+    _log.info("Update Timer Run")
     now = datetime.now()
     blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
     _log.info("Time updated : " + now.strftime("%d/%m/%Y %H:%M:%S"))
@@ -180,6 +184,7 @@ def blynk_data():
         
 while True:
     try:
+       _log.info('start blynk')
        blynk.run()
        if bootup :
           bootup = False
