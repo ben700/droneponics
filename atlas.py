@@ -139,6 +139,7 @@ GPIO.output(Pump10,GPIO.HIGH)
 try:
    # Create the I2C bus
    i2c = busio.I2C(board.SCL, board.SDA)
+    
 except:
     i2c = None
     _log.info("Unexpected error: I2C")
@@ -154,17 +155,19 @@ if i2c is not None:
       _log.info("Unexpected error: TSL2591")
    try:
       _log.info("create soil sonsors")
-      ss1 = Seesaw(i2c_bus, addr=0x36)
-      ss2 = Seesaw(i2c_bus, addr=0x37)
-      ss3 = Seesaw(i2c_bus, addr=0x38)
-      ss4 = Seesaw(i2c_bus, addr=0x38)
+      ss1 = Seesaw(i2c, addr=0x36)
+      ss2 = Seesaw(i2c, addr=0x37)
+      ss3 = Seesaw(i2c, addr=0x38)
+      ss4 = Seesaw(i2c, addr=0x38)
    except:
       ads = None
       _log.info("Unexpected error: Seesaw")
 else: 
     _log.info("Unexpected error: i2c is none")    
-    
+ 
 
+_log.info ("Channel 1 moisture reading is "+str(ss1.moisture_read())+" and Temp is :" +  str("{0:.2f}".format(ss1.get_temp())))
+ 
 # The ID and range of a sample spreadsheet.
 BLYNK_AUTH = 'XVbhfI6ZYxkqFp7d4RsCIN6Is9YnKp9q' #atlasButt
 
