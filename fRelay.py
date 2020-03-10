@@ -135,7 +135,7 @@ def rebooter(pin, value):
 @blynk.handle_event("connect")
 def connect_handler():
     _log.info('SCRIPT_START')
-    for pin in range(4):
+    for pin in range(5):
         _log.info('Syncing virtual pin {}'.format(pin))
         blynk.virtual_sync(pin)
 
