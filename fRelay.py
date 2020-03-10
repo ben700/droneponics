@@ -44,12 +44,12 @@ GPIO.setup(Relay3,GPIO.OUT)
 GPIO.setup(Relay4,GPIO.OUT)
 
 
-i2c_bus = busio.I2C(SCL, SDA)
+#i2c_bus = busio.I2C(SCL, SDA)
 
-ss1 = Seesaw(i2c_bus, addr=0x36)
-ss2 = Seesaw(i2c_bus, addr=0x37)
-ss3 = Seesaw(i2c_bus, addr=0x38)
-ss4 = Seesaw(i2c_bus, addr=0x38)
+#ss1 = Seesaw(i2c_bus, addr=0x36)
+#ss2 = Seesaw(i2c_bus, addr=0x37)
+#ss3 = Seesaw(i2c_bus, addr=0x38)
+#ss4 = Seesaw(i2c_bus, addr=0x38)
 
 # Initialize Blynk
 blynk = blynklib.Blynk(BLYNK_AUTH, heartbeat=15, max_msg_buffer=512, log=_log.info)
@@ -121,7 +121,7 @@ def buttonV4Pressed(value):
 def buttonV255Pressed(value):
     os.system('sudo reboot')
     
-@blynk.on("connected")
+@blynk.handle_event("connected")
 def blynk_connected():
     # You can also use blynk.sync_virtual(pin)
     # to sync a specific virtual pin
@@ -165,24 +165,24 @@ def setLEDsonApp():
 def blynk_data():
     now = datetime.now()
     blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
-    print("Time updated : " + now.strftime("%d/%m/%Y %H:%M:%S"))
-    setLEDsonApp()
+    _log.info("Time updated : " + now.strftime("%d/%m/%Y %H:%M:%S"))
+   
     if (ss1 is not None):
         blynk.virtual_write(11, str(ss1.moisture_read()))
         blynk.virtual_write(12, str(ss1.get_temp()))
-        print ("Channel 1 moisture reading is "+str(ss1.moisture_read())+" and Temp is :" +  str("{0:.2f}".format(ss1.get_temp())))
+        _log.info ("Channel 1 moisture reading is "+str(ss1.moisture_read())+" and Temp is :" +  str("{0:.2f}".format(ss1.get_temp())))
     if (ss2 is not None):    
        blynk.virtual_write(13, str(ss2.moisture_read()))
        blynk.virtual_write(14, str(ss2.get_temp()))
-       print ("Channel 2 moisture reading is "+str(ss2.moisture_read())+" and Temp is :" +  str("{0:.2f}".format(ss2.get_temp())))
+       _log.info ("Channel 2 moisture reading is "+str(ss2.moisture_read())+" and Temp is :" +  str("{0:.2f}".format(ss2.get_temp())))
     if (ss3 is not None):    
        blynk.virtual_write(15, str(ss3.moisture_read()))          
        blynk.virtual_write(16, str(ss3.get_temp()))
-       print ("Channel 3 moisture reading is "+str(ss3.moisture_read())+" and Temp is :" +  str("{0:.2f}".format(ss3.get_temp())))
+       _log.info ("Channel 3 moisture reading is "+str(ss3.moisture_read())+" and Temp is :" +  str("{0:.2f}".format(ss3.get_temp())))
     if (ss4 is not None):    
        blynk.virtual_write(17, str(ss4.moisture_read()))
        blynk.virtual_write(18, str(ss4.get_temp()))
-       print ("Channel 4 moisture reading is "+str(ss4.moisture_read())+" and Temp is :" +  str("{0:.2f}".format(ss4.get_temp())))
+       _log.info ("Channel 4 moisture reading is "+str(ss4.moisture_read())+" and Temp is :" +  str("{0:.2f}".format(ss4.get_temp())))
  
 
         
