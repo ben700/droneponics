@@ -52,9 +52,9 @@ GPIO.setup(Relay4,GPIO.OUT)
 #ss4 = Seesaw(i2c_bus, addr=0x38)
 
 # Initialize Blynk
-blynk = blynklib.Blynk(BLYNK_AUTH, heartbeat=15, max_msg_buffer=512, log=_log.info)
+blynk = blynklib.Blynk(BLYNK_AUTH)
 timer = blynktimer.Timer()
-blynk.run()
+
 
 APP_CONNECT_PRINT_MSG = '[APP_CONNECT_EVENT]'
 APP_DISCONNECT_PRINT_MSG = '[APP_DISCONNECT_EVENT]'
@@ -65,10 +65,7 @@ READ_PRINT_MSG = "[READ_VIRTUAL_PIN_EVENT] Pin: V{}"
 ALLOWED_COMMANDS_LIST = ['ls', 'lsusb', 'ip a', 'ip abc']
 TWEET_MSG = "New value='{}' on VPIN({})"
 
-now = datetime.now()
-blynk.virtual_write(99, now.strftime("%d/%m/%Y %H:%M:%S"))
-print("Boot time : " + now.strftime("%d/%m/%Y %H:%M:%S"))
-    
+  
 
 @blynk.handle_event("V1")
 def buttonV1Pressed(value):
