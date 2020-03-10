@@ -59,9 +59,9 @@ TWEET_MSG = "New value='{}' on VPIN({})"
 
 
   
-@timer.register(vpin_num=9, interval=7, run_once=False)
-def blynk_data(pin, value):
-    _log.info(WRITE_EVENT_PRINT_MSG.format(pin, value))
+@timer.register(interval=10, run_once=False)
+def blynk_data():
+    _log.info(WRITE_EVENT_PRINT_MSG.format(0, 0))
 
  
     
