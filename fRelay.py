@@ -150,7 +150,7 @@ def setLEDsonApp():
     
     
     
-@blynk.handle_event("write V255")
+@blynk.handle_event('write V255')
 def buttonV255Pressed(value):
     _log.info("User Reboot")
     os.system('/home/pi/updateDropneponics.sh')
