@@ -61,7 +61,7 @@ BLYNK_AUTH = 'ZDy8p4aFPCKGwQhafv4jwUT6TpCY9CyP' #envLogger1
 # Initialize Blynk
 blynk = blynklib.Blynk(BLYNK_AUTH, heartbeat=15, log=_log.info)
 timer = blynktimer.Timer()
-blynk.run()
+#blynk.run()
 APP_CONNECT_PRINT_MSG = '[APP_CONNECT_EVENT]'
 APP_DISCONNECT_PRINT_MSG = '[APP_DISCONNECT_EVENT]'
 CONNECT_PRINT_MSG = '[CONNECT_EVENT]'
@@ -71,8 +71,8 @@ READ_PRINT_MSG = "[READ_VIRTUAL_PIN_EVENT] Pin: V{}"
 ALLOWED_COMMANDS_LIST = ['ls', 'lsusb', 'ip a', 'ip abc']
 TWEET_MSG = "New value='{}' on VPIN({})"
 
-now = datetime.now()
-blynk.virtual_write(99, now.strftime("%d/%m/%Y %H:%M:%S"))
+#now = datetime.now()
+#blynk.virtual_write(99, now.strftime("%d/%m/%Y %H:%M:%S"))
     
 @blynk.handle_event('write V255')
 def buttonV255Pressed(pin, value):
