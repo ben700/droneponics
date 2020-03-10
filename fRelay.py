@@ -67,7 +67,7 @@ WRITE_EVENT_PRINT_MSG = "[WRITE_VIRTUAL_PIN_EVENT] Pin: V{} Value: '{}'"
 READ_PRINT_MSG = "[READ_VIRTUAL_PIN_EVENT] Pin: V{}"
 ALLOWED_COMMANDS_LIST = ['ls', 'lsusb', 'ip a', 'ip abc']
 TWEET_MSG = "New value='{}' on VPIN({})"
-colors = {'1': '#D3435C', '0': '#D3435C', 'OFFLINE': '#FF0000'}
+colors = {'1': '#23C48E', '0': '#D3435C', 'OFFLINE': '#FF0000'}
 
   
 @blynk.handle_event('write V1')
