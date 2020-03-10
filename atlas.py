@@ -51,6 +51,8 @@ BLYNK_BLUE      ="#04C0F8"
 BLYNK_YELLOW    ="#ED9D00"
 BLYNK_RED       ="#D3435C"
 BLYNK_DARK_BLUE ="#5F7CD8"
+colors = {'1': '#23C48E', '0': '#D3435C', 'OFFLINE': '#FF0000'}
+
 
 buttFullSensor =  17
 buttEmptySensor = 4
@@ -144,7 +146,7 @@ chan = AnalogIn(ads, ADS.P0)
 BLYNK_AUTH = 'XVbhfI6ZYxkqFp7d4RsCIN6Is9YnKp9q' #atlasButt
 
 # Initialize Blynk
-blynk = blynklib.Blynk(BLYNK_AUTH, heartbeat=15, log=_log.info)
+blynk = blynklib.Blynk(BLYNK_AUTH)
 timer = blynktimer.Timer()
 
 APP_CONNECT_PRINT_MSG = '[APP_CONNECT_EVENT]'
@@ -182,15 +184,15 @@ _log.info("EC Device Info = " + ec.query("i"))
 #print("Flow Device Info = " + flow.query("i"))      
 
       
-print("Temp Cal = " + temp.query("Cal,?"))
-print("Temp Scale = " + temp.query("S,?"))
+_log.info("Temp Cal = " + temp.query("Cal,?"))
+_log.info("Temp Scale = " + temp.query("S,?"))
       
-print("pH Cal = " + ph.query("Cal,?"))
-print("pH Temp Cal = " + ph.query("T,?"))
+_log.info("pH Cal = " + ph.query("Cal,?"))
+_log.info("pH Temp Cal = " + ph.query("T,?"))
 
-print("EC Cal = " + ec.query("Cal,?"))
-print("EC Temp Cal = " + ec.query("Cal,?"))
-print("EC Probe Type = " + ec.query("K,?"))
+_log.info("EC Cal = " + ec.query("Cal,?"))
+_log.info("EC Temp Cal = " + ec.query("Cal,?"))
+_log.info("EC Probe Type = " + ec.query("K,?"))
 
 #print("DO Cal = " + do.query("Cal,?"))     
 #print("DO Temp Cal = " + do.query("Cal,?"))
@@ -215,20 +217,30 @@ print("EC Probe Type = " + ec.query("K,?"))
       
       
 cTemp = temp.query("R").split(":")[1]
-print("Temp = " + cTemp)
-print("EC = " + ec.query("RT,16.699"))
-print("PH = " + ph.query("RT"+cTemp))
+_log.info("Temp = " + cTemp)
+_log.info("EC = " + ec.query("RT,16.699"))
+_log.info("PH = " + ph.query("RT"+cTemp))
 #print("DO = " + d0.query("RT,"+cTemp))
 
 
-now = datetime.now()
-#blynk.virtual_write(99, now.strftime("%d/%m/%Y %H:%M:%S"))
-_log.info("Rebooted at " + now.strftime("%d/%m/%Y %H:%M:%S"))
-#blynk.notify("Rebooted at " + now.strftime("%d/%m/%Y %H:%M:%S"))
+@blynk.handle_event("connect")
+def connect_handler():
+    _log.info('SCRIPT_START')
+    for pin in range(5):
+        _log.info('Syncing virtual pin {}'.format(pin))
+        blynk.virtual_sync(pin)
 
-@blynk.handle_event("V1")
-def buttonV1Pressed(value):
+        # within connect handler after each server send operation forced socket reading is required cause:
+        #  - we are not in script listening state yet
+        #  - without forced reading some portion of blynk server messages can be not delivered to HW
+        blynk.read_response(timeout=0.5)
+    
+  
+@blynk.handle_event('write V1')
+def buttonV1Pressed(pin, value):
+    _log.info(WRITE_EVENT_PRINT_MSG.format(pin, value))
     blynk.virtual_write(1, str(value[0]))
+    blynk.set_property(5, 'color', colors[value[0]])
     if(value[0] == '1'):
         print("Waste turned off")
         GPIO.output(Relay1,GPIO.HIGH)
@@ -237,29 +249,36 @@ def buttonV1Pressed(value):
         GPIO.output(Relay1,GPIO.LOW)
   
 
-@blynk.handle_event("V2")
-def buttonV2Pressed(value):
+@blynk.handle_event('write V2')
+def buttonV2Pressed(pin, value):
+    _log.info(WRITE_EVENT_PRINT_MSG.format(pin, value))
+    blynk.virtual_write(2, str(value[0]))
+    blynk.set_property(6, 'color', colors[value[0]])
     if(value[0] == '1'):
         print("Feed Pump turned off")
         GPIO.output(Relay2,GPIO.HIGH)
     else:
         print("Feed Pump turned on")
         GPIO.output(Relay2,GPIO.LOW)
-  
 
-
-@blynk.handle_event("V3")
-def buttonV3Pressed(value):
+@blynk.handle_event('write V3')
+def buttonV3Pressed(pin, value):
+    _log.info(WRITE_EVENT_PRINT_MSG.format(pin, value))
+    blynk.virtual_write(3, str(value[0]))
+    blynk.set_property(7, 'color', colors[value[0]])
     if(value[0] == '1'):
         print("Air and Mixer turned off")
         GPIO.output(Relay3,GPIO.HIGH)
     else:
         print("Air and Mixer turned on")
         GPIO.output(Relay3,GPIO.LOW)
-   
 
-@blynk.on("V4")
-def buttonV4Pressed(value):
+
+@blynk.handle_event('write V4')
+def buttonV4Pressed(pin, value):
+    _log.info(WRITE_EVENT_PRINT_MSG.format(pin, value))
+    blynk.virtual_write(4, str(value[0]))
+    blynk.set_property(8, 'color', colors[value[0]])
     if(value[0] == '1'):
         print("Pump/UV turned off")
         GPIO.output(Relay4,GPIO.HIGH)
@@ -267,9 +286,18 @@ def buttonV4Pressed(value):
         print("Pump/UV turned on")
         GPIO.output(Relay4,GPIO.LOW)
 
+    
+    
+@blynk.handle_event('write V255')
+def rebooter(pin, value):
+    _log.info(WRITE_EVENT_PRINT_MSG.format(pin, value))
+    _log.info("User Reboot")
+    os.system('sh /home/pi/updateDroneponics.sh')
+    os.system('sudo reboot')
+    
 
         
-@blynk.handle_event("V30")
+@blynk.handle_event('write 30')
 def buttonV30Pressed(value):
     logging.info("Dose started at" + now.strftime("%d/%m/%Y %H:%M:%S"))
     print("Dose started at " + now.strftime("%d/%m/%Y %H:%M:%S"))
@@ -282,7 +310,7 @@ def buttonV30Pressed(value):
        blynk.set_property(dose.LED, 'color', BLYNK_GREEN)
        logger.info("Dosing " + dose.name +" for " + dose.dose + " using pin " + dose.pump + " and led " + dose.LED) 
     
-@blynk.handle_event("V69")
+@blynk.handle_event('write 69')
 def buttonV69Pressed(value):
     logging.info("Dose Line Fill at " + now.strftime("%d/%m/%Y %H:%M:%S"))
     print("Dose Line Stop Fill at " + now.strftime("%d/%m/%Y %H:%M:%S"))
@@ -297,7 +325,7 @@ def buttonV69Pressed(value):
     GPIO.output(Pump9,GPIO.LOW)
     GPIO.output(Pump10,GPIO.LOW)
        
-@blynk.handle_event("V70")
+@blynk.handle_event('write 70')
 def buttonV70Pressed(value):
     logging.info("Dose Line Stop All at " + now.strftime("%d/%m/%Y %H:%M:%S"))
     print("Dose Line Stop All at " + now.strftime("%d/%m/%Y %H:%M:%S"))
@@ -312,77 +340,20 @@ def buttonV70Pressed(value):
     GPIO.output(Pump9,GPIO.HIGH)
     GPIO.output(Pump10,GPIO.HIGH)    
 
-        
-@blynk.handle_event("V255")
-def buttonV255Pressed(value):
-    os.system('sudo reboot')
-    
-@blynk.handle_event("connected")
-def blynk_connected():
-    # You can also use blynk.sync_virtual(pin)
-    # to sync a specific virtual pin
-    print("Updating values from the server...")
-    for i in range(40): 
-        result = blynk.sync_virtual(i)
-        print("For i = " + str(i) + " the result was "+ str(result))
-    
-    
-def setLEDsonApp():
-    #leds for 4 plugs
-    if (GPIO.input(Relay1) == GPIO.LOW) :
-       blynk.virtual_write(5,255)
-       blynk.set_property(5, 'color', BLYNK_RED)
-    else:
-       blynk.virtual_write(5,255)
-       blynk.set_property(5, 'color', BLYNK_GREEN)
-        
-    if (GPIO.input(Relay2) == GPIO.LOW) :
-       blynk.virtual_write(6,255)
-       blynk.set_property(6, 'color', BLYNK_RED)
-    else:
-       blynk.virtual_write(6,255)
-       blynk.set_property(6, 'color', BLYNK_GREEN)
-        
-    if (GPIO.input(Relay3) == GPIO.LOW) :
-       blynk.virtual_write(7,255)
-       blynk.set_property(7, 'color', BLYNK_RED)
-    else:
-       blynk.virtual_write(7,255)
-       blynk.set_property(7, 'color', BLYNK_GREEN)
-        
-    if (GPIO.input(Relay4) == GPIO.LOW) :
-       blynk.virtual_write(8,255)
-       blynk.set_property(8, 'color', BLYNK_RED)
-    else:
-       blynk.virtual_write(8,255)
-       blynk.set_property(8, 'color', BLYNK_GREEN)  
-    #now do water level LEDs    
-    if (GPIO.input(buttFullSensor) == GPIO.LOW) :
-       blynk.virtual_write(10,255)
-       blynk.set_property(10, 'color', BLYNK_RED)
-    else:
-       blynk.virtual_write(10,255)
-       blynk.set_property(10, 'color', BLYNK_GREEN)
-        
-    if (GPIO.input(buttEmptySensor) == GPIO.LOW) :
-       blynk.virtual_write(11,255)
-       blynk.set_property(11, 'color', BLYNK_RED)
-    else:
-       blynk.virtual_write(11,255)
-       blynk.set_property(11, 'color', BLYNK_GREEN)
+
         
 def turnOffNoisyThingsWhenButtEmpty(): 
    for Relay in noisyThingsWhenButtEmpty:
-       if GPIO.inout(Relay) != GPIO.HIGH : 
+       if GPIO.input(Relay) != GPIO.HIGH : 
            GPIO.output(Relay,GPIO.HIGH)
       
 def turnOnNoisyThingsWhenButtNotEmpty(): 
    for Relay in noisyThingsWhenButtEmpty:
-       if GPIO.inout(Relay) != GPIO.LOW : 
+       if GPIO.input(Relay) != GPIO.LOW : 
            GPIO.output(Relay,GPIO.LOW)
       
 def DoseNutrients(): 
-    logging.debug("DoseNutrients")
+    _log.info("DoseNutrients")
     now = datetime.now()
     blynk.virtual_write(98, now.strftime("%d/%m/%Y %H:%M:%S"))
     print ("Going to dose butt time is now " + now.strftime("%d/%m/%Y %H:%M:%S"))
@@ -400,11 +371,11 @@ def DoseNutrients():
 # Will Print Every 10 Seconds
 @timer.register(interval=10, run_once=False)
 def blynk_data():
-    logging.debug("Start of blynk_data")
+    _log.info("Start of blynk_data")
     now = datetime.now()
     blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
     
-    logging.debug("now the t3")
+    _log.info("now the t3")
     cTemp = temp.query("R,").split(":")[1]
     print("Temp = " + cTemp)
     blynk.virtual_write(20, cTemp)
@@ -415,18 +386,18 @@ def blynk_data():
     blynk.virtual_write(22, cPH)
     print ("PH = " + cPH)
    
-    logging.debug("now the adc")
+    _log.info("now the adc")
     
     volt = chan.voltage
     if volt is not None:
        blynk.virtual_write(25, str("{0}".format((volt-1.5)*100)))
        blynk.virtual_write(26, str("{0:.2f}".format((volt-1.5)*12)))
       
-    logging.debug("now the digital single wire")
+    _log.info("now the digital single wire")
     blynk.virtual_write(27, GPIO.input(buttEmptySensor))
     blynk.virtual_write(28, GPIO.input(buttFullSensor))
     
-    logging.debug("make actions for empty butt")
+    _log.info("make actions for empty butt")
     if (GPIO.input(buttEmptySensor) == GPIO.LOW) :
        blynk.set_property(11, 'color', BLYNK_GREEN)
        turnOnNoisyThingsWhenButtNotEmpty()
@@ -436,7 +407,7 @@ def blynk_data():
        turnOffNoisyThingsWhenButtEmpty()
        blynk.set_property(11, 'color', BLYNK_RED)
   
-    logging.debug("make actions for full butt")
+    _log.info("make actions for full butt")
     if (GPIO.input(buttFullSensor) == GPIO.LOW) :
        blynk.virtual_write(10,255)
        blynk.set_property(10, 'color', BLYNK_RED)
@@ -449,12 +420,14 @@ def blynk_data():
 while True:
     try:
        blynk.run()
+       if bootup :
+          bootup = False
+          now = datetime.now()
+          blynk.virtual_write(99, now.strftime("%d/%m/%Y %H:%M:%S"))
+          _log.info('Just Booted')
+          
        timer.run()
     except:
-        logging.error("Something bad happened to did end of programme reboot")
-        os.system('sudo reboot')
-    finally:  
-        logging.error("Running the finally before rebooting")
-        os.system('sudo reboot')
-        
+       _log.info('Unexpected error')
+       os.system('sh /home/pi/updateDroneponics.sh')
     
