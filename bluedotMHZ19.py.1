@@ -29,6 +29,8 @@ import adafruit_tsl2591
 import sys
 import os
 
+bootup = True
+
 # tune console logging
 _log = logging.getLogger('BlynkLog')
 logFormatter = logging.Formatter("%(asctime)s [%(levelname)s]  %(message)s")
@@ -256,6 +258,12 @@ def blynk_data():
 while True:
     try:
        blynk.run()
+       if bootup :
+          bootup = False
+          now = datetime.now()
+          blynk.virtual_write(99, now.strftime("%d/%m/%Y %H:%M:%S"))
+          _log.info('Just Booted')
+          
        timer.run()
     except:
        _log.info('Unexpected error')
