@@ -67,24 +67,29 @@ WRITE_EVENT_PRINT_MSG = "[WRITE_VIRTUAL_PIN_EVENT] Pin: V{} Value: '{}'"
 READ_PRINT_MSG = "[READ_VIRTUAL_PIN_EVENT] Pin: V{}"
 ALLOWED_COMMANDS_LIST = ['ls', 'lsusb', 'ip a', 'ip abc']
 TWEET_MSG = "New value='{}' on VPIN({})"
+colors = {'1': '#D3435C', '0': '#D3435C', 'OFFLINE': '#FF0000'}
 
   
 @blynk.handle_event('write V1')
 def buttonV1Pressed(pin, value):
     _log.info(WRITE_EVENT_PRINT_MSG.format(pin, value))
     blynk.virtual_write(1, str(value[0]))
+    blynk.set_property(5, 'color', colors[value[0]])
     if(value[0] == '1'):
         print("Waste turned off")
         GPIO.output(Relay1,GPIO.HIGH)
     else:
         print("Waste turned on")
         GPIO.output(Relay1,GPIO.LOW)
+    
+
 
 
 @blynk.handle_event('write V2')
 def buttonV2Pressed(pin, value):
     _log.info(WRITE_EVENT_PRINT_MSG.format(pin, value))
     blynk.virtual_write(2, str(value[0]))
+    blynk.set_property(6, 'color', colors[value[0]])
     if(value[0] == '1'):
         print("Feed Pump turned off")
         GPIO.output(Relay2,GPIO.HIGH)
@@ -96,6 +101,7 @@ def buttonV2Pressed(pin, value):
 def buttonV3Pressed(pin, value):
     _log.info(WRITE_EVENT_PRINT_MSG.format(pin, value))
     blynk.virtual_write(3, str(value[0]))
+    blynk.set_property(7, 'color', colors[value[0]])
     if(value[0] == '1'):
         print("Air and Mixer turned off")
         GPIO.output(Relay3,GPIO.HIGH)
@@ -108,6 +114,7 @@ def buttonV3Pressed(pin, value):
 def buttonV4Pressed(pin, value):
     _log.info(WRITE_EVENT_PRINT_MSG.format(pin, value))
     blynk.virtual_write(4, str(value[0]))
+    blynk.set_property(8, 'color', colors[value[0]])
     if(value[0] == '1'):
         print("Pump/UV turned off")
         GPIO.output(Relay4,GPIO.HIGH)
@@ -115,14 +122,13 @@ def buttonV4Pressed(pin, value):
         print("Pump/UV turned on")
         GPIO.output(Relay4,GPIO.LOW)
 
-
-
     
     
 @blynk.handle_event('write V255')
 def rebooter(pin, value):
     _log.info(WRITE_EVENT_PRINT_MSG.format(pin, value))
-
+    _log.info("User Reboot")
+    os.system('sh /home/pi/updateDropneponics.sh')
     
     
   
