@@ -248,8 +248,11 @@ def blynk_data():
         _log.info('Unexpected error: mhz19b')
     
     
-    
 
 while True:
-    blynk.run()
-    timer.run()
+    try:
+       blynk.run()
+       timer.run()
+    except:
+       _log.info('Unexpected error')
+    
