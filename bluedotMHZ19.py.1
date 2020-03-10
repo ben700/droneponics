@@ -210,7 +210,13 @@ def readBME280All(addr=DEVICE):
 def blynk_data():
     _log.info(WRITE_EVENT_PRINT_MSG.format(0, 0))
 
+    temperature,pressure,humidity = readBME280All()
+    mhz19b = mh_z19.read()    
+    now = datetime.now()
  
+    _log.info('Temperature: {0:.2f} C'.format(temperature))
+    blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
+    
     
 
 while True:
