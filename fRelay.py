@@ -69,11 +69,33 @@ ALLOWED_COMMANDS_LIST = ['ls', 'lsusb', 'ip a', 'ip abc']
 TWEET_MSG = "New value='{}' on VPIN({})"
 
   
+@blynk.handle_event('write V1')
+def buttonV1Pressed(pin, value):
+    _log.info(WRITE_EVENT_PRINT_MSG.format(pin, value))
+
+
+@blynk.handle_event('write V2')
+def buttonV2Pressed(pin, value):
+    _log.info(WRITE_EVENT_PRINT_MSG.format(pin, value))
+
+
+@blynk.handle_event('write V3')
+def buttonV3Pressed(pin, value):
+    _log.info(WRITE_EVENT_PRINT_MSG.format(pin, value))
+
+
+
+@blynk.handle_event('write V4')
+def buttonV4Pressed(pin, value):
+    _log.info(WRITE_EVENT_PRINT_MSG.format(pin, value))
+
+
+
     
     
 @blynk.handle_event('write V255')
 def rebooter(pin, value):
-    print(WRITE_EVENT_PRINT_MSG.format(pin, value))
+    _log.info(WRITE_EVENT_PRINT_MSG.format(pin, value))
 
     
     
