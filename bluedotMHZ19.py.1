@@ -59,8 +59,8 @@ except:
 BLYNK_AUTH = 'ZDy8p4aFPCKGwQhafv4jwUT6TpCY9CyP' #envLogger1
 
 # Initialize Blynk
-blynk = blynklib.Blynk(BLYNK_AUTH, heartbeat=15, log=_log.info)
-timer = blynktimer.Timer()
+blynk = blynklib.Blynk(BLYNK_AUTH)
+#timer = blynktimer.Timer()
 #blynk.run()
 APP_CONNECT_PRINT_MSG = '[APP_CONNECT_EVENT]'
 APP_DISCONNECT_PRINT_MSG = '[APP_DISCONNECT_EVENT]'
