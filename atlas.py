@@ -166,8 +166,6 @@ else:
     _log.info("Unexpected error: i2c is none")    
  
 
-_log.info ("Channel 1 moisture reading is "+str(ss1.moisture_read())+" and Temp is :" +  str("{0:.2f}".format(ss1.get_temp())))
- 
 # The ID and range of a sample spreadsheet.
 BLYNK_AUTH = 'XVbhfI6ZYxkqFp7d4RsCIN6Is9YnKp9q' #atlasButt
 
@@ -323,7 +321,7 @@ def rebooter(pin, value):
     
 
         
-@blynk.handle_event('write 30')
+@blynk.handle_event('write v30')
 def buttonV30Pressed(value):
     _log.info("Dose started at" + now.strftime("%d/%m/%Y %H:%M:%S"))
     print("Dose started at " + now.strftime("%d/%m/%Y %H:%M:%S"))
@@ -336,8 +334,8 @@ def buttonV30Pressed(value):
        blynk.set_property(dose.LED, 'color', BLYNK_GREEN)
        _log.info("Dosing " + dose.name +" for " + dose.dose + " using pin " + dose.pump + " and led " + dose.LED) 
     
-@blynk.handle_event('write 69')
-def buttonV69Pressed(value):
+@blynk.handle_event('write v69')
+def buttonV69Pressed(pin, value):
     _log.info("Dose Line Fill at " + now.strftime("%d/%m/%Y %H:%M:%S"))
     print("Dose Line Stop Fill at " + now.strftime("%d/%m/%Y %H:%M:%S"))
     GPIO.output(Pump1,GPIO.LOW)
@@ -351,8 +349,8 @@ def buttonV69Pressed(value):
     GPIO.output(Pump9,GPIO.LOW)
     GPIO.output(Pump10,GPIO.LOW)
        
-@blynk.handle_event('write 70')
-def buttonV70Pressed(value):
+@blynk.handle_event('write v70')
+def buttonV70Pressed(pin, value):
     _log.info("Dose Line Stop All at " + now.strftime("%d/%m/%Y %H:%M:%S"))
     print("Dose Line Stop All at " + now.strftime("%d/%m/%Y %H:%M:%S"))
     GPIO.output(Pump1,GPIO.HIGH)
