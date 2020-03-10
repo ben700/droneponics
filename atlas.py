@@ -375,24 +375,24 @@ def blynk_data():
     _log.info("now the t3")
     cTemp = temp.query("R,").split(":")[1]
     print("Temp = " + cTemp)
-    blynk.virtual_write(20, cTemp)
+    blynk.virtual_write(30, cTemp)
     cEC = ec.query("RT,"+cTemp).split(":")[1]
-    blynk.virtual_write(21, cEC)
+    blynk.virtual_write(31, cEC)
     print ("EC  = " + cEC)
     cPH = ph.query("RT,"+cTemp).split(":")[1]
-    blynk.virtual_write(22, cPH)
+    blynk.virtual_write(32, cPH)
     print ("PH = " + cPH)
    
     _log.info("now the adc")
     
     volt = chan.voltage
     if volt is not None:
-       blynk.virtual_write(25, str("{0}".format((volt-1.5)*100)))
-       blynk.virtual_write(26, str("{0:.2f}".format((volt-1.5)*12)))
+       blynk.virtual_write(35, str("{0}".format((volt-1.5)*100)))
+       blynk.virtual_write(36, str("{0:.2f}".format((volt-1.5)*12)))
       
     _log.info("now the digital single wire")
-    blynk.virtual_write(27, GPIO.input(buttEmptySensor))
-    blynk.virtual_write(28, GPIO.input(buttFullSensor))
+    blynk.virtual_write(37, GPIO.input(buttEmptySensor))
+    blynk.virtual_write(38, GPIO.input(buttFullSensor))
     
     _log.info("make actions for empty butt")
     if (GPIO.input(buttEmptySensor) == GPIO.LOW) :
