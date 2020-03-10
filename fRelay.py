@@ -163,22 +163,22 @@ def blynk_data():
     blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
     _log.info("Time updated : " + now.strftime("%d/%m/%Y %H:%M:%S"))
    
-    if (ss1 is not None):
-        blynk.virtual_write(11, str(ss1.moisture_read()))
-        blynk.virtual_write(12, str(ss1.get_temp()))
-        _log.info ("Channel 1 moisture reading is "+str(ss1.moisture_read())+" and Temp is :" +  str("{0:.2f}".format(ss1.get_temp())))
-    if (ss2 is not None):    
-       blynk.virtual_write(13, str(ss2.moisture_read()))
-       blynk.virtual_write(14, str(ss2.get_temp()))
-       _log.info ("Channel 2 moisture reading is "+str(ss2.moisture_read())+" and Temp is :" +  str("{0:.2f}".format(ss2.get_temp())))
-    if (ss3 is not None):    
-       blynk.virtual_write(15, str(ss3.moisture_read()))          
-       blynk.virtual_write(16, str(ss3.get_temp()))
-       _log.info ("Channel 3 moisture reading is "+str(ss3.moisture_read())+" and Temp is :" +  str("{0:.2f}".format(ss3.get_temp())))
-    if (ss4 is not None):    
-       blynk.virtual_write(17, str(ss4.moisture_read()))
-       blynk.virtual_write(18, str(ss4.get_temp()))
-       _log.info ("Channel 4 moisture reading is "+str(ss4.moisture_read())+" and Temp is :" +  str("{0:.2f}".format(ss4.get_temp())))
+   # if (ss1 is not None):
+   #     blynk.virtual_write(11, str(ss1.moisture_read()))
+   #     blynk.virtual_write(12, str(ss1.get_temp()))
+   #     _log.info ("Channel 1 moisture reading is "+str(ss1.moisture_read())+" and Temp is :" +  str("{0:.2f}".format(ss1.get_temp())))
+   # if (ss2 is not None):    
+   #    blynk.virtual_write(13, str(ss2.moisture_read()))
+   #    blynk.virtual_write(14, str(ss2.get_temp()))
+   #    _log.info ("Channel 2 moisture reading is "+str(ss2.moisture_read())+" and Temp is :" +  str("{0:.2f}".format(ss2.get_temp())))
+   # if (ss3 is not None):    
+   #    blynk.virtual_write(15, str(ss3.moisture_read()))          
+   #    blynk.virtual_write(16, str(ss3.get_temp()))
+   #    _log.info ("Channel 3 moisture reading is "+str(ss3.moisture_read())+" and Temp is :" +  str("{0:.2f}".format(ss3.get_temp())))
+   # if (ss4 is not None):    
+   #    blynk.virtual_write(17, str(ss4.moisture_read()))
+   #    blynk.virtual_write(18, str(ss4.get_temp()))
+   #    _log.info ("Channel 4 moisture reading is "+str(ss4.moisture_read())+" and Temp is :" +  str("{0:.2f}".format(ss4.get_temp())))
  
 
         
@@ -194,4 +194,4 @@ while True:
        timer.run()
     except:
        _log.info('Unexpected error')
-       os.system('sh /home/pi/updateDropneponics.sh')
+       os.system('sh /home/pi/updateDroneponics.sh')
