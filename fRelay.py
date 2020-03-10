@@ -117,14 +117,7 @@ def buttonV4Pressed(value):
 @blynk.handle_event("V255")
 def buttonV255Pressed(value):
     os.system('sudo reboot')
-    
-@blynk.handle_event("connected")
-def blynk_connected():
-    # You can also use blynk.sync_virtual(pin)
-    # to sync a specific virtual pin
-    print("Updating values from the server...")
-    blynk.sync_virtual(1, 2, 3, 4)
-    
+
     
 def setLEDsonApp():    
     if (GPIO.input(Relay1) == GPIO.LOW) :
