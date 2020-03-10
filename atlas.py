@@ -21,6 +21,9 @@ from adafruit_ads1x15.analog_in import AnalogIn
 import os
 import logging
 
+
+bootup = True 
+
 # tune console logging
 _log = logging.getLogger('BlynkLog')
 logFormatter = logging.Formatter("%(asctime)s [%(levelname)s]  %(message)s")
