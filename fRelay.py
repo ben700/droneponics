@@ -114,9 +114,6 @@ def buttonV4Pressed(value):
         GPIO.output(Relay4,GPIO.LOW)
     setLEDsonApp()
 
-@blynk.handle_event("V255")
-def buttonV255Pressed(value):
-    os.system('sudo reboot')
 
     
 def setLEDsonApp():    
@@ -150,7 +147,12 @@ def setLEDsonApp():
     
     
     
-# Will Print Every 10 Seconds
+@blynk.handle_event("V255")
+def buttonV255Pressed(value):
+    _log.info("User Reboot")
+    os.system('sh /home/pi/updateDropneponics.sh')
+    
+  
 @timer.register(interval=10, run_once=False)
 def blynk_data():
     now = datetime.now()
@@ -176,11 +178,16 @@ def blynk_data():
  
 
         
-
 while True:
     try:
        blynk.run()
+       if bootup :
+          bootup = False
+          now = datetime.now()
+          blynk.virtual_write(99, now.strftime("%d/%m/%Y %H:%M:%S"))
+          _log.info('Just Booted')
+          
        timer.run()
     except:
        _log.info('Unexpected error')
-       os.system('/home/pi/updateDropneponics.sh')
+       os.system('sh /home/pi/updateDropneponics.sh')
