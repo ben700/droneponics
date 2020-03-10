@@ -29,6 +29,8 @@ import adafruit_tsl2591
 import sys
 import os
 
+bootup = True
+
 # tune console logging
 _log = logging.getLogger('BlynkLog')
 logFormatter = logging.Formatter("%(asctime)s [%(levelname)s]  %(message)s")
@@ -36,6 +38,7 @@ consoleHandler = logging.StreamHandler()
 consoleHandler.setFormatter(logFormatter)
 _log.addHandler(consoleHandler)
 _log.setLevel(logging.DEBUG)
+
 
 # Initialize the I2C bus.
 i2c = busio.I2C(board.SCL, board.SDA)
@@ -59,9 +62,9 @@ BLYNK_AUTH = 'FnSZls3WUdCbWmDJvfnjz3f83Sm70HqI' #envLogger2
 #BLYNK_AUTH = 'ZDy8p4aFPCKGwQhafv4jwUT6TpCY9CyP' #envLogger1
 
 # Initialize Blynk
-blynk = blynklib.Blynk(BLYNK_AUTH, heartbeat=15, log=_log.info)
+blynk = blynklib.Blynk(BLYNK_AUTH)
 timer = blynktimer.Timer()
-blynk.run()
+#blynk.run()
 APP_CONNECT_PRINT_MSG = '[APP_CONNECT_EVENT]'
 APP_DISCONNECT_PRINT_MSG = '[APP_DISCONNECT_EVENT]'
 CONNECT_PRINT_MSG = '[CONNECT_EVENT]'
@@ -71,13 +74,6 @@ READ_PRINT_MSG = "[READ_VIRTUAL_PIN_EVENT] Pin: V{}"
 ALLOWED_COMMANDS_LIST = ['ls', 'lsusb', 'ip a', 'ip abc']
 TWEET_MSG = "New value='{}' on VPIN({})"
 
-now = datetime.now()
-blynk.virtual_write(99, now.strftime("%d/%m/%Y %H:%M:%S"))
-    
-@blynk.handle_event('write V255')
-def buttonV255Pressed(pin, value):
-    _log.info(WRITE_EVENT_PRINT_MSG.format(pin, value))
-    os.system('sudo reboot')
 
 DEVICE = 0x77 # Default device I2C address
 
@@ -210,56 +206,66 @@ def readBME280All(addr=DEVICE):
 
   return temperature/100.0,pressure/100.0,humidity
   
+@blynk.handle_event("V255")
+def buttonV255Pressed(value):
+    _log.info("User Reboot")
+    os.system('sh /home/pi/updateDropneponics.sh')
+    
+  
 @timer.register(interval=10, run_once=False)
-def blynk_data(pin, value):
-    _log.info(WRITE_EVENT_PRINT_MSG.format(pin, value))
+def blynk_data():
+    _log.info("Update Timer Run")
 
     temperature,pressure,humidity = readBME280All()
     mhz19b = mh_z19.read()    
     now = datetime.now()
  
     blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
-    print('Temperature: {0:.2f} C'.format(temperature))
+    _log.info('Temperature: {0:.2f} C'.format(temperature))
     blynk.virtual_write(1, str("{0:.2f}".format(temperature)))
-    print('Pressure: {0:.0f}'.format(pressure))
+    _log.info('Pressure: {0:.0f}'.format(pressure))
     blynk.virtual_write(2, str("{0:.2f}".format(pressure)))
-    print('Humidity: {0:.2f}'.format(humidity))
+    _log.info('Humidity: {0:.2f}'.format(humidity))
     blynk.virtual_write(3, str("{0:.2f}".format(humidity)))
     
-    if (tsl is not null):
+    if (tsl is not None):
        lux = tsl.lux
-       print('Total light: {0:.2f}lux'.format(lux))
+       _log.info('Total light: {0:.2f}lux'.format(lux))
        blynk.virtual_write(4, str("{0:.2f}".format(lux)))           
  
        infrared = tsl.infrared
-       print('Infrared light: {0:d}'.format(infrared))
+       _log.info('Infrared light: {0:d}'.format(infrared))
        blynk.virtual_write(5, str("{0:d}".format(infrared)))
 
        visible = tsl.visible
-       print('Visible light: {0:d}'.format(visible))
+       _log.info('Visible light: {0:d}'.format(visible))
        blynk.virtual_write(6, ("{0:d}".format(visible)))
      
        full_spectrum = tsl.full_spectrum
-       print('Full spectrum (IR + visible) light: {0:d}'.format(full_spectrum))
+       _log.info('Full spectrum (IR + visible) light: {0:d}'.format(full_spectrum))
        blynk.virtual_write(7, ("{0:d}".format(full_spectrum)))
     
     if mhz19b is not None:
         blynk.virtual_write(10, '{0:d}'.format(mhz19b['co2']))
-        print('CO2: {0:d}'.format(mhz19b['co2']))
+        _log.info('CO2: {0:d}'.format(mhz19b['co2']))
         
     else:
         blynk.virtual_write(100, 'Unexpected error: mhz19b')
-        print('Unexpected error: mhz19b')
+        _log.info('Unexpected error: mhz19b')
     
     
+
 while True:
     try:
-       _log.info("Start to run Blynk") 
        blynk.run()
-       timer.run()   
+       if bootup :
+          bootup = False
+          now = datetime.now()
+          blynk.virtual_write(99, now.strftime("%d/%m/%Y %H:%M:%S"))
+          _log.info('Just Booted')
+          
+       timer.run()
     except:
-        _log.info("Got to the except")
-    finally:
-        os.system('/home/pi/uDrone.sh')
-        os.system('sudo reboot')
-
+       _log.info('Unexpected error')
+       os.system('sh /home/pi/updateDropneponics.sh')
+    
