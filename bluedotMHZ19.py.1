@@ -222,7 +222,7 @@ def blynk_data():
     _log.info('Humidity: {0:.2f}'.format(humidity))
     blynk.virtual_write(3, str("{0:.2f}".format(humidity)))
     
-    if (tsl is not null):
+    if (tsl is not None):
        lux = tsl.lux
        _log.info('Total light: {0:.2f}lux'.format(lux))
        blynk.virtual_write(4, str("{0:.2f}".format(lux)))           
