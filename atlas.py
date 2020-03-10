@@ -145,6 +145,7 @@ except:
     
     
 if i2c is not None:
+   _log.info("i2c not none")
    try:
       ads = ADS.ADS1015(i2c) 
       chan = AnalogIn(ads, ADS.P0)
@@ -152,6 +153,7 @@ if i2c is not None:
       ads = None
       _log.info("Unexpected error: TSL2591")
    try:
+      _log.info("create soil sonsors")
       ss1 = Seesaw(i2c_bus, addr=0x36)
       ss2 = Seesaw(i2c_bus, addr=0x37)
       ss3 = Seesaw(i2c_bus, addr=0x38)
@@ -159,7 +161,8 @@ if i2c is not None:
    except:
       ads = None
       _log.info("Unexpected error: Seesaw")
-    
+else: 
+    _log.info("Unexpected error: i2c is none")    
     
 
 # The ID and range of a sample spreadsheet.
@@ -415,6 +418,7 @@ def blynk_data():
     
     _log.info("now the soil sensor")
     if (ss1 is not None):
+        _log.info("now record the soil sensor")
         blynk.virtual_write(11, str(ss1.moisture_read()))
         blynk.virtual_write(12, str(ss1.get_temp()))
         _log.info ("Channel 1 moisture reading is "+str(ss1.moisture_read())+" and Temp is :" +  str("{0:.2f}".format(ss1.get_temp())))
