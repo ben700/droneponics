@@ -184,7 +184,6 @@ def blynk_data():
         
 while True:
     try:
-       _log.info('start blynk')
        blynk.run()
        if bootup :
           bootup = False
