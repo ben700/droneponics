@@ -132,6 +132,17 @@ def rebooter(pin, value):
     os.system('sudo reboot')
     
     
+@blynk.handle_event("connect")
+def connect_handler():
+    _log.info('SCRIPT_START')
+    for pin in range(4):
+        _log.info('Syncing virtual pin {}'.format(pin))
+        blynk.virtual_sync(pin)
+
+        # within connect handler after each server send operation forced socket reading is required cause:
+        #  - we are not in script listening state yet
+        #  - without forced reading some portion of blynk server messages can be not delivered to HW
+        blynk.read_response(timeout=0.5)
     
   
 @timer.register(interval=30, run_once=False)
