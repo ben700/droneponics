@@ -153,10 +153,11 @@ def setLEDsonApp():
 @blynk.handle_event("write V255")
 def buttonV255Pressed(value):
     _log.info("User Reboot")
-    os.system('sh /home/pi/updateDropneponics.sh')
+    os.system('/home/pi/updateDropneponics.sh')
+    
     
   
-@timer.register(interval=10, run_once=False)
+@timer.register(interval=30, run_once=False)
 def blynk_data():
     _log.info("Update Timer Run")
     now = datetime.now()
