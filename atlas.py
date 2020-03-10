@@ -151,7 +151,7 @@ if i2c is not None:
    except:
       ads = None
       _log.info("Unexpected error: TSL2591")
-    try:
+   try:
       ss1 = Seesaw(i2c_bus, addr=0x36)
       ss2 = Seesaw(i2c_bus, addr=0x37)
       ss3 = Seesaw(i2c_bus, addr=0x38)
