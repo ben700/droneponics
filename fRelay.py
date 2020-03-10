@@ -72,22 +72,48 @@ TWEET_MSG = "New value='{}' on VPIN({})"
 @blynk.handle_event('write V1')
 def buttonV1Pressed(pin, value):
     _log.info(WRITE_EVENT_PRINT_MSG.format(pin, value))
+    blynk.virtual_write(1, str(value[0]))
+    if(value[0] == '1'):
+        print("Waste turned off")
+        GPIO.output(Relay1,GPIO.HIGH)
+    else:
+        print("Waste turned on")
+        GPIO.output(Relay1,GPIO.LOW)
 
 
 @blynk.handle_event('write V2')
 def buttonV2Pressed(pin, value):
     _log.info(WRITE_EVENT_PRINT_MSG.format(pin, value))
-
+    blynk.virtual_write(2, str(value[0]))
+    if(value[0] == '1'):
+        print("Feed Pump turned off")
+        GPIO.output(Relay2,GPIO.HIGH)
+    else:
+        print("Feed Pump turned on")
+        GPIO.output(Relay2,GPIO.LOW)
 
 @blynk.handle_event('write V3')
 def buttonV3Pressed(pin, value):
     _log.info(WRITE_EVENT_PRINT_MSG.format(pin, value))
-
+    blynk.virtual_write(3, str(value[0]))
+    if(value[0] == '1'):
+        print("Air and Mixer turned off")
+        GPIO.output(Relay3,GPIO.HIGH)
+    else:
+        print("Air and Mixer turned on")
+        GPIO.output(Relay3,GPIO.LOW)
 
 
 @blynk.handle_event('write V4')
 def buttonV4Pressed(pin, value):
     _log.info(WRITE_EVENT_PRINT_MSG.format(pin, value))
+    blynk.virtual_write(4, str(value[0]))
+    if(value[0] == '1'):
+        print("Pump/UV turned off")
+        GPIO.output(Relay4,GPIO.HIGH)
+    else:
+        print("Pump/UV turned on")
+        GPIO.output(Relay4,GPIO.LOW)
 
 
 
