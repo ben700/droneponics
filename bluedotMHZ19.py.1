@@ -60,7 +60,7 @@ BLYNK_AUTH = 'ZDy8p4aFPCKGwQhafv4jwUT6TpCY9CyP' #envLogger1
 
 # Initialize Blynk
 blynk = blynklib.Blynk(BLYNK_AUTH)
-#timer = blynktimer.Timer()
+timer = blynktimer.Timer()
 #blynk.run()
 APP_CONNECT_PRINT_MSG = '[APP_CONNECT_EVENT]'
 APP_DISCONNECT_PRINT_MSG = '[APP_DISCONNECT_EVENT]'
@@ -71,13 +71,6 @@ READ_PRINT_MSG = "[READ_VIRTUAL_PIN_EVENT] Pin: V{}"
 ALLOWED_COMMANDS_LIST = ['ls', 'lsusb', 'ip a', 'ip abc']
 TWEET_MSG = "New value='{}' on VPIN({})"
 
-#now = datetime.now()
-#blynk.virtual_write(99, now.strftime("%d/%m/%Y %H:%M:%S"))
-    
-@blynk.handle_event('write V255')
-def buttonV255Pressed(pin, value):
-    _log.info(WRITE_EVENT_PRINT_MSG.format(pin, value))
-    os.system('sudo reboot')
 
 DEVICE = 0x77 # Default device I2C address
 
@@ -256,7 +249,7 @@ while True:
     try:
        _log.info("Start to run Blynk") 
        blynk.run()
-       #timer.run() 
+       timer.run() 
        _log.info("End to run Blynk") 
     except:
         _log.info("Got to the except")
