@@ -210,6 +210,8 @@ def readBME280All(addr=DEVICE):
 def buttonV255Pressed(value):
     _log.info("User Reboot")
     os.system('sh /home/pi/updateDroneponics.sh')
+    os.system('sudo reboot')
+    
     
   
 @timer.register(interval=10, run_once=False)
