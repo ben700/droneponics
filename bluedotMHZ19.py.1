@@ -206,10 +206,10 @@ def readBME280All(addr=DEVICE):
 
   return temperature/100.0,pressure/100.0,humidity
   
-@blynk.handle_event("V255")
+@blynk.handle_event("write V255")
 def buttonV255Pressed(value):
     _log.info("User Reboot")
-    os.system('sh /home/pi/updateDropneponics.sh')
+    os.system('sh /home/pi/updateDroneponics.sh')
     
   
 @timer.register(interval=10, run_once=False)
@@ -267,5 +267,5 @@ while True:
        timer.run()
     except:
        _log.info('Unexpected error')
-       os.system('sh /home/pi/updateDropneponics.sh')
+       os.system('sh /home/pi/updateDroneponics.sh')
     

@@ -128,7 +128,7 @@ def buttonV4Pressed(pin, value):
 def rebooter(pin, value):
     _log.info(WRITE_EVENT_PRINT_MSG.format(pin, value))
     _log.info("User Reboot")
-    os.system('sh /home/pi/updateDropneponics.sh')
+    os.system('sh /home/pi/updateDroneponics.sh')
     
     
   
