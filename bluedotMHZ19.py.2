@@ -61,7 +61,7 @@ BLYNK_AUTH = 'FnSZls3WUdCbWmDJvfnjz3f83Sm70HqI' #envLogger2
 # Initialize Blynk
 blynk = blynklib.Blynk(BLYNK_AUTH, heartbeat=15, log=_log.info)
 timer = blynktimer.Timer()
-
+blynk.run()
 APP_CONNECT_PRINT_MSG = '[APP_CONNECT_EVENT]'
 APP_DISCONNECT_PRINT_MSG = '[APP_DISCONNECT_EVENT]'
 CONNECT_PRINT_MSG = '[CONNECT_EVENT]'
@@ -71,8 +71,8 @@ READ_PRINT_MSG = "[READ_VIRTUAL_PIN_EVENT] Pin: V{}"
 ALLOWED_COMMANDS_LIST = ['ls', 'lsusb', 'ip a', 'ip abc']
 TWEET_MSG = "New value='{}' on VPIN({})"
 
-#now = datetime.now()
-#blynk.virtual_write(99, now.strftime("%d/%m/%Y %H:%M:%S"))
+now = datetime.now()
+blynk.virtual_write(99, now.strftime("%d/%m/%Y %H:%M:%S"))
     
 @blynk.handle_event('write V255')
 def buttonV255Pressed(pin, value):
@@ -210,12 +210,7 @@ def readBME280All(addr=DEVICE):
 
   return temperature/100.0,pressure/100.0,humidity
   
-    
-    
-@timer.register(vpin_num=200, interval=10, run_once=False)
-    
-@blynk.handle_event('write V200')    
-# Will Print Every 10 Seconds
+@timer.register(interval=10, run_once=False)
 def blynk_data(pin, value):
     _log.info(WRITE_EVENT_PRINT_MSG.format(pin, value))
 
@@ -256,12 +251,15 @@ def blynk_data(pin, value):
         blynk.virtual_write(100, 'Unexpected error: mhz19b')
         print('Unexpected error: mhz19b')
     
-
-
+    
 while True:
     try:
+       _log.info("Start to run Blynk") 
        blynk.run()
-       timer.run()
+       timer.run()   
     except:
+        _log.info("Got to the except")
+    finally:
+        os.system('/home/pi/uDrone.sh')
         os.system('sudo reboot')
 
