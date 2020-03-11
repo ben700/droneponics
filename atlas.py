@@ -81,14 +81,15 @@ Relay2 = 20
 Relay3 = 16
 Relay4 = 12
 
-nutrientMix = []
-nutrientMix.append( Dose(Pump1, 6, 40, "Hydro Grow A")) 
-nutrientMix.append( Dose(Pump2, 6, 41, "Hydro Grow B")) 
-nutrientMix.append( Dose(Pump3, 10, 42, "Root Stimulant"))
-nutrientMix.append( Dose(Pump4, 4, 43, "Enzyme"))
-nutrientMix.append( Dose(Pump5, 1, 44, "Hydro Silicon")) 
-nutrientMix.append( Dose(Pump6, 1, 45, "Pure Clean"))
+LED = [40,41,42,43,44, 45, 46, 47, 48, 49]
 
+nutrientMix = []
+nutrientMix.append( Dose(Pump1, 6, LED[0], "Hydro Grow A")) 
+nutrientMix.append( Dose(Pump2, 6, LED[1], "Hydro Grow B")) 
+nutrientMix.append( Dose(Pump3, 10, LED[2], "Root Stimulant"))
+nutrientMix.append( Dose(Pump4, 4, LED[3], "Enzyme"))
+nutrientMix.append( Dose(Pump5, 1, LED[4], "Hydro Silicon")) 
+nutrientMix.append( Dose(Pump8, 1, LED[8], "Pure Clean")) 
 
 noisyThingsWhenButtEmpty = [Relay1, Relay2, Relay3]
 
@@ -322,18 +323,25 @@ def rebooter(pin, value):
 
         
 @blynk.handle_event('write v30')
-def buttonV30Pressed(value):
-    _log.info("Dose started at" + now.strftime("%d/%m/%Y %H:%M:%S"))
-    print("Dose started at " + now.strftime("%d/%m/%Y %H:%M:%S"))
-    for dose in nutrientMix: 
-       blynk.virtual_write(dose.LED,255)
-       blynk.set_property(dose.LED, 'color', BLYNK_GREEN)
-       GPIO.output(dose.Pump,GPIO.LOW)
-       time.sleep(dose.dose)
-       GPIO.output(dose.pump,GPIO.HIGH)
-       blynk.set_property(dose.LED, 'color', BLYNK_GREEN)
-       _log.info("Dosing " + dose.name +" for " + dose.dose + " using pin " + dose.pump + " and led " + dose.LED) 
+def buttonV30Pressed(pin, value):
+   if (value[0] == '1'):
+      now = datetime.now()
+      _log.info("Dose Nutrients started at" + now.strftime("%d/%m/%Y %H:%M:%S"))
+       for dose in nutrientMix: 
+          blynk.virtual_write(dose.LED,255)
+          blynk.set_property(dose.LED, 'color',  colours[GPIO.LOW])
+          GPIO.output(dose.Pump,GPIO.LOW)
+          time.sleep(dose.dose)
+          GPIO.output(dose.pump,GPIO.HIGH)
+          blynk.set_property(dose.LED, 'color',  colours[GPIO.HIGH])
+          _log.info("Dosing " + dose.name +" for " + dose.dose + " using pin " + dose.pump + " and led " + dose.LED) 
+      _log.info("Requested dose completed")
+      blynk.virtual_write(98, "Requested dose completed"  + '\n')
+   blynk.virtual_write(30, 0)
+   
+
     
+
 @blynk.handle_event('write v69')
 def buttonV69Pressed(pin, value):
     _log.info("Dose Line Fill at " + now.strftime("%d/%m/%Y %H:%M:%S"))
@@ -348,6 +356,9 @@ def buttonV69Pressed(pin, value):
     GPIO.output(Pump8,GPIO.LOW)
     GPIO.output(Pump9,GPIO.LOW)
     GPIO.output(Pump10,GPIO.LOW)
+    for i in LED: 
+       blynk.set_property(i, 'color', colours[GPIO.LOW])
+    blynk.virtual_write(98, "All pumps stopped" + '\n')
        
 @blynk.handle_event('write v70')
 def buttonV70Pressed(pin, value):
@@ -363,34 +374,21 @@ def buttonV70Pressed(pin, value):
     GPIO.output(Pump8,GPIO.HIGH)
     GPIO.output(Pump9,GPIO.HIGH)
     GPIO.output(Pump10,GPIO.HIGH)    
-
-
-        
-def turnOffNoisyThingsWhenButtEmpty(): 
-   for Relay in noisyThingsWhenButtEmpty:
-       if GPIO.input(Relay) != GPIO.HIGH : 
-           GPIO.output(Relay,GPIO.HIGH)
-      
-def turnOnNoisyThingsWhenButtNotEmpty(): 
-   for Relay in noisyThingsWhenButtEmpty:
-       if GPIO.input(Relay) != GPIO.LOW : 
-           GPIO.output(Relay,GPIO.LOW)
-      
-def DoseNutrients(): 
-    _log.info("DoseNutrients")
-    now = datetime.now()
-    blynk.virtual_write(98, now.strftime("%d/%m/%Y %H:%M:%S"))
-    print ("Going to dose butt time is now " + now.strftime("%d/%m/%Y %H:%M:%S"))
-    for dose in nutrientMix:
-        blynk.set_property(dose.LED, 'color', BLYNK_RED)
-        blynk.log_event(dose.name, dose.dose)
-        GPIO.output(dose.pump,GPIO.LOW)
-        time.sleep(dose.Dose)
-        GPIO.output(dose.pump,GPIO.HIGH)
-        blynk.set_property(dose.LED, 'color', BLYNK_RED)
-        print ("Dosed " + dose.name + " for " + dose.Dose + " seconds. Using PIN " + dose.Pump + " and showed using LED" + dose.LED)
-
-        
+    for i in LED: 
+       blynk.set_property(i, 'color', colours[GPIO.HIGH])
+    blynk.virtual_write(98, "All pumps Started" + '\n')
+    
+@blynk.handle_event('write V80')
+def buttonV80Pressed(pin, value):
+    _log.info(WRITE_EVENT_PRINT_MSG.format(pin, value))
+    blynk.set_property(LED[0], 'color', colors[value[0]])
+    GPIO.output(Pump1,value[0])
+    
+@blynk.handle_event('write V90')
+def buttonV90Pressed(pin, value):
+   _log.info("User requested to open butt")
+   GPIO.output(solenoidOut, GPIO.HIGH)   
+  
         
 # Will Print Every 10 Seconds
 @timer.register(interval=10, run_once=False)
@@ -442,25 +440,28 @@ def blynk_data():
     blynk.virtual_write(37, GPIO.input(buttEmptySensor))
     blynk.virtual_write(38, GPIO.input(buttFullSensor))
     
-    _log.info("make actions for empty butt")
-    if (GPIO.input(buttEmptySensor) == GPIO.LOW) :
-       blynk.set_property(11, 'color', BLYNK_GREEN)
-       turnOnNoisyThingsWhenButtNotEmpty()
-       blynk.virtual_write(11,255)
-    else:
-       blynk.virtual_write(11,255)
-       turnOffNoisyThingsWhenButtEmpty()
-       blynk.set_property(11, 'color', BLYNK_RED)
-  
     _log.info("make actions for full butt")
-    if (GPIO.input(buttFullSensor) == GPIO.LOW) :
-       blynk.virtual_write(10,255)
-       blynk.set_property(10, 'color', BLYNK_RED)
+    blynk.virtual_write(10,255)
+    blynk.set_property(10, 'color', colours[GPIO.input(buttFullSensor)])
+    
+    _log.info("make actions for empty butt")
+    blynk.virtual_write(11,255)
+    blynk.set_property(11, 'color', colours[GPIO.input(buttEmptySensor)])
+    
+    if (GPIO.input(buttEmptySensor) == GPIO.LOW) :
+       for Relay in noisyThingsWhenButtEmpty:
+          if GPIO.input(Relay) != GPIO.LOW : 
+             GPIO.output(Relay,GPIO.LOW)
+       GPIO.output(solenoidIn, GPIO.HIGH)
+       GPIO.output(solenoidOut, GPIO.HIGH)   
     else:
-       blynk.set_property(10, 'color', BLYNK_GREEN)
-       blynk.virtual_write(10,255)
-        
-
+       for Relay in noisyThingsWhenButtEmpty:
+          if GPIO.input(Relay) != GPIO.HIGH : 
+             GPIO.output(Relay,GPIO.HIGH)
+   
+    if (GPIO.input(buttFullSensor) == GPIO.LOW) : 
+       blynk.notify("Water butt {DEVICE_NAME} full needs to be dosed")
+       GPIO.output(solenoidIn, GPIO.LOW)
 
 while True:
     try:
