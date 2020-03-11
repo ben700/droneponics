@@ -201,12 +201,12 @@ ph = AtlasI2C(99)
 _log.info("Temp Device Info = " + temp.query("i"))
 _log.info("pH Device Info = " + ph.query("i"))
 _log.info("EC Device Info = " + ec.query("i"))
-#print("colour Device Info = " + colour.query("i"))    
-#print("Temp Device Info = " + temp.query("i"))
-#print("pH Device Info = " + ph.query("i"))
-#print("EC Device Info = " + ec.query("i"))
-#print("DO Device Info = " + do.query("i"))      
-#print("Flow Device Info = " + flow.query("i"))      
+#_log.info("colour Device Info = " + colour.query("i"))    
+#_log.info("Temp Device Info = " + temp.query("i"))
+#_log.info("pH Device Info = " + ph.query("i"))
+#_log.info("EC Device Info = " + ec.query("i"))
+#_log.info("DO Device Info = " + do.query("i"))      
+#_log.info("Flow Device Info = " + flow.query("i"))      
 
       
 _log.info("Temp Cal = " + temp.query("Cal,?"))
@@ -219,25 +219,25 @@ _log.info("EC Cal = " + ec.query("Cal,?"))
 _log.info("EC Temp Cal = " + ec.query("Cal,?"))
 _log.info("EC Probe Type = " + ec.query("K,?"))
 
-#print("DO Cal = " + do.query("Cal,?"))     
-#print("DO Temp Cal = " + do.query("Cal,?"))
-#print("DO Salinity Cal = " + do.query("S,?"))
-#print("DO Pressure Cal = " + do.query("P,?"))
+#_log.info("DO Cal = " + do.query("Cal,?"))     
+#_log.info("DO Temp Cal = " + do.query("Cal,?"))
+#_log.info("DO Salinity Cal = " + do.query("S,?"))
+#_log.info("DO Pressure Cal = " + do.query("P,?"))
 
-#print("Flow Meter Type = " + flow.query("Set,?"))
-#print("Flow number of K Values = " + flow.query("K,?"))  #returns the number of K values stored
-#print("Flow K Values = " + flow.query("K,all"))  #query the programmed K-value(s)
-#print("Flow Rate = " + flow.query("Frp,?"))
-#print("Flow Rate Time Base = " + flow.query("Vp,?"))
-#print("Flow Resistors = " + flow.query("P,?")) #pull-up or pull-down resistors
+#_log.info("Flow Meter Type = " + flow.query("Set,?"))
+#_log.info("Flow number of K Values = " + flow.query("K,?"))  #returns the number of K values stored
+#_log.info("Flow K Values = " + flow.query("K,all"))  #query the programmed K-value(s)
+#_log.info("Flow Rate = " + flow.query("Frp,?"))
+#_log.info("Flow Rate Time Base = " + flow.query("Vp,?"))
+#_log.info("Flow Resistors = " + flow.query("P,?")) #pull-up or pull-down resistors
     
-#print("Pump Cal = " + pump.query("Cal,?"))
-#print("Pump Voltage Check = " + pump.query("PV,?"))
-#print("Pump Dispense Status = " + pump.query("D,?"))
-#print("Pump maximum possible flow rate = " + pump.query("DC,?")) # maximum flow rate is determined after calibration.
-#print("Pump Pause Status = " + pump.query("P,?"))
-#print("Pump total volume dispensed = " + pump.query("TV,?")) #shows total volume dispensed  
-#print("Pump absolute value of the total volume dispensed  = " + pump.query("ATV,?")) #absolute value of the total volume dispensed 
+#_log.info("Pump Cal = " + pump.query("Cal,?"))
+#_log.info("Pump Voltage Check = " + pump.query("PV,?"))
+#_log.info("Pump Dispense Status = " + pump.query("D,?"))
+#_log.info("Pump maximum possible flow rate = " + pump.query("DC,?")) # maximum flow rate is determined after calibration.
+#_log.info("Pump Pause Status = " + pump.query("P,?"))
+#_log.info("Pump total volume dispensed = " + pump.query("TV,?")) #shows total volume dispensed  
+#_log.info("Pump absolute value of the total volume dispensed  = " + pump.query("ATV,?")) #absolute value of the total volume dispensed 
     
       
       
@@ -245,7 +245,7 @@ cTemp = temp.query("R").split(":")[1]
 _log.info("Temp = " + cTemp)
 _log.info("EC = " + ec.query("RT,16.699"))
 _log.info("PH = " + ph.query("RT"+cTemp))
-#print("DO = " + d0.query("RT,"+cTemp))
+#_log.info("colour = " + colour.query("R"))
 
 
 @blynk.handle_event("connect")
@@ -267,10 +267,10 @@ def buttonV1Pressed(pin, value):
     blynk.virtual_write(1, str(value[0]))
     blynk.set_property(5, 'color', colors[value[0]])
     if(value[0] == '1'):
-        print("Waste turned off")
+        _log.info("Waste turned off")
         GPIO.output(Relay1,GPIO.HIGH)
     else:
-        print("Waste turned on")
+        _log.info("Waste turned on")
         GPIO.output(Relay1,GPIO.LOW)
   
 
@@ -280,10 +280,10 @@ def buttonV2Pressed(pin, value):
     blynk.virtual_write(2, str(value[0]))
     blynk.set_property(6, 'color', colors[value[0]])
     if(value[0] == '1'):
-        print("Feed Pump turned off")
+        _log.info("Feed Pump turned off")
         GPIO.output(Relay2,GPIO.HIGH)
     else:
-        print("Feed Pump turned on")
+        _log.info("Feed Pump turned on")
         GPIO.output(Relay2,GPIO.LOW)
 
 @blynk.handle_event('write V3')
@@ -292,10 +292,10 @@ def buttonV3Pressed(pin, value):
     blynk.virtual_write(3, str(value[0]))
     blynk.set_property(7, 'color', colors[value[0]])
     if(value[0] == '1'):
-        print("Air and Mixer turned off")
+        _log.info("Air and Mixer turned off")
         GPIO.output(Relay3,GPIO.HIGH)
     else:
-        print("Air and Mixer turned on")
+        _log.info("Air and Mixer turned on")
         GPIO.output(Relay3,GPIO.LOW)
 
 
@@ -305,10 +305,10 @@ def buttonV4Pressed(pin, value):
     blynk.virtual_write(4, str(value[0]))
     blynk.set_property(8, 'color', colors[value[0]])
     if(value[0] == '1'):
-        print("Pump/UV turned off")
+        _log.info("Pump/UV turned off")
         GPIO.output(Relay4,GPIO.HIGH)
     else:
-        print("Pump/UV turned on")
+        _log.info("Pump/UV turned on")
         GPIO.output(Relay4,GPIO.LOW)
 
     
@@ -346,7 +346,6 @@ def buttonV30Pressed(pin, value):
 @blynk.handle_event('write v69')
 def buttonV69Pressed(pin, value):
     _log.info("Dose Line Fill at " + now.strftime("%d/%m/%Y %H:%M:%S"))
-    print("Dose Line Stop Fill at " + now.strftime("%d/%m/%Y %H:%M:%S"))
     GPIO.output(Pump1,GPIO.LOW)
     GPIO.output(Pump2,GPIO.LOW)
     GPIO.output(Pump3,GPIO.LOW)
@@ -364,7 +363,6 @@ def buttonV69Pressed(pin, value):
 @blynk.handle_event('write v70')
 def buttonV70Pressed(pin, value):
     _log.info("Dose Line Stop All at " + now.strftime("%d/%m/%Y %H:%M:%S"))
-    print("Dose Line Stop All at " + now.strftime("%d/%m/%Y %H:%M:%S"))
     GPIO.output(Pump1,GPIO.HIGH)
     GPIO.output(Pump2,GPIO.HIGH)
     GPIO.output(Pump3,GPIO.HIGH)
@@ -400,14 +398,14 @@ def blynk_data():
     
     _log.info("now the t3")
     cTemp = temp.query("R,").split(":")[1]
-    print("Temp = " + cTemp)
+    _log.info("Temp = " + cTemp)
     blynk.virtual_write(30, cTemp)
     cEC = ec.query("RT,"+cTemp).split(":")[1]
     blynk.virtual_write(31, cEC)
-    print ("EC  = " + cEC)
+    _log.info ("EC  = " + cEC)
     cPH = ph.query("RT,"+cTemp).split(":")[1]
     blynk.virtual_write(32, cPH)
-    print ("PH = " + cPH)
+    _log.info ("PH = " + cPH)
    
     _log.info("now the adc")
     
