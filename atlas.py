@@ -318,6 +318,7 @@ def rebooter(pin, value):
     _log.info(WRITE_EVENT_PRINT_MSG.format(pin, value))
     _log.info("User Reboot")
     os.system('sh /home/pi/updateDroneponics.sh')
+    blynk.virtual_write(255, 0)
     os.system('sudo reboot')
     
 
