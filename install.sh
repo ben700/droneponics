@@ -1,5 +1,4 @@
-cp updateDronepnics.sh ../
-/home/pi/droneponics/updatePi.sh
+cp /home/pi/droneponics/updateDroneponics.sh /home/pi/updateDroneponics.sh
 sudo apt-get install python-pip
 sudo apt-get install xterm -y
 sudo apt-get install lxde
