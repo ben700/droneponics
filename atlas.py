@@ -229,15 +229,15 @@ _log.info("EC Device Info = " + ec.query("i"))
 #_log.info("Flow Device Info = " + flow.query("i"))      
 
       
-_log.info("Temp Cal = " + temp.query("Cal,?"))
-_log.info("Temp Scale = " + temp.query("S,?"))
+#_log.info("Temp Cal = " + temp.query("Cal,?"))
+#_log.info("Temp Scale = " + temp.query("S,?"))
       
-_log.info("pH Cal = " + ph.query("Cal,?"))
-_log.info("pH Temp Cal = " + ph.query("T,?"))
+#_log.info("pH Cal = " + ph.query("Cal,?"))
+#_log.info("pH Temp Cal = " + ph.query("T,?"))
 
-_log.info("EC Cal = " + ec.query("Cal,?"))
-_log.info("EC Temp Cal = " + ec.query("Cal,?"))
-_log.info("EC Probe Type = " + ec.query("K,?"))
+#_log.info("EC Cal = " + ec.query("Cal,?"))
+#_log.info("EC Temp Cal = " + ec.query("Cal,?"))
+#_log.info("EC Probe Type = " + ec.query("K,?"))
 
 #_log.info("DO Cal = " + do.query("Cal,?"))     
 #_log.info("DO Temp Cal = " + do.query("Cal,?"))
