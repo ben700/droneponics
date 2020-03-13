@@ -428,13 +428,10 @@ def blynk_data():
     except:
         blynk.virtual_write(98, "Read EC Error" + '\n')
         cEC = 'Error'
-        devices = AtlasI2C()
-        for device in devices.list_i2c_devices()
+        devices = devices.list_i2c_devices()
+        for device in devices
            blynk.virtual_write(98, device.address() + '\n')
-        ec = AtlasI2C(100)
-        blynk.virtual_write(98, "Going to reread ec" + '\n')
-        cEC = ec.query("R").split(":")[1]
-        blynk.virtual_write(98, "EC no temp = " + cEC + '\n')
+   
     else:
         blynk.virtual_write(98, "EC Else" + '\n')
         blynk.virtual_write(31, cEC)
@@ -528,6 +525,7 @@ while True:
           bootup = False
           now = datetime.now()
           blynk.virtual_write(99, now.strftime("%d/%m/%Y %H:%M:%S"))
+          blynk.virtual_write(98, "clr")
           blynk.virtual_write(98, "System now updated and restarted " + '\n')
           blynk.virtual_write(255, 0)
           _log.info('Just Booted')
