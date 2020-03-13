@@ -289,10 +289,10 @@ def buttonV1Pressed(pin, value):
     blynk.virtual_write(1, str(value[0]))
     blynk.set_property(5, 'color', colors[value[0]])
     if(value[0] == '1'):
-        _log.info("Waste turned off")
+        blynk.virtual_write(98,"Waste turned off" + '\n')
         GPIO.output(Relay1,GPIO.HIGH)
     else:
-        _log.info("Waste turned on")
+        blynk.virtual_write(98,"Waste turned on" + '\n')
         GPIO.output(Relay1,GPIO.LOW)
   
 
@@ -302,10 +302,10 @@ def buttonV2Pressed(pin, value):
     blynk.virtual_write(2, str(value[0]))
     blynk.set_property(6, 'color', colors[value[0]])
     if(value[0] == '1'):
-        _log.info("Feed Pump turned off")
+        blynk.virtual_write(98,"Feed Pump turned off" + '\n')
         GPIO.output(Relay2,GPIO.HIGH)
     else:
-        _log.info("Feed Pump turned on")
+        blynk.virtual_write(98,"Feed Pump turned on" + '\n')
         GPIO.output(Relay2,GPIO.LOW)
 
 @blynk.handle_event('write V3')
@@ -314,30 +314,31 @@ def buttonV3Pressed(pin, value):
     blynk.virtual_write(3, str(value[0]))
     blynk.set_property(7, 'color', colors[value[0]])
     if(value[0] == '1'):
-        _log.info("Air and Mixer turned off")
+        blynk.virtual_write(98,"Air and Mixer turned off" + '\n')
         GPIO.output(Relay3,GPIO.HIGH)
     else:
-        _log.info("Air and Mixer turned on")
+        blynk.virtual_write(98,"Air and Mixer turned on" + '\n')
         GPIO.output(Relay3,GPIO.LOW)
 
 
 @blynk.handle_event('write V4')
 def buttonV4Pressed(pin, value):
-    _log.info(WRITE_EVENT_PRINT_MSG.format(pin, value))
+    
+    blynk.virtual_write(98, "User Dose Nutrients" + '\n')
     blynk.virtual_write(4, str(value[0]))
     blynk.set_property(8, 'color', colors[value[0]])
     if(value[0] == '1'):
-        _log.info("Pump/UV turned off")
+        blynk.virtual_write(98, "Pump/UV turned off" + '\n')
         GPIO.output(Relay4,GPIO.HIGH)
     else:
-        _log.info("Pump/UV turned on")
+        blynk.virtual_write(98,"Pump/UV turned on" + '\n')
         GPIO.output(Relay4,GPIO.LOW)
 
     
     
 @blynk.handle_event('write V255')
 def rebooter(pin, value):
-    _log.info(WRITE_EVENT_PRINT_MSG.format(pin, value))
+    blynk.virtual_write(98, "User Reboot " + '\n')
     _log.info("User Reboot")
     os.system('sh /home/pi/updateDroneponics.sh')
     os.system('sudo reboot')
@@ -346,6 +347,7 @@ def rebooter(pin, value):
         
 @blynk.handle_event('write v30')
 def buttonV30Pressed(pin, value):
+   blynk.virtual_write(98, "User Dose Nutrients" + '\n')
    if (value[0] == '1'):
       now = datetime.now()
       _log.info("Dose Nutrients started at" + now.strftime("%d/%m/%Y %H:%M:%S"))
