@@ -371,8 +371,7 @@ def buttonV50Pressed(pin, value):
    blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
    blynk.set_property(dosePump.LED[i], 'color',  colours[value[0]])
    GPIO.output(dosePump.Pump[i], value[0])
-  # blynk.virtual_write(98, "Dose pump " + dosePump[i].name + " to = " str(value[0]))
-
+   blynk.virtual_write(98, "Dose pump " + dosePump[i].name + " to = " + value[0])
 
 
 @blynk.handle_event('write v69')
@@ -420,25 +419,37 @@ def blynk_data():
     _log.info("now the t3")
     cTemp = temp.query("R,").split(":")[1]
     _log.info("Temp = " + cTemp)
-
-    _log.info("next log temp to blynk")
     blynk.virtual_write(30, cTemp)
+    
     _log.info("read ec")
-    cEC = ec.query("RT,"+cTemp).split(":")[1]
-    _log.info("log temp to blynk")
+    try:
+        cEC = ec.query("RT,"+cTemp).split(":")[1]
+    except:
+       _log.info("Read EC Error")
+       cEC = 'Error'
+    _log.info("log EC to blynk")
     blynk.virtual_write(31, cEC)
     _log.info ("EC  = " + cEC)
 
-    cPH = ph.query("RT,"+cTemp).split(":")[1]
+    _log.info("read PH")
+    try:
+       cPH = ph.query("RT,"+cTemp).split(":")[1]
+    except:
+       _log.info("Read Ph Error")
+       cPH = 'Error'
     blynk.virtual_write(32, cPH)
     _log.info ("PH = " + cPH)
 
-    cColour = colour.query("R").split(":")[1]
+    _log.info("read colour")
+    try:
+       cColour = colour.query("R").split(":")[1]
+    except:
+       _log.info("Read Colour Error")
+       cColour = 'Error'
     blynk.virtual_write(33, cColour)
     _log.info ("Colour = " + cColour)
 
     _log.info("now the adc")
-    
     volt = chan.voltage
     if volt is not None:
        blynk.virtual_write(35, str("{0}".format((volt-1.5)*100)))
@@ -462,35 +473,30 @@ def blynk_data():
        blynk.virtual_write(17, str(ss4.moisture_read()))
        blynk.virtual_write(18, str(ss4.get_temp()))
        _log.info ("Channel 4 moisture reading is "+str(ss4.moisture_read())+" and Temp is :" +  str("{0:.2f}".format(ss4.get_temp())))
- 
-
     
     _log.info("now the digital single wire")
     blynk.virtual_write(37, GPIO.input(buttEmptySensor))
     blynk.virtual_write(38, GPIO.input(buttFullSensor))
     
-    _log.info("make actions for full butt")
-   # blynk.virtual_write(10,255)
-   # blynk.set_property(10, 'color', colours[GPIO.input(buttFullSensor)])
-    
-    _log.info("make actions for empty butt")
-   # blynk.virtual_write(9,255)
-   # blynk.set_property(9, 'color', colours[GPIO.input(buttEmptySensor)])
-   # if (GPIO.input(buttEmptySensor) == GPIO.LOW) :
-    #   for Relay in noisyThingsWhenButtEmpty:
-    #      if GPIO.input(Relay) != GPIO.LOW : 
-   #          GPIO.output(Relay,GPIO.LOW)
-    #   GPIO.output(solenoidIn, GPIO.HIGH)
-    #   GPIO.output(solenoidOut, GPIO.HIGH)   
-   # else:
-  #     for Relay in noisyThingsWhenButtEmpty:
-    #      if GPIO.input(Relay) != GPIO.HIGH : 
-   #          GPIO.output(Relay,GPIO.HIGH)
+    _log.info("Change LEDs for butt sensors")
+    blynk.virtual_write(10,255)
+    blynk.set_property(10, 'color', colours[GPIO.input(buttFullSensor)])
+    blynk.virtual_write(9,255)
+    blynk.set_property(9, 'color', colours[GPIO.input(buttEmptySensor)])
+   
+    if (GPIO.input(buttEmptySensor) == GPIO.LOW) :
+       for Relay in noisyThingsWhenButtEmpty:
+          GPIO.output(Relay,GPIO.LOW)
+       GPIO.output(solenoidIn, GPIO.HIGH)
+       GPIO.output(solenoidOut, GPIO.HIGH)   
+    else:
+       for Relay in noisyThingsWhenButtEmpty:
+          GPIO.output(Relay,GPIO.HIGH)
             
     _log.info("make actions for full butt")
-    #if (GPIO.input(buttFullSensor) == GPIO.LOW) : 
+    if (GPIO.input(buttFullSensor) == GPIO.LOW) : 
        #blynk.notify("Water butt {DEVICE_NAME} full needs to be dosed")
-      # GPIO.output(solenoidIn, GPIO.LOW)
+       GPIO.output(solenoidIn, GPIO.LOW)
 
 while True:
     try:
