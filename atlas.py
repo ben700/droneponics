@@ -210,7 +210,7 @@ TWEET_MSG = "New value='{}' on VPIN({})"
 #69 - co2
 #70 - colour 112 (0x70)
 #6A - pressure
-device = AtlasI2C()
+#device = AtlasI2C()
 temp = AtlasI2C(102)
 ec = AtlasI2C(100)
 ph = AtlasI2C(99)
@@ -428,8 +428,9 @@ def blynk_data():
     except:
         blynk.virtual_write(98, "Read EC Error" + '\n')
         cEC = 'Error'
-        
-        blynk.virtual_write(98, device.list_i2c_devices() + '\n')
+        devices = AtlasI2C()
+        for device in devices.list_i2c_devices()
+           blynk.virtual_write(98, device.address() + '\n')
         ec = AtlasI2C(100)
         blynk.virtual_write(98, "Going to reread ec" + '\n')
         cEC = ec.query("R").split(":")[1]
