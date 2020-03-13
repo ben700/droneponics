@@ -217,7 +217,7 @@ ph = AtlasI2C(99)
 #do = AtlasI2C(97)
 #flow = AtlasI2C(104)
 #pump = AtlasI2C(103)
-colour = AtlasI2C(70)
+colour = AtlasI2C(112)
 
 
 #_log.info("Temp Device Info = " + temp.query("i"))
@@ -442,6 +442,10 @@ def blynk_data():
     _log.info("read colour")
     try:
        cColour = colour.query("R").split(":")[1]
+       blynk.virtual_write(27, cColour.split(",")[0])
+       blynk.virtual_write(28, cColour.split(",")[1])
+       blynk.virtual_write(29, cColour.split(",")[2])
+       
     except:
        _log.info("Read Colour Error")
        cColour = 'Error'
