@@ -420,10 +420,15 @@ def blynk_data():
     _log.info("now the t3")
     cTemp = temp.query("R,").split(":")[1]
     _log.info("Temp = " + cTemp)
+
+    
     blynk.virtual_write(30, cTemp)
+    _log.info("read ec")
     cEC = ec.query("RT,"+cTemp).split(":")[1]
+    _log.info("log temp to blynk")
     blynk.virtual_write(31, cEC)
     _log.info ("EC  = " + cEC)
+
     cPH = ph.query("RT,"+cTemp).split(":")[1]
     blynk.virtual_write(32, cPH)
     _log.info ("PH = " + cPH)
