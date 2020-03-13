@@ -425,14 +425,19 @@ def blynk_data():
     _log.info("read ec")
     try:
         cEC = ec.query("RT,"+cTemp).split(":")[1]
+    except:
+        blynk.virtual_write(98, "Read EC Error" + '\n')
+        cEC = 'Error'
+        ec = AtlasI2C(100)
+        cEC = ec.query("R").split(":")[1]
+        blynk.virtual_write(98, "EC no temp = " + cEC + '\n')
+    else:
         blynk.virtual_write(31, cEC)
         _log.info ("EC  = " + cEC)
-    except:
-       blynk.virtual_write(98, "Read EC Error" + '\n')
-       _log.info("Read EC Error")
-       cEC = 'Error'
-    _log.info("log EC to blynk")
-
+    finally:
+        pass
+    
+    
     _log.info("read PH")
     try:
        cPH = ph.query("RT,"+cTemp).split(":")[1]
@@ -486,8 +491,8 @@ def blynk_data():
     blynk.virtual_write(38, 9)
     
     
-   # blynk.virtual_write(37, GPIO.input(buttEmptySensor))
-   # blynk.virtual_write(38, GPIO.input(buttFullSensor))
+    blynk.virtual_write(37, GPIO.input(buttEmptySensor))
+    blynk.virtual_write(38, GPIO.input(buttFullSensor))
     
     _log.info("Change LEDs for butt sensors")
     blynk.virtual_write(10,255)
