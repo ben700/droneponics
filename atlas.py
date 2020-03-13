@@ -59,7 +59,7 @@ colors = {'1': '#23C48E', '0': '#D3435C', 'OFFLINE': '#FF0000'}
 
 
 buttFullSensor =  17
-buttEmptySensor = 4
+buttEmptySensor = 6
 
 #pins for solenoid
 solenoidIn = 18
@@ -79,7 +79,7 @@ Pump10 = 24
 
 
 #setup sensor 2
-GPIO.setup(buttFullSensor, GPIO.IN, GPIO.PUD_UP)
+GPIO.setup(buttFullSensor, GPIO.IN, GPIO.PUD_DOWN)
 GPIO.setup(buttEmptySensor, GPIO.IN, GPIO.PUD_DOWN)
 
 Relay1 = 21
