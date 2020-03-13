@@ -82,9 +82,9 @@ Pump10 = 24
 GPIO.setup(buttFullSensor, GPIO.IN, GPIO.PUD_DOWN)
 GPIO.setup(buttEmptySensor, GPIO.IN, GPIO.PUD_DOWN)
 
-Relay1 = 21
-Relay2 = 20
-Relay3 = 16
+Relay1 = 21 #UV & Mixer
+Relay2 = 20 #Air
+Relay3 = 16 #Waste
 Relay4 = 12
 
 LED = [40,41,42,43,44, 45, 46, 47, 48, 49]
@@ -113,7 +113,6 @@ dosePumps.append( DosePump(Pump10, LED[9], "pH"))
 
 noisyThingsWhenButtEmpty = [Relay1, Relay2, Relay3]
 
-Mixer = Relay1
 
 GPIO.setup(Relay1,GPIO.OUT)
 GPIO.setup(Relay2,GPIO.OUT)
@@ -210,7 +209,7 @@ TWEET_MSG = "New value='{}' on VPIN({})"
 #69 - co2
 #70 - colour 112 (0x70)
 #6A - pressure
-#device = AtlasI2C()
+device = AtlasI2C()
 temp = AtlasI2C(102)
 ec = AtlasI2C(100)
 ph = AtlasI2C(99)
@@ -285,54 +284,51 @@ def connect_handler():
   
 @blynk.handle_event('write V1')
 def buttonV1Pressed(pin, value):
-    _log.info(WRITE_EVENT_PRINT_MSG.format(pin, value))
-    blynk.virtual_write(1, str(value[0]))
+    GPIO.output(Relay1,value[0])
+    now = datetime.now()
+    blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
     blynk.set_property(5, 'color', colors[value[0]])
     if(value[0] == '1'):
-        blynk.virtual_write(98,"Waste turned off" + '\n')
-        GPIO.output(Relay1,GPIO.HIGH)
+        blynk.virtual_write(98,"UV & Mixer turned off" + '\n')
     else:
-        blynk.virtual_write(98,"Waste turned on" + '\n')
-        GPIO.output(Relay1,GPIO.LOW)
+        blynk.virtual_write(98,"UV & Mixer turned on" + '\n')
+        
   
 
 @blynk.handle_event('write V2')
 def buttonV2Pressed(pin, value):
-    _log.info(WRITE_EVENT_PRINT_MSG.format(pin, value))
-    blynk.virtual_write(2, str(value[0]))
+    GPIO.output(Relay2,value[0])
+    now = datetime.now()
+    blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
     blynk.set_property(6, 'color', colors[value[0]])
     if(value[0] == '1'):
-        blynk.virtual_write(98,"Feed Pump turned off" + '\n')
-        GPIO.output(Relay2,GPIO.HIGH)
+        blynk.virtual_write(98,"Air turned off" + '\n')
     else:
-        blynk.virtual_write(98,"Feed Pump turned on" + '\n')
-        GPIO.output(Relay2,GPIO.LOW)
+        blynk.virtual_write(98,"Air turned on" + '\n')
+        
 
 @blynk.handle_event('write V3')
 def buttonV3Pressed(pin, value):
-    _log.info(WRITE_EVENT_PRINT_MSG.format(pin, value))
-    blynk.virtual_write(3, str(value[0]))
+    GPIO.output(Relay3,value[0])
+    now = datetime.now()
+    blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
     blynk.set_property(7, 'color', colors[value[0]])
     if(value[0] == '1'):
-        blynk.virtual_write(98,"Air and Mixer turned off" + '\n')
-        GPIO.output(Relay3,GPIO.HIGH)
+        blynk.virtual_write(98,"Waste turned off" + '\n')
     else:
-        blynk.virtual_write(98,"Air and Mixer turned on" + '\n')
-        GPIO.output(Relay3,GPIO.LOW)
-
+        blynk.virtual_write(98,"Waste turned on" + '\n')
+        
 
 @blynk.handle_event('write V4')
 def buttonV4Pressed(pin, value):
-    
-    blynk.virtual_write(98, "User Dose Nutrients" + '\n')
-    blynk.virtual_write(4, str(value[0]))
+    GPIO.output(Relay4,value[0])
+    now = datetime.now()
+    blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
     blynk.set_property(8, 'color', colors[value[0]])
     if(value[0] == '1'):
-        blynk.virtual_write(98, "Pump/UV turned off" + '\n')
-        GPIO.output(Relay4,GPIO.HIGH)
+        blynk.virtual_write(98, "Heater turned off" + '\n')
     else:
-        blynk.virtual_write(98,"Pump/UV turned on" + '\n')
-        GPIO.output(Relay4,GPIO.LOW)
+        blynk.virtual_write(98,"Heater turned on" + '\n')
 
     
     
