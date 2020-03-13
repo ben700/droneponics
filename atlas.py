@@ -215,13 +215,13 @@ ph = AtlasI2C(99)
 #do = AtlasI2C(97)
 #flow = AtlasI2C(104)
 #pump = AtlasI2C(103)
-#colour = AtlasI2C(70)
+colour = AtlasI2C(70)
 
 
 _log.info("Temp Device Info = " + temp.query("i"))
 _log.info("pH Device Info = " + ph.query("i"))
 _log.info("EC Device Info = " + ec.query("i"))
-#_log.info("colour Device Info = " + colour.query("i"))    
+_log.info("colour Device Info = " + colour.query("i"))    
 #_log.info("Temp Device Info = " + temp.query("i"))
 #_log.info("pH Device Info = " + ph.query("i"))
 #_log.info("EC Device Info = " + ec.query("i"))
@@ -425,7 +425,11 @@ def blynk_data():
     cPH = ph.query("RT,"+cTemp).split(":")[1]
     blynk.virtual_write(32, cPH)
     _log.info ("PH = " + cPH)
-   
+
+    cColour = colour.query("R").split(":")[1]
+    blynk.virtual_write(33, cColour)
+    _log.info ("Colour = " + cColour)
+
     _log.info("now the adc")
     
     volt = chan.voltage
