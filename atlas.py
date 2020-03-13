@@ -423,21 +423,23 @@ def blynk_data():
     _log.info("read ec")
     try:
         cEC = ec.query("RT,"+cTemp).split(":")[1]
+        blynk.virtual_write(31, cEC)
+        _log.info ("EC  = " + cEC)
     except:
+       blynk.virtual_write(98, "Read EC Error" + '\n')
        _log.info("Read EC Error")
        cEC = 'Error'
     _log.info("log EC to blynk")
-    blynk.virtual_write(31, cEC)
-    _log.info ("EC  = " + cEC)
 
     _log.info("read PH")
     try:
        cPH = ph.query("RT,"+cTemp).split(":")[1]
+       blynk.virtual_write(32, cPH)
+       _log.info ("PH = " + cPH)
     except:
+       blynk.virtual_write(98, "Read PH Error" + '\n') 
        _log.info("Read Ph Error")
        cPH = 'Error'
-    blynk.virtual_write(32, cPH)
-    _log.info ("PH = " + cPH)
 
     _log.info("read colour")
     try:
@@ -445,12 +447,12 @@ def blynk_data():
        blynk.virtual_write(27, cColour.split(",")[0])
        blynk.virtual_write(28, cColour.split(",")[1])
        blynk.virtual_write(29, cColour.split(",")[2])
-       
+       blynk.virtual_write(33, cColour)
+       _log.info ("Colour = " + cColour)
     except:
+       blynk.virtual_write(98, "Read PH Error" + '\n') 
        _log.info("Read Colour Error")
        cColour = 'Error'
-    blynk.virtual_write(33, cColour)
-    _log.info ("Colour = " + cColour)
 
     _log.info("now the adc")
     volt = chan.voltage
@@ -494,13 +496,14 @@ def blynk_data():
        GPIO.output(solenoidOut, GPIO.HIGH)   
     else:
        for Relay in noisyThingsWhenButtEmpty:
-          GPIO.output(Relay,GPIO.HIGH)
-            
+          GPIO.output(Relay,GPIO.HIGH)     
     _log.info("make actions for full butt")
     if (GPIO.input(buttFullSensor) == GPIO.LOW) : 
        #blynk.notify("Water butt {DEVICE_NAME} full needs to be dosed")
        GPIO.output(solenoidIn, GPIO.LOW)
 
+    blynk.virtual_write(98, "Completed Timer Function" + '\n') 
+      
 while True:
     try:
        blynk.run()
