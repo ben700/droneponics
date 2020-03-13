@@ -482,6 +482,10 @@ def blynk_data():
        _log.info ("Channel 4 moisture reading is "+str(ss4.moisture_read())+" and Temp is :" +  str("{0:.2f}".format(ss4.get_temp())))
     
     _log.info("now the digital single wire")
+    blynk.virtual_write(37, 9)
+    blynk.virtual_write(38, 9)
+    
+    
     blynk.virtual_write(37, GPIO.input(buttEmptySensor))
     blynk.virtual_write(38, GPIO.input(buttFullSensor))
     
