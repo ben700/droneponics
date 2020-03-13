@@ -256,10 +256,10 @@ def blynk_data():
     
     if temperature <= T_CRI_VALUE:
        blynk.set_property(1, 'color', T_CRI_COLOR)
-            # send notifications not each time but once a minute (6*10 sec)
-            if Counter.cycle % 6 == 0:
-                blynk.notify(T_CRI_MSG)
-                Counter.cycle = 0
+       # send notifications not each time but once a minute (6*10 sec)
+       if Counter.cycle % 6 == 0:
+          blynk.notify(T_CRI_MSG)
+          Counter.cycle = 0
     else:
        blynk.set_property(1, 'color', T_COLOR)
        
