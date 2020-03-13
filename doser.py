@@ -219,7 +219,7 @@ while True:
           bootup = False
           now = datetime.now()
           blynk.virtual_write(99, now.strftime("%d/%m/%Y %H:%M:%S"))
-	  blynk.virtual_write(255, 0)
+	  blynk.virtual_write(255,0)
           _log.info('Just Booted')
           
        timer.run()
