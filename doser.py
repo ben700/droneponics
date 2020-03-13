@@ -97,14 +97,8 @@ BLYNK_AUTH = 'e06jzpI2zuRD4KB5eHyHdCQTGFT7einR'
 # initialize Blynk
 blynk = blynklib.Blynk(BLYNK_AUTH)
 timer = blynktimer.Timer()
-blynk.run()
 
-_log.info("Booted")
-blynk.virtual_write(98, "Rebooted"  + '\n')
-blynk.virtual_write(99, now.strftime("%d/%m/%Y %H:%M:%S"))
-    
-
-@timer.register(interval=60, run_once=True)
+@timer.register(interval=60, run_once=False)
 def started():
     _log.info("hearbeat")
     now = datetime.now()
