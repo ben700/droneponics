@@ -152,7 +152,9 @@ GPIO.output(Pump8,GPIO.HIGH)
 GPIO.output(Pump9,GPIO.HIGH)
 GPIO.output(Pump10,GPIO.HIGH)
 
+print(GPIO.input(buttEmptySensor)))
 
+print(GPIO.input(buttFullSensor)))
 
 
 
