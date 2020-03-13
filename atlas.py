@@ -463,18 +463,18 @@ def blynk_data():
    # blynk.set_property(10, 'color', colours[GPIO.input(buttFullSensor)])
     
     _log.info("make actions for empty butt")
-    blynk.virtual_write(9,255)
-    blynk.set_property(9, 'color', colours[GPIO.input(buttEmptySensor)])
-    if (GPIO.input(buttEmptySensor) == GPIO.LOW) :
-       for Relay in noisyThingsWhenButtEmpty:
-          if GPIO.input(Relay) != GPIO.LOW : 
-             GPIO.output(Relay,GPIO.LOW)
-       GPIO.output(solenoidIn, GPIO.HIGH)
-       GPIO.output(solenoidOut, GPIO.HIGH)   
-    else:
-       for Relay in noisyThingsWhenButtEmpty:
-          if GPIO.input(Relay) != GPIO.HIGH : 
-             GPIO.output(Relay,GPIO.HIGH)
+   # blynk.virtual_write(9,255)
+   # blynk.set_property(9, 'color', colours[GPIO.input(buttEmptySensor)])
+   # if (GPIO.input(buttEmptySensor) == GPIO.LOW) :
+    #   for Relay in noisyThingsWhenButtEmpty:
+    #      if GPIO.input(Relay) != GPIO.LOW : 
+   #          GPIO.output(Relay,GPIO.LOW)
+    #   GPIO.output(solenoidIn, GPIO.HIGH)
+    #   GPIO.output(solenoidOut, GPIO.HIGH)   
+   # else:
+  #     for Relay in noisyThingsWhenButtEmpty:
+    #      if GPIO.input(Relay) != GPIO.HIGH : 
+   #          GPIO.output(Relay,GPIO.HIGH)
             
     _log.info("make actions for full butt")
     #if (GPIO.input(buttFullSensor) == GPIO.LOW) : 
