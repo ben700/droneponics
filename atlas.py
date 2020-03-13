@@ -263,11 +263,11 @@ colour = AtlasI2C(70)
     
       
       
-cTemp = temp.query("R").split(":")[1]
-_log.info("Temp = " + cTemp)
-_log.info("EC = " + ec.query("RT,16.699"))
-_log.info("PH = " + ph.query("RT"+cTemp))
-_log.info("colour = " + colour.query("R"))
+#cTemp = temp.query("R").split(":")[1]
+#_log.info("Temp = " + cTemp)
+#_log.info("EC = " + ec.query("RT,16.699"))
+#_log.info("PH = " + ph.query("RT"+cTemp))
+#_log.info("colour = " + colour.query("R"))
 
 
 @blynk.handle_event("connect")
