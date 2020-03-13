@@ -421,7 +421,7 @@ def blynk_data():
     cTemp = temp.query("R,").split(":")[1]
     _log.info("Temp = " + cTemp)
 
-    
+    _log.info("next log temp to blynk")
     blynk.virtual_write(30, cTemp)
     _log.info("read ec")
     cEC = ec.query("RT,"+cTemp).split(":")[1]
