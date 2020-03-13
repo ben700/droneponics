@@ -1,3 +1,4 @@
+echo "Installing User Mods"
 pip3 install blynklib
 
 sudo pip3 install adafruit-circuitpython-tsl2591
