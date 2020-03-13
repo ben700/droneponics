@@ -40,6 +40,12 @@ class Dose:
         self.LED = Led
         self.name = name
 
+class DosePump:
+    def __init__(self, Pump, Led, name):
+        self.pump = Pump
+        self.LED = Led
+        self.name = name
+
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
@@ -90,6 +96,20 @@ nutrientMix.append( Dose(Pump3, 10, LED[2], "Root Stimulant"))
 nutrientMix.append( Dose(Pump4, 4, LED[3], "Enzyme"))
 nutrientMix.append( Dose(Pump5, 1, LED[4], "Hydro Silicon")) 
 nutrientMix.append( Dose(Pump8, 1, LED[8], "Pure Clean")) 
+
+
+dosePumps = []
+dosePumps.append( DosePump(Pump1, LED[0], "Hydro Grow A")) 
+dosePumps.append( DosePump(Pump2, LED[1], "Hydro Grow B")) 
+dosePumps.append( DosePump(Pump3, LED[2], "Root Stimulant"))
+dosePumps.append( DosePump(Pump4, LED[3], "Enzyme"))
+dosePumps.append( DosePump(Pump5, LED[4], "Hydro Silicon")) 
+dosePumps.append( DosePump(Pump6, LED[5], "Pure Clean")) 
+dosePumps.append( DosePump(Pump7, LED[6], "Unused"))
+dosePumps.append( DosePump(Pump8, LED[7], "Unused"))
+dosePumps.append( DosePump(Pump9, LED[8], "Unused")) 
+dosePumps.append( DosePump(Pump10, LED[9], "pH")) 
+
 
 noisyThingsWhenButtEmpty = [Relay1, Relay2, Relay3]
 
@@ -340,54 +360,163 @@ def buttonV30Pressed(pin, value):
       blynk.virtual_write(98, "Requested dose completed"  + '\n')
    blynk.virtual_write(30, 0)
    
+@blynk.handle_event('write v50')
+def buttonV50Pressed(pin, value):
+    y = 1
+    i = y + -1
+   _log.info("Dose pump " + str(y) + " value changed to " +str(value))
+   now = datetime.now()
+   blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
+   blynk.set_property(dosePump.LED[i], 'color',  colours[value[0[])
+   GPIO.output(dosePump.Pump[i], value[0])
+   blynk.virtual_write(98, "Dose pump " + dosePump[i].name + " to = " str(value[0]))
 
+@blynk.handle_event('write v51')
+def buttonV51Pressed(pin, value):
+    y = 2
+    i = y + -1
+   _log.info("Dose pump " + str(y) + " value changed to " +str(value))
+   now = datetime.now()
+   blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
+   blynk.set_property(dosePump.LED[i], 'color',  colours[value[0[])
+   GPIO.output(dosePump.Pump[i], value[0])
+   blynk.virtual_write(98, "Dose pump " + dosePump[i].name + " to = " str(value[0]))
+
+@blynk.handle_event('write v52')
+def buttonV52Pressed(pin, value):
+    y = 2
+    i = y + -1
+   _log.info("Dose pump " + str(y) + " value changed to " +str(value))
+   now = datetime.now()
+   blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
+   blynk.set_property(dosePump.LED[i], 'color',  colours[value[0[])
+   GPIO.output(dosePump.Pump[i], value[0])
+   blynk.virtual_write(98, "Dose pump " + dosePump[i].name + " to = " str(value[0]))
+
+@blynk.handle_event('write v53')
+def buttonV53Pressed(pin, value):
+    y = 3
+    i = y + -1
+   _log.info("Dose pump " + str(y) + " value changed to " +str(value))
+   now = datetime.now()
+   blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
+   blynk.set_property(dosePump.LED[i], 'color',  colours[value[0[])
+   GPIO.output(dosePump.Pump[i], value[0])
+   blynk.virtual_write(98, "Dose pump " + dosePump[i].name + " to = " str(value[0]))
+
+@blynk.handle_event('write v54')
+def buttonV54Pressed(pin, value):
+    y = 4
+    i = y + -1
+   _log.info("Dose pump " + str(y) + " value changed to " +str(value))
+   now = datetime.now()
+   blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
+   blynk.set_property(dosePump.LED[i], 'color',  colours[value[0[])
+   GPIO.output(dosePump.Pump[i], value[0])
+   blynk.virtual_write(98, "Dose pump " + dosePump[i].name + " to = " str(value[0]))
+
+@blynk.handle_event('write v55')
+def buttonV55Pressed(pin, value):
+    y = 5
+    i = y + -1
+   _log.info("Dose pump " + str(y) + " value changed to " +str(value))
+   now = datetime.now()
+   blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
+   blynk.set_property(dosePump.LED[i], 'color',  colours[value[0[])
+   GPIO.output(dosePump.Pump[i], value[0])
+   blynk.virtual_write(98, "Dose pump " + dosePump[i].name + " to = " str(value[0]))
+
+@blynk.handle_event('write v56')
+def buttonV56Pressed(pin, value):
+    y = 6
+    i = y + -1
+   _log.info("Dose pump " + str(y) + " value changed to " +str(value))
+   now = datetime.now()
+   blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
+   blynk.set_property(dosePump.LED[i], 'color',  colours[value[0[])
+   GPIO.output(dosePump.Pump[i], value[0])
+   blynk.virtual_write(98, "Dose pump " + dosePump[i].name + " to = " str(value[0]))
+
+@blynk.handle_event('write v57')
+def buttonV57Pressed(pin, value):
+    y = 7
+    i = y + -1
+   _log.info("Dose pump " + str(y) + " value changed to " +str(value))
+   now = datetime.now()
+   blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
+   blynk.set_property(dosePump.LED[i], 'color',  colours[value[0[])
+   GPIO.output(dosePump.Pump[i], value[0])
+   blynk.virtual_write(98, "Dose pump " + dosePump[i].name + " to = " str(value[0]))
+
+@blynk.handle_event('write v58')
+def buttonV58Pressed(pin, value):
+    y = 8
+    i = y + -1
+   _log.info("Dose pump " + str(y) + " value changed to " +str(value))
+   now = datetime.now()
+   blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
+   blynk.set_property(dosePump.LED[i], 'color',  colours[value[0[])
+   GPIO.output(dosePump.Pump[i], value[0])
+   blynk.virtual_write(98, "Dose pump " + dosePump[i].name + " to = " str(value[0]))
+
+@blynk.handle_event('write v59')
+def buttonV59Pressed(pin, value):
+    y = 9
+    i = y + -1
+   _log.info("Dose pump " + str(y) + " value changed to " +str(value))
+   now = datetime.now()
+   blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
+   blynk.set_property(dosePump.LED[i], 'color',  colours[value[0[])
+   GPIO.output(dosePump.Pump[i], value[0])
+   blynk.virtual_write(98, "Dose pump " + dosePump[i].name + " to = " str(value[0]))
+
+@blynk.handle_event('write v60')
+def buttonV59Pressed(pin, value):
+    y = 10
+    i = y + -1
+   _log.info("Dose pump " + str(y) + " value changed to " +str(value))
+   now = datetime.now()
+   blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
+   blynk.set_property(dosePump.LED[i], 'color',  colours[value[0[])
+   GPIO.output(dosePump.Pump[i], value[0])
+   blynk.virtual_write(98, "Dose pump " + dosePump[i].name + " to = " str(value[0]))
+          
     
 
 @blynk.handle_event('write v69')
 def buttonV69Pressed(pin, value):
+    now = datetime.now()
     _log.info("Dose Line Fill at " + now.strftime("%d/%m/%Y %H:%M:%S"))
-    GPIO.output(Pump1,GPIO.LOW)
-    GPIO.output(Pump2,GPIO.LOW)
-    GPIO.output(Pump3,GPIO.LOW)
-    GPIO.output(Pump4,GPIO.LOW)
-    GPIO.output(Pump5,GPIO.LOW)
-    GPIO.output(Pump6,GPIO.LOW)
-    GPIO.output(Pump7,GPIO.LOW)
-    GPIO.output(Pump8,GPIO.LOW)
-    GPIO.output(Pump9,GPIO.LOW)
-    GPIO.output(Pump10,GPIO.LOW)
-    for i in LED: 
-       blynk.set_property(i, 'color', colours[GPIO.LOW])
+    for pump in dosePump
+        blynk.set_property(pump.LED, 'color', colours[GPIO.LOW])
+        GPIO.output(pump.Pump,GPIO.LOW)                                                           
     blynk.virtual_write(98, "All pumps stopped" + '\n')
        
 @blynk.handle_event('write v70')
 def buttonV70Pressed(pin, value):
+    now = datetime.now()
     _log.info("Dose Line Stop All at " + now.strftime("%d/%m/%Y %H:%M:%S"))
-    GPIO.output(Pump1,GPIO.HIGH)
-    GPIO.output(Pump2,GPIO.HIGH)
-    GPIO.output(Pump3,GPIO.HIGH)
-    GPIO.output(Pump4,GPIO.HIGH)
-    GPIO.output(Pump5,GPIO.HIGH)
-    GPIO.output(Pump6,GPIO.HIGH)
-    GPIO.output(Pump7,GPIO.HIGH)
-    GPIO.output(Pump8,GPIO.HIGH)
-    GPIO.output(Pump9,GPIO.HIGH)
-    GPIO.output(Pump10,GPIO.HIGH)    
-    for i in LED: 
-       blynk.set_property(i, 'color', colours[GPIO.HIGH])
+    blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
     blynk.virtual_write(98, "All pumps Started" + '\n')
-    
-@blynk.handle_event('write V80')
-def buttonV80Pressed(pin, value):
-    _log.info(WRITE_EVENT_PRINT_MSG.format(pin, value))
-    blynk.set_property(LED[0], 'color', colors[value[0]])
-    GPIO.output(Pump1,value[0])
+    for pump in dosePump
+        blynk.set_property(pump.LED, 'color', colours[GPIO.HIGH])
+        GPIO.output(pump.Pump,GPIO.HIGH)                                                           
     
 @blynk.handle_event('write V90')
-def buttonV90Pressed(pin, value):
-   _log.info("User requested to open butt")
-   GPIO.output(solenoidOut, GPIO.HIGH)   
-  
+def openButtbuttonPressed(pin, value):
+    now = datetime.now()
+    _log.info("User requested to open butt")
+    blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
+    blynk.virtual_write(98, "User requested to open butt" + '\n')
+    GPIO.output(solenoidOut, GPIO.HIGH)   
+
+@blynk.handle_event('write V90')
+def openButtbuttonPressed(pin, value):
+    now = datetime.now()
+    _log.info("User requested to close butt")
+    blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
+    blynk.virtual_write(98, "User requested to close butt" + '\n')
+    GPIO.output(solenoidOut, GPIO.LOW)  
         
 # Will Print Every 10 Seconds
 @timer.register(interval=10, run_once=False)
