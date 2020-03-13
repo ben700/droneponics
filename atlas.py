@@ -486,8 +486,8 @@ def blynk_data():
     blynk.virtual_write(38, 9)
     
     
-    blynk.virtual_write(37, GPIO.input(buttEmptySensor))
-    blynk.virtual_write(38, GPIO.input(buttFullSensor))
+   # blynk.virtual_write(37, GPIO.input(buttEmptySensor))
+   # blynk.virtual_write(38, GPIO.input(buttFullSensor))
     
     _log.info("Change LEDs for butt sensors")
     blynk.virtual_write(10,255)
