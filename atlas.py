@@ -218,10 +218,10 @@ ph = AtlasI2C(99)
 colour = AtlasI2C(70)
 
 
-_log.info("Temp Device Info = " + temp.query("i"))
-_log.info("pH Device Info = " + ph.query("i"))
-_log.info("EC Device Info = " + ec.query("i"))
-_log.info("colour Device Info = " + colour.query("i"))    
+#_log.info("Temp Device Info = " + temp.query("i"))
+#_log.info("pH Device Info = " + ph.query("i"))
+#_log.info("EC Device Info = " + ec.query("i"))
+#_log.info("colour Device Info = " + colour.query("i"))    
 #_log.info("Temp Device Info = " + temp.query("i"))
 #_log.info("pH Device Info = " + ph.query("i"))
 #_log.info("EC Device Info = " + ec.query("i"))
@@ -265,7 +265,7 @@ cTemp = temp.query("R").split(":")[1]
 _log.info("Temp = " + cTemp)
 _log.info("EC = " + ec.query("RT,16.699"))
 _log.info("PH = " + ph.query("RT"+cTemp))
-#_log.info("colour = " + colour.query("R"))
+_log.info("colour = " + colour.query("R"))
 
 
 @blynk.handle_event("connect")
