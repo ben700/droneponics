@@ -476,7 +476,7 @@ def blynk_data():
           if GPIO.input(Relay) != GPIO.HIGH : 
              GPIO.output(Relay,GPIO.HIGH)
             
-     _log.info("make actions for full butt")
+     #_log.info("make actions for full butt")
     #if (GPIO.input(buttFullSensor) == GPIO.LOW) : 
        #blynk.notify("Water butt {DEVICE_NAME} full needs to be dosed")
       # GPIO.output(solenoidIn, GPIO.LOW)
