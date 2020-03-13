@@ -218,7 +218,8 @@ def blynk_data():
     _log.info("Update Timer Run")
 
     temperature,pressure,humidity = readBME280All()
-    mhz19b = mh_z19.read()    
+    mhz19 = None
+    #mhz19b = mh_z19.read()    
     now = datetime.now()
  
     blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
