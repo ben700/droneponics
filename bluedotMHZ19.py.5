@@ -29,7 +29,26 @@ import adafruit_tsl2591
 import sys
 import os
 
+class Counter:
+    cycle = 0
+    
 bootup = True
+T_CRI_VALUE = 16.5  # 16.5°C
+T_CRI_MSG = 'Low TEMP!!!'
+T_CRI_COLOR = '#c0392b'
+
+T_COLOR = '#f5b041'
+H_COLOR = '#85c1e9'
+P_COLOR = '#a2d9ce'
+
+TL_COLOR = '#cea2d9'
+IR_COLOR = '#a2add9'
+VL_COLOR = '#d9cea2'
+FS_COLOR = '#add9a2'
+
+CO2_COLOR = '#d9b3a2'
+
+ERR_COLOR = '#444444'
 
 # tune console logging
 _log = logging.getLogger('BlynkLog')
@@ -50,8 +69,9 @@ try:
    tsl.gain = adafruit_tsl2591.GAIN_LOW
    tsl.integration_time = adafruit_tsl2591.INTEGRATIONTIME_100MS
 except:
+    blynk.virtual_write(100, "Unexpected error: TSL2591")
     tsl = None
-    _log.info("Unexpected error: TSL2591")
+    print("Unexpected error: TSL2591")
     
     
 # The ID and range of a sample spreadsheet.
@@ -208,54 +228,91 @@ def readBME280All(addr=DEVICE):
   
 @blynk.handle_event("write V255")
 def buttonV255Pressed(value):
-    _log.info("User Reboot")
+    blynk.virtual_write(98, "User Reboot " + '\n')
     os.system('sh /home/pi/updateDroneponics.sh')
+    blynk.virtual_write(98, "System updated and restarting " + '\n')
     os.system('sudo reboot')
     
-        
+    
+    
   
 @timer.register(interval=10, run_once=False)
 def blynk_data():
     _log.info("Update Timer Run")
-
+    Counter.cycle += 1
     temperature,pressure,humidity = readBME280All()
-    mhz19 = None
-    #mhz19b = mh_z19.read()    
+    mhz19b = mh_z19.read()    
     now = datetime.now()
- 
     blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
+    
+    if not all([temperature,pressure,humidity]):
+       blynk.set_property(1, 'color', ERR_COLOR)
+       blynk.set_property(2, 'color', ERR_COLOR)
+       blynk.set_property(3, 'color', ERR_COLOR)
+    
+    
+    
     _log.info('Temperature: {0:.2f} C'.format(temperature))
     blynk.virtual_write(1, str("{0:.2f}".format(temperature)))
+    
+    if temperature <= T_CRI_VALUE:
+       blynk.set_property(1, 'color', T_CRI_COLOR)
+       # send notifications not each time but once a minute (6*10 sec)
+       if Counter.cycle % 6 == 0:
+          blynk.notify(T_CRI_MSG)
+          Counter.cycle = 0
+    else:
+       blynk.set_property(1, 'color', T_COLOR)
+       
+    
     _log.info('Pressure: {0:.0f}'.format(pressure))
     blynk.virtual_write(2, str("{0:.2f}".format(pressure)))
+    blynk.set_property(2, 'color', P_COLOR)
+    
     _log.info('Humidity: {0:.2f}'.format(humidity))
     blynk.virtual_write(3, str("{0:.2f}".format(humidity)))
+    blynk.set_property(3, 'color', H_COLOR)
     
     if (tsl is not None):
        lux = tsl.lux
        _log.info('Total light: {0:.2f}lux'.format(lux))
-       blynk.virtual_write(4, str("{0:.2f}".format(lux)))           
+       blynk.virtual_write(4, str("{0:.2f}".format(lux))) 
+       blynk.set_property(4, 'color', TL_COLOR)
+       
  
        infrared = tsl.infrared
        _log.info('Infrared light: {0:d}'.format(infrared))
        blynk.virtual_write(5, str("{0:d}".format(infrared)))
-
+       blynk.set_property(4, 'color', IR_COLOR)
+       
        visible = tsl.visible
        _log.info('Visible light: {0:d}'.format(visible))
        blynk.virtual_write(6, ("{0:d}".format(visible)))
+       blynk.set_property(4, 'color', VL_COLOR)
      
        full_spectrum = tsl.full_spectrum
        _log.info('Full spectrum (IR + visible) light: {0:d}'.format(full_spectrum))
        blynk.virtual_write(7, ("{0:d}".format(full_spectrum)))
+       blynk.set_property(4, 'color', FS_COLOR)
+    else:
+       blynk.set_property(4, 'color', ERR_COLOR)
+       blynk.set_property(5, 'color', ERR_COLOR)
+       blynk.set_property(6, 'color', ERR_COLOR)
+       blynk.set_property(7, 'color', ERR_COLOR)
+ 
     
     if mhz19b is not None:
         blynk.virtual_write(10, '{0:d}'.format(mhz19b['co2']))
+        blynk.set_property(10, 'color', CO2_COLOR)
         _log.info('CO2: {0:d}'.format(mhz19b['co2']))
         
     else:
-        blynk.virtual_write(100, 'Unexpected error: mhz19b')
+        blynk.virtual_write(98, 'Unexpected error: mhz19b' + '\n')
         _log.info('Unexpected error: mhz19b')
+        blynk.set_property(10, 'color', ERR_COLOR)
     
+    blynk.virtual_write(98, "Completed Timer Function" + '\n') 
+      
     
 
 while True:
@@ -265,10 +322,14 @@ while True:
           bootup = False
           now = datetime.now()
           blynk.virtual_write(99, now.strftime("%d/%m/%Y %H:%M:%S"))
+          blynk.virtual_write(98, "clr")
+          blynk.virtual_write(98, "System now updated and restarted " + '\n')
+          blynk.virtual_write(255, 0)
           _log.info('Just Booted')
           
        timer.run()
     except:
        _log.info('Unexpected error')
        os.system('sh /home/pi/updateDroneponics.sh')
+       os.system('sudo reboot')
     
