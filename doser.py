@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 
 import blynklib
-from blynktimer import Timer, TimerError
+import blynktimer 
 import logging
 from datetime import datetime
 import io
@@ -19,6 +19,8 @@ import busio
 import adafruit_ads1x15.ads1015 as ADS
 from adafruit_ads1x15.analog_in import AnalogIn
 import os
+
+bootup = True
 
 class Dose:
     def __init__(self, Pump, Dose, Led, Name):
@@ -216,14 +218,18 @@ def buttonV255Pressed(pin, value):
 ###########################################################
 # infinite loop that waits for event
 ###########################################################
-try:
-    while True:
-        blynk.run()
-        timer.run()
-except:
-    blynk.disconnect()
-    _log.info('SCRIPT WAS INTERRUPTED')
-finally: 
-     _log.info('Could do finally reboot')
-    #os.system('sh /home/pi/droneponics/reboot.sh')
+while True:
+    try:
+       blynk.run()
+       if bootup :
+          bootup = False
+          now = datetime.now()
+          blynk.virtual_write(99, now.strftime("%d/%m/%Y %H:%M:%S"))
+          _log.info('Just Booted')
+          
+       timer.run()
+    except:
+       _log.info('Unexpected error')
+       os.system('sh /home/pi/updateDroneponics.sh')
+    
 
