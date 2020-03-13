@@ -459,8 +459,8 @@ def blynk_data():
     blynk.virtual_write(38, GPIO.input(buttFullSensor))
     
     _log.info("make actions for full butt")
-    blynk.virtual_write(10,255)
-    blynk.set_property(10, 'color', colours[GPIO.input(buttFullSensor)])
+   # blynk.virtual_write(10,255)
+   # blynk.set_property(10, 'color', colours[GPIO.input(buttFullSensor)])
     
     _log.info("make actions for empty butt")
     blynk.virtual_write(9,255)
@@ -476,7 +476,7 @@ def blynk_data():
           if GPIO.input(Relay) != GPIO.HIGH : 
              GPIO.output(Relay,GPIO.HIGH)
             
-     #_log.info("make actions for full butt")
+    _log.info("make actions for full butt")
     #if (GPIO.input(buttFullSensor) == GPIO.LOW) : 
        #blynk.notify("Water butt {DEVICE_NAME} full needs to be dosed")
       # GPIO.output(solenoidIn, GPIO.LOW)
