@@ -428,14 +428,18 @@ def blynk_data():
     except:
         blynk.virtual_write(98, "Read EC Error" + '\n')
         cEC = 'Error'
+        blynk.virtual_write(98, "Going to recreate AtlasI2C" + '\n')
         ec = AtlasI2C(100)
+        blynk.virtual_write(98, "Going to reread ec" + '\n')
         cEC = ec.query("R").split(":")[1]
         blynk.virtual_write(98, "EC no temp = " + cEC + '\n')
     else:
+        blynk.virtual_write(98, "EC Else" + '\n')
         blynk.virtual_write(31, cEC)
         _log.info ("EC  = " + cEC)
     finally:
-        pass
+        blynk.virtual_write(98, "EC finally" + '\n')
+        
     
     
     _log.info("read PH")
