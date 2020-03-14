@@ -69,7 +69,6 @@ try:
    tsl.gain = adafruit_tsl2591.GAIN_LOW
    tsl.integration_time = adafruit_tsl2591.INTEGRATIONTIME_100MS
 except:
-    blynk.virtual_write(100, "Unexpected error: TSL2591")
     tsl = None
     print("Unexpected error: TSL2591")
     
