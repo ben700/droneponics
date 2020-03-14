@@ -165,28 +165,21 @@ try:
 except:
     i2c = None
     _log.info("Unexpected error: I2C")
-    
-    
-if i2c is not None:
-   _log.info("i2c not none")
-   try:
-      ads = ADS.ADS1015(i2c) 
-      chan = AnalogIn(ads, ADS.P0)
-   except:
-      ads = None
-      _log.info("Unexpected error: TSL2591")
-   try:
-      _log.info("create soil sonsors")
-      ss1 = Seesaw(i2c, addr=0x36)
-      ss2 = Seesaw(i2c, addr=0x37)
-      ss3 = Seesaw(i2c, addr=0x38)
-      ss4 = Seesaw(i2c, addr=0x38)
-   except:
-      ads = None
-      _log.info("Unexpected error: Seesaw")
-else: 
-    _log.info("Unexpected error: i2c is none")    
- 
+else:
+    ads = ADS.ADS1015(i2c) 
+    chan = AnalogIn(ads, ADS.P0)
+    _log.info("create soil sonsors")
+    ss1 = Seesaw(i2c, addr=0x36)
+    ss2 = Seesaw(i2c, addr=0x37)
+    ss3 = Seesaw(i2c, addr=0x38)
+    ss4 = Seesaw(i2c, addr=0x38)
+finally:
+    ss1 = None
+    ss2 = None
+    ss3 = None
+    ss4 = None
+    _log.info("Unexpected error: Seesaw")
+
 
 # The ID and range of a sample spreadsheet.
 BLYNK_AUTH = 'XVbhfI6ZYxkqFp7d4RsCIN6Is9YnKp9q' #atlasButt
@@ -465,7 +458,9 @@ def blynk_data():
     if volt is not None:
        blynk.virtual_write(35, str("{0}".format((volt-1.5)*100)))
        blynk.virtual_write(36, str("{0:.2f}".format((volt-1.5)*12)))
-    
+    else:
+       blynk.virtual_write(98, "Read ADC Error" + '\n') 
+        
     _log.info("now the soil sensor")
     if (ss1 is not None):
         _log.info("now record the soil sensor")
