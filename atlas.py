@@ -164,6 +164,11 @@ try:
     
 except:
     i2c = None
+    chan = None
+    ss1 = None
+    ss2 = None
+    ss3 = None
+    ss4 = None
     _log.info("Unexpected error: I2C")
 else:
     ads = ADS.ADS1015(i2c) 
@@ -174,11 +179,7 @@ else:
     ss3 = Seesaw(i2c, addr=0x38)
     ss4 = Seesaw(i2c, addr=0x38)
 finally:
-    ss1 = None
-    ss2 = None
-    ss3 = None
-    ss4 = None
-    _log.info("Unexpected error: Seesaw")
+    _log.info("Unexpected error: I2C finally")
 
 
 # The ID and range of a sample spreadsheet.

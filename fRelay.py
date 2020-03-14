@@ -47,13 +47,30 @@ GPIO.setup(Relay3,GPIO.OUT)
 GPIO.setup(Relay4,GPIO.OUT)
 
 
-#i2c_bus = busio.I2C(SCL, SDA)
 
-#ss1 = Seesaw(i2c_bus, addr=0x36)
-#ss2 = Seesaw(i2c_bus, addr=0x37)
-#ss3 = Seesaw(i2c_bus, addr=0x38)
-#ss4 = Seesaw(i2c_bus, addr=0x38)
-
+# Initialize the sensor.
+try:
+   # Create the I2C bus
+   i2c = busio.I2C(board.SCL, board.SDA)
+    
+except:
+    i2c = None
+    ss1 = None
+    ss2 = None
+    ss3 = None
+    ss4 = None
+    _log.info("Unexpected error: I2C")
+else:
+    ads = ADS.ADS1015(i2c) 
+    chan = AnalogIn(ads, ADS.P0)
+    _log.info("create soil sonsors")
+    ss1 = Seesaw(i2c, addr=0x36)
+    ss2 = Seesaw(i2c, addr=0x37)
+    ss3 = Seesaw(i2c, addr=0x38)
+    ss4 = Seesaw(i2c, addr=0x38)
+finally:
+    _log.info("Unexpected error: I2C finally")
+    
 # Initialize Blynk
 blynk = blynklib.Blynk(BLYNK_AUTH)
 timer = blynktimer.Timer()
@@ -152,22 +169,22 @@ def blynk_data():
     blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
     _log.info("Time updated : " + now.strftime("%d/%m/%Y %H:%M:%S"))
    
-   # if (ss1 is not None):
-   #     blynk.virtual_write(11, str(ss1.moisture_read()))
-   #     blynk.virtual_write(12, str(ss1.get_temp()))
-   #     _log.info ("Channel 1 moisture reading is "+str(ss1.moisture_read())+" and Temp is :" +  str("{0:.2f}".format(ss1.get_temp())))
-   # if (ss2 is not None):    
-   #    blynk.virtual_write(13, str(ss2.moisture_read()))
-   #    blynk.virtual_write(14, str(ss2.get_temp()))
-   #    _log.info ("Channel 2 moisture reading is "+str(ss2.moisture_read())+" and Temp is :" +  str("{0:.2f}".format(ss2.get_temp())))
-   # if (ss3 is not None):    
-   #    blynk.virtual_write(15, str(ss3.moisture_read()))          
-   #    blynk.virtual_write(16, str(ss3.get_temp()))
-   #    _log.info ("Channel 3 moisture reading is "+str(ss3.moisture_read())+" and Temp is :" +  str("{0:.2f}".format(ss3.get_temp())))
-   # if (ss4 is not None):    
-   #    blynk.virtual_write(17, str(ss4.moisture_read()))
-   #    blynk.virtual_write(18, str(ss4.get_temp()))
-   #    _log.info ("Channel 4 moisture reading is "+str(ss4.moisture_read())+" and Temp is :" +  str("{0:.2f}".format(ss4.get_temp())))
+    if (ss1 is not None):
+        blynk.virtual_write(11, str(ss1.moisture_read()))
+        blynk.virtual_write(12, str(ss1.get_temp()))
+        _log.info ("Channel 1 moisture reading is "+str(ss1.moisture_read())+" and Temp is :" +  str("{0:.2f}".format(ss1.get_temp())))
+    if (ss2 is not None):    
+       blynk.virtual_write(13, str(ss2.moisture_read()))
+       blynk.virtual_write(14, str(ss2.get_temp()))
+       _log.info ("Channel 2 moisture reading is "+str(ss2.moisture_read())+" and Temp is :" +  str("{0:.2f}".format(ss2.get_temp())))
+    if (ss3 is not None):    
+       blynk.virtual_write(15, str(ss3.moisture_read()))          
+       blynk.virtual_write(16, str(ss3.get_temp()))
+       _log.info ("Channel 3 moisture reading is "+str(ss3.moisture_read())+" and Temp is :" +  str("{0:.2f}".format(ss3.get_temp())))
+    if (ss4 is not None):    
+       blynk.virtual_write(17, str(ss4.moisture_read()))
+       blynk.virtual_write(18, str(ss4.get_temp()))
+       _log.info ("Channel 4 moisture reading is "+str(ss4.moisture_read())+" and Temp is :" +  str("{0:.2f}".format(ss4.get_temp())))
  
 
         
@@ -178,6 +195,8 @@ while True:
           bootup = False
           now = datetime.now()
           blynk.virtual_write(99, now.strftime("%d/%m/%Y %H:%M:%S"))
+          blynk.virtual_write(98, "clr")
+          blynk.virtual_write(98, "System now updated and restarted " + '\n')
           blynk.virtual_write(255, 0)
           _log.info('Just Booted')
           
