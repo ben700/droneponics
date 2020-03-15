@@ -49,6 +49,9 @@ while (time.time() - start) <= 5.0:
     # conversion (like by calling read_adc again) it will disable the
     # continuous conversion!
     print('Channel 0: {0}'.format(value))
+    print('Channel 1: {1}'.format(value))
+    print('Channel 2: {2}'.format(value))
+    print('Channel 3: {3}'.format(value))
     # Sleep for half a second.
     time.sleep(0.5)
 
