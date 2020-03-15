@@ -43,7 +43,7 @@ GPIO.output(Relay1,GPIO.LOW)
 
 
 while True: 
-   print ("Full = " + GPIO.input(buttFullSensor))
-   print ("Empty = " + GPIO.input(buttEmptySensor))
+   print ("Full = " + str(GPIO.input(buttFullSensor)))
+   print ("Empty = " + str(GPIO.input(buttEmptySensor)))
    GPIO.output(Relay1,not GPIO.input(Relay1))   
    time.sleep(5)
