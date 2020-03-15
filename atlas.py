@@ -79,8 +79,8 @@ Pump10 = 24
 
 
 #setup sensor 2
-GPIO.setup(buttFullSensor, GPIO.IN, GPIO.PUD_DOWN)
-GPIO.setup(buttEmptySensor, GPIO.IN, GPIO.PUD_DOWN)
+GPIO.setup(buttFullSensor, GPIO.IN)
+GPIO.setup(buttEmptySensor, GPIO.IN)
 
 Relay1 = 21 #UV & Mixer
 Relay2 = 20 #Air
