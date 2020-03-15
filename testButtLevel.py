@@ -35,15 +35,17 @@ Relay1 = 16
 #setup sensor 2
 GPIO.setup(buttFullSensor, GPIO.IN)
 GPIO.setup(buttEmptySensor, GPIO.IN)
-GPIO.setup(Relay1,GPIO.OUT)
 
 
 GPIO.setup(Relay1,GPIO.OUT)
 GPIO.output(Relay1,GPIO.LOW)
 
 
+GPIO.setup(4,GPIO.IN)
+
 while True: 
-   print ("Full = " + str(GPIO.input(buttFullSensor)))
-   print ("Empty = " + str(GPIO.input(buttEmptySensor)))
-   GPIO.output(Relay1,not GPIO.input(Relay1))   
+   print ("Full 20= " + str(GPIO.input(buttFullSensor)))
+   print ("Empty 21= " + str(GPIO.input(buttEmptySensor)))
+   print ("Pin 4 = " + str(GPIO.input(4)))
+   GPIO.output(Relay1,not GPIO.input(4))   
    time.sleep(5)
