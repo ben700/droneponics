@@ -1,5 +1,10 @@
 cp /home/pi/droneponics/updateDroneponics.sh /home/pi/updateDroneponics.sh
 sh /home/pi/droneponics/updatePi.sh
+
+cd /tmp
+wget https://project-downloads.drogon.net/wiringpi-latest.deb
+sudo dpkg -i wiringpi-latest.deb
+cd
 sudo apt-get install wiringpi
 sudo apt-get install python-pip
 sudo apt-get install xterm -y
