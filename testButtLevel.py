@@ -45,4 +45,5 @@ GPIO.output(Relay1,GPIO.LOW)
 while True: 
    print (GPIO.input(buttFullSensor))
    print (GPIO.input(buttEmptySensor))
-   time.sleep(10)
+   GPIO.output(Relay1,not GPIO.input(Relay1))   
+   time.sleep(5)
