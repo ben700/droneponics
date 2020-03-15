@@ -17,10 +17,12 @@ import RPi.GPIO as GPIO
 import board
 import busio
 from adafruit_seesaw.seesaw import Seesaw
-import adafruit_ads1x15.ads1015 as ADS
-from adafruit_ads1x15.analog_in import AnalogIn
 import os
 import logging
+from busio import I2C
+import adafruit_bme680
+import Adafruit_ADS1x15
+
 
  
 bootup = True 
@@ -46,14 +48,29 @@ BLYNK_DARK_BLUE ="#5F7CD8"
 colors = {'1': '#23C48E', '0': '#D3435C', 'OFFLINE': '#FF0000'}
 
 
-buttFullSensor =  17
-buttEmptySensor = 4
+buttFullSensor =  20
+buttEmptySensor =21
+
+
+Relay1 = 16
+
+
 
 #setup sensor 2
-GPIO.setup(buttFullSensor, GPIO.IN, GPIO.PUD_UP)
-GPIO.setup(buttEmptySensor, GPIO.IN, GPIO.PUD_DOWN)
+GPIO.setup(buttFullSensor, GPIO.IN)
+GPIO.setup(buttEmptySensor, GPIO.IN)
+GPIO.setup(buttEmptySensor, GPIO.OUT)
+GPIO.output(Relay1,GPIO.input(buttEmptySensor))   
+ 
+# Create library object using our Bus I2C port
+i2c = I2C(board.SCL, board.SDA)
+bme680 = adafruit_bme680.Adafruit_BME680_I2C(i2c, debug=False)
 
+# change this to match the location's pressure (hPa) at sea level
+bme680.sea_level_pressure = 1013.25
 
+adc = Adafruit_ADS1x15.ADS1115()
+GAIN = 1
 
 # The ID and range of a sample spreadsheet.
 BLYNK_AUTH = '00vIt07mIauITIq4q_quTOakFvcvpgGb' #robot Mon
@@ -86,14 +103,35 @@ def connect_handler():
         #  - without forced reading some portion of blynk server messages can be not delivered to HW
         blynk.read_response(timeout=0.5)
     
-
+@blynk.handle_event("write V255")
+def buttonV255Pressed(value):
+    blynk.virtual_write(98, "User Reboot " + '\n')
+    os.system('sh /home/pi/updateDroneponics.sh')
+    blynk.virtual_write(98, "System updated and restarting " + '\n')
+    os.system('sudo reboot')
+    
+    
+    
     # Will Print Every 10 Seconds
 @timer.register(interval=10, run_once=False)
 def blynk_data():
     _log.info("Start of blynk_data")
     now = datetime.now()
     blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
-    
+    blynk.virtual_write(1, bme680.temperature)
+    print("Gas: %d ohm" % bme680.gas)
+    blynk.virtual_write(2, bme680.humidity)
+    blynk.virtual_write(3,  bme680.pressure)
+    blynk.virtual_write(4,  bme680.altitude)
+    blynk.virtual_write(37, GPIO.input(buttEmptySensor))
+    blynk.virtual_write(38, GPIO.input(buttFullSensor))
+    GPIO.output(Relay1,GPIO.input(buttEmptySensor))   
+    blynk.virtual_write(98, "Completed Timer Function" + '\n') 
+    blynk.virtual_write(10, adc.read_adc(0, gain=GAIN))
+    blynk.virtual_write(11, adc.read_adc(1, gain=GAIN))
+    blynk.virtual_write(12, adc.read_adc(2, gain=GAIN)*(((5000/1024.0)-400)*50.0/16.0)))
+    blynk.virtual_write(13, adc.read_adc(3, gain=GAIN)*(6/5))
+                        
     
 while True:
     try:
@@ -102,6 +140,9 @@ while True:
           bootup = False
           now = datetime.now()
           blynk.virtual_write(99, now.strftime("%d/%m/%Y %H:%M:%S"))
+          blynk.virtual_write(98, "clr")
+          blynk.virtual_write(98, "System now updated and restarted " + '\n')
+          blynk.virtual_write(255, 0)
           _log.info('Just Booted')
           
        timer.run()
