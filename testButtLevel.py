@@ -39,10 +39,10 @@ GPIO.setup(Relay1,GPIO.OUT)
 
 
 GPIO.setup(Relay1,GPIO.OUT)
-GPIO.output(Relay1,GPIO.HIGH)
+GPIO.output(Relay1,GPIO.LOW)
 
 
 while True: 
-   print (GPIO.output(buttFullSensor))
-   print (GPIO.output(buttEmptySensor))
+   print (GPIO.input(buttFullSensor))
+   print (GPIO.input(buttEmptySensor))
    time.sleep(10)
