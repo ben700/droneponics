@@ -167,12 +167,7 @@ def blynk_data():
         
     _log.info("Log ADC data")
     temperature = 25
-    adc0 = ads1115.readVoltage(0) #ph
-    adc1 = ads1115.readVoltage(1) #ec
-    adc2 = ads1115.readVoltage(2) #co2
-    adc3 = ads1115.readVoltage(3) #light
-    print(adc2)
-	
+ 
     _log.info("Read Ph data")
     #Convert voltage to PH with temperature compensation
     pH = ph.readPH(adc0['r'],temperature)
@@ -180,20 +175,22 @@ def blynk_data():
     eC = ec.readEC(adc1['r'],temperature)
     
     _log.info("Read CO2 data")
-    voltage = adc2['r']*(5000/1024.0);
+    sensorValue = adc2['r']
+    voltage = sensorValue*(5000/1024.0);
     if(voltage == 0):
        _log.info("Fault")
     elif(voltage < 400): 
        _log.info("preheating")
     
     else:
-       voltage_diference=voltahtge-400;
+       voltage_diference=voltage-400;
        concentration=voltage_diference*50.0/16.0;
        blynk.virtual_write(10, concentration)
       
     
     _log.info("Read Light data")
-    blynk.virtual_write(13, adc3['r'])
+    light = adc3['r']
+    blynk.virtual_write(13, light)
     
     blynk.virtual_write(98, "Completed Timer Function" + '\n') 
     
