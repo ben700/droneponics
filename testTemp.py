@@ -7,6 +7,7 @@ import time
 os.system('modprobe w1-gpio')  # Turns on the GPIO module
 os.system('modprobe w1-therm') # Turns on the Temperature module
  
+
 # Finds the correct device file that holds the temperature data
 base_dir = '/sys/bus/w1/devices/'
 device_folder = glob.glob(base_dir + '28*')[0]
@@ -22,7 +23,6 @@ def read_temp_raw():
 # Convert the value of the sensor into a temperature
 def read_temp():
   lines = read_temp_raw() # Read the temperature 'device file'
- 
   # While the first line does not contain 'YES', wait for 0.2s
   # and then read the device file again.
   while lines[0].strip()[-3:] != 'YES':
@@ -38,10 +38,20 @@ def read_temp():
   if equals_pos != -1:
     temp_string = lines[1][equals_pos+2:]
     temp_c = float(temp_string) / 1000.0
-    temp_f = temp_c * 9.0 / 5.0 + 32.0
-    return temp_c, temp_f
+#    temp_f = temp_c * 9.0 / 5.0 + 32.0
+    return temp_c
  
-# Print out the temperature until the program is stopped.
-while True:
-  print(read_temp())
-  time.sleep(1)
+
+
+def doMain():    
+ temperature =  read_temp()
+ pH = pHDevice.query("RT," + str(temperature)).split(' ')[2] 
+ print(temperature)
+ print(pH )
+ updateDisplay(temperature, pH)
+ updateGoogle(temperature, pH)
+
+if __name__ == '__main__':
+# while True:
+  doMain()
+ 
