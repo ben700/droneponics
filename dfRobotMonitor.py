@@ -181,6 +181,8 @@ def blynk_data():
     
     _log.info("Read CO2 data")
     sensorValue = adc2['r']
+    blynk.virtual_write(10, sensorValue)
+    
     _log.info("sensorValue ={}".format(sensorValue))
     voltage = sensorValue*(5000/1024.0)
     _log.info("voltage ={}".format(voltage))
@@ -193,13 +195,12 @@ def blynk_data():
        _log.info("voltage ={}".format(voltage_diference))
        concentration=voltage_diference*50.0/16.0
        _log.info("concentration ={}".format(concentration))
-       blynk.virtual_write(10, concentration)
       
     
     _log.info("Read Light data")
     light = adc3['r']
     blynk.virtual_write(13, light)
-    
+    _log.info("light ={}".format(light))
     blynk.virtual_write(98, "Completed Timer Function" + '\n') 
     
     
