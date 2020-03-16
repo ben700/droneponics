@@ -167,7 +167,12 @@ def blynk_data():
         
     _log.info("Log ADC data")
     temperature = 25
- 
+    adc0 = ads1115.readVoltage(0) #ph
+    adc1 = ads1115.readVoltage(1) #ec
+    adc2 = ads1115.readVoltage(2) #co2
+    adc3 = ads1115.readVoltage(3) #light
+    print(adc2)
+	
     _log.info("Read Ph data")
     #Convert voltage to PH with temperature compensation
     pH = ph.readPH(adc0['r'],temperature)
@@ -183,7 +188,7 @@ def blynk_data():
        _log.info("preheating")
     
     else:
-       voltage_diference=voltage-400;
+       voltage_diference=voltahtge-400;
        concentration=voltage_diference*50.0/16.0;
        blynk.virtual_write(10, concentration)
       
