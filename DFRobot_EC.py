@@ -54,7 +54,7 @@ class DFRobot_EC():
 		elif (rawEC>9 and rawEC<16.8):
 			compECsolution = 12.88*(1.0+0.0185*(temperature-25.0))
 			KValueTemp = 820.0*200.0*compECsolution/1000.0/voltage
-			print ">>>Buffer Solution:12.88ms/cm")
+			print (">>>Buffer Solution:12.88ms/cm")
 			f=open('ecdata.txt','r+')
 			flist=f.readlines()
 			flist[1]='kvalueHigh='+ str(KValueTemp) + '\n'
