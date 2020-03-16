@@ -1,6 +1,5 @@
 #This example ues to reset phdata.txt to default value
 import sys
-sys.path.append('../')
 import time
 
 from DFRobot_PH import DFRobot_PH
