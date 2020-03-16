@@ -69,7 +69,7 @@ Relay1 = 16
 #setup sensor 2
 GPIO.setup(buttFullSensor, GPIO.IN)
 GPIO.setup(buttEmptySensor, GPIO.IN)
-GPIO.setup(buttEmptySensor, GPIO.OUT)
+GPIO.setup(Relay1, GPIO.OUT)
 GPIO.output(Relay1,GPIO.input(buttEmptySensor))   
  
 # Create library object using our Bus I2C port
