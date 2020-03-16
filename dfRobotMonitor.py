@@ -22,6 +22,16 @@ import logging
 from busio import I2C
 import adafruit_bme680
 import Adafruit_ADS1x15
+ADS1115_REG_CONFIG_PGA_6_144V        = 0x00 # 6.144V range = Gain 2/3
+ADS1115_REG_CONFIG_PGA_4_096V        = 0x02 # 4.096V range = Gain 1
+ADS1115_REG_CONFIG_PGA_2_048V        = 0x04 # 2.048V range = Gain 2 (default)
+ADS1115_REG_CONFIG_PGA_1_024V        = 0x06 # 1.024V range = Gain 4
+ADS1115_REG_CONFIG_PGA_0_512V        = 0x08 # 0.512V range = Gain 8
+ADS1115_REG_CONFIG_PGA_0_256V        = 0x0A # 0.256V range = Gain 16
+
+from DFRobot_ADS1115 import ADS1115
+from DFRobot_PH      import DFRobot_PH
+from DFRobot_EC      import DFRobot_EC
 
 
  
@@ -71,6 +81,35 @@ bme680.sea_level_pressure = 1013.25
 
 adc = Adafruit_ADS1x15.ADS1115()
 GAIN = 1
+
+ads1115 = ADS1115()
+ph      = DFRobot_PH()
+ec      = DFRobot_EC()
+
+ph.begin()
+ec.begin()
+
+#Set the IIC address
+ads1115.setAddr_ADS1115(0x48)
+#Sets the gain and input voltage range.
+ads1115.setGain(ADS1115_REG_CONFIG_PGA_6_144V)
+#Get the Digital Value of Analog of selected channel
+adc0 = ads1115.readVoltage(0) #ph
+adc1 = ads1115.readVoltage(1) #ec
+adc2 = ads1115.readVoltage(2) #co2
+adc3 = ads1115.readVoltage(3) #light
+	
+    
+# Initialize the GPIO Pins
+os.system('modprobe w1-gpio')  # Turns on the GPIO module
+os.system('modprobe w1-therm') # Turns on the Temperature module
+
+ 
+# Finds the correct device file that holds the temperature data
+base_dir = '/sys/bus/w1/devices/'
+device_folder = glob.glob(base_dir + '28*')[0]
+device_file = device_folder + '/w1_slave'
+
 
 # The ID and range of a sample spreadsheet.
 BLYNK_AUTH = '00vIt07mIauITIq4q_quTOakFvcvpgGb' #robot Mon
@@ -127,11 +166,28 @@ def blynk_data():
     blynk.virtual_write(38, GPIO.input(buttFullSensor))
     GPIO.output(Relay1,GPIO.input(buttEmptySensor))   
     blynk.virtual_write(98, "Completed Timer Function" + '\n') 
-    blynk.virtual_write(10, adc.read_adc(0, gain=GAIN))
-    blynk.virtual_write(11, adc.read_adc(1, gain=GAIN))
-    blynk.virtual_write(12, adc.read_adc(2, gain=GAIN)*(((5000/1024.0)-400)*50.0/16.0)))
-    blynk.virtual_write(13, adc.read_adc(3, gain=GAIN)*(6/5))
-                        
+        
+    temperature = 25
+	#Convert voltage to PH with temperature compensation
+	pH = ph.readPH(adc0['r'],temperature)
+    eC = ec.readEC(adc1['r'],temperature)
+    sensorValue = adc.read_adc(2, gain=GAIN)
+    voltage = sensorValue*(5000/1024.0);
+    if(voltage == 0):
+       _log.info("Fault")
+    else if(voltage < 400): 
+       _log.info("preheating")
+    
+    else:
+       voltage_diference=voltahtge-400;
+       concentration=voltage_diference*50.0/16.0;
+       blynk.virtual_write(10, concentration)
+      
+    
+    light = adc.read_adc(3, gain=GAIN)
+    blynk.virtual_write(13, light)
+    
+    
     
 while True:
     try:
