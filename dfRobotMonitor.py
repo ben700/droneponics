@@ -180,8 +180,7 @@ def blynk_data():
     eC = ec.readEC(adc1['r'],temperature)
     
     _log.info("Read CO2 data")
-    sensorValue = ads1115.readVoltage(2)
-    voltage = sensorValue*(5000/1024.0);
+    voltage = adc2['r']*(5000/1024.0);
     if(voltage == 0):
        _log.info("Fault")
     elif(voltage < 400): 
@@ -194,8 +193,7 @@ def blynk_data():
       
     
     _log.info("Read Light data")
-    light = ads1115.readVoltage(3)
-    blynk.virtual_write(13, light)
+    blynk.virtual_write(13, adc3['r'])
     
     blynk.virtual_write(98, "Completed Timer Function" + '\n') 
     
