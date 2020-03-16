@@ -171,6 +171,7 @@ def blynk_data():
     adc1 = ads1115.readVoltage(1) #ec
     adc2 = ads1115.readVoltage(2) #co2
     adc3 = ads1115.readVoltage(3) #light
+    print(adc2)
 	
     _log.info("Read Ph data")
     #Convert voltage to PH with temperature compensation
@@ -179,7 +180,7 @@ def blynk_data():
     eC = ec.readEC(adc1['r'],temperature)
     
     _log.info("Read CO2 data")
-    sensorValue = adc2.read_adc(2, gain=GAIN)
+    sensorValue = ads1115.readVoltage(2)
     voltage = sensorValue*(5000/1024.0);
     if(voltage == 0):
        _log.info("Fault")
@@ -193,7 +194,7 @@ def blynk_data():
       
     
     _log.info("Read Light data")
-    light = adc3.read_adc(3, gain=GAIN)
+    light = ads1115.readVoltage(3)
     blynk.virtual_write(13, light)
     
     blynk.virtual_write(98, "Completed Timer Function" + '\n') 
