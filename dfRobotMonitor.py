@@ -169,7 +169,7 @@ def blynk_data():
         
     temperature = 25
 	#Convert voltage to PH with temperature compensation
-	pH = ph.readPH(adc0['r'],temperature)
+    pH = ph.readPH(adc0['r'],temperature)
     eC = ec.readEC(adc1['r'],temperature)
     sensorValue = adc.read_adc(2, gain=GAIN)
     voltage = sensorValue*(5000/1024.0);
