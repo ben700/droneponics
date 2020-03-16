@@ -35,6 +35,9 @@ try:
 
 
 
+    class Counter:
+        cycle = 0
+
     bootup = True 
 
     # tune console logging
@@ -177,8 +180,8 @@ try:
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
         blynk.virtual_write(98, "Log BME data")
 
-        if not all([temperature]):
-            temperature =  bme680.temperature
+        temperature =  bme680.temperature
+        if temperature is not None:
             blynk.virtual_write(1, temperature)
             if temperature <= T_CRI_VALUE:
                blynk.set_property(1, 'color', T_CRI_COLOR)
