@@ -41,6 +41,7 @@ class DFRobot_PH():
 		elif (voltage>1854 and voltage<2210):
 			print (">>>Buffer Solution:4.0")
 			f=open('phdata.txt','r+')
+            print(flist)
 			flist=f.readlines()
 			flist[1]='acidVoltage='+ str(voltage) + '\n'
 			f=open('phdata.txt','w+')
