@@ -177,7 +177,9 @@ def blynk_data():
     pH = ph.readPH(adc0['r'],temperature)
     _log.info("Read EC data")
     eC = ec.readEC(adc1['r'],temperature)
-    sensorValue = adc.read_adc(2, gain=GAIN)
+    
+    _log.info("Read CO2 data")
+    sensorValue = adc2.read_adc(2, gain=GAIN)
     voltage = sensorValue*(5000/1024.0);
     if(voltage == 0):
        _log.info("Fault")
@@ -190,7 +192,8 @@ def blynk_data():
        blynk.virtual_write(10, concentration)
       
     
-    light = adc.read_adc(3, gain=GAIN)
+    _log.info("Read Light data")
+    light = adc3.read_adc(3, gain=GAIN)
     blynk.virtual_write(13, light)
     
     blynk.virtual_write(98, "Completed Timer Function" + '\n') 
