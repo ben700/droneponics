@@ -20,14 +20,16 @@ from AtlasI2C import (
 #69 - co2
 #70 - colour
 #6A - pressure
-device = AtlasI2C()
-temp = AtlasI2C(102)
-ec = AtlasI2C(100)
-ph = AtlasI2C(99)
+#device = AtlasI2C()
+#temp = AtlasI2C(102)
+#ec = AtlasI2C(100)
+#ph = AtlasI2C(99)
 #do = AtlasI2C(97, "DO")
 #flow = AtlasI2C(104, "FLOW")
 #pump = AtlasI2C(103, "PUMP")
 
+
+beautiful_number = input("Are you sure you want to calibrate ")
 
 #print(device.list_i2c_devices())
 #print("Temp Device Info = " + temp.query("i"))
@@ -37,15 +39,15 @@ ph = AtlasI2C(99)
 #print("Flow Device Info = " + flow.query("i"))      
 #print("Pump Device Info = " + pump.query("i"))      
 
-print("Temp Cal = " + temp.query("Cal,?"))
-print("Temp Scale = " + temp.query("S,?"))
+#print("Temp Cal = " + temp.query("Cal,?"))
+#print("Temp Scale = " + temp.query("S,?"))
       
-print("pH Cal = " + ph.query("Cal,?"))
-print("pH Temp Cal = " + ph.query("T,?"))
+#print("pH Cal = " + ph.query("Cal,?"))
+#print("pH Temp Cal = " + ph.query("T,?"))
 
-print("EC Cal = " + ec.query("Cal,?"))
-print("EC Temp Cal = " + ec.query("Cal,?"))
-print("EC Probe Type = " + ec.query("K,?"))
+#print("EC Cal = " + ec.query("Cal,?"))
+#print("EC Temp Cal = " + ec.query("Cal,?"))
+#print("EC Probe Type = " + ec.query("K,?"))
 
 #print("DO Cal = " + do.query("Cal,?"))     
 #print("DO Temp Cal = " + do.query("Cal,?"))
@@ -64,7 +66,7 @@ print("EC Probe Type = " + ec.query("K,?"))
        
 #temp.query("Cal,clear")
 #temp.query("Cal,36.4") #t = any temperature
-print("Temp = " + str(temp.query("R")))      
+#print("Temp = " + str(temp.query("R")))      
 
 #ec.query("Cal,clear")
 #ec.query("K,0.1")
@@ -73,7 +75,7 @@ print("Temp = " + str(temp.query("R")))
 #ec.query("Cal,n") #single point calibration, where n = any value
 #ec.query("Cal,low,84") #low end calibration, where n = any value
 #ec.query("Cal,high,1413") #high end calibration, where n = any value
-print("ec = " + str(ec.query("R")))
+#print("ec = " + str(ec.query("R")))
 
 
 #ph.query("Cal,clear")
@@ -81,7 +83,7 @@ print("ec = " + str(ec.query("R")))
 #ph.query("Cal,mid,7") #single point calibration at midpoint
 #ph.query("Cal,low,4")   #two point calibration at lowpoint
 #ph.query("Cal,high,10") #three point calibration at highpoint 
-print("ph = " + str(ph.query("R")))
+#print("ph = " + str(ph.query("R")))
       
       
 #do.query("Cal,clear")
