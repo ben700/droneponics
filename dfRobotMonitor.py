@@ -175,7 +175,7 @@ def blynk_data():
     voltage = sensorValue*(5000/1024.0);
     if(voltage == 0):
        _log.info("Fault")
-    else if(voltage < 400): 
+    elif(voltage < 400): 
        _log.info("preheating")
     
     else:
