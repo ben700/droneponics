@@ -1,5 +1,4 @@
-#!/usr/bin/python
-try:
+    #!/usr/bin/python
     import logging
     import blynklib
     import blynktimer
@@ -10,9 +9,7 @@ try:
     import time
     import copy
     import string
-    from AtlasI2C import (
-         AtlasI2C
-    )
+    from AtlasI2C import AtlasI2C
     import RPi.GPIO as GPIO
     import board
     import busio
@@ -214,9 +211,9 @@ try:
              
         
         _log.info("Log GPIO data")
-        blynk.virtual_write(37, GPIO.input(buttEmptySensor))
-        blynk.virtual_write(38, GPIO.input(buttFullSensor))
-
+        blynk.set_property(37, 'color', colours[GPIO.input(buttFullSensor)])
+        blynk.set_property(38, 'color', colours[GPIO.input(buttEmptySensor)])
+        
         _log.info("Log ADC data")
         temperature = 25
         adc0 = ads1115.readVoltage(0) #ph
@@ -278,7 +275,5 @@ try:
         except:
            _log.info('Unexpected error')
            os.system('sh /home/pi/updateDroneponics.sh')
-except:
-   _log.info('Unexpected error')
-   os.system('sh /home/pi/updateDroneponics.sh')
+
  
