@@ -276,5 +276,6 @@ try:
            _log.info('Unexpected error')
            os.system('sh /home/pi/updateDroneponics.sh')
 except:
-_log.info('Unexpected error')
-os.system('sh /home/pi/updateDroneponics.sh')
+   _log.info('Unexpected error')
+   os.system('sh /home/pi/updateDroneponics.sh')
+ 
