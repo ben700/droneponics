@@ -176,8 +176,11 @@ def blynk_data():
     _log.info("Read Ph data")
     #Convert voltage to PH with temperature compensation
     pH = ph.readPH(adc0['r'],temperature)
+    _log.info("pH Value ={}".format(pH))
+    
     _log.info("Read EC data")
     eC = ec.readEC(adc1['r'],temperature)
+    _log.info("eC Value ={}".format(eC))
     
     _log.info("Read CO2 data")
     sensorValue = adc2['r']
@@ -188,16 +191,16 @@ def blynk_data():
     _log.info("voltage ={}".format(voltage))
     if(voltage == 0):
        _log.info("Fault")
-    elif(voltage < 400): 
-       _log.info("preheating")
-    else:
-       voltage_diference=voltage-400
-       _log.info("voltage ={}".format(voltage_diference))
-       concentration=voltage_diference*50.0/16.0
-       _log.info("concentration ={}".format(concentration))
+   # elif(voltage < 400): 
+   #    _log.info("preheating")
+   # else:
+   #    voltage_diference=voltage-400
+   #    _log.info("voltage ={}".format(voltage_diference))
+   #    concentration=voltage_diference*50.0/16.0
+   #    _log.info("concentration ={}".format(concentration))
       
     
-    _log.info("Read Light data")
+    _log.debug("Read Light data")
     light = adc3['r']
     blynk.virtual_write(13, light)
     _log.info("light ={}".format(light))
