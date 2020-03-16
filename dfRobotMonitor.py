@@ -57,6 +57,26 @@ BLYNK_RED       ="#D3435C"
 BLYNK_DARK_BLUE ="#5F7CD8"
 colors = {'1': '#23C48E', '0': '#D3435C', 'OFFLINE': '#FF0000'}
 
+T_CRI_VALUE = 16.5  # 16.5°C
+T_CRI_MSG = 'Low TEMP!!!'
+T_CRI_COLOR = '#c0392b'
+
+T_COLOR = '#f5b041'
+H_COLOR = '#85c1e9'
+P_COLOR = '#a2d9ce'
+A_COLOR = '#85c1e9'
+G_COLOR = '#a2d9ce'
+
+TL_COLOR = '#cea2d9'
+IR_COLOR = '#a2add9'
+VL_COLOR = '#d9cea2'
+FS_COLOR = '#add9a2'
+
+CO2_COLOR = '#d9b3a2'
+
+ERR_COLOR = '#444444'
+
+
 
 buttFullSensor =  20
 buttEmptySensor =21
@@ -156,11 +176,40 @@ def blynk_data():
     now = datetime.now()
     blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
     blynk.virtual_write(98, "Log BME data")
-    blynk.virtual_write(1, bme680.temperature)
-    blynk.virtual_write(2, bme680.humidity)
-    blynk.virtual_write(3,  bme680.pressure)
-    blynk.virtual_write(4,  bme680.altitude)
-    blynk.virtual_write(5,  bme680.gas)
+    
+    if not all([temperature]):
+        temperature =  bme680.temperature
+        blynk.virtual_write(1, temperature)
+        if temperature <= T_CRI_VALUE:
+           blynk.set_property(1, 'color', T_CRI_COLOR)
+           # send notifications not each time but once a minute (6*10 sec)
+           if Counter.cycle % 6 == 0:
+              blynk.notify(T_CRI_MSG)
+              Counter.cycle = 0
+        else:
+           blynk.set_property(1, 'color', T_COLOR)
+    else:
+        blynk.set_property(1, 'color', ERR_COLOR)
+     
+
+        
+        
+    if not all([bme680.gas, bme680.altitude,bme680.pressure,bme680.humidity]):
+       blynk.set_property(3, 'color', ERR_COLOR)
+       blynk.set_property(2, 'color', ERR_COLOR)
+       blynk.set_property(11, 'color', ERR_COLOR)
+       blynk.set_property(12, 'color', ERR_COLOR)
+   else:    
+       blynk.virtual_write(3, bme680.humidity)
+       blynk.set_property(3, 'color', H_COLOR)
+       blynk.virtual_write(2,  bme680.pressure)
+       blynk.set_property(2, 'color', P_COLOR)
+       blynk.virtual_write(11,  bme680.altitude)
+       blynk.set_property(11, 'color', H_COLOR)
+       blynk.virtual_write(12,  bme680.gas)
+       blynk.set_property(12, 'color', H_COLOR)
+    
+        
     _log.info("Log GPIO data")
     blynk.virtual_write(37, GPIO.input(buttEmptySensor))
     blynk.virtual_write(38, GPIO.input(buttFullSensor))
@@ -176,10 +225,12 @@ def blynk_data():
     _log.info("Read Ph data")
     #Convert voltage to PH with temperature compensation
     pH = ph.readPH(adc0['r'],temperature)
+    blynk.virtual_write(32, "{}".format(pH))
     _log.info("pH Value ={}".format(pH))
     
     _log.info("Read EC data")
     eC = ec.readEC(adc1['r'],temperature)
+    blynk.virtual_write(31, "{}".format(eC))
     _log.info("eC Value ={}".format(eC))
     
     _log.info("Read CO2 data")
@@ -187,10 +238,10 @@ def blynk_data():
     blynk.virtual_write(10, sensorValue)
     
     _log.info("sensorValue ={}".format(sensorValue))
-    voltage = sensorValue*(5000/1024.0)
-    _log.info("voltage ={}".format(voltage))
-    if(voltage == 0):
-       _log.info("Fault")
+  #  voltage = sensorValue*(5000/1024.0)
+  #  _log.info("voltage ={}".format(voltage))
+  #  if(voltage == 0):
+    #   _log.info("Fault")
    # elif(voltage < 400): 
    #    _log.info("preheating")
    # else:
@@ -202,7 +253,7 @@ def blynk_data():
     
     _log.debug("Read Light data")
     light = adc3['r']
-    blynk.virtual_write(13, light)
+    blynk.virtual_write(7, light)
     _log.info("light ={}".format(light))
     blynk.virtual_write(98, "Completed Timer Function" + '\n') 
     
