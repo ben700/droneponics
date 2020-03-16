@@ -39,7 +39,7 @@ class DFRobot_PH():
 			print (">>>PH:7.0 Calibration completed,Please enter Ctrl+C exit calibration in 5 seconds")
 			time.sleep(5.0)
 		elif (voltage>1854 and voltage<2210):
-			print (">>>Buffer Solution:4.0"
+			print (">>>Buffer Solution:4.0")
 			f=open('phdata.txt','r+')
 			flist=f.readlines()
 			flist[1]='acidVoltage='+ str(voltage) + '\n'
