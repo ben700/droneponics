@@ -1,5 +1,4 @@
 import sys
-sys.path.append('../')
 import time
 ADS1115_REG_CONFIG_PGA_6_144V        = 0x00 # 6.144V range = Gain 2/3
 ADS1115_REG_CONFIG_PGA_4_096V        = 0x02 # 4.096V range = Gain 1
@@ -23,7 +22,7 @@ while True :
 	ads1115.setGain(ADS1115_REG_CONFIG_PGA_6_144V)
 	#Get the Digital Value of Analog of selected channel
 	adc0 = ads1115.readVoltage(0)
-	print "A0:%dmV "%(adc0['r'])
+	print ("A0:%dmV " % adc0['r'])
 	#Calibrate the calibration data
 	ph.calibration(adc0['r'])
 	time.sleep(1.0)

@@ -23,7 +23,7 @@ while True :
 	ads1115.setGain(ADS1115_REG_CONFIG_PGA_6_144V)
 	#Get the Digital Value of Analog of selected channel
 	adc1 = ads1115.readVoltage(1)
-	print ("A0:%dmV "%(adc1['r']))
+	print ("A0:%dmV " % adc1['r'])
 	#Calibrate the calibration data
 	ec.calibration(adc1['r'],temperature)
 	time.sleep(3.0)
