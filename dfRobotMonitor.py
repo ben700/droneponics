@@ -154,19 +154,22 @@ def buttonV255Pressed(value):
     # Will Print Every 10 Seconds
 @timer.register(interval=10, run_once=False)
 def blynk_data():
-    _log.info("Start of blynk_data")
+    _log.info("Start of blynk_data:- do actions")
+    GPIO.output(Relay1,GPIO.input(buttEmptySensor))   
+    _log.info("Start Logging data")
     now = datetime.now()
     blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
+    blynk.virtual_write(98, "Log BME data")
     blynk.virtual_write(1, bme680.temperature)
-    print("Gas: %d ohm" % bme680.gas)
     blynk.virtual_write(2, bme680.humidity)
     blynk.virtual_write(3,  bme680.pressure)
     blynk.virtual_write(4,  bme680.altitude)
+    blynk.virtual_write(5,  bme680.gas)
+    _log.info("Log GPIO data")
     blynk.virtual_write(37, GPIO.input(buttEmptySensor))
     blynk.virtual_write(38, GPIO.input(buttFullSensor))
-    GPIO.output(Relay1,GPIO.input(buttEmptySensor))   
-    blynk.virtual_write(98, "Completed Timer Function" + '\n') 
         
+    _log.info("Log ADC data")
     temperature = 25
 	#Convert voltage to PH with temperature compensation
     pH = ph.readPH(adc0['r'],temperature)
@@ -186,6 +189,8 @@ def blynk_data():
     
     light = adc.read_adc(3, gain=GAIN)
     blynk.virtual_write(13, light)
+    
+    blynk.virtual_write(98, "Completed Timer Function" + '\n') 
     
     
     
