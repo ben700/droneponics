@@ -94,11 +94,7 @@ ads1115.setAddr_ADS1115(0x48)
 #Sets the gain and input voltage range.
 ads1115.setGain(ADS1115_REG_CONFIG_PGA_6_144V)
 #Get the Digital Value of Analog of selected channel
-adc0 = ads1115.readVoltage(0) #ph
-adc1 = ads1115.readVoltage(1) #ec
-adc2 = ads1115.readVoltage(2) #co2
-adc3 = ads1115.readVoltage(3) #light
-	
+
     
 # Initialize the GPIO Pins
 os.system('modprobe w1-gpio')  # Turns on the GPIO module
@@ -171,6 +167,11 @@ def blynk_data():
         
     _log.info("Log ADC data")
     temperature = 25
+    adc0 = ads1115.readVoltage(0) #ph
+    adc1 = ads1115.readVoltage(1) #ec
+    adc2 = ads1115.readVoltage(2) #co2
+    adc3 = ads1115.readVoltage(3) #light
+	
 	#Convert voltage to PH with temperature compensation
     pH = ph.readPH(adc0['r'],temperature)
     eC = ec.readEC(adc1['r'],temperature)
