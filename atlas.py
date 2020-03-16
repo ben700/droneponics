@@ -409,17 +409,7 @@ def blynk_data():
     _log.info("Temp = " + cTemp)
     blynk.virtual_write(30, cTemp)
     
-
-    if (cTemp < WT_CRI_VALUE):
-        GPIO.output(Relay4,GPIO.LOW)
-        blynk.set_property(8, 'color', colors[GPIO.LOE])
-        blynk.virtual_write(98,"Heater turned on" + '\n')
-    else:
-        blynk.set_property(8, 'color', colors[GPIO.HIGH])
-        GPIO.output(Relay4,GPIO.HIGH)
-        blynk.virtual_write(98, "Heater turned off" + '\n')
-    
-          
+  
    
         
     _log.info("read ec")
