@@ -22,6 +22,27 @@ from adafruit_ads1x15.analog_in import AnalogIn
 import os
 import logging
 
+class Counter:
+    cycle = 0
+    
+bootup = True
+T_CRI_VALUE = 16.5  # 16.5°C
+WT_CRI_VALUE = 16.5  # 16.5°C
+T_CRI_MSG = 'Low TEMP!!!'
+T_CRI_COLOR = '#c0392b'
+
+T_COLOR = '#f5b041'
+H_COLOR = '#85c1e9'
+P_COLOR = '#a2d9ce'
+
+TL_COLOR = '#cea2d9'
+IR_COLOR = '#a2add9'
+VL_COLOR = '#d9cea2'
+FS_COLOR = '#add9a2'
+
+CO2_COLOR = '#d9b3a2'
+
+ERR_COLOR = '#444444' 
 
 bootup = True 
 
@@ -412,6 +433,19 @@ def blynk_data():
     _log.info("Temp = " + cTemp)
     blynk.virtual_write(30, cTemp)
     
+
+    if (cTemp < WT_LOW_CRI_VALUE):
+        GPIO.output(Relay4,GPIO.LOW)
+        blynk.set_property(8, 'color', colors[GPIO.LOE])
+        blynk.virtual_write(98,"Heater turned on" + '\n')
+    else:
+        blynk.set_property(8, 'color', colors[GPIO.HIGH])
+        GPIO.output(Relay4,GPIO.HIGH)
+        blynk.virtual_write(98, "Heater turned off" + '\n')
+    
+          
+   
+        
     _log.info("read ec")
     try:
         cEC = ec.query("RT,"+cTemp).split(":")[1]
@@ -419,7 +453,7 @@ def blynk_data():
         blynk.virtual_write(98, "Read EC Error" + '\n')
         cEC = 'Error'
         devices = devices.list_i2c_devices()
-        for device in devices
+        for device in devices:
            blynk.virtual_write(98, device.address() + '\n')
    
     else:
@@ -430,6 +464,7 @@ def blynk_data():
         blynk.virtual_write(98, "EC finally" + '\n')
         
     
+       
     
     _log.info("read PH")
     try:
