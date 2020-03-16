@@ -29,7 +29,9 @@ from AtlasI2C import (
 #pump = AtlasI2C(103, "PUMP")
 
 
-beautiful_number = input("Are you sure you want to calibrate ")
+answer = input("Are you sure you want to calibrate (y/n)")
+if answer is None or answer != 'y':
+    break
 
 #print(device.list_i2c_devices())
 #print("Temp Device Info = " + temp.query("i"))
