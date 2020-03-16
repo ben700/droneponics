@@ -178,6 +178,30 @@ print(GPIO.input(buttFullSensor))
 
 
 
+# Initialize the sensor.
+try:
+   # Create the I2C bus
+   i2c = busio.I2C(board.SCL, board.SDA)
+    
+except:
+    i2c = None
+    chan = None
+    ss1 = None
+    ss2 = None
+    ss3 = None
+    ss4 = None
+    _log.info("Unexpected error: I2C")
+else:
+    ads = ADS.ADS1015(i2c) 
+    chan = AnalogIn(ads, ADS.P0)
+    _log.info("create soil sonsors")
+    ss1 = Seesaw(i2c, addr=0x36)
+    ss2 = Seesaw(i2c, addr=0x37)
+    ss3 = Seesaw(i2c, addr=0x38)
+    ss4 = Seesaw(i2c, addr=0x38)
+finally:
+    _log.info("Unexpected error: I2C finally")
+
 
 # The ID and range of a sample spreadsheet.
 BLYNK_AUTH = 'XVbhfI6ZYxkqFp7d4RsCIN6Is9YnKp9q' #atlasButt
@@ -207,7 +231,7 @@ ph = AtlasI2C(99)
 #do = AtlasI2C(97)
 #flow = AtlasI2C(104)
 #pump = AtlasI2C(103)
-#colour = AtlasI2C(112)
+colour = AtlasI2C(112)
 
 
 #_log.info("Temp Device Info = " + temp.query("i"))
@@ -452,8 +476,49 @@ def blynk_data():
        _log.info("Read Ph Error")
        cPH = 'Error'
 
+    _log.info("read colour")
+    try:
+       cColour = colour.query("R").split(":")[1]
+       blynk.virtual_write(27, cColour.split(",")[0])
+       blynk.virtual_write(28, cColour.split(",")[1])
+       blynk.virtual_write(29, cColour.split(",")[2])
+       blynk.virtual_write(33, cColour)
+       _log.info ("Colour = " + cColour)
+    except:
+       blynk.virtual_write(98, "Read PH Error" + '\n') 
+       _log.info("Read Colour Error")
+       cColour = 'Error'
+
+    _log.info("now the adc")
+    volt = chan.voltage
+    if volt is not None:
+       blynk.virtual_write(35, str("{0}".format((volt-1.5)*100)))
+       blynk.virtual_write(36, str("{0:.2f}".format((volt-1.5)*12)))
+    else:
+       blynk.virtual_write(98, "Read ADC Error" + '\n') 
+        
+    _log.info("now the soil sensor")
+    if (ss1 is not None):
+        _log.info("now record the soil sensor")
+        blynk.virtual_write(11, str(ss1.moisture_read()))
+        blynk.virtual_write(12, str(ss1.get_temp()))
+        _log.info ("Channel 1 moisture reading is "+str(ss1.moisture_read())+" and Temp is :" +  str("{0:.2f}".format(ss1.get_temp())))
+    if (ss2 is not None):    
+       blynk.virtual_write(13, str(ss2.moisture_read()))
+       blynk.virtual_write(14, str(ss2.get_temp()))
+       _log.info ("Channel 2 moisture reading is "+str(ss2.moisture_read())+" and Temp is :" +  str("{0:.2f}".format(ss2.get_temp())))
+    if (ss3 is not None):    
+       blynk.virtual_write(15, str(ss3.moisture_read()))          
+       blynk.virtual_write(16, str(ss3.get_temp()))
+       _log.info ("Channel 3 moisture reading is "+str(ss3.moisture_read())+" and Temp is :" +  str("{0:.2f}".format(ss3.get_temp())))
+    if (ss4 is not None):    
+       blynk.virtual_write(17, str(ss4.moisture_read()))
+       blynk.virtual_write(18, str(ss4.get_temp()))
+       _log.info ("Channel 4 moisture reading is "+str(ss4.moisture_read())+" and Temp is :" +  str("{0:.2f}".format(ss4.get_temp())))
     
     _log.info("now the digital single wire")
+    blynk.virtual_write(37, 9)
+    blynk.virtual_write(38, 9)
     
     
     blynk.virtual_write(37, GPIO.input(buttEmptySensor))
