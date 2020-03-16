@@ -182,14 +182,17 @@ def blynk_data():
     _log.info("Read CO2 data")
     sensorValue = adc2['r']
     _log.info("sensorValue ={}".format(sensorValue))
-    voltage = sensorValue*(5000/1024.0);
+    voltage = sensorValue*(5000/1024.0)
+    _log.info("voltage ={}".format(voltage))
     if(voltage == 0):
        _log.info("Fault")
     elif(voltage < 400): 
        _log.info("preheating")
     else:
-       voltage_diference=voltahtge-400;
-       concentration=voltage_diference*50.0/16.0;
+       voltage_diference=voltage-400
+       _log.info("voltage ={}".format(voltage_diference))
+       concentration=voltage_diference*50.0/16.0
+       _log.info("concentration ={}".format(concentration))
        blynk.virtual_write(10, concentration)
       
     
