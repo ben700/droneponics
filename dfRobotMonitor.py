@@ -1,4 +1,5 @@
-    #!/usr/bin/python
+#!/usr/bin/python
+try:
     import logging
     import blynklib
     import blynktimer
@@ -275,5 +276,7 @@
         except:
            _log.info('Unexpected error')
            os.system('sh /home/pi/updateDroneponics.sh')
-
+except:
+   _log.info('Unexpected error')
+   os.system('sh /home/pi/updateDroneponics.sh')
  
