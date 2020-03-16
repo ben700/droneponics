@@ -43,6 +43,7 @@ FS_COLOR = '#add9a2'
 CO2_COLOR = '#d9b3a2'
 
 ERR_COLOR = '#444444' 
+colors = {'1': '#23C48E', '0': '#D3435C', 'OFFLINE': '#FF0000'}
 
 bootup = True 
 
