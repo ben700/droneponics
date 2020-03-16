@@ -31,7 +31,7 @@ from AtlasI2C import (
 
 answer = input("Are you sure you want to calibrate (y/n)")
 if answer is None or answer != 'y':
-    break
+    quit()
 
 #print(device.list_i2c_devices())
 #print("Temp Device Info = " + temp.query("i"))
