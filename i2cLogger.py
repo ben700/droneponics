@@ -1,4 +1,4 @@
-##!/usr/bin/env python3 
+    ##!/usr/bin/env python3 
 
 try:
     from python_tsl2591 import tsl2591
@@ -77,10 +77,10 @@ try:
         
         blynk.virtual_write(37, GPIO.input(buttEmptySensor))
         blynk.virtual_write(38, GPIO.input(buttFullSensor))
-        #blynk.virtual_write(10,255)
-        #blynk.set_property(10, 'color', colours[GPIO.input(buttFullSensor)])
-        #blynk.virtual_write(9,255)
-        #blynk.set_property(9, 'color', colours[GPIO.input(buttEmptySensor)])
+        blynk.virtual_write(10,255)
+        blynk.set_property(10, 'color', colours[GPIO.input(buttFullSensor)])
+        blynk.virtual_write(9,255)
+        blynk.set_property(9, 'color', colours[GPIO.input(buttEmptySensor)])
         blynk.virtual_write(98, "Completed Timer Function" + '\n') 
         
 
@@ -101,6 +101,7 @@ try:
            timer.run()
         except:
            _log.info('Unexpected error')
+           blynk.virtual_write(98, "System has main loop error" + '\n')
            os.system('sh /home/pi/updateDroneponics.sh')
            os.system('sudo reboot') 
 except:
