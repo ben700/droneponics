@@ -63,6 +63,8 @@ try:
     @blynk.handle_event('write V255')
     def rebooter(pin, value):
         blynk.virtual_write(98, "User Reboot " + '\n')
+        blynk.set_property(10, 'color', colours['OFFLINE'])
+        blynk.set_property(9, 'color', colours['OFFLINE'])   
         os.system('sh /home/pi/updateDroneponics.sh')
         blynk.virtual_write(98, "System updated and restarting " + '\n')
         os.system('sudo reboot')
