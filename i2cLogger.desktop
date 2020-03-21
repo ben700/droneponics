@@ -1,0 +1,4 @@
+[Desktop Entry]
+Type=Application
+Name=i2cLogger
+Exec=xterm -hold -e '/usr/bin/python3 /home/pi/droneponics/i2cLogger.py'
