@@ -74,15 +74,15 @@ try:
         Counter.cycle += 1
         now = datetime.now()
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))    
-        blynk.virtual_write(98, "Completed Timer Function" + '\n') 
         
+        blynk.virtual_write(37, GPIO.input(buttEmptySensor))
+        blynk.virtual_write(38, GPIO.input(buttFullSensor))
         blynk.virtual_write(10,255)
         blynk.set_property(10, 'color', colours[GPIO.input(buttFullSensor)])
         blynk.virtual_write(9,255)
         blynk.set_property(9, 'color', colours[GPIO.input(buttEmptySensor)])
-        blynk.virtual_write(37, GPIO.input(buttEmptySensor))
-        blynk.virtual_write(38, GPIO.input(buttFullSensor))
-    
+        blynk.virtual_write(98, "Completed Timer Function" + '\n') 
+        
 
 
 
