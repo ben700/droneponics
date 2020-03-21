@@ -1,4 +1,4 @@
-    ##!/usr/bin/env python3 
+##!/usr/bin/env python3 
 
 try:
     from python_tsl2591 import tsl2591
@@ -81,7 +81,7 @@ try:
         blynk.virtual_write(37, GPIO.input(buttEmptySensor))
         blynk.virtual_write(38, GPIO.input(buttFullSensor))
         blynk.set_property(10, 'color', colours['1'])
-        blynk.set_property(9, 'color', colours['0'])
+        blynk.set_property(9, 'color', colours['1'])
         
         #blynk.set_property(10, 'color', colours[GPIO.input(buttFullSensor)])
         #blynk.set_property(9, 'color', colours[GPIO.input(buttEmptySensor)])
