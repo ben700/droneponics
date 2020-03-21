@@ -49,16 +49,13 @@ READ_PRINT_MSG = "[READ_VIRTUAL_PIN_EVENT] Pin: V{}"
 ALLOWED_COMMANDS_LIST = ['ls', 'lsusb', 'ip a', 'ip abc']
 TWEET_MSG = "New value='{}' on VPIN({})"
 
-
-
-@blynk.handle_event("write V255")
-def buttonV255Pressed(value):
+    
+@blynk.handle_event('write V255')
+def rebooter(pin, value):
     blynk.virtual_write(98, "User Reboot " + '\n')
     os.system('sh /home/pi/updateDroneponics.sh')
     blynk.virtual_write(98, "System updated and restarting " + '\n')
     os.system('sudo reboot')
-    
-    
     
   
 @timer.register(interval=10, run_once=False)
