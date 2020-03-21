@@ -52,6 +52,7 @@ TWEET_MSG = "New value='{}' on VPIN({})"
     
 @blynk.handle_event('write V255')
 def rebooter(pin, value):
+    _log.info("Update Software")
     blynk.virtual_write(98, "User Reboot " + '\n')
     os.system('sh /home/pi/updateDroneponics.sh')
     blynk.virtual_write(98, "System updated and restarting " + '\n')
