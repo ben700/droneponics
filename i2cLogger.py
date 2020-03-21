@@ -37,8 +37,8 @@ try:
     
     buttFullSensor =  8
     buttEmptySensor = 10
-    GPIO.setup(buttFullSensor, GPIO.IN)
-    GPIO.setup(buttEmptySensor, GPIO.IN)
+    GPIO.setup(buttFullSensor, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+    GPIO.setup(buttEmptySensor, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
     _log.info(GPIO.input(buttEmptySensor))
     _log.info(GPIO.input(buttFullSensor))
 
@@ -100,3 +100,5 @@ except:
    blynk.virtual_write(98, "System has error" + '\n')
    os.system('sh /home/pi/updateDroneponics.sh')
    os.system('sudo reboot')
+finally:
+   GPIO.cleanup()
