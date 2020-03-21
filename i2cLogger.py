@@ -25,14 +25,6 @@ try:
         cycle = 0
 
     bootup = True
-    
-    buttFullSensor =  8
-    buttEmptySensor = 10
-    GPIO.setup(buttFullSensor, GPIO.IN)
-    GPIO.setup(buttEmptySensor, GPIO.IN)
-    _log.info(GPIO.input(buttEmptySensor))
-    _log.info(GPIO.input(buttFullSensor))
-
 
 
     # tune console logging
@@ -42,6 +34,14 @@ try:
     consoleHandler.setFormatter(logFormatter)
     _log.addHandler(consoleHandler)
     _log.setLevel(logging.DEBUG)
+    
+    buttFullSensor =  8
+    buttEmptySensor = 10
+    GPIO.setup(buttFullSensor, GPIO.IN)
+    GPIO.setup(buttEmptySensor, GPIO.IN)
+    _log.info(GPIO.input(buttEmptySensor))
+    _log.info(GPIO.input(buttFullSensor))
+
 
     BLYNK_AUTH = '4IfX_hzDREonPi_PIDQrETikxc0-XpqI' #i2cLogger
 
