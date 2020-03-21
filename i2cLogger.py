@@ -77,10 +77,8 @@ try:
         
         blynk.virtual_write(37, GPIO.input(buttEmptySensor))
         blynk.virtual_write(38, GPIO.input(buttFullSensor))
-        blynk.virtual_write(10,255)
-        blynk.set_property(10, 'color', colours[GPIO.input(buttFullSensor)])
-        blynk.virtual_write(9,255)
-        blynk.set_property(9, 'color', colours[GPIO.input(buttEmptySensor)])
+        #blynk.set_property(10, 'color', colours[GPIO.input(buttFullSensor)])
+        #blynk.set_property(9, 'color', colours[GPIO.input(buttEmptySensor)])
         blynk.virtual_write(98, "Completed Timer Function" + '\n') 
         
 
@@ -107,6 +105,8 @@ try:
         except:
            _log.info('Unexpected error')
            blynk.virtual_write(98, "System has main loop error" + '\n')
+           blynk.set_property(10, 'color', colours['OFFLINE'])
+           blynk.set_property(9, 'color', colours['OFFLINE']) 
            os.system('sh /home/pi/updateDroneponics.sh')
            os.system('sudo reboot') 
 except:
