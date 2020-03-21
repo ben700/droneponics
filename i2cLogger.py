@@ -25,7 +25,7 @@ try:
         cycle = 0
 
     bootup = True
-    colors = {'1': '#23C48E', '0': '#D3435C', 'OFFLINE': '#FF0000'}
+    colours = {'1': '#23C48E', '0': '#D3435C', 'OFFLINE': '#FF0000'}
 
 
     # tune console logging
