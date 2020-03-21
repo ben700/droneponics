@@ -93,7 +93,12 @@ try:
               bootup = False
               now = datetime.now()
               blynk.virtual_write(99, now.strftime("%d/%m/%Y %H:%M:%S"))
-              blynk.virtual_write(98, "clr")
+              blynk.virtual_write(10,255)
+              blynk.set_property(10, 'color', colours['OFFLINE'])
+              blynk.virtual_write(9,255)
+              blynk.set_property(9, 'color', colours['OFFLINE'])
+            
+              #blynk.virtual_write(98, "clr")
               blynk.virtual_write(98, "System now updated and restarted " + '\n')
               blynk.virtual_write(255, 0)
               _log.info('Just Booted')
