@@ -1,4 +1,4 @@
-##!/usr/bin/env python3 
+    ##!/usr/bin/env python3 
 
 try:
     from python_tsl2591 import tsl2591
@@ -25,7 +25,8 @@ try:
         cycle = 0
 
     bootup = True
-    colours = {'1': '#00FF00', '0': '#FF0000', 'OFFLINE': '#0000FF'}
+    colours = {1: '#00FF00', 0: '#FF0000', 'OFFLINE': '#0000FF'}
+
 
     # tune console logging
     _log = logging.getLogger('BlynkLog')
@@ -79,11 +80,9 @@ try:
         
         blynk.virtual_write(37, GPIO.input(buttEmptySensor))
         blynk.virtual_write(38, GPIO.input(buttFullSensor))
-        blynk.set_property(10, 'color', colours['0'])
-        blynk.set_property(9, 'color', colours['0'])
         
-        #blynk.set_property(10, 'color', colours[GPIO.input(buttFullSensor)])
-        #blynk.set_property(9, 'color', colours[GPIO.input(buttEmptySensor)])
+        blynk.set_property(10, 'color', colours[GPIO.input(buttFullSensor)])
+        blynk.set_property(9, 'color', colours[GPIO.input(buttEmptySensor)])
         blynk.virtual_write(98, "Completed Timer Function" + '\n') 
         
 
