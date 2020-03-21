@@ -78,6 +78,7 @@ try:
         
         blynk.virtual_write(37, GPIO.input(buttEmptySensor))
         blynk.virtual_write(38, GPIO.input(buttFullSensor))
+        blynk.set_property(10, 'color', colours['1'])
         #blynk.set_property(10, 'color', colours[GPIO.input(buttFullSensor)])
         #blynk.set_property(9, 'color', colours[GPIO.input(buttEmptySensor)])
         blynk.virtual_write(98, "Completed Timer Function" + '\n') 
@@ -93,10 +94,7 @@ try:
               now = datetime.now()
               blynk.virtual_write(99, now.strftime("%d/%m/%Y %H:%M:%S"))
               blynk.virtual_write(10,255)
-              blynk.set_property(10, 'color', colours['OFFLINE'])
               blynk.virtual_write(9,255)
-              blynk.set_property(9, 'color', colours['OFFLINE'])
-            
               #blynk.virtual_write(98, "clr")
               blynk.virtual_write(98, "System now updated and restarted " + '\n')
               blynk.virtual_write(255, 0)
@@ -113,7 +111,9 @@ try:
 except:
    _log.info('Unexpected error')
    blynkErr = blynklib.Blynk(BLYNK_AUTH)
-   blynk.virtual_write(98, "System has error" + '\n')
+   blynkErr.set_property(10, 'color', colours['OFFLINE'])
+   blynkErr.set_property(9, 'color', colours['OFFLINE'])   
+   blynkErr.virtual_write(98, "System has error" + '\n')
    os.system('sh /home/pi/updateDroneponics.sh')
    os.system('sudo reboot')
 finally:
