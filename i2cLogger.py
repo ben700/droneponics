@@ -25,8 +25,7 @@ try:
         cycle = 0
 
     bootup = True
-    colours = {'1': '#23C48E', '0': '#D3435C', 'OFFLINE': '#FF0000'}
-
+    colours = {'1': '#00FF00', '0': '#FF0000', 'OFFLINE': '#0000FF'}
 
     # tune console logging
     _log = logging.getLogger('BlynkLog')
