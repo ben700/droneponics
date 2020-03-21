@@ -19,6 +19,7 @@ try:
     import adafruit_tsl2591
     import sys
     import os
+    import RPi.GPIO as GPIO
 
     class Counter:
         cycle = 0
