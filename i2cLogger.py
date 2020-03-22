@@ -21,6 +21,10 @@ try:
     import sys
     import os
     import RPi.GPIO as GPIO
+    
+    import os
+    import subprocess
+    import re
 
     class Counter:
         cycle = 0
@@ -88,6 +92,13 @@ try:
     while True:
         try:
            blynk.run()
+        
+           p = subprocess.Popen(['i2cdetect', '-y','1'],stdout=subprocess.PIPE,)
+           #cmdout = str(p.communicate())
+           for i in range(0,9):
+               blynk.virtual_write(98, str(p.stdout.readline()) + '\n')
+              
+ 
            if bootup :
               bootup = False
               now = datetime.now()
