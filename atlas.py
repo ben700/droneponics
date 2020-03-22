@@ -134,7 +134,7 @@ dosePumps.append( DosePump(Pump9, LED[8], "Unused"))
 dosePumps.append( DosePump(Pump10, LED[9], "pH")) 
 
 
-noisyThingsWhenButtEmpty = [Relay1, Relay2s]
+noisyThingsWhenButtEmpty = [Relay1, Relay2]
 
 
 GPIO.setup(Relay1,GPIO.OUT)
