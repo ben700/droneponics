@@ -66,6 +66,10 @@ try:
     def readV1(value):
        _log.info("in read v1")
        _log.info(value)
+    @blynkTemp.handle_event('write V1')
+    def readV1(pin, value):
+       _log.info("in write v1")
+       _log.info(value)
         
     @blynk.handle_event('write V255')
     def rebooter(pin, value):
