@@ -396,16 +396,15 @@ def openButtbuttonPressed(pin, value):
         
     blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
     blynk.virtual_write(98, "User requested to fill butt" + '\n')
-    GPIO.output(solenoidOut, value[0])   
+    GPIO.output(solenoidIn, value[0])   
 
 @blynk.handle_event('write V91')
 def openButtbuttonPressed(pin, value):
-    GPIO.output(solenoidOut, value[0])  
     now = datetime.now()
     _log.info("User requested to close butt")
     blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
     blynk.virtual_write(98, "User requested to change butt bottom tap" + '\n')
-
+    GPIO.output(solenoidOut, value[0])  
         
 # Will Print Every 10 Seconds
 @timer.register(interval=10, run_once=False)
