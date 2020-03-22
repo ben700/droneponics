@@ -22,7 +22,6 @@ try:
     import os
     import RPi.GPIO as GPIO
     
-    import os
     import subprocess
     import re
 

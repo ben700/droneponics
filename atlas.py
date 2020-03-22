@@ -21,6 +21,8 @@ import adafruit_ads1x15.ads1015 as ADS
 from adafruit_ads1x15.analog_in import AnalogIn
 import os
 import logging
+import subprocess
+import re
 
 class Counter:
     cycle = 0
@@ -479,6 +481,10 @@ while True:
     try:
        blynk.run()
        if bootup :
+          p = subprocess.Popen(['i2cdetect', '-y','1'],stdout=subprocess.PIPE,)
+          #cmdout = str(p.communicate())
+          for i in range(0,9):
+              blynk.virtual_write(98, str(p.stdout.readline()) + '\n')
           bootup = False
           now = datetime.now()
           blynk.virtual_write(99, now.strftime("%d/%m/%Y %H:%M:%S"))
