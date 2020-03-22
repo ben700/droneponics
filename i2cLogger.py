@@ -1,4 +1,5 @@
-    ##!/usr/bin/env python3 
+##!/usr/bin/env python3 
+BLYNK_AUTH = '4IfX_hzDREonPi_PIDQrETikxc0-XpqI' #i2cLogger
 
 try:
     from python_tsl2591 import tsl2591
@@ -45,8 +46,7 @@ try:
     _log.info(GPIO.input(buttFullSensor))
 
 
-    BLYNK_AUTH = '4IfX_hzDREonPi_PIDQrETikxc0-XpqI' #i2cLogger
-
+    
     # Initialize Blynk
     blynk = blynklib.Blynk(BLYNK_AUTH)
     timer = blynktimer.Timer()
