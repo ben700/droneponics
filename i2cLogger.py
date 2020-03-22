@@ -37,8 +37,8 @@ try:
     _log.addHandler(consoleHandler)
     _log.setLevel(logging.DEBUG)
     
-    buttFullSensor =  8
-    buttEmptySensor = 10
+    buttFullSensor =  14
+    buttEmptySensor = 15
     GPIO.setmode(GPIO.BCM)
     GPIO.setup(buttFullSensor, GPIO.IN, pull_up_down=GPIO.PUD_UP)
     GPIO.setup(buttEmptySensor, GPIO.IN, pull_up_down=GPIO.PUD_UP)
