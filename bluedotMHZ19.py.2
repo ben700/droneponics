@@ -258,7 +258,7 @@ def blynk_data():
        blynk.set_property(1, 'color', T_CRI_COLOR)
        # send notifications not each time but once a minute (6*10 sec)
        if Counter.cycle % 6 == 0:
-          blynk.notify(T_CRI_MSG)
+          blynk.notify(T_CRI_MSG + " :envLogger2")
           Counter.cycle = 0
     else:
        blynk.set_property(1, 'color', T_COLOR)
