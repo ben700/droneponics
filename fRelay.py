@@ -151,9 +151,9 @@ def buttonV4Pressed(pin, value):
     
 @blynk.handle_event('write V255')
 def rebooter(pin, value):
-    _log.info(WRITE_EVENT_PRINT_MSG.format(pin, value))
-    _log.info("User Reboot")
+    blynk.virtual_write(98, "User Reboot " + '\n')  
     os.system('sh /home/pi/updateDroneponics.sh')
+    blynk.virtual_write(98, "System updated and restarting " + '\n')
     os.system('sudo reboot')
     
     
