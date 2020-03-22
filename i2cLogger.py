@@ -93,7 +93,7 @@ try:
         blynk.set_property(10, 'color', colours[GPIO.input(buttFullSensor)])
         blynk.set_property(9, 'color', colours[GPIO.input(buttEmptySensor)])
         blynk.virtual_write(98, "Completed Timer Function" + '\n') 
-        
+        blynkTemp.run()
         blynkTemp.virtual_sync('V1')
 
     while True:
