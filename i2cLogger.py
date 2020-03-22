@@ -49,6 +49,8 @@ try:
     
     # Initialize Blynk
     blynk = blynklib.Blynk(BLYNK_AUTH)
+    blynkTemp = blynklib.Blynk('ZDy8p4aFPCKGwQhafv4jwUT6TpCY9CyP')
+        
     timer = blynktimer.Timer()
     #blynk.run()
     APP_CONNECT_PRINT_MSG = '[APP_CONNECT_EVENT]'
@@ -60,7 +62,11 @@ try:
     ALLOWED_COMMANDS_LIST = ['ls', 'lsusb', 'ip a', 'ip abc']
     TWEET_MSG = "New value='{}' on VPIN({})"
 
-
+    @blynkTemp.handle_event('read V1')
+    def readV1(value):
+       _log.info("in read v1")
+       _log.info(value)
+        
     @blynk.handle_event('write V255')
     def rebooter(pin, value):
         blynk.virtual_write(98, "User Reboot " + '\n')
@@ -88,11 +94,6 @@ try:
         blynk.set_property(9, 'color', colours[GPIO.input(buttEmptySensor)])
         blynk.virtual_write(98, "Completed Timer Function" + '\n') 
         
-        blynkTemp = blynklib.Blynk('ZDy8p4aFPCKGwQhafv4jwUT6TpCY9CyP')
-        @blynkTemp.handle_event('read V1')
-        def readV1(value):
-            _log.info("in read v1")
-            _log.info(value)
         blynkTemp.virtual_sync('V1')
 
     while True:
