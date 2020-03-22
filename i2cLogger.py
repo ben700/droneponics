@@ -39,8 +39,8 @@ try:
     buttFullSensor =  8
     buttEmptySensor = 10
     GPIO.setmode(GPIO.BOARD)
-    GPIO.setup(buttFullSensor, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-    GPIO.setup(buttEmptySensor, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+    GPIO.setup(buttFullSensor, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+    GPIO.setup(buttEmptySensor, GPIO.IN, pull_up_down=GPIO.PUD_UP)
     _log.info(GPIO.input(buttEmptySensor))
     _log.info(GPIO.input(buttFullSensor))
 
