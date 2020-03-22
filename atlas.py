@@ -77,7 +77,8 @@ BLYNK_BLUE      ="#04C0F8"
 BLYNK_YELLOW    ="#ED9D00"
 BLYNK_RED       ="#D3435C"
 BLYNK_DARK_BLUE ="#5F7CD8"
-colors = {'1': '#23C48E', '0': '#D3435C', 'OFFLINE': '#FF0000'}
+
+colors = {1: '#23C48E', 0: '#D3435C', 'OFFLINE': '#FF0000'}
 
 
 buttFullSensor =  17
@@ -133,7 +134,7 @@ dosePumps.append( DosePump(Pump9, LED[8], "Unused"))
 dosePumps.append( DosePump(Pump10, LED[9], "pH")) 
 
 
-noisyThingsWhenButtEmpty = [Relay1, Relay2, Relay3]
+noisyThingsWhenButtEmpty = [Relay1, Relay2s]
 
 
 GPIO.setup(Relay1,GPIO.OUT)
@@ -385,10 +386,14 @@ def buttonV70Pressed(pin, value):
 @blynk.handle_event('write V90')
 def openButtbuttonPressed(pin, value):
     now = datetime.now()
-    _log.info("User requested to open butt")
+    if value :
+       _log.info("User requested to fill butt")
+    else:
+        _log.info("User requested to stop fill butt")
+        
     blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
-    blynk.virtual_write(98, "User requested to open butt" + '\n')
-    GPIO.output(solenoidOut, GPIO.HIGH)   
+    blynk.virtual_write(98, "User requested to fill butt" + '\n')
+    GPIO.output(solenoidOut, value)   
 
 @blynk.handle_event('write V91')
 def openButtbuttonPressed(pin, value):
@@ -447,22 +452,22 @@ def blynk_data():
     _log.info("now the digital single wire")
     
     
-    blynk.virtual_write(37, GPIO.input(buttEmptySensor))
-    blynk.virtual_write(38, GPIO.input(buttFullSensor))
+  #  blynk.virtual_write(37, GPIO.input(buttEmptySensor))
+  #  blynk.virtual_write(38, GPIO.input(buttFullSensor))
     
     _log.info("Change LEDs for butt sensors")
     
-    if (GPIO.input(buttEmptySensor) == GPIO.LOW) :
-       for Relay in noisyThingsWhenButtEmpty:
-          GPIO.output(Relay,GPIO.LOW)
-       GPIO.output(solenoidIn, GPIO.HIGH)
-       GPIO.output(solenoidOut, GPIO.HIGH)   
-    else:
-       for Relay in noisyThingsWhenButtEmpty:
-          GPIO.output(Relay,GPIO.HIGH)     
-    _log.info("make actions for full butt")
-    if (GPIO.input(buttFullSensor) == GPIO.LOW) : 
-       GPIO.output(solenoidIn, GPIO.LOW)
+   # if (GPIO.input(buttEmptySensor) == GPIO.LOW) :
+   #    for Relay in noisyThingsWhenButtEmpty:
+   #       GPIO.output(Relay,GPIO.LOW)
+   #    GPIO.output(solenoidIn, GPIO.HIGH)
+   #    GPIO.output(solenoidOut, GPIO.HIGH)   
+   # else:
+   #    for Relay in noisyThingsWhenButtEmpty:
+   #      GPIO.output(Relay,GPIO.HIGH)     
+   # _log.info("make actions for full butt")
+   # if (GPIO.input(buttFullSensor) == GPIO.LOW) : 
+   #    GPIO.output(solenoidIn, GPIO.LOW)
 
     blynk.virtual_write(98, "Completed Timer Function" + '\n') 
       
