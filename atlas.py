@@ -387,6 +387,7 @@ def buttonV70Pressed(pin, value):
     
 @blynk.handle_event('write V90')
 def openButtbuttonPressed(pin, value):
+    #GPIO.output(solenoidIn, value[0])
     now = datetime.now()
     _log.info(value)
     if (value[0] == '0'):
@@ -395,7 +396,7 @@ def openButtbuttonPressed(pin, value):
         _log.info("User requested to stop fill butt")
         
     blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
-    blynk.virtual_write(98, "User requested to fill butt" + '\n')
+    blynk.virtual_write(98, "User requested to fill butt" + str(value[0]) + '\n')
     GPIO.output(solenoidIn, value[0])   
 
 @blynk.handle_event('write V91')
