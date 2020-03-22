@@ -96,7 +96,7 @@ colors = {'1': '#23C48E', '0': '#D3435C', 'OFFLINE': '#FF0000'}
 def readV1(pin, value):
    _log.info("in write v1")
    _log.info(value)
-   blynk.virtual_write(98, "Temp was " + str(value) +'\n') 
+   blynk.virtual_write(98, "Temp was " + str(value[0]) +'\n') 
     
   
 @blynk.handle_event('write V1')
