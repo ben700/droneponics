@@ -196,6 +196,7 @@ def blynk_data():
        blynk.virtual_write(18, str(ss4.get_temp()))
        _log.info ("Channel 4 moisture reading is "+str(ss4.moisture_read())+" and Temp is :" +  str("{0:.2f}".format(ss4.get_temp())))
     
+    blynk.virtual_write(98, "Timer Function:- Get Temp" + '\n')
     blynkTemp.run()
     blynkTemp.virtual_sync('V1')
     blynk.virtual_write(98, "Completed Timer Function" + '\n') 
