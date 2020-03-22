@@ -394,7 +394,7 @@ def openButtbuttonPressed(pin, value):
         
     blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
     blynk.virtual_write(98, "User requested to fill butt" + '\n')
-    GPIO.output(solenoidOut, value)   
+    GPIO.output(solenoidOut, value[0])   
 
 @blynk.handle_event('write V91')
 def openButtbuttonPressed(pin, value):
