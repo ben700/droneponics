@@ -87,7 +87,7 @@ buttFullSensor =  17
 buttEmptySensor = 6
 
 #pins for solenoid
-solenoidIn = 18
+solenoidIn = 1
 solenoidOut = 23
 
 
