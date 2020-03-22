@@ -35,7 +35,9 @@ BLYNK_AUTH = 'rHuhXZ97FK3_azBlFK1AC4pIPNUxgw7B' #envControl
 #BLYNK_AUTH = 'SHraFqInf27JKowTcFZapu0rHH2QGtuO' #atlasReservoir
 #BLYNK_AUTH = 'XVbhfI6ZYxkqFp7d4RsCIN6Is9YnKp9q' #atlasButt
 
-Relay1 = 26 #waste
+BLYNK_AUTH_TEMP = 'FnSZls3WUdCbWmDJvfnjz3f83Sm70HqI' #envLogger2
+
+Relay1 = 26 #heater
 Relay2 = 19 #Feed
 Relay3 = 13 #Air
 Relay4 = 6  #Mixer - turned off with low water 
@@ -73,6 +75,8 @@ finally:
     
 # Initialize Blynk
 blynk = blynklib.Blynk(BLYNK_AUTH)
+blynkTemp = blynklib.Blynk(BLYNK_AUTH_TEMP)
+      
 timer = blynktimer.Timer()
 
 
@@ -86,6 +90,10 @@ ALLOWED_COMMANDS_LIST = ['ls', 'lsusb', 'ip a', 'ip abc']
 TWEET_MSG = "New value='{}' on VPIN({})"
 colors = {'1': '#23C48E', '0': '#D3435C', 'OFFLINE': '#FF0000'}
 
+@blynkTemp.handle_event('write V1')
+def readV1(pin, value):
+   _log.info("in write v1")
+   _log.info(value)
   
 @blynk.handle_event('write V1')
 def buttonV1Pressed(pin, value):
@@ -185,8 +193,11 @@ def blynk_data():
        blynk.virtual_write(17, str(ss4.moisture_read()))
        blynk.virtual_write(18, str(ss4.get_temp()))
        _log.info ("Channel 4 moisture reading is "+str(ss4.moisture_read())+" and Temp is :" +  str("{0:.2f}".format(ss4.get_temp())))
- 
-
+    
+    blynkTemp.run()
+    blynkTemp.virtual_sync('V1')
+    blynk.virtual_write(98, "Completed Timer Function" + '\n') 
+    
         
 while True:
     try:
