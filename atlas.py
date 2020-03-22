@@ -386,7 +386,8 @@ def buttonV70Pressed(pin, value):
 @blynk.handle_event('write V90')
 def openButtbuttonPressed(pin, value):
     now = datetime.now()
-    if value :
+    _log.info(value)
+    if (value[0] == '0'):
        _log.info("User requested to fill butt")
     else:
         _log.info("User requested to stop fill butt")
