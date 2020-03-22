@@ -25,6 +25,8 @@ import logging
 class Counter:
     cycle = 0
     
+colours = {1: '#00FF00', 0: '#FF0000', 'OFFLINE': '#0000FF'}
+
 bootup = True
 T_CRI_VALUE = 16.5  # 16.5°C
 WT_CRI_VALUE = 16.5  # 16.5°C
@@ -280,7 +282,7 @@ def buttonV1Pressed(pin, value):
     GPIO.output(Relay1,value[0])
     now = datetime.now()
     blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
-    blynk.set_property(5, 'color', colors[value[0]])
+    blynk.set_property(5, 'color', colours[value[0]])
     if(value[0] == '1'):
         blynk.virtual_write(98,"UV & Mixer turned off" + '\n')
     else:
@@ -293,7 +295,7 @@ def buttonV2Pressed(pin, value):
     GPIO.output(Relay2,value[0])
     now = datetime.now()
     blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
-    blynk.set_property(6, 'color', colors[value[0]])
+    blynk.set_property(6, 'color', colours[value[0]])
     if(value[0] == '1'):
         blynk.virtual_write(98,"Air turned off" + '\n')
     else:
@@ -305,7 +307,7 @@ def buttonV3Pressed(pin, value):
     GPIO.output(Relay3,value[0])
     now = datetime.now()
     blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
-    blynk.set_property(7, 'color', colors[value[0]])
+    blynk.set_property(7, 'color', colours[value[0]])
     if(value[0] == '1'):
         blynk.virtual_write(98,"Waste turned off" + '\n')
     else:
@@ -317,7 +319,7 @@ def buttonV4Pressed(pin, value):
     GPIO.output(Relay4,value[0])
     now = datetime.now()
     blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
-    blynk.set_property(8, 'color', colors[value[0]])
+    blynk.set_property(8, 'color', colours[value[0]])
     if(value[0] == '1'):
         blynk.virtual_write(98, "Heater turned off" + '\n')
     else:
