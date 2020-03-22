@@ -213,7 +213,7 @@ ph = AtlasI2C(99)
 #do = AtlasI2C(97)
 #flow = AtlasI2C(104)
 #pump = AtlasI2C(103)
-#colour = AtlasI2C(112)
+colour = AtlasI2C(112)
 
 
 #_log.info("Temp Device Info = " + temp.query("i"))
@@ -423,6 +423,30 @@ def blynk_data():
     
   
    
+       
+    
+    _log.info("read PH")
+    try:
+       cPH = ph.query("RT,"+cTemp).split(":")[1]
+       blynk.virtual_write(32, cPH)
+       _log.info ("PH = " + cPH)
+    except:
+       blynk.virtual_write(98, "Read PH Error" + '\n') 
+       _log.info("Read Ph Error")
+       cPH = 'Error'
+
+    _log.info("read colour")
+    try:
+       cColour = colour.query("R").split(":")[1]
+       blynk.virtual_write(27, cColour.split(",")[0])
+       blynk.virtual_write(28, cColour.split(",")[1])
+       blynk.virtual_write(29, cColour.split(",")[2])
+       blynk.virtual_write(33, cColour)
+       _log.info ("Colour = " + cColour)
+    except:
+       blynk.virtual_write(98, "Read colour Error" + '\n') 
+       _log.info("Read Colour Error")
+       cColour = 'Error'
         
     _log.info("read ec")
     try:
@@ -441,20 +465,7 @@ def blynk_data():
     finally:
         blynk.virtual_write(98, "EC finally" + '\n')
         
-    
-       
-    
-    _log.info("read PH")
-    try:
-       cPH = ph.query("RT,"+cTemp).split(":")[1]
-       blynk.virtual_write(32, cPH)
-       _log.info ("PH = " + cPH)
-    except:
-       blynk.virtual_write(98, "Read PH Error" + '\n') 
-       _log.info("Read Ph Error")
-       cPH = 'Error'
-
-    
+     
     _log.info("now the digital single wire")
     
     
@@ -484,7 +495,7 @@ while True:
           p = subprocess.Popen(['i2cdetect', '-y','1'],stdout=subprocess.PIPE,)
           #cmdout = str(p.communicate())
           for i in range(0,9):
-              blynk.virtual_write(98, str(p.stdout.readline()) + '\n')
+              blynk.virtual_write(98, str(p.stdout.readline()))
           bootup = False
           now = datetime.now()
           blynk.virtual_write(99, now.strftime("%d/%m/%Y %H:%M:%S"))
