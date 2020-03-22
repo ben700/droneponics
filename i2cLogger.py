@@ -70,6 +70,8 @@ try:
         blynk.virtual_write(98, "System updated and restarting " + '\n')
         os.system('sudo reboot')
 
+        
+    
 
     @timer.register(interval=10, run_once=False)
     def blynk_data():
@@ -86,8 +88,12 @@ try:
         blynk.set_property(9, 'color', colours[GPIO.input(buttEmptySensor)])
         blynk.virtual_write(98, "Completed Timer Function" + '\n') 
         
-
-
+        blynkTemp = blynklib.Blynk('ZDy8p4aFPCKGwQhafv4jwUT6TpCY9CyP')
+        @blynkTemp.handle_event('read V1')
+        def readV1(value):
+            _log.info("in read v1")
+            _log.info(value)
+        blynkTemp.virtual_sync('V1')
 
     while True:
         try:
