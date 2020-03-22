@@ -454,16 +454,9 @@ def blynk_data():
     except:
         blynk.virtual_write(98, "Read EC Error" + '\n')
         cEC = 'Error'
-        devices = devices.list_i2c_devices()
-        for device in devices:
-           blynk.virtual_write(98, device.address() + '\n')
-   
     else:
-        blynk.virtual_write(98, "EC Else" + '\n')
         blynk.virtual_write(31, cEC)
         _log.info ("EC  = " + cEC)
-    finally:
-        blynk.virtual_write(98, "EC finally" + '\n')
         
      
     _log.info("now the digital single wire")
