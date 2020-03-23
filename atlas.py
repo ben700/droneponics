@@ -437,6 +437,7 @@ def blynk_data():
 
     _log.info("read colour")
     try:
+       blynk.virtual_write(98,str(colour.query("L,100,T"))+'\n')
        cColour = colour.query("R").split(":")[1]
        blynk.virtual_write(27, cColour.split(",")[0])
        blynk.virtual_write(28, cColour.split(",")[1])
