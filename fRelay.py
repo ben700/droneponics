@@ -2,6 +2,7 @@
 # The ID and range of a sample spreadsheet.
 BLYNK_AUTH = 'rHuhXZ97FK3_azBlFK1AC4pIPNUxgw7B' #envControl
 BLYNK_AUTH_TEMP = 'FnSZls3WUdCbWmDJvfnjz3f83Sm70HqI' #envLogger2
+colours = {1: '#FF0000', 0: '#00FF00', 'OFFLINE': '#0000FF'}
 
 try:
     from board import SCL, SDA
@@ -18,10 +19,8 @@ try:
     import subprocess
     import re
 
-
     bootup = True
-    colours = {1: '#FF0000', 0: '#00FF00', 'OFFLINE': '#0000FF'}
-
+   
     # tune console logging
     _log = logging.getLogger('BlynkLog')
     logFormatter = logging.Formatter("%(asctime)s [%(levelname)s]  %(message)s")
@@ -260,6 +259,8 @@ except:
    os.system('sh /home/pi/updateDroneponics.sh')
    os.system('sudo reboot')
 finally:
-   blynk.set_property(10, 'color', colours['OFFLINE'])
-   blynk.set_property(9, 'color', colours['OFFLINE'])    
+   blynk.set_property(5, 'color', colours['OFFLINE'])
+   blynk.set_property(6, 'color', colours['OFFLINE'])
+   blynk.set_property(7, 'color', colours['OFFLINE'])
+   blynk.set_property(8, 'color', colours['OFFLINE'])
    GPIO.cleanup()
