@@ -186,6 +186,8 @@ BLYNK_AUTH = 'XVbhfI6ZYxkqFp7d4RsCIN6Is9YnKp9q' #atlasButt
 # Initialize Blynk
 blynk = blynklib.Blynk(BLYNK_AUTH)
 timer = blynktimer.Timer()
+blink.run()
+blynk.virtual_write(98, "clr")
 
 APP_CONNECT_PRINT_MSG = '[APP_CONNECT_EVENT]'
 APP_DISCONNECT_PRINT_MSG = '[APP_DISCONNECT_EVENT]'
@@ -465,7 +467,7 @@ def blynk_data():
    # if (GPIO.input(buttFullSensor) == GPIO.LOW) : 
    #    GPIO.output(solenoidIn, GPIO.LOW)
 
-   # blynk.virtual_write(98, "Completed Timer Function" + '\n') 
+    blynk.virtual_write(98, "Completed Timer Function" + '\n') 
       
 while True:
     try:
