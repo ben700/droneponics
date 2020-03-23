@@ -121,9 +121,7 @@ try:
            blynk.set_property(9, 'color', colours['OFFLINE']) 
            os.system('sh /home/pi/updateDroneponics.sh')
            os.system('sudo reboot') 
-        finally:
-           blynk.set_property(10, 'color', colours['OFFLINE'])
-           blynk.set_property(9, 'color', colours['OFFLINE'])    
+  
   
 except:
    _log.info('Unexpected error')

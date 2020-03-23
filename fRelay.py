@@ -90,12 +90,11 @@ WRITE_EVENT_PRINT_MSG = "[WRITE_VIRTUAL_PIN_EVENT] Pin: V{} Value: '{}'"
 READ_PRINT_MSG = "[READ_VIRTUAL_PIN_EVENT] Pin: V{}"
 ALLOWED_COMMANDS_LIST = ['ls', 'lsusb', 'ip a', 'ip abc']
 TWEET_MSG = "New value='{}' on VPIN({})"
-colors = {'1': '#23C48E', '0': '#D3435C', 'OFFLINE': '#FF0000'}
+colours = {1: '#FF0000', 0: '#00FF00', 'OFFLINE': '#0000FF'}
 
 @blynkTemp.handle_event('write V1')
 def readV1(pin, value):
    _log.info("in write v1")
-   _log.info(value)
    blynk.virtual_write(98, "Temp was " + str(value[0]) +'\n') 
     
   
@@ -103,7 +102,7 @@ def readV1(pin, value):
 def buttonV1Pressed(pin, value):
     _log.info(WRITE_EVENT_PRINT_MSG.format(pin, value))
     blynk.virtual_write(1, str(value[0]))
-    blynk.set_property(5, 'color', colors[value[0]])
+    blynk.set_property(5, 'color', colours[value[0]])
     if(value[0] == '1'):
         print("Waste turned off")
         GPIO.output(Relay1,GPIO.HIGH)
@@ -118,7 +117,7 @@ def buttonV1Pressed(pin, value):
 def buttonV2Pressed(pin, value):
     _log.info(WRITE_EVENT_PRINT_MSG.format(pin, value))
     blynk.virtual_write(2, str(value[0]))
-    blynk.set_property(6, 'color', colors[value[0]])
+    blynk.set_property(6, 'color', colours[value[0]])
     if(value[0] == '1'):
         print("Feed Pump turned off")
         GPIO.output(Relay2,GPIO.HIGH)
@@ -130,7 +129,7 @@ def buttonV2Pressed(pin, value):
 def buttonV3Pressed(pin, value):
     _log.info(WRITE_EVENT_PRINT_MSG.format(pin, value))
     blynk.virtual_write(3, str(value[0]))
-    blynk.set_property(7, 'color', colors[value[0]])
+    blynk.set_property(7, 'color', colours[value[0]])
     if(value[0] == '1'):
         print("Air and Mixer turned off")
         GPIO.output(Relay3,GPIO.HIGH)
@@ -143,7 +142,7 @@ def buttonV3Pressed(pin, value):
 def buttonV4Pressed(pin, value):
     _log.info(WRITE_EVENT_PRINT_MSG.format(pin, value))
     blynk.virtual_write(4, str(value[0]))
-    blynk.set_property(8, 'color', colors[value[0]])
+    blynk.set_property(8, 'color', colours[value[0]])
     if(value[0] == '1'):
         print("Pump/UV turned off")
         GPIO.output(Relay4,GPIO.HIGH)
@@ -155,7 +154,11 @@ def buttonV4Pressed(pin, value):
     
 @blynk.handle_event('write V255')
 def rebooter(pin, value):
-    blynk.virtual_write(98, "User Reboot " + '\n')  
+    blynk.virtual_write(98, "User Reboot " + '\n')
+    blynk.set_property(5, 'color', 'OFFLINE')
+    blynk.set_property(6, 'color', 'OFFLINE')
+    blynk.set_property(7, 'color', 'OFFLINE')
+    blynk.set_property(8, 'color', 'OFFLINE')
     os.system('sh /home/pi/updateDroneponics.sh')
     blynk.virtual_write(98, "System updated and restarting " + '\n')
     os.system('sudo reboot')
