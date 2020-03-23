@@ -51,7 +51,11 @@ try:
     GPIO.setup(Relay4,GPIO.OUT)
 
 
+    # Initialize Blynk
+    blynk = blynklib.Blynk(BLYNK_AUTH)
+    blynkTemp = blynklib.Blynk(BLYNK_AUTH_TEMP)
 
+    timer = blynktimer.Timer()
     
     # Initialize the sensor.
     try:
@@ -84,11 +88,7 @@ try:
             blynk.virtual_write(98, "Expected error: No soil sonsors" + '\n') 
 
 
-    # Initialize Blynk
-    blynk = blynklib.Blynk(BLYNK_AUTH)
-    blynkTemp = blynklib.Blynk(BLYNK_AUTH_TEMP)
 
-    timer = blynktimer.Timer()
 
 
     APP_CONNECT_PRINT_MSG = '[APP_CONNECT_EVENT]'
