@@ -72,8 +72,7 @@ else:
     ss2 = Seesaw(i2c, addr=0x37)
     ss3 = Seesaw(i2c, addr=0x38)
     ss4 = Seesaw(i2c, addr=0x38)
-finally:
-    _log.info("Unexpected error: I2C finally")
+
     
 # Initialize Blynk
 blynk = blynklib.Blynk(BLYNK_AUTH)

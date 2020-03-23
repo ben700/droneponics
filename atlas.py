@@ -178,11 +178,6 @@ GPIO.output(Pump8,GPIO.HIGH)
 GPIO.output(Pump9,GPIO.HIGH)
 GPIO.output(Pump10,GPIO.HIGH)
 
-print(GPIO.input(buttEmptySensor))
-
-print(GPIO.input(buttFullSensor))
-
-
 
 
 # The ID and range of a sample spreadsheet.
@@ -420,11 +415,7 @@ def blynk_data():
     cTemp = temp.query("R,").split(":")[1]
     _log.info("Temp = " + cTemp)
     blynk.virtual_write(30, cTemp)
-    
-  
-   
-       
-    
+
     _log.info("read PH")
     try:
        cPH = ph.query("RT,"+cTemp).split(":")[1]
@@ -459,13 +450,8 @@ def blynk_data():
         _log.info ("EC  = " + cEC)
         
      
-    _log.info("now the digital single wire")
-    
-    
-  #  blynk.virtual_write(37, GPIO.input(buttEmptySensor))
-  #  blynk.virtual_write(38, GPIO.input(buttFullSensor))
-    
-    _log.info("Change LEDs for butt sensors")
+ 
+   #_log.info("Change LEDs for butt sensors")
     
    # if (GPIO.input(buttEmptySensor) == GPIO.LOW) :
    #    for Relay in noisyThingsWhenButtEmpty:
@@ -479,7 +465,7 @@ def blynk_data():
    # if (GPIO.input(buttFullSensor) == GPIO.LOW) : 
    #    GPIO.output(solenoidIn, GPIO.LOW)
 
-    blynk.virtual_write(98, "Completed Timer Function" + '\n') 
+   # blynk.virtual_write(98, "Completed Timer Function" + '\n') 
       
 while True:
     try:

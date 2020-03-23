@@ -84,18 +84,15 @@ try:
             ss2 = None
             ss3 = None
             ss4 = None
-            blynk.virtual_write(98, "Expected error: soil sonsors" + '\n') 
+            blynk.virtual_write(98, "Expected error: No soil sonsors" + '\n') 
         try:
             blynk.virtual_write(98, "Try to create ADC" + '\n') 
             ads = ADS.ADS1015(i2c) 
             chan = AnalogIn(ads, ADS.P0)
             blynk.virtual_write(98, "Created ADC" + '\n')     
         except:
-            blynk.virtual_write(98, "Expected error: ADC" + '\n') 
+            blynk.virtual_write(98, "Expected error: No Water Level Sensor" + '\n') 
             
-           
-
-
     
     APP_CONNECT_PRINT_MSG = '[APP_CONNECT_EVENT]'
     APP_DISCONNECT_PRINT_MSG = '[APP_DISCONNECT_EVENT]'
