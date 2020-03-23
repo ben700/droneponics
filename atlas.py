@@ -47,7 +47,7 @@ FS_COLOR = '#add9a2'
 CO2_COLOR = '#d9b3a2'
 
 ERR_COLOR = '#444444' 
-colors = {'1': '#23C48E', '0': '#D3435C', 'OFFLINE': '#FF0000'}
+colors = {1: '#23C48E', 0: '#D3435C', 'OFFLINE': '#FF0000'}
 
 bootup = True 
 
@@ -82,7 +82,7 @@ BLYNK_YELLOW    ="#ED9D00"
 BLYNK_RED       ="#D3435C"
 BLYNK_DARK_BLUE ="#5F7CD8"
 
-colors = {1: '#23C48E', 0: '#D3435C', 'OFFLINE': '#FF0000'}
+colours = {1: '#23C48E', 0: '#D3435C', 'OFFLINE': '#FF0000'}
 
 
 buttFullSensor =  17
@@ -178,6 +178,11 @@ GPIO.output(Pump8,GPIO.HIGH)
 GPIO.output(Pump9,GPIO.HIGH)
 GPIO.output(Pump10,GPIO.HIGH)
 
+print(GPIO.input(buttEmptySensor))
+
+print(GPIO.input(buttFullSensor))
+
+
 
 
 # The ID and range of a sample spreadsheet.
@@ -186,8 +191,6 @@ BLYNK_AUTH = 'XVbhfI6ZYxkqFp7d4RsCIN6Is9YnKp9q' #atlasButt
 # Initialize Blynk
 blynk = blynklib.Blynk(BLYNK_AUTH)
 timer = blynktimer.Timer()
-blink.run()
-blynk.virtual_write(98, "clr")
 
 APP_CONNECT_PRINT_MSG = '[APP_CONNECT_EVENT]'
 APP_DISCONNECT_PRINT_MSG = '[APP_DISCONNECT_EVENT]'
@@ -417,7 +420,11 @@ def blynk_data():
     cTemp = temp.query("R,").split(":")[1]
     _log.info("Temp = " + cTemp)
     blynk.virtual_write(30, cTemp)
-
+    
+  
+   
+       
+    
     _log.info("read PH")
     try:
        cPH = ph.query("RT,"+cTemp).split(":")[1]
@@ -452,8 +459,13 @@ def blynk_data():
         _log.info ("EC  = " + cEC)
         
      
- 
-   #_log.info("Change LEDs for butt sensors")
+    _log.info("now the digital single wire")
+    
+    
+  #  blynk.virtual_write(37, GPIO.input(buttEmptySensor))
+  #  blynk.virtual_write(38, GPIO.input(buttFullSensor))
+    
+    _log.info("Change LEDs for butt sensors")
     
    # if (GPIO.input(buttEmptySensor) == GPIO.LOW) :
    #    for Relay in noisyThingsWhenButtEmpty:
