@@ -69,7 +69,7 @@ try:
         ss2 = None
         ss3 = None
         ss4 = None
-        blynk.virtual_write(98, "Unexpected error: I2C" + '\n') 
+        #blynk.virtual_write(98, "Unexpected error: I2C" + '\n') 
         _log.info("Unexpected error: I2C")
     else:
         try:
