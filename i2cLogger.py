@@ -83,6 +83,8 @@ try:
         
         blynk.virtual_write(37, GPIO.input(buttEmptySensor))
         blynk.virtual_write(38, GPIO.input(buttFullSensor))
+        blynk.virtual_write(39, (2 - int(GPIO.input(buttFullSensor))-int(GPIO.input(buttEmptySensor))))
+        
         
         blynk.set_property(10, 'color', colours[GPIO.input(buttFullSensor)])
         blynk.set_property(9, 'color', colours[GPIO.input(buttEmptySensor)])
@@ -117,6 +119,10 @@ try:
            blynk.set_property(9, 'color', colours['OFFLINE']) 
            os.system('sh /home/pi/updateDroneponics.sh')
            os.system('sudo reboot') 
+        finally:
+           blynk.set_property(10, 'color', colours['OFFLINE'])
+           blynk.set_property(9, 'color', colours['OFFLINE'])    
+  
 except:
    _log.info('Unexpected error')
    blynkErr = blynklib.Blynk(BLYNK_AUTH)
@@ -126,4 +132,6 @@ except:
    os.system('sh /home/pi/updateDroneponics.sh')
    os.system('sudo reboot')
 finally:
+   blynk.set_property(10, 'color', colours['OFFLINE'])
+   blynk.set_property(9, 'color', colours['OFFLINE'])    
    GPIO.cleanup()
