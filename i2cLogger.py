@@ -81,13 +81,15 @@ try:
         now = datetime.now()
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))    
         
-        blynk.virtual_write(37, GPIO.input(buttEmptySensor))
-        blynk.virtual_write(38, GPIO.input(buttFullSensor))
-        blynk.virtual_write(39, (2 - int(GPIO.input(buttFullSensor))-int(GPIO.input(buttEmptySensor))))
+        bES = GPIO.input(buttEmptySensor)
+        bFS = GPIO.input(buttFullSensor)
+        blynk.virtual_write(37, bES)
+        blynk.virtual_write(38, bFS)
+        blynk.virtual_write(39, 2-bES-bFS)
         
+        blynk.set_property(9, 'color', colours[bES])
+        blynk.set_property(10, 'color', colours[bFS])
         
-        blynk.set_property(10, 'color', colours[GPIO.input(buttFullSensor)])
-        blynk.set_property(9, 'color', colours[GPIO.input(buttEmptySensor)])
         blynk.virtual_write(98, "Completed Timer Function" + '\n') 
 
     while True:
