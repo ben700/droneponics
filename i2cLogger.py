@@ -53,7 +53,7 @@ try:
     blynk = blynklib.Blynk(BLYNK_AUTH)        
     timer = blynktimer.Timer()
     blynk.run()
-    
+    blynk.virtual_write(98, "clr")
     
     
     # Initialize the sensor.
@@ -73,25 +73,27 @@ try:
     else:
         try:
             blynk.virtual_write(98, "Try to create soil sonsors" + '\n') 
-            ads = ADS.ADS1015(i2c) 
-            chan = AnalogIn(ads, ADS.P0)
-            _log.info("Created soil sonsors")
             ss1 = Seesaw(i2c, addr=0x36)
             ss2 = Seesaw(i2c, addr=0x37)
             ss3 = Seesaw(i2c, addr=0x38)
             ss4 = Seesaw(i2c, addr=0x38)
             blynk.virtual_write(98, "Created soil sonsors" + '\n') 
-            _log.info("Created soil sonsors")
             
         except:
             ss1 = None
             ss2 = None
             ss3 = None
             ss4 = None
-            blynk.virtual_write(98, "Unexpected error: soil sonsors" + '\n') 
-            _log.info("Unexpected error: soil sonsors")
+            blynk.virtual_write(98, "Expected error: soil sonsors" + '\n') 
+        try:
+            blynk.virtual_write(98, "Try to create ADC" + '\n') 
+            ads = ADS.ADS1015(i2c) 
+            chan = AnalogIn(ads, ADS.P0)
+            blynk.virtual_write(98, "Created ADC" + '\n')     
+        except:
+            blynk.virtual_write(98, "Expected error: ADC" + '\n') 
             
-    
+           
 
 
     
