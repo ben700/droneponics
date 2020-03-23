@@ -45,15 +45,56 @@ try:
     GPIO.setmode(GPIO.BCM)
     GPIO.setup(buttFullSensor, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
     GPIO.setup(buttEmptySensor, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-    _log.info(GPIO.input(buttEmptySensor))
-    _log.info(GPIO.input(buttFullSensor))
 
-
+    
+    
     
     # Initialize Blynk
     blynk = blynklib.Blynk(BLYNK_AUTH)        
     timer = blynktimer.Timer()
-    #blynk.run()
+    blynk.run()
+    
+    
+    
+    # Initialize the sensor.
+    try:
+       # Create the I2C bus
+       blynk.virtual_write(98, "Try to I2C" + '\n') 
+       i2c = busio.I2C(board.SCL, board.SDA)
+       blynk.virtual_write(98, "I2C created" + '\n') 
+    except:
+        i2c = None
+        ss1 = None
+        ss2 = None
+        ss3 = None
+        ss4 = None
+        blynk.virtual_write(98, "Unexpected error: I2C" + '\n') 
+        _log.info("Unexpected error: I2C")
+    else:
+        try:
+            blynk.virtual_write(98, "Try to create soil sonsors" + '\n') 
+            ads = ADS.ADS1015(i2c) 
+            chan = AnalogIn(ads, ADS.P0)
+            _log.info("Created soil sonsors")
+            ss1 = Seesaw(i2c, addr=0x36)
+            ss2 = Seesaw(i2c, addr=0x37)
+            ss3 = Seesaw(i2c, addr=0x38)
+            ss4 = Seesaw(i2c, addr=0x38)
+            blynk.virtual_write(98, "Created soil sonsors" + '\n') 
+            _log.info("Created soil sonsors")
+            
+        except:
+            ss1 = None
+            ss2 = None
+            ss3 = None
+            ss4 = None
+            blynk.virtual_write(98, "Unexpected error: soil sonsors" + '\n') 
+            _log.info("Unexpected error: soil sonsors")
+            
+    
+
+
+    
     APP_CONNECT_PRINT_MSG = '[APP_CONNECT_EVENT]'
     APP_DISCONNECT_PRINT_MSG = '[APP_DISCONNECT_EVENT]'
     CONNECT_PRINT_MSG = '[CONNECT_EVENT]'
