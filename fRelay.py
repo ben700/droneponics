@@ -29,6 +29,12 @@ try:
     _log.addHandler(consoleHandler)
     _log.setLevel(logging.DEBUG)
 
+    
+    # Initialize Blynk
+    blynk = blynklib.Blynk(BLYNK_AUTH)
+    blynkTemp = blynklib.Blynk(BLYNK_AUTH_TEMP)
+    timer = blynktimer.Timer()
+    
     BLYNK_GREEN     ="#23C48E"
     BLYNK_BLUE      ="#04C0F8"
     BLYNK_YELLOW    ="#ED9D00"
@@ -84,11 +90,6 @@ try:
             blynk.virtual_write(98, "Expected error: No soil sonsors" + '\n') 
 
 
-    # Initialize Blynk
-    blynk = blynklib.Blynk(BLYNK_AUTH)
-    blynkTemp = blynklib.Blynk(BLYNK_AUTH_TEMP)
-
-    timer = blynktimer.Timer()
 
 
     APP_CONNECT_PRINT_MSG = '[APP_CONNECT_EVENT]'
