@@ -51,11 +51,7 @@ try:
     GPIO.setup(Relay4,GPIO.OUT)
 
 
-    # Initialize Blynk
-    blynk = blynklib.Blynk(BLYNK_AUTH)
-    blynkTemp = blynklib.Blynk(BLYNK_AUTH_TEMP)
 
-    timer = blynktimer.Timer()
     
     # Initialize the sensor.
     try:
@@ -69,7 +65,7 @@ try:
         ss2 = None
         ss3 = None
         ss4 = None
-        #blynk.virtual_write(98, "Unexpected error: I2C" + '\n') 
+        blynk.virtual_write(98, "Unexpected error: I2C" + '\n') 
         _log.info("Unexpected error: I2C")
     else:
         try:
@@ -88,7 +84,11 @@ try:
             blynk.virtual_write(98, "Expected error: No soil sonsors" + '\n') 
 
 
+    # Initialize Blynk
+    blynk = blynklib.Blynk(BLYNK_AUTH)
+    blynkTemp = blynklib.Blynk(BLYNK_AUTH_TEMP)
 
+    timer = blynktimer.Timer()
 
 
     APP_CONNECT_PRINT_MSG = '[APP_CONNECT_EVENT]'
@@ -99,7 +99,6 @@ try:
     READ_PRINT_MSG = "[READ_VIRTUAL_PIN_EVENT] Pin: V{}"
     ALLOWED_COMMANDS_LIST = ['ls', 'lsusb', 'ip a', 'ip abc']
     TWEET_MSG = "New value='{}' on VPIN({})"
-    colours = {1: '#FF0000', 0: '#00FF00', 'OFFLINE': '#0000FF'}
 
     @blynkTemp.handle_event('write V1')
     def writeV1(pin, value):
