@@ -20,26 +20,26 @@ from AtlasI2C import (
 #69 - co2
 #70 - colour
 #6A - pressure
-#device = AtlasI2C()
+device = AtlasI2C()
 #temp = AtlasI2C(102)
 #ec = AtlasI2C(100)
 #ph = AtlasI2C(99)
 #do = AtlasI2C(97, "DO")
 #flow = AtlasI2C(104, "FLOW")
-#pump = AtlasI2C(103, "PUMP")
+pump = AtlasI2C(103)
 
 
-answer = input("Are you sure you want to calibrate (y/n)")
-if answer is None or answer != 'y':
-    quit()
+#answer = input("Are you sure you want to calibrate (y/n)")
+#if answer is None or answer != 'y':
+#    quit()
 
-#print(device.list_i2c_devices())
+print(device.list_i2c_devices())
 #print("Temp Device Info = " + temp.query("i"))
 #print("pH Device Info = " + ph.query("i"))
 #print("EC Device Info = " + ec.query("i"))
 #print("DO Device Info = " + ec.query("i")) 
 #print("Flow Device Info = " + flow.query("i"))      
-#print("Pump Device Info = " + pump.query("i"))      
+print("Pump Device Info = " + pump.query("i"))      
 
 #print("Temp Cal = " + temp.query("Cal,?"))
 #print("Temp Scale = " + temp.query("S,?"))
@@ -109,4 +109,3 @@ if answer is None or answer != 'y':
 #pump.query("Cal,v") #v = corrected volume
 #pump.query("D,10,10") #Dose 10ml over 10min
 #pump.query("Cal,v") #v = corrected volume
-
