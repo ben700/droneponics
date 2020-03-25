@@ -246,6 +246,7 @@ try:
            #blynk.set_property(7, 'color', colours['OFFLINE'])
            #blynk.set_property(8, 'color', colours['OFFLINE'])
            os.system('sh /home/pi/updateDroneponics.sh')
+           blynk.virtual_write(98, "System updated and restarting " + '\n')
            os.system('sudo reboot') 
   
   
