@@ -5,7 +5,7 @@ BLYNK_AUTH_TEMP = 'FnSZls3WUdCbWmDJvfnjz3f83Sm70HqI' #envLogger2
 colours = {1: '#FF0000', 0: '#00FF00', 'OFFLINE': '#0000FF'}
 
 try:
-    from board import SCL, SDA
+    import board
     import busio
     from adafruit_seesaw.seesaw import Seesaw
     import time
