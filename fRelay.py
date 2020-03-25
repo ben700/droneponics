@@ -195,7 +195,7 @@ try:
         _log.info("Update Timer Run")
         now = datetime.now()
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
-        _log.info("Time updated : " + now.strftime("%d/%m/%Y %H:%M:%S"))
+        blynk.virtual_write(98,"Time updated : " + now.strftime("%d/%m/%Y %H:%M:%S"))
 
         if (ss1 is not None):
             blynk.virtual_write(11, str(ss1.moisture_read()))
@@ -240,10 +240,10 @@ try:
         except:
            _log.info('Unexpected error')
            blynk.virtual_write(98, "System has main loop error" + '\n')
-           blynk.set_property(5, 'color', colours['OFFLINE'])
-           blynk.set_property(6, 'color', colours['OFFLINE'])
-           blynk.set_property(7, 'color', colours['OFFLINE'])
-           blynk.set_property(8, 'color', colours['OFFLINE'])
+           #blynk.set_property(5, 'color', colours['OFFLINE'])
+           #blynk.set_property(6, 'color', colours['OFFLINE'])
+           #blynk.set_property(7, 'color', colours['OFFLINE'])
+           #blynk.set_property(8, 'color', colours['OFFLINE'])
            os.system('sh /home/pi/updateDroneponics.sh')
            os.system('sudo reboot') 
   
