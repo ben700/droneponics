@@ -118,10 +118,10 @@ try:
         blynk.virtual_write(1, str(value[0]))
         blynk.set_property(5, 'color', colours[value[0]])
         if(value[0] == '1'):
-            print("Waste turned off")
+            blynk.virtual_write(98,"Waste turned off" + '\n')
             GPIO.output(Relay1,GPIO.HIGH)
         else:
-            print("Waste turned on")
+            blynk.virtual_write(98,"Waste turned on" + '\n')
             GPIO.output(Relay1,GPIO.LOW)
 
 
@@ -133,10 +133,10 @@ try:
         blynk.virtual_write(2, str(value[0]))
         blynk.set_property(6, 'color', colours[value[0]])
         if(value[0] == '1'):
-            print("Feed Pump turned off")
+            blynk.virtual_write(98,"Feed Pump turned off" + '\n')
             GPIO.output(Relay2,GPIO.HIGH)
         else:
-            print("Feed Pump turned on")
+            blynk.virtual_write(98,"Feed Pump turned on" + '\n')
             GPIO.output(Relay2,GPIO.LOW)
 
     @blynk.handle_event('write V3')
