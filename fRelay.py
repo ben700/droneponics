@@ -20,7 +20,8 @@ try:
     import re
 
     bootup = True
-   
+    colours = {1: '#FF0000', 0: '#00FF00', 'OFFLINE': '#0000FF'}
+
     # tune console logging
     _log = logging.getLogger('BlynkLog')
     logFormatter = logging.Formatter("%(asctime)s [%(levelname)s]  %(message)s")
