@@ -2,7 +2,9 @@
 # The ID and range of a sample spreadsheet.
 BLYNK_AUTH = 'rHuhXZ97FK3_azBlFK1AC4pIPNUxgw7B' #envControl
 BLYNK_AUTH_TEMP = 'FnSZls3WUdCbWmDJvfnjz3f83Sm70HqI' #envLogger2
-colours = {1: '#FF0000', 0: '#00FF00', 'OFFLINE': '#0000FF'}
+
+colours = {'1': '#FF0000', '0': '#00FF00', 1: '#FF0000', 0: '#00FF00', 'OFFLINE': '#0000FF'}
+
 
 try:
     import board
@@ -20,7 +22,7 @@ try:
     import re
 
     bootup = True
-    colours = {'1': '#FF0000', '0': '#00FF00', 'OFFLINE': '#0000FF'}
+    colours = {'1': '#FF0000', '0': '#00FF00', 1: '#FF0000', 0: '#00FF00', 'OFFLINE': '#0000FF'}
 
     # tune console logging
     _log = logging.getLogger('BlynkLog')
