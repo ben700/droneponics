@@ -238,6 +238,7 @@ try:
              # blynk.virtual_write(98, "clr")
               blynk.virtual_write(98, "System now updated and restarted " + '\n')
               blynk.virtual_write(255, 0)
+              connect_handler()
               _log.info('Just Booted')
 
            timer.run()
