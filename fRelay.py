@@ -196,7 +196,7 @@ try:
         _log.info("Update Timer Run")
         now = datetime.now()
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
-        blynk.virtual_write(98,"Time updated : " + now.strftime("%d/%m/%Y %H:%M:%S"))
+        blynk.virtual_write(98,"Time updated : " + now.strftime("%d/%m/%Y %H:%M:%S") + '\n')
 
         if (ss1 is not None):
             blynk.virtual_write(11, str(ss1.moisture_read()))
@@ -234,7 +234,7 @@ try:
               blynk.virtual_write(99, now.strftime("%d/%m/%Y %H:%M:%S"))
              # blynk.virtual_write(98, "clr")
               blynk.virtual_write(98, "System now updated and restarted " + '\n')
-             # blynk.virtual_write(255, 0)
+              blynk.virtual_write(255, 0)
              # _log.info('Just Booted')
 
            timer.run()
