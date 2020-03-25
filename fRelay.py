@@ -134,7 +134,7 @@ try:
     def buttonV2Pressed(pin, value):
         blynk.virtual_write(98, "User button 2" + '\n')
         blynk.virtual_write(2, str(value[0]))
-     #   blynk.set_property(6, 'color', colours[value[0]])
+        blynk.set_property(6, 'color', colours[value[0]])
         if(value[0] == '1'):
             blynk.virtual_write(98,"Feed Pump turned off" + '\n')
             GPIO.output(Relay2,GPIO.HIGH)
@@ -146,7 +146,7 @@ try:
     def buttonV3Pressed(pin, value):
         blynk.virtual_write(98, "User button 3 " + '\n')
         blynk.virtual_write(3, str(value[0]))
-      #  blynk.set_property(7, 'color', colours[value[0]])
+        blynk.set_property(7, 'color', colours[value[0]])
         if(value[0] == '1'):
             print("Air and Mixer turned off")
             GPIO.output(Relay3,GPIO.HIGH)
@@ -159,7 +159,7 @@ try:
     def buttonV4Pressed(pin, value):
         blynk.virtual_write(98, "User button 4 " + '\n')
         blynk.virtual_write(4, str(value[0]))
-      #  blynk.set_property(8, 'color', colours[value[0]])
+        blynk.set_property(8, 'color', colours[value[0]])
         if(value[0] == '1'):
             print("Pump/UV turned off")
             GPIO.output(Relay4,GPIO.HIGH)
