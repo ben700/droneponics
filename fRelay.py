@@ -154,7 +154,7 @@ try:
 
     @blynk.handle_event('write V4')
     def buttonV4Pressed(pin, value):
-        _log.info(WRITE_EVENT_PRINT_MSG.format(pin, value))
+        blynk.virtual_write(98, "User button 4 " + '\n')
         blynk.virtual_write(4, str(value[0]))
         blynk.set_property(8, 'color', colours[value[0]])
         if(value[0] == '1'):
@@ -178,7 +178,7 @@ try:
         os.system('sudo reboot')
 
 
-    @blynk.handle_event("connect")
+    @blynk.handle_event('connect')
     def connect_handler():
         _log.info('SCRIPT_START')
         for pin in range(5):
