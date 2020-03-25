@@ -34,7 +34,8 @@ try:
     blynk = blynklib.Blynk(BLYNK_AUTH)
     blynkTemp = blynklib.Blynk(BLYNK_AUTH_TEMP)
     timer = blynktimer.Timer()
-    
+    blynk.run()
+
     BLYNK_GREEN     ="#23C48E"
     BLYNK_BLUE      ="#04C0F8"
     BLYNK_YELLOW    ="#ED9D00"
