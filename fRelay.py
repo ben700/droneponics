@@ -117,9 +117,9 @@ try:
     def buttonV1Pressed(pin, value):
         blynk.virtual_write(98, "User button 1 " + '\n')
         blynk.virtual_write(98, str(value[0]) + '\n')
-        blynk.virtual_write(98, str(colour [0]) + '\n')
+        blynk.virtual_write(98, str(colours[0]) + '\n')
         blynk.virtual_write(1, str(value[0]))
-        #blynk.set_property(5, 'color', colours[value[0]])
+        blynk.set_property(5, 'color', colours[value[0]])
         if(value[0] == '1'):
             blynk.virtual_write(98,"Waste turned off" + '\n')
             GPIO.output(Relay1,GPIO.HIGH)
