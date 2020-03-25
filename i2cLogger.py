@@ -125,7 +125,7 @@ try:
         bFS = GPIO.input(buttFullSensor)
         blynk.virtual_write(38, bES)
         blynk.virtual_write(37, bFS)
-        blynk.virtual_write(39, 2-bES-bFS)
+        blynk.virtual_write(39, bES+bFS)
         
         blynk.set_property(10, 'color', colours[bES])
         blynk.set_property(9, 'color', colours[bFS])
