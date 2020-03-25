@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 # The ID and range of a sample spreadsheet.
 BLYNK_AUTH = 'rHuhXZ97FK3_azBlFK1AC4pIPNUxgw7B' #envControl
 BLYNK_AUTH_TEMP = 'FnSZls3WUdCbWmDJvfnjz3f83Sm70HqI' #envLogger2
@@ -215,8 +215,8 @@ try:
            _log.info ("Channel 4 moisture reading is "+str(ss4.moisture_read())+" and Temp is :" +  str("{0:.2f}".format(ss4.get_temp())))
 
         blynk.virtual_write(98, "Timer Function:- virtual_sync" + '\n')
-        blynkTemp.run()
-        blynkTemp.virtual_sync('V1')
+       # blynkTemp.run()
+       # blynkTemp.virtual_sync('V1')
         blynk.virtual_write(98, "Completed Timer Function" + '\n') 
 
 
@@ -233,8 +233,8 @@ try:
               blynk.virtual_write(99, now.strftime("%d/%m/%Y %H:%M:%S"))
              # blynk.virtual_write(98, "clr")
               blynk.virtual_write(98, "System now updated and restarted " + '\n')
-              blynk.virtual_write(255, 0)
-              _log.info('Just Booted')
+             # blynk.virtual_write(255, 0)
+             # _log.info('Just Booted')
 
            timer.run()
         except:
