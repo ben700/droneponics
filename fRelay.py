@@ -217,7 +217,7 @@ try:
 
         blynk.virtual_write(98, "Timer Function:- virtual_sync" + '\n')
         blynkTemp.run()
-        #blynkTemp.virtual_sync('V1')
+        blynkTemp.virtual_sync('V1')
         blynk.virtual_write(98, "Completed Timer Function" + '\n') 
 
 
