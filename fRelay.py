@@ -114,7 +114,7 @@ try:
 
     @blynk.handle_event('write V1')
     def buttonV1Pressed(pin, value):
-        _log.info(WRITE_EVENT_PRINT_MSG.format(pin, value))
+        blynk.virtual_write(98, "User button 1 " + '\n')
         blynk.virtual_write(1, str(value[0]))
         blynk.set_property(5, 'color', colours[value[0]])
         if(value[0] == '1'):
@@ -129,7 +129,7 @@ try:
 
     @blynk.handle_event('write V2')
     def buttonV2Pressed(pin, value):
-        _log.info(WRITE_EVENT_PRINT_MSG.format(pin, value))
+        blynk.virtual_write(98, "User button 2" + '\n')
         blynk.virtual_write(2, str(value[0]))
         blynk.set_property(6, 'color', colours[value[0]])
         if(value[0] == '1'):
@@ -141,7 +141,7 @@ try:
 
     @blynk.handle_event('write V3')
     def buttonV3Pressed(pin, value):
-        _log.info(WRITE_EVENT_PRINT_MSG.format(pin, value))
+        blynk.virtual_write(98, "User button 3 " + '\n')
         blynk.virtual_write(3, str(value[0]))
         blynk.set_property(7, 'color', colours[value[0]])
         if(value[0] == '1'):
