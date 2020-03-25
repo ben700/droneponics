@@ -84,15 +84,12 @@ try:
     BLYNK_RED       ="#D3435C"
     BLYNK_DARK_BLUE ="#5F7CD8"
 
-    colours = {1: '#23C48E', 0: '#D3435C', 'OFFLINE': '#FF0000'}
-
-
     buttFullSensor =  17
     buttEmptySensor = 6
 
     #pins for solenoid
     solenoidIn = 18
-    solenoidOut = 23
+    solenoidOut = 15
 
 
     Pump1 = 26
