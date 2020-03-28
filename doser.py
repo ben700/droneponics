@@ -1,5 +1,7 @@
 ##!/usr/bin/env python3 
-BLYNK_AUTH = '4IfX_hzDREonPi_PIDQrETikxc0-XpqI' #i2cLogger
+BLYNK_AUTH = 'e06jzpI2zuRD4KB5eHyHdCQTGFT7einR' #i2cLogger
+BLYNK_AUTH_DATA = 'XVbhfI6ZYxkqFp7d4RsCIN6Is9YnKp9q' #i2cLogger
+
 
 try:
     from python_tsl2591 import tsl2591
@@ -107,21 +109,12 @@ try:
     @timer.register(interval=10, run_once=False)
     def blynk_data():
         _log.info("Update Timer Run")
-        #blynk.virtual_write(98, "Starting Timer Function" + '\n') 
+        blynk.virtual_write(98, "Starting Timer Function" + '\n') 
         Counter.cycle += 1
         now = datetime.now()
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))    
         
-        bES = GPIO.input(buttEmptySensor)
-        bFS = GPIO.input(buttFullSensor)
-        blynk.virtual_write(37, bES)
-        blynk.virtual_write(38, bFS)
-        blynk.virtual_write(39, 2-bES-bFS)
-        
-        blynk.set_property(9, 'color', colours[bES])
-        blynk.set_property(10, 'color', colours[bFS])
-        
-        #blynk.virtual_write(98, "Completed Timer Function" + '\n') 
+        blynk.virtual_write(98, "Completed Timer Function" + '\n') 
 
     while True:
         try:
