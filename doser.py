@@ -23,8 +23,10 @@ try:
     import sys
     import os
     import RPi.GPIO as GPIO
-    import AtlasI2C
- 
+
+    from AtlasI2C import (
+	    AtlasI2C
+    )
     
     import subprocess
     import re
