@@ -94,7 +94,7 @@ try:
             _log.info("Try Use Pump")
             for dosage in nutrientMix:
                 if(dosage.pump is not None):
-                   blynk.set_property(dosage.LED, 'color', colours[0])
+                   #blynk.set_property(dosage.LED, 'color', colours[0])
                    dosage.volume = dosage.pump.query("TV,?").split("TV,")[1]
                    blynk.virtual_write(dosage.volumePin, dosage.volume )
                    _log.info( "Pump id " + dosage.pumpId + " has dosed = " + dosage.volume+ '\n')
@@ -105,7 +105,7 @@ try:
         	
              
         except:
-            _log.info("Expected error: Atlas Error")
+            _log.info("Expected error: Use Atlas Error")
             blynk.virtual_write(98, "Expected error: Atlas Error" + '\n') 
             
             
