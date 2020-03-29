@@ -78,7 +78,7 @@ try:
     # Initialize the sensor.
     try:
        # Create the I2C bus
-       _log.info( "Try to create pump" + '\n')
+       _log.info( nutrientMix)
        for dose in nutrientMix:
            _log.info("Create pump " + dose.pumpId) 
            dose.pump = AtlasI2C(dose.pumpId)
