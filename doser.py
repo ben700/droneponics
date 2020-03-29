@@ -98,10 +98,10 @@ try:
                    blynk.virtual_write(dosage.volumePin, dosage.volume )
                    _log.info( "Pump id " + str(dosage.pumpId) + " has dosed = " + str(dosage.volume) + '\n')
                    _log.info( "Pump Device Info = " + dosage.pump.query("i") + '\n')
+		   _log.info( "Pump Device Report = " + dosage.pump.query("R") + '\n')
+		
                 else:
-                   blynk.set_property(dosage.LED, 'color', colours[1])
-	
-        	
+                   blynk.set_property(dosage.LED, 'color', colours[1])	
              
         except:
             _log.info("Expected error: Use Atlas Error")
@@ -134,6 +134,18 @@ try:
     def buttonV1Pressed(pin, value):
         blynk.set_property(10, 'color', colours[value[0]])
         _log.info("Button 1 " + '\n') 
+	for dosage in nutrientMix:
+           if(dosage.pump is not None):
+                   blynk.set_property(dosage.LED, 'color', colours[1])
+                   dosage.pump.query("D,"+str(dosage.dose))
+		   while (dosage.pump.query("R").split(",")[1] != dosage.dose)
+			_log.info( "Pump id " + str(dosage.pumpId) + " has dosed = " + str(dosage.pump.query("R").split(",")[1]) + '\n')
+		   dosage.volume = dosage.pump.query("TV,?").split("TV,")[1]
+                   blynk.virtual_write(dosage.volumePin, dosage.volume )
+                   _log.info( "Pump id " + str(dosage.pumpId) + " has dosed = " + str(dosage.volume) + '\n')
+                   blynk.set_property(dosage.LED, 'color', colours[0])
+                else:
+                   blynk.set_property(dosage.LED, 'color', colours['OFFLINE'])	
            
         
     @blynk.handle_event('write V11')
