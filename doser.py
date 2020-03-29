@@ -45,6 +45,20 @@ try:
     consoleHandler.setFormatter(logFormatter)
     _log.addHandler(consoleHandler)
     _log.setLevel(logging.DEBUG)
+
+
+    class Dose:
+        def __init__(self, Pump, Dose, Led, name):
+            self.pump = Pump
+            self.dose = Dose
+            self.LED = Led
+            self.name = name
+
+    class DosePump:
+        def __init__(self, Pump, Led, name):
+            self.pump = Pump
+            self.LED = Led
+            self.name = name
     
     pump1Int =  21
     GPIO.setmode(GPIO.BCM)
