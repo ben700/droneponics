@@ -67,13 +67,12 @@ try:
            blynk.set_property(dosage.LED, 'color', colours[1])
        blynk.virtual_write(98, "pump created" + '\n') 
        _log.info("pump created")
-    else:
-       blynk.set_property(LED[0], 'color', colours[1])    
     except:
 
         blynk.virtual_write(98, "Unexpected error: atlas" + '\n') 
         _log.info("Unexpected error: Atlas")
     else:
+	blynk.set_property(LED[0], 'color', colours[1])    
         try:	
             _log.info("Try Use Pump")
             for dosage in nutrientMix:
