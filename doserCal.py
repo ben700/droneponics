@@ -107,7 +107,7 @@ try:
                             break
                         else:
                              _log.info("["+ dosed +"]")
-                             _log.info("["+ float("10.00") +"]")
+                             _log.info("["+ str("10.00") +"]")
                   		
 		
 		
