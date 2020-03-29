@@ -105,7 +105,7 @@ try:
                         if (str(dosed).strip() == str("10.00").strip()):
                             _log.info("break")
                             break
-			else:
+                        else:
                              _log.info("["+ dosed +"]")
                              _log.info("["+ str("10.00").strip() +"]")
                   		
