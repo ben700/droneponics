@@ -61,8 +61,8 @@ try:
 
     nutrientMix = []
     nutrientMix.append( Dose(111, 6, LED[1], "Hydro Grow A", VolumePin[1])) 
-    nutrientMix.append( Dose(112, 6, LED[2], "Hydro Grow B", VolumePin[2])) 
-    #nutrientMix.append( Dose(113, 10, LED[3], "Root Stimulant", VolumePin[3]))
+    #nutrientMix.append( Dose(112, 6, LED[2], "Hydro Grow B", VolumePin[2])) 
+    nutrientMix.append( Dose(113, 10, LED[3], "Root Stimulant", VolumePin[3]))
     #nutrientMix.append( Dose(114, 4, LED[4], "Enzyme", VolumePin[4]))
     #nutrientMix.append( Dose(115, 1, LED[5], "Hydro Silicon", VolumePin[5])) 
 
