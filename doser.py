@@ -64,7 +64,7 @@ try:
        # Create the I2C bus
        for dosage in nutrientMix:
            dosage.pump = AtlasI2C(dosage.pumpId)
-           blynk.set_property(dosage.LED, 'color', colours[1])
+           blynk.set_property(dosage.LED, 'color', colours[0])
        blynk.virtual_write(98, "pump created" + '\n') 
        _log.info("pump created")
     except:
