@@ -59,17 +59,33 @@ try:
             self.pump = Pump
             self.LED = Led
             self.name = name
-    
-    pump1Int =  21
-    GPIO.setmode(GPIO.BCM)
-    GPIO.setup(pump1Int, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-  
-    
+
+    LED = [10,11,12,13,14,15]
+
     pump1=None
     pump2=None
     pump3=None
     pump4=None
     pump5=None
+	
+    nutrientMix = []
+    nutrientMix.append( Dose(Pump1, 6, LED[1], "Hydro Grow A")) 
+    nutrientMix.append( Dose(Pump2, 6, LED[2], "Hydro Grow B")) 
+    nutrientMix.append( Dose(Pump3, 10, LED[3], "Root Stimulant"))
+    nutrientMix.append( Dose(Pump4, 4, LED[4], "Enzyme"))
+    nutrientMix.append( Dose(Pump5, 1, LED[5], "Hydro Silicon")) 
+
+
+    dosePumps = []
+    dosePumps.append( DosePump(Pump1, LED[1], "Hydro Grow A")) 
+    dosePumps.append( DosePump(Pump2, LED[2], "Hydro Grow B")) 
+    dosePumps.append( DosePump(Pump3, LED[3], "Root Stimulant"))
+    dosePumps.append( DosePump(Pump4, LED[4], "Enzyme"))
+    dosePumps.append( DosePump(Pump5, LED[5], "Hydro Silicon")) 
+
+	
+    
+
 	
     
     # Initialize Blynk
@@ -83,8 +99,8 @@ try:
     try:
        # Create the I2C bus
        blynk.virtual_write(98, "Try to create pump" + '\n') 
-       pump1 = AtlasI2C(111)
-       pump2 = AtlasI2C(112)
+       nutrientMix[0].pump = AtlasI2C(111)
+       nutrientMix[1].pump = AtlasI2C(112)
        #pump3 = AtlasI2C(113)
       # pump4 = AtlasI2C(114)
       # pump5 = AtlasI2C(115)
@@ -102,18 +118,18 @@ try:
         try:
 		
         
-            if(pump1 is not None):
+            if(nutrientMix[0].pump is not None):
                 blynk.set_property(11, 'color', 0)
             else:
                 blynk.set_property(11, 'color', 1)
 	
         	
-            blynk.virtual_write(21,pump1.query("TV,?").split("TV,")[1])
-            blynk.virtual_write(22,pump2.query("TV,?").split("TV,")[1])
+            blynk.virtual_write(21,nutrientMix[0].pump.query("TV,?").split("TV,")[1])
+            blynk.virtual_write(22,nutrientMix[1].pump.query("TV,?").split("TV,")[1])
 	    #blynk.virtual_write(23,pump3.query("TV,?").split("TV,")[1])
 	    #blynk.virtual_write(24,pump4.query("TV,?").split("TV,")[1])
 	    #blynk.virtual_write(25,pump5.query("TV,?").split("TV,")[1])
-            blynk.virtual_write(98, "Pump Device Info = " + pump1.query("i") + '\n') 
+            _log.info( "Pump Device Info = " + nutrientMix[0].pump.query("i") + '\n') 
         except:
             pump1 = None
             pump2 = None
@@ -158,9 +174,9 @@ try:
         blynk.virtual_write(98, "Fill Line 1 " + '\n')
         blynk.set_property(11, 'color', colours[value[0]])
         if(value[0] == '1'):
-            _log.info("Pump Device  v==1 = " + pump1.query("X") + '\n') 
+            _log.info("Pump Device  v==1 = " + nutrientMix[0].pump.query("X") + '\n') 
         else:
-            _log.info("Pump Device v!=1 = " + pump1.query("D,*") + '\n') 
+            _log.info("Pump Device v!=1 = " + nutrientMix[0].pump.query("D,*") + '\n') 
                 
     @timer.register(interval=10, run_once=False)
     def blynk_data():
