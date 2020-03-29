@@ -136,7 +136,9 @@ try:
         
         nutrientMix[0].volume = nutrientMix[0].pump.query("TV,?").split("TV,")[1]
         blynk.virtual_write(nutrientMix[0].volumePin, nutrientMix[0].volume )
-			
+        dosed = dosage.pump.query("R").split(":")[1].strip().rstrip('\x00')
+        _log.info( "Pump id " + str(dosage.pumpId) + " has dosed = " + str(dosed) + "ml of 10ml")
+                        
     @timer.register(interval=10, run_once=False)
     def blynk_data():
         _log.info("Update Timer Run")
