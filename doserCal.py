@@ -2,7 +2,10 @@
 BLYNK_AUTH = 'e06jzpI2zuRD4KB5eHyHdCQTGFT7einR' #i2cLogger
 BLYNK_AUTH_DATA = 'XVbhfI6ZYxkqFp7d4RsCIN6Is9YnKp9q' #i2cLogger
 
-testInput = [None, "Python", "0,1", "0 1", 1+2j]
+pump = AtlasI2C(111)
+dosed = pump.query("R").split(":")[1].strip()
+print(dosed)                     
+testInput = [None, dosed, "0,1", "0 1", 1+2j]
 
 # We'll use exception handling to continue even if some error occurs
 for eachItem in testInput:
