@@ -48,43 +48,23 @@ try:
 
 
     class Dose:
-        def __init__(self, Pump, Dose, Led, name):
-            self.pump = Pump
+        def __init__(self, PumpId, Dose, Led, name):
+            self.pump = None
+            self.pumpId = PumpId
             self.dose = Dose
             self.LED = Led
             self.name = name
 
-    class DosePump:
-        def __init__(self, Pump, Led, name):
-            self.pump = Pump
-            self.LED = Led
-            self.name = name
+    
 
     LED = [10,11,12,13,14,15]
-
-    Pump1=None
-    Pump2=None
-    Pump3=None
-    Pump4=None
-    Pump5=None
 	
     nutrientMix = []
-    nutrientMix.append( Dose(Pump1, 6, LED[1], "Hydro Grow A")) 
-    nutrientMix.append( Dose(Pump2, 6, LED[2], "Hydro Grow B")) 
-    nutrientMix.append( Dose(Pump3, 10, LED[3], "Root Stimulant"))
-    nutrientMix.append( Dose(Pump4, 4, LED[4], "Enzyme"))
-    nutrientMix.append( Dose(Pump5, 1, LED[5], "Hydro Silicon")) 
-
-
-    dosePumps = []
-    dosePumps.append( DosePump(Pump1, LED[1], "Hydro Grow A")) 
-    dosePumps.append( DosePump(Pump2, LED[2], "Hydro Grow B")) 
-    dosePumps.append( DosePump(Pump3, LED[3], "Root Stimulant"))
-    dosePumps.append( DosePump(Pump4, LED[4], "Enzyme"))
-    dosePumps.append( DosePump(Pump5, LED[5], "Hydro Silicon")) 
-
-	
-    
+    nutrientMix.append( Dose(111, 6, LED[1], "Hydro Grow A")) 
+    nutrientMix.append( Dose(112, 6, LED[2], "Hydro Grow B")) 
+    #nutrientMix.append( Dose(113, 10, LED[3], "Root Stimulant"))
+    #nutrientMix.append( Dose(114, 4, LED[4], "Enzyme"))
+    #nutrientMix.append( Dose(115, 1, LED[5], "Hydro Silicon")) 
 
 	
     
@@ -98,12 +78,9 @@ try:
     # Initialize the sensor.
     try:
        # Create the I2C bus
-       blynk.virtual_write(98, "Try to create pump" + '\n') 
-       nutrientMix[0].pump = AtlasI2C(111)
-       nutrientMix[1].pump = AtlasI2C(112)
-       #pump3 = AtlasI2C(113)
-      # pump4 = AtlasI2C(114)
-      # pump5 = AtlasI2C(115)
+       blynk.virtual_write(98, "Try to create pump" + '\n')
+       for dose in nutrientMix:
+           dose.pump = AtlasI2C(pumpId)
        blynk.virtual_write(98, "pump created" + '\n') 
        _log.info("pump created")
     except:
