@@ -80,7 +80,8 @@ try:
        # Create the I2C bus
        blynk.virtual_write(98, "Try to create pump" + '\n')
        for dose in nutrientMix:
-           dose.pump = AtlasI2C(pumpId)
+           _log.info("Create pump " + dose.pumpId) 
+           dose.pump = AtlasI2C(dose.pumpId)
        blynk.virtual_write(98, "pump created" + '\n') 
        _log.info("pump created")
     except:
