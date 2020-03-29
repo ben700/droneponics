@@ -25,10 +25,10 @@ def main(stdscr):
     user_input = ""
 
     #clear serial buffer
-    ser.write("\r")
+    ser.write(str.encode("\r"))
 
     #turn on LEDS
-    ser.write("L,1\r")
+    ser.write(str.encode("L,1\r"))
 
 
     #main loop
