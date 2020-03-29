@@ -29,7 +29,6 @@ try:
     
     import subprocess
     import re
-    import nutrientSchedule
     import drone
 
     class Counter:
