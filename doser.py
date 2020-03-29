@@ -48,23 +48,25 @@ try:
 
 
     class Dose:
-        def __init__(self, PumpId, Dose, Led, name):
+        def __init__(self, PumpId, Dose, Led, name, volumePin):
             self.pump = None
             self.pumpId = PumpId
             self.dose = Dose
             self.LED = Led
             self.name = name
-
+            self.volumePin = volumePin	
+            self.volume = 0	
     
 
     LED = [10,11,12,13,14,15]
-	
+    VolumePin = [0,21,22,23,24,25]
+
     nutrientMix = []
-    nutrientMix.append( Dose(111, 6, LED[1], "Hydro Grow A")) 
-    nutrientMix.append( Dose(112, 6, LED[2], "Hydro Grow B")) 
-    #nutrientMix.append( Dose(113, 10, LED[3], "Root Stimulant"))
-    #nutrientMix.append( Dose(114, 4, LED[4], "Enzyme"))
-    #nutrientMix.append( Dose(115, 1, LED[5], "Hydro Silicon")) 
+    nutrientMix.append( Dose(111, 6, LED[1], "Hydro Grow A", VolumePin[1])) 
+    nutrientMix.append( Dose(112, 6, LED[2], "Hydro Grow B", VolumePin[2])) 
+    #nutrientMix.append( Dose(113, 10, LED[3], "Root Stimulant", VolumePin[3]))
+    #nutrientMix.append( Dose(114, 4, LED[4], "Enzyme", VolumePin[4]))
+    #nutrientMix.append( Dose(115, 1, LED[5], "Hydro Silicon", VolumePin[5])) 
 
 	
     
@@ -90,18 +92,18 @@ try:
         try:
 		
             _log.info("Try Use Pump")
-            if(nutrientMix[0].pump is not None):
-                blynk.set_property(11, 'color', 0)
-            else:
-                blynk.set_property(11, 'color', 1)
+            for dosage in nutrientMix:
+                if(dosage.pump is not None):
+                   blynk.set_property(dosage.LED, 'color', colours[0])
+                   dosage.volume = dosage.pump.query("TV,?").split("TV,")[1]
+                   blynk.virtual_write(dosage.volumePin, dosage.volume )
+                   _log.info( "Pump id " + dosage.pumpId + " has dosed = " + dosage.volume+ '\n')
+                   _log.info( "Pump Device Info = " + dosage.pump.query("i") + '\n')
+                else:
+                   blynk.set_property(dosage.LED, 'color', colours[1])
 	
         	
-            blynk.virtual_write(21,nutrientMix[0].pump.query("TV,?").split("TV,")[1])
-            blynk.virtual_write(22,nutrientMix[1].pump.query("TV,?").split("TV,")[1])
-	    #blynk.virtual_write(23,pump3.query("TV,?").split("TV,")[1])
-	    #blynk.virtual_write(24,pump4.query("TV,?").split("TV,")[1])
-	    #blynk.virtual_write(25,pump5.query("TV,?").split("TV,")[1])
-            _log.info( "Pump Device Info = " + nutrientMix[0].pump.query("i") + '\n') 
+             
         except:
             _log.info("Expected error: Atlas Error")
             blynk.virtual_write(98, "Expected error: Atlas Error" + '\n') 
