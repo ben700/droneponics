@@ -134,14 +134,20 @@ try:
 
     @blynk.handle_event('write V1')
     def buttonV1Pressed(pin, value):
-        blynk.set_property(11, 'color', colours[value[0]])
-        if(value[0] == '1'):
-            blynk.virtual_write(98, "Pump Device Info = " + pump.query("X") + '\n') 
-            print("Waste turned off")
-        else:
-            blynk.virtual_write(98, "Pump Device Info = " + pump.query("D,*") + '\n') 
-            print("Waste turned on")
+        blynk.set_property(10, 'color', colours[value[0]])
+        _log.info("Button 1 " + '\n') 
+           
         
+    @blynk.handle_event('write V11')
+    def fillLinePump1(pin, value):
+        _log.info("Fill Line 1")
+	blynk.virtual_write(98, "Fill Line 1 " + '\n')
+	blynk.set_property(11, 'color', colours[value[0]])
+        if(value[0] == '1'):
+            _log.info("Pump Device  v==1 = " + pump1.query("X") + '\n') 
+        else:
+            _log.info("Pump Device v!=1 = " + pump1.query("D,*") + '\n') 
+                
     @timer.register(interval=10, run_once=False)
     def blynk_data():
         _log.info("Update Timer Run")
