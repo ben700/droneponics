@@ -97,8 +97,8 @@ try:
                    dosage.volume = dosage.pump.query("TV,?").split("TV,")[1]
                    blynk.virtual_write(dosage.volumePin, dosage.volume )
                    _log.info( "Pump id " + str(dosage.pumpId) + " has dosed = " + str(dosage.volume) + '\n')
-                   _log.info( "Pump Device Info = " + dosage.pump.query("i") + '\n')
-                   _log.info( "Pump Device Report = [" + dosage.pump.query("R").split(":")[1].strip() + "]" + '\n')
+                  # _log.info( "Pump Device Info = " + dosage.pump.query("i") + '\n')
+                  # _log.info( "Pump Device Report = [" + dosage.pump.query("R").split(":")[1].strip() + "]" + '\n')
 		
                 else:
                    blynk.set_property(dosage.LED, 'color', colours[1])	
@@ -120,12 +120,8 @@ try:
     @blynk.handle_event('write V255')
     def rebooter(pin, value):
         blynk.virtual_write(98, "User Reboot " + '\n')
-        blynk.set_property(10, 'color', colours['OFFLINE'])
-        blynk.set_property(11, 'color', colours['OFFLINE'])
-        blynk.set_property(12, 'color', colours['OFFLINE']) 
-        blynk.set_property(13, 'color', colours['OFFLINE']) 
-        blynk.set_property(14, 'color', colours['OFFLINE']) 
-        blynk.set_property(15, 'color', colours['OFFLINE'])  
+	for l in LED:
+            blynk.set_property(l, 'color', colours['OFFLINE'])
         os.system('sh /home/pi/updateDroneponics.sh')
         blynk.virtual_write(98, "System updated and restarting " + '\n')
         os.system('sudo reboot')
@@ -146,6 +142,8 @@ try:
                    blynk.set_property(dosage.LED, 'color', colours[0])
            else:
                    blynk.set_property(dosage.LED, 'color', colours['OFFLINE'])	
+        blynk.set_property(10, 'color', colours[value[1]])
+        _log.info("Button 1 completed" + '\n') 
            
         
     @blynk.handle_event('write V11')
