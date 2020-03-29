@@ -82,7 +82,7 @@ try:
        nutrientMix[0].pump = AtlasI2C(nutrientMix[0].pumpId)
        nutrientMix[1].pump = AtlasI2C(nutrientMix[1].pumpId)
        for dosage in nutrientMix:
-           _log.info("Create pump " + dosage.pumpId) 
+           _log.info("Create pump " + str(dosage)) 
            #dose.pump = AtlasI2C(dose.pumpId)
        blynk.virtual_write(98, "pump created" + '\n') 
        _log.info("pump created")
