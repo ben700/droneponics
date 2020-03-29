@@ -89,18 +89,17 @@ try:
         blynk.virtual_write(98, "Unexpected error: atlas" + '\n') 
         _log.info("Unexpected error: Atlas")
     else:
-        try:
-		
+        try:	
             _log.info("Try Use Pump")
             for dosage in nutrientMix:
-                if(dosage.pump is not None):
+         #       if(dosage.pump is not None):
                    #blynk.set_property(dosage.LED, 'color', colours[0])
-                   dosage.volume = dosage.pump.query("TV,?").split("TV,")[1]
-                   blynk.virtual_write(dosage.volumePin, dosage.volume )
+               #    dosage.volume = dosage.pump.query("TV,?").split("TV,")[1]
+               #    blynk.virtual_write(dosage.volumePin, dosage.volume )
                    _log.info( "Pump id " + dosage.pumpId + " has dosed = " + dosage.volume+ '\n')
                    _log.info( "Pump Device Info = " + dosage.pump.query("i") + '\n')
-                else:
-                   blynk.set_property(dosage.LED, 'color', colours[1])
+        #        else:
+        #           blynk.set_property(dosage.LED, 'color', colours[1])
 	
         	
              
