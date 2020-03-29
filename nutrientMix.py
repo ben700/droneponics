@@ -8,7 +8,7 @@ class Dose:
        self.volumePin = volumePin	
        self.volume = 0	
             
-def nutrientMix(nutrientMix):
+def buildNutrientMix(nutrientMix):
     nutrientMix.append( Dose(111, 6.00, LED[1], "Hydro Bloom A", VolumePin[1])) 
     nutrientMix.append( Dose(112, 6.00, LED[2], "Hydro Bloom B", VolumePin[2])) 
     nutrientMix.append( Dose(113, 10, LED[3], "Ignition", VolumePin[3]))
