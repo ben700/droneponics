@@ -134,7 +134,7 @@ try:
         else:
             _log.info("Pump Device v!=1 = " + nutrientMix[0].pump.query("D,*") + '\n') 
         
-        while((value[0] == '1')):
+        while((value[0] != '1')):
             nutrientMix[0].volume = nutrientMix[0].pump.query("TV,?").split("TV,")[1]
             blynk.virtual_write(nutrientMix[0].volumePin, nutrientMix[0].volume )
             dosed = nutrientMix[0].pump.query("R").split(":")[1].strip().rstrip('\x00')
