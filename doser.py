@@ -79,6 +79,8 @@ try:
     try:
        # Create the I2C bus
        _log.info( nutrientMix[0].pumpId)
+       nutrientMix[0].pump = AtlasI2C(nutrientMix[0].pumpId)
+       nutrientMix[1].pump = AtlasI2C(nutrientMix[1].pumpId)
       # for doses in nutrientMix:
        #    _log.info("Create pump " + doses.pumpId) 
            #dose.pump = AtlasI2C(dose.pumpId)
@@ -105,11 +107,6 @@ try:
 	    #blynk.virtual_write(25,pump5.query("TV,?").split("TV,")[1])
             _log.info( "Pump Device Info = " + nutrientMix[0].pump.query("i") + '\n') 
         except:
-            pump1 = None
-            pump2 = None
-            pump3 = None
-            pump4 = None
-            pump5 = None
             _log.info("Expected error: Atlas Error")
             blynk.virtual_write(98, "Expected error: Atlas Error" + '\n') 
             
