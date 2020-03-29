@@ -46,13 +46,55 @@ try:
     _log.addHandler(consoleHandler)
     _log.setLevel(logging.DEBUG)
 
+    class Dose:
+        def __init__(self, PumpId, Dose, Led, name, volumePin):
+            self.pump = None
+            self.pumpId = PumpId
+            self.dose = Dose
+            self.LED = Led
+            self.name = name
+            self.volumePin = volumePin	
+            self.volume = 0	
+    
 
+    LED = [10,11,12,13,14,15]
+    VolumePin = [0,21,22,23,24,25]
+
+    nutrientMix = []
+    nutrientMix.append( Dose(111, 6, LED[1], "Hydro Grow A", VolumePin[1])) 
+    nutrientMix.append( Dose(112, 6, LED[2], "Hydro Grow B", VolumePin[2])) 
+    #nutrientMix.append( Dose(113, 10, LED[3], "Root Stimulant", VolumePin[3]))
+    #nutrientMix.append( Dose(114, 4, LED[4], "Enzyme", VolumePin[4]))
+    #nutrientMix.append( Dose(115, 1, LED[5], "Hydro Silicon", VolumePin[5])) 
+
+	
 
     answer = input("Are you sure you want to calibrate (y/n)")
     if answer is None or answer != 'y':
         _log.info("User Exit")
         quit()
   
+    # Initialize the sensor.
+    try:
+       # Create the I2C bus
+       for dosage in nutrientMix:
+           dosage.pump = AtlasI2C(dosage.pumpId)
+       _log.info("pump created")
+    except:
+        _log.info("Unexpected error: Atlas")
+    else:
+        try:	
+            _log.info("Try Use Pump")
+            for dosage in nutrientMix:
+                if(dosage.pump is not None):
+                   dosage.volume = dosage.pump.query("TV,?").split("TV,")[1]
+                   _log.info( "Pump id " + str(dosage.pumpId) + " has dosed = " + str(dosage.volume) + '\n')
+                  # _log.info( "Pump Device Info = " + dosage.pump.query("i") + '\n')
+                  # _log.info( "Pump Device Report = [" + dosage.pump.query("R").split(":")[1].strip() + "]" + '\n')
+	    
+        except:
+            _log.info("Expected error: Use Atlas Error")
+            
   
 except:
    _log.info('Unexpected error')
