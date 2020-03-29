@@ -62,11 +62,11 @@ try:
     VolumePin = [0,21,22,23,24,25]
 
     nutrientMix = []
-    nutrientMix.append( Dose(111, 6.00, LED[1], "Hydro Grow A", VolumePin[1])) 
-    nutrientMix.append( Dose(112, 6.00, LED[2], "Hydro Grow B", VolumePin[2])) 
-    #nutrientMix.append( Dose(113, 10, LED[3], "Root Stimulant", VolumePin[3]))
-    #nutrientMix.append( Dose(114, 4, LED[4], "Enzyme", VolumePin[4]))
-    #nutrientMix.append( Dose(115, 1, LED[5], "Hydro Silicon", VolumePin[5])) 
+    nutrientMix.append( Dose(111, 6.00, LED[1], "Hydro Bloom A", VolumePin[1])) 
+    nutrientMix.append( Dose(112, 6.00, LED[2], "Hydro Bloom B", VolumePin[2])) 
+    nutrientMix.append( Dose(113, 10, LED[3], "Ignition", VolumePin[3]))
+    nutrientMix.append( Dose(114, 4, LED[4], "Enzyme", VolumePin[4]))
+    nutrientMix.append( Dose(115, 1, LED[5], "Magne-Cal", VolumePin[5])) 
 
 	
     
@@ -97,9 +97,7 @@ try:
                    dosage.volume = dosage.pump.query("TV,?").split("TV,")[1]
                    blynk.virtual_write(dosage.volumePin, dosage.volume )
                    _log.info( "Pump id " + str(dosage.pumpId) + " has dosed = " + str(dosage.volume) + '\n')
-                  # _log.info( "Pump Device Info = " + dosage.pump.query("i") + '\n')
-                  # _log.info( "Pump Device Report = [" + dosage.pump.query("R").split(":")[1].strip() + "]" + '\n')
-		
+          
                 else:
                    blynk.set_property(dosage.LED, 'color', colours[1])	
              
