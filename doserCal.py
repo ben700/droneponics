@@ -1,32 +1,6 @@
 ##!/usr/bin/env python3 
 BLYNK_AUTH = 'e06jzpI2zuRD4KB5eHyHdCQTGFT7einR' #i2cLogger
 BLYNK_AUTH_DATA = 'XVbhfI6ZYxkqFp7d4RsCIN6Is9YnKp9q' #i2cLogger
-from AtlasI2C import (
-	    AtlasI2C
-    )
-pump = AtlasI2C(111)
-dosed = pump.query("R").split(":")[1].strip().rstrip('\x00')
-print(dosed)                     
-#dosed =dosed.split('\')
-print(dosed)                     
-testInput = [None, dosed, "0,1", "0 1", 1+2j]
-
-# We'll use exception handling to continue even if some error occurs
-for eachItem in testInput:
-   try:
-      if isinstance(eachItem, str):
-         print("float('{}') = {}".format(eachItem, float(eachItem)))
-      else:
-         print("float({}) = {}".format(eachItem, float(eachItem)))
-   except Exception as ex:
-      print("float({}) = {}".format(eachItem, ex))
-
-# Also, check for 1/0
-try:
-  print("float(1/0) = {}".format(float(1/0)))
-except Exception as ex:
-  print("float(1/0) = {}".format(ex))
-
 
 try:
     from python_tsl2591 import tsl2591
@@ -126,7 +100,8 @@ try:
                    while (True):
                    #_log.info( "Pump id " + str(dosage.pumpId) + " has dosed = " + str(dosage.pump.query("R").split(",")[1]) + '\n')
                         dosed = pump.query("R").split(":")[1].strip().rstrip('\x00')
-                        if (dosed >= 10.00):
+			print(dosed)
+                        if (str(dosed) == "10.00"):
                             _log.info("break")
                             break
                         else:
