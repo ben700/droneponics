@@ -79,8 +79,8 @@ try:
     try:
        # Create the I2C bus
        _log.info( nutrientMix[0].pumpId)
-       for dose in nutrientMix:
-           _log.info("Create pump " + dose.pumpId) 
+       for doses in nutrientMix:
+           _log.info("Create pump " + doses.pumpId) 
            #dose.pump = AtlasI2C(dose.pumpId)
        blynk.virtual_write(98, "pump created" + '\n') 
        _log.info("pump created")
@@ -95,7 +95,7 @@ try:
     else:
         try:
 		
-        
+            _log.info("Try Use Pump")
             if(nutrientMix[0].pump is not None):
                 blynk.set_property(11, 'color', 0)
             else:
