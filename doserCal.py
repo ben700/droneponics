@@ -98,9 +98,9 @@ try:
                    dosage.pump.query("D,10")	
 		
 		
-                   #while (float(dosage.pump.query("R").split(":")[1].strip()) < 10):
+                   while (float(dosage.pump.query("R").split(":")[1].strip()) < 10):
                    #_log.info( "Pump id " + str(dosage.pumpId) + " has dosed = " + str(dosage.pump.query("R").split(",")[1]) + '\n')
-                   _log.info( str(dosage.pump.query("R").split(":")[1].strip()))
+                        _log.info( str(dosage.pump.query("R").split(":")[1].strip()))
                   		
 		
 		
