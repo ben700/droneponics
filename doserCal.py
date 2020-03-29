@@ -99,7 +99,7 @@ try:
 		
                    while (True):
                    #_log.info( "Pump id " + str(dosage.pumpId) + " has dosed = " + str(dosage.pump.query("R").split(",")[1]) + '\n')
-                        val = pump.query("R").split(":")[1].strip()
+			val = pump.query("R").split(":")[1].strip()
 			_log.info(val)
 			dosed = val.rstrip('\x00')
 			
