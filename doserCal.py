@@ -12,5 +12,6 @@ from AtlasI2C import (
 
 
 answer = input("Are you sure you want to calibrate (y/n)")
+print(answer)
 if answer is None or answer != 'y':
     quit()
