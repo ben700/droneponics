@@ -104,7 +104,7 @@ try:
                    dosage.pump.query("Cal,clear")	
                    dosage.pump.query("Cal,"+str(aDose))
 		   
-		   answer = input("Going to dose 10ml of " + dosage.name + " over 1 min. Enter y when you are ready(y/n)")
+                   answer = input("Going to dose 10ml of " + dosage.name + " over 1 min. Enter y when you are ready(y/n)")
                    if answer is None or answer != 'y':
                         _log.info("User Exit")
                         continue
