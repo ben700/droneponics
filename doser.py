@@ -81,7 +81,7 @@ try:
        _log.info( nutrientMix[0].pumpId)
        for dose in nutrientMix:
            _log.info("Create pump " + dose.pumpId) 
-           dose.pump = AtlasI2C(dose.pumpId)
+           #dose.pump = AtlasI2C(dose.pumpId)
        blynk.virtual_write(98, "pump created" + '\n') 
        _log.info("pump created")
     except:
