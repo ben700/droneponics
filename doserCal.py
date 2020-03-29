@@ -100,8 +100,8 @@ try:
                    while (True):
                    #_log.info( "Pump id " + str(dosage.pumpId) + " has dosed = " + str(dosage.pump.query("R").split(",")[1]) + '\n')
                         dosed = pump.query("R").split(":")[1].strip().rstrip('\x00')
-			print(dosed)
-                        if (str(dosed) == "10.00"):
+                        print(dosed)
+                        if (float(dosed) >= 10.00):
                             _log.info("break")
                             break
                         else:
