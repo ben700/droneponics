@@ -75,6 +75,7 @@ try:
       # pump4 = AtlasI2C(114)
       # pump5 = AtlasI2C(115)
        blynk.virtual_write(98, "pump created" + '\n') 
+       _log.info("pump created")
     except:
         pump1 = None
         pump2 = None
@@ -93,6 +94,7 @@ try:
             pump3 = None
             pump4 = None
             pump5 = None
+            _log.info("Expected error: Atlas Error")
             blynk.virtual_write(98, "Expected error: Atlas Error" + '\n') 
             
             
