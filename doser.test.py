@@ -50,9 +50,8 @@ try:
     LED = [10,11,12,13,14,15]
     VolumePin = [0,21,22,23,24,25]
 
-    print(nutrientSchedule.add(2,3))
-    nutrientMix = []
-    nutrientMix = nutrientSchedule.buildNutrientMix(nutrientMix)
+    _log.info("build array")
+    nutrientMix = nutrientSchedule.buildNutrientMix([])
 
 
     answer = input("Are you sure you want to test (y/n)")
