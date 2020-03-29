@@ -106,7 +106,7 @@ try:
 
     @blynk.handle_event('write V1')
     def buttonV1Pressed(pin, value):
-        blynk.set_property(10, 'color', colours[1])
+        blynk.set_property(10, 'color', colours[0])
         _log.info("Button 1 " + '\n') 
         for dosage in nutrientMix:
            if(dosage.pump is not None):
@@ -121,11 +121,10 @@ try:
                             break	
                    dosage.volume = dosage.pump.query("TV,?").split("TV,")[1]
                    blynk.virtual_write(dosage.volumePin, dosage.volume )
-                   _log.info( "Pump id " + str(dosage.pumpId) + " has dosed = " + str(dosage.volume) + '\n')
                    blynk.set_property(dosage.LED, 'color', colours[1])
            else:
                    blynk.set_property(dosage.LED, 'color', colours['OFFLINE'])	
-        blynk.set_property(10, 'color', colours[0])
+        blynk.set_property(10, 'color', colours[1])
         blynk.virtual_write(1, 0)
         _log.info("Button 1 completed" + '\n') 
            
