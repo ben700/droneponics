@@ -54,7 +54,7 @@ try:
     
     # Initialize Blynk
     blynk = blynklib.Blynk(BLYNK_AUTH)        
-    #timer = blynktimer.Timer()
+    timer = blynktimer.Timer()
     blynk.run()
     blynk.virtual_write(98, "clr")
     
