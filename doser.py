@@ -99,7 +99,7 @@ try:
 	    #blynk.virtual_write(23,pump3.query("TV,?").split("TV,")[1])
 	    #blynk.virtual_write(24,pump4.query("TV,?").split("TV,")[1])
 	    #blynk.virtual_write(25,pump5.query("TV,?").split("TV,")[1])
-	    blynk.virtual_write(98, "Pump Device Info = " + pump1.query("i") + '\n') 
+            blynk.virtual_write(98, "Pump Device Info = " + pump1.query("i") + '\n') 
         except:
             pump1 = None
             pump2 = None
