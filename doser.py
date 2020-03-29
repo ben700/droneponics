@@ -95,7 +95,7 @@ try:
          #       if(dosage.pump is not None):
                    #blynk.set_property(dosage.LED, 'color', colours[0])
                    dosage.volume = dosage.pump.query("TV,?").split("TV,")[1]
-               #    blynk.virtual_write(dosage.volumePin, dosage.volume )
+                   blynk.virtual_write(dosage.volumePin, dosage.volume )
                    _log.info( "Pump id " + str(dosage.pumpId) + " has dosed = " + str(dosage.volume) + '\n')
                    _log.info( "Pump Device Info = " + dosage.pump.query("i") + '\n')
         #        else:
