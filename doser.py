@@ -106,7 +106,7 @@ try:
 
     @blynk.handle_event('write V1')
     def buttonV1Pressed(pin, value):
-        blynk.set_property(10, 'color', colours[value[0]])
+        blynk.set_property(10, 'color', colours[0])
         _log.info("Button 1 " + '\n') 
         for dosage in nutrientMix:
            if(dosage.pump is not None):
