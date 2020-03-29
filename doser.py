@@ -71,9 +71,9 @@ try:
        blynk.virtual_write(98, "Try to create pump" + '\n') 
        pump1 = AtlasI2C(111)
        pump2 = AtlasI2C(112)
-       pump3 = AtlasI2C(113)
-       pump4 = AtlasI2C(114)
-       pump5 = AtlasI2C(115)
+       #pump3 = AtlasI2C(113)
+      # pump4 = AtlasI2C(114)
+      # pump5 = AtlasI2C(115)
        blynk.virtual_write(98, "pump created" + '\n') 
     except:
         pump1 = None
