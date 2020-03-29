@@ -36,7 +36,7 @@ try:
         cycle = 0
 
     bootup = True
-    colours = {1: '#FF0000', 0: '#00FF00', 'OFFLINE': '#0000FF'}
+    colours = {1: '#FF0000', 0: '#00FF00', '1': '#FF0000', '0': '#00FF00', 'OFFLINE': '#0000FF'}
 
 
     # tune console logging
@@ -129,7 +129,7 @@ try:
     def fillLinePump1(pin, value):
         _log.info("Fill Line 1")
         _log.info( "Fill Line 1 " + str(value[0]) + '\n')
-       # blynk.set_property(11, 'color', colours[value[0]])
+        blynk.set_property(nutrientMix[0].LED, 'color', colours[value[0]])
         if(value[0] == '1'):
             _log.info("Pump Device  v==1 = " + nutrientMix[0].pump.query("X") + '\n') 
         else:
