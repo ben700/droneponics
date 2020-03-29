@@ -62,11 +62,11 @@ try:
 
     LED = [10,11,12,13,14,15]
 
-    pump1=None
-    pump2=None
-    pump3=None
-    pump4=None
-    pump5=None
+    Pump1=None
+    Pump2=None
+    Pump3=None
+    Pump4=None
+    Pump5=None
 	
     nutrientMix = []
     nutrientMix.append( Dose(Pump1, 6, LED[1], "Hydro Grow A")) 
