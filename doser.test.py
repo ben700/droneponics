@@ -46,14 +46,8 @@ try:
     _log.addHandler(consoleHandler)
     _log.setLevel(logging.DEBUG)
 
-
-    LED = [10,11,12,13,14,15]
-    VolumePin = [0,21,22,23,24,25]
-
-    _log.info("build array") 
     nutrientMix = []
     nutrientMix = drone.buildNutrientMix(nutrientMix, _log)
-    _log.info("Array built")
 
     answer = input("Are you sure you want to test (y/n)")
     if answer is None or answer != 'y':
