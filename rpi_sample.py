@@ -73,8 +73,8 @@ def main(stdscr):
                 # if the character is a printable character, put it into the input area and send buffer
     	        user_input = user_input + chr(c)
     	        inputpad.addstr(0, pos_text, chr(c))
-                inputpad.move(0, pos_text)
-                pos_text = (pos_text + 1) % (width -1) # increments the cursors position in the input area, returns it to the beginning if it runs past the screen size
+    	        inputpad.move(0, pos_text)
+    	        pos_text = (pos_text + 1) % (width -1) # increments the cursors position in the input area, returns it to the beginning if it runs past the screen size
             else:
                 #if the character entered doesnt meet any conditions, ignore it
                 pass
