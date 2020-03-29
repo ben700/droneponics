@@ -5,7 +5,7 @@ from AtlasI2C import (
 	    AtlasI2C
     )
 pump = AtlasI2C(111)
-dosed = pump.query("R").split(":")[1]
+dosed = pump.query("R").split(":")[1].strip()
 print(dosed)                     
 #dosed =dosed.split('\')
 print(dosed)                     
