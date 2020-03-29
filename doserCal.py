@@ -130,7 +130,7 @@ try:
                             _log.info("break")
                             break
                         else:
-                             _log.info("["+ dosed +"]")
+                             _log.info("["+ str(dosed) +"]")
                              _log.info("["+ str("10.00") +"]")
                   		
 		
