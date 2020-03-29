@@ -29,7 +29,7 @@ try:
     
     import subprocess
     import re
-    import nutrientMix as nMix
+    import nutrientSchedule
 
     class Counter:
         cycle = 0
@@ -51,7 +51,7 @@ try:
     VolumePin = [0,21,22,23,24,25]
 
     nutrientMix = []
-    nutrientMix = nMix.buildNutrientMix(nutrientMix)
+    nutrientMix = nutrientSchedule.buildNutrientMix(nutrientMix)
 
 
     answer = input("Are you sure you want to test (y/n)")
