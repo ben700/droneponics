@@ -87,10 +87,35 @@ try:
             _log.info("Try Use Pump")
             for dosage in nutrientMix:
                 if(dosage.pump is not None):
-                   dosage.volume = dosage.pump.query("TV,?").split("TV,")[1]
-                   _log.info( "Pump id " + str(dosage.pumpId) + " has dosed = " + str(dosage.volume) + '\n')
-                  # _log.info( "Pump Device Info = " + dosage.pump.query("i") + '\n')
-                  # _log.info( "Pump Device Report = [" + dosage.pump.query("R").split(":")[1].strip() + "]" + '\n')
+                   answer = input("Are you sure you want to calibrate pump " + dosage.name + "(y/n)")
+                   if answer is None or answer != 'y':
+                        _log.info("User Exit")
+                        continue
+  		   answer = input("Going to dose 10ml of " + dosage.name + ". Enter y when you are ready(y/n)")
+                   if answer is None or answer != 'y':
+                        _log.info("User Exit")
+                        continue
+  		   dosage.pump.query("D,10")	
+		   aDose = input("How much in ml did pump dose?")
+                   answer = input("Going to calibrate pump. It dosed [" + str(aDose) + "]. Enter y when you are ready(y/n)")
+		   if answer is None or answer != 'y':
+                        _log.info("User Exit")
+                        continue
+		   dosage.pump.query("Cal,clear")	
+  		   dosage.pump.query("Cal,"+str(aDose))
+		   
+		   answer = input("Going to dose 10ml of " + dosage.name + " over 1 min. Enter y when you are ready(y/n)")
+                   if answer is None or answer != 'y':
+                        _log.info("User Exit")
+                        continue
+  		   dosage.pump.query("D,10,1")	
+		   aDose = input("How much in ml did pump dose?")
+                   answer = input("Going to calibrate pump. It dosed [" + str(aDose) + "]. Enter y when you are ready(y/n)")
+		   if answer is None or answer != 'y':
+                        _log.info("User Exit")
+                        continue
+		   dosage.pump.query("Cal,"+str(aDose))
+		   	
 	    
         except:
             _log.info("Expected error: Use Atlas Error")
