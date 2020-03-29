@@ -93,7 +93,7 @@ try:
             _log.info("Try Use Pump")
             for dosage in nutrientMix:
                 if(dosage.pump is not None):
-                   #blynk.set_property(dosage.LED, 'color', colours[0])
+                   blynk.set_property(dosage.LED, 'color', colours[0])
                    dosage.volume = dosage.pump.query("TV,?").split("TV,")[1]
                    blynk.virtual_write(dosage.volumePin, dosage.volume )
                    _log.info( "Pump id " + str(dosage.pumpId) + " has dosed = " + str(dosage.volume) + '\n')
