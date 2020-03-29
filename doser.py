@@ -112,8 +112,8 @@ try:
            if(dosage.pump is not None):
                    blynk.set_property(dosage.LED, 'color', colours[0])
                    dosage.pump.query("D,"+str(dosage.dose))
-                   while (str(dosage.pump.query("R").split(":")[1].strip().rstrip('\x00')) != str(dosage.dose)):
-                       _log.info( "Pump id " + str(dosage.pumpId) + " has dosed = " + str(dosage.pump.query("R").split(",")[1]) + '\n')
+                 #  while (str(dosage.pump.query("R").split(":")[1].strip().rstrip('\x00')) != str(dosage.dose)):
+                 #      _log.info( "Pump id " + str(dosage.pumpId) + " has dosed = " + str(dosage.pump.query("R").split(",")[1]) + '\n')
                    dosage.volume = dosage.pump.query("TV,?").split("TV,")[1]
                    blynk.virtual_write(dosage.volumePin, dosage.volume )
                    _log.info( "Pump id " + str(dosage.pumpId) + " has dosed = " + str(dosage.volume) + '\n')
