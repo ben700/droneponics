@@ -116,8 +116,8 @@ try:
                         dosed = dosage.pump.query("R").split(":")[1].strip().rstrip('\x00')
                         _log.info( "Pump id " + str(dosage.pumpId) + " has dosed = " + str(dosed) + "ml of 10ml")
                         _log.info(str(dosed))
-                        _log.info(str(dosage.dose))
-                        if (str(dosed) == str(dosage.dose)):
+                        _log.info('{:.2f}'.format(dosage.dose))
+                        if (str(dosed) == '{:.2f}'.format(dosage.dose)):
                             break	
                    dosage.volume = dosage.pump.query("TV,?").split("TV,")[1]
                    blynk.virtual_write(dosage.volumePin, dosage.volume )
