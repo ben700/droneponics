@@ -52,6 +52,11 @@ try:
   
     
     pump1=None
+    pump2=None
+    pump3=None
+    pump4=None
+    pump5=None
+	
     
     # Initialize Blynk
     blynk = blynklib.Blynk(BLYNK_AUTH)        
@@ -65,17 +70,29 @@ try:
        # Create the I2C bus
        blynk.virtual_write(98, "Try to create pump" + '\n') 
        pump1 = AtlasI2C(111)
+       pump2 = AtlasI2C(112)
+       pump3 = AtlasI2C(113)
+       pump4 = AtlasI2C(114)
+       pump5 = AtlasI2C(115)
        blynk.virtual_write(98, "pump created" + '\n') 
     except:
         pump1 = None
-        pump1.virtual_write(98, "Unexpected error: atlas" + '\n') 
+        pump2 = None
+        pump3 = None
+        pump4 = None
+        pump5 = None
+        blynk.virtual_write(98, "Unexpected error: atlas" + '\n') 
         _log.info("Unexpected error: Atlas")
     else:
         try:
             blynk.virtual_write(98, "Pump Device Info = " + pump.query("i") + '\n') 
         except:
             pump1 = None
-            blynk.virtual_write(98, "Expected error: Atlas Error" + '\n') 
+            pump2 = None
+            pump3 = None
+            pump4 = None
+            pump5 = None
+	    blynk.virtual_write(98, "Expected error: Atlas Error" + '\n') 
             
             
     APP_CONNECT_PRINT_MSG = '[APP_CONNECT_EVENT]'
