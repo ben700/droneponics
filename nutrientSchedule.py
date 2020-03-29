@@ -15,3 +15,9 @@ class Dose:
             nutrientMix.append( Dose(114, 4, LED[4], "Enzyme", VolumePin[4]))
             nutrientMix.append( Dose(115, 1, LED[5], "Magne-Cal", VolumePin[5])) 
  
+
+def add(a, b):
+    return a + b
+
+def subtract(a, b):
+    return a - b
