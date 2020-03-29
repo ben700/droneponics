@@ -1,6 +1,7 @@
 import drone
             
-            
+LED = [10,11,12,13,14,15]
+VolumePin = [0,21,22,23,24,25]          
  
 
 def buildNutrientMix(nutrientMix, _log):
