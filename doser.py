@@ -119,13 +119,13 @@ try:
                         _log.info('{:.2f}'.format(dosage.dose))
                         if (str(dosed) == '{:.2f}'.format(dosage.dose)):
                             break	
-                   dosage.volume = dosage.pump.query("TV,?").split("TV,")[1]
-                   blynk.virtual_write(dosage.volumePin, dosage.volume )
-                   _log.info("Going to change LED back to green for pump " +  str(dosage.LED))
                    blynk.set_property(dosage.LED, 'color', colours[1])
+		   dosage.volume = dosage.pump.query("TV,?").split("TV,")[1]
+                   blynk.virtual_write(dosage.volumePin, dosage.volume )
            else:
                    blynk.set_property(dosage.LED, 'color', colours['OFFLINE'])	
-        blynk.set_property(10, 'color', colours[1])
+        _log.info("Change LED" + '\n') 
+	blynk.set_property(10, 'color', colours[1])
         blynk.virtual_write(1, 0)
         _log.info("Button 1 completed" + '\n') 
            
