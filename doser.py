@@ -134,7 +134,7 @@ try:
     def buttonV1Pressed(pin, value):
         blynk.set_property(10, 'color', colours[value[0]])
         _log.info("Button 1 " + '\n') 
-	for dosage in nutrientMix:
+        for dosage in nutrientMix:
            if(dosage.pump is not None):
                    blynk.set_property(dosage.LED, 'color', colours[1])
                    dosage.pump.query("D,"+str(dosage.dose))
