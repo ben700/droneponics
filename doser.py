@@ -64,7 +64,7 @@ try:
        # Create the I2C bus
        for dosage in nutrientMix:
            dosage.pump = AtlasI2C(dosage.pumpId)
-           blynk.set_property(dosage.LED, 'color', colours[0])
+           blynk.set_property(dosage.LED, 'color', colours[1])
        blynk.virtual_write(98, "pump created" + '\n') 
        _log.info("pump created")
     except:
@@ -76,14 +76,10 @@ try:
             _log.info("Try Use Pump")
             for dosage in nutrientMix:
                 if(dosage.pump is not None):
-                   blynk.set_property(dosage.LED, 'color', colours[0])
                    dosage.volume = dosage.pump.query("TV,?").split("TV,")[1]
                    blynk.virtual_write(dosage.volumePin, dosage.volume )
                    _log.info( "Pump id " + str(dosage.pumpId) + " has dosed = " + str(dosage.volume) + '\n')
           
-                else:
-                   blynk.set_property(dosage.LED, 'color', colours[1])	
-             
         except:
             _log.info("Expected error: Use Atlas Error")
             blynk.virtual_write(98, "Expected error: Atlas Error" + '\n') 
