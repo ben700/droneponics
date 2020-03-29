@@ -51,7 +51,7 @@ try:
     VolumePin = [0,21,22,23,24,25]
 
     nutrientMix = []
-    nutrientMix = Dose.buildNutrientMix(nutrientMix)
+    nutrientMix = nutrientSchedule.buildNutrientMix(nutrientMix)
 
 
     answer = input("Are you sure you want to test (y/n)")
