@@ -1,2 +1,2 @@
-from drone.dose import Dose
+from drone.dose import dose
 
