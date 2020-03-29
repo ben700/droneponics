@@ -86,7 +86,8 @@ try:
         _log.info("Unexpected error: Atlas")
     else:
         try:
-            print("Pump Device Info = " + pump1.query("TV,?").split(":")[1])
+            print("Pump Device Info = " + pump1.query("TV,?"))
+            print("Pump Device Info = " + pump1.query("TV,?").split("TV,")[1])
             blynk.virtual_write(98, "Pump Device Info = " + pump1.query("i") + '\n') 
         except:
             pump1 = None
