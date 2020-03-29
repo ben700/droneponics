@@ -52,7 +52,7 @@ try:
 
     _log.info("build array") 
     nutrientMix = []
-    nutrientMix = nutrientSchedule.buildNutrientMix(nutrientMix, _log)
+    nutrientMix = drone.buildNutrientMix(nutrientMix, _log)
     _log.info("Array built")
 
     answer = input("Are you sure you want to test (y/n)")
