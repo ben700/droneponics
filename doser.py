@@ -129,7 +129,7 @@ try:
     def fillLinePump1(pin, value):
         _log.info("Fill Line 1")
         _log.info( "Fill Line 1 " + str(value[0]) + '\n')
-        blynk.set_property(11, 'color', colours[value[0]])
+       # blynk.set_property(11, 'color', colours[value[0]])
         if(value[0] == '1'):
             _log.info("Pump Device  v==1 = " + nutrientMix[0].pump.query("X") + '\n') 
         else:
