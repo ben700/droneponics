@@ -78,7 +78,7 @@ try:
     # Initialize the sensor.
     try:
        # Create the I2C bus
-       blynk.virtual_write(98, "Try to create pump" + '\n')
+       _log.info( "Try to create pump" + '\n')
        for dose in nutrientMix:
            _log.info("Create pump " + dose.pumpId) 
            dose.pump = AtlasI2C(dose.pumpId)
