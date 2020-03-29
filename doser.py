@@ -125,7 +125,7 @@ try:
                    blynk.set_property(dosage.LED, 'color', colours[1])
            else:
                    blynk.set_property(dosage.LED, 'color', colours['OFFLINE'])	
-        blynk.set_property(10, 'color', colours[value[1]])
+        blynk.set_property(10, 'color', colours[1])
         blynk.virtual_write(1, 0)
         _log.info("Button 1 completed" + '\n') 
            
