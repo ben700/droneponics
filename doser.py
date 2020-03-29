@@ -54,7 +54,7 @@ try:
     
     # Initialize Blynk
     blynk = blynklib.Blynk(BLYNK_AUTH)        
-    timer = blynktimer.Timer()
+    #timer = blynktimer.Timer()
     blynk.run()
     blynk.virtual_write(98, "clr")
     
@@ -110,14 +110,14 @@ try:
         _log.info("Button 1 " + '\n') 
         for dosage in nutrientMix:
            if(dosage.pump is not None):
-                   blynk.set_property(dosage.LED, 'color', colours[1])
+                   blynk.set_property(dosage.LED, 'color', colours[0])
                    dosage.pump.query("D,"+str(dosage.dose))
                    while (str(dosage.pump.query("R").split(":")[1].strip().rstrip('\x00')) != str(dosage.dose)):
                        _log.info( "Pump id " + str(dosage.pumpId) + " has dosed = " + str(dosage.pump.query("R").split(",")[1]) + '\n')
                    dosage.volume = dosage.pump.query("TV,?").split("TV,")[1]
                    blynk.virtual_write(dosage.volumePin, dosage.volume )
                    _log.info( "Pump id " + str(dosage.pumpId) + " has dosed = " + str(dosage.volume) + '\n')
-                   blynk.set_property(dosage.LED, 'color', colours[0])
+                   blynk.set_property(dosage.LED, 'color', colours[1])
            else:
                    blynk.set_property(dosage.LED, 'color', colours['OFFLINE'])	
         blynk.set_property(10, 'color', colours[value[1]])
@@ -168,7 +168,7 @@ try:
               blynk.virtual_write(98, "System now updated and restarted " + '\n')
               blynk.virtual_write(255, 0)
               _log.info('Just Booted')
-           timer.run()
+           #timer.run()
         except:
            _log.info('Unexpected error')
            blynk.virtual_write(98, "System has main loop error" + '\n')
