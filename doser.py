@@ -158,12 +158,8 @@ try:
               bootup = False
               now = datetime.now()
               blynk.virtual_write(99, now.strftime("%d/%m/%Y %H:%M:%S"))
-              blynk.virtual_write(10,255)
-              blynk.virtual_write(11,255)
-              blynk.virtual_write(12,255)
-              blynk.virtual_write(13,255)
-              blynk.virtual_write(14,255)
-              blynk.virtual_write(15,255)
+	      for l in LED:
+                  blynk.virtual_write(l, 255)
               #blynk.virtual_write(98, "clr")
               blynk.virtual_write(98, "System now updated and restarted " + '\n')
               blynk.virtual_write(255, 0)
@@ -172,12 +168,8 @@ try:
         except:
            _log.info('Unexpected error')
            blynk.virtual_write(98, "System has main loop error" + '\n')
-           blynk.set_property(10, 'color', colours['OFFLINE'])
-           blynk.set_property(11, 'color', colours['OFFLINE'])
-           blynk.set_property(12, 'color', colours['OFFLINE']) 
-           blynk.set_property(13, 'color', colours['OFFLINE']) 
-           blynk.set_property(14, 'color', colours['OFFLINE']) 
-           blynk.set_property(15, 'color', colours['OFFLINE']) 
+           for l in LED:
+                blynk.set_property(l, 'color', colours['OFFLINE'])
            os.system('sh /home/pi/updateDroneponics.sh')
            os.system('sudo reboot') 
   
@@ -185,22 +177,14 @@ try:
 except:
    _log.info('Unexpected error')
    blynkErr = blynklib.Blynk(BLYNK_AUTH)
-   blynkErr.set_property(10, 'color', colours['OFFLINE'])
-   blynkErr.set_property(11, 'color', colours['OFFLINE'])
-   blynkErr.set_property(12, 'color', colours['OFFLINE']) 
-   blynkErr.set_property(13, 'color', colours['OFFLINE']) 
-   blynkErr.set_property(14, 'color', colours['OFFLINE']) 
-   blynkErr.set_property(15, 'color', colours['OFFLINE']) 
+   for l in LED:
+        blynkErr.set_property(l, 'color', colours['OFFLINE'])
    blynkErr.virtual_write(98, "System has error" + '\n')
    os.system('sh /home/pi/updateDroneponics.sh')
    os.system('sudo reboot')
 finally:
    blynk = blynklib.Blynk(BLYNK_AUTH)        
    blynk.run() 
-   blynk.set_property(10, 'color', colours['OFFLINE'])
-   blynk.set_property(11, 'color', colours['OFFLINE'])
-   blynk.set_property(12, 'color', colours['OFFLINE']) 
-   blynk.set_property(13, 'color', colours['OFFLINE']) 
-   blynk.set_property(14, 'color', colours['OFFLINE']) 
-   blynk.set_property(15, 'color', colours['OFFLINE']) 
+   for l in LED:
+        blynk.set_property(l, 'color', colours['OFFLINE'])
    GPIO.cleanup()
