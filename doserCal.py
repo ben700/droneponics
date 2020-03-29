@@ -5,7 +5,9 @@ from AtlasI2C import (
 	    AtlasI2C
     )
 pump = AtlasI2C(111)
-dosed = pump.query("R").split(":")[1].split("\")[0]
+dosed = pump.query("R").split(":")[1]
+print(dosed)                     
+dosed =dosed.split("\")[0]
 print(dosed)                     
 testInput = [None, dosed, "0,1", "0 1", 1+2j]
 
