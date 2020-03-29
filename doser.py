@@ -95,7 +95,7 @@ try:
 	
         	
             blynk.virtual_write(21,pump1.query("TV,?").split("TV,")[1])
-	    blynk.virtual_write(22,pump2.query("TV,?").split("TV,")[1])
+            blynk.virtual_write(22,pump2.query("TV,?").split("TV,")[1])
 	    #blynk.virtual_write(23,pump3.query("TV,?").split("TV,")[1])
 	    #blynk.virtual_write(24,pump4.query("TV,?").split("TV,")[1])
 	    #blynk.virtual_write(25,pump5.query("TV,?").split("TV,")[1])
