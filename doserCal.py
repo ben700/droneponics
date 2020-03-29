@@ -102,7 +102,7 @@ try:
                    #_log.info( "Pump id " + str(dosage.pumpId) + " has dosed = " + str(dosage.pump.query("R").split(",")[1]) + '\n')
                         dosed = dosage.pump.query("R").split(":")[1].strip()
                         _log.info("["+ str(dosed) +"]")
-                        if (str(dosed).strip() == str("10.00").strip()):
+                        if (float(dosed) >= 10.00):
                             _log.info("break")
                             break
                         else:
