@@ -28,7 +28,7 @@ def main(stdscr):
     ser.write(str.encode("\r"))
 
     #turn on LEDS
-    ser.write(str.encode("L,1\r"))
+    ser.write(str.encode("I2C,104\r"))
 
 
     #main loop
