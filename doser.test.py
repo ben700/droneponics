@@ -30,6 +30,7 @@ try:
     import subprocess
     import re
     import nutrientSchedule
+    import droneObjects
 
     class Counter:
         cycle = 0
