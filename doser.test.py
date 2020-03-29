@@ -29,6 +29,7 @@ try:
     
     import subprocess
     import re
+    import nutrientMix as nMix
 
     class Counter:
         cycle = 0
@@ -45,28 +46,13 @@ try:
     _log.addHandler(consoleHandler)
     _log.setLevel(logging.DEBUG)
 
-    class Dose:
-        def __init__(self, PumpId, Dose, Led, name, volumePin):
-            self.pump = None
-            self.pumpId = PumpId
-            self.dose = Dose
-            self.LED = Led
-            self.name = name
-            self.volumePin = volumePin	
-            self.volume = 0	
-    
 
     LED = [10,11,12,13,14,15]
     VolumePin = [0,21,22,23,24,25]
 
     nutrientMix = []
-    nutrientMix.append( Dose(111, 6, LED[1], "Hydro Grow A", VolumePin[1])) 
-    nutrientMix.append( Dose(112, 6, LED[2], "Hydro Grow B", VolumePin[2])) 
-    nutrientMix.append( Dose(113, 10, LED[3], "Root Stimulant", VolumePin[3]))
-    nutrientMix.append( Dose(114, 4, LED[4], "Enzyme", VolumePin[4]))
-    nutrientMix.append( Dose(115, 1, LED[5], "Hydro Silicon", VolumePin[5])) 
+    nutrientMix = nMix.buildNutrientMix(nutrientMix)
 
-	
 
     answer = input("Are you sure you want to test (y/n)")
     if answer is None or answer != 'y':
