@@ -87,7 +87,7 @@ try:
             for dosage in nutrientMix:
                 if(dosage.pump is not None):
                    dosage.pump.query("D,10")	
-	           while (True):
+                   while (True):
                         dosed = dosage.pump.query("R").split(":")[1].strip().rstrip('\x00')
                         _log.info( "Pump id " + str(dosage.pumpId) + " has dosed = " + str(dosed) + "ml of 10ml")
                         if (str(dosed) == "10.00"):
