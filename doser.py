@@ -121,7 +121,7 @@ try:
                             break	
                    dosage.volume = dosage.pump.query("TV,?").split("TV,")[1]
                    blynk.virtual_write(dosage.volumePin, dosage.volume )
-                   _log.info("Going to change LED back to green for pump " +  str(dosage.pumpId))
+                   _log.info("Going to change LED back to green for pump " +  str(dosage.LED))
                    blynk.set_property(dosage.LED, 'color', colours[1])
            else:
                    blynk.set_property(dosage.LED, 'color', colours['OFFLINE'])	
