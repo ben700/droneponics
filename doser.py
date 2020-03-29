@@ -1,7 +1,8 @@
 ##!/usr/bin/env python3 
 BLYNK_AUTH = 'e06jzpI2zuRD4KB5eHyHdCQTGFT7einR' #i2cLogger
 BLYNK_AUTH_DATA = 'XVbhfI6ZYxkqFp7d4RsCIN6Is9YnKp9q' #i2cLogger
-
+LED = [10,11,12,13,14,15]
+VolumePin = [0,21,22,23,24,25] 
 
 try:
     from python_tsl2591 import tsl2591
