@@ -100,10 +100,10 @@ try:
 		
                    while (True):
                    #_log.info( "Pump id " + str(dosage.pumpId) + " has dosed = " + str(dosage.pump.query("R").split(",")[1]) + '\n')
-			dosed = dosage.pump.query("R").split(":")[1].strip()
-			_log.info( str(dosed))
-			if (dosed == 10):
-				break
+                        dosed = dosage.pump.query("R").split(":")[1].strip()
+                        _log.info( str(dosed))
+                        if (dosed == 10):
+                            break
                   		
 		
 		
