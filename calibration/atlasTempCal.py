@@ -1,7 +1,7 @@
 ##!/usr/bin/env python3 
 BLYNK_AUTH = 'SHraFqInf27JKowTcFZapu0rHH2QGtuO' #atlasMonitor
 
-try:
+if True:
     import datetime
     import time
     import shlex, requests
@@ -75,6 +75,4 @@ try:
         except:
             _log.info("Expected error: Use Atlas Error")
             
-  
-except:
-   print('Unexpected error')
+ 
