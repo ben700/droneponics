@@ -31,11 +31,11 @@ if True:
     else:
         try:	
              oTemp = -999
-             cTemp = temp.query("R,").split(":")[1]
+             cTemp = temp.query("R").split(":")[1]
              while ( cTemp != oTemp):
                  oTemp = cTemp
                  time.sleep(1)
-                 cTemp = temp.query("R,").split(":")[1]
+                 cTemp = temp.query("R").split(":")[1]
                  _log.info("Waiting for temp to be stable. It's now :" + str(cTemp) + '\n')
                            
         except:
