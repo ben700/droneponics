@@ -287,13 +287,17 @@ try:
            blynk.run()
            _log.info("Now in main")
            if bootup :
+              _log.info("Now boot function")
               p = subprocess.Popen(['i2cdetect', '-y','1'],stdout=subprocess.PIPE,)
               #cmdout = str(p.communicate())
               for i in range(0,9):
                    blynk.virtual_write(98, str(p.stdout.readline()) + '\n')
               bootup = False
+              _log.info("About to get time")
               now = datetime.now()
               blynk.virtual_write(99, now.strftime("%d/%m/%Y %H:%M:%S"))
+              
+              _log.info("Turn on LEDs")
               for l in LED:
                   blynk.virtual_write(l, 255)
               #blynk.virtual_write(98, "clr")
