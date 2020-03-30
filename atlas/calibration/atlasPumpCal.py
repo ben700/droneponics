@@ -103,5 +103,3 @@ if True:
             _log.info("Expected error: Use Atlas Error")
             
   
-except:
-   _log.info('Unexpected error')
