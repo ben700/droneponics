@@ -1,8 +1,6 @@
 #!/usr/bin/python
 # The ID and range of a sample spreadsheet.
 BLYNK_AUTH = 'XVbhfI6ZYxkqFp7d4RsCIN6Is9YnKp9q' #atlasButt
-LED = [10,11,12,13,14,15]
-VolumePin = [0,21,22,23,24,25] 
 
 try:
     import logging
@@ -46,7 +44,7 @@ try:
     # Initialize Blynk
     blynk = blynklib.Blynk(BLYNK_AUTH)
     timer = blynktimer.Timer()
-
+    blynk.run()
     APP_CONNECT_PRINT_MSG = '[APP_CONNECT_EVENT]'
     APP_DISCONNECT_PRINT_MSG = '[APP_DISCONNECT_EVENT]'
     CONNECT_PRINT_MSG = '[CONNECT_EVENT]'
@@ -62,36 +60,33 @@ try:
     ec = AtlasI2C(100)
     ph = AtlasI2C(99)
 
-
-
-    _log.info("Temp Device Info = " + temp.query("i"))
-    _log.info("pH Device Info = " + ph.query("i"))
-    _log.info("EC Device Info = " + ec.query("i"))
+    blynk.virtual_write(98,"Temp Device Info = " + temp.query("i") + '\n')
+    blynk.virtual_write(98,"pH Device Info = " + ph.query("i") + '\n')
+    blynk.virtual_write(98,"EC Device Info = " + ec.query("i") + '\n')
     
+    blynk.virtual_write(98,"Temp Cal = " + temp.query("Cal,?") + '\n')
+    blynk.virtual_write(98,"Temp Scale = " + temp.query("S,?") + '\n')
 
-    _log.info("Temp Cal = " + temp.query("Cal,?"))
-    _log.info("Temp Scale = " + temp.query("S,?"))
+    blynk.virtual_write(98,"pH Cal = " + ph.query("Cal,?") + '\n')
+    blynk.virtual_write(98,"pH Temp Cal = " + ph.query("T,?") + '\n')
 
-    _log.info("pH Cal = " + ph.query("Cal,?"))
-    _log.info("pH Temp Cal = " + ph.query("T,?"))
-
-    _log.info("EC Cal = " + ec.query("Cal,?"))
-    _log.info("EC Temp Cal = " + ec.query("Cal,?"))
-    _log.info("EC Probe Type = " + ec.query("K,?"))
+    blynk.virtual_write(98,"EC Cal = " + ec.query("Cal,?") + '\n')
+    blynk.virtual_write(98,"EC Temp Cal = " + ec.query("Cal,?") + '\n')
+    blynk.virtual_write(98,"EC Probe Type = " + ec.query("K,?") + '\n')
 
     
 
     @blynk.handle_event("connect")
     def connect_handler():
         _log.info('SCRIPT_START')
-        for pin in range(5):
-            _log.info('Syncing virtual pin {}'.format(pin))
-            blynk.virtual_sync(pin)
+     #   for pin in range(5):
+     #       _log.info('Syncing virtual pin {}'.format(pin))
+     #       blynk.virtual_sync(pin)
 
             # within connect handler after each server send operation forced socket reading is required cause:
             #  - we are not in script listening state yet
             #  - without forced reading some portion of blynk server messages can be not delivered to HW
-            blynk.read_response(timeout=0.5)
+     #       blynk.read_response(timeout=0.5)
 
 
     @blynk.handle_event('write V255')
