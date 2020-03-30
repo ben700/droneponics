@@ -9,7 +9,7 @@ if True:
     import sys
     import os
    
-    from AtlasI2C import (
+    from /home/pi/droneponics/AtlasI2C import (
 	    AtlasI2C
     )
     
