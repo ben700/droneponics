@@ -23,10 +23,8 @@ if True:
     class Counter:
         cycle = 0
 
-    bootup = True
-    colours = {1: '#FF0000', 0: '#00FF00', 'OFFLINE': '#0000FF'}
-
-
+    f = open("tempCal.txt", "w")
+    
     # tune console logging
     _log = logging.getLogger('BlynkLog')
     logFormatter = logging.Formatter("%(asctime)s [%(levelname)s]  %(message)s")
@@ -44,11 +42,15 @@ if True:
         _log.info("Unexpected error: Atlas")
     else:
         try:	
-             print(temp.query("Export,?").split(",")[1])
+             x = int(temp.query("Export,?").split(",")[1])
              print(temp.query("Export,?"))
-             for i in range(3):
-                 print(temp.query("Export"))
-		   
+             x =x+1
+             for i in range(x):
+		y = temp.query("Export")	
+		f.write(y)
+		print(y)
+             f.close()
+	   
         except:
             _log.info("Expected error: Use Atlas Error")
             
