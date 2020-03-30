@@ -124,8 +124,8 @@ try:
            else:
                    blynk.set_property(dosage.LED, 'color', colours['OFFLINE'])	
         blynk.set_property(10, 'color', colours[1])
-	_log.info("Completed")
-	now = datetime.now()
+        _log.info("Completed")
+        now = datetime.now()
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))    
         blynk.virtual_write(98, "Dosed Complete" + '\n') 
         
