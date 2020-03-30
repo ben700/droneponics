@@ -28,9 +28,23 @@ def main(stdscr):
     ser.write(str.encode("\r"))
 
     #turn on LEDS
-    ser.write(str.encode("I2C,104\r"))
+    ser.write(str.encode("L,1\r"))
 
-
+    #enable streaming
+    ser.write(str.encode("C,1\r"))
+    
+    def check_ph_level(line):
+        # compares the ph reading to a value and displays if its higher or lower
+        try:
+            ph = float(line) # converts the string into a floating point number
+            if(ph >= 7.5):
+                pad.addstr("High"+ "\n")
+            if(ph < 7.5):
+                pad.addstr("Low"+ "\n")
+        except ValueError:
+            # if the string is not a valid floating point number, dont do anything
+            pass
+    
     #main loop
     while True:
     
@@ -46,6 +60,7 @@ def main(stdscr):
         if(data == "\r"): # if its terminated by a newline
             pad.addstr("> " + strftime("%Y-%m-%d %H:%M:%S") + 
             " Received from sensor: " + line + "\n") #print the timestamp and received data to the main screen
+            check_ph_level(line) # calls function to check ph levels
             line = "" # clears the input
             pad.refresh(y-(height-3),0, 0,0, height-2,width) # refresh the main screen and scroll to the cursor
             
@@ -73,8 +88,8 @@ def main(stdscr):
                 # if the character is a printable character, put it into the input area and send buffer
     	        user_input = user_input + chr(c)
     	        inputpad.addstr(0, pos_text, chr(c))
-    	        inputpad.move(0, pos_text)
-    	        pos_text = (pos_text + 1) % (width -1) # increments the cursors position in the input area, returns it to the beginning if it runs past the screen size
+                inputpad.move(0, pos_text)
+                pos_text = (pos_text + 1) % (width -1) # increments the cursors position in the input area, returns it to the beginning if it runs past the screen size
             else:
                 #if the character entered doesnt meet any conditions, ignore it
                 pass
