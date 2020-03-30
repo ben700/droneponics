@@ -60,9 +60,9 @@ try:
     ec = AtlasI2C(100)
     ph = AtlasI2C(99)
 
-    blynk.virtual_write(98,"Temp Device Info = " + temp.query("i") + '\n')
-    blynk.virtual_write(98,"pH Device Info = " + ph.query("i") + '\n')
-    blynk.virtual_write(98,"EC Device Info = " + ec.query("i") + '\n')
+    #blynk.virtual_write(98,"Temp Device Info = " + temp.query("i") + '\n')
+    #blynk.virtual_write(98,"pH Device Info = " + ph.query("i") + '\n')
+    #blynk.virtual_write(98,"EC Device Info = " + ec.query("i") + '\n')
     
     blynk.virtual_write(98,"Temp Cal = " + temp.query("Cal,?") + '\n')
     blynk.virtual_write(98,"Temp Scale = " + temp.query("S,?") + '\n')
