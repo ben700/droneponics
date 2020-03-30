@@ -148,11 +148,11 @@ try:
             _log.info("Pump Device v!=1 = " + nutrientMix[x].pump.query("D,*") + '\n') 
         #    blynk.virtual_write(98, now.strftime("%d/%m/%Y %H:%M:%S") + " :- Pump for " + nutrientMix[x].name + ":- STARTED" + '\n') 
         
-        #lVolume= nutrientMix[x].volume
-        #nutrientMix[x].volume = nutrientMix[x].pump.query("TV,?").split("TV,")[1]
-        #blynk.virtual_write(nutrientMix[x].volumePin, nutrientMix[x].volume )
-        #dosed = nutrientMix[x].pump.query("R").split(":")[1].strip().rstrip('\x00')
-        #_log.info( "Pump id " + str(dosage.pumpId) + " has dosed = " + str(dosed) + "Before was :-" + str(lVolume))
+        lVolume= nutrientMix[x].volume
+        nutrientMix[x].volume = nutrientMix[x].pump.query("TV,?").split("TV,")[1]
+        blynk.virtual_write(nutrientMix[x].volumePin, nutrientMix[x].volume )
+        dosed = nutrientMix[x].pump.query("R").split(":")[1].strip().rstrip('\x00')
+        _log.info( "Pump id " + str(dosage.pumpId) + " has dosed = " + str(dosed) + "Before was :-" + str(lVolume))
 	
                         
     @timer.register(interval=10, run_once=False)
