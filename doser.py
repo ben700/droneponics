@@ -149,8 +149,10 @@ try:
         else:
             _log.info("Pump for " +nutrientMix[x].name +" = " + nutrientMix[x].pump.query("D,*") + '\n') 
             blynk.virtual_write(98, now.strftime("%d/%m/%Y %H:%M:%S") + " :- Pump for " + nutrientMix[x].name + ":- STARTED" + '\n') 
+        dosage.volume = dosage.pump.query("TV,?").split("TV,")[1]
+        blynk.virtual_write(dosage.volumePin, dosage.volume )
         blynk.set_property(LED[0], 'color', 0)
-
+        
                         
     @timer.register(interval=10, run_once=False)
     def blynk_data():
