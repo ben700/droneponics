@@ -146,15 +146,12 @@ try:
         if(value[0] == '1'):
             _log.info("Pump for " +nutrientMix[x].name +" = " + nutrientMix[x].pump.query("X") + '\n')
             dosed = nutrientMix[x].pump.query("R").split(":")[1].strip().rstrip('\x00')
-            blynk.virtual_write(98, now.strftime("%d/%m/%Y %H:%M:%S") + " :- Pump for " + nutrientMix[x].name + ":- STOPPED"  + " Dosed :-"+ str(dosed) + '\n') 
+            blynk.virtual_write(98, now.strftime("%d/%m/%Y %H:%M:%S") + " :- Pump for " + nutrientMix[x].name + ":- STOPPED"  + " Dosed :"+ str(dosed) + '\n') 
         else:
-            _log.info("Pump Device v!=1 = " + nutrientMix[x].pump.query("D,*") + '\n') 
+            _log.info("Pump for " +nutrientMix[x].name +" = " + nutrientMix[x].pump.query("D,*") + '\n') 
             blynk.virtual_write(98, now.strftime("%d/%m/%Y %H:%M:%S") + " :- Pump for " + nutrientMix[x].name + ":- STARTED" + '\n') 
         
-        nutrientMix[x].volume = nutrientMix[x].pump.query("TV,?").split("TV,")[1]
-        blynk.virtual_write(nutrientMix[x].volumePin, nutrientMix[x].volume )
-        _log.info( "Pump id " + str(dosage.pumpId) + " has dosed = " + str(nutrientMix[x].volume) + " Before was :" + str(lVolume))
-	
+
                         
     @timer.register(interval=10, run_once=False)
     def blynk_data():
