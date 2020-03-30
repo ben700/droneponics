@@ -128,14 +128,15 @@ try:
                    blynk.virtual_write(dosage.volumePin, dosage.volume )
            else:
                    blynk.set_property(dosage.LED, 'color', colours['OFFLINE'])	
-        blynk.run()
-        blynk.set_property(LED[0], 'color', colours[1])
+        
         
     @blynk.handle_event('write V1')
     def buttonV1Pressed(pin, value):
         blynk.set_property(10, 'color', colours[0]) 
         doSingleDose()
-        _log.info("Completed")
+        blynk.run()
+        blynk.set_property(LED[0], 'color', colours[1])
+	_log.info("Completed")
         now = datetime.now()
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))    
         blynk.virtual_write(98, now.strftime("%d/%m/%Y %H:%M:%S") + " :Full Dosed Complete" + '\n') 
@@ -146,7 +147,9 @@ try:
         blynk.set_property(10, 'color', colours[0])
         for i in range (11):
             doSingleDose()
-        _log.info("Completed")
+        blynk.run()
+        blynk.set_property(LED[0], 'color', colours[1])
+	_log.info("Completed")
         now = datetime.now()
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))    
         blynk.virtual_write(98, now.strftime("%d/%m/%Y %H:%M:%S") + " :Full Dosed Complete" + '\n') 
