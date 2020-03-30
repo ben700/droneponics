@@ -111,11 +111,8 @@ try:
         os.system('sh /home/pi/updateDroneponics.sh')
         blynk.virtual_write(98, "System updated and restarting " + '\n')
         os.system('sudo reboot')
-
-    @blynk.handle_event('write V1')
-    def buttonV1Pressed(pin, value):
-        blynk.set_property(10, 'color', colours[0]) 
-        for dosage in nutrientMix:
+    def doSingleDose():
+	for dosage in nutrientMix:
            if(dosage.pump is not None):
                    blynk.set_property(dosage.LED, 'color', colours[0])
                    dosage.pump.query("D,"+str(dosage.dose))
@@ -133,13 +130,27 @@ try:
                    blynk.set_property(dosage.LED, 'color', colours['OFFLINE'])	
         blynk.run()
         blynk.set_property(LED[0], 'color', colours[1])
+        
+    @blynk.handle_event('write V1')
+    def buttonV1Pressed(pin, value):
+        blynk.set_property(10, 'color', colours[0]) 
+	doSingleDose()
         _log.info("Completed")
         now = datetime.now()
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))    
         blynk.virtual_write(98, now.strftime("%d/%m/%Y %H:%M:%S") + " :Full Dosed Complete" + '\n') 
         blynk.virtual_write(1, value[0])
         
-           
+    @blynk.handle_event('write V1')
+    def buttonV1Pressed(pin, value):
+        blynk.set_property(10, 'color', colours[0])
+	for i in range (11)
+	    doSingleDose()
+        _log.info("Completed")
+        now = datetime.now()
+        blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))    
+        blynk.virtual_write(98, now.strftime("%d/%m/%Y %H:%M:%S") + " :Full Dosed Complete" + '\n') 
+        blynk.virtual_write(1, value[0])           
         
     @blynk.handle_event('write V41')
     def fillLinePump1(pin, value):
