@@ -101,31 +101,26 @@ try:
     # Will Print Every 10 Seconds
     @timer.register(interval=10, run_once=False)
     def blynk_data():
-        _log.info("Start of blynk_data")
         now = datetime.now()
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
-
-        cTemp = temp.query("R,").split(":")[1]
-        _log.info("Temp = " + cTemp)
-        blynk.virtual_write(30, cTemp)
-
         try:
-           cPH = ph.query("RT,"+cTemp).split(":")[1]
-           blynk.virtual_write(32, cPH)
-           _log.info ("PH = " + cPH)
+           cTemp = temp.query("R,").split(":")[1]
         except:
            blynk.virtual_write(98, "Read PH Error" + '\n') 
-           _log.info("Read Ph Error")
-        
+        else:
+           blynk.virtual_write(30, cTemp)
+        try:
+           cPH = ph.query("RT,"+cTemp).split(":")[1]
+        except:
+           blynk.virtual_write(98, "Read PH Error" + '\n') 
+        else:
+           blynk.virtual_write(32, cPH)
         try:
             cEC = ec.query("RT,"+cTemp).split(":")[1]
         except:
             blynk.virtual_write(98, "Read EC Error" + '\n')
         else:
             blynk.virtual_write(31, cEC)
-            _log.info ("EC  = " + cEC)
-
-
         blynk.virtual_write(98, "Completed Timer Function" + '\n') 
 
     while True:
@@ -139,7 +134,7 @@ try:
               bootup = False
               now = datetime.now()
               blynk.virtual_write(99, now.strftime("%d/%m/%Y %H:%M:%S"))
-              blynk.virtual_write(98, "clr")
+              #blynk.virtual_write(98, "clr")
               blynk.virtual_write(98, "System now updated and restarted " + '\n')
               blynk.virtual_write(255, 0)
               _log.info('Just Booted')
@@ -147,7 +142,9 @@ try:
            timer.run()
         except:
            _log.info('Unexpected error')
+           blynk.virtual_write(98, "System has error : Auto updated and restarted" + '\n')
            os.system('sh /home/pi/updateDroneponics.sh')
+           os.system('sudo reboot') 
 except:
    _log.info('Unexpected error')
    blynkErr = blynklib.Blynk(BLYNK_AUTH)
