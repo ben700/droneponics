@@ -128,7 +128,8 @@ try:
         blynk.set_property(10, 'color', colours[1])
         blynk.virtual_write(1, 0)
         for l in LED:
-             blynk.virtual_write(l, 0)
+             blynk.virtual_write(l, 255)
+             blynk.set_property(l, 'color', colours['OFFLINE'])
         _log.info("Button 1 completed" + '\n') 
            
         
