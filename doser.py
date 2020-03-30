@@ -175,8 +175,8 @@ try:
     @blynk.handle_event('write V31')
     def logEc(pin, value):    
         _log.info("How in log EC")
-	eC = value[0]
-	_log.info(value[0])
+        eC = value[0]
+        _log.info(value[0])
 	
     @timer.register(interval=10, run_once=False)
     def blynk_data():
