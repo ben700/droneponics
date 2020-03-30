@@ -141,8 +141,8 @@ try:
         blynk.virtual_write(98, now.strftime("%d/%m/%Y %H:%M:%S") + " :Full Dosed Complete" + '\n') 
         blynk.virtual_write(1, value[0])
         
-    @blynk.handle_event('write V1')
-    def buttonV1Pressed(pin, value):
+    @blynk.handle_event('write V2')
+    def buttonV2Pressed(pin, value):
         blynk.set_property(10, 'color', colours[0])
 	for i in range (11)
 	    doSingleDose()
@@ -150,7 +150,7 @@ try:
         now = datetime.now()
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))    
         blynk.virtual_write(98, now.strftime("%d/%m/%Y %H:%M:%S") + " :Full Dosed Complete" + '\n') 
-        blynk.virtual_write(1, value[0])           
+        blynk.virtual_write(2, value[0])           
         
     @blynk.handle_event('write V41')
     def fillLinePump1(pin, value):
