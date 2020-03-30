@@ -165,14 +165,14 @@ try:
         blynk.virtual_write(98, now.strftime("%d/%m/%Y %H:%M:%S") + " :- Reset Pump Counters " + '\n') 
         blynk.virtual_write(200, 0)
     
-    @blynk.handle_event('write V32')
+    @blynkData.handle_event('write V32')
     def logPh(pin, value):    
         _log.info("How in log pH")
         pH = value[0]
         _log.info(value[0])
 	
 
-    @blynk.handle_event('write V31')
+    @blynkData.handle_event('write V31')
     def logEc(pin, value):    
         _log.info("How in log EC")
         eC = value[0]
@@ -188,7 +188,7 @@ try:
         
         blynkData = blynklib.Blynk(BLYNK_AUTH_DATA)  
         blynkData.run()
-        blynkData.virtual_sync('V1')
+        blynkData.virtual_sync('V31, V32')
 	
         blynk.virtual_write(98, "Completed Timer Function" + '\n') 
 
