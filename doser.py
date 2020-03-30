@@ -136,8 +136,8 @@ try:
     def fillLinePump1(pin, value):
         x=0
         _log.info( "Fill Line 1 " + str(value[0]) + '\n')
-        now = datetime.now()
-        blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))    
+        #now = datetime.now()
+        #blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))    
         blynk.set_property(nutrientMix[x].LED, 'color', colours[value[0]])
         blynk.set_property(LED[0], 'color', colours[value['OFFLINE']])
 	
