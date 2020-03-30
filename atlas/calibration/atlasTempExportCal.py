@@ -47,7 +47,7 @@ if True:
              x =x+1
              for i in range(x):
                 y = temp.query("Export").split(":")[1].strip().rstrip('^@')	
-                y = y..split("^@")[0]
+                y = y.split("^@")[0]
                 f.write(y + '\n')
                 print(y)
              f.close()
