@@ -11,7 +11,7 @@ try:
     from datetime import datetime
     import sys
     import os
-   
+    sys.path.append('/home/pi/droneponics')
     from AtlasI2C import (
 	    AtlasI2C
     )
