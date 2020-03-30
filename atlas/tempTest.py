@@ -4,9 +4,6 @@ BLYNK_AUTH = 'SHraFqInf27JKowTcFZapu0rHH2QGtuO' #atlasMonitor
 if True:
     import datetime
     import time
-    import shlex, requests
-    import blynklib
-    import blynktimer
     import logging
     from datetime import datetime
     import sys
