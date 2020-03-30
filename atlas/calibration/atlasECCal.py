@@ -56,6 +56,7 @@ if True:
                            
                       ec.query("Cal,clear")
                       ec.query("K,0.1")
+                      ec.query("T,19.5")
                       ec.query("Cal,dry")
                       
              if answer == 'y':
@@ -64,7 +65,7 @@ if True:
                       cEC = ec.query("R").split(":")[1]
                       while ( cEC != oEC):
                            oEC = cEC 
-                           cEC = ec.query("R,").split(":")[1]
+                           cEC = ec.query("R").split(":")[1]
                            _log.info("Waiting for EC to be stable. It's now :" + str(cEC) + '\n')
                       ec.query("Cal,low,84")
                       
