@@ -46,9 +46,9 @@ if True:
              print(temp.query("Export,?"))
              x =x+1
              for i in range(x):
-		y = temp.query("Export")	
-		f.write(y)
-		print(y)
+                y = temp.query("Export")	
+                f.write(y)
+                print(y)
              f.close()
 	   
         except:
