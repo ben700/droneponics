@@ -88,4 +88,4 @@ try:
             
   
 except:
-   _log.info('Unexpected error')
+   print('Unexpected error')
