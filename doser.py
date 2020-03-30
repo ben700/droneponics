@@ -141,17 +141,17 @@ try:
         now = datetime.now()
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))    
         blynk.set_property(nutrientMix[x].LED, 'color', colours[value[0]])
-        blynk.set_property(LED[0], 'color', 0)
+        blynk.set_property(LED[0], 'color', colours[value[0]])
         if(value[0] == '1'):
             _log.info("Pump for " +nutrientMix[x].name +" = " + nutrientMix[x].pump.query("X") + '\n')
             dosed = nutrientMix[x].pump.query("R").split(":")[1].strip().rstrip('\x00')
+            dosage.volume = dosage.pump.query("TV,?").split("TV,")[1]
+            blynk.virtual_write(dosage.volumePin, dosage.volume )
             blynk.virtual_write(98, now.strftime("%d/%m/%Y %H:%M:%S") + " :- Pump for " + nutrientMix[x].name + ":- STOPPED"  + " Dosed :"+ str(dosed) + "ml" + '\n') 
         else:
             _log.info("Pump for " +nutrientMix[x].name +" = " + nutrientMix[x].pump.query("D,*") + '\n') 
             blynk.virtual_write(98, now.strftime("%d/%m/%Y %H:%M:%S") + " :- Pump for " + nutrientMix[x].name + ":- STARTED" + '\n') 
-        dosage.volume = dosage.pump.query("TV,?").split("TV,")[1]
-        blynk.virtual_write(dosage.volumePin, dosage.volume )
-        blynk.set_property(LED[0], 'color', 0)
+
         
                         
     @timer.register(interval=10, run_once=False)
