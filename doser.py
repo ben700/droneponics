@@ -77,7 +77,7 @@ try:
                    dosage.volume = dosage.pump.query("TV,?").split("TV,")[1]
                    blynk.virtual_write(dosage.volumePin, dosage.volume )
                    _log.info( "Pump id " + str(dosage.pumpId) + " has dosed = " + str(dosage.volume) + '\n')
-          
+            _log.info("Pumps all read")          
         except:
             _log.info("Expected error: Use Atlas Error")
             blynk.virtual_write(98, "Expected error: Atlas Error" + '\n') 
@@ -285,7 +285,7 @@ try:
     while True:
         try:
            blynk.run()
-   
+           _log.info("Now in main")
            if bootup :
               p = subprocess.Popen(['i2cdetect', '-y','1'],stdout=subprocess.PIPE,)
               #cmdout = str(p.communicate())
