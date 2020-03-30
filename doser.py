@@ -170,15 +170,15 @@ try:
     @blynkData.handle_event('write V32')
     def logPh(pin, value):    
         _log.info("How in log pH")
-        pH = value[0]
-        _log.info(value[0])
+        pH = value
+        _log.info(value)
 	
 
     @blynkData.handle_event('write V31')
     def logEc(pin, value):    
         _log.info("How in log EC")
-        eC = value[0]
-        _log.info(value[0])
+        eC = value
+        _log.info(value)
 	
     @timer.register(interval=10, run_once=False)
     def blynk_data():
