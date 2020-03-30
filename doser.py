@@ -5,22 +5,11 @@ LED = [10,11,12,13,14,15]
 VolumePin = [0,21,22,23,24,25] 
 
 try:
-    from python_tsl2591 import tsl2591
     import datetime
     import time
-    import shlex, requests
-    import board
-    import busio
-    import smbus 
-    from ctypes import c_short
-    from ctypes import c_byte
-    from ctypes import c_ubyte
-    import mh_z19
     import blynklib
     import blynktimer
     import logging
-    from datetime import datetime
-    import adafruit_tsl2591
     import sys
     import os
     import RPi.GPIO as GPIO
