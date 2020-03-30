@@ -153,6 +153,10 @@ try:
             _log.info("Pump for " +nutrientMix[x].name +" = " + nutrientMix[x].pump.query("D,*") + '\n') 
             blynk.virtual_write(98, now.strftime("%d/%m/%Y %H:%M:%S") + " :- Pump for " + nutrientMix[x].name + ":- STARTED" + '\n') 
 
+    @blynk.handle_event('write V200')
+    def clearCounters(pin, value):        
+	blynk.virtual_write(98, now.strftime("%d/%m/%Y %H:%M:%S") + " :- Reset Pump Counters " + '\n') 
+
         
                         
     @timer.register(interval=10, run_once=False)
