@@ -124,7 +124,7 @@ try:
            else:
                    blynk.set_property(dosage.LED, 'color', colours['OFFLINE'])	
         blynk.run()
-        blynk.set_property(10, 'color', colours[1])
+        blynk.set_property(LED[0], 'color', colours[1])
         _log.info("Completed")
         now = datetime.now()
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))    
@@ -139,14 +139,14 @@ try:
         now = datetime.now()
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))    
         blynk.set_property(nutrientMix[x].LED, 'color', colours[value[0]])
-        blynk.set_property(10, 'color', colours[value['OFFLINE']])
+        blynk.set_property(LED[0], 'color', colours[value['OFFLINE']])
 	
         if(value[0] == '1'):
             _log.info("Pump for " +nutrientMix[x].name +" = " + nutrientMix[x].pump.query("X") + '\n')
             blynk.virtual_write(98, now.strftime("%d/%m/%Y %H:%M:%S") + " :- Pump for " + nutrientMix[x].name + ":- STOPPED" + '\n') 
         else:
-            blynk.virtual_write(98, now.strftime("%d/%m/%Y %H:%M:%S") + " :- Pump for " + nutrientMix[x].name + ":- STARTED" + '\n') 
             _log.info("Pump Device v!=1 = " + nutrientMix[x].pump.query("D,*") + '\n') 
+            blynk.virtual_write(98, now.strftime("%d/%m/%Y %H:%M:%S") + " :- Pump for " + nutrientMix[x].name + ":- STARTED" + '\n') 
         
         lVolume= nutrientMix[x].volume
         nutrientMix[x].volume = nutrientMix[x].pump.query("TV,?").split("TV,")[1]
