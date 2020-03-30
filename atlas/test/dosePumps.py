@@ -3,29 +3,19 @@ BLYNK_AUTH = 'e06jzpI2zuRD4KB5eHyHdCQTGFT7einR' #i2cLogger
 BLYNK_AUTH_DATA = 'XVbhfI6ZYxkqFp7d4RsCIN6Is9YnKp9q' #i2cLogger
 
 try:
-    from python_tsl2591 import tsl2591
     import datetime
     import time
-    import shlex, requests
-    import board
-    import busio
-    import smbus 
-    from ctypes import c_short
-    from ctypes import c_byte
-    from ctypes import c_ubyte
-    import mh_z19
-    import blynklib
-    import blynktimer
     import logging
     from datetime import datetime
-    import adafruit_tsl2591
     import sys
     import os
     import RPi.GPIO as GPIO
-
+    sys.path.append('/home/pi/droneponics')
     from AtlasI2C import (
 	    AtlasI2C
     )
+    import blynklib
+    import blynktimer
     
     import subprocess
     import re
@@ -79,5 +69,3 @@ try:
             _log.info("Expected error: Use Atlas Error")
             
   
-except:
-   _log.info('Unexpected error')
