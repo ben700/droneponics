@@ -102,17 +102,6 @@ try:
     READ_PRINT_MSG = "[READ_VIRTUAL_PIN_EVENT] Pin: V{}"
     ALLOWED_COMMANDS_LIST = ['ls', 'lsusb', 'ip a', 'ip abc']
     TWEET_MSG = "New value='{}' on VPIN({})"
-        
-    @blynk.handle_event('write V255')
-    def rebooter(pin, value):
-        _log.info( "User reboot")	
-        blynk.virtual_write(98, "User Reboot " + '\n')
-        for l in LED:
-            blynk.set_property(l, 'color', colours['OFFLINE'])
-        os.system('sh /home/pi/updateDroneponics.sh')
-        blynk.virtual_write(98, "System updated and restarting " + '\n')
-        os.system('sudo reboot')
-	
 	
     def doSingleDose():
         for dosage in nutrientMix:
@@ -278,7 +267,15 @@ try:
         blynk.virtual_write(98, now.strftime("%d/%m/%Y %H:%M:%S") + " :- Reset Pump Counters " + '\n') 
         blynk.virtual_write(200, 0)
     
-
+    @blynk.handle_event('write V255')
+    def rebooter(pin, value):
+        _log.info( "User reboot")	
+        blynk.virtual_write(98, "User Reboot " + '\n')
+     #   for l in LED:
+     #       blynk.set_property(l, 'color', colours['OFFLINE'])
+        os.system('sh /home/pi/updateDroneponics.sh')
+        blynk.virtual_write(98, "System updated and restarting " + '\n')
+        os.system('sudo reboot')
 
 	
     @timer.register(interval=10, run_once=False)
