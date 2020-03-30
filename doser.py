@@ -5,7 +5,7 @@ LED = [10,11,12,13,14,15]
 VolumePin = [0,21,22,23,24,25] 
 
 try:
-    import datetime
+    from datetime import datetime
     import time
     import blynklib
     import blynktimer
