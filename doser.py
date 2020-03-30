@@ -139,7 +139,7 @@ try:
         now = datetime.now()
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))    
         blynk.virtual_write(98, now.strftime("%d/%m/%Y %H:%M:%S") + " :Full Dosed Complete" + '\n') 
-        blynk.virtual_write(1, value[0])
+        blynk.virtual_write(1, 0)
         
     @blynk.handle_event('write V2')
     def buttonV2Pressed(pin, value):
@@ -150,7 +150,7 @@ try:
         now = datetime.now()
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))    
         blynk.virtual_write(98, now.strftime("%d/%m/%Y %H:%M:%S") + " :Full Dosed Complete" + '\n') 
-        blynk.virtual_write(2, value[0])           
+        blynk.virtual_write(2, 0)           
         
     @blynk.handle_event('write V41')
     def fillLinePump1(pin, value):
