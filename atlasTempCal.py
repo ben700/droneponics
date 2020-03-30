@@ -61,7 +61,7 @@ try:
         ec = AtlasI2C(100)
         ph = AtlasI2C(99)
 
-       _log.info("sensor created")
+        _log.info("sensor created")
     except:
         _log.info("Unexpected error: Atlas")
     else:
