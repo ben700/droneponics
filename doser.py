@@ -144,7 +144,7 @@ try:
     @blynk.handle_event('write V2')
     def buttonV2Pressed(pin, value):
         blynk.set_property(10, 'color', colours[0])
-        for i in range (11)
+        for i in range (11):
 	    doSingleDose()
         _log.info("Completed")
         now = datetime.now()
