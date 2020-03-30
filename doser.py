@@ -211,7 +211,7 @@ try:
               blynk.virtual_write(98, "System now updated and restarted " + '\n')
               blynk.virtual_write(255, 0)
               _log.info('Just Booted')
-           #timer.run()
+           timer.run()
         except:
            _log.info('Unexpected error')
            blynk.virtual_write(98, "System has main loop error" + '\n')
