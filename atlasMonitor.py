@@ -19,11 +19,6 @@ try:
          AtlasI2C
     )
     import RPi.GPIO as GPIO
-    import board
-    import busio
-    from adafruit_seesaw.seesaw import Seesaw
-    import adafruit_ads1x15.ads1015 as ADS
-    from adafruit_ads1x15.analog_in import AnalogIn
     import os
     import logging
     import subprocess
