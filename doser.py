@@ -160,7 +160,7 @@ try:
            if(dosage.pump is not None):
                    dosage.pump.query("clear") 
         now = datetime.now()
-	blynk.virtual_write(98, now.strftime("%d/%m/%Y %H:%M:%S") + " :- Reset Pump Counters " + '\n') 
+        blynk.virtual_write(98, now.strftime("%d/%m/%Y %H:%M:%S") + " :- Reset Pump Counters " + '\n') 
         blynk.virtual_write(200, 0)
         
                         
