@@ -46,7 +46,7 @@ if True:
              print(temp.query("Export,?"))
              x =x+1
              for i in range(x):
-                y = temp.query("Export")	
+                y = temp.query("Export").split(":")[1]).strip().rstrip('^@')	
                 f.write(y + '\n')
                 print(y)
              f.close()
