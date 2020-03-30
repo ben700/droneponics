@@ -10,6 +10,8 @@ pip3 install adafruit-circuitpython-lis3dh
 pip3 install adafruit-circuitpython-ads1x15
 sudo pip3 install mh-z19
 sudo apt-get install lxde
+sudo apt-get install xterm -y
+
 
 pip3 install adafruit-circuitpython-seesaw
 git submodule init
