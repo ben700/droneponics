@@ -134,18 +134,25 @@ try:
         
     @blynk.handle_event('write V31')
     def fillLinePump1(pin, value):
-        _log.info("Fill Line 1")
+        x=0
         _log.info( "Fill Line 1 " + str(value[0]) + '\n')
-        blynk.set_property(nutrientMix[0].LED, 'color', colours[value[0]])
-        if(value[0] == '1'):
-            _log.info("Pump Device  v==1 = " + nutrientMix[0].pump.query("X") + '\n') 
-        else:
-            _log.info("Pump Device v!=1 = " + nutrientMix[0].pump.query("D,*") + '\n') 
+	now = datetime.now()
+        blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))    
         
-        nutrientMix[0].volume = nutrientMix[0].pump.query("TV,?").split("TV,")[1]
-        blynk.virtual_write(nutrientMix[0].volumePin, nutrientMix[0].volume )
-        dosed = nutrientMix[0].pump.query("R").split(":")[1].strip().rstrip('\x00')
-        _log.info( "Pump id " + str(dosage.pumpId) + " has dosed = " + str(dosed) + "ml of 10ml")
+        blynk.set_property(nutrientMix[x].LED, 'color', colours[value[0]])
+        if(value[0] == '1'):
+            _log.info("Pump for " +nutrientMix[x].name +" = " + nutrientMix[x].pump.query("X") + '\n')
+            blynk.virtual_write(98, now.strftime("%d/%m/%Y %H:%M:%S") + " :- Pump for " + nutrientMix[x].name + ":- STOPPED" + '\n') 
+        else:
+            blynk.virtual_write(98, now.strftime("%d/%m/%Y %H:%M:%S") + " :- Pump for " + nutrientMix[x].name + ":- STARTED" + '\n') 
+            _log.info("Pump Device v!=1 = " + nutrientMix[x].pump.query("D,*") + '\n') 
+        
+	lVolume= nutrientMix[x].volume
+        nutrientMix[x].volume = nutrientMix[x].pump.query("TV,?").split("TV,")[1]
+        blynk.virtual_write(nutrientMix[x].volumePin, nutrientMix[x].volume )
+        dosed = nutrientMix[x].pump.query("R").split(":")[1].strip().rstrip('\x00')
+        _log.info( "Pump id " + str(dosage.pumpId) + " has dosed = " + str(dosed) + "Before was :-" + str(lVolume))
+	
                         
     @timer.register(interval=10, run_once=False)
     def blynk_data():
