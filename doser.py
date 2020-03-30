@@ -186,9 +186,9 @@ try:
         now = datetime.now()
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))    
         
-	blynkData = blynklib.Blynk(BLYNK_AUTH_DATA)  
-	blynkData.run()
-	blynkData.virtual_sync('V1')
+        blynkData = blynklib.Blynk(BLYNK_AUTH_DATA)  
+        blynkData.run()
+        blynkData.virtual_sync('V1')
 	
         blynk.virtual_write(98, "Completed Timer Function" + '\n') 
 
