@@ -140,8 +140,8 @@ try:
         lVolume= nutrientMix[x].volume
         now = datetime.now()
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))    
-        #blynk.set_property(nutrientMix[x].LED, 'color', colours[value[0]])
-        #blynk.set_property(LED[0], 'color', colours[value[0]])
+        blynk.set_property(nutrientMix[x].LED, 'color', colours[value[0]])
+        blynk.set_property(LED[0], 'color', colours[value[0]])
         if(value[0] == '1'):
             _log.info("Pump for " +nutrientMix[x].name +" = " + nutrientMix[x].pump.query("X") + '\n')
             dosed = nutrientMix[x].pump.query("R").split(":")[1].strip().rstrip('\x00')
