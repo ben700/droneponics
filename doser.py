@@ -112,7 +112,7 @@ try:
         blynk.virtual_write(98, "System updated and restarting " + '\n')
         os.system('sudo reboot')
     def doSingleDose():
-	for dosage in nutrientMix:
+        for dosage in nutrientMix:
            if(dosage.pump is not None):
                    blynk.set_property(dosage.LED, 'color', colours[0])
                    dosage.pump.query("D,"+str(dosage.dose))
