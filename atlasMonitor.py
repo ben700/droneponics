@@ -1,6 +1,6 @@
 #!/usr/bin/python
 # The ID and range of a sample spreadsheet.
-BLYNK_AUTH = 'XVbhfI6ZYxkqFp7d4RsCIN6Is9YnKp9q' #atlasButt
+BLYNK_AUTH = 'SHraFqInf27JKowTcFZapu0rHH2QGtuO' #atlasMonitor
 
 try:
     import logging
@@ -105,12 +105,10 @@ try:
         now = datetime.now()
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
 
-        _log.info("now the t3")
         cTemp = temp.query("R,").split(":")[1]
         _log.info("Temp = " + cTemp)
         blynk.virtual_write(30, cTemp)
 
-        _log.info("read PH")
         try:
            cPH = ph.query("RT,"+cTemp).split(":")[1]
            blynk.virtual_write(32, cPH)
@@ -118,14 +116,11 @@ try:
         except:
            blynk.virtual_write(98, "Read PH Error" + '\n') 
            _log.info("Read Ph Error")
-           cPH = 'Error'
-
-        _log.info("read ec")
+        
         try:
             cEC = ec.query("RT,"+cTemp).split(":")[1]
         except:
             blynk.virtual_write(98, "Read EC Error" + '\n')
-            cEC = 'Error'
         else:
             blynk.virtual_write(31, cEC)
             _log.info ("EC  = " + cEC)
