@@ -44,8 +44,9 @@ if True:
         _log.info("Unexpected error: Atlas")
     else:
         try:	
+             print(temp.query("Export,?").split(",")[1])
              print(temp.query("Export,?"))
-             for i in range(11):
+             for i in range(3):
                  print(temp.query("Export"))
 		   
         except:
