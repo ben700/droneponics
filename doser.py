@@ -159,7 +159,6 @@ try:
         for dosage in nutrientMix:
            if(dosage.pump is not None):
                    dosage.pump.query("clear") 
-	nutrientMix[x].pump.query("R")
         blynk.virtual_write(98, now.strftime("%d/%m/%Y %H:%M:%S") + " :- Reset Pump Counters " + '\n') 
         blynk.virtual_write(200, 0)
         
