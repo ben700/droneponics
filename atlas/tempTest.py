@@ -9,7 +9,7 @@ if True:
     import sys
     import os
    
-    from .AtlasI2C import (
+    from ~./AtlasI2C import (
 	    AtlasI2C
     )
     
