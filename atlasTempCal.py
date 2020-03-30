@@ -86,6 +86,3 @@ try:
         except:
             _log.info("Expected error: Use Atlas Error")
             
-  
-except:
-   print('Unexpected error')
