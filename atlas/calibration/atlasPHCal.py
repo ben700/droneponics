@@ -48,34 +48,35 @@ if True:
              if answer == 'y':
                  answer = input("Going to calibrate ph to mid 7.00. Enter y when you are ready(y/n)")
                  if answer == 'y':
-                      cPH = ph.query("R,").split(":")[1]
+                      cPH = ph.query("R").split(":")[1]
                       while ( cPH != oPH):
                            oPH = cPH 
-                           cPH = ph.query("R,").split(":")[1]
+                           cPH = ph.query("R").split(":")[1]
                            _log.info("Waiting for ph to be stable. It's now :" + str(cPH) + '\n')
                            
-                      ph.query("Cal,clear")	
-                      temp.query("Cal,mid,7.00")
+                      ph.query("Cal,clear")
+                      ph.query("T,19.5")
+                      ph.query("Cal,mid,7.00")
                       
              if answer == 'y':
                  answer = input("Going to calibrate ph to low 4.00. Enter y when you are ready(y/n)")
                  if answer == 'y':
-                      cPH = ph.query("R,").split(":")[1]
+                      cPH = ph.query("R").split(":")[1]
                       while ( cPH != oPH):
                            oPH = cPH 
-                           cPH = ph.query("R,").split(":")[1]
+                           cPH = ph.query("R").split(":")[1]
                            _log.info("Waiting for ph to be stable. It's now :" + str(cPH) + '\n')
-                      temp.query("Cal,low,4.00")
+                      ph.query("Cal,low,4.00")
                       
              if answer == 'y':
                  answer = input("Going to calibrate ph to high 10.00. Enter y when you are ready(y/n)")
                  if answer == 'y':
-                      cPH = ph.query("R,").split(":")[1]
+                      cPH = ph.query("R").split(":")[1]
                       while ( cPH != oPH):
                            oPH = cPH 
-                           cPH = ph.query("R,").split(":")[1]
+                           cPH = ph.query("R").split(":")[1]
                            _log.info("Waiting for ph to be stable. It's now :" + str(cPH) + '\n')
-                      temp.query("Cal,high,10.00")
+                      ph.query("Cal,high,10.00")
                       
                       
         except:
