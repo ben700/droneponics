@@ -129,7 +129,6 @@ try:
            else:
                    blynk.set_property(dosage.LED, 'color', colours['OFFLINE'])	
         
-        
     @blynk.handle_event('write V1')
     def buttonV1Pressed(pin, value):
         blynk.set_property(10, 'color', colours[0]) 
@@ -181,7 +180,9 @@ try:
         for dosage in nutrientMix:
            if(dosage.pump is not None):
                    dosage.pump.query("clear") 
-        now = datetime.now()
+                   dosage.volume = dosage.pump.query("TV,?").split("TV,")[1]
+                   blynk.virtual_write(dosage.volumePin, dosage.volume )            
+	now = datetime.now()
         blynk.virtual_write(98, now.strftime("%d/%m/%Y %H:%M:%S") + " :- Reset Pump Counters " + '\n') 
         blynk.virtual_write(200, 0)
     
