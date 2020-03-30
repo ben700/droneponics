@@ -161,6 +161,7 @@ try:
         nutrientMix[x].volume = nutrientMix[x].pump.query("TV,?").split("TV,")[1]
         blynk.virtual_write(nutrientMix[x].volumePin, nutrientMix[x].volume )
         blynk.virtual_write(98, now.strftime("%d/%m/%Y %H:%M:%S") + " :- Pump for " + nutrientMix[x].name + ":- Paused"  + " Dosed :"+ str(dosed) + "ml" + '\n') 
+	blynk.virtual_write(3, 0) 
      
     @blynk.handle_event('write V41')
     def fillLinePump1(pin, value):
