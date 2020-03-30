@@ -65,7 +65,8 @@ try:
     def logEc(pin, value):    
         eC=value
         _log.info("ec was :" + str(value))     
-    
+    blynkData.run()
+    blynkData.virtual_sync('V31')
     # Initialize the sensor.
     try:
        # Create the I2C bus
