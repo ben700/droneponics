@@ -48,6 +48,8 @@ try:
     _log.addHandler(consoleHandler)
     _log.setLevel(logging.DEBUG)
 
+    pH=0
+    eC=0	
     nutrientMix = []
     nutrientMix = drone.buildNutrientMix(nutrientMix, _log)
 	
@@ -162,8 +164,20 @@ try:
         now = datetime.now()
         blynk.virtual_write(98, now.strftime("%d/%m/%Y %H:%M:%S") + " :- Reset Pump Counters " + '\n') 
         blynk.virtual_write(200, 0)
-        
-                        
+    
+    @blynk.handle_event('write V32')
+    def logPh(pin, value):    
+        _log.info("How in log pH")
+	pH = value[0]
+	_log.info(value[0])
+	
+
+    @blynk.handle_event('write V31')
+    def logEc(pin, value):    
+        _log.info("How in log EC")
+	eC = value[0]
+	_log.info(value[0])
+	
     @timer.register(interval=10, run_once=False)
     def blynk_data():
         _log.info("Update Timer Run")
@@ -172,6 +186,10 @@ try:
         now = datetime.now()
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))    
         
+	blynkData = blynklib.Blynk(BLYNK_AUTH_DATA)  
+	blynkData.run()
+	blynkData.virtual_sync('V1')
+	
         blynk.virtual_write(98, "Completed Timer Function" + '\n') 
 
     while True:
