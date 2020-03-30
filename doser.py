@@ -60,6 +60,8 @@ try:
     blynk.run()
     blynk.virtual_write(98, "clr")
     
+    blynkData = blynklib.Blynk(BLYNK_AUTH_DATA)  
+        
     
     # Initialize the sensor.
     try:
@@ -186,7 +188,6 @@ try:
         now = datetime.now()
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))    
         
-        blynkData = blynklib.Blynk(BLYNK_AUTH_DATA)  
         blynkData.run()
         blynkData.virtual_sync('V31, V32')
 	
