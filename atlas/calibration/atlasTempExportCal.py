@@ -46,7 +46,7 @@ if True:
         try:	
              print(temp.query("Export,?"))
              for i in range(11):
-                 print(temp.query("Export,?"))
+                 print(temp.query("Export"))
 		   
         except:
             _log.info("Expected error: Use Atlas Error")
