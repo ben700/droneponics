@@ -8,8 +8,8 @@ if True:
     from datetime import datetime
     import sys
     import os
-   
-    from /home/pi/droneponics/AtlasI2C import (
+    sys.path.append('/home/pi/droneponics')
+    from AtlasI2C import (
 	    AtlasI2C
     )
     
