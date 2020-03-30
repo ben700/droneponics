@@ -5,8 +5,6 @@ if True:
     import datetime
     import time
     import shlex, requests
-    import blynklib
-    import blynktimer
     import logging
     from datetime import datetime
     import sys
@@ -15,6 +13,8 @@ if True:
     from AtlasI2C import (
 	    AtlasI2C
     )
+    import blynklib
+    import blynktimer
     
     import subprocess
     import re
