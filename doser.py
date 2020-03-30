@@ -155,11 +155,12 @@ try:
 
     @blynk.handle_event('write V200')
     def clearCounters(pin, value):    
-        now = datetime.now()
+        _log.info( "clear counters")
         for dosage in nutrientMix:
            if(dosage.pump is not None):
                    dosage.pump.query("clear") 
-        blynk.virtual_write(98, now.strftime("%d/%m/%Y %H:%M:%S") + " :- Reset Pump Counters " + '\n') 
+        now = datetime.now()
+	blynk.virtual_write(98, now.strftime("%d/%m/%Y %H:%M:%S") + " :- Reset Pump Counters " + '\n') 
         blynk.virtual_write(200, 0)
         
                         
