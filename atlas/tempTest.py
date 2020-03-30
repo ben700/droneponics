@@ -28,7 +28,7 @@ if True:
         _log.info("Temp Sensor Info = " + temp.query("i"))
         _log.info("Temp Sensor Calibration = " + temp.query("cal,?"))
         _log.info("Temp Sensor Status = " + temp.query("Status"))
-        _log.info("Temp Sensor Scale = " + temp.query("S,.?"))
+        _log.info("Temp Sensor Scale = " + temp.query("S,?"))
     except:
         _log.info("Unexpected error: Atlas")
     else:
