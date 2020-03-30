@@ -145,7 +145,7 @@ try:
 	
         if(value[0] == '1'):
             _log.info("Pump for " +nutrientMix[x].name +" = " + nutrientMix[x].pump.query("X") + '\n')
-	    dosed = nutrientMix[x].pump.query("R").split(":")[1].strip().rstrip('\x00')
+            dosed = nutrientMix[x].pump.query("R").split(":")[1].strip().rstrip('\x00')
             blynk.virtual_write(98, now.strftime("%d/%m/%Y %H:%M:%S") + " :- Pump for " + nutrientMix[x].name + ":- STOPPED"  + " Dosed :-"+ str(dosed) + '\n') 
         else:
             _log.info("Pump Device v!=1 = " + nutrientMix[x].pump.query("D,*") + '\n') 
