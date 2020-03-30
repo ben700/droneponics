@@ -36,7 +36,7 @@ if True:
         _log.info("Unexpected error: Atlas")
     else:
         try:	
-             answer = input("Are you sure you want to calibrate Temprature (y/n)")
+             answer = input("Are you sure you want to reset Temprature (y/n)")
              if answer == 'y':
                       temp.query("Factory")
                       _log.info("Temprature Reset")
