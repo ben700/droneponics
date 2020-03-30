@@ -153,7 +153,15 @@ try:
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))    
         blynk.virtual_write(98, now.strftime("%d/%m/%Y %H:%M:%S") + " :Full Dosed Complete" + '\n') 
         blynk.virtual_write(2, 0)           
-        
+
+    @blynk.handle_event('write V3')
+    def pauseDosing(pin, value):
+        _log.info("Pump for " +nutrientMix[x].name +" = " + nutrientMix[x].pump.query("P") + '\n')
+        dosed = nutrientMix[x].pump.query("R").split(":")[1].strip().rstrip('\x00')
+        nutrientMix[x].volume = nutrientMix[x].pump.query("TV,?").split("TV,")[1]
+        blynk.virtual_write(nutrientMix[x].volumePin, nutrientMix[x].volume )
+        blynk.virtual_write(98, now.strftime("%d/%m/%Y %H:%M:%S") + " :- Pump for " + nutrientMix[x].name + ":- Paused"  + " Dosed :"+ str(dosed) + "ml" + '\n') 
+     
     @blynk.handle_event('write V41')
     def fillLinePump1(pin, value):
         x=0
