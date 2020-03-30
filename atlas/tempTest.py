@@ -25,7 +25,10 @@ if True:
     # Initialize the sensor.
     try:
         temp = AtlasI2C(102)
-        _log.info("sensor created")
+        _log.info("Temp Sensor Info = " + temp.query("i"))
+        _log.info("Temp Sensor Calibration = " + temp.query("cal,?"))
+        _log.info("Temp Sensor Status = " + temp.query("Status"))
+        _log.info("Temp Sensor Scale = " + temp.query("S,.?"))
     except:
         _log.info("Unexpected error: Atlas")
     else:
