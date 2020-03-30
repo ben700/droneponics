@@ -137,6 +137,7 @@ try:
     def fillLinePump1(pin, value):
         x=0
         _log.info( "Fill Line 1 " + str(value[0]) + '\n')
+        lVolume= nutrientMix[x].volume
         now = datetime.now()
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))    
         blynk.set_property(nutrientMix[x].LED, 'color', colours[value[0]])
@@ -149,7 +150,6 @@ try:
             _log.info("Pump Device v!=1 = " + nutrientMix[x].pump.query("D,*") + '\n') 
         #    blynk.virtual_write(98, now.strftime("%d/%m/%Y %H:%M:%S") + " :- Pump for " + nutrientMix[x].name + ":- STARTED" + '\n') 
         
-        lVolume= nutrientMix[x].volume
         nutrientMix[x].volume = nutrientMix[x].pump.query("TV,?").split("TV,")[1]
         blynk.virtual_write(nutrientMix[x].volumePin, nutrientMix[x].volume )
         dosed = nutrientMix[x].pump.query("R").split(":")[1].strip().rstrip('\x00')
