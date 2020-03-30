@@ -128,7 +128,7 @@ try:
         _log.info("Completed")
         now = datetime.now()
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))    
-        blynk.virtual_write(98, "Dosed Complete" + '\n') 
+        blynk.virtual_write(98, now.strftime("%d/%m/%Y %H:%M:%S") + " :- Dosed Complete" + '\n') 
         
            
         
