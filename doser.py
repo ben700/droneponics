@@ -168,8 +168,8 @@ try:
     @blynk.handle_event('write V32')
     def logPh(pin, value):    
         _log.info("How in log pH")
-	pH = value[0]
-	_log.info(value[0])
+        pH = value[0]
+        _log.info(value[0])
 	
 
     @blynk.handle_event('write V31')
