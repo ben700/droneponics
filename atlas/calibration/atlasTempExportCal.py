@@ -47,7 +47,7 @@ if True:
              x =x+1
              for i in range(x):
                 y = temp.query("Export")	
-                f.write(y)
+                f.write(y + '\n')
                 print(y)
              f.close()
 	   
