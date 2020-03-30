@@ -49,7 +49,7 @@ try:
     _log.setLevel(logging.DEBUG)
 
     pH=0
-    eC=0	
+    eC=9999	
     nutrientMix = []
     nutrientMix = drone.buildNutrientMix(nutrientMix, _log)
 	
@@ -61,7 +61,10 @@ try:
     blynk.virtual_write(98, "clr")
     
     blynkData = blynklib.Blynk(BLYNK_AUTH_DATA)  
-        
+    @blynkData.handle_event('write V31')
+    def logEc(pin, value):    
+        eC=value
+        _log.info("ec was :" + str(value))     
     
     # Initialize the sensor.
     try:
@@ -168,10 +171,7 @@ try:
         blynk.virtual_write(200, 0)
     
 
-    @blynkData.handle_event('write V31')
-    def logEc(pin, value):    
-        eC=value
-        _log.info("ec was :" + str(value))
+
 	
     @timer.register(interval=10, run_once=False)
     def blynk_data():
@@ -184,6 +184,8 @@ try:
         blynkData.run()
         blynkData.virtual_sync('V31')
 	
+        blynkData.virtual_sync('31')
+        blynkData.virtual_sync("V31")
         blynk.virtual_write(98, "Completed Timer Function" + '\n') 
 
     while True:
