@@ -39,7 +39,7 @@ try:
     nutrientMix = drone.buildNutrientMix(nutrientMix, _log)
 	
 
-    answer = input("Are you sure you want to calibrate (y/n)")
+    answer = input("Are you sure you want to calibrate Temp, EC or pH? (y/n)")
     if answer is None or answer != 'y':
         _log.info("User Exit")
         quit()
