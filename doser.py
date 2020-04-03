@@ -111,17 +111,17 @@ try:
     def doSinglePHDose():
         if(nutrientMix[0].pump is not None):
             blynk.set_property(nutrientMix[0].LED, 'color', colours[0])
-                   nutrientMix[0].pump.query("D,5")
-                   while (True):
-                        dosed = nutrientMix[0].pump.query("R").split(":")[1].strip().rstrip('\x00')
-                        _log.info( "Pump id " + str(nutrientMix[0].pumpId) + " has dosed = " + str(dosed) + "ml of 5ml")
-                        if (str(dosed) == '{:.2f}'.format(nutrientMix[0].dose)):
-                            break	
-                   blynk.set_property(nutrientMix[0].LED, 'color', colours[1])
-                   nutrientMix[0].volume = nutrientMix[0].pump.query("TV,?").split("TV,")[1]
-                   blynk.virtual_write(nutrientMix[0].volumePin, nutrientMix[0].volume )
-           else:
-                   blynk.set_property(nutrientMix[0].LED, 'color', colours['OFFLINE'])	
+            nutrientMix[0].pump.query("D,5")
+            while (True):
+                dosed = nutrientMix[0].pump.query("R").split(":")[1].strip().rstrip('\x00')
+                _log.info( "Pump id " + str(nutrientMix[0].pumpId) + " has dosed = " + str(dosed) + "ml of 5ml")
+                if (str(dosed) == '{:.2f}'.format(nutrientMix[0].dose)):
+                    break	
+            blynk.set_property(nutrientMix[0].LED, 'color', colours[1])
+            nutrientMix[0].volume = nutrientMix[0].pump.query("TV,?").split("TV,")[1]
+            blynk.virtual_write(nutrientMix[0].volumePin, nutrientMix[0].volume )
+        else:
+            blynk.set_property(nutrientMix[0].LED, 'color', colours['OFFLINE'])	
     
     
     @blynk.handle_event('write V1')
