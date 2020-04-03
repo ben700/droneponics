@@ -1,3 +1,3 @@
 from drone.dose import Dose
-from drone.nutrientSchedule import buildNutrientMix
+from drone.nutrientSchedule import *
 
