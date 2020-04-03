@@ -316,12 +316,11 @@ try:
        # sensors = drone.readSensors(sensors, _log, blynk)
         blynk.virtual_write(98,"now read sensors temp"+ '\n') 
         sensors[0].value = sensors[0].sensor.query("R").split(":")[1].strip() #Temp
-        blynk.virtual_write(98,"read temp : ["+ str(sensors[0].value) + "]" +'\n') 
-        blynk.virtual_write(98,"now read sensors EC"+ '\n') 
+        blynk.virtual_write(98,"Read temp : ["+ str(sensors[0].value) + "]" +'\n') 
         sensors[1].value = sensors[1].sensor.query("RT,"+sensors[0].value).split(":")[1].strip() #EC
-        blynk.virtual_write(98,"now read sensors pH"+ '\n') 
+        blynk.virtual_write(98,"Read EC ["+ str(sensors[0].value) + "]"+ '\n') 
         sensors[2].value = sensors[2].sensor.query("RT,"+sensors[0].value).split(":")[1].strip() #pH
-        blynk.virtual_write(98, "all sensors read"+ '\n') 
+        blynk.virtual_write(98, "Read ph = ["+ str(sensors[2].value) + "]" + '\n') 
     
         blynk.virtual_write(98, "Sensors have been read" + '\n') 
         
