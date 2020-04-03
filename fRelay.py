@@ -124,7 +124,7 @@ try:
 
     @blynkTemp.handle_event('read V1')
     def readV1(value):
-       blynk.virtual_write(98, "Read"+'\n') 
+       blynk.virtual_write(98, "Read"+'\n' + str(value)) 
 
 
 
