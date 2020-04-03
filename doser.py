@@ -307,7 +307,7 @@ try:
     def blynk_data():
         _log.info("Update Timer Run")
         blynk.virtual_write(98, "Starting Timer Function" + '\n') 
-        Counter.cycle += 1
+        #Counter.cycle += 1
         now = datetime.now()
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))    
        # drone.readSensors(sensors, _log)
