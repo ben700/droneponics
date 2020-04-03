@@ -314,20 +314,17 @@ try:
         
         blynk.virtual_write(98, "Going to read Sensors" + '\n') 
        # sensors = drone.readSensors(sensors, _log, blynk)
-        blynk.virtual_write(98,"now read sensors temp"+ '\n') 
         sensors[0].value = sensors[0].sensor.query("R").split(":")[1].strip() #Temp
-        blynk.virtual_write(98,"Read temp : ["+ str(sensors[0].value) + "]" +'\n') 
         sensors[1].value = sensors[1].sensor.query("RT,"+sensors[0].value).split(":")[1].strip() #EC
-        blynk.virtual_write(98,"Read EC ["+ str(sensors[0].value) + "]"+ '\n') 
         sensors[2].value = sensors[2].sensor.query("RT,"+sensors[0].value).split(":")[1].strip() #pH
-        blynk.virtual_write(98, "Read ph = ["+ str(sensors[2].value) + "]" + '\n') 
-    
         blynk.virtual_write(98, "Sensors have been read" + '\n') 
         
         for sensor in sensors:
              blynk.virtual_write(sensor.displayPin, sensor.value)   
+
         blynk.virtual_write(98, "EC target = [" +str(sensors[1].target) +"] current EC reading =[" + str(sensors[1].value) + "]" + '\n')
         blynk.virtual_write(98, "PH target = [" +str(sensors[2].target) +"] current PH reading =[" + str(sensors[2].value) + "]" + '\n')         
+        
         if (sensors[1].target < sensors[1].value):
              doSingleDose()
         elif (sensors[2].target > sensors[2].value):
