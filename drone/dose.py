@@ -10,3 +10,13 @@ class Dose:
        self.volume = 0	
             
  
+class Sensor:
+   def __init__(self, SensorId, Name, DisplayPin, Target):
+       print("Building Sensor")
+       self.sensor = None
+       self.sensorId = SensorId
+       self.name = Name
+       self.displayPin = DisplayPin
+       self.target = Target
+         
+            
