@@ -330,9 +330,9 @@ try:
         blynk.virtual_write(98, "Temp target = [" +str(sensors[0].target) +"] current Temp reading =[" + str(sensors[0].value) + "]" + '\n')
         blynk.virtual_write(98, "EC target = [" +str(sensors[1].target) +"] current EC reading =[" + str(sensors[1].value) + "]" + '\n')
         blynk.virtual_write(98, "PH target = [" +str(sensors[2].target) +"] current PH reading =[" + str(sensors[2].value) + "]" + '\n')         
-        getcontext().prec = 3
-        if (cEC < sensors[1].target):
-       #      doSingleDose()
+        blynk.virtual_write(98,float(cEC))
+        if (True):
+             doSingleDose()
              blynk.virtual_write(98,"Would dose nutrient") 
        # elif (float(sensors[2].target) < float(sensors[2].value)):
        #      doSinglePHDose()
