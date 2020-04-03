@@ -13,3 +13,10 @@ def buildNutrientMix(nutrientMix, _log):
     nutrientMix.append( Dose(114, 4.00, LED[4], "Enzyme", VolumePin[4]))
     nutrientMix.append( Dose(115, 1.00, LED[5], "Magne-Cal", VolumePin[5])) 
     return nutrientMix
+
+def buildNutrientMix(sensors, _log):
+    _log.info("now building sensors list") 
+    nutrientMix.append( Sensor(102, "Temprature", 30, 20))
+    nutrientMix.append( Sensor(100, "EC", 31 , 500))
+    nutrientMix.append( Sensor(99, "pH", 32, 5.5))
+    return nutrientMix
