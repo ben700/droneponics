@@ -67,5 +67,3 @@ try:
 	    
         except:
             _log.info("Expected error: Use Atlas Error")
-            
-  
