@@ -314,23 +314,23 @@ try:
         
         blynk.virtual_write(98, "Going to read Sensors" + '\n') 
        # sensors = drone.readSensors(sensors, _log, blynk)
-        blynk.virtual_write(98,"now read sensors temp") 
+        blynk.virtual_write(98,"now read sensors temp"+ '\n') 
         sensors[0].value = sensors[0].sensor.query("R").split(":")[1] #Temp
-        blynk.virtual_write(98,"now read sensors EC") 
+        blynk.virtual_write(98,"now read sensors EC"+ '\n') 
         sensors[1].value = sensors[1].sensor.query("RT,"+sensors[0].value).split(":")[1] #EC
-        blynk.virtual_write(98,"now read sensors pH") 
+        blynk.virtual_write(98,"now read sensors pH"+ '\n') 
         sensors[2].value = sensors[2].sensor.query("RT,"+sensors[0].value).split(":")[1] #pH
-        blynk.virtual_write(98, "all sensors read") 
+        blynk.virtual_write(98, "all sensors read"+ '\n') 
     
         blynk.virtual_write(98, "Sensors have been read" + '\n') 
         
         for sensor in sensors:
              blynk.virtual_write(sensor.displayPin, sensor.value)   
                 
-        if (sensors[1].target < sensors[1].value):
-             doSingleDose()
-        elif (sensors[0].target > sensors[0].value):
-             doSinglePHDose()
+        #if (sensors[1].target < sensors[1].value):
+        #     doSingleDose()
+        #elif (sensors[0].target > sensors[0].value):
+        #     doSinglePHDose()
        
         blynk.virtual_write(98, "Completed Timer Function" + '\n') 
 
