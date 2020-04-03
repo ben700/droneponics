@@ -14,9 +14,18 @@ def buildNutrientMix(nutrientMix, _log):
     nutrientMix.append( Dose(115, 1.00, LED[5], "Magne-Cal", VolumePin[5])) 
     return nutrientMix
 
-def buildNutrientMix(sensors, _log):
+def buildSensors(sensors, _log):
     _log.info("now building sensors list") 
-    nutrientMix.append( Sensor(102, "Temprature", 30, 20))
-    nutrientMix.append( Sensor(100, "EC", 31 , 500))
-    nutrientMix.append( Sensor(99, "pH", 32, 5.5))
-    return nutrientMix
+    sensors.append( Sensor(102, "Temprature", 30, 20))
+    sensors.append( Sensor(100, "EC", 31 , 500))
+    sensors.append( Sensor(99, "pH", 32, 5.5))
+    return sensors
+
+def readSensors(sensors, _log):
+    _log.info("now read sensors list") 
+    sensors[0].value = sensor[0].query("R").split(":")[1] #Temp
+    sensors[1].value = sensor[1].query("RT,"+sensors[0].value).split(":")[1] #EC
+    sensors[2].value = sensor[2].query("RT,"+sensors[0].value).split(":")[1] #pH
+    _log.info("pump created") 
+    return sensors
+
