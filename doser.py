@@ -310,7 +310,7 @@ try:
         #Counter.cycle += 1
         now = datetime.now()
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))    
-       # drone.readSensors(sensors, _log)
+        drone.readSensors(sensors, _log)
        # for sensor in sensors:
        #      blynk.virtual_write(sensor.displayPin, sensor.value)   
                 
