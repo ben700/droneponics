@@ -316,9 +316,12 @@ try:
         
         blynk.virtual_write(98, "Going to read Sensors" + '\n') 
        # sensors = drone.readSensors(sensors, _log, blynk)
-        sensors[0].value = sensors[0].sensor.query("R").split(":")[1].strip() #Temp
-        sensors[1].value = sensors[1].sensor.query("RT,"+sensors[0].value).split(":")[1].strip() #EC
-        sensors[2].value = sensors[2].sensor.query("RT,"+sensors[0].value).split(":")[1].strip() #pH
+        cTemp = sensors[0].sensor.query("R").split(":")[1].strip()
+        sensors[0].value = cTemp #Temp
+        cEC = sensors[1].sensor.query("RT,"+cTemp).split(":")[1].strip()
+        sensors[1].value = cEC #EC
+        cPH = sensors[2].sensor.query("RT,"+sensors[0].value).split(":")[1].strip() #pH
+        sensors[2].value = cPH #pH
         blynk.virtual_write(98, "Sensors have been read" + '\n') 
         
         for sensor in sensors:
@@ -328,7 +331,7 @@ try:
         blynk.virtual_write(98, "EC target = [" +str(sensors[1].target) +"] current EC reading =[" + str(sensors[1].value) + "]" + '\n')
         blynk.virtual_write(98, "PH target = [" +str(sensors[2].target) +"] current PH reading =[" + str(sensors[2].value) + "]" + '\n')         
         getcontext().prec = 3
-        if (True):
+        if (cEC < sensors[1].target):
        #      doSingleDose()
              blynk.virtual_write(98,"Would dose nutrient") 
        # elif (float(sensors[2].target) < float(sensors[2].value)):
