@@ -1,6 +1,6 @@
 ##!/usr/bin/env python3 
 BLYNK_AUTH = 'e06jzpI2zuRD4KB5eHyHdCQTGFT7einR' #i2cLogger
-BLYNK_AUTH_DATA = 'XVbhfI6ZYxkqFp7d4RsCIN6Is9YnKp9q' #i2cLogger
+
 LED = [10,11,12,13,14,15]
 VolumePin = [0,21,22,23,24,25] 
 
@@ -39,9 +39,10 @@ try:
 
     pH=0
     eC=9999	
+    sensors = []
     nutrientMix = []
     nutrientMix = drone.buildNutrientMix(nutrientMix, _log)
-	
+	sensors = drone.buildSensors(sensors, _log)
     
     # Initialize Blynk
     blynk = blynklib.Blynk(BLYNK_AUTH)        
@@ -49,13 +50,7 @@ try:
     blynk.run()
     blynk.virtual_write(98, "clr")
     
-    blynkData = blynklib.Blynk(BLYNK_AUTH_DATA)  
-    @blynkData.handle_event('write V31')
-    def logEc(pin, value):    
-        eC=value
-        _log.info("ec was :" + str(value))     
-    blynkData.run()
-    blynkData.virtual_sync('V31')
+    
     # Initialize the sensor.
     try:
        # Create the I2C bus
@@ -63,6 +58,8 @@ try:
            dosage.pump = AtlasI2C(dosage.pumpId)
            blynk.set_property(dosage.LED, 'color', colours[1])
        blynk.virtual_write(98, "pump created" + '\n') 
+       for sensor in sensors:
+           sensor.sensor = AtlasI2C(sensor.sensorId)
        _log.info("pump created")
     except:
 
@@ -109,7 +106,24 @@ try:
                    blynk.virtual_write(dosage.volumePin, dosage.volume )
            else:
                    blynk.set_property(dosage.LED, 'color', colours['OFFLINE'])	
-        
+    
+    
+    def doSinglePHDose():
+        if(nutrientMix[0].pump is not None):
+            blynk.set_property(nutrientMix[0].LED, 'color', colours[0])
+                   nutrientMix[0].pump.query("D,5")
+                   while (True):
+                        dosed = nutrientMix[0].pump.query("R").split(":")[1].strip().rstrip('\x00')
+                        _log.info( "Pump id " + str(nutrientMix[0].pumpId) + " has dosed = " + str(dosed) + "ml of 5ml")
+                        if (str(dosed) == '{:.2f}'.format(nutrientMix[0].dose)):
+                            break	
+                   blynk.set_property(nutrientMix[0].LED, 'color', colours[1])
+                   nutrientMix[0].volume = nutrientMix[0].pump.query("TV,?").split("TV,")[1]
+                   blynk.virtual_write(nutrientMix[0].volumePin, nutrientMix[0].volume )
+           else:
+                   blynk.set_property(nutrientMix[0].LED, 'color', colours['OFFLINE'])	
+    
+    
     @blynk.handle_event('write V1')
     def buttonV1Pressed(pin, value):
         blynk.set_property(10, 'color', colours[0]) 
@@ -243,7 +257,27 @@ try:
         else:
             _log.info("Pump for " +nutrientMix[x].name +" = " + nutrientMix[x].pump.query("D,*") + '\n') 
             blynk.virtual_write(98, now.strftime("%d/%m/%Y %H:%M:%S") + " :- Pump for " + nutrientMix[x].name + ":- STARTED" + '\n') 
-		
+            
+    @blynk.handle_event('write V46')
+    def fillLinePump6(pin, value):
+        x=5
+        _log.info( "Fill Line 6 " + str(value[0]) + '\n')
+        lVolume= nutrientMix[x].volume
+        now = datetime.now()
+        blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))    
+        blynk.set_property(nutrientMix[x].LED, 'color', colours[value[0]])
+        blynk.set_property(LED[0], 'color', colours[value[0]])
+        if(value[0] == '1'):
+            _log.info("Pump for " +nutrientMix[x].name +" = " + nutrientMix[x].pump.query("X") + '\n')
+            dosed = nutrientMix[x].pump.query("R").split(":")[1].strip().rstrip('\x00')
+            nutrientMix[x].volume = nutrientMix[x].pump.query("TV,?").split("TV,")[1]
+            blynk.virtual_write(nutrientMix[x].volumePin, nutrientMix[x].volume )
+            blynk.virtual_write(98, now.strftime("%d/%m/%Y %H:%M:%S") + " :- Had used " + lVolume + " ml| Now Dosed :"+ str(nutrientMix[x].volume) + "ml" + '\n') 
+            blynk.virtual_write(98, now.strftime("%d/%m/%Y %H:%M:%S") + " :- Pump for " + nutrientMix[x].name + ":- STOPPED"  + " Dosed :"+ str(dosed) + "ml" + '\n') 
+        else:
+            _log.info("Pump for " +nutrientMix[x].name +" = " + nutrientMix[x].pump.query("D,*") + '\n') 
+            blynk.virtual_write(98, now.strftime("%d/%m/%Y %H:%M:%S") + " :- Pump for " + nutrientMix[x].name + ":- STARTED" + '\n') 
+				
     @blynk.handle_event('write V200')
     def clearCounters(pin, value):    
         _log.info( "clear counters")
@@ -274,12 +308,15 @@ try:
         Counter.cycle += 1
         now = datetime.now()
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))    
-        
-        blynkData.run()
-        blynkData.virtual_sync('V31')
-	
-        blynkData.virtual_sync('31')
-        blynkData.virtual_sync("V31")
+        drone.readSensors(sensors, _log)
+        for sensor in sensors:
+             blynk.virtual_write(sensor.displayPin, sensor.value)   
+                
+        if (sensors[1].target < sensors[1].value)
+             doSingleDose()
+        elif (sensors[0].target > sensors[0].value)
+             doSinglePHDose()
+       
         blynk.virtual_write(98, "Completed Timer Function" + '\n') 
 
     while True:
