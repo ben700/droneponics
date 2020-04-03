@@ -311,13 +311,6 @@ try:
         now = datetime.now()
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
         
-        blynk.virtual_write(98, "Read Sensors" + '\n') 
-        sensors[0].value = sensors[0].sensor.query("R").split(":")[1] #Temp
-        sensors[1].value = sensors[1].sensor.query("RT,"+sensors[0].value).split(":")[1] #EC
-        sensors[2].value = sensors[2].sensor.query("RT,"+sensors[0].value).split(":")[1] #pH
-        blynk.virtual_write(98, "Temp = " + str(sensors[0].value) + '\n') 
-        blynk.virtual_write(98, "EC = "  + str(sensors[1].value)+ '\n') 
-        blynk.virtual_write(98, "PH = "  + str(sensors[2].value)+ '\n') 
         
         blynk.virtual_write(98, "Going to read Sensors" + '\n') 
         sensors = drone.readSensors(sensors, _log)
