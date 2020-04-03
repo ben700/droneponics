@@ -23,9 +23,11 @@ def buildSensors(sensors, _log):
 
 
 def readSensors(sensors, _log):
-    _log.info("now read sensors list") 
+    _log.info("now read sensors temp") 
     sensors[0].value = sensor[0].sensor.query("R").split(":")[1] #Temp
+    _log.info("now read sensors EC") 
     sensors[1].value = sensor[1].sensor.query("RT,"+sensors[0].value).split(":")[1] #EC
+    _log.info("now read sensors pH") 
     sensors[2].value = sensor[2].sensor.query("RT,"+sensors[0].value).split(":")[1] #pH
-    _log.info("sensors read") 
+    _log.info("all sensors read") 
     return sensors
