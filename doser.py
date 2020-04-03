@@ -312,9 +312,9 @@ try:
         for sensor in sensors:
              blynk.virtual_write(sensor.displayPin, sensor.value)   
                 
-        if (sensors[1].target < sensors[1].value)
+        if (sensors[1].target < sensors[1].value):
              doSingleDose()
-        elif (sensors[0].target > sensors[0].value)
+        elif (sensors[0].target > sensors[0].value):
              doSinglePHDose()
        
         blynk.virtual_write(98, "Completed Timer Function" + '\n') 
