@@ -49,6 +49,8 @@ if True:
                  answer = input("Going to calibrate ph to mid 7.00. Enter y when you are ready(y/n)")
                  if answer == 'y':
                       cPH = ph.query("R").split(":")[1]
+                      if ( cPH == oPH):
+                           _log.info("Ph to be stable. It's now :" + str(cPH) + '\n')
                       while ( cPH != oPH):
                            oPH = cPH 
                            cPH = ph.query("R").split(":")[1]
@@ -72,6 +74,8 @@ if True:
                  answer = input("Going to calibrate ph to high 10.00. Enter y when you are ready(y/n)")
                  if answer == 'y':
                       cPH = ph.query("R").split(":")[1]
+                      if ( cPH == oPH):
+                           _log.info("Ph to be stable. It's now :" + str(cPH) + '\n')
                       while ( cPH != oPH):
                            oPH = cPH 
                            cPH = ph.query("R").split(":")[1]
