@@ -21,11 +21,4 @@ def buildSensors(sensors, _log):
     sensors.append( Sensor(99, "pH", 32, 5.5))
     return sensors
 
-def readSensors(sensors, _log):
-    _log.info("now read sensors list") 
-    sensors[0].value = sensor[0].query("R").split(":")[1] #Temp
-    sensors[1].value = sensor[1].query("RT,"+sensors[0].value).split(":")[1] #EC
-    sensors[2].value = sensor[2].query("RT,"+sensors[0].value).split(":")[1] #pH
-    _log.info("pump created") 
-    return sensors
 
