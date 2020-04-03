@@ -79,19 +79,32 @@ try:
         _log.info("Unexpected error: I2C")
     else:
         try:
-            blynk.virtual_write(98, "Try to create soil sonsors" + '\n') 
+            blynk.virtual_write(98, "Try to create soil sonsor 1" + '\n') 
             ss1 = Seesaw(i2c, addr=0x36)
-            ss2 = Seesaw(i2c, addr=0x37)
-            ss3 = Seesaw(i2c, addr=0x38)
-            ss4 = Seesaw(i2c, addr=0x38)
-            blynk.virtual_write(98, "Created soil sonsors" + '\n') 
-            
         except:
             ss1 = None
+            blynk.virtual_write(98, "Expected error: No soil sonsor 1" + '\n') 
+
+        try:
+            blynk.virtual_write(98, "Try to create soil sonsor 2" + '\n') 
+            ss2 = Seesaw(i2c, addr=0x37)
+        except:
             ss2 = None
+            blynk.virtual_write(98, "Expected error: No soil sonsor 2" + '\n') 
+
+        try:
+            blynk.virtual_write(98, "Try to create soil sonsor 3" + '\n') 
+            ss3 = Seesaw(i2c, addr=0x38)
+        except:
             ss3 = None
+            blynk.virtual_write(98, "Expected error: No soil sonsor 3" + '\n') 
+
+        try:
+            blynk.virtual_write(98, "Try to create soil sonsor 4" + '\n') 
+            ss4 = Seesaw(i2c, addr=0x38)
+        except:
             ss4 = None
-            blynk.virtual_write(98, "Expected error: No soil sonsors" + '\n') 
+            blynk.virtual_write(98, "Expected error: No soil sonsor 4" + '\n') 
 
 
 
