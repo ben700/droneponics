@@ -52,11 +52,11 @@ if True:
             _log.info("Try Use Pump")
             for dosage in nutrientMix:
                 if(dosage.pump is not None):
-                   answer = input("Are you sure you want to calibrate pump " + dosage.name + "(y/n)")
+                   answer = input("Are you sure you want to calibrate pump " + dosage.name + "(y/n to skip)")
                    if answer is None or answer != 'y':
                         _log.info("User Exit")
                         continue
-                   answer = input("Going to dose 10ml of " + dosage.name + ". Enter y when you are ready(y/n)")
+                   answer = input("Going to dose 10ml of " + dosage.name + ". Enter y when you are ready(y/n  to skip)")
                    if answer is None or answer != 'y':
                         _log.info("User Exit")
                         continue
@@ -72,14 +72,14 @@ if True:
 		
 		
                    aDose = input("How much in ml did pump dose?")
-                   answer = input("Going to calibrate pump. It dosed [" + str(aDose) + "]. Enter y when you are ready(y/n)")
+                   answer = input("Going to calibrate pump. It dosed [" + str(aDose) + "]. Enter y when you are ready(y/n to skip)")
                    if answer is None or answer != 'y':
                         _log.info("User Exit")
                         continue
                    dosage.pump.query("Cal,clear")	
                    dosage.pump.query("Cal,"+str(aDose))
 		   
-                   answer = input("Going to dose 10ml of " + dosage.name + " over 1 min. Enter y when you are ready(y/n)")
+                   answer = input("Going to dose 10ml of " + dosage.name + " over 1 min. Enter y when you are ready(y/n to skip only done 1 part cal)")
                    if answer is None or answer != 'y':
                         _log.info("User Exit")
                         continue
@@ -92,7 +92,7 @@ if True:
                             break		
 		
                    aDose = input("How much in ml did pump dose?")
-                   answer = input("Going to calibrate pump. It dosed [" + str(aDose) + "]. Enter y when you are ready(y/n)")
+                   answer = input("Going to calibrate pump. It dosed [" + str(aDose) + "]. Enter y when you are ready(y/n to skip only done 1 part cal)")
                    if answer is None or answer != 'y':
                         _log.info("User Exit")
                         continue
