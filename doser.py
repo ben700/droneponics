@@ -328,8 +328,10 @@ try:
         
        # if (sensors[1].target < sensors[1].value):
        #      doSingleDose()
+             blynk.virtual_write(98,"Would dose nutrient") 
        # elif (sensors[2].target > sensors[2].value):
        #      doSinglePHDose()
+             blynk.virtual_write(98,"Would dose Ph")
        
         blynk.virtual_write(98, "Completed Timer Function" + '\n') 
 
