@@ -4,23 +4,25 @@ BLYNK_AUTH = 'e06jzpI2zuRD4KB5eHyHdCQTGFT7einR' #i2cLogger
 LED = [10,11,12,13,14,15]
 VolumePin = [0,21,22,23,24,25] 
 
-try:
-    from datetime import datetime
-    import time
-    import blynklib
-    import blynktimer
-    import logging
-    import sys
-    import os
-    import RPi.GPIO as GPIO
+import blynklib
+import blynktimer
 
-    from AtlasI2C import (
-	    AtlasI2C
-    )
+from datetime import datetime
+import time
+
+import logging
+import sys
+import os
+import RPi.GPIO as GPIO
+
+from AtlasI2C import (
+   AtlasI2C
+)
     
-    import subprocess
-    import re
-    import drone
+import subprocess
+import re
+import drone
+try:
 
     class Counter:
         cycle = 0
