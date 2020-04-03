@@ -326,10 +326,10 @@ try:
         blynk.virtual_write(98, "EC target = [" +str(sensors[1].target) +"] current EC reading =[" + str(sensors[1].value) + "]" + '\n')
         blynk.virtual_write(98, "PH target = [" +str(sensors[2].target) +"] current PH reading =[" + str(sensors[2].value) + "]" + '\n')         
         
-        if (sensors[1].target < sensors[1].value):
-             doSingleDose()
-        elif (sensors[2].target > sensors[2].value):
-             doSinglePHDose()
+       # if (sensors[1].target < sensors[1].value):
+       #      doSingleDose()
+       # elif (sensors[2].target > sensors[2].value):
+       #      doSinglePHDose()
        
         blynk.virtual_write(98, "Completed Timer Function" + '\n') 
 
