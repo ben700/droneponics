@@ -42,7 +42,7 @@ try:
     sensors = []
     nutrientMix = []
     nutrientMix = drone.buildNutrientMix(nutrientMix, _log)
-	sensors = drone.buildSensors(sensors, _log)
+    sensors = drone.buildSensors(sensors, _log)
     
     # Initialize Blynk
     blynk = blynklib.Blynk(BLYNK_AUTH)        
