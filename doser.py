@@ -320,7 +320,7 @@ try:
         blynk.virtual_write(98, "PH = "  + str(sensors[2].value)+ '\n') 
         
         blynk.virtual_write(98, "Sensors Read" + '\n') 
-        
+        sensors = drone.readSensors(sensors, _log)
         for sensor in sensors:
              blynk.virtual_write(sensor.displayPin, sensor.value)   
                 
