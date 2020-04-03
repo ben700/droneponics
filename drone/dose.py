@@ -19,4 +19,4 @@ class Sensor:
        self.displayPin = DisplayPin
        self.target = Target
          
-            
+       
