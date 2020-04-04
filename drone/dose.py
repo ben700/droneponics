@@ -7,8 +7,7 @@ class Dose:
        self.LED = Led
        self.name = name
        self.volumePin = volumePin	
-       self.volume = 0	
-            
+       self.volume = 0	 
  
 class Sensor:
    def __init__(self, SensorId, Name, DisplayPin, Target):
@@ -19,4 +18,6 @@ class Sensor:
        self.displayPin = DisplayPin
        self.target = Target
        self.value = None
- 
+   def read(self):
+       print("Building object")
+       return self.pump.query("R").split(":")[1].strip().rstrip('\x00')
