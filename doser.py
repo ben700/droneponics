@@ -18,7 +18,7 @@ import RPi.GPIO as GPIO
 from AtlasI2C import (
    AtlasI2C
 )
-    
+import math  
 import subprocess
 import re
 import drone
@@ -98,11 +98,13 @@ try:
     TWEET_MSG = "New value='{}' on VPIN({})"
 	
     def doSingleDose():
+	        
         now = datetime.now()
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
         blynk.virtual_write(98, now.strftime("%d/%m/%Y %H:%M:%S") + " Going to Dose" + '\n')
-        for dosage in nutrientMix:
+        for dosage in nutrientMix:           
            if(dosage.pump is not None and dosage.name != "pH"):
+                   dosage.volume = dosage.pump.query("TV,?").split("TV,")[1]
                    blynk.set_property(dosage.LED, 'color', colours[0])
                    dosage.pump.query("D,"+str(dosage.dose))
                    while (True):
@@ -113,8 +115,11 @@ try:
                         if (str(dosed) == '{:.2f}'.format(dosage.dose)):
                             break	
                    blynk.set_property(dosage.LED, 'color', colours[1])
+                   oVolume = dosage.volume 
                    dosage.volume = dosage.pump.query("TV,?").split("TV,")[1]
                    blynk.virtual_write(dosage.volumePin, dosage.volume )
+                   if (floor(oVolume) != floor(dosage.volume)):
+                        blynk.notify(dosage.name + " has pumped " + str(dosage.volume) + ", so may need topup")
            else:
                    blynk.set_property(dosage.LED, 'color', colours['OFFLINE'])	
     
