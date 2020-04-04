@@ -100,7 +100,7 @@ try:
     def doSingleDose():
         now = datetime.now()
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
-        blynk.virtual_write(98, now.strftime("%d/%m/%Y %H:%M:%S") + " Going to Dose: isPH = " +str(isPH) + '\n')
+        blynk.virtual_write(98, now.strftime("%d/%m/%Y %H:%M:%S") + " Going to Dose" + '\n')
         for dosage in nutrientMix:
            if(dosage.pump is not None and dosage.name != "pH"):
                    blynk.set_property(dosage.LED, 'color', colours[0])
@@ -122,7 +122,7 @@ try:
     def doSinglePHDose():
         now = datetime.now()
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
-        blynk.virtual_write(98, now.strftime("%d/%m/%Y %H:%M:%S") + " Going to Dose: isPH = " +str(isPH) + '\n')
+        blynk.virtual_write(98, now.strftime("%d/%m/%Y %H:%M:%S") + " Going to PH Dose" + '\n')
         for dosage in nutrientMix:
            if(dosage.pump is not None and dosage.name == "pH"):
                    blynk.set_property(dosage.LED, 'color', colours[0])
