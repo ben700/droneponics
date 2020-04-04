@@ -30,7 +30,7 @@ if True:
   
     # Initialize the sensor.
     try:
-        colour = AtlasI2C(97)
+        colour = AtlasI2C(112)
         _log.info("sensor created")
     except:
         _log.info("Unexpected error: Atlas")
