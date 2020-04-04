@@ -85,9 +85,9 @@ try:
                    blynk.virtual_write(98, dosage.pump.query("O,TV,1") + '\n')
                    blynk.virtual_write(98, dosage.pump.query("O,ATV,1") + '\n')
                    blynk.virtual_write(98, dosage.pump.query("O,?") + '\n')
-                   blynk.virtual_write(98, "TV =" + dosage.pump.query("TV,?"))
-                   blynk.virtual_write(98, "ATV =" + dosage.pump.query("ATV,?"))
-                   blynk.virtual_write(98, "R =" + dosage.pump.query("R,?"))
+                   blynk.virtual_write(98, "TV =" + dosage.pump.query("TV,?") + '\n')
+                   blynk.virtual_write(98, "ATV =" + dosage.pump.query("ATV,?") + '\n')
+                   blynk.virtual_write(98, "R =" + dosage.pump.query("R,?") + '\n')
                    blynk.virtual_write(98, "Pump id " + str(dosage.pumpId) + " has dosed = " + str(dosage.volume) + '\n')
             _log.info("Pumps all read")          
         except:
@@ -110,6 +110,11 @@ try:
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
         blynk.virtual_write(98, now.strftime("%d/%m/%Y %H:%M:%S") + " Going to Dose" + '\n')
         for dosage in nutrientMix:           
+		
+           blynk.virtual_write(98, "TV =" + dosage.pump.query("TV,?") + '\n')
+           blynk.virtual_write(98, "ATV =" + dosage.pump.query("ATV,?") + '\n')
+           blynk.virtual_write(98, "R =" + dosage.pump.query("R,?") + '\n')
+			
            if(dosage.pump is not None and dosage.name != "pH"):
                    dosage.volume = dosage.pump.query("TV,?").split("TV,")[1].strip().rstrip('\x00')
                    blynk.set_property(dosage.LED, 'color', colours[0])
