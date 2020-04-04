@@ -40,7 +40,7 @@ if True:
              answer = input("Are you sure you want to calibrate colour (y/n)")
              if answer == 'y':
                   answer = input("Going to calibrate colour. Is white object in front of target. Enter y when you are ready(y/n)")
-                 if answer == 'y':
+                  if answer == 'y':
                       cColour = colour.query("R").split(":")[1]
                       while ( cColour != oColour):
                            oColour = cColour 
