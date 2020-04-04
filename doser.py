@@ -333,12 +333,12 @@ try:
         #blynk.virtual_write(98, "PH target = [" +str(sensors[2].target) +"] current PH reading =[" + str(sensors[2].value) + "]" + '\n')         
        # blynk.virtual_write(98, "Current "+sensors[3].name+" reading =[" + str(sensors[3].value) + "]" + '\n')
        # blynk.virtual_write(98,sensors[1].value+ '\n')
-        if (sensors[1].target < float(sensors[1].value)):
+        if (sensors[1].target > float(sensors[1].value)): #EC
         #     doSingleDose()
              blynk.virtual_write(98,"Would dose nutrient "+ '\n') 
-       # elif (float(sensors[2].target) < float(sensors[2].value)):
+        elif (sensors[2].target < float(sensors[2].value)): #ph
        #      doSinglePHDose()
-       #      blynk.virtual_write(98,"Would dose Ph")
+             blynk.virtual_write(98,"Would dose Ph")
        
         blynk.virtual_write(98, "Completed Timer Function" + '\n') 
 
