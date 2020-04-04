@@ -23,14 +23,12 @@ import subprocess
 import re
 import drone
 
+bootup = True
+colours = {0: '#FF0000', 1: '#00FF00', '0': '#FF0000', '1': '#00FF00', 'OFFLINE': '#0000FF', 'ONLINE': '#00FF00'}
+systemLED=101
+
+
 try:
-
-    class Counter:
-        cycle = 0
-
-    bootup = True
-    colours = {0: '#FF0000', 1: '#00FF00', '0': '#FF0000', '1': '#00FF00', 'OFFLINE': '#0000FF', 'ONLINE': '#00FF00'}
-
 
     # tune console logging
     _log = logging.getLogger('BlynkLog')
@@ -42,7 +40,6 @@ try:
 
     pH=0
     eC=9999	
-    systemLED=101
     sensors = []
     nutrientMix = []
     nutrientMix = drone.buildNutrientMix(nutrientMix, _log)
@@ -345,6 +342,7 @@ try:
               blynk.virtual_write(99, now.strftime("%d/%m/%Y %H:%M:%S"))
               for l in LED:
                   blynk.virtual_write(l, 255)
+              blynk.virtual_write(systemLED, 255)
               #blynk.virtual_write(98, "clr")
               blynk.virtual_write(98, "System now updated and restarted " + '\n')
               blynk.virtual_write(255, 0)
@@ -355,6 +353,7 @@ try:
            blynk.virtual_write(98, "System has main loop error" + '\n')
            for l in LED:
                 blynk.set_property(l, 'color', colours['OFFLINE'])
+           blynk.set_property(systemLED, 'color', colours['OFFLINE'])
            os.system('sh /home/pi/updateDroneponics.sh')
            os.system('sudo reboot') 
   
