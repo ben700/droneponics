@@ -278,18 +278,7 @@ try:
             _log.info("Pump for " +nutrientMix[x].name +" = " + nutrientMix[x].pump.query("D,*") + '\n') 
             blynk.virtual_write(98, now.strftime("%d/%m/%Y %H:%M:%S") + " :- Pump for " + nutrientMix[x].name + ":- STARTED" + '\n') 
 				
-    @blynk.handle_event('write V200')
-    def clearCounters(pin, value):    
-        _log.info( "clear counters")
-        for dosage in nutrientMix:
-           if(dosage.pump is not None):
-                   #dosage.pump.query("clear") 
-                   dosage.volume = dosage.pump.query("TV,?").split("TV,")[1]
-                   blynk.virtual_write(dosage.volumePin, dosage.volume )            
-        now = datetime.now()
-        blynk.virtual_write(98, now.strftime("%d/%m/%Y %H:%M:%S") + " :- Reset Pump Counters " + '\n') 
-        blynk.virtual_write(200, 0)
-    
+  
     @blynk.handle_event('write V255')
     def rebooter(pin, value):
         _log.info( "User reboot")	
