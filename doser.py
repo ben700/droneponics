@@ -99,9 +99,9 @@ try:
     def doSingleDose():
         now = datetime.now()
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
-        blynk.virtual_write(98, now.strftime("%d/%m/%Y %H:%M:%S") + " Going to Dose")
+        blynk.virtual_write(98, now.strftime("%d/%m/%Y %H:%M:%S") + " Going to Dose: isPH = " +str(isPH) + '\n')
         for dosage in nutrientMix:
-           if(dosage.pump is not None):
+           if(dosage.pump is not None && dosage.name != "pH"):
                    blynk.set_property(dosage.LED, 'color', colours[0])
                    dosage.pump.query("D,"+str(dosage.dose))
                    while (True):
@@ -121,20 +121,23 @@ try:
     def doSinglePHDose()
         now = datetime.now()
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
-        blynk.virtual_write(98, now.strftime("%d/%m/%Y %H:%M:%S") + " Going to PH")
-        if(nutrientMix[0].pump is not None):
-            blynk.set_property(nutrientMix[0].LED, 'color', colours[0])
-            nutrientMix[0].pump.query("D,5")
-            while (True):
-                dosed = nutrientMix[0].pump.query("R").split(":")[1].strip().rstrip('\x00')
-                _log.info( "Pump id " + str(nutrientMix[0].pumpId) + " has dosed = " + str(dosed) + "ml of 5ml")
-                if (str(dosed) == '{:.2f}'.format(nutrientMix[0].dose)):
-                    break	
-            blynk.set_property(nutrientMix[0].LED, 'color', colours[1])
-            nutrientMix[0].volume = nutrientMix[0].pump.query("TV,?").split("TV,")[1]
-            blynk.virtual_write(nutrientMix[0].volumePin, nutrientMix[0].volume )
-        else:
-            blynk.set_property(nutrientMix[0].LED, 'color', colours['OFFLINE'])	
+        blynk.virtual_write(98, now.strftime("%d/%m/%Y %H:%M:%S") + " Going to Dose: isPH = " +str(isPH) + '\n')
+        for dosage in nutrientMix:
+           if(dosage.pump is not None && dosage.name == "pH"):
+                   blynk.set_property(dosage.LED, 'color', colours[0])
+                   dosage.pump.query("D,"+str(dosage.dose))
+                   while (True):
+                        dosed = dosage.pump.query("R").split(":")[1].strip().rstrip('\x00')
+                        _log.info( "Pump id " + str(dosage.pumpId) + " has dosed = " + str(dosed) + "ml of 10ml")
+                        _log.info(str(dosed))
+                        _log.info('{:.2f}'.format(dosage.dose))
+                        if (str(dosed) == '{:.2f}'.format(dosage.dose)):
+                            break	
+                   blynk.set_property(dosage.LED, 'color', colours[1])
+                   dosage.volume = dosage.pump.query("TV,?").split("TV,")[1]
+                   blynk.virtual_write(dosage.volumePin, dosage.volume )
+           else:
+                   blynk.set_property(dosage.LED, 'color', colours['OFFLINE'])	
     
     
     @blynk.handle_event('write V1')
@@ -328,10 +331,10 @@ try:
                   blynk.virtual_write(sensor.displayPin, sensor.value)   
 
         if (sensors[1].target > float(sensors[1].value)): #EC
-             doSingleDose()     
+             doSingleDose(False)     
              blynk.virtual_write(98,"Automatic dose nutrient "+ '\n') 
         if (sensors[2].target < float(sensors[2].value)): #ph
-             doSinglePHDose()
+             doSingleDose(True)
              blynk.virtual_write(98,"Automatic dose Ph"+ '\n')
        
         _log.info("Completed Timer Function") 
