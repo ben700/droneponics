@@ -119,7 +119,7 @@ try:
                    dosage.volume = dosage.pump.query("TV,?").split("TV,")[1].strip().rstrip('\x00')
                    blynk.virtual_write(dosage.volumePin, dosage.volume )
                    
-                   if (int(float(dosage.volume)) != int(float(dosage.bottleSize))):
+                   if (int(float(dosage.volume)) <= int(float(dosage.bottleSize))):
                         blynk.notify(dosage.name + " has pumped " + str(dosage.volume) + ", so may need topup")
            else:
                    blynk.set_property(dosage.LED, 'color', colours['OFFLINE'])	
