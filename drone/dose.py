@@ -8,7 +8,7 @@ class Dose:
        self.name = name
        self.volumePin = volumePin	
        self.volume = 0	
-       self.bottleSize = 0	
+       self.bottleSize = BottleSize
       
    
    def blynkMe(self, blynk, colours):
