@@ -297,7 +297,7 @@ try:
         os.system('sudo reboot')
 
 	
-    @timer.register(interval=30, run_once=False)
+    @timer.register(interval=60, run_once=False)
     def blynk_data():
         _log.info("Update Timer Run")
         #Counter.cycle += 1
