@@ -309,14 +309,14 @@ try:
         sensors[0].value = cTemp #Temp
         sensors[1].value = sensors[1].sensor.query("RT,"+cTemp).split(":")[1].strip().rstrip('\x00') #EC
         sensors[2].value = sensors[2].sensor.query("RT,"+sensors[0].value).split(":")[1].strip().rstrip('\x00')  #pH
-	if sensors[3] is not None:
+        if sensors[3] is not None:
             sensors[3].value = sensors[3].sensor.query("R").split(":")[1].strip().rstrip('\x00') #colour
         _log.info( "Sensors have been read")  
         for sensor in sensors:
              if sensor is not None:
                   _log.info("Going to update pin " + str(sensor.displayPin) + " with value " + str(sensor.value))                  
                   #unhash to continue
-                  #sensor.blynk()			
+                  #sensor.blynk()
                   blynk.virtual_write(98, "Current "+sensor.name+" reading =[" + str(sensor.value) + "]" + '\n')
                   blynk.virtual_write(sensor.displayPin, sensor.value)   
 
