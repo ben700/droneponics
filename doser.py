@@ -2,7 +2,7 @@
 BLYNK_AUTH = 'e06jzpI2zuRD4KB5eHyHdCQTGFT7einR' #i2cLogger
 
 LED = [10,11,12,13,14,15]
-VolumePin = [0,21,22,23,24,25] 
+VolumePin = [26,21,22,23,24,25] 
 
 import blynklib
 import blynktimer
@@ -69,7 +69,6 @@ try:
         blynk.virtual_write(98, "Unexpected error: atlas" + '\n') 
         _log.info("Unexpected error: Atlas")
     else:
-        blynk.set_property(LED[0], 'color', colours[1])    
         try:	
             _log.info("Try Use Pump")
             for dosage in nutrientMix:
@@ -129,11 +128,8 @@ try:
     
     @blynk.handle_event('write V1')
     def buttonV1Pressed(pin, value):
-        blynk.set_property(10, 'color', colours[0]) 
         doSingleDose()
         blynk.run()
-        blynk.set_property(LED[0], 'color', colours[1])
-        _log.info("Completed")
         now = datetime.now()
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))    
         blynk.virtual_write(98, now.strftime("%d/%m/%Y %H:%M:%S") + " :Full Dosed Complete" + '\n') 
@@ -141,12 +137,9 @@ try:
         
     @blynk.handle_event('write V2')
     def buttonV2Pressed(pin, value):
-        blynk.set_property(10, 'color', colours[0])
         for i in range (11):
             doSingleDose()
         blynk.run()
-        blynk.set_property(LED[0], 'color', colours[1])
-        _log.info("Completed")
         now = datetime.now()
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))    
         blynk.virtual_write(98, now.strftime("%d/%m/%Y %H:%M:%S") + " :Full Dosed Complete" + '\n') 
@@ -169,7 +162,6 @@ try:
         now = datetime.now()
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))    
         blynk.set_property(nutrientMix[x].LED, 'color', colours[value[0]])
-        blynk.set_property(LED[0], 'color', colours[value[0]])
         if(value[0] == '1'):
             _log.info("Pump for " +nutrientMix[x].name +" = " + nutrientMix[x].pump.query("X") + '\n')
             dosed = nutrientMix[x].pump.query("R").split(":")[1].strip().rstrip('\x00')
@@ -189,7 +181,6 @@ try:
         now = datetime.now()
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))    
         blynk.set_property(nutrientMix[x].LED, 'color', colours[value[0]])
-        blynk.set_property(LED[0], 'color', colours[value[0]])
         if(value[0] == '1'):
             _log.info("stop Pump for " +nutrientMix[x].name +" = " + nutrientMix[x].pump.query("X") + '\n')
             dosed = nutrientMix[x].pump.query("R").split(":")[1].strip().rstrip('\x00')
@@ -209,7 +200,6 @@ try:
         now = datetime.now()
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))    
         blynk.set_property(nutrientMix[x].LED, 'color', colours[value[0]])
-        blynk.set_property(LED[0], 'color', colours[value[0]])
         if(value[0] == '1'):
             _log.info("Pump for " +nutrientMix[x].name +" = " + nutrientMix[x].pump.query("X") + '\n')
             dosed = nutrientMix[x].pump.query("R").split(":")[1].strip().rstrip('\x00')
@@ -229,7 +219,6 @@ try:
         now = datetime.now()
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))    
         blynk.set_property(nutrientMix[x].LED, 'color', colours[value[0]])
-        blynk.set_property(LED[0], 'color', colours[value[0]])
         if(value[0] == '1'):
             _log.info("Pump for " +nutrientMix[x].name +" = " + nutrientMix[x].pump.query("X") + '\n')
             dosed = nutrientMix[x].pump.query("R").split(":")[1].strip().rstrip('\x00')
@@ -249,7 +238,6 @@ try:
         now = datetime.now()
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))    
         blynk.set_property(nutrientMix[x].LED, 'color', colours[value[0]])
-        blynk.set_property(LED[0], 'color', colours[value[0]])
         if(value[0] == '1'):
             _log.info("Pump for " +nutrientMix[x].name +" = " + nutrientMix[x].pump.query("X") + '\n')
             dosed = nutrientMix[x].pump.query("R").split(":")[1].strip().rstrip('\x00')
@@ -269,7 +257,6 @@ try:
         now = datetime.now()
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))    
         blynk.set_property(nutrientMix[x].LED, 'color', colours[value[0]])
-        blynk.set_property(LED[0], 'color', colours[value[0]])
         if(value[0] == '1'):
             _log.info("Pump for " +nutrientMix[x].name +" = " + nutrientMix[x].pump.query("X") + '\n')
             dosed = nutrientMix[x].pump.query("R").split(":")[1].strip().rstrip('\x00')
@@ -321,7 +308,7 @@ try:
             sensors[3].value = sensors[3].sensor.query("R").split(":")[1].strip().rstrip('\x00') #colour
         _log.info( "Sensors have been read")  
         for sensor in sensors:
-             if sensors[3] is not None:
+             if sensor is not None:
                   _log.info("Going to update pin " + str(sensor.displayPin) + " with value " + str(sensor.value))                  
                   #unhash to continue
                   #sensor.blynk()			
