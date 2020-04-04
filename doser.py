@@ -104,7 +104,7 @@ try:
         blynk.virtual_write(98, now.strftime("%d/%m/%Y %H:%M:%S") + " Going to Dose" + '\n')
         for dosage in nutrientMix:           
            if(dosage.pump is not None and dosage.name != "pH"):
-                   dosage.volume = dosage.pump.query("TV,?").split("TV,")[1]
+                   dosage.volume = dosage.pump.query("TV,?").split("TV,")[1].strip().rstrip('\x00')
                    blynk.set_property(dosage.LED, 'color', colours[0])
                    dosage.pump.query("D,"+str(dosage.dose))
                    while (True):
@@ -116,9 +116,9 @@ try:
                             break	
                    blynk.set_property(dosage.LED, 'color', colours[1])
                    oVolume = dosage.volume 
-                   dosage.volume = dosage.pump.query("TV,?").split("TV,")[1]
+                   dosage.volume = dosage.pump.query("TV,?").split("TV,")[1].strip().rstrip('\x00')
                    blynk.virtual_write(dosage.volumePin, dosage.volume )
-                   if (floor(oVolume) != floor(dosage.volume)):
+                   if (math.floor(oVolume) != math.floor(dosage.volume)):
                         blynk.notify(dosage.name + " has pumped " + str(dosage.volume) + ", so may need topup")
            else:
                    blynk.set_property(dosage.LED, 'color', colours['OFFLINE'])	
