@@ -336,7 +336,7 @@ try:
         blynk.virtual_write(98, "Temp target = [" +str(sensors[0].target) +"] current Temp reading =[" + str(sensors[0].value) + "]" + '\n')
         blynk.virtual_write(98, "EC target = [" +str(sensors[1].target) +"] current EC reading =[" + str(sensors[1].value) + "]" + '\n')
         blynk.virtual_write(98, "PH target = [" +str(sensors[2].target) +"] current PH reading =[" + str(sensors[2].value) + "]" + '\n')         
-        blynk.virtual_write(98, "Current Colour reading =[" + str(sensors[3].value) + "]" + '\n')
+        blynk.virtual_write(98, "Current "+sensors[3].name+" reading =[" + str(sensors[3].value) + "]" + '\n')
        # blynk.virtual_write(98,sensors[1].value+ '\n')
         if (True):
         #     doSingleDose()
