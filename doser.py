@@ -113,13 +113,13 @@ try:
                    dosage.pump.query("D,"+str(dosage.dose))
                    while (True):
                         dosed = dosage.pump.query("R").split(":")[1].strip().rstrip('\x00')
-                        blynk.virtual_write(98, "Pump id " + str(dosage.pumpId) + " has dosed = " + str(dosed) + "ml of "+str(dosage.dose)+"ml")
+                        blynk.virtual_write(98, "Pump id " + str(dosage.pumpId) + " has dosed = " + str(dosed) + "ml of "+str(dosage.dose)+"ml" + '\n')
                         if (str(dosed) == '{:.2f}'.format(dosage.dose)):
                             break	
                    blynk.set_property(dosage.LED, 'color', colours[1])
                    dosage.volume = dosage.pump.query("TV,?").split("TV,")[1].strip().rstrip('\x00')
                    blynk.virtual_write(dosage.volumePin, dosage.volume )
-                   blynk.virtual_write(98,"Check to see if user needs notify")
+                   blynk.virtual_write(98,"Check to see if user needs notify" + '\n')
                    if (int(float(dosage.volume)) >= int(float(dosage.bottleSize))):
                         blynk.notify(dosage.name + " has pumped " + str(dosage.volume) + ", so may need topup")
            else:
