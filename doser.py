@@ -70,7 +70,7 @@ try:
            sensor.sensor = AtlasI2C(sensor.sensorId)
            blynk.set_property(sensor.displayPin, 'color', colours['ONLINE'])
            blynk.set_property(sensor.displayPin, 'label', sensor.name)
-	blynk.virtual_write(98, "Sensors created" + '\n') 
+       blynk.virtual_write(98, "Sensors created" + '\n') 
     except:
 
         blynk.virtual_write(98, "Unexpected error: atlas" + '\n') 
