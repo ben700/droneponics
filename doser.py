@@ -22,7 +22,6 @@ from AtlasI2C import (
 import subprocess
 import re
 import drone
-from decimal import *
 
 try:
 
@@ -312,23 +311,27 @@ try:
         now = datetime.now()
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
         
+	#cTemp = sensors[0].read()
+        
         cTemp = sensors[0].sensor.query("R").split(":")[1].strip().rstrip('\x00')
         sensors[0].value = cTemp #Temp
         sensors[1].value = sensors[1].sensor.query("RT,"+cTemp).split(":")[1].strip().rstrip('\x00') #EC
         sensors[2].value = sensors[2].sensor.query("RT,"+sensors[0].value).split(":")[1].strip().rstrip('\x00')  #pH
-        sensors[3].value = sensors[3].sensor.query("R").split(":")[1].strip().rstrip('\x00') #colour
+	if sensors[3] is not None:
+            sensors[3].value = sensors[3].sensor.query("R").split(":")[1].strip().rstrip('\x00') #colour
         _log.info( "Sensors have been read")  
         for sensor in sensors:
-             _log.info("Going to update pin " + str(sensor.displayPin) + " with value " + str(sensor.value))
-             blynk.virtual_write(98, "Current "+sensor.name+" reading =[" + str(sensor.value) + "]" + '\n')
-             blynk.virtual_write(sensor.displayPin, sensor.value)   
+             if sensors[3] is not None:
+                  _log.info("Going to update pin " + str(sensor.displayPin) + " with value " + str(sensor.value))
+                  blynk.virtual_write(98, "Current "+sensor.name+" reading =[" + str(sensor.value) + "]" + '\n')
+                  blynk.virtual_write(sensor.displayPin, sensor.value)   
 
         if (sensors[1].target > float(sensors[1].value)): #EC
-        #     doSingleDose()
-             blynk.virtual_write(98,"Would dose nutrient "+ '\n') 
+             doSingleDose()     
+             blynk.virtual_write(98,"Automatic dose nutrient "+ '\n') 
         elif (sensors[2].target < float(sensors[2].value)): #ph
-       #      doSinglePHDose()
-             blynk.virtual_write(98,"Would dose Ph")
+             doSinglePHDose()
+             blynk.virtual_write(98,"Automatic dose Ph")
        
         _log.info("Completed Timer Function") 
 
