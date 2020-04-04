@@ -8,10 +8,10 @@ def buildNutrientMix(nutrientMix, _log):
     _log.info("now building buildNutrientMix") 
     nutrientMix.append( Dose(119, 0.00, LED[0], "pH", VolumePin[0]))
     nutrientMix.append( Dose(111, 6.00, LED[1], "Hydro Bloom A", VolumePin[1]))
-    nutrientMix.append( Dose(112, 6.00, LED[2], "Hydro Bloom B", VolumePin[2])) 
-    nutrientMix.append( Dose(113, 10.00, LED[3], "Ignition", VolumePin[3]))
-    nutrientMix.append( Dose(114, 4.00, LED[4], "Enzyme", VolumePin[4]))
-    nutrientMix.append( Dose(115, 1.00, LED[5], "Magne-Cal", VolumePin[5])) 
+    nutrientMix.append( Dose(113, 6.00, LED[2], "Hydro Bloom B", VolumePin[2])) 
+    nutrientMix.append( Dose(114, 10.00, LED[3], "Ignition", VolumePin[3]))
+    nutrientMix.append( Dose(115, 4.00, LED[4], "Enzyme", VolumePin[4]))
+    nutrientMix.append( Dose(116, 1.00, LED[5], "Magne-Cal", VolumePin[5])) 
     return nutrientMix
 
 def buildSensors(sensors, _log):
