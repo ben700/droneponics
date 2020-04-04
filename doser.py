@@ -365,7 +365,7 @@ try:
            for l in LED:
                 blynk.set_property(l, 'color', colours['OFFLINE'])
            os.system('sh /home/pi/updateDroneponics.sh')
-           os.system('sudo reboot') 
+   #        os.system('sudo reboot') 
   
   
 except:
@@ -375,7 +375,7 @@ except:
         blynkErr.set_property(l, 'color', colours['OFFLINE'])
    blynkErr.virtual_write(98, "System has error" + '\n')
    os.system('sh /home/pi/updateDroneponics.sh')
-   os.system('sudo reboot')
+  # os.system('sudo reboot')
 finally:
    blynk = blynklib.Blynk(BLYNK_AUTH)        
    blynk.run() 
