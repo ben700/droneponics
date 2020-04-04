@@ -65,10 +65,12 @@ try:
            blynk.set_property(dosage.LED, 'color', colours[1])
            blynk.set_property(dosage.LED, 'label', dosage.name)
            blynk.set_property(dosage.volumePin, 'label', dosage.name + "-TVP")
-       blynk.virtual_write(98, "pump created" + '\n') 
+       blynk.virtual_write(98, "Pumps created" + '\n') 
        for sensor in sensors:
            sensor.sensor = AtlasI2C(sensor.sensorId)
-       _log.info("pump created")
+           blynk.set_property(sensor.displayPin, 'color', colours['ONLINE'])
+           blynk.set_property(sensor.displayPin, 'label', sensor.name)
+	blynk.virtual_write(98, "Sensors created" + '\n') 
     except:
 
         blynk.virtual_write(98, "Unexpected error: atlas" + '\n') 
