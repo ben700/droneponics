@@ -324,9 +324,9 @@ try:
         if (sensors[1].target > float(sensors[1].value)): #EC
              doSingleDose()     
              blynk.virtual_write(98,"Automatic dose nutrient "+ '\n') 
-        elif (sensors[2].target < float(sensors[2].value)): #ph
+        if (sensors[2].target < float(sensors[2].value)): #ph
              doSinglePHDose()
-             blynk.virtual_write(98,"Automatic dose Ph")
+             blynk.virtual_write(98,"Automatic dose Ph"+ '\n')
        
         _log.info("Completed Timer Function") 
 
