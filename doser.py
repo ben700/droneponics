@@ -328,13 +328,17 @@ try:
                   _log.info("Going to update pin " + str(sensor.displayPin) + " with value " + str(sensor.value))                  
                   #unhash to continue
                   #sensor.blynk()
-                  blynk.virtual_write(98, "Current "+sensor.name+" reading =[" + str(sensor.value) + "]" + '\n')
-                  blynk.virtual_write(sensor.displayPin, sensor.value)   
+                  blynk.virtual_write(98, "Current " + str(sensor.name) + " reading =[" + str(sensor.value) + "]" + '\n')
+                  _log.info("Updated log")
+                  blynk.virtual_write(sensor.displayPin, sensor.value)
+                  _log.info("Updated display")
         _log.info( "Sensors displays updated")  
         if (sensors[1].target > float(sensors[1].value)): #EC
+             _log.info("Do a dose")     
              doSingleDose()     
              blynk.virtual_write(98,"Automatic dose nutrient "+ '\n') 
         if (sensors[2].target < float(sensors[2].value)): #ph
+             _log.info("Do a ph dose") 
              doSinglePHDose()
              blynk.virtual_write(98,"Automatic dose Ph"+ '\n')
        
