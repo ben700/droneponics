@@ -97,6 +97,9 @@ try:
     TWEET_MSG = "New value='{}' on VPIN({})"
 	
     def doSingleDose():
+        now = datetime.now()
+        blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
+        blynk.virtual_write(98, now.strftime("%d/%m/%Y %H:%M:%S") + " Going to Dose")
         for dosage in nutrientMix:
            if(dosage.pump is not None):
                    blynk.set_property(dosage.LED, 'color', colours[0])
@@ -115,7 +118,10 @@ try:
                    blynk.set_property(dosage.LED, 'color', colours['OFFLINE'])	
     
     
-    def doSinglePHDose():
+    def doSinglePHDose()
+        now = datetime.now()
+        blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
+        blynk.virtual_write(98, now.strftime("%d/%m/%Y %H:%M:%S") + " Going to PH")
         if(nutrientMix[0].pump is not None):
             blynk.set_property(nutrientMix[0].LED, 'color', colours[0])
             nutrientMix[0].pump.query("D,5")
