@@ -81,7 +81,8 @@ try:
                    blynk.set_property(dosage.volumePin, 'label', dosage.name + "-TVP")
                    dosage.volume = dosage.pump.query("ATV,?").split("TV,")[1].strip().rstrip('\x00')
                    blynk.virtual_write(dosage.volumePin, dosage.volume )
-                   _log.info( "Pump id " + str(dosage.pumpId) + " has dosed = " + str(dosage.volume) + '\n')
+                   blynk.virtual_write(98, osage.pump.query("o,?") + '\n')
+                   blynk.virtual_write(98, "Pump id " + str(dosage.pumpId) + " has dosed = " + str(dosage.volume) + '\n')
             _log.info("Pumps all read")          
         except:
             _log.info("Expected error: Use Atlas Error")
