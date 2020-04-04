@@ -19,6 +19,7 @@ def buildSensors(sensors, _log):
     sensors.append( Sensor(102, "Temprature", 30, 20))
     sensors.append( Sensor(100, "EC", 31 , 500))
     sensors.append( Sensor(99, "pH", 32, 5.5))
+    sensors.append( Sensor(99, "pH", 33, None))        
     return sensors
 
 
@@ -29,5 +30,7 @@ def readSensors(sensors, _log, blynk):
     sensors[1].value = sensor[1].sensor.query("RT,"+sensors[0].value).split(":")[1] #EC
     _log.info("now read sensors pH") 
     sensors[2].value = sensor[2].sensor.query("RT,"+sensors[0].value).split(":")[1] #pH
+    _log.info("now read sensors colour") 
+    sensors[3].value = sensor[3].sensor.query("R").split(":")[1] #colour
     blynk.virtual_write(98, "all sensors read") 
     return sensors
