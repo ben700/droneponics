@@ -110,9 +110,7 @@ try:
                    dosage.pump.query("D,"+str(dosage.dose))
                    while (True):
                         dosed = dosage.pump.query("R").split(":")[1].strip().rstrip('\x00')
-                        _log.info( "Pump id " + str(dosage.pumpId) + " has dosed = " + str(dosed) + "ml of 10ml")
-                        _log.info(str(dosed))
-                        _log.info('{:.2f}'.format(dosage.dose))
+                        _log.info( "Pump id " + str(dosage.pumpId) + " has dosed = " + str(dosed) + "ml of "+str(dosage.dose)+"ml")
                         if (str(dosed) == '{:.2f}'.format(dosage.dose)):
                             break	
                    blynk.set_property(dosage.LED, 'color', colours[1])
@@ -135,9 +133,7 @@ try:
                    dosage.pump.query("D,"+str(dosage.dose))
                    while (True):
                         dosed = dosage.pump.query("R").split(":")[1].strip().rstrip('\x00')
-                        _log.info( "Pump id " + str(dosage.pumpId) + " has dosed = " + str(dosed) + "ml of 10ml")
-                        _log.info(str(dosed))
-                        _log.info('{:.2f}'.format(dosage.dose))
+                        _log.info( "Pump id " + str(dosage.pumpId) + " has dosed = " + str(dosed) + "ml of "+str(dosage.dose)+"ml")
                         if (str(dosed) == '{:.2f}'.format(dosage.dose)):
                             break	
                    blynk.set_property(dosage.LED, 'color', colours[1])
