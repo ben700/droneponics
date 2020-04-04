@@ -59,9 +59,9 @@ try:
        # Create the I2C bus
        for dosage in nutrientMix:
            dosage.pump = AtlasI2C(dosage.pumpId)
-           blynk.set_property(dosage.LED, 'color', colours[1])
-           blynk.set_property(dosage.LED, 'label', dosage.name)
-           blynk.set_property(dosage.volumePin, 'label', dosage.name + "-TVP")
+          # blynk.set_property(dosage.LED, 'color', colours[1])
+          # blynk.set_property(dosage.LED, 'label', dosage.name)
+          # blynk.set_property(dosage.volumePin, 'label', dosage.name + "-TVP")
        blynk.virtual_write(98, "Pumps created" + '\n') 
        for sensor in sensors:
            sensor.sensor = AtlasI2C(sensor.sensorId)
@@ -78,8 +78,8 @@ try:
             for dosage in nutrientMix:
                 if(dosage.pump is not None):
                    dosage.blynkMe(blynk, colours)	
-                   dosage.volume = dosage.pump.query("TV,?").split("TV,")[1]
-                   blynk.virtual_write(dosage.volumePin, dosage.volume )
+           #        dosage.volume = dosage.pump.query("TV,?").split("TV,")[1]
+           #       blynk.virtual_write(dosage.volumePin, dosage.volume )
                    _log.info( "Pump id " + str(dosage.pumpId) + " has dosed = " + str(dosage.volume) + '\n')
             _log.info("Pumps all read")          
         except:
