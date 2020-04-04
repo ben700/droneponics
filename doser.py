@@ -289,7 +289,7 @@ try:
         _log.info( "clear counters")
         for dosage in nutrientMix:
            if(dosage.pump is not None):
-                   dosage.pump.query("clear") 
+                   #dosage.pump.query("clear") 
                    dosage.volume = dosage.pump.query("TV,?").split("TV,")[1]
                    blynk.virtual_write(dosage.volumePin, dosage.volume )            
         now = datetime.now()
