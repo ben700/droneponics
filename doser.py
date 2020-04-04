@@ -325,10 +325,10 @@ try:
         cColour = sensors[3].sensor.query("R").split(":")[1].strip() #pH
         sensors[3].value = cColour #pH
         blynk.virtual_write(98, "Sensors have been read" + '\n') 
-      #  blynk.virtual_write(27, cColour.split(",")[0])
-      #  blynk.virtual_write(28, cColour.split(",")[1])
-      #  blynk.virtual_write(29, cColour.split(",")[2])
-      #  blynk.virtual_write(98, "Sensors have been read" + '\n')         
+        blynk.virtual_write(27, cColour.split(",")[0])
+        blynk.virtual_write(28, cColour.split(",")[1])
+        blynk.virtual_write(29, cColour.split(",")[2])
+        blynk.virtual_write(98, "Sensors have been read" + '\n')         
        # for sensor in sensors:
       #       _log.info("Going to update pin " + sensor.displayPin + " with value " + sensor.value) 
        #      blynk.virtual_write(sensor.displayPin, sensor.value)   
@@ -340,7 +340,7 @@ try:
        # blynk.virtual_write(98,sensors[1].value+ '\n')
         if (True):
         #     doSingleDose()
-             blynk.virtual_write(98,"Would dose nutrient"+ '\n') 
+             blynk.virtual_write(98,"Would dose nutrient "+ '\n') 
        # elif (float(sensors[2].target) < float(sensors[2].value)):
        #      doSinglePHDose()
        #      blynk.virtual_write(98,"Would dose Ph")
