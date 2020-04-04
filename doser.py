@@ -63,6 +63,8 @@ try:
        for dosage in nutrientMix:
            dosage.pump = AtlasI2C(dosage.pumpId)
            blynk.set_property(dosage.LED, 'color', colours[1])
+           blynk.set_property(dosage.LED, 'label', dosage.name)
+           blynk.set_property(dosage.volumePin, 'label', dosage.name + "-TVP")
        blynk.virtual_write(98, "pump created" + '\n') 
        for sensor in sensors:
            sensor.sensor = AtlasI2C(sensor.sensorId)
