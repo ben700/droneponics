@@ -8,6 +8,13 @@ class Dose:
        self.name = name
        self.volumePin = volumePin	
        self.volume = 0	 
+   
+   def blynkMe(self, blynk, colours):   
+       blynk.set_property(self.LED, 'color', colours['ONLINE'])
+       blynk.set_property(self.LED, 'label', self.name)
+       blynk.set_property(self.volumePin, 'label', self.name + "-TVP")
+       self.volume = self.pump.query("TV,?").split("TV,")[1]
+       blynk.virtual_write(self.volumePin, self.volume )
  
 class Sensor:
    def __init__(self, SensorId, Name, DisplayPin, Target):
