@@ -85,8 +85,9 @@ try:
                    blynk.virtual_write(98, dosage.pump.query("O,TV,1") + '\n')
                    blynk.virtual_write(98, dosage.pump.query("O,ATV,1") + '\n')
                    blynk.virtual_write(98, dosage.pump.query("O,?") + '\n')
-                   blynk.virtual_write(98, dosage.pump.query("ATV,?"))
-                   blynk.virtual_write(98, dosage.pump.query("R,?"))
+                   blynk.virtual_write(98, "TV =" + dosage.pump.query("TV,?"))
+                   blynk.virtual_write(98, "ATV =" + dosage.pump.query("ATV,?"))
+                   blynk.virtual_write(98, "R =" + dosage.pump.query("R,?"))
                    blynk.virtual_write(98, "Pump id " + str(dosage.pumpId) + " has dosed = " + str(dosage.volume) + '\n')
             _log.info("Pumps all read")          
         except:
