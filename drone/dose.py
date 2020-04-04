@@ -19,5 +19,5 @@ class Sensor:
        self.target = Target
        self.value = None
    def read(self):
-       print("Building object")
+       print("Building object")   
        return self.pump.query("R").split(":")[1].strip().rstrip('\x00')
