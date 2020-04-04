@@ -318,22 +318,19 @@ try:
        # sensors = drone.readSensors(sensors, _log, blynk)
         cTemp = sensors[0].sensor.query("R").split(":")[1].strip()
         sensors[0].value = cTemp #Temp
-        cEC = sensors[1].sensor.query("RT,"+cTemp).split(":")[1].strip()
-        sensors[1].value = cEC #EC
-        cPH = sensors[2].sensor.query("RT,"+sensors[0].value).split(":")[1].strip() #pH
-        sensors[2].value = cPH #pH
-        cColour = sensors[3].sensor.query("R").split(":")[1].strip() #pH
-        sensors[3].value = cColour #colour
+        sensors[1].value = sensors[1].sensor.query("RT,"+cTemp).split(":")[1].strip() #EC
+        sensors[2].value = sensors[2].sensor.query("RT,"+sensors[0].value).split(":")[1].strip()  #pH
+        sensors[3].value = sensors[3].sensor.query("R").split(":")[1].strip() #colour
         blynk.virtual_write(98, "Sensors have been read" + '\n')         
         for sensor in sensors:
              _log.info("Going to update pin " + sensor.displayPin + " with value " + sensor.value)
              blynk.virtual_write(98, "Current "+sensor.name+" reading =[" + str(sensor.value) + "]" + '\n')
        #      blynk.virtual_write(sensor.displayPin, sensor.value)   
 
-        blynk.virtual_write(98, "Temp target = [" +str(sensors[0].target) +"] current Temp reading =[" + str(sensors[0].value) + "]" + '\n')
-        blynk.virtual_write(98, "EC target = [" +str(sensors[1].target) +"] current EC reading =[" + str(sensors[1].value) + "]" + '\n')
-        blynk.virtual_write(98, "PH target = [" +str(sensors[2].target) +"] current PH reading =[" + str(sensors[2].value) + "]" + '\n')         
-        blynk.virtual_write(98, "Current "+sensors[3].name+" reading =[" + str(sensors[3].value) + "]" + '\n')
+        #blynk.virtual_write(98, "Temp target = [" +str(sensors[0].target) +"] current Temp reading =[" + str(sensors[0].value) + "]" + '\n')
+        #blynk.virtual_write(98, "EC target = [" +str(sensors[1].target) +"] current EC reading =[" + str(sensors[1].value) + "]" + '\n')
+        #blynk.virtual_write(98, "PH target = [" +str(sensors[2].target) +"] current PH reading =[" + str(sensors[2].value) + "]" + '\n')         
+       # blynk.virtual_write(98, "Current "+sensors[3].name+" reading =[" + str(sensors[3].value) + "]" + '\n')
        # blynk.virtual_write(98,sensors[1].value+ '\n')
         if (True):
         #     doSingleDose()
