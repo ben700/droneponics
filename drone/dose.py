@@ -1,5 +1,5 @@
 class Dose:
-   def __init__(self, PumpId, Dose, Led, name, volumePin):
+   def __init__(self, PumpId, Dose, Led, name, volumePin, BottleSize):
        print("Building object")
        self.pump = None
        self.pumpId = PumpId
@@ -7,7 +7,9 @@ class Dose:
        self.LED = Led
        self.name = name
        self.volumePin = volumePin	
-       self.volume = 0	 
+       self.volume = 0	
+       self.bottleSize = 0	
+      
    
    def blynkMe(self, blynk, colours):
        print("Building Sensor")
