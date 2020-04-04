@@ -42,7 +42,7 @@ try:
 
     pH=0
     eC=9999	
-    systemLED=10
+    systemLED=101
     sensors = []
     nutrientMix = []
     nutrientMix = drone.buildNutrientMix(nutrientMix, _log)
