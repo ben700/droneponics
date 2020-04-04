@@ -19,7 +19,7 @@ def buildSensors(sensors, _log):
     sensors.append( Sensor(102, "Temprature", 30, 20))
     sensors.append( Sensor(100, "EC", 31 , 500))
     sensors.append( Sensor(99, "pH", 32, 5.5))
-    sensors.append( Sensor(99, "pH", 33, None))        
+    sensors.append( Sensor(112, "Colour", 33, None))        
     return sensors
 
 
