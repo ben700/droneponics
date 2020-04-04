@@ -323,14 +323,10 @@ try:
         cPH = sensors[2].sensor.query("RT,"+sensors[0].value).split(":")[1].strip() #pH
         sensors[2].value = cPH #pH
         cColour = sensors[3].sensor.query("R").split(":")[1].strip() #pH
-        sensors[3].value = cColour #pH
-        blynk.virtual_write(98, "Sensors have been read" + '\n') 
-        blynk.virtual_write(27, cColour.split(",")[0])
-        blynk.virtual_write(28, cColour.split(",")[1])
-        blynk.virtual_write(29, cColour.split(",")[2])
+        sensors[3].value = cColour #colour
         blynk.virtual_write(98, "Sensors have been read" + '\n')         
-       # for sensor in sensors:
-      #       _log.info("Going to update pin " + sensor.displayPin + " with value " + sensor.value) 
+        for sensor in sensors:
+             _log.info("Going to update pin " + sensor.displayPin + " with value " + sensor.value) 
        #      blynk.virtual_write(sensor.displayPin, sensor.value)   
 
         blynk.virtual_write(98, "Temp target = [" +str(sensors[0].target) +"] current Temp reading =[" + str(sensors[0].value) + "]" + '\n')
