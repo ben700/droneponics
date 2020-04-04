@@ -343,7 +343,7 @@ try:
         blynk.virtual_write(98, "Completed Timer Function" + '\n') 
 
     while True:
-        try:
+        if True:
            blynk.run()
            if bootup :
               p = subprocess.Popen(['i2cdetect', '-y','1'],stdout=subprocess.PIPE,)
@@ -360,12 +360,12 @@ try:
               blynk.virtual_write(255, 0)
               _log.info('Just Booted')
            timer.run()
-        except:
-           _log.info('Unexpected error')
-           blynk.virtual_write(98, "System has main loop error" + '\n')
-           for l in LED:
-                blynk.set_property(l, 'color', colours['OFFLINE'])
-           os.system('sh /home/pi/updateDroneponics.sh')
+       # except:
+       #    _log.info('Unexpected error')
+       #    blynk.virtual_write(98, "System has main loop error" + '\n')
+       #    for l in LED:
+       #         blynk.set_property(l, 'color', colours['OFFLINE'])
+       #    os.system('sh /home/pi/updateDroneponics.sh')
    #        os.system('sudo reboot') 
   
   
