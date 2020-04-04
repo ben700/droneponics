@@ -326,7 +326,8 @@ try:
         sensors[3].value = cColour #colour
         blynk.virtual_write(98, "Sensors have been read" + '\n')         
         for sensor in sensors:
-             _log.info("Going to update pin " + sensor.displayPin + " with value " + sensor.value) 
+             _log.info("Going to update pin " + sensor.displayPin + " with value " + sensor.value)
+             blynk.virtual_write(98, "Current "+sensor.name+" reading =[" + str(sensor.value) + "]" + '\n')
        #      blynk.virtual_write(sensor.displayPin, sensor.value)   
 
         blynk.virtual_write(98, "Temp target = [" +str(sensors[0].target) +"] current Temp reading =[" + str(sensors[0].value) + "]" + '\n')
