@@ -81,10 +81,10 @@ try:
                    blynk.set_property(dosage.volumePin, 'label', dosage.name + "-TVP")
                    dosage.volume = dosage.pump.query("ATV,?").split("TV,")[1].strip().rstrip('\x00')
                    blynk.virtual_write(dosage.volumePin, dosage.volume )
-                   blynk.virtual_write(98, dosage.pump.query("O,V,1") + '\n')
-                   blynk.virtual_write(98, dosage.pump.query("O,TV,1") + '\n')
-                   blynk.virtual_write(98, dosage.pump.query("O,ATV,1") + '\n')
-                   blynk.virtual_write(98, dosage.pump.query("O,?") + '\n')
+                  # blynk.virtual_write(98, dosage.pump.query("O,V,1") + '\n')
+                  # blynk.virtual_write(98, dosage.pump.query("O,TV,1") + '\n')
+                  # blynk.virtual_write(98, dosage.pump.query("O,ATV,1") + '\n')
+                  # blynk.virtual_write(98, dosage.pump.query("O,?") + '\n')
                    blynk.virtual_write(98, "Pump id " + str(dosage.pumpId) + " has dosed = " + str(dosage.volume) + '\n')
             _log.info("Pumps all read")          
         except:
@@ -113,13 +113,13 @@ try:
                    dosage.pump.query("D,"+str(dosage.dose))
                    while (True):
                         dosed = dosage.pump.query("R").split(":")[1].strip().rstrip('\x00')
-                        _log.info( "Pump id " + str(dosage.pumpId) + " has dosed = " + str(dosed) + "ml of "+str(dosage.dose)+"ml")
+                        blynk.virtual_write(98, "Pump id " + str(dosage.pumpId) + " has dosed = " + str(dosed) + "ml of "+str(dosage.dose)+"ml")
                         if (str(dosed) == '{:.2f}'.format(dosage.dose)):
                             break	
                    blynk.set_property(dosage.LED, 'color', colours[1])
                    dosage.volume = dosage.pump.query("TV,?").split("TV,")[1].strip().rstrip('\x00')
                    blynk.virtual_write(dosage.volumePin, dosage.volume )
-                   
+                   blynk.virtual_write(98,"Check to see if user needs notify")
                    if (int(float(dosage.volume)) >= int(float(dosage.bottleSize))):
                         blynk.notify(dosage.name + " has pumped " + str(dosage.volume) + ", so may need topup")
            else:
