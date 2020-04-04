@@ -78,6 +78,7 @@ try:
                    blynk.set_property(dosage.LED, 'color', colours['ONLINE'])
                    blynk.set_property(dosage.LED, 'label', dosage.name)
                    blynk.set_property(dosage.volumePin, 'label', dosage.name + "-TVP")
+                   print(dosage.pump.query("TV,?"))	
                    dosage.volume = dosage.pump.query("TV,?").split("TV,")[1].strip().rstrip('\x00')
                    blynk.virtual_write(dosage.volumePin, dosage.volume )
                    _log.info( "Pump id " + str(dosage.pumpId) + " has dosed = " + str(dosage.volume) + '\n')
@@ -329,7 +330,7 @@ try:
                   #sensor.blynk()
                   blynk.virtual_write(98, "Current "+sensor.name+" reading =[" + str(sensor.value) + "]" + '\n')
                   blynk.virtual_write(sensor.displayPin, sensor.value)   
-
+        _log.info( "Sensors displays updated")  
         if (sensors[1].target > float(sensors[1].value)): #EC
              doSingleDose()     
              blynk.virtual_write(98,"Automatic dose nutrient "+ '\n') 
