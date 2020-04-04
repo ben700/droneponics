@@ -81,10 +81,12 @@ try:
                    blynk.set_property(dosage.volumePin, 'label', dosage.name + "-TVP")
                    dosage.volume = dosage.pump.query("ATV,?").split("TV,")[1].strip().rstrip('\x00')
                    blynk.virtual_write(dosage.volumePin, dosage.volume )
-                   blynk.virtual_write(98, dosage.pump.query("O,V,0") + '\n')
-                   blynk.virtual_write(98, dosage.pump.query("O,TV,0") + '\n')
+                   blynk.virtual_write(98, dosage.pump.query("O,V,1") + '\n')
+                   blynk.virtual_write(98, dosage.pump.query("O,TV,1") + '\n')
                    blynk.virtual_write(98, dosage.pump.query("O,ATV,1") + '\n')
                    blynk.virtual_write(98, dosage.pump.query("O,?") + '\n')
+                   blynk.virtual_write(98, dosage.pump.query("ATV,?"))
+                   blynk.virtual_write(98, dosage.pump.query("R,?"))
                    blynk.virtual_write(98, "Pump id " + str(dosage.pumpId) + " has dosed = " + str(dosage.volume) + '\n')
             _log.info("Pumps all read")          
         except:
@@ -112,7 +114,7 @@ try:
                    blynk.set_property(dosage.LED, 'color', colours[0])
                    dosage.pump.query("D,"+str(dosage.dose))
                    while (True):
-                        dosed = dosage.pump.query("R").split(":")[1].strip().rstrip('\x00')
+                        dosed = dosage.pump.query("R").split(":")[1].split(",")[0].strip().rstrip('\x00')
                         blynk.virtual_write(98, "Pump id " + str(dosage.pumpId) + " has dosed = " + str(dosed) + "ml of "+str(dosage.dose)+"ml" + '\n')
                         if (str(dosed) == '{:.2f}'.format(dosage.dose)):
                             break	
