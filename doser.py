@@ -329,7 +329,7 @@ try:
                   _log.info("Going to update pin " + str(sensor.displayPin) + " with value " + str(sensor.value))                  
                   #unhash to continue
                   #sensor.blynk()
-                 # blynk.virtual_write(98, "Current " + str(sensor.name) + " reading =[" + str(sensor.value) + "]" + '\n')
+                  blynk.virtual_write(98, "Current " + str(sensor.name) + " reading =[" + str(sensor.value) + "]" + '\n')
                  # _log.info("Updated log")
                   blynk.virtual_write(sensor.displayPin, sensor.value)
                  # _log.info("Updated display")
