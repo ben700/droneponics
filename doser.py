@@ -308,31 +308,21 @@ try:
     @timer.register(interval=10, run_once=False)
     def blynk_data():
         _log.info("Update Timer Run")
-        blynk.virtual_write(98, "Starting Timer Function" + '\n') 
         #Counter.cycle += 1
         now = datetime.now()
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
         
-        
-        blynk.virtual_write(98, "Going to read Sensors" + '\n') 
-       # sensors = drone.readSensors(sensors, _log, blynk)
         cTemp = sensors[0].sensor.query("R").split(":")[1].strip().rstrip('\x00')
         sensors[0].value = cTemp #Temp
         sensors[1].value = sensors[1].sensor.query("RT,"+cTemp).split(":")[1].strip().rstrip('\x00') #EC
         sensors[2].value = sensors[2].sensor.query("RT,"+sensors[0].value).split(":")[1].strip().rstrip('\x00')  #pH
         sensors[3].value = sensors[3].sensor.query("R").split(":")[1].strip().rstrip('\x00') #colour
-        blynk.virtual_write(98, "Sensors have been read" + '\n')  
-        _log.info( "Sensors have been read" + '\n')  
+        _log.info( "Sensors have been read")  
         for sensor in sensors:
              _log.info("Going to update pin " + str(sensor.displayPin) + " with value " + str(sensor.value))
              blynk.virtual_write(98, "Current "+sensor.name+" reading =[" + str(sensor.value) + "]" + '\n')
              blynk.virtual_write(sensor.displayPin, sensor.value)   
 
-        #blynk.virtual_write(98, "Temp target = [" +str(sensors[0].target) +"] current Temp reading =[" + str(sensors[0].value) + "]" + '\n')
-        #blynk.virtual_write(98, "EC target = [" +str(sensors[1].target) +"] current EC reading =[" + str(sensors[1].value) + "]" + '\n')
-        #blynk.virtual_write(98, "PH target = [" +str(sensors[2].target) +"] current PH reading =[" + str(sensors[2].value) + "]" + '\n')         
-       # blynk.virtual_write(98, "Current "+sensors[3].name+" reading =[" + str(sensors[3].value) + "]" + '\n')
-       # blynk.virtual_write(98,sensors[1].value+ '\n')
         if (sensors[1].target > float(sensors[1].value)): #EC
         #     doSingleDose()
              blynk.virtual_write(98,"Would dose nutrient "+ '\n') 
@@ -340,10 +330,10 @@ try:
        #      doSinglePHDose()
              blynk.virtual_write(98,"Would dose Ph")
        
-        blynk.virtual_write(98, "Completed Timer Function" + '\n') 
+        _log.info("Completed Timer Function") 
 
     while True:
-        if True:
+        try:
            blynk.run()
            if bootup :
               p = subprocess.Popen(['i2cdetect', '-y','1'],stdout=subprocess.PIPE,)
@@ -360,13 +350,13 @@ try:
               blynk.virtual_write(255, 0)
               _log.info('Just Booted')
            timer.run()
-       # except:
-       #    _log.info('Unexpected error')
-       #    blynk.virtual_write(98, "System has main loop error" + '\n')
-       #    for l in LED:
-       #         blynk.set_property(l, 'color', colours['OFFLINE'])
-       #    os.system('sh /home/pi/updateDroneponics.sh')
-   #        os.system('sudo reboot') 
+        except:
+           _log.info('Unexpected error')
+           blynk.virtual_write(98, "System has main loop error" + '\n')
+           for l in LED:
+                blynk.set_property(l, 'color', colours['OFFLINE'])
+           os.system('sh /home/pi/updateDroneponics.sh')
+           os.system('sudo reboot') 
   
   
 except:
@@ -376,7 +366,7 @@ except:
         blynkErr.set_property(l, 'color', colours['OFFLINE'])
    blynkErr.virtual_write(98, "System has error" + '\n')
    os.system('sh /home/pi/updateDroneponics.sh')
-  # os.system('sudo reboot')
+   os.system('sudo reboot')
 finally:
    blynk = blynklib.Blynk(BLYNK_AUTH)        
    blynk.run() 
