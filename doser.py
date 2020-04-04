@@ -315,8 +315,8 @@ try:
         sensors[0].value = cTemp #Temp
         sensors[1].value = sensors[1].sensor.query("RT,"+cTemp).split(":")[1].strip().rstrip('\x00') #EC
         sensors[2].value = sensors[2].sensor.query("RT,"+sensors[0].value).split(":")[1].strip().rstrip('\x00')  #pH
-        if sensors[3] is not None:
-            sensors[3].value = sensors[3].sensor.query("R").split(":")[1].strip().rstrip('\x00') #colour
+       # if sensors[3] is not None:
+       #     sensors[3].value = sensors[3].sensor.query("R").split(":")[1].strip().rstrip('\x00') #colour
         #_log.info( "Sensors have been read")  
         for sensor in sensors:
              if sensor is not None:
