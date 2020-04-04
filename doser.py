@@ -323,7 +323,7 @@ try:
         sensors[3].value = sensors[3].sensor.query("R").split(":")[1].strip() #colour
         blynk.virtual_write(98, "Sensors have been read" + '\n')         
         for sensor in sensors:
-             _log.info("Going to update pin " + sensor.displayPin + " with value " + sensor.value)
+             _log.info("Going to update pin " + sensor.displayPin + " with value " + str(sensor.value))
              blynk.virtual_write(98, "Current "+sensor.name+" reading =[" + str(sensor.value) + "]" + '\n')
        #      blynk.virtual_write(sensor.displayPin, sensor.value)   
 
