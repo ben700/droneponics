@@ -118,7 +118,7 @@ try:
                    blynk.set_property(dosage.LED, 'color', colours['OFFLINE'])	
     
     
-    def doSinglePHDose()
+    def doSinglePHDose():
         now = datetime.now()
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
         blynk.virtual_write(98, now.strftime("%d/%m/%Y %H:%M:%S") + " Going to Dose: isPH = " +str(isPH) + '\n')
