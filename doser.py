@@ -101,7 +101,7 @@ try:
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
         blynk.virtual_write(98, now.strftime("%d/%m/%Y %H:%M:%S") + " Going to Dose: isPH = " +str(isPH) + '\n')
         for dosage in nutrientMix:
-           if(dosage.pump is not None && dosage.name != "pH"):
+           if(dosage.pump is not None and dosage.name != "pH"):
                    blynk.set_property(dosage.LED, 'color', colours[0])
                    dosage.pump.query("D,"+str(dosage.dose))
                    while (True):
@@ -123,7 +123,7 @@ try:
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
         blynk.virtual_write(98, now.strftime("%d/%m/%Y %H:%M:%S") + " Going to Dose: isPH = " +str(isPH) + '\n')
         for dosage in nutrientMix:
-           if(dosage.pump is not None && dosage.name == "pH"):
+           if(dosage.pump is not None and dosage.name == "pH"):
                    blynk.set_property(dosage.LED, 'color', colours[0])
                    dosage.pump.query("D,"+str(dosage.dose))
                    while (True):
@@ -331,10 +331,10 @@ try:
                   blynk.virtual_write(sensor.displayPin, sensor.value)   
 
         if (sensors[1].target > float(sensors[1].value)): #EC
-             doSingleDose(False)     
+             doSingleDose()     
              blynk.virtual_write(98,"Automatic dose nutrient "+ '\n') 
         if (sensors[2].target < float(sensors[2].value)): #ph
-             doSingleDose(True)
+             doSinglePHDose()
              blynk.virtual_write(98,"Automatic dose Ph"+ '\n')
        
         _log.info("Completed Timer Function") 
