@@ -32,7 +32,7 @@ if True:
     try:
         colour = AtlasI2C(112)
         _log.info("sensor created")
-	_log.info("sensor created")
+        _log.info("sensor created")
     except:
         _log.info("Unexpected error: Atlas")
     else:
