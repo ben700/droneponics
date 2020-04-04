@@ -20,4 +20,8 @@ class Sensor:
        self.value = None
    def read(self):
        print("Building object")   
-       return self.sensor.query("R").split(":")[1].strip().rstrip('\x00')
+       return self.sensor.query("R").split(":")[1].strip().rstrip('\x00')   
+   
+   def blynkMe(self, blynk):
+       print("blynk object")   
+       blynk.virtual_write(self.displayPin, self.value)
