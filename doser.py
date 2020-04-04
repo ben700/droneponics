@@ -325,8 +325,8 @@ try:
         _log.info( "Sensors have been read" + '\n')  
         for sensor in sensors:
              _log.info("Going to update pin " + str(sensor.displayPin) + " with value " + str(sensor.value))
-       #      blynk.virtual_write(98, "Current "+sensor.name+" reading =[" + str(sensor.value) + "]" + '\n')
-       #      blynk.virtual_write(sensor.displayPin, sensor.value)   
+             blynk.virtual_write(98, "Current "+sensor.name+" reading =[" + str(sensor.value) + "]" + '\n')
+             blynk.virtual_write(sensor.displayPin, sensor.value)   
 
         #blynk.virtual_write(98, "Temp target = [" +str(sensors[0].target) +"] current Temp reading =[" + str(sensors[0].value) + "]" + '\n')
         #blynk.virtual_write(98, "EC target = [" +str(sensors[1].target) +"] current EC reading =[" + str(sensors[1].value) + "]" + '\n')
