@@ -29,7 +29,7 @@ try:
         cycle = 0
 
     bootup = True
-    colours = {0: '#FF0000', 1: '#00FF00', '0': '#FF0000', '1': '#00FF00', 'OFFLINE': '#0000FF'}
+    colours = {0: '#FF0000', 1: '#00FF00', '0': '#FF0000', '1': '#00FF00', 'OFFLINE': '#0000FF', 'ONLINE': '#00FF00'}
 
 
     # tune console logging
@@ -42,6 +42,7 @@ try:
 
     pH=0
     eC=9999	
+    systemLED=10
     sensors = []
     nutrientMix = []
     nutrientMix = drone.buildNutrientMix(nutrientMix, _log)
@@ -52,6 +53,8 @@ try:
     timer = blynktimer.Timer()
     blynk.run()
     blynk.virtual_write(98, "clr")
+    blynk.set_property(systemLED, 'color', colours['ONLINE'])
+
     
     
     # Initialize the sensor.
@@ -364,4 +367,5 @@ finally:
    blynk.run() 
    for l in LED:
         blynk.set_property(l, 'color', colours['OFFLINE'])
+   blynk.set_property(systemLED, 'color', colours['OFFLINE'])	
    GPIO.cleanup()
