@@ -87,7 +87,7 @@ try:
                    blynk.virtual_write(98, dosage.pump.query("O,?") + '\n')
                    blynk.virtual_write(98, "TV =" + dosage.pump.query("TV,?") + '\n')
                    blynk.virtual_write(98, "ATV =" + dosage.pump.query("ATV,?") + '\n')
-                   blynk.virtual_write(98, "R =" + dosage.pump.query("R,?") + '\n')
+                   blynk.virtual_write(98, "R =" + dosage.pump.query("R") + '\n')
                    blynk.virtual_write(98, "Pump id " + str(dosage.pumpId) + " has dosed = " + str(dosage.volume) + '\n')
             _log.info("Pumps all read")          
         except:
@@ -113,7 +113,7 @@ try:
 		
            blynk.virtual_write(98, "TV =" + dosage.pump.query("TV,?") + '\n')
            blynk.virtual_write(98, "ATV =" + dosage.pump.query("ATV,?") + '\n')
-           blynk.virtual_write(98, "Read "+dosage.name+" =" + dosage.pump.query("R,?") + '\n')
+           blynk.virtual_write(98, "Read "+dosage.name+" =" + dosage.pump.query("R") + '\n')
 			
            if(dosage.pump is not None and dosage.name != "pH"):
                    dosage.volume = dosage.pump.query("TV,?").split("TV,")[1].strip().rstrip('\x00')
