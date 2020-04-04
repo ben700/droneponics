@@ -333,7 +333,7 @@ try:
         #blynk.virtual_write(98, "PH target = [" +str(sensors[2].target) +"] current PH reading =[" + str(sensors[2].value) + "]" + '\n')         
        # blynk.virtual_write(98, "Current "+sensors[3].name+" reading =[" + str(sensors[3].value) + "]" + '\n')
        # blynk.virtual_write(98,sensors[1].value+ '\n')
-        if (True):
+        if (sensors[1].target < sensors[1].value):
         #     doSingleDose()
              blynk.virtual_write(98,"Would dose nutrient "+ '\n') 
        # elif (float(sensors[2].target) < float(sensors[2].value)):
