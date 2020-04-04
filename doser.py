@@ -77,6 +77,7 @@ try:
             _log.info("Update Pump volumes")
             for dosage in nutrientMix:
                 if(dosage.pump is not None):
+                   dosage.blynkMe(blynk, colours)	
                    dosage.volume = dosage.pump.query("TV,?").split("TV,")[1]
                    blynk.virtual_write(dosage.volumePin, dosage.volume )
                    _log.info( "Pump id " + str(dosage.pumpId) + " has dosed = " + str(dosage.volume) + '\n')
