@@ -368,16 +368,17 @@ try:
            os.system('sudo reboot') 
   
   
-except:
-   _log.info('Unexpected error')
+except KeyboardInterrupt:
+   _log.info('Keyboard Interrupt')
    blynkErr = blynklib.Blynk(BLYNK_AUTH)
    for l in LED:
         blynkErr.set_property(l, 'color', colours['OFFLINE'])
    blynkErr.virtual_write(98, "System has error" + '\n')
    os.system('sh /home/pi/updateDroneponics.sh')
    os.system('sudo reboot')
-except KeyboardInterrupt:
-   _log.info('Keyboard Interrupt')
+
+except:
+   _log.info('Unexpected error')
    blynkErr = blynklib.Blynk(BLYNK_AUTH)
    for l in LED:
         blynkErr.set_property(l, 'color', colours['OFFLINE'])
