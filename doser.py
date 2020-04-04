@@ -367,10 +367,11 @@ except:
    blynkErr.virtual_write(98, "System has error" + '\n')
    os.system('sh /home/pi/updateDroneponics.sh')
    os.system('sudo reboot')
-finally:
-   blynk = blynklib.Blynk(BLYNK_AUTH)        
-   blynk.run() 
+except KeyboardInterrupt:
+   _log.info('Keyboard Interrupt')
+   blynkErr = blynklib.Blynk(BLYNK_AUTH)
    for l in LED:
-        blynk.set_property(l, 'color', colours['OFFLINE'])
-   blynk.set_property(systemLED, 'color', colours['OFFLINE'])	
-   GPIO.cleanup()
+        blynkErr.set_property(l, 'color', colours['OFFLINE'])
+   blynkErr.virtual_write(98, "System has error" + '\n')
+   os.system('sh /home/pi/updateDroneponics.sh')
+   os.system('sudo reboot')
