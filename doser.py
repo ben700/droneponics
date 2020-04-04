@@ -337,7 +337,7 @@ try:
              _log.info("Do a dose")     
              doSingleDose()     
              blynk.virtual_write(98,"Automatic dose nutrient "+ '\n') 
-        if (sensors[2].target < float(sensors[2].value)): #ph
+        elif (sensors[2].target < float(sensors[2].value)): #ph
              _log.info("Do a ph dose") 
              doSinglePHDose()
              blynk.virtual_write(98,"Automatic dose Ph"+ '\n')
@@ -369,8 +369,8 @@ try:
            for l in LED:
                 blynk.set_property(l, 'color', colours['OFFLINE'])
            blynk.set_property(systemLED, 'color', colours['OFFLINE'])
- #          os.system('sh /home/pi/updateDroneponics.sh')
- #          os.system('sudo reboot') 
+           os.system('sh /home/pi/updateDroneponics.sh')
+           os.system('sudo reboot') 
   
   
 except KeyboardInterrupt:
@@ -379,8 +379,8 @@ except KeyboardInterrupt:
    for l in LED:
         blynkErr.set_property(l, 'color', colours['OFFLINE'])
    blynkErr.virtual_write(98, "System has error" + '\n')
- #  os.system('sh /home/pi/updateDroneponics.sh')
- #  os.system('sudo reboot')
+   os.system('sh /home/pi/updateDroneponics.sh')
+   os.system('sudo reboot')
 
 except:
    _log.info('Unexpected error')
@@ -388,5 +388,5 @@ except:
    for l in LED:
         blynkErr.set_property(l, 'color', colours['OFFLINE'])
    blynkErr.virtual_write(98, "System has error" + '\n')
- #  os.system('sh /home/pi/updateDroneponics.sh')
- #  os.system('sudo reboot')
+   os.system('sh /home/pi/updateDroneponics.sh')
+   os.system('sudo reboot')
