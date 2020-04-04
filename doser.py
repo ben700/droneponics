@@ -323,8 +323,8 @@ try:
         cPH = sensors[2].sensor.query("RT,"+sensors[0].value).split(":")[1].strip() #pH
         sensors[2].value = cPH #pH
         blynk.virtual_write(98, "Sensors have been read" + '\n') 
-        cColour = sensors[3].sensor.query("R").split(":")[1].strip() #pH
-        sensors[3].value = cColour #pH
+      #  cColour = sensors[3].sensor.query("R").split(":")[1].strip() #pH
+      #  sensors[3].value = cColour #pH
       #  blynk.virtual_write(27, cColour.split(",")[0])
       #  blynk.virtual_write(28, cColour.split(",")[1])
       #  blynk.virtual_write(29, cColour.split(",")[2])
