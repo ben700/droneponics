@@ -77,7 +77,7 @@ try:
         _log.info("Unexpected error: Atlas")
     else:
         try:	
-            _log.info("Try Use Pump")
+            _log.info("Update Pump volumes")
             for dosage in nutrientMix:
                 if(dosage.pump is not None):
                    dosage.volume = dosage.pump.query("TV,?").split("TV,")[1]
