@@ -22,3 +22,8 @@ def buildSensors(sensors, _log):
     sensors.append( Sensor(112, "Colour", 33, None))        
     return sensors
 
+
+def buildExperimentalSensors(sensors, _log):
+    _log.info("now building sensors list") 
+    sensors.append( Sensor(97, "Dissolved Oxygen", 30, 20))
+    return sensors
