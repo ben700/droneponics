@@ -324,17 +324,17 @@ try:
         sensors[2].value = sensors[2].sensor.query("RT,"+sensors[0].value).split(":")[1].strip().rstrip('\x00')  #pH
         if sensors[3] is not None:
             sensors[3].value = sensors[3].sensor.query("R").split(":")[1].strip().rstrip('\x00') #colour
-        _log.info( "Sensors have been read")  
+        #_log.info( "Sensors have been read")  
         for sensor in sensors:
              if sensor is not None:
                   _log.info("Going to update pin " + str(sensor.displayPin) + " with value " + str(sensor.value))                  
                   #unhash to continue
                   #sensor.blynk()
-                  blynk.virtual_write(98, "Current " + str(sensor.name) + " reading =[" + str(sensor.value) + "]" + '\n')
-                  _log.info("Updated log")
+                 # blynk.virtual_write(98, "Current " + str(sensor.name) + " reading =[" + str(sensor.value) + "]" + '\n')
+                 # _log.info("Updated log")
                   blynk.virtual_write(sensor.displayPin, sensor.value)
-                  _log.info("Updated display")
-        _log.info( "Sensors displays updated")  
+                 # _log.info("Updated display")
+        #_log.info( "Sensors displays updated")  
         if (sensors[1].target > float(sensors[1].value)): #EC
              _log.info("Do a dose")     
              doSingleDose()     
