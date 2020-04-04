@@ -76,10 +76,9 @@ try:
                 if(dosage.pump is not None):
                    #dosage.blynkMe(blynk, colours)
                    blynk.set_property(dosage.LED, 'color', colours['ONLINE'])
+                   blynk.set_property(dosage.volumePin, 'color', colours['ONLINE'])
                    blynk.set_property(dosage.LED, 'label', dosage.name)
                    blynk.set_property(dosage.volumePin, 'label', dosage.name + "-TVP")
-                   print(dosage.pump.query("TV,?"))
-                   print(dosage.pump.query("ATV,?"))
                    dosage.volume = dosage.pump.query("ATV,?").split("TV,")[1].strip().rstrip('\x00')
                    blynk.virtual_write(dosage.volumePin, dosage.volume )
                    _log.info( "Pump id " + str(dosage.pumpId) + " has dosed = " + str(dosage.volume) + '\n')
