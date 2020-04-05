@@ -4,8 +4,7 @@ LED = [10,11,12,13,14,15]
 VolumePin = [20,21,22,23,24,25]          
  
 
-def buildNutrientMix(nutrientMix, _log):
-    _log.info("now building buildNutrientMix") 
+def buildNutrientMix(nutrientMix, _log): 
     nutrientMix.append( Dose(119, 1.00, LED[0], "pH", VolumePin[0], 1000))
     nutrientMix.append( Dose(111, 6.00, LED[1], "Hydro Bloom A", VolumePin[1], 5000))
     nutrientMix.append( Dose(114, 10.00, LED[3], "Ignition", VolumePin[3], 1000))
@@ -15,15 +14,13 @@ def buildNutrientMix(nutrientMix, _log):
     return nutrientMix
 
 def buildSensors(sensors, _log):
-    _log.info("now building sensors list") 
-    sensors.append( Sensor(102, "Temprature", 30, 20))
-    sensors.append( Sensor(100, "EC", 31 , 500))
-    sensors.append( Sensor(99, "pH", 32, 5.5))
+    sensors.append( Sensor(102, "Temprature", 30, 20, lowAlarm=10, highAlarm=25))
+    sensors.append( Sensor(100, "EC", 31 , 500, lowAlarm=300, highAlarm=1250))
+    sensors.append( Sensor(99, "pH", 32, 5.5, lowAlarm=5.3, highAlarm=6.5))
     #sensors.append( Sensor(112, "Colour", 33, None))        
     return sensors
 
 
 def buildExperimentalSensors(sensors, _log):
-    _log.info("now building sensors list") 
     sensors.append( Sensor(97, "Dissolved Oxygen", 30, 20))
     return sensors
