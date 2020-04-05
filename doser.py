@@ -129,9 +129,7 @@ try:
                    blynk.virtual_write(dosage.volumePin, dosage.volume )
                    blynk.virtual_write(98,"Check to see if user needs notify" + '\n')
                    if (int(float(dosage.volume)) >= int(float(dosage.bottleSize))):
-                        blynk.notify(dosage.name + " has pumped " + str(dosage.volume) + ", so may need topup")
-           else:
-                   blynk.set_property(dosage.LED, 'color', colours['OFFLINE'])	
+                        blynk.notify(dosage.name + " has pumped " + str(dosage.volume) + ", so may need topup")	
     
     
     def doSinglePHDose():   
@@ -159,8 +157,6 @@ try:
                    blynk.virtual_write(98,"Check to see if user needs notify" + '\n')
                    if (int(float(dosage.volume)) >= int(float(dosage.bottleSize))):
                         blynk.notify(dosage.name + " has pumped " + str(dosage.volume) + ", so may need topup")
-           else:
-                   blynk.set_property(dosage.LED, 'color', colours['OFFLINE'])	
       
     
     @blynk.handle_event('write V1')
