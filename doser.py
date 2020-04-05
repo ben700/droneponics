@@ -314,7 +314,7 @@ try:
         #_log.info( "Sensors have been read")  
         for sensor in sensors:
              if sensor is not None:
-                  _log.info("Going to update pin " + str(sensor.displayPin) + " with value " + str(sensor.value))                  
+                  _log.info("Going to update " + str(sensor.name) + "using pin " + str(sensor.displayPin) + " with value " + str(sensor.value))                  
                   #unhash to continue
                   #sensor.blynk()
                   blynk.virtual_write(98, "Current " + str(sensor.name) + " reading =[" + str(sensor.value) + "]" + '\n')
