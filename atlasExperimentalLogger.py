@@ -93,7 +93,6 @@ try:
         #Counter.cycle += 1
         now = datetime.now()
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
-        cDO = 
         sensors[0].value = sensors[0].sensor.query("R").split(":")[1].strip().rstrip('\x00') #DO
         _log.info( "Sensors have been read")  
         for sensor in sensors:
