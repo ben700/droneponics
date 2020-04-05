@@ -14,9 +14,9 @@ def buildNutrientMix(nutrientMix, _log):
     return nutrientMix
 
 def buildSensors(sensors, _log):
-    sensors.append( Sensor(102, "Temprature", 30, 20, lowAlarm=10, highAlarm=25))
-    sensors.append( Sensor(100, "EC", 31 , 500, lowAlarm=300, highAlarm=1250))
-    sensors.append( Sensor(99, "pH", 32, 5.5, lowAlarm=5.3, highAlarm=6.5))
+    sensors.append( Sensor(102, "Temprature", 30, Target=20, LowAlarm=10, HighAlarm=25))
+    sensors.append( Sensor(100, "EC", 31 , Target=500, LowAlarm=300, HighAlarm=1250))
+    sensors.append( Sensor(99, "pH", 32, Target=5.5, LowAlarm=5.3, HighAlarm=6.5))
     #sensors.append( Sensor(112, "Colour", 33, None))        
     return sensors
 
