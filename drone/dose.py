@@ -21,16 +21,16 @@ class Dose:
       
  
 class Sensor:
-   def __init__(self, SensorId, Name, DisplayPin, Target, *args, **kwargs):
+   def __init__(self, SensorId, Name, DisplayPin, *args, **kwargs):
        print("Building Sensor")
        self.sensor = None
        self.sensorId = SensorId
        self.name = Name
        self.displayPin = DisplayPin
-       self.target = Target
+       self.target = kwargs.get('Target', None)
        self.value = None
-       self.lowAlarm = kwargs.get('lowAlarm', None)
-       self.highAlarm = kwargs.get('lowAlarm', None)
+       self.lowAlarm = kwargs.get('LowAlarm', None)
+       self.highAlarm = kwargs.get('HighAlarm', None)
     def read(self):
        print("Building object")   
        return self.sensor.query("R").split(":")[1].strip().rstrip('\x00')   
