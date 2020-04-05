@@ -36,7 +36,7 @@ try:
     _log.setLevel(logging.DEBUG)
 
     DO=None
-    sensors = drone.buildSensors(sensors, _log)
+    sensors = drone.buildExperimentalSensors(sensors, _log)
     
     # Initialize Blynk
     blynk = blynklib.Blynk(BLYNK_AUTH)        
@@ -93,9 +93,8 @@ try:
         #Counter.cycle += 1
         now = datetime.now()
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
-        
-	      cDO = sensors[0].sensor.query("R").split(":")[1].strip().rstrip('\x00')
-        sensors[0].value = cDO #DO
+        cDO = 
+        sensors[0].value = sensors[0].sensor.query("R").split(":")[1].strip().rstrip('\x00') #DO
         _log.info( "Sensors have been read")  
         for sensor in sensors:
              if sensor is not None:
