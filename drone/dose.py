@@ -22,7 +22,6 @@ class Dose:
  
 class Sensor:
    def __init__(self, SensorId, Name, DisplayPin, *args, **kwargs):
-       print("Building Sensor")
        self.sensor = None
        self.sensorId = SensorId
        self.name = Name
@@ -31,10 +30,9 @@ class Sensor:
        self.value = None
        self.lowAlarm = kwargs.get('LowAlarm', None)
        self.highAlarm = kwargs.get('HighAlarm', None)
-    def read(self):
-       print("Building object")   
+   
+   def read(self):
        return self.sensor.query("R").split(":")[1].strip().rstrip('\x00')   
    
    def blynkMe(self, blynk):
-       print("blynk object")   
        blynk.virtual_write(self.displayPin, self.value)
