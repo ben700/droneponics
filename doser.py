@@ -121,7 +121,7 @@ try:
                    dosage.pump.query("D,"+str(dosage.dose))
                    while (True):
                         dosed = dosage.pump.query("R").split(":")[1].split(",")[0].strip().rstrip('\x00')
-                        blynk.virtual_write(98, "Pump id " + str(dosage.pumpId) + " has dosed = " + str(dosed) + "ml of "+str(dosage.dose)+"ml" + '\n')
+                        blynk.virtual_write(98, "Pump for "+dosage.name+" pump id " + str(dosage.pumpId) + " has dosed = " + str(dosed) + "ml of "+str(dosage.dose)+"ml" + '\n')
                         if (float(dosed) >= float(dosage.dose)):
                             break	
                    blynk.set_property(dosage.LED, 'color', colours[1])
