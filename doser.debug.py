@@ -78,13 +78,13 @@ if True:
                    blynk.set_property(dosage.volumePin, 'label', dosage.name + "-TVP")
                    dosage.volume = dosage.pump.query("ATV,?").split("TV,")[1].strip().rstrip('\x00')
                    blynk.virtual_write(dosage.volumePin, dosage.volume )
-                   blynk.virtual_write(98, dosage.name + " " + dosage.pump.query("O,V,1").strip().rstrip('\x00') + '\n')
-                   blynk.virtual_write(98, dosage.name + " " + dosage.pump.query("O,TV,1").strip().rstrip('\x00') + '\n')
-                   blynk.virtual_write(98, dosage.name + " " + dosage.pump.query("O,ATV,1").strip().rstrip('\x00') + '\n')
-                   blynk.virtual_write(98, dosage.name + " " + dosage.pump.query("O,?").strip().rstrip('\x00') + '\n')
-                   blynk.virtual_write(98, dosage.name + " TV =" + dosage.pump.query("TV,?").strip().rstrip('\x00') + '\n')
-                   blynk.virtual_write(98, dosage.name + " ATV =" + dosage.pump.query("ATV,?").strip().rstrip('\x00') + '\n')
-                   blynk.virtual_write(98, dosage.name + " R =" + dosage.pump.query("R").strip().rstrip('\x00') + '\n')
+                   dosage.pump.query("O,V,1")
+                   dosage.pump.query("O,TV,1")
+		   dosage.pump.query("O,ATV,1")
+           #        blynk.virtual_write(98, dosage.name + " Params =" + dosage.pump.query("O,?").strip().rstrip('\x00') + '\n')
+           #        blynk.virtual_write(98, dosage.name + " TV =" + dosage.pump.query("TV,?").strip().rstrip('\x00') + '\n')
+           #        blynk.virtual_write(98, dosage.name + " ATV =" + dosage.pump.query("ATV,?").strip().rstrip('\x00') + '\n')
+           #        blynk.virtual_write(98, dosage.name + " R =" + dosage.pump.query("R").strip().rstrip('\x00') + '\n')
                    blynk.virtual_write(98, dosage.name + " Pump id " + str(dosage.pumpId) + " has dosed = " + str(dosage.volume) + '\n')
             _log.info("Pumps all read")          
    
@@ -132,8 +132,8 @@ if True:
         blynk.virtual_write(98, now.strftime("%d/%m/%Y %H:%M:%S") + " Going to Dose" + '\n')
         for dosage in nutrientMix:           
 		
-           blynk.virtual_write(98, "TV =" + dosage.pump.query("TV,?").strip().rstrip('\x00') + '\n')
-           blynk.virtual_write(98, "ATV =" + dosage.pump.query("ATV,?").strip().rstrip('\x00') + '\n')
+           #blynk.virtual_write(98, "TV =" + dosage.pump.query("TV,?").strip().rstrip('\x00') + '\n')
+           #blynk.virtual_write(98, "ATV =" + dosage.pump.query("ATV,?").strip().rstrip('\x00') + '\n')
            blynk.virtual_write(98, "Read "+dosage.name+" =" + dosage.pump.query("R").strip().rstrip('\x00') + '\n')
 			
            if(dosage.pump is not None and dosage.name == "pH"):
