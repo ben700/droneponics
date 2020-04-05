@@ -39,7 +39,7 @@ if True:
     except:
         _log.info("Unexpected error: Atlas")
     else:
-        try:	
+        if True:	
              oDO = do.query("R").split(":")[1]
              answer = input("Are you sure you want to calibrate DO (y/n)")
              if answer == 'y':
@@ -67,7 +67,6 @@ if True:
                            _log.info("Waiting for DO to be stable. It's now :" + str(cDO) + '\n')
                       do.query("Cal,0")
                       
-        except:
-            _log.info("Expected error: Use Atlas Error")
+      
             
  
