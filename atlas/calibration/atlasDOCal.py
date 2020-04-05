@@ -45,7 +45,7 @@ if True:
              if answer == 'y':
                  answer = input("Going to calibrate DO to atmospheric oxygen levels. Enter y when you are ready(y/n)")
                  if answer == 'y':
-                      cDO = ec.query("R").split(":")[1].strip().rstrip('\x00')
+                      cDO = do.query("R").split(":")[1].strip().rstrip('\x00')
                       while ( cDO != oDO):
                            oDO = cDO 
                            cDO = do.query("R").split(":")[1].strip().rstrip('\x00')
