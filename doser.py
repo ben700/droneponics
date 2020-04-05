@@ -134,25 +134,34 @@ try:
                    blynk.set_property(dosage.LED, 'color', colours['OFFLINE'])	
     
     
-    def doSinglePHDose():
+    def doSinglePHDose():   
         now = datetime.now()
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
-        blynk.virtual_write(98, now.strftime("%d/%m/%Y %H:%M:%S") + " Going to PH Dose" + '\n')
-        for dosage in nutrientMix:
+        blynk.virtual_write(98, now.strftime("%d/%m/%Y %H:%M:%S") + " Going to Dose" + '\n')
+        for dosage in nutrientMix:           
+		
+           blynk.virtual_write(98, "TV =" + dosage.pump.query("TV,?").strip().rstrip('\x00') + '\n')
+           blynk.virtual_write(98, "ATV =" + dosage.pump.query("ATV,?").strip().rstrip('\x00') + '\n')
+           blynk.virtual_write(98, "Read "+dosage.name+" =" + dosage.pump.query("R").strip().rstrip('\x00') + '\n')
+			
            if(dosage.pump is not None and dosage.name == "pH"):
+                   dosage.volume = dosage.pump.query("TV,?").split("TV,")[1].strip().rstrip('\x00')
                    blynk.set_property(dosage.LED, 'color', colours[0])
                    dosage.pump.query("D,"+str(dosage.dose))
                    while (True):
-                        dosed = dosage.pump.query("R").split(":")[1].strip().rstrip('\x00')
-                        _log.info( "Pump id " + str(dosage.pumpId) + " has dosed = " + str(dosed) + "ml of "+str(dosage.dose)+"ml")
-                        if (str(dosed) == '{:.2f}'.format(dosage.dose)):
+                        dosed = dosage.pump.query("R").split(":")[1].split(",")[0].strip().rstrip('\x00')
+                        blynk.virtual_write(98, "Pump id " + str(dosage.pumpId) + " has dosed = " + str(dosed) + "ml of "+str(dosage.dose)+"ml" + '\n')
+                        if (float(dosed) >= float(dosage.dose)):
                             break	
                    blynk.set_property(dosage.LED, 'color', colours[1])
-                   dosage.volume = dosage.pump.query("TV,?").split("TV,")[1]
+                   dosage.volume = dosage.pump.query("TV,?").split("TV,")[1].strip().rstrip('\x00')
                    blynk.virtual_write(dosage.volumePin, dosage.volume )
+                   blynk.virtual_write(98,"Check to see if user needs notify" + '\n')
+                   if (int(float(dosage.volume)) >= int(float(dosage.bottleSize))):
+                        blynk.notify(dosage.name + " has pumped " + str(dosage.volume) + ", so may need topup")
            else:
                    blynk.set_property(dosage.LED, 'color', colours['OFFLINE'])	
-    
+      
     
     @blynk.handle_event('write V1')
     def buttonV1Pressed(pin, value):
