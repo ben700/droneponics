@@ -40,15 +40,15 @@ if True:
         _log.info("Unexpected error: Atlas")
     else:
         if True:	
-             oDO = do.query("R").split(":")[1]
+             oDO = do.query("R").split(":")[1].strip().rstrip('\x00')
              answer = input("Are you sure you want to calibrate DO (y/n)")
              if answer == 'y':
                  answer = input("Going to calibrate DO to atmospheric oxygen levels. Enter y when you are ready(y/n)")
                  if answer == 'y':
-                      cDO = ec.query("R").split(":")[1]
+                      cDO = ec.query("R").split(":")[1].strip().rstrip('\x00')
                       while ( cDO != oDO):
                            oDO = cDO 
-                           cDO = ec.query("R").split(":")[1]
+                           cDO = do.query("R").split(":")[1].strip().rstrip('\x00')
                            _log.info("Waiting for DO to be stable. It's now :" + str(cDO) + '\n')
                            
                       do.query("Cal,clear")
@@ -60,10 +60,10 @@ if True:
              if answer == 'y':
                  answer = input("Going to calibrate DO to  0 dissolved oxygen. Enter y when you are ready(y/n)")
                  if answer == 'y':
-                      cDO = do.query("R").split(":")[1]
+                      cDO = do.query("R").split(":")[1].strip().rstrip('\x00')
                       while ( cDO != oDO):
                            oDO = cDO 
-                           cDO = do.query("R").split(":")[1]
+                           cDO = do.query("R").split(":")[1].strip().rstrip('\x00')
                            _log.info("Waiting for DO to be stable. It's now :" + str(cDO) + '\n')
                       do.query("Cal,0")
                       
