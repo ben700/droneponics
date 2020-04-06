@@ -82,7 +82,7 @@ try:
         _log.info("lightTimer")
         _log.info("Start Time is seconds =" + str(value[0]))
         _log.info("Stop Time is seconds =" + str(value[1]))
-        blynk.set_property(9, 'color', colours[value[0]])   
+        blynk.set_property(9, 'color', colours[1])   
    
     @blynk.handle_event('write V255')
     def rebooter(pin, value):
