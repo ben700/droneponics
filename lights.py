@@ -52,8 +52,7 @@ try:
     # Initialize Blynk
     blynk = blynklib.Blynk(BLYNK_AUTH)        
     timer = blynktimer.Timer()
-    blynk.run()
-    blynk.virtual_write(98, "clr")
+
     
         
     APP_CONNECT_PRINT_MSG = '[APP_CONNECT_EVENT]'
