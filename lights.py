@@ -4,6 +4,8 @@ BLYNK_AUTH = 'jX8rstxGafpXQU9ChKVCliPHRlmgjHHp' #lights
 from python_tsl2591 import tsl2591
 import datetime
 import time
+from time import strftime
+from time import gmtime
 import shlex, requests
 import board
 import busio
@@ -78,6 +80,10 @@ try:
     @blynk.handle_event('write V1')
     def lightTimer(pin, value):
         _log.info("lightTimer")
+        start = value[0]
+        _log.info(strftime("%H:%M:%S", gmtime(value[0])))
+
+        startTime = datetime.timedelta(seconds=value[0])
         _log.info(value[0])
         _log.info(value[1])
         
