@@ -62,7 +62,19 @@ try:
     READ_PRINT_MSG = "[READ_VIRTUAL_PIN_EVENT] Pin: V{}"
     ALLOWED_COMMANDS_LIST = ['ls', 'lsusb', 'ip a', 'ip abc']
     TWEET_MSG = "New value='{}' on VPIN({})"
-   
+    
+    @blynk.handle_event("connect")
+    def connect_handler():
+        _log.info('SCRIPT_START')
+        for pin in range(5):
+            _log.info('Syncing virtual pin {}'.format(pin))
+            blynk.virtual_sync(pin)
+
+            # within connect handler after each server send operation forced socket reading is required cause:
+            #  - we are not in script listening state yet
+            #  - without forced reading some portion of blynk server messages can be not delivered to HW
+            blynk.read_response(timeout=0.5)
+            
     @blynk.handle_event('write V1')
     def lightTimer(pin, value):
         _log.info(str(datetime.timedelta(seconds=value[0])))
