@@ -83,8 +83,16 @@ try:
         _log.info("Start Time is seconds =" + str(value[0]))
         _log.info("Stop Time is seconds =" + str(value[1]))
         blynk.set_property(9, 'color', colours[1])  
-        lightOff()
+
    
+    @blynk.handle_event('write V2')
+    def lightTimer(pin, value):
+        lightOn()
+        
+    @blynk.handle_event('write V3')
+    def lightTimer(pin, value):
+        lightOff()
+        
     def lightOn():
         _log.info("light on")
         blynk.set_property(9, 'color', colours[1])
