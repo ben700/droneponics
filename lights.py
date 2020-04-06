@@ -125,9 +125,13 @@ try:
         _log.info(stopTime)
         
         midnight = now.replace(hour=0, minute=0, second=0, microsecond=0)
-        seconds = (now - midnight).seconds
-        _log.info(seconds)
-        
+        currTime = (now - midnight).seconds
+        _log.info(currTime)
+        lightShouldBeOn = startTime <= currTime <= stopTime
+        if(lightShouldBeOn):
+            lightOn()
+        else :
+            lightOn()
         #blynk.virtual_write(98, "Completed Timer Function" + '\n') 
 
     while True:
