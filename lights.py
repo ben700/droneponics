@@ -80,19 +80,8 @@ try:
     @blynk.handle_event('write V1')
     def lightTimer(pin, value):
         _log.info("lightTimer")
-        start = value[0]
-        _log.info(start)
-        gmTime = gmtime(value[0])
-        _log.info(gmTime)
-        strTime = strftime("%H:%M:%S", gmTime)
-        _log.info(strTime)
-
-        startTime = datetime.timedelta(seconds=value[0])
-        _log.info(value[0])
-        _log.info(value[1])
-        
-        _log.info(str(datetime.timedelta(seconds=value[0])))
-        _log.info(str(datetime.timedelta(seconds=value[1])))
+        _log.info("Start Time is seconds =" + str(value[0]))
+        _log.info("Stop Time is seconds =" + str(value[1]))
         blynk.set_property(9, 'color', colours[value[0]])   
    
     @blynk.handle_event('write V255')
