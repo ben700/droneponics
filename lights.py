@@ -80,22 +80,39 @@ if True:
         stopTime = value[1]
         now = datetime.now()
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))   
-        midnight = now.replace(hour=0, minute=0, second=0, microsecond=0)
-        currTime = (now - midnight).seconds
-        lightShouldBeOn = float(startTime) <= float(currTime) <= float(stopTime)
-        if(lightShouldBeOn):
+       if(overRdTime==1):
             lightOn()
-        else :
+        elif(overRdTime==2):
             lightOff()
+        else:
+             midnight = now.replace(hour=0, minute=0, second=0, microsecond=0)
+             currTime = (now - midnight).seconds
+             lightShouldBeOn = float(startTime) <= float(currTime) <= float(stopTime)
+             if(lightShouldBeOn):
+                 lightOn()
+             else :
+                 lightOff()
+        
 
     @blynk.handle_event('write V2')
     def lightTimer(pin, value):
         global overRdTime
         overRdTime = value[0]
-        if(value[0]==1):
+        now = datetime.now()
+        blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))   
+        if(overRdTime==1):
             lightOn()
-        else:
+        elif(overRdTime==2):
             lightOff()
+        else:
+             midnight = now.replace(hour=0, minute=0, second=0, microsecond=0)
+             currTime = (now - midnight).seconds
+             lightShouldBeOn = float(startTime) <= float(currTime) <= float(stopTime)
+             if(lightShouldBeOn):
+                 lightOn()
+             else :
+                 lightOff()
+            
         
     def lightOn():
         _log.info("light on")
