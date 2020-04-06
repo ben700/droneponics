@@ -101,9 +101,10 @@ if True:
         overRdTime = value[0]
         now = datetime.now()
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))   
-        if(overRdTime==1):
+         _log.info((overRdTime = " + str(overRdTime))
+        if(overRdTime=='1'):
             lightOn()
-        elif(overRdTime==2):
+        elif(overRdTime=='2'):
             lightOff()
         else:
              midnight = now.replace(hour=0, minute=0, second=0, microsecond=0)
