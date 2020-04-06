@@ -82,8 +82,19 @@ try:
         _log.info("lightTimer")
         _log.info("Start Time is seconds =" + str(value[0]))
         _log.info("Stop Time is seconds =" + str(value[1]))
-        blynk.set_property(9, 'color', colours[1])   
+        blynk.set_property(9, 'color', colours[1])  
+        lightOff()
    
+    def lightOn():
+        _log.info("light on")
+        blynk.set_property(9, 'color', colours[1])
+        GPIO.output(37,GPIO.HIGH)
+
+    def lightOff():
+        _log.info("light off")
+        blynk.set_property(9, 'color', colours[0])
+        GPIO.output(37,GPIO.LOW)
+        
     @blynk.handle_event('write V255')
     def rebooter(pin, value):
         blynk.virtual_write(98, "User Reboot " + '\n')
