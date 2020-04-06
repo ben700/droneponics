@@ -37,7 +37,8 @@ colours = {1: '#00FF00', 0: '#FF0000', 'OFFLINE': '#0000FF'}
 startTime = 0 
 stopTime = 0
 
-try:
+#try:
+if True:
     # tune console logging
     _log = logging.getLogger('BlynkLog')
     logFormatter = logging.Formatter("%(asctime)s [%(levelname)s]  %(message)s")
@@ -135,7 +136,8 @@ try:
         #blynk.virtual_write(98, "Completed Timer Function" + '\n') 
 
     while True:
-        try:
+ #       try:
+        if True:
            blynk.run()
         
               
@@ -157,24 +159,24 @@ try:
               _log.info('Just Booted')
 
            timer.run()
-        except:
-           _log.info('Unexpected error')
-           blynk.virtual_write(98, "System has main loop error" + '\n')
-           blynk.set_property(10, 'color', colours['OFFLINE'])
-           blynk.set_property(9, 'color', colours['OFFLINE']) 
-           os.system('sh /home/pi/updateDroneponics.sh')
-           os.system('sudo reboot') 
+       # except:
+       #    _log.info('Unexpected error')
+       #    blynk.virtual_write(98, "System has main loop error" + '\n')
+       #    blynk.set_property(10, 'color', colours['OFFLINE'])
+       #    blynk.set_property(9, 'color', colours['OFFLINE']) 
+       #    os.system('sh /home/pi/updateDroneponics.sh')
+       #    os.system('sudo reboot') 
   
   
-except:
-   _log.info('Unexpected error')
-   blynkErr = blynklib.Blynk(BLYNK_AUTH)
-   blynkErr.set_property(10, 'color', colours['OFFLINE'])
-   blynkErr.set_property(9, 'color', colours['OFFLINE'])   
-   blynkErr.virtual_write(98, "System has error" + '\n')
-   os.system('sh /home/pi/updateDroneponics.sh')
-   os.system('sudo reboot')
-finally:
-   blynk.set_property(10, 'color', colours['OFFLINE'])
-   blynk.set_property(9, 'color', colours['OFFLINE'])    
-   GPIO.cleanup()
+#except:
+#   _log.info('Unexpected error')
+#   blynkErr = blynklib.Blynk(BLYNK_AUTH)
+#   blynkErr.set_property(10, 'color', colours['OFFLINE'])
+#   blynkErr.set_property(9, 'color', colours['OFFLINE'])   
+#   blynkErr.virtual_write(98, "System has error" + '\n')
+#   os.system('sh /home/pi/updateDroneponics.sh')
+#   os.system('sudo reboot')
+#finally:
+#   blynk.set_property(10, 'color', colours['OFFLINE'])
+#   blynk.set_property(9, 'color', colours['OFFLINE'])    
+#   GPIO.cleanup()
