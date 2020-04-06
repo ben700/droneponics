@@ -97,12 +97,12 @@ if True:
     def lightOn():
         _log.info("light on")
         blynk.set_property(9, 'color', colours[1])
-        GPIO.output(37,GPIO.HIGH)
+        GPIO.output(drone.lightPin(),GPIO.HIGH)
 
     def lightOff():
         _log.info("light off")
         blynk.set_property(9, 'color', colours[0])
-        GPIO.output(37,GPIO.LOW)
+        GPIO.output(drone.lightPin(),GPIO.LOW)
         
     @blynk.handle_event('write V255')
     def rebooter(pin, value):
