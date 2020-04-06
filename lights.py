@@ -80,6 +80,8 @@ try:
         startTime = value[0]
         stopTime = value[1]
         blynk.set_property(9, 'color', colours[1])  
+        _log.info(startTime)
+        _log.info(stopTime)
 
    
     @blynk.handle_event('write V2')
