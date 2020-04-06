@@ -69,9 +69,7 @@ if True:
     @blynk.handle_event("connect")
     def connect_handler():
         _log.info('SCRIPT_START')
-        blynk.virtual_sync(1)
-        blynk.virtual_sync(2)
-        
+        blynk.virtual_sync(1)       
         blynk.read_response(timeout=0.5)
             
     @blynk.handle_event('write V1')
@@ -156,6 +154,7 @@ if True:
               blynk.virtual_write(10,255)
               blynk.set_property(10, 'color', colours[1])  
               blynk.virtual_write(9,255)
+              blynk.virtual_write(2,3)  
               #blynk.virtual_write(98, "clr")
               blynk.virtual_write(98, "System now updated and restarted " + '\n')
               blynk.virtual_write(255, 0)
