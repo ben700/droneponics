@@ -2,7 +2,7 @@ import BlynkLib
 from datetime import datetime
 
 
-BLYNK_AUTH = 'GP_sDPLJqyEN7jky9_zcQVSkgiyx-AeW' #motherLights
+BLYNK_AUTH = 'jX8rstxGafpXQU9ChKVCliPHRlmgjHHp' #motherLights
 
 # Initialize Blynk
 blynk = BlynkLib.Blynk(BLYNK_AUTH)
