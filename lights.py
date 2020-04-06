@@ -33,7 +33,9 @@ class Counter:
 
 bootup = True
 colours = {1: '#00FF00', 0: '#FF0000', 'OFFLINE': '#0000FF'}
-
+timerID =5
+startTime = 0 
+stopTime = 0
 
 try:
     # tune console logging
@@ -75,9 +77,10 @@ try:
     @blynk.handle_event('write V1')
     def lightTimer(pin, value):
         _log.info("lightTimer")
-        _log.info("Start Time is seconds =" + str(value[0]))
-        _log.info("Stop Time is seconds =" + str(value[1]))
+        startTime = value[0]
+        stopTime = value[1]
         blynk.set_property(9, 'color', colours[1])  
+        timerID = timer.setInterval(value[1] * 1000L, lightOff)
 
    
     @blynk.handle_event('write V2')
