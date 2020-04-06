@@ -129,6 +129,8 @@ if True:
         currTime = (now - midnight).seconds
         _log.info(currTime)
         lightShouldBeOn = float(startTime) <= float(currTime) <= float(stopTime)
+        _log.info(lightShouldBeOn)
+        
         if(lightShouldBeOn):
             lightOn()
         else :
