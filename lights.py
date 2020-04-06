@@ -36,7 +36,7 @@ colours = {1: '#00FF00', 0: '#FF0000', 'OFFLINE': '#0000FF'}
 
 startTime = 0 
 stopTime = 0
-
+overRdTime = 3
 #try:
 if True:
     # tune console logging
@@ -69,9 +69,9 @@ if True:
     @blynk.handle_event("connect")
     def connect_handler():
         _log.info('SCRIPT_START')
-        pin = 1
-        _log.info('Syncing virtual pin {}'.format(pin))
-        blynk.virtual_sync(pin)
+        blynk.virtual_sync(1)
+        blynk.virtual_sync(2)
+        
         blynk.read_response(timeout=0.5)
             
     @blynk.handle_event('write V1')
@@ -92,7 +92,8 @@ if True:
 
     @blynk.handle_event('write V2')
     def lightTimer(pin, value):
-        _log.info(value[0])
+        global overRdTime
+        overRdTime = value[0]
         if(value[0]==1):
             lightOn()
         else:
@@ -123,6 +124,7 @@ if True:
         _log.info("Update Timer Run")
         global startTime
         global stopTime
+        global overRdTime
         now = datetime.now()
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))    
 
@@ -130,7 +132,7 @@ if True:
         midnight = now.replace(hour=0, minute=0, second=0, microsecond=0)
         currTime = (now - midnight).seconds
         lightShouldBeOn = float(startTime) <= float(currTime) <= float(stopTime)
-        if(lightShouldBeOn):
+        if(lightShouldBeOn is True and overRdTime == 3):
             lightOn()
         else :
             lightOff()
