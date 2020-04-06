@@ -81,14 +81,14 @@ try:
                    blynk.set_property(dosage.volumePin, 'label', dosage.name + "-TVP")
                    dosage.volume = dosage.pump.query("ATV,?").split("TV,")[1].strip().rstrip('\x00')
                    blynk.virtual_write(dosage.volumePin, dosage.volume )
-                   blynk.virtual_write(98, dosage.name + " " + dosage.pump.query("O,V,1").strip().rstrip('\x00') + '\n')
-                   blynk.virtual_write(98, dosage.name + " " + dosage.pump.query("O,TV,1").strip().rstrip('\x00') + '\n')
-                   blynk.virtual_write(98, dosage.name + " " + dosage.pump.query("O,ATV,1").strip().rstrip('\x00') + '\n')
-                   blynk.virtual_write(98, dosage.name + " " + dosage.pump.query("O,?").strip().rstrip('\x00') + '\n')
-                   blynk.virtual_write(98, dosage.name + " TV =" + dosage.pump.query("TV,?").strip().rstrip('\x00') + '\n')
-                   blynk.virtual_write(98, dosage.name + " ATV =" + dosage.pump.query("ATV,?").strip().rstrip('\x00') + '\n')
-                   blynk.virtual_write(98, dosage.name + " R =" + dosage.pump.query("R").strip().rstrip('\x00') + '\n')
-                   blynk.virtual_write(98, dosage.name + " Pump id " + str(dosage.pumpId) + " has dosed = " + str(dosage.volume) + '\n')
+                   #blynk.virtual_write(98, dosage.name + " " + dosage.pump.query("O,V,1").strip().rstrip('\x00') + '\n')
+                   #blynk.virtual_write(98, dosage.name + " " + dosage.pump.query("O,TV,0").strip().rstrip('\x00') + '\n')
+                   #blynk.virtual_write(98, dosage.name + " " + dosage.pump.query("O,ATV,0").strip().rstrip('\x00') + '\n')
+                   #blynk.virtual_write(98, dosage.name + " " + dosage.pump.query("O,?").strip().rstrip('\x00') + '\n')
+                   #blynk.virtual_write(98, dosage.name + " TV =" + dosage.pump.query("TV,?").strip().rstrip('\x00') + '\n')
+                   #blynk.virtual_write(98, dosage.name + " ATV =" + dosage.pump.query("ATV,?").strip().rstrip('\x00') + '\n')
+                   #blynk.virtual_write(98, dosage.name + " R =" + dosage.pump.query("R").strip().rstrip('\x00') + '\n')
+                   #blynk.virtual_write(98, dosage.name + " Pump id " + str(dosage.pumpId) + " has dosed = " + str(dosage.volume) + '\n')
             _log.info("Pumps all read")          
         except:
             _log.info("Expected error: Use Atlas Error")
@@ -111,9 +111,9 @@ try:
         blynk.virtual_write(98, now.strftime("%d/%m/%Y %H:%M:%S") + " Going to Dose" + '\n')
         for dosage in nutrientMix:           
 		
-           blynk.virtual_write(98, dosage.name + " TV =" + dosage.pump.query("TV,?").strip().rstrip('\x00') + '\n')
-           blynk.virtual_write(98, dosage.name + " ATV =" + dosage.pump.query("ATV,?").strip().rstrip('\x00') + '\n')
-           blynk.virtual_write(98, "Read "+dosage.name+" =" + dosage.pump.query("R").strip().rstrip('\x00') + '\n')
+          # blynk.virtual_write(98, dosage.name + " TV =" + dosage.pump.query("TV,?").strip().rstrip('\x00') + '\n')
+          # blynk.virtual_write(98, dosage.name + " ATV =" + dosage.pump.query("ATV,?").strip().rstrip('\x00') + '\n')
+          # blynk.virtual_write(98, "Read "+dosage.name+" =" + dosage.pump.query("R").strip().rstrip('\x00') + '\n')
 			
            if(dosage.pump is not None and dosage.name != "pH"):
                    dosage.volume = dosage.pump.query("TV,?").split("TV,")[1].strip().rstrip('\x00')
@@ -121,7 +121,7 @@ try:
                    dosage.pump.query("D,"+str(dosage.dose))
                    while (True):
                         dosed = dosage.pump.query("R").split(":")[1].split(",")[0].strip().rstrip('\x00')
-                        blynk.virtual_write(98, "Pump for "+dosage.name+" pump id " + str(dosage.pumpId) + " has dosed = " + str(dosed) + "ml of "+str(dosage.dose)+"ml" + '\n')
+                        #blynk.virtual_write(98, "Pump for "+dosage.name+" pump id " + str(dosage.pumpId) + " has dosed = " + str(dosed) + "ml of "+str(dosage.dose)+"ml" + '\n')
                         if (float(dosed) >= float(dosage.dose)):
                             break	
                    blynk.set_property(dosage.LED, 'color', colours[1])
@@ -138,9 +138,9 @@ try:
         blynk.virtual_write(98, now.strftime("%d/%m/%Y %H:%M:%S") + " Going to Dose" + '\n')
         for dosage in nutrientMix:           
 		
-           blynk.virtual_write(98, "TV =" + dosage.pump.query("TV,?").strip().rstrip('\x00') + '\n')
-           blynk.virtual_write(98, "ATV =" + dosage.pump.query("ATV,?").strip().rstrip('\x00') + '\n')
-           blynk.virtual_write(98, "Read "+dosage.name+" =" + dosage.pump.query("R").strip().rstrip('\x00') + '\n')
+           #blynk.virtual_write(98, "TV =" + dosage.pump.query("TV,?").strip().rstrip('\x00') + '\n')
+           #blynk.virtual_write(98, "ATV =" + dosage.pump.query("ATV,?").strip().rstrip('\x00') + '\n')
+           #blynk.virtual_write(98, "Read "+dosage.name+" =" + dosage.pump.query("R").strip().rstrip('\x00') + '\n')
 			
            if(dosage.pump is not None and dosage.name == "pH"):
                    dosage.volume = dosage.pump.query("TV,?").split("TV,")[1].strip().rstrip('\x00')
@@ -148,13 +148,13 @@ try:
                    dosage.pump.query("D,"+str(dosage.dose))
                    while (True):
                         dosed = dosage.pump.query("R").split(":")[1].split(",")[0].strip().rstrip('\x00')
-                        blynk.virtual_write(98, "Pump id " + str(dosage.pumpId) + " has dosed = " + str(dosed) + "ml of "+str(dosage.dose)+"ml" + '\n')
+            #            blynk.virtual_write(98, "Pump id " + str(dosage.pumpId) + " has dosed = " + str(dosed) + "ml of "+str(dosage.dose)+"ml" + '\n')
                         if (float(dosed) >= float(dosage.dose)):
                             break	
                    blynk.set_property(dosage.LED, 'color', colours[1])
                    dosage.volume = dosage.pump.query("TV,?").split("TV,")[1].strip().rstrip('\x00')
                    blynk.virtual_write(dosage.volumePin, dosage.volume )
-                   blynk.virtual_write(98,"Check to see if user needs notify" + '\n')
+           #        blynk.virtual_write(98,"Check to see if user needs notify" + '\n')
                    if (int(float(dosage.volume)) >= int(float(dosage.bottleSize))):
                         blynk.notify(dosage.name + " has pumped " + str(dosage.volume) + ", so may need topup")
       
