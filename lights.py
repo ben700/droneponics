@@ -34,6 +34,8 @@ class Counter:
 bootup = True
 colours = {1: '#00FF00', 0: '#FF0000', 'OFFLINE': '#0000FF'}
 
+startTime = 0 
+stopTime = 0
 
 try:
     # tune console logging
@@ -53,9 +55,6 @@ try:
     blynk = blynklib.Blynk(BLYNK_AUTH)        
     timer = blynktimer.Timer()
 
-    timerID =5
-    startTime = 0 
-    stopTime = 0
         
     APP_CONNECT_PRINT_MSG = '[APP_CONNECT_EVENT]'
     APP_DISCONNECT_PRINT_MSG = '[APP_DISCONNECT_EVENT]'
@@ -76,6 +75,8 @@ try:
             
     @blynk.handle_event('write V1')
     def lightTimer(pin, value):
+        global startTime
+        global stopTime
         _log.info("lightTimer")
         startTime = value[0]
         stopTime = value[1]
@@ -115,6 +116,8 @@ try:
     @timer.register(interval=10, run_once=False)
     def blynk_data():
         _log.info("Update Timer Run")
+        global startTime
+        global stopTime
         now = datetime.now()
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))    
         _log.info(time.time())
