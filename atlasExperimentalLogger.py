@@ -37,6 +37,7 @@ if True:
     _log.setLevel(logging.DEBUG)
 
     DO=None
+    sensors = []
     sensors = drone.buildExperimentalSensors(sensors, _log)
     
     # Initialize Blynk
@@ -45,8 +46,6 @@ if True:
     blynk.run()
     #blynk.virtual_write(98, "clr")
     blynk.set_property(systemLED, 'color', colours['ONLINE'])
-
-    
     
     # Initialize the sensor.
     try:
