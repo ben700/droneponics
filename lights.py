@@ -81,7 +81,11 @@ try:
     def lightTimer(pin, value):
         _log.info("lightTimer")
         start = value[0]
-        _log.info(strftime("%H:%M:%S", gmtime(value[0])))
+        _log.info(start)
+        gmTime = gmtime(value[0])
+        _log.info(gmTime)
+        strTime = strftime("%H:%M:%S", gmTime)
+        _log.info(strTime)
 
         startTime = datetime.timedelta(seconds=value[0])
         _log.info(value[0])
