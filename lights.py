@@ -24,6 +24,8 @@ import RPi.GPIO as GPIO
 import subprocess
 import re
 
+import drone
+
 class Counter:
     cycle = 0
 
