@@ -92,6 +92,7 @@ if True:
 
     @blynk.handle_event('write V2')
     def lightTimer(pin, value):
+        _log.info(value[0])
         if(value[0]==1):
             lightOn()
         else:
