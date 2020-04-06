@@ -33,9 +33,7 @@ class Counter:
 
 bootup = True
 colours = {1: '#00FF00', 0: '#FF0000', 'OFFLINE': '#0000FF'}
-timerID =5
-startTime = 0 
-stopTime = 0
+
 
 try:
     # tune console logging
@@ -55,7 +53,9 @@ try:
     blynk = blynklib.Blynk(BLYNK_AUTH)        
     timer = blynktimer.Timer()
 
-    
+    timerID =5
+    startTime = 0 
+    stopTime = 0
         
     APP_CONNECT_PRINT_MSG = '[APP_CONNECT_EVENT]'
     APP_DISCONNECT_PRINT_MSG = '[APP_DISCONNECT_EVENT]'
