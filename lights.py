@@ -101,7 +101,7 @@ if True:
         overRdTime = value[0]
         now = datetime.now()
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))   
-         _log.info((overRdTime = " + str(overRdTime))
+        _log.info((overRdTime = " + str(overRdTime))
         if(overRdTime=='1'):
             lightOn()
         elif(overRdTime=='2'):
