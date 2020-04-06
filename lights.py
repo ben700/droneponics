@@ -80,7 +80,6 @@ try:
         startTime = value[0]
         stopTime = value[1]
         blynk.set_property(9, 'color', colours[1])  
-        timerID = timer.setInterval(value[1] * 1000L, lightOff)
 
    
     @blynk.handle_event('write V2')
@@ -116,7 +115,9 @@ try:
         _log.info("Update Timer Run")
         now = datetime.now()
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))    
-
+        _log.info(time.time())
+        _log.info(startTime)
+        _log.info(stopTime)
         
         #blynk.virtual_write(98, "Completed Timer Function" + '\n') 
 
