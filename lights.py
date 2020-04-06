@@ -77,6 +77,7 @@ try:
             
     @blynk.handle_event('write V1')
     def lightTimer(pin, value):
+        _log.info("lightTimer")
         _log.info(str(datetime.timedelta(seconds=value[0])))
         _log.info(str(datetime.timedelta(seconds=value[1])))
         blynk.set_property(9, 'color', colours[value[0]])   
