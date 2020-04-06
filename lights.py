@@ -97,6 +97,7 @@ if True:
     @blynk.handle_event('write V2')
     def lightTimer(pin, value):
         global overRdTime
+        _log.info(value[0])
         overRdTime = value[0]
         now = datetime.now()
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))   
