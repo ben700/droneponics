@@ -3,7 +3,10 @@ from drone import *
 LED = [10,11,12,13,14,15]
 VolumePin = [20,21,22,23,24,25]          
  
-
+def lightPin(): 
+    return 26
+            
+            
 def buildNutrientMix(nutrientMix, _log): 
     nutrientMix.append( Dose(119, 1.00, LED[0], "pH", VolumePin[0], 1000))
     nutrientMix.append( Dose(111, 6.00, LED[1], "Hydro Bloom A", VolumePin[1], 5000))
