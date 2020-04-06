@@ -78,14 +78,16 @@ if True:
     def lightTimer(pin, value):
         global startTime
         global stopTime
-        _log.info("lightTimer")
-        startTime = value[0]
+        startTime  = value[0]
         stopTime = value[1]
-        blynk.set_property(9, 'color', colours[1])  
-        _log.info(startTime)
-        _log.info(stopTime)
+        midnight = now.replace(hour=0, minute=0, second=0, microsecond=0)
+        currTime = (now - midnight).seconds
+        lightShouldBeOn = float(startTime) <= float(currTime) <= float(stopTime)
+        if(lightShouldBeOn):
+            lightOn()
+        else :
+            lightOff()
 
-   
     @blynk.handle_event('write V2')
     def lightTimer(pin, value):
         lightOn()
@@ -121,20 +123,15 @@ if True:
         global stopTime
         now = datetime.now()
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))    
-        _log.info(time.time())
-        _log.info(startTime)
-        _log.info(stopTime)
+
         
         midnight = now.replace(hour=0, minute=0, second=0, microsecond=0)
         currTime = (now - midnight).seconds
-        _log.info(currTime)
         lightShouldBeOn = float(startTime) <= float(currTime) <= float(stopTime)
-        _log.info(lightShouldBeOn)
-        
         if(lightShouldBeOn):
             lightOn()
         else :
-            lightOn()
+            lightOff()
         #blynk.virtual_write(98, "Completed Timer Function" + '\n') 
 
     while True:
