@@ -66,7 +66,7 @@ try:
     @blynk.handle_event("connect")
     def connect_handler():
         _log.info('SCRIPT_START')
-        for pin in range(5):
+        for pin in range(2):
             _log.info('Syncing virtual pin {}'.format(pin))
             blynk.virtual_sync(pin)
 
@@ -78,6 +78,9 @@ try:
     @blynk.handle_event('write V1')
     def lightTimer(pin, value):
         _log.info("lightTimer")
+        _log.info(value[0])
+        _log.info(value[1])
+        
         _log.info(str(datetime.timedelta(seconds=value[0])))
         _log.info(str(datetime.timedelta(seconds=value[1])))
         blynk.set_property(9, 'color', colours[value[0]])   
