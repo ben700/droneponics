@@ -1,6 +1,6 @@
 from drone import * 
 class Dose:
-   def __init__(self, PumpId, Dose, Led, name, volumePin, BottleSize):
+   def __init__(self, PumpId, Dose, Led, name, volumePin, BottleSize, *args, **kwargs):
        print("Building object")
        self.pump = None
        self.pumpId = PumpId
@@ -10,6 +10,8 @@ class Dose:
        self.volumePin = volumePin	
        self.volume = 0	
        self.bottleSize = BottleSize
+       self.notify = False
+         
       
    
    def blynkMe(self, blynk, colours):
