@@ -46,13 +46,7 @@ if True:
     #blynk.run()
     #blynk.virtual_write(98, "clr")
     #blynk.set_property(systemLED, 'color', colours['ONLINE'])
-   
-    GPIO.setmode(GPIO.BCM)
-    GPIO.setwarnings(False)
-    for relay in relays:
-         GPIO.setup(relay.pinId, GPIO.OUT)
-         GPIO.set_property(relay.pinId, 'label', relay.name )
-		
+   		
     @blynk.handle_event('connect')
     def connect_handler():
         _log.info('SCRIPT_START')
@@ -68,7 +62,13 @@ if True:
     blynk.run()
     blynk.virtual_write(98, "clr")
     blynk.set_property(systemLED, 'color', colours['ONLINE'])
-   
+    
+    GPIO.setmode(GPIO.BCM)
+    GPIO.setwarnings(False)
+    for relay in relays:
+         GPIO.setup(relay.pinId, GPIO.OUT)
+         blynk.set_property(relay.pinId, 'label', relay.name )
+
     @blynk.handle_event('write V1')
     def button1(pin, value):
         _log.info("button1")	
