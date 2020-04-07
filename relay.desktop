@@ -1,0 +1,4 @@
+[Desktop Entry]
+Type=Application
+Name=Relay
+Exec=xterm -hold -e '/usr/bin/python3 /home/pi/droneponics/relay.py'
