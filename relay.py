@@ -107,7 +107,9 @@ if True:
     @blynk.handle_event('write V37')
     def button37(pin, value):
         _log.info("button37")		
-
+    @blynk.handle_event('read V37')
+    def button37a(value):
+        _log.info("read button37")	
 	
     def relayOn(i):
         blynk.set_property(relays[i].LED, 'color', colours[0])
