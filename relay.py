@@ -148,7 +148,7 @@ if True:
               for relay in relays:
                   blynk.virtual_write(relay.pinId, 255)
                   blynk.set_property(relay.pinId, 'label', relay.name)
-                  blynk.virtual_write(98, "setup relay " relay.name + " using pin " relay.pinId + '\n')	
+                  _log.info("setup relay " relay.name + " using pin " relay.pinId + '\n')	
               blynk.virtual_write(systemLED, 255)
               #blynk.virtual_write(98, "clr")
               blynk.virtual_write(98, "System now updated and restarted " + '\n')
