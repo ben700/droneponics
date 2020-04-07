@@ -79,7 +79,8 @@ try:
                    blynk.set_property(dosage.volumePin, 'color', colours['ONLINE'])
                    blynk.set_property(dosage.LED, 'label', dosage.name)
                    blynk.set_property(dosage.volumePin, 'label', dosage.name + "-TVP")
-                   dosage.volume = dosage.pump.query("ATV,?").split("TV,")[1].strip().rstrip('\x00')
+                   #dosage.volume = dosage.pump.query("ATV,?").split("TV,")[1].strip().rstrip('\x00')
+                   dosage.volume = dosage.pump.query("ATV,?").split("TV,")[1].split(".")[0].strip().rstrip('\x00')
                    blynk.virtual_write(dosage.volumePin, dosage.volume )
                   # blynk.virtual_write(98, dosage.name + " " + dosage.pump.query("O,V,1").strip().rstrip('\x00') + '\n')
                   # blynk.virtual_write(98, dosage.name + " " + dosage.pump.query("O,TV,0").strip().rstrip('\x00') + '\n')
@@ -109,7 +110,8 @@ try:
                         if (float(dosed) >= float(dosage.dose)):
                             break	
                    blynk.set_property(dosage.LED, 'color', colours[1])
-                   dosage.volume = dosage.pump.query("TV,?").split("TV,")[1].strip().rstrip('\x00')
+                  # dosage.volume = dosage.pump.query("TV,?").split("TV,")[1].strip().rstrip('\x00')
+                   dosage.volume = dosage.pump.query("TV,?").split("TV,")[1].split(".")[0].strip().rstrip('\x00')
                    blynk.virtual_write(dosage.volumePin, dosage.volume )
                    blynk.virtual_write(98,"Check to see if user needs notify" + '\n')
                    if (int(float(dosage.volume)) >= int(float(dosage.bottleSize))):
@@ -131,7 +133,8 @@ try:
                         if (float(dosed) >= float(dosage.dose)):
                             break	
                    blynk.set_property(dosage.LED, 'color', colours[1])
-                   dosage.volume = dosage.pump.query("TV,?").split("TV,")[1].strip().rstrip('\x00')
+                  # dosage.volume = dosage.pump.query("TV,?").split("TV,")[1].strip().rstrip('\x00')
+                   dosage.volume = dosage.pump.query("TV,?").split("TV,")[1].split(".")[0].strip().rstrip('\x00')
                    blynk.virtual_write(dosage.volumePin, dosage.volume )
                    if (int(float(dosage.volume)) >= int(float(dosage.bottleSize))):
                         blynk.notify(dosage.name + " has pumped " + str(dosage.volume) + ", so may need topup")      
