@@ -122,11 +122,11 @@ if True:
             relayOff(3)
 	
     def relayOn(i):
-	blynk.set_property(relays[i].LED, 'color', colours[1])
+        blynk.set_property(relays[i].LED, 'color', colours[1])
         GPIO.output(relays[i].pinId,GPIO.HIGH)
 	
     def relayOn(i):
-	blynk.set_property(relays[i].LED, 'color', colours[0])
+        blynk.set_property(relays[i].LED, 'color', colours[0])
         GPIO.output(relays[i].pinId,GPIO.LOW)
 	
     @timer.register(interval=30, run_once=False)
