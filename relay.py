@@ -51,24 +51,13 @@ if True:
     GPIO.setwarnings(False)
     for relay in relays:
          GPIO.setup(relay.pinId, GPIO.OUT)
-         GPIO.output(relay.pinId,GPIO.HIGH)
-    
-            
-    APP_CONNECT_PRINT_MSG = '[APP_CONNECT_EVENT]'
-    APP_DISCONNECT_PRINT_MSG = '[APP_DISCONNECT_EVENT]'
-    CONNECT_PRINT_MSG = '[CONNECT_EVENT]'
-    DISCONNECT_PRINT_MSG = '[DISCONNECT_EVENT]'
-    WRITE_EVENT_PRINT_MSG = "[WRITE_VIRTUAL_PIN_EVENT] Pin: V{} Value: '{}'"
-    READ_PRINT_MSG = "[READ_VIRTUAL_PIN_EVENT] Pin: V{}"
-    ALLOWED_COMMANDS_LIST = ['ls', 'lsusb', 'ip a', 'ip abc']
-    TWEET_MSG = "New value='{}' on VPIN({})"
-	 
+         
     @blynk.handle_event('write V1')
     def button1(pin, value):
         _log.info("button1")	
         now = datetime.now()
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))   
-        if(value[0]==1):
+        if(value[0]=='1'):
             relayOn(0)
         else:
             relayOff(0)
@@ -78,7 +67,7 @@ if True:
         _log.info("button2")	
         now = datetime.now()
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))   
-        if(value[0]==1):
+        if(value[0]=='1'):
             relayOn(1)
         else:
             relayOff(1)
@@ -88,7 +77,7 @@ if True:
         _log.info("button3")	
         now = datetime.now()
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))   
-        if(value[0]==1):
+        if(value[0]=='1'):
             relayOn(2)
         else:
             relayOff(2)
@@ -98,7 +87,7 @@ if True:
         _log.info("button4")		
         now = datetime.now()
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))   
-        if(value[0]==1):
+        if(value[0]=='1'):
             relayOn(3)
         else:
             relayOff(3)
