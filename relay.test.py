@@ -27,11 +27,41 @@ systemLED=101
 
 
 if True:
- 
+
+    # tune console logging
+    _log = logging.getLogger('BlynkLog')
+    logFormatter = logging.Formatter("%(asctime)s [%(levelname)s]  %(message)s")
+    consoleHandler = logging.StreamHandler()
+    consoleHandler.setFormatter(logFormatter)
+    _log.addHandler(consoleHandler)
+    _log.setLevel(logging.DEBUG)
+
+
+    relays = []
+    relays = drone.buildRelay(relays, _log)
+    
     # Initialize Blynk
     blynk = blynklib.Blynk(BLYNK_AUTH)        
     timer = blynktimer.Timer()
-        
+    blynk.run()
+    #blynk.virtual_write(98, "clr")
+    blynk.set_property(systemLED, 'color', colours['ONLINE'])
+   
+    GPIO.setmode(GPIO.BCM)
+    GPIO.setwarnings(False)
+    for relay in relays:
+         GPIO.setup(relay.pinId, GPIO.OUT)
+    
+            
+    APP_CONNECT_PRINT_MSG = '[APP_CONNECT_EVENT]'
+    APP_DISCONNECT_PRINT_MSG = '[APP_DISCONNECT_EVENT]'
+    CONNECT_PRINT_MSG = '[CONNECT_EVENT]'
+    DISCONNECT_PRINT_MSG = '[DISCONNECT_EVENT]'
+    WRITE_EVENT_PRINT_MSG = "[WRITE_VIRTUAL_PIN_EVENT] Pin: V{} Value: '{}'"
+    READ_PRINT_MSG = "[READ_VIRTUAL_PIN_EVENT] Pin: V{}"
+    ALLOWED_COMMANDS_LIST = ['ls', 'lsusb', 'ip a', 'ip abc']
+    TWEET_MSG = "New value='{}' on VPIN({})"
+      
     @blynk.handle_event('write V1')
     def button1(pin, value):
         print("button1")	
