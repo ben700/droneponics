@@ -65,6 +65,7 @@ if True:
     
     blynk.run()
     blynkSensor.run()	
+    blynkSensor.virtual_write(98, "This is line added by relay")
     blynk.virtual_write(98, "clr")
     blynk.set_property(systemLED, 'color', colours['ONLINE'])
    
@@ -120,7 +121,6 @@ if True:
     def rebooter(pin, value):
         _log.info( "User reboot")	
         blynk.virtual_write(98, "User Reboot " + '\n')
-        blynkSensor.virtual_write(255,1)
         for l in LED:
             blynk.set_property(l, 'color', colours['OFFLINE'])
         blynk.set_property(systemLED, 'color', colours['OFFLINE'])	
