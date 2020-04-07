@@ -43,9 +43,11 @@ if True:
     # Initialize Blynk
     blynk = blynklib.Blynk(BLYNK_AUTH)        
     timer = blynktimer.Timer()
-    #blynk.run()
-    #blynk.virtual_write(98, "clr")
-    #blynk.set_property(systemLED, 'color', colours['ONLINE'])
+
+    GPIO.setmode(GPIO.BCM)
+    GPIO.setwarnings(False)
+    for relay in relays:
+         GPIO.setup(relay.pinId, GPIO.OUT)
    		
     @blynk.handle_event('connect')
     def connect_handler():
@@ -62,13 +64,7 @@ if True:
     blynk.run()
     blynk.virtual_write(98, "clr")
     blynk.set_property(systemLED, 'color', colours['ONLINE'])
-    
-    GPIO.setmode(GPIO.BCM)
-    GPIO.setwarnings(False)
-    for relay in relays:
-         GPIO.setup(relay.pinId, GPIO.OUT)
-         blynk.set_property(relay.pinId, 'label', relay.name )
-
+   
     @blynk.handle_event('write V1')
     def button1(pin, value):
         _log.info("button1")	
@@ -149,7 +145,10 @@ if True:
               for relay in relays:
                   blynk.virtual_write(relay.LED, 255)
                   blynk.set_property(relay.LED, 'label', relay.name)
-                  _log.info("setup relay " + relay.name + " using LED " + str(relay.LED) + '\n')	
+                  blynk.set_property(relay.pinId, 'label', relay.name )
+                  _log.info("setup relay " + relay.name + " using LED " + str(relay.LED) + '\n')
+         
+
               blynk.virtual_write(systemLED, 255)
               #blynk.virtual_write(98, "clr")
               blynk.virtual_write(98, "System now updated and restarted " + '\n')
