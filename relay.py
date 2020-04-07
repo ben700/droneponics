@@ -107,17 +107,14 @@ if True:
 	
     @blynk.handle_event('write V37')
     def button38(pin, value):
-        _log.info("button38 " + str(value[0]))
         if value[0] :
             buttEmpty = True
-            for relay in relays:
-                _log.info(relay.noisy)	
+            for relay in relays:	
                 if (relay.noisy == True):
                     GPIO.output(relay.pinId,GPIO.LOW)
                     blynk.set_property(relay.LED, 'color', colours[GPIO.input(relay.pinId)])
                     blynk.virtual_write(relay.button, 0 )
                     blynk.virtual_write(98, "Turning off " + relay.name + " because water level is low" + '\n')
-      
         else:
             buttEmpty = False
 	
