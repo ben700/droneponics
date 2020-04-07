@@ -62,7 +62,7 @@ if True:
     ALLOWED_COMMANDS_LIST = ['ls', 'lsusb', 'ip a', 'ip abc']
     TWEET_MSG = "New value='{}' on VPIN({})"
       
-   @blynk.handle_event('write V1')
+    @blynk.handle_event('write V1')
     def button1(pin, value):
         _log,info("button1")	
         now = datetime.now()
