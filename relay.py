@@ -19,6 +19,7 @@ import math
 import subprocess
 import re
 import drone
+from drone.droneObj import LED
 
 bootup = True
 colours = {0: '#FF0000', 1: '#00FF00', '0': '#FF0000', '1': '#00FF00', 'OFFLINE': '#0000FF', 'ONLINE': '#00FF00'}
