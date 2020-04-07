@@ -111,18 +111,20 @@ if True:
         if value[0] :
             buttEmpty = True
             for relay in relays:
-                blynk.set_property(relays[i].LED, 'color', colours[1])
                 GPIO.output(relays[i].pinId,GPIO.LOW)
+                blynk.set_property(relays[i].LED, 'color', colours[GPIO.input(relays[i].pinId)])
         else:
             buttEmpty = False
 	
     def relayOn(i):
-        blynk.set_property(relays[i].LED, 'color', colours[0])
         GPIO.output(relays[i].pinId,GPIO.HIGH)
+	blynk.set_property(relays[i].LED, 'color', colours[GPIO.input(relays[i].pinId)])
+        
 	
     def relayOff(i):
-        blynk.set_property(relays[i].LED, 'color', colours[1])
         GPIO.output(relays[i].pinId,GPIO.LOW)
+	blynk.set_property(relays[i].LED, 'color', colours[GPIO.input(relays[i].pinId)])
+        
  
     @blynk.handle_event('write V255')
     def rebooter(pin, value):
