@@ -51,7 +51,7 @@ if True:
     GPIO.setwarnings(False)
     for relay in relays:
          GPIO.setup(relay.pinId, GPIO.OUT)
-         GPIO.output(relay.pinId,GPIO.LOW)
+         GPIO.output(relay.pinId,GPIO.HIGH)
     
             
     APP_CONNECT_PRINT_MSG = '[APP_CONNECT_EVENT]'
