@@ -64,7 +64,7 @@ if True:
 	 
     @blynk.handle_event('write V1')
     def button1(pin, value):
-        _log,info("button1")	
+        _log.info("button1")	
         now = datetime.now()
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))   
         if(value[0]==1):
@@ -74,7 +74,7 @@ if True:
 	
     @blynk.handle_event('write V2')
     def button2(pin, value):
-        _log,info("button2")	
+        _log.info("button2")	
         now = datetime.now()
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))   
         if(value[0]==1):
@@ -84,7 +84,7 @@ if True:
 
     @blynk.handle_event('write V3')
     def button3(pin, value):
-        _log,info("button3")	
+        _log.info("button3")	
         now = datetime.now()
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))   
         if(value[0]==1):
@@ -94,7 +94,7 @@ if True:
 	
     @blynk.handle_event('write V4')
     def button4(pin, value):
-        _log,info("button4")		
+        _log.info("button4")		
         now = datetime.now()
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))   
         if(value[0]==1):
