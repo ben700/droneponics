@@ -24,6 +24,7 @@ from drone.droneObj import LED
 bootup = True
 colours = {0: '#FF0000', 1: '#00FF00', '0': '#FF0000', '1': '#00FF00', 'OFFLINE': '#0000FF', 'ONLINE': '#00FF00'}
 systemLED=101
+buttEmpty = False
 
 
 if True:
@@ -106,11 +107,11 @@ if True:
 	
     @blynk.handle_event('write V38')
     def button38(pin, value):
-        _log.info("button38")	
-	
-    @blynk.handle_event('read V38')
-    def button38a(value):
-        _log.info("read button38")	
+        _log.info("button38 " + str(value[0]))
+	if value[0] :
+            buttEmpty = True
+	else:
+            buttEmpty = False
 	
     def relayOn(i):
         blynk.set_property(relays[i].LED, 'color', colours[0])
