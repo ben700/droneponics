@@ -34,31 +34,31 @@ if True:
         
     @blynk.handle_event('write V1')
     def button1(pin, value):
-        _log,info("button1")	
+        print("button1")	
     
     @blynk.handle_event('write V2')
     def button2(pin, value):
-        _log,info("button2")	
+        print("button2")	
     
     @blynk.handle_event('write V3')
     def button3(pin, value):
-        _log,info("button3")	
+        print("button3")	
     
     @blynk.handle_event('write V4')
     def button4(pin, value):
-        _log,info("button4")		
+        print("button4")		
 
     @blynk.handle_event('write V255')
     def rebooter(pin, value):
-        _log.info( "User reboot")	
+        print( "User reboot")	
 
     @blynk.handle_event("connect")
     def connect_handler():
-        _log.info('SCRIPT_START')
+        print('SCRIPT_START')
         
     @timer.register(interval=30, run_once=False)
     def blynk_data():
-        _log.info("Completed Timer Function") 
+        print("Completed Timer Function") 
 
     while True:
         if True:
