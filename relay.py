@@ -111,6 +111,7 @@ if True:
         if value[0] :
             buttEmpty = True
             for relay in relays:
+                _log.info(relay.noisy)	
                 if (relay.noisy):
                     GPIO.output(relay.pinId,GPIO.LOW)
                     blynk.set_property(relay.LED, 'color', colours[GPIO.input(relay.pinId)])
