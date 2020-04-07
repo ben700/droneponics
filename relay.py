@@ -105,7 +105,7 @@ if True:
         else:
             relayOff(3)
 	
-    @blynk.handle_event('write V38')
+    @blynk.handle_event('write V37')
     def button38(pin, value):
         _log.info("button38 " + str(value[0]))
         if value[0] :
@@ -160,7 +160,7 @@ if True:
                   blynk.virtual_write(relay.LED, 255)
                   blynk.set_property(relay.LED, 'label', relay.name)
                   blynk.set_property(relay.button, 'label', relay.name )
-                  _log.info("Current state of relay is" + str(GPIO.input(relay.pinId)))
+                  _log.info("Current state of relay is " + str(GPIO.input(relay.pinId)))
                   blynk.set_property(relay.LED, 'color', colours[GPIO.input(relay.pinId)])		
                   _log.info("setup relay " + relay.name + " using LED " + str(relay.LED) + " and pin " + str(relay.pinId) + '\n')
          
