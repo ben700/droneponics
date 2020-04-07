@@ -111,9 +111,10 @@ if True:
         if value[0] :
             buttEmpty = True
             for relay in relays:
-                GPIO.output(relay.pinId,GPIO.LOW)
-                blynk.set_property(relay.LED, 'color', colours[GPIO.input(relay.pinId)])
-                blynk.virtual_write(98, "Turning off " + relay.name + " because water level is low" + '\n')
+                if (relay.noisy):
+                    GPIO.output(relay.pinId,GPIO.LOW)
+                    blynk.set_property(relay.LED, 'color', colours[GPIO.input(relay.pinId)])
+                    blynk.virtual_write(98, "Turning off " + relay.name + " because water level is low" + '\n')
         else:
             buttEmpty = False
 	
