@@ -63,7 +63,11 @@ if True:
             #  - we are not in script listening state yet
             #  - without forced reading some portion of blynk server messages can be not delivered to HW
             blynk.read_response(timeout=0.5)
-
+    
+    blynk.run()
+    blynk.virtual_write(98, "clr")
+    blynk.set_property(systemLED, 'color', colours['ONLINE'])
+   
     @blynk.handle_event('write V1')
     def button1(pin, value):
         _log.info("button1")	
