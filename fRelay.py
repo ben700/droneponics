@@ -35,9 +35,7 @@ try:
     
     # Initialize Blynk
     blynk = blynklib.Blynk(BLYNK_AUTH)
-    blynkTemp = blynklib.Blynk(BLYNK_AUTH_TEMP)
     timer = blynktimer.Timer()
-    blynk.run()
 
     BLYNK_GREEN     ="#23C48E"
     BLYNK_BLUE      ="#04C0F8"
@@ -60,8 +58,20 @@ try:
     GPIO.setup(Relay3,GPIO.OUT)
     GPIO.setup(Relay4,GPIO.OUT)
 
+    @blynk.handle_event('connect')
+    def connect_handler():
+        _log.info('SCRIPT_START')
+        for pin in range(5):
+            _log.info('Syncing virtual pin {}'.format(pin))
+            blynk.virtual_sync(pin)
+
+            # within connect handler after each server send operation forced socket reading is required cause:
+            #  - we are not in script listening state yet
+            #  - without forced reading some portion of blynk server messages can be not delivered to HW
+            blynk.read_response(timeout=0.5)
 
 
+    blynk.run()
     
     # Initialize the sensor.
     try:
@@ -107,27 +117,6 @@ try:
             blynk.virtual_write(98, "Expected error: No soil sonsor 4" + '\n') 
 
 
-
-
-    APP_CONNECT_PRINT_MSG = '[APP_CONNECT_EVENT]'
-    APP_DISCONNECT_PRINT_MSG = '[APP_DISCONNECT_EVENT]'
-    CONNECT_PRINT_MSG = '[CONNECT_EVENT]'
-    DISCONNECT_PRINT_MSG = '[DISCONNECT_EVENT]'
-    WRITE_EVENT_PRINT_MSG = "[WRITE_VIRTUAL_PIN_EVENT] Pin: V{} Value: '{}'"
-    READ_PRINT_MSG = "[READ_VIRTUAL_PIN_EVENT] Pin: V{}"
-    ALLOWED_COMMANDS_LIST = ['ls', 'lsusb', 'ip a', 'ip abc']
-    TWEET_MSG = "New value='{}' on VPIN({})"
-
-    @blynkTemp.handle_event('write V1')
-    def writeV1(pin, value):
-       blynk.virtual_write(98, "Write "+'\n') 
-
-    @blynkTemp.handle_event('read V1')
-    def readV1(value):
-       blynk.virtual_write(98, "Read"+'\n' + str(value)) 
-
-
-
     @blynk.handle_event('write V1')
     def buttonV1Pressed(pin, value):
         blynk.virtual_write(98, "User button 1 " + '\n')
@@ -139,9 +128,6 @@ try:
         else:
             blynk.virtual_write(98,"Waste turned on" + '\n')
             GPIO.output(Relay1,GPIO.LOW)
-
-
-
 
     @blynk.handle_event('write V2')
     def buttonV2Pressed(pin, value):
@@ -194,17 +180,6 @@ try:
         os.system('sudo reboot')
 
 
-    @blynk.handle_event('connect')
-    def connect_handler():
-        _log.info('SCRIPT_START')
-        for pin in range(5):
-            _log.info('Syncing virtual pin {}'.format(pin))
-            blynk.virtual_sync(pin)
-
-            # within connect handler after each server send operation forced socket reading is required cause:
-            #  - we are not in script listening state yet
-            #  - without forced reading some portion of blynk server messages can be not delivered to HW
-            blynk.read_response(timeout=0.5)
 
 
     @timer.register(interval=30, run_once=False)
@@ -232,8 +207,8 @@ try:
            _log.info ("Channel 4 moisture reading is "+str(ss4.moisture_read())+" and Temp is :" +  str("{0:.2f}".format(ss4.get_temp())))
 
         blynk.virtual_write(98, "Timer Function:- virtual_sync" + '\n')
-        blynkTemp.run()
-        blynkTemp.virtual_sync('V1')
+       # blynkTemp.run()
+       # blynkTemp.virtual_sync('V1')
         blynk.virtual_write(98, "Completed Timer Function" + '\n') 
 
 
