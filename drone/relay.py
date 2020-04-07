@@ -1,6 +1,6 @@
 from drone import * 
 class Relay:
-   def __init__(self, PinId, Led, Name, Button, *args, **kwargs)):
+   def __init__(self, PinId, Led, Name, Button, *args, **kwargs):
        print("Building object")
        self.pinId = PinId
        self.LED = Led
