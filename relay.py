@@ -42,7 +42,6 @@ if True:
     
     # Initialize Blynk
     blynk = blynklib.Blynk(BLYNK_AUTH)   
-    blynkSensor = blynklib.Blynk(BLYNK_AUTH_Sensor)   	
     timer = blynktimer.Timer()
 
     GPIO.setmode(GPIO.BCM)
