@@ -52,10 +52,15 @@ if True:
     for relay in relays:
          GPIO.setup(relay.pinId, GPIO.OUT)
 
-      
     @blynk.handle_event('write V1')
     def button1(pin, value):
         _log.info("button1")	
+        now = datetime.now()
+        blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))   
+        if(value[0]==1):
+            relayOn(0)
+        else:
+            relayOff(0)
 	
     @blynk.handle_event('write V2')
     def button2(pin, value):
