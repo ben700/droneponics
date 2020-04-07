@@ -109,6 +109,11 @@ if True:
         else:
             relayOff(3)
 	
+    @blynk.handle_event('write V37')
+    def button37(pin, value):
+        _log.info("button37")		
+
+	
     def relayOn(i):
         blynk.set_property(relays[i].LED, 'color', colours[1])
         GPIO.output(relays[i].pinId,GPIO.HIGH)
