@@ -147,6 +147,7 @@ if True:
               blynk.virtual_write(99, now.strftime("%d/%m/%Y %H:%M:%S"))
               for relay in relays:
                   blynk.virtual_write(relay.pinId, 255)
+                  blynk.set_property(l, 'label', relay.name)
               blynk.virtual_write(systemLED, 255)
               #blynk.virtual_write(98, "clr")
               blynk.virtual_write(98, "System now updated and restarted " + '\n')
