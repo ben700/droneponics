@@ -51,7 +51,8 @@ if True:
     GPIO.setwarnings(False)
     for relay in relays:
          GPIO.setup(relay.pinId, GPIO.OUT)
-         
+         GPIO.set_property(relay.pinId, 'label', relay.name )
+		
     @blynk.handle_event('connect')
     def connect_handler():
         _log.info('SCRIPT_START')
