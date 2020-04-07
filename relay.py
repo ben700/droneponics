@@ -61,7 +61,18 @@ if True:
     ALLOWED_COMMANDS_LIST = ['ls', 'lsusb', 'ip a', 'ip abc']
     TWEET_MSG = "New value='{}' on VPIN({})"
 	 
-   			
+    @blynk.handle_event("connect")
+    def connect_handler():
+        _log.info('SCRIPT_START')
+        for pin in range(5):
+            _log.info('Syncing virtual pin {}'.format(pin))
+            blynk.virtual_sync(pin)
+
+            # within connect handler after each server send operation forced socket reading is required cause:
+            #  - we are not in script listening state yet
+            #  - without forced reading some portion of blynk server messages can be not delivered to HW
+            blynk.read_response(timeout=0.5)
+			
   
     @blynk.handle_event('write V255')
     def rebooter(pin, value):
@@ -74,6 +85,49 @@ if True:
         blynk.virtual_write(98, "System updated and restarting " + '\n')
         os.system('sudo reboot')
 
+    @blynk.handle_event('write V1')
+    def lightTimer(pin, value):
+        now = datetime.now()
+        blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))   
+        if(overRdTime==1):
+            relayOn(0)
+        elif(overRdTime==2):
+            relayOff(0)
+	
+    @blynk.handle_event('write V2')
+    def lightTimer(pin, value):
+        now = datetime.now()
+        blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))   
+        if(overRdTime==1):
+            relayOn(1)
+        elif(overRdTime==2):
+            relayOff(1)
+
+    @blynk.handle_event('write V3')
+    def lightTimer(pin, value):
+        now = datetime.now()
+        blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))   
+        if(overRdTime==1):
+            relayOn(2)
+        elif(overRdTime==2):
+            relayOff(2)
+	
+    @blynk.handle_event('write V4')
+    def lightTimer(pin, value):
+        now = datetime.now()
+        blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))   
+        if(overRdTime==1):
+            relayOn(3)
+        elif(overRdTime==2):
+            relayOff(3)
+	
+    def relayOn(i):
+	blynk.set_property(relays[i].LED, 'color', colours[1])
+        GPIO.output(relays[i].pinId,GPIO.HIGH)
+	
+    def relayOn(i):
+	blynk.set_property(relays[i].LED, 'color', colours[0])
+        GPIO.output(relays[i].pinId,GPIO.LOW)
 	
     @timer.register(interval=30, run_once=False)
     def blynk_data():
