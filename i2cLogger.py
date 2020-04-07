@@ -1,5 +1,7 @@
 ##!/usr/bin/env python3 
 BLYNK_AUTH = '4IfX_hzDREonPi_PIDQrETikxc0-XpqI' #i2cLogger
+BLYNK_AUTH_RELAY = 'iipK7r0pSz68i8ZDo4sVdtkhbCzXM_ns' #i2cLogger
+
 
 try:
     from python_tsl2591 import tsl2591
@@ -50,9 +52,11 @@ try:
     
     
     # Initialize Blynk
-    blynk = blynklib.Blynk(BLYNK_AUTH)        
+    blynk = blynklib.Blynk(BLYNK_AUTH)
+    blynkRelay = blynklib.Blynk(BLYNK_AUTH_RELAY)
     timer = blynktimer.Timer()
     blynk.run()
+    blynkRelay.run()
     blynk.virtual_write(98, "clr")
     
     
@@ -124,12 +128,14 @@ try:
         bES = GPIO.input(buttEmptySensor)
         bFS = GPIO.input(buttFullSensor)
         blynk.virtual_write(38, bES)
+        blynkRelay.virtual_write(38, bES)
         blynk.virtual_write(37, bFS)
         blynk.virtual_write(39, bES+bFS)
       #  if(bES == 0):
       #       blynk.notify("Water Butt is Empty")
         blynk.set_property(10, 'color', colours[bES])
         blynk.set_property(9, 'color', colours[bFS])
+        
         
         #blynk.virtual_write(98, "Completed Timer Function" + '\n') 
 
