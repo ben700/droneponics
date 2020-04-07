@@ -109,7 +109,7 @@ if True:
     def relayOn(i):
         blynk.set_property(relays[i].LED, 'color', colours[0])
         GPIO.output(relays[i].pinId,GPIO.LOW)
-
+ 
     @blynk.handle_event('write V255')
     def rebooter(pin, value):
         _log.info( "User reboot")	
