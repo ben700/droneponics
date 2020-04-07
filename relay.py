@@ -147,7 +147,7 @@ if True:
                   blynk.set_property(relay.LED, 'label', relay.name)
                   blynk.set_property(relay.pinId, 'label', relay.name )
                   blynk.set_property(relay.LED, 'color', colours[GPIO.input(relay.pinId)])		
-                  _log.info("setup relay " + relay.name + " using LED " + str(relay.LED) + '\n')
+                  _log.info("setup relay " + relay.name + " using LED " + str(relay.LED) + " and pin " + str(relay.pinId) + '\n')
          
 
               blynk.virtual_write(systemLED, 255)
