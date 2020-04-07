@@ -62,21 +62,54 @@ if True:
     ALLOWED_COMMANDS_LIST = ['ls', 'lsusb', 'ip a', 'ip abc']
     TWEET_MSG = "New value='{}' on VPIN({})"
       
-    @blynk.handle_event('write V1')
+   @blynk.handle_event('write V1')
     def button1(pin, value):
-        print("button1")	
-    
+        _log,info("button1")	
+        now = datetime.now()
+        blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))   
+        if(value[0]==1):
+            relayOn(0)
+        else:
+            relayOff(0)
+	
     @blynk.handle_event('write V2')
     def button2(pin, value):
-        print("button2")	
-    
+        _log,info("button2")	
+        now = datetime.now()
+        blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))   
+        if(value[0]==1):
+            relayOn(1)
+        else:
+            relayOff(1)
+
     @blynk.handle_event('write V3')
     def button3(pin, value):
-        print("button3")	
-    
+        _log,info("button3")	
+        now = datetime.now()
+        blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))   
+        if(value[0]==1):
+            relayOn(2)
+        else:
+            relayOff(2)
+	
     @blynk.handle_event('write V4')
     def button4(pin, value):
-        print("button4")		
+        _log,info("button4")		
+        now = datetime.now()
+        blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))   
+        if(value[0]==1):
+            relayOn(3)
+        else:
+            relayOff(3)
+	
+    def relayOn(i):
+        blynk.set_property(relays[i].LED, 'color', colours[1])
+        GPIO.output(relays[i].pinId,GPIO.HIGH)
+	
+    def relayOn(i):
+        blynk.set_property(relays[i].LED, 'color', colours[0])
+        GPIO.output(relays[i].pinId,GPIO.LOW)
+ 		
 
     @blynk.handle_event('write V255')
     def rebooter(pin, value):
