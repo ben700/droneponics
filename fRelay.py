@@ -20,10 +20,11 @@ try:
     import os
     import subprocess
     import re
-
+    import chirp
     bootup = True
     colours = {'1': '#FF0000', '0': '#00FF00', 1: '#FF0000', 0: '#00FF00', 'OFFLINE': '#0000FF'}
-
+    min_moist = 240
+    max_moist = 790
     # tune console logging
     _log = logging.getLogger('BlynkLog')
     logFormatter = logging.Formatter("%(asctime)s [%(levelname)s]  %(message)s")
@@ -116,7 +117,15 @@ try:
             ss4 = None
             blynk.virtual_write(98, "Expected error: No soil sonsor 4" + '\n') 
 
-
+    chirp = chirp.Chirp(address=0x20,
+                    read_moist=True,
+                    read_temp=True,
+                    read_light=True,
+                    min_moist=min_moist,
+                    max_moist=max_moist,
+                    temp_scale='celsius',
+                    temp_offset=0)
+    
     @blynk.handle_event('write V1')
     def buttonV1Pressed(pin, value):
         blynk.virtual_write(98, "User button 1 " + '\n')
@@ -205,8 +214,14 @@ try:
            blynk.virtual_write(17, str(ss4.moisture_read()))
            blynk.virtual_write(18, str(ss4.get_temp()))
            _log.info ("Channel 4 moisture reading is "+str(ss4.moisture_read())+" and Temp is :" +  str("{0:.2f}".format(ss4.get_temp())))
-
-        blynk.virtual_write(98, "Timer Function:- virtual_sync" + '\n')
+        
+        chirp.trigger()
+        blynk.virtual_write(19, '{:d}'.format(chirp.moist))
+        blynk.virtual_write(20, '{:4.1f}%'.format(chirp.moist_percent))
+        blynk.virtual_write(21, '{:3.1f}'.format(chirp.temp))
+        blynk.virtual_write(22, '{:d}'.format(chirp.light))
+        
+        #blynk.virtual_write(98, "Timer Function:- virtual_sync" + '\n')
        # blynkTemp.run()
        # blynkTemp.virtual_sync('V1')
         blynk.virtual_write(98, "Completed Timer Function" + '\n') 
