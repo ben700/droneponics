@@ -43,9 +43,9 @@ if True:
     # Initialize Blynk
     blynk = blynklib.Blynk(BLYNK_AUTH)        
     timer = blynktimer.Timer()
-    blynk.run()
+  #  blynk.run()
     #blynk.virtual_write(98, "clr")
-    blynk.set_property(systemLED, 'color', colours['ONLINE'])
+#  blynk.set_property(systemLED, 'color', colours['ONLINE'])
    
     GPIO.setmode(GPIO.BCM)
     GPIO.setwarnings(False)
