@@ -62,7 +62,6 @@ if True:
             blynk.read_response(timeout=0.5)
     
     blynk.run()
-    blynk.virtual_write(98, "clr")
     blynk.set_property(systemLED, 'color', colours['ONLINE'])
    
     @blynk.handle_event('write V1')
