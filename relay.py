@@ -1,6 +1,5 @@
 ##!/usr/bin/env python3 
 BLYNK_AUTH = 'iipK7r0pSz68i8ZDo4sVdtkhbCzXM_ns' #relay
-BLYNK_AUTH_Sensor = '4IfX_hzDREonPi_PIDQrETikxc0-XpqI' #i2cLogger
 
 import blynklib
 import blynktimer
@@ -64,8 +63,6 @@ if True:
             blynk.read_response(timeout=0.5)
     
     blynk.run()
-    blynkSensor.run()	
-    blynkSensor.virtual_write(98, "This is line added by relay")
     blynk.virtual_write(98, "clr")
     blynk.set_property(systemLED, 'color', colours['ONLINE'])
    
