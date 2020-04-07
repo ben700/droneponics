@@ -52,7 +52,7 @@ if True:
     for relay in relays:
          GPIO.setup(relay.pinId, GPIO.OUT)
          
-    @blynk.handle_event("connect")
+    @blynk.handle_event('connect')
     def connect_handler():
         _log.info('SCRIPT_START')
         for pin in range(5):
