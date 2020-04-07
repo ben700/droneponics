@@ -79,7 +79,7 @@ if True:
                    #dosage.volume = dosage.pump.query("ATV,?").split("TV,")[1].strip().rstrip('\x00')
                    dosage.volume = dosage.pump.query("ATV,?").split("TV,")[1].split(".")[0].strip().rstrip('\x00')
                    blynk.virtual_write(dosage.volumePin, dosage.volume )
-               _log.info("Pumps all read")          
+            _log.info("Pumps all read")          
             
 	
     def doSingleDose():        
