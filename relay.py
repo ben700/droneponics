@@ -87,39 +87,43 @@ if True:
         os.system('sudo reboot')
 
     @blynk.handle_event('write V1')
-    def lightTimer(pin, value):
+    def button1(pin, value):
+        _log,info("button1")	
         now = datetime.now()
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))   
-        if(overRdTime==1):
+        if(value[0]==1):
             relayOn(0)
-        elif(overRdTime==2):
+        else:
             relayOff(0)
 	
     @blynk.handle_event('write V2')
-    def lightTimer(pin, value):
+    def button2(pin, value):
+        _log,info("button2")	
         now = datetime.now()
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))   
-        if(overRdTime==1):
+        if(value[0]==1):
             relayOn(1)
-        elif(overRdTime==2):
+        else:
             relayOff(1)
 
     @blynk.handle_event('write V3')
-    def lightTimer(pin, value):
+    def button3(pin, value):
+        _log,info("button3")	
         now = datetime.now()
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))   
-        if(overRdTime==1):
+        if(value[0]==1):
             relayOn(2)
-        elif(overRdTime==2):
+        else:
             relayOff(2)
 	
     @blynk.handle_event('write V4')
-    def lightTimer(pin, value):
+    def button4(pin, value):
+        _log,info("button4")		
         now = datetime.now()
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))   
-        if(overRdTime==1):
+        if(value[0]==1):
             relayOn(3)
-        elif(overRdTime==2):
+        else:
             relayOff(3)
 	
     def relayOn(i):
