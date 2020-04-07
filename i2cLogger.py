@@ -129,6 +129,7 @@ try:
         bFS = GPIO.input(buttFullSensor)
         blynk.virtual_write(38, bES)
         blynkRelay.virtual_write(38, bES)
+        blynkRelay.virtual_write(98, "I2C logger updated 38 to be " + str(bES) + '\n')
         blynk.virtual_write(37, bFS)
         blynk.virtual_write(39, bES+bFS)
       #  if(bES == 0):
