@@ -44,6 +44,7 @@ if True:
     nutrientMix = []
     nutrientMix = drone.buildNutrientMix(nutrientMix, _log)
     sensors = drone.buildSensors(sensors, _log)
+    #sensors.append( Sensor(112, "Colour", 33, None))  
     
     # Initialize Blynk
     blynk = blynklib.Blynk(BLYNK_AUTH)        
@@ -65,8 +66,7 @@ if True:
            blynk.set_property(sensor.displayPin, 'color', colours['ONLINE'])
            blynk.set_property(sensor.displayPin, 'label', sensor.name)
        blynk.virtual_write(98, "Sensors created" + '\n') 
-
-    else:
+    if True:
         if True:	
             _log.info("Update Pump volumes")
             for dosage in nutrientMix:
@@ -76,82 +76,54 @@ if True:
                    blynk.set_property(dosage.volumePin, 'color', colours['ONLINE'])
                    blynk.set_property(dosage.LED, 'label', dosage.name)
                    blynk.set_property(dosage.volumePin, 'label', dosage.name + "-TVP")
-                   dosage.volume = dosage.pump.query("ATV,?").split("TV,")[1].strip().rstrip('\x00')
+                   #dosage.volume = dosage.pump.query("ATV,?").split("TV,")[1].strip().rstrip('\x00')
+                   dosage.volume = dosage.pump.query("ATV,?").split("TV,")[1].split(".")[0].strip().rstrip('\x00')
                    blynk.virtual_write(dosage.volumePin, dosage.volume )
-                   dosage.pump.query("O,V,1")
-                   dosage.pump.query("O,TV,1")
-                   dosage.pump.query("O,ATV,1")
-           #        blynk.virtual_write(98, dosage.name + " Params =" + dosage.pump.query("O,?").strip().rstrip('\x00') + '\n')
-           #        blynk.virtual_write(98, dosage.name + " TV =" + dosage.pump.query("TV,?").strip().rstrip('\x00') + '\n')
-           #        blynk.virtual_write(98, dosage.name + " ATV =" + dosage.pump.query("ATV,?").strip().rstrip('\x00') + '\n')
-           #        blynk.virtual_write(98, dosage.name + " R =" + dosage.pump.query("R").strip().rstrip('\x00') + '\n')
-                   blynk.virtual_write(98, dosage.name + " Pump id " + str(dosage.pumpId) + " has dosed = " + str(dosage.volume) + '\n')
-            _log.info("Pumps all read")          
-   
+               _log.info("Pumps all read")          
             
-    APP_CONNECT_PRINT_MSG = '[APP_CONNECT_EVENT]'
-    APP_DISCONNECT_PRINT_MSG = '[APP_DISCONNECT_EVENT]'
-    CONNECT_PRINT_MSG = '[CONNECT_EVENT]'
-    DISCONNECT_PRINT_MSG = '[DISCONNECT_EVENT]'
-    WRITE_EVENT_PRINT_MSG = "[WRITE_VIRTUAL_PIN_EVENT] Pin: V{} Value: '{}'"
-    READ_PRINT_MSG = "[READ_VIRTUAL_PIN_EVENT] Pin: V{}"
-    ALLOWED_COMMANDS_LIST = ['ls', 'lsusb', 'ip a', 'ip abc']
-    TWEET_MSG = "New value='{}' on VPIN({})"
 	
-    def doSingleDose():
-	        
+    def doSingleDose():        
         now = datetime.now()
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
         blynk.virtual_write(98, now.strftime("%d/%m/%Y %H:%M:%S") + " Going to Dose" + '\n')
-        for dosage in nutrientMix:           
-		
-           blynk.virtual_write(98, dosage.name + " TV =" + dosage.pump.query("TV,?").strip().rstrip('\x00') + '\n')
-           blynk.virtual_write(98, dosage.name + " ATV =" + dosage.pump.query("ATV,?").strip().rstrip('\x00') + '\n')
-           blynk.virtual_write(98, "Read "+dosage.name+" =" + dosage.pump.query("R").strip().rstrip('\x00') + '\n')
-			
+        for dosage in nutrientMix:
            if(dosage.pump is not None and dosage.name != "pH"):
                    dosage.volume = dosage.pump.query("TV,?").split("TV,")[1].strip().rstrip('\x00')
                    blynk.set_property(dosage.LED, 'color', colours[0])
                    dosage.pump.query("D,"+str(dosage.dose))
                    while (True):
                         dosed = dosage.pump.query("R").split(":")[1].split(",")[0].strip().rstrip('\x00')
-                        blynk.virtual_write(98, "Pump for "+dosage.name+" pump id " + str(dosage.pumpId) + " has dosed = " + str(dosed) + "ml of "+str(dosage.dose)+"ml" + '\n')
                         if (float(dosed) >= float(dosage.dose)):
                             break	
                    blynk.set_property(dosage.LED, 'color', colours[1])
-                   dosage.volume = dosage.pump.query("TV,?").split("TV,")[1].strip().rstrip('\x00')
+                  # dosage.volume = dosage.pump.query("TV,?").split("TV,")[1].strip().rstrip('\x00')
+                   dosage.volume = dosage.pump.query("TV,?").split("TV,")[1].split(".")[0].strip().rstrip('\x00')
                    blynk.virtual_write(dosage.volumePin, dosage.volume )
                    blynk.virtual_write(98,"Check to see if user needs notify" + '\n')
                    if (int(float(dosage.volume)) >= int(float(dosage.bottleSize))):
-                        blynk.notify(dosage.name + " has pumped " + str(dosage.volume) + ", so may need topup")	
-    
+                        if not dosage.notify :
+                             blynk.notify(dosage.name + " has pumped " + str(dosage.volume) + ", so may need topup")	
+                             dosage.notify = True
     
     def doSinglePHDose():   
         now = datetime.now()
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
         blynk.virtual_write(98, now.strftime("%d/%m/%Y %H:%M:%S") + " Going to Dose" + '\n')
-        for dosage in nutrientMix:           
-		
-           #blynk.virtual_write(98, "TV =" + dosage.pump.query("TV,?").strip().rstrip('\x00') + '\n')
-           #blynk.virtual_write(98, "ATV =" + dosage.pump.query("ATV,?").strip().rstrip('\x00') + '\n')
-           blynk.virtual_write(98, "Read "+dosage.name+" =" + dosage.pump.query("R").strip().rstrip('\x00') + '\n')
-			
+        for dosage in nutrientMix:		
            if(dosage.pump is not None and dosage.name == "pH"):
                    dosage.volume = dosage.pump.query("TV,?").split("TV,")[1].strip().rstrip('\x00')
                    blynk.set_property(dosage.LED, 'color', colours[0])
                    dosage.pump.query("D,"+str(dosage.dose))
                    while (True):
                         dosed = dosage.pump.query("R").split(":")[1].split(",")[0].strip().rstrip('\x00')
-                        blynk.virtual_write(98, "Pump id " + str(dosage.pumpId) + " has dosed = " + str(dosed) + "ml of "+str(dosage.dose)+"ml" + '\n')
                         if (float(dosed) >= float(dosage.dose)):
                             break	
                    blynk.set_property(dosage.LED, 'color', colours[1])
-                   dosage.volume = dosage.pump.query("TV,?").split("TV,")[1].strip().rstrip('\x00')
+                  # dosage.volume = dosage.pump.query("TV,?").split("TV,")[1].strip().rstrip('\x00')
+                   dosage.volume = dosage.pump.query("TV,?").split("TV,")[1].split(".")[0].strip().rstrip('\x00')
                    blynk.virtual_write(dosage.volumePin, dosage.volume )
-                   blynk.virtual_write(98,"Check to see if user needs notify" + '\n')
                    if (int(float(dosage.volume)) >= int(float(dosage.bottleSize))):
-                        blynk.notify(dosage.name + " has pumped " + str(dosage.volume) + ", so may need topup")
-      
+                        blynk.notify(dosage.name + " has pumped " + str(dosage.volume) + ", so may need topup")      
     
     @blynk.handle_event('write V1')
     def buttonV1Pressed(pin, value):
@@ -293,19 +265,18 @@ if True:
     @timer.register(interval=60, run_once=False)
     def blynk_data():
         _log.info("Update Timer Run")
-        #Counter.cycle += 1
         now = datetime.now()
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
-        
-	#cTemp = sensors[0].read()
-        
+
         cTemp = sensors[0].sensor.query("R").split(":")[1].strip().rstrip('\x00')
         sensors[0].value = cTemp #Temp
         sensors[1].value = sensors[1].sensor.query("RT,"+cTemp).split(":")[1].strip().rstrip('\x00') #EC
         sensors[2].value = sensors[2].sensor.query("RT,"+sensors[0].value).split(":")[1].strip().rstrip('\x00')  #pH
-       # if sensors[3] is not None:
-       #     sensors[3].value = sensors[3].sensor.query("R").split(":")[1].strip().rstrip('\x00') #colour
-        #_log.info( "Sensors have been read")  
+        if sensors[3] is not None and sensors[3].sensor is not None:
+            sensors[3].value = sensors[3].sensor.query("R").split(":")[1].strip().rstrip('\x00') #colour
+            blynk.virtual_write(34, sensors[3].value.split(",")[0])
+            blynk.virtual_write(35, sensors[3].value.split(",")[1])
+            blynk.virtual_write(36, sensors[3].value.split(",")[2])
         for sensor in sensors:
              if sensor is not None:
                   _log.info("Going to update " + str(sensor.name) + "using pin " + str(sensor.displayPin) + " with value " + str(sensor.value))                  
