@@ -96,7 +96,7 @@ if True:
         blynk.set_property(relays[i].LED, 'color', colours[1])
         GPIO.output(relays[i].pinId,GPIO.HIGH)
 	
-    def relayOn(i):
+    def relayOff(i):
         blynk.set_property(relays[i].LED, 'color', colours[0])
         GPIO.output(relays[i].pinId,GPIO.LOW)
  
