@@ -1,5 +1,6 @@
 ##!/usr/bin/env python3 
 BLYNK_AUTH = 'iipK7r0pSz68i8ZDo4sVdtkhbCzXM_ns' #relay
+BLYNK_AUTH_Sensor = '4IfX_hzDREonPi_PIDQrETikxc0-XpqI' #i2cLogger
 
 import blynklib
 import blynktimer
@@ -41,7 +42,8 @@ if True:
     relays = drone.buildRelay(relays, _log)
     
     # Initialize Blynk
-    blynk = blynklib.Blynk(BLYNK_AUTH)        
+    blynk = blynklib.Blynk(BLYNK_AUTH)   
+    blynkSensor = blynklib.Blynk(BLYNK_AUTH_Sensor)   	
     timer = blynktimer.Timer()
 
     GPIO.setmode(GPIO.BCM)
@@ -62,6 +64,7 @@ if True:
             blynk.read_response(timeout=0.5)
     
     blynk.run()
+    blynkSensor.run()	
     blynk.virtual_write(98, "clr")
     blynk.set_property(systemLED, 'color', colours['ONLINE'])
    
@@ -117,6 +120,7 @@ if True:
     def rebooter(pin, value):
         _log.info( "User reboot")	
         blynk.virtual_write(98, "User Reboot " + '\n')
+	blynkSensor.virtual_write(255,1)
         for l in LED:
             blynk.set_property(l, 'color', colours['OFFLINE'])
         blynk.set_property(systemLED, 'color', colours['OFFLINE'])	
