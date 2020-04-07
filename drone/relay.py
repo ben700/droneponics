@@ -1,10 +1,10 @@
 from drone import * 
 class Relay:
-   def __init__(self, PinId, Led, name):
+   def __init__(self, PinId, Led, Name):
        print("Building object")
-       self.pinId = PumpId
+       self.pinId = PinId
        self.LED = Led
-       self.name = name
+       self.name = Name
        
 def buildRelay(relays, _log): 
     relays.append( Relay(26, LED[1], "Air"))
