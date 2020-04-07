@@ -1,33 +1,31 @@
-#!/usr/bin/python
-# The ID and range of a sample spreadsheet.
-BLYNK_AUTH = 'SHraFqInf27JKowTcFZapu0rHH2QGtuO' #atlasMonitor
+#!/usr/bin/python3
+BLYNK_AUTH = '00vIt07mIauITIq4q_quTOakFvcvpgGb' #atlasMonitor
+
+import blynklib
+import blynktimer
+
+from datetime import datetime
+import time
+
+import logging
+import sys
+import os
+import RPi.GPIO as GPIO
+
+from AtlasI2C import (
+   AtlasI2C
+)
+import math  
+import subprocess
+import re
+import drone
+
+bootup = True
+colours = {0: '#FF0000', 1: '#00FF00', '0': '#FF0000', '1': '#00FF00', 'OFFLINE': '#0000FF', 'ONLINE': '#00FF00'}
+systemLED=101
+sensors = []
 
 try:
-    import logging
-    import blynklib
-    import blynktimer
-    from datetime import datetime
-    import io
-    import sys
-    import fcntl
-    import time
-    import copy
-    import string
-    from AtlasI2C import (
-         AtlasI2C
-    )
-    import RPi.GPIO as GPIO
-    import os
-    import logging
-    import subprocess
-    import re
-    import drone
-
-    class Counter:
-        cycle = 0
-
-    bootup = True
-    colours = {0: '#FF0000', 1: '#00FF00', '0': '#FF0000', '1': '#00FF00', 'OFFLINE': '#0000FF'}
 
     # tune console logging
     _log = logging.getLogger('BlynkLog')
@@ -37,91 +35,56 @@ try:
     _log.addHandler(consoleHandler)
     _log.setLevel(logging.DEBUG)
 
-    nutrientMix = []
-    nutrientMix = drone.buildNutrientMix(nutrientMix, _log)
-
-   
+    sensors = drone.buildSensors(sensors, _log)
+    
     # Initialize Blynk
-    blynk = blynklib.Blynk(BLYNK_AUTH)
+    blynk = blynklib.Blynk(BLYNK_AUTH)        
     timer = blynktimer.Timer()
+
     blynk.run()
-    APP_CONNECT_PRINT_MSG = '[APP_CONNECT_EVENT]'
-    APP_DISCONNECT_PRINT_MSG = '[APP_DISCONNECT_EVENT]'
-    CONNECT_PRINT_MSG = '[CONNECT_EVENT]'
-    DISCONNECT_PRINT_MSG = '[DISCONNECT_EVENT]'
-    WRITE_EVENT_PRINT_MSG = "[WRITE_VIRTUAL_PIN_EVENT] Pin: V{} Value: '{}'"
-    READ_PRINT_MSG = "[READ_VIRTUAL_PIN_EVENT] Pin: V{}"
-    ALLOWED_COMMANDS_LIST = ['ls', 'lsusb', 'ip a', 'ip abc']
-    TWEET_MSG = "New value='{}' on VPIN({})"
-
-
-    device = AtlasI2C()
-    temp = AtlasI2C(102)
-    ec = AtlasI2C(100)
-    ph = AtlasI2C(99)
-
-    #blynk.virtual_write(98,"Temp Device Info = " + temp.query("i") + '\n')
-    #blynk.virtual_write(98,"pH Device Info = " + ph.query("i") + '\n')
-    #blynk.virtual_write(98,"EC Device Info = " + ec.query("i") + '\n')
+    blynk.set_property(systemLED, 'color', colours['ONLINE'])
     
-    blynk.virtual_write(98,"Temp Cal = " + temp.query("Cal,?") + '\n')
-    blynk.virtual_write(98,"Temp Scale = " + temp.query("S,?") + '\n')
-
-    blynk.virtual_write(98,"pH Cal = " + ph.query("Cal,?") + '\n')
-    blynk.virtual_write(98,"pH Temp Cal = " + ph.query("T,?") + '\n')
-
-    blynk.virtual_write(98,"EC Cal = " + ec.query("Cal,?") + '\n')
-    blynk.virtual_write(98,"EC Temp Cal = " + ec.query("Cal,?") + '\n')
-    blynk.virtual_write(98,"EC Probe Type = " + ec.query("K,?") + '\n')
-
-    
-
-    @blynk.handle_event("connect")
-    def connect_handler():
-        _log.info('SCRIPT_START')
-     #   for pin in range(5):
-     #       _log.info('Syncing virtual pin {}'.format(pin))
-     #       blynk.virtual_sync(pin)
-
-            # within connect handler after each server send operation forced socket reading is required cause:
-            #  - we are not in script listening state yet
-            #  - without forced reading some portion of blynk server messages can be not delivered to HW
-     #       blynk.read_response(timeout=0.5)
-
-
+    # Initialize the sensor.
+    try:
+       # Create the I2C bus
+       for sensor in sensors:
+           sensor.sensor = AtlasI2C(sensor.sensorId)
+           blynk.set_property(sensor.displayPin, 'color', colours['ONLINE'])
+           blynk.set_property(sensor.displayPin, 'label', sensor.name)
+       blynk.virtual_write(98, "Sensors created" + '\n') 
+    except:
+        blynk.virtual_write(98, "Unexpected error: atlas" + '\n') 
+        _log.info("Unexpected error: Atlas")
+    			
+  
     @blynk.handle_event('write V255')
     def rebooter(pin, value):
+        _log.info( "User reboot")	
         blynk.virtual_write(98, "User Reboot " + '\n')
+        for sensor in sensors:
+            blynk.set_property(sensor.displayPin, 'color', colours['OFFLINE'])
+        blynk.set_property(systemLED, 'color', colours['OFFLINE'])	
         os.system('sh /home/pi/updateDroneponics.sh')
         blynk.virtual_write(98, "System updated and restarting " + '\n')
         os.system('sudo reboot')
 
-
-
-    # Will Print Every 10 Seconds
-    @timer.register(interval=10, run_once=False)
+	
+    @timer.register(interval=60, run_once=False)
     def blynk_data():
+        _log.info("Update Timer Run")
         now = datetime.now()
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
-        try:
-           cTemp = temp.query("R,").split(":")[1]
-        except:
-           blynk.virtual_write(98, "Read PH Error" + '\n') 
-        else:
-           blynk.virtual_write(30, cTemp)
-        try:
-           cPH = ph.query("RT,"+cTemp).split(":")[1]
-        except:
-           blynk.virtual_write(98, "Read PH Error" + '\n') 
-        else:
-           blynk.virtual_write(32, cPH)
-        try:
-            cEC = ec.query("RT,"+cTemp).split(":")[1]
-        except:
-            blynk.virtual_write(98, "Read EC Error" + '\n')
-        else:
-            blynk.virtual_write(31, cEC)
-        blynk.virtual_write(98, "Completed Timer Function" + '\n') 
+
+        cTemp = sensors[0].sensor.query("R").split(":")[1].strip().rstrip('\x00')
+        sensors[0].value = cTemp #Temp
+        sensors[1].value = sensors[1].sensor.query("RT,"+cTemp).split(":")[1].strip().rstrip('\x00') #EC
+        sensors[2].value = sensors[2].sensor.query("RT,"+sensors[0].value).split(":")[1].strip().rstrip('\x00')  #pH
+        for sensor in sensors:
+             if sensor is not None:
+                  _log.info("Going to update " + str(sensor.name) + "using pin " + str(sensor.displayPin) + " with value " + str(sensor.value))                  
+                  blynk.virtual_write(98, "Current " + str(sensor.name) + " reading =[" + str(sensor.value) + "]" + '\n')
+                  blynk.virtual_write(sensor.displayPin, sensor.value)
+        _log.info("Completed Timer Function") 
 
     while True:
         try:
@@ -130,26 +93,41 @@ try:
               p = subprocess.Popen(['i2cdetect', '-y','1'],stdout=subprocess.PIPE,)
               #cmdout = str(p.communicate())
               for i in range(0,9):
-                  blynk.virtual_write(98, str(p.stdout.readline()) + '\n')
+                   blynk.virtual_write(98, str(p.stdout.readline()) + '\n')
               bootup = False
               now = datetime.now()
               blynk.virtual_write(99, now.strftime("%d/%m/%Y %H:%M:%S"))
-              #blynk.virtual_write(98, "clr")
+              for sensor in sensors:
+                  blynk.virtual_write(sensor.displayPin, 255)
+              blynk.virtual_write(systemLED, 255)
               blynk.virtual_write(98, "System now updated and restarted " + '\n')
               blynk.virtual_write(255, 0)
               _log.info('Just Booted')
-
            timer.run()
         except:
            _log.info('Unexpected error')
-           blynk.virtual_write(98, "System has error : Auto updated and restarted" + '\n')
+           blynk.virtual_write(98, "System has main loop error" + '\n')
+           for sensor in sensors:
+                 blynk.virtual_write(sensor.displayPin, 255)
+           blynk.set_property(systemLED, 'color', colours['OFFLINE'])
            os.system('sh /home/pi/updateDroneponics.sh')
            os.system('sudo reboot') 
-except:
-   _log.info('Unexpected error')
+  
+  
+except KeyboardInterrupt:
+   _log.info('Keyboard Interrupt')
    blynkErr = blynklib.Blynk(BLYNK_AUTH)
+   for sensor in sensors:
+        blynkErr.set_property(sensor.displayPin, 'color', colours['OFFLINE'])
    blynkErr.virtual_write(98, "System has error" + '\n')
    os.system('sh /home/pi/updateDroneponics.sh')
    os.system('sudo reboot')
-finally:
-   GPIO.cleanup()
+
+except:
+   _log.info('Unexpected error')
+   blynkErr = blynklib.Blynk(BLYNK_AUTH)
+   for sensor in sensors:
+        blynkErr.set_property(sensor.displayPin, 'color', colours['OFFLINE'])
+   blynkErr.virtual_write(98, "System has error" + '\n')
+   os.system('sh /home/pi/updateDroneponics.sh')
+   os.system('sudo reboot')
