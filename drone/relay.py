@@ -6,6 +6,7 @@ class Relay:
        self.LED = Led
        self.name = Name
        self.button = Button
+       self.noisy = False
        
 def buildRelay(relays, _log): 
     relays.append( Relay(26, LED[1], "Air", 1))
