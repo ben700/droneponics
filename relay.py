@@ -62,30 +62,6 @@ if True:
     ALLOWED_COMMANDS_LIST = ['ls', 'lsusb', 'ip a', 'ip abc']
     TWEET_MSG = "New value='{}' on VPIN({})"
 	 
-    @blynk.handle_event("connect")
-    def connect_handler():
-        _log.info('SCRIPT_START')
-        for pin in range(5):
-            _log.info('Syncing virtual pin {}'.format(pin))
-            blynk.virtual_sync(pin)
-
-            # within connect handler after each server send operation forced socket reading is required cause:
-            #  - we are not in script listening state yet
-            #  - without forced reading some portion of blynk server messages can be not delivered to HW
-            blynk.read_response(timeout=0.5)
-			
-  
-    @blynk.handle_event('write V255')
-    def rebooter(pin, value):
-        _log.info( "User reboot")	
-        blynk.virtual_write(98, "User Reboot " + '\n')
-        for l in LED:
-            blynk.set_property(l, 'color', colours['OFFLINE'])
-        blynk.set_property(systemLED, 'color', colours['OFFLINE'])	
-        os.system('sh /home/pi/updateDroneponics.sh')
-        blynk.virtual_write(98, "System updated and restarting " + '\n')
-        os.system('sudo reboot')
-
     @blynk.handle_event('write V1')
     def button1(pin, value):
         _log,info("button1")	
@@ -133,7 +109,30 @@ if True:
     def relayOn(i):
         blynk.set_property(relays[i].LED, 'color', colours[0])
         GPIO.output(relays[i].pinId,GPIO.LOW)
-	
+
+    @blynk.handle_event('write V255')
+    def rebooter(pin, value):
+        _log.info( "User reboot")	
+        blynk.virtual_write(98, "User Reboot " + '\n')
+        for l in LED:
+            blynk.set_property(l, 'color', colours['OFFLINE'])
+        blynk.set_property(systemLED, 'color', colours['OFFLINE'])	
+        os.system('sh /home/pi/updateDroneponics.sh')
+        blynk.virtual_write(98, "System updated and restarting " + '\n')
+        os.system('sudo reboot')	
+
+    @blynk.handle_event("connect")
+    def connect_handler():
+        _log.info('SCRIPT_START')
+        for pin in range(5):
+            _log.info('Syncing virtual pin {}'.format(pin))
+            blynk.virtual_sync(pin)
+
+            # within connect handler after each server send operation forced socket reading is required cause:
+            #  - we are not in script listening state yet
+            #  - without forced reading some portion of blynk server messages can be not delivered to HW
+            blynk.read_response(timeout=0.5)
+				
     @timer.register(interval=30, run_once=False)
     def blynk_data():
         _log.info("Update Timer Run")
