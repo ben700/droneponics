@@ -111,11 +111,11 @@ if True:
 
 	
     def relayOn(i):
-        blynk.set_property(relays[i].LED, 'color', colours[1])
+        blynk.set_property(relays[i].LED, 'color', colours[0])
         GPIO.output(relays[i].pinId,GPIO.HIGH)
 	
     def relayOff(i):
-        blynk.set_property(relays[i].LED, 'color', colours[0])
+        blynk.set_property(relays[i].LED, 'color', colours[1])
         GPIO.output(relays[i].pinId,GPIO.LOW)
  
     @blynk.handle_event('write V255')
