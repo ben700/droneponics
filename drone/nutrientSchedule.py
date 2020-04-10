@@ -15,7 +15,7 @@ def buildNutrientMix(nutrientMix, _log):
 
             
 def buildOxyMix(nutrientMix, _log): 
-    nutrientMix.append( Dose(103, 5.00, LED[0], "Oxy Plus", VolumePin[0], 10))
+    nutrientMix.append( Dose(103, 5.00, LED[0], "Oxy Plus", VolumePin[0], 5000))
     return nutrientMix
 
    
