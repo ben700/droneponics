@@ -177,7 +177,7 @@ if True:
                   blynk.virtual_write(98, "Current " + str(sensor.name) + " reading =[" + str(sensor.value) + "]" + '\n')
                   blynk.virtual_write(sensor.displayPin, sensor.value)
       
-        if (sensors[1].target > float(sensors[1].value)): #EC
+        if (sensors[0].target > float(sensors[0].value)): #DO
              _log.info("Do a dose")     
              doSingleDose()     
              blynk.virtual_write(98,"Automatic oxy dose "+ '\n') 
