@@ -38,8 +38,7 @@ try:
     _log.addHandler(consoleHandler)
     _log.setLevel(logging.DEBUG)
 
-    pH=0
-    eC=9999	
+
     sensors = []
     nutrientMix = []
     nutrientMix = drone.buildOxyMix(nutrientMix, _log)
