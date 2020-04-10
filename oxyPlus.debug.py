@@ -173,7 +173,7 @@ if True:
         sensors[0].value = sensors[0].sensor.query("R").split(":")[1].strip().rstrip('\x00') #EC
         for sensor in sensors:
              if sensor is not None:
-                  _log.info("Going to update " + str(sensor.name) + "using pin " + str(sensor.displayPin) + " with value " + str(sensor.value))                  
+                  _log.info("Going to update " + str(sensor.name) + " using pin " + str(sensor.displayPin) + " with value " + str(sensor.value))                  
                   blynk.virtual_write(98, "Current " + str(sensor.name) + " reading =[" + str(sensor.value) + "]" + '\n')
                   blynk.virtual_write(sensor.displayPin, sensor.value)
       
