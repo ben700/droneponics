@@ -28,7 +28,7 @@ colours = {0: '#FF0000', 1: '#00FF00', '0': '#FF0000', '1': '#00FF00', 'OFFLINE'
 systemLED=101
 
 
-try:
+if True:
 
     # tune console logging
     _log = logging.getLogger('BlynkLog')
@@ -185,7 +185,7 @@ try:
         _log.info("Completed Timer Function") 
 
     while True:
-        try:
+        if True:
            blynk.run()
            if bootup :
               p = subprocess.Popen(['i2cdetect', '-y','1'],stdout=subprocess.PIPE,)
@@ -203,30 +203,3 @@ try:
               blynk.virtual_write(255, 0)
               _log.info('Just Booted')
            timer.run()
-        except:
-           _log.info('Unexpected error')
-           blynk.virtual_write(98, "System has main loop error" + '\n')
-           for l in LED:
-                blynk.set_property(l, 'color', colours['OFFLINE'])
-           blynk.set_property(systemLED, 'color', colours['OFFLINE'])
-           os.system('sh /home/pi/updateDroneponics.sh')
-           os.system('sudo reboot') 
-  
-  
-except KeyboardInterrupt:
-   _log.info('Keyboard Interrupt')
-   blynkErr = blynklib.Blynk(BLYNK_AUTH)
-   for l in LED:
-        blynkErr.set_property(l, 'color', colours['OFFLINE'])
-   blynkErr.virtual_write(98, "System has error" + '\n')
-   os.system('sh /home/pi/updateDroneponics.sh')
-   os.system('sudo reboot')
-
-except:
-   _log.info('Unexpected error')
-   blynkErr = blynklib.Blynk(BLYNK_AUTH)
-   for l in LED:
-        blynkErr.set_property(l, 'color', colours['OFFLINE'])
-   blynkErr.virtual_write(98, "System has error" + '\n')
-   os.system('sh /home/pi/updateDroneponics.sh')
-   os.system('sudo reboot')
