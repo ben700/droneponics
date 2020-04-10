@@ -1,0 +1,4 @@
+[Desktop Entry]
+Type=Application
+Name=oxyDoser
+Exec=xterm -hold -e '/usr/bin/python3 /home/pi/droneponics/oxyDoser.py'
