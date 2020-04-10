@@ -119,7 +119,7 @@ try:
                              blynk.notify(dosage.name + " has pumped " + str(dosage.volume) + ", so may need topup")	
                              dosage.notify = True
                         else :
-                             blynk.virtual_write(98, "User already notified :-" + dosage.name + " has pumped " + str(dosage.volume) + ", so may need topup")	
+                             blynk.virtual_write(98, "User already notified :-" + dosage.name + " has pumped " + str(dosage.volume) + ", so may need topup"  + '\n')	
                              
     
      
