@@ -1,5 +1,5 @@
 ##!/usr/bin/env python3 
-BLYNK_AUTH = 'e06jzpI2zuRD4KB5eHyHdCQTGFT7einR' #i2cLogger
+BLYNK_AUTH = 'q0j5JmKCsTnXObzdDNN4PH-f9r8av0q6' #oxyDoser
 
 LED = [10,11,12,13,14,15]
 VolumePin = [26,21,22,23,24,25] 
