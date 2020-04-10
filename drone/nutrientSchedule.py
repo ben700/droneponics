@@ -27,9 +27,9 @@ def buildSensors(sensors, _log):
     return sensors
 
 def buildOxySensors(sensors, _log):
-    sensors.append( Sensor(97, "Dissolved Oxygen", 30, 20))
+    sensors.append( Sensor(97, "Dissolved Oxygen", 30, Target=10))
     return sensors
 
 def buildExperimentalSensors(sensors, _log):
-    sensors.append( Sensor(97, "Dissolved Oxygen", 30, 20))
+    sensors.append( Sensor(97, "Dissolved Oxygen", 30, Target=10))
     return sensors
