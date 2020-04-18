@@ -137,6 +137,7 @@ try:
     @blynk.handle_event('write V41')
     def fillLinePump1(pin, value):
         x=0
+	blynk.virtual_write(40, str(value[0]) + '\n')
         _log.info( "Fill Line 1 " + str(value[0]) + '\n')
         lVolume= nutrientMix[x].volume
         now = datetime.now()
@@ -161,7 +162,8 @@ try:
         blynk.virtual_write(98, "User Reboot " + '\n')
         for l in LED:
             blynk.set_property(l, 'color', colours['OFFLINE'])
-        blynk.set_property(systemLED, 'color', colours['OFFLINE'])	
+        blynk.set_property(systemLED, 'color', colours['OFFLINE'])
+	blynk.virtual_write(40, "Booted" + '\n')
         os.system('sh /home/pi/updateDroneponics.sh')
         blynk.virtual_write(98, "System updated and restarting " + '\n')
         os.system('sudo reboot')
