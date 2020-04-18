@@ -1,5 +1,6 @@
 ##!/usr/bin/env python3 
 BLYNK_AUTH = 'q0j5JmKCsTnXObzdDNN4PH-f9r8av0q6' #oxyDoser
+#BLYNK_AUTH = '9eH36c7ajeEs9rM6byIkDZcoVZi4R8v5' #oxyDoser2
 
 LED = [10,11,12,13,14,15]
 VolumePin = [26,21,22,23,24,25] 
