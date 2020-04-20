@@ -1,3 +1,4 @@
+sys.path.append('/home/pi/droneponics')
 import chirp
 import time
 
