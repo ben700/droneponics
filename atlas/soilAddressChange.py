@@ -40,5 +40,6 @@ except IOError:
 	print ("Use ''i2cdetect -y 1'' to see your current Chirp addresses.")
 
 print ("Renaming %s to address %d" % (chirp, new_addr))
-chirp.set_addr(new_addr)
+#chirp.set_addr(new_addr)
+chirp.sensor_address(new_addr)
 print ("Now your Chirp answers:", chirp)
