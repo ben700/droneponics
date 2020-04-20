@@ -1,5 +1,6 @@
 #!/usr/bin/python
 #by Daniel Tamm
+import sys
 sys.path.append('/home/pi/droneponics')
 from chirp import Chirp
 import sys
