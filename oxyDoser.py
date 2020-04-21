@@ -170,11 +170,11 @@ try:
 	
     @timer.register(interval=60, run_once=False)
     def blynk_data():
-        _log.info("Update Timer Run")
+        blynk.virtual_write(98,"Update Timer Run"+ '\n')
         now = datetime.now()
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
-
-        sensors[0].value = sensors[0].sensor.query("R").split(":")[1].strip().rstrip('\x00') #EC
+        
+        sensors[0].value = sensors[0].sensor.query("R").split(":")[1].strip().rstrip('\x00') #DO
         for sensor in sensors:
              if sensor is not None:
                   _log.info("Going to update " + str(sensor.name) + " using pin " + str(sensor.displayPin) + " with value " + str(sensor.value))                  
