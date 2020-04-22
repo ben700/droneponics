@@ -304,9 +304,9 @@ try:
             _log.info('CO2: {0:d}'.format(mhz19b['co2']))
 
         else:
-            blynk.virtual_write(98, 'Unexpected error: mhz19b' + '\n')
-            _log.info('Unexpected error: mhz19b')
-            blynk.set_property(10, 'color', ERR_COLOR)
+            blynk.virtual_write(98, 'Error can access CO2 sensor: mhz19b' + '\n')
+            _log.info('Error can access CO2 sensor: mhz19b')
+            blynk.set_property(10, 'color', colours['OFFLINE'])
 
         blynk.virtual_write(98, "Completed Timer Function" + '\n') 
 
