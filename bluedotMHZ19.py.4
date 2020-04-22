@@ -4,7 +4,7 @@ colours = {1: '#FF0000', 0: '#00FF00', 'OFFLINE': '#0000FF'}
 systemLED = 101
 try:
 #if True:
-
+    import math
     import subprocess
     from python_tsl2591 import tsl2591
     import datetime
@@ -308,6 +308,11 @@ try:
             _log.info('Error can access CO2 sensor: mhz19b')
             blynk.set_property(10, 'color', colours['OFFLINE'])
 
+        b = 17.62
+        c = 243.12
+        gamma = (b * bme280.temperature /(c + bme280.temperature)) + math.log(bme280.humidity / 100.0)
+        dewpoint = (c * gamma) / (b - gamma)
+        blynk.virtual_write(8, str("{0:.0f}".format(dewpoint)))
         blynk.virtual_write(98, "Completed Timer Function" + '\n') 
 
 
