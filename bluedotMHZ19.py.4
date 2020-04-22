@@ -2,8 +2,8 @@
 BLYNK_AUTH = 'PRWoa0b_xLEAS8OwA3lUp0JIF_5GRogZ' #envornmental
 colours = {1: '#FF0000', 0: '#00FF00', 'OFFLINE': '#0000FF'}
 systemLED = 101
-#try:
-if True:
+try:
+#if True:
 
     import subprocess
     from python_tsl2591 import tsl2591
@@ -317,6 +317,7 @@ if True:
               now = datetime.now()
               blynk.virtual_write(99, now.strftime("%d/%m/%Y %H:%M:%S"))
               blynk.set_property(systemLED, 'color', colours[0])
+              blynk.set_property(0, 'color', colours[0])
               blynk.set_property(1, 'color', colours[0])
               blynk.set_property(2, 'color', colours[0])
               blynk.set_property(3, 'color', colours[0])
@@ -345,26 +346,28 @@ if True:
   
   
 #except:
-#   _log.info('Unexpected error')
-#   blynkErr = blynklib.Blynk(BLYNK_AUTH)
-#   blynkErr.virtual_write(98, "System has error" + '\n')
-#   blynkErr.set_property(1, 'color', colours['OFFLINE'])
-#   blynkErr.set_property(2, 'color', colours['OFFLINE'])
-#   blynkErr.set_property(3, 'color', colours['OFFLINE'])
-#   blynkErr.set_property(4, 'color', colours['OFFLINE'])
-#   blynkErr.set_property(5, 'color', colours['OFFLINE'])
-#   blynkErr.set_property(6, 'color', colours['OFFLINE'])
-#   blynkErr.set_property(7, 'color', colours['OFFLINE'])
-#   blynkErr.set_property(10, 'color', colours['OFFLINE'])
-#   os.system('sh /home/pi/updateDroneponics.sh')
-#   os.system('sudo reboot')
-#finally:
-#   blynk.set_property(1, 'color', colours['OFFLINE'])
-#   blynk.set_property(2, 'color', colours['OFFLINE'])
-#   blynk.set_property(3, 'color', colours['OFFLINE'])
-#   blynk.set_property(4, 'color', colours['OFFLINE'])
-#   blynk.set_property(5, 'color', colours['OFFLINE'])
-#   blynk.set_property(6, 'color', colours['OFFLINE'])
-#   blynk.set_property(7, 'color', colours['OFFLINE'])
-#   blynk.set_property(10, 'color', colours['OFFLINE'])
-#   GPIO.cleanup()
+   _log.info('Unexpected error')
+   blynkErr = blynklib.Blynk(BLYNK_AUTH)
+   blynkErr.virtual_write(98, "System has error" + '\n')
+   blynkErr.set_property(0, 'color', colours['OFFLINE'])
+   blynkErr.set_property(1, 'color', colours['OFFLINE'])
+   blynkErr.set_property(2, 'color', colours['OFFLINE'])
+   blynkErr.set_property(3, 'color', colours['OFFLINE'])
+   blynkErr.set_property(4, 'color', colours['OFFLINE'])
+   blynkErr.set_property(5, 'color', colours['OFFLINE'])
+   blynkErr.set_property(6, 'color', colours['OFFLINE'])
+   blynkErr.set_property(7, 'color', colours['OFFLINE'])
+   blynkErr.set_property(10, 'color', colours['OFFLINE'])
+   os.system('sh /home/pi/updateDroneponics.sh')
+   os.system('sudo reboot')
+finally:
+   blynk.set_property(0, 'color', colours['OFFLINE'])
+   blynk.set_property(1, 'color', colours['OFFLINE'])
+   blynk.set_property(2, 'color', colours['OFFLINE'])
+   blynk.set_property(3, 'color', colours['OFFLINE'])
+   blynk.set_property(4, 'color', colours['OFFLINE'])
+   blynk.set_property(5, 'color', colours['OFFLINE'])
+   blynk.set_property(6, 'color', colours['OFFLINE'])
+   blynk.set_property(7, 'color', colours['OFFLINE'])
+   blynk.set_property(10, 'color', colours['OFFLINE'])
+   GPIO.cleanup()
