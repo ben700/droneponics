@@ -1,0 +1,48 @@
+# The ID and range of a sample spreadsheet.
+BLYNK_AUTH = 'PRWoa0b_xLEAS8OwA3lUp0JIF_5GRogZ' #envornmental
+colours = {1: '#FF0000', 0: '#00FF00', 'OFFLINE': '#0000FF'}
+systemLED = 101
+
+try:
+
+    import subprocess
+    from python_tsl2591 import tsl2591
+    import datetime
+    import time
+    import shlex, requests
+    import board
+    import busio
+    import smbus 
+    from ctypes import c_short
+    from ctypes import c_byte
+    from ctypes import c_ubyte
+    import mh_z19
+    import blynklib
+    import blynktimer
+    import logging
+    from datetime import datetime
+    import adafruit_tsl2591
+    import sys
+    import os
+
+    # Initialize Blynk
+    blynk = blynklib.Blynk(BLYNK_AUTH)
+    timer = blynktimer.Timer()
+
+    @blynk.handle_event("write V255")
+    def buttonV255Pressed(value):
+        print("User Reboot")
+        blynk.virtual_write(98, "User Reboot " + '\n')
+
+    @timer.register(interval=10, run_once=False)
+    def blynk_data():
+        print("Update Timer Run")
+
+
+    blynk.run()
+    timer.run()
+  
+  
+except:
+   _log.info('Unexpected error')
+
