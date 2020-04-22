@@ -254,12 +254,12 @@ if True:
            blynk.set_property(1, 'color', T_COLOR)
 
 
-        _log.info('Pressure: {0:d}'.format(pressure))
-        blynk.virtual_write(2, str("{0:d}".format(pressure)))
+        _log.info('Pressure: {0:.0f}'.format(pressure))
+        blynk.virtual_write(2, str("{0:.0f}".format(pressure)))
         blynk.set_property(2, 'color', P_COLOR)
 
-        _log.info('Humidity: {0:d}'.format(humidity))
-        blynk.virtual_write(3, str("{0:d}".format(humidity)))
+        _log.info('Humidity: {0:.0f}'.format(humidity))
+        blynk.virtual_write(3, str("{0:.0f}".format(humidity)))
         blynk.set_property(3, 'color', H_COLOR)
 
         if (tsl is not None):
