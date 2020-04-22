@@ -28,11 +28,16 @@ try:
     # Initialize Blynk
     blynk = blynklib.Blynk(BLYNK_AUTH)
     timer = blynktimer.Timer()
-
+    
     @blynk.handle_event('write V255')
-    def buttonV255Pressed(value):
-        print("User Reboot")
+    def rebooter(pin, value):
+        _log.info( "User reboot")	
         blynk.virtual_write(98, "User Reboot " + '\n')
+        blynk.set_property(systemLED, 'color', colours['OFFLINE'])	
+        os.system('sh /home/pi/updateDroneponics.sh')
+        blynk.virtual_write(98, "System updated and restarting " + '\n')
+        os.system('sudo reboot')
+
 
     @timer.register(interval=10, run_once=False)
     def blynk_data():
