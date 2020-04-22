@@ -29,7 +29,7 @@ try:
     blynk = blynklib.Blynk(BLYNK_AUTH)
     timer = blynktimer.Timer()
 
-    @blynk.handle_event("write V255")
+    @blynk.handle_event('write V255')
     def buttonV255Pressed(value):
         print("User Reboot")
         blynk.virtual_write(98, "User Reboot " + '\n')
