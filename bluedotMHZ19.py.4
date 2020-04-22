@@ -1,7 +1,7 @@
 # The ID and range of a sample spreadsheet.
 BLYNK_AUTH = 'PRWoa0b_xLEAS8OwA3lUp0JIF_5GRogZ' #envornmental
 colours = {1: '#FF0000', 0: '#00FF00', 'OFFLINE': '#0000FF'}
-
+systemLED = 101
 try:
 
 
@@ -308,14 +308,17 @@ try:
         try:
            blynk.run()
            if bootup :
+              p = subprocess.Popen(['i2cdetect', '-y','1'],stdout=subprocess.PIPE,)
+              #cmdout = str(p.communicate())
+              for i in range(0,9):
+                   blynk.virtual_write(98, str(p.stdout.readline()) + '\n')
               bootup = False
               now = datetime.now()
               blynk.virtual_write(99, now.strftime("%d/%m/%Y %H:%M:%S"))
-              blynk.virtual_write(98, "clr")
+              blynk.virtual_write(systemLED, 255)
               blynk.virtual_write(98, "System now updated and restarted " + '\n')
               blynk.virtual_write(255, 0)
               _log.info('Just Booted')
-
            timer.run()
         except:
            _log.info('Unexpected error')
