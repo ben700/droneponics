@@ -311,7 +311,7 @@ try:
 
         b = 17.62
         c = 243.12
-        gamma = (b * bme280.temperature /(c + bme280.temperature)) + math.log(bme280.humidity / 100.0)
+        gamma = (b * temperature /(c + temperature)) + math.log(humidity / 100.0)
         dewpoint = (c * gamma) / (b - gamma)
         blynk.virtual_write(8, str("{0:.0f}".format(dewpoint)))
         blynk.virtual_write(98, "Completed Timer Function" + '\n') 
