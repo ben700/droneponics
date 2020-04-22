@@ -345,7 +345,7 @@ try:
  #          os.system('sudo reboot') 
   
   
-#except:
+except:
    _log.info('Unexpected error')
    blynkErr = blynklib.Blynk(BLYNK_AUTH)
    blynkErr.virtual_write(98, "System has error" + '\n')
