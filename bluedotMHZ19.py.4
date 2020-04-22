@@ -313,8 +313,7 @@ try:
 
 
     while True:
-   #     try:
-         if True:
+        try:
            blynk.run()
            if bootup :
               p = subprocess.Popen(['i2cdetect', '-y','1'],stdout=subprocess.PIPE,)
@@ -339,19 +338,20 @@ try:
               blynk.virtual_write(255, 0)
               _log.info('Just Booted')
            timer.run()
- #       except:
- #          _log.info('Unexpected error')
- #          blynk.virtual_write(98, "System has main loop error" + '\n')
- #          blynk.set_property(1, 'color', colours['OFFLINE'])
- #          blynk.set_property(2, 'color', colours['OFFLINE'])
- #          blynk.set_property(3, 'color', colours['OFFLINE'])
- #          blynk.set_property(4, 'color', colours['OFFLINE'])
- #          blynk.set_property(5, 'color', colours['OFFLINE'])
- #          blynk.set_property(6, 'color', colours['OFFLINE'])
- #          blynk.set_property(7, 'color', colours['OFFLINE'])
- #          blynk.set_property(10, 'color', colours['OFFLINE'])
- #          os.system('sh /home/pi/updateDroneponics.sh')
- #          os.system('sudo reboot') 
+        except:
+           _log.info('Unexpected error')
+           blynk.virtual_write(98, "System has main loop error" + '\n')
+           blynk.set_property(systemLED, 'color', colours['OFFLINE'])
+           blynk.set_property(1, 'color', colours['OFFLINE'])
+           blynk.set_property(2, 'color', colours['OFFLINE'])
+           blynk.set_property(3, 'color', colours['OFFLINE'])
+           blynk.set_property(4, 'color', colours['OFFLINE'])
+           blynk.set_property(5, 'color', colours['OFFLINE'])
+           blynk.set_property(6, 'color', colours['OFFLINE'])
+           blynk.set_property(7, 'color', colours['OFFLINE'])
+           blynk.set_property(10, 'color', colours['OFFLINE'])
+           os.system('sh /home/pi/updateDroneponics.sh')
+           os.system('sudo reboot') 
   
   
 except:
@@ -359,6 +359,7 @@ except:
    blynkErr = blynklib.Blynk(BLYNK_AUTH)
    blynkErr.run()
    blynkErr.virtual_write(98, "System has error" + '\n')
+   blynkErr.set_property(systemLED, 'color', colours['OFFLINE'])
    blynkErr.set_property(0, 'color', colours['OFFLINE'])
    blynkErr.set_property(1, 'color', colours['OFFLINE'])
    blynkErr.set_property(2, 'color', colours['OFFLINE'])
