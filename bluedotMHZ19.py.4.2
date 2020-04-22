@@ -38,9 +38,9 @@ try:
     def blynk_data():
         print("Update Timer Run")
 
-
-    blynk.run()
-    timer.run()
+    while True:
+       blynk.run()
+       timer.run()
   
   
 except:
