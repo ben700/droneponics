@@ -214,18 +214,26 @@ try:
         humidity = 0
 
       return temperature/100.0,pressure/100.0,humidity
-
-    @blynk.handle_event("write V255")
-    def buttonV255Pressed(value):
+      
+    @blynk.handle_event('write V255')
+    def rebooter(pin, value):
+        _log.info( "User reboot")	
         blynk.virtual_write(98, "User Reboot " + '\n')
+        blynk.set_property(systemLED, 'color', colours['OFFLINE'])	
+        blynk.set_property(0, 'color', colours['OFFLINE'])
+        blynk.set_property(1, 'color', colours['OFFLINE'])
+        blynk.set_property(2, 'color', colours['OFFLINE'])
+        blynk.set_property(3, 'color', colours['OFFLINE'])
+        blynk.set_property(4, 'color', colours['OFFLINE'])
+        blynk.set_property(5, 'color', colours['OFFLINE'])
+        blynk.set_property(6, 'color', colours['OFFLINE'])
+        blynk.set_property(7, 'color', colours['OFFLINE'])
+        blynk.set_property(10, 'color', colours['OFFLINE'])
         os.system('sh /home/pi/updateDroneponics.sh')
         blynk.virtual_write(98, "System updated and restarting " + '\n')
         os.system('sudo reboot')
 
-
-
-
-    @timer.register(interval=10, run_once=False)
+    @timer.register(interval=30, run_once=False)
     def blynk_data():
         _log.info("Update Timer Run")
         Counter.cycle += 1
