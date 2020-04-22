@@ -264,8 +264,8 @@ if True:
 
         if (tsl is not None):
            lux = tsl.lux
-           _log.info('Total light: {0:d}lux'.format(lux))
-           blynk.virtual_write(4, str("{0:d}".format(lux))) 
+           _log.info('Total light: {0:.0f}lux'.format(lux))
+           blynk.virtual_write(4, str("{0:.0f}".format(lux))) 
            blynk.set_property(4, 'color', TL_COLOR)
 
 
