@@ -1,5 +1,12 @@
 cp /home/pi/droneponics/updateDroneponics.sh /home/pi/updateDroneponics.sh
-sh /home/pi/droneponics/updatePi.sh
+
+sudo apt full-upgrade -y
+sudo apt update
+sudo apt full-upgrade -y
+sudo apt upgrade -y
+sudo apt dist-upgrade -y
+sudo apt autoremove -y
+sudo apt autoclean -y
 
 cd /tmp
 wget https://project-downloads.drogon.net/wiringpi-latest.deb
