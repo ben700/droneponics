@@ -18,3 +18,6 @@ git submodule init
 git submodule update
 git submodule foreach git fetch --all
 git submodule foreach "tag=\$(git rev-list --exclude='*-*' --tags --max-count=1); git checkout -q \$tag"
+
+
+pip3 list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1 | xargs -n1 pip3 install -U
