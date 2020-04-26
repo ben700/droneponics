@@ -1,5 +1,5 @@
-sudo rm -rf droneponics
-git clone https://github.com/ben700/droneponics.git
-cd droneponics
-chmod +x *.sh
-cd
+cd /home/pi
+sudo rm -rf /home/pi/droneponics
+git clone https://github.com/ben700/droneponics.git /home/pi/
+chmod +x /home/pi/droneponics/*.sh
+
