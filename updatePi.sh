@@ -1,6 +1,6 @@
 pip3 freeze > /home/pi/droneponics/requirements.txt
 python3 /home/pi/droneponics/replace.py /home/pi/droneponics/requirements.txt
-#pip3 install -r /home/pi/droneponics/requirements.txt --upgrade
+pip3 install -r /home/pi/droneponics/requirements.txt --upgrade
 
 
 #echo "Update PI"
