@@ -12,7 +12,7 @@ blynk = blynklib.Blynk(BLYNK_AUTH)
 timer = blynktimer.Timer()
 
 # Will Print Every 10 Seconds
-#@timer.register(interval=10, run_once=False)
+@timer.register(interval=10, run_once=False)
 def blynk_data():
     now = datetime.now()
     blynk.virtual_write(1, now.strftime("%d/%m/%Y %H:%M:%S"))
@@ -23,10 +23,6 @@ def blynk_data():
     blynk.virtual_write(11, str(chirp.moist()))
     blynk.virtual_write(12, str(chirp.temp()))
     blynk.virtual_write(12, str(chirp.light()))
-
-
-# Add Timers
-timer.set_interval(10, blynk_data)
 
 
 while True:
