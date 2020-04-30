@@ -13,8 +13,8 @@ min_moist = 240
 max_moist = 750
 highest_measurement = False
 lowest_measurement = False
-    
- 
+scale_sign = '°C'
+        
 blynk = blynklib.Blynk(BLYNK_AUTH)
 timer = blynktimer.Timer()
 
@@ -42,9 +42,10 @@ def blynk_data():
         chirp.temp, scale_sign, chirp.light)
     print(output)
             
-    blynk.virtual_write(11, str(chirp.moist()))
-    blynk.virtual_write(12, str(chirp.temp()))
-    blynk.virtual_write(12, str(chirp.light()))
+    blynk.virtual_write(11, str(chirp.moist))
+    blynk.virtual_write(12, str(chirp.moist_percent))
+    blynk.virtual_write(13, str(chirp.temp))
+    blynk.virtual_write(14, str(chirp.light))
 
 
 while True:
