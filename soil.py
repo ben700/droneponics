@@ -21,6 +21,7 @@ timer = blynktimer.Timer()
 # Will Print Every 10 Seconds
 @timer.register(interval=10, run_once=False)
 def blynk_data():
+    highest_measurement = 0
     print("Now in Timer")
     now = datetime.now()
     blynk.virtual_write(1, now.strftime("%d/%m/%Y %H:%M:%S"))
@@ -49,7 +50,7 @@ def blynk_data():
 
     # Adjust max and min measurement variables, used for calibrating
     # the sensor and allow using moisture percentage.
-    if highest_measurement is not False:
+    if (highest_measurement is not False):
         if chirp.moist > highest_measurement:
             highest_measurement = chirp.moist
         else:
