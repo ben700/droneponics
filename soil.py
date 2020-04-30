@@ -21,7 +21,8 @@ timer = blynktimer.Timer()
 # Will Print Every 10 Seconds
 @timer.register(interval=10, run_once=False)
 def blynk_data():
-    highest_measurement = 0
+    global highest_measurement
+    global lowest_measurement
     print("Now in Timer")
     now = datetime.now()
     blynk.virtual_write(1, now.strftime("%d/%m/%Y %H:%M:%S"))
