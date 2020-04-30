@@ -1,6 +1,12 @@
 from chirp import Chirp
 import time
 from datetime import datetime
+import blynklib
+import blynktimer
+import logging
+    
+BLYNK_AUTH = 'n0OuchdtamBdO0V1X_3v3EIwBashSr4n' #envornmental
+colours = {1: '#FF0000', 0: '#00FF00', 'OFFLINE': '#0000FF'}
 
 # Initialize Blynk
 blynk = BlynkLib.Blynk(BLYNK_AUTH)
