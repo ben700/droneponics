@@ -7,14 +7,12 @@ import logging
     
 BLYNK_AUTH = 'n0OuchdtamBdO0V1X_3v3EIwBashSr4n' #envornmental
 colours = {1: '#FF0000', 0: '#00FF00', 'OFFLINE': '#0000FF'}
-
-# Initialize Blynk
-blynk = BlynkLib.Blynk(BLYNK_AUTH)
-
-# Create BlynkTimer Instance
-timer = BlynkTimer()
+    
+blynk = blynklib.Blynk(BLYNK_AUTH)
+timer = blynktimer.Timer()
 
 # Will Print Every 10 Seconds
+#@timer.register(interval=10, run_once=False)
 def blynk_data():
     now = datetime.now()
     blynk.virtual_write(1, now.strftime("%d/%m/%Y %H:%M:%S"))
