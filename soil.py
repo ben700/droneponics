@@ -11,8 +11,8 @@ colours = {1: '#FF0000', 0: '#00FF00', 'OFFLINE': '#0000FF'}
 addr = 0x20
 min_moist = 240
 max_moist = 750
-highest_measurement = False
-lowest_measurement = False
+highest_measurement = 0
+lowest_measurement = 0
 scale_sign = '°C'
         
 blynk = blynklib.Blynk(BLYNK_AUTH)
