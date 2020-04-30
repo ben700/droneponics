@@ -7,19 +7,41 @@ import logging
     
 BLYNK_AUTH = 'n0OuchdtamBdO0V1X_3v3EIwBashSr4n' #envornmental
 colours = {1: '#FF0000', 0: '#00FF00', 'OFFLINE': '#0000FF'}
+
+addr = 0x20
+min_moist = 240
+max_moist = 750
+highest_measurement = False
+lowest_measurement = False
     
+ 
 blynk = blynklib.Blynk(BLYNK_AUTH)
 timer = blynktimer.Timer()
 
 # Will Print Every 10 Seconds
 @timer.register(interval=10, run_once=False)
 def blynk_data():
+    print("Now in Timer")
     now = datetime.now()
     blynk.virtual_write(1, now.strftime("%d/%m/%Y %H:%M:%S"))
     
-    chirp = Chirp(1, 0x20)
-    print ("%d\t%d\t%d" % (chirp.moist(), chirp.temp(), chirp.light()))
     
+    # Initialize the sensor.
+    chirp = Chirp(address=addr,
+                  read_moist=True,
+                  read_temp=True,
+                  read_light=True,
+                  min_moist=min_moist,
+                  max_moist=max_moist,
+                  temp_scale='celsius',
+                  temp_offset=0)
+    
+    chirp.trigger()
+    output = '{:d} {:4.1f}% | {:3.1f}{} | {:d}'
+    output = output.format(chirp.moist, chirp.moist_percent,
+        chirp.temp, scale_sign, chirp.light)
+    print(output)
+            
     blynk.virtual_write(11, str(chirp.moist()))
     blynk.virtual_write(12, str(chirp.temp()))
     blynk.virtual_write(12, str(chirp.light()))
