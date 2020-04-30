@@ -47,7 +47,21 @@ def blynk_data():
     blynk.virtual_write(13, str(chirp.temp))
     blynk.virtual_write(14, str(chirp.light))
 
-
+    # Adjust max and min measurement variables, used for calibrating
+    # the sensor and allow using moisture percentage.
+    if highest_measurement is not False:
+        if chirp.moist > highest_measurement:
+            highest_measurement = chirp.moist
+        else:
+            highest_measurement = chirp.moist
+    if lowest_measurement is not False:    
+        if chirp.moist < lowest_measurement:
+            lowest_measurement = chirp.moist
+        else:
+            lowest_measurement = chirp.moist
+    blynk.virtual_write(21, str(highest_measurement))
+    blynk.virtual_write(22, str(lowest_measurement))
+    
 while True:
     blynk.run()
     timer.run()
