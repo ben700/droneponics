@@ -2,6 +2,7 @@ from drone import *
 class Dose:
    def __init__(self, PumpId, Dose, Led, name, volumePin, BottleSize, *args, **kwargs):
        print("Building object")
+       self.operational = False
        self.pump = None
        self.pumpId = PumpId
        self.dose = Dose
