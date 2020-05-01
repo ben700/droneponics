@@ -347,6 +347,8 @@ try:
            for l in LED:
                 blynk.set_property(l, 'color', colours['OFFLINE'])
            blynk.set_property(systemLED, 'color', colours['OFFLINE'])
+           blynk.set_property(sensorLED, 'color', colours['OFFLINE'])
+           blynk.set_property(pumpLED, 'color', colours['OFFLINE'])	   
            os.system('sh /home/pi/updateDroneponics.sh')
            os.system('sudo reboot') 
   
