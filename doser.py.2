@@ -59,7 +59,12 @@ try:
     # Initialize the sensor.
     try:
        for dosage in nutrientMix:
-           dosage.pump = AtlasI2C(dosage.pumpId)
+           try:
+               dosage.pump = AtlasI2C(dosage.pumpId)
+               dosage.pump.query("i")
+               dosage.pump.operational = True
+           except:
+               dosage.pump.operational = False
        blynk.virtual_write(98, "Pumps created" + '\n')
        blynk.set_property(pumpLED, 'color', colours['ONLINE'])
     except:
