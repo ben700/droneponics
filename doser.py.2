@@ -58,10 +58,14 @@ try:
     
     # Initialize the sensor.
     try:
-       # Create the I2C bus
        for dosage in nutrientMix:
            dosage.pump = AtlasI2C(dosage.pumpId)
-       blynk.virtual_write(98, "Pumps created" + '\n') 
+       blynk.virtual_write(98, "Pumps created" + '\n')
+       blynk.set_property(pumpLED, 'color', colours['ONLINE'])
+    except:
+            blynk.set_property(pumpLED, 'color', colours['OFFLINE'])
+            blynk.virtual_write(98, "Expected error: Connecting to dosers" + '\n') 
+    try:       
        for sensor in sensors:
            sensor.sensor = AtlasI2C(sensor.sensorId)
            blynk.set_property(sensor.displayPin, 'color', colours['ONLINE'])
@@ -70,8 +74,7 @@ try:
        blynk.set_property(sensorLED, 'color', colours['ONLINE'])
     except:
         blynk.set_property(sensorLED, 'color', colours['OFFLINE'])
-        blynk.virtual_write(98, "Unexpected error: atlas" + '\n') 
-        _log.info("Unexpected error: Atlas")
+        blynk.virtual_write(98, "Unexpected error: Connecting to Sensors" + '\n') 
     else:
         try:	
             _log.info("Update Pump volumes")
@@ -93,7 +96,6 @@ try:
                    #blynk.virtual_write(98, dosage.name + " ATV =" + dosage.pump.query("ATV,?").strip().rstrip('\x00') + '\n')
                    #blynk.virtual_write(98, dosage.name + " R =" + dosage.pump.query("R").strip().rstrip('\x00') + '\n')
                    #blynk.virtual_write(98, dosage.name + " Pump id " + str(dosage.pumpId) + " has dosed = " + str(dosage.volume) + '\n')
-            blynk.set_property(pumpLED, 'color', colours['ONLINE'])
             _log.info("Pumps all read")          
         except:
             _log.info("Expected error: Use Atlas Error")
