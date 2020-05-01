@@ -57,19 +57,17 @@ try:
     
     
     # Initialize the sensor.
-    try:
-       for dosage in nutrientMix:
-           try:
-               dosage.pump = AtlasI2C(dosage.pumpId)
-               dosage.pump.query("i")
-               dosage.pump.operational = True
-           except:
-               dosage.pump.operational = False
-       blynk.virtual_write(98, "Pumps created" + '\n')
-       blynk.set_property(pumpLED, 'color', colours['ONLINE'])
-    except:
-            blynk.set_property(pumpLED, 'color', colours['OFFLINE'])
-            blynk.virtual_write(98, "Expected error: Connecting to dosers" + '\n') 
+    for dosage in nutrientMix:
+       try:
+           blynk.set_property(dosage.LED, 'label', dosage.name)
+           dosage.pump = AtlasI2C(dosage.pumpId)
+           dosage.pump.query("i")
+           dosage.pump.operational = True
+           blynk.set_property(dosage.volumePin, 'color', colours['ONLINE'])
+       except:
+           dosage.pump.operational = False
+           blynk.set_property(dosage.volumePin, 'color', colours['OFFLINE'])
+	       
     try:       
        for sensor in sensors:
            sensor.sensor = AtlasI2C(sensor.sensorId)
@@ -80,32 +78,6 @@ try:
     except:
         blynk.set_property(sensorLED, 'color', colours['OFFLINE'])
         blynk.virtual_write(98, "Unexpected error: Connecting to Sensors" + '\n') 
-    else:
-        try:	
-            _log.info("Update Pump volumes")
-            for dosage in nutrientMix:
-                if(dosage.pump is not None):
-                   #dosage.blynkMe(blynk, colours)
-                   blynk.set_property(dosage.LED, 'color', colours['ONLINE'])
-                   blynk.set_property(dosage.volumePin, 'color', colours['ONLINE'])
-                   blynk.set_property(dosage.LED, 'label', dosage.name)
-                   blynk.set_property(dosage.volumePin, 'label', dosage.name + "-TVP")
-                   #dosage.volume = dosage.pump.query("ATV,?").split("TV,")[1].strip().rstrip('\x00')
-                   dosage.volume = dosage.pump.query("ATV,?").split("TV,")[1].split(".")[0].strip().rstrip('\x00')
-                   blynk.virtual_write(dosage.volumePin, dosage.volume )
-                  # blynk.virtual_write(98, dosage.name + " " + dosage.pump.query("O,V,1").strip().rstrip('\x00') + '\n')
-                  # blynk.virtual_write(98, dosage.name + " " + dosage.pump.query("O,TV,0").strip().rstrip('\x00') + '\n')
-                  # blynk.virtual_write(98, dosage.name + " " + dosage.pump.query("O,ATV,0").strip().rstrip('\x00') + '\n')
-                  # blynk.virtual_write(98, dosage.name + " " + dosage.pump.query("O,?").strip().rstrip('\x00') + '\n')
-                   #blynk.virtual_write(98, dosage.name + " TV =" + dosage.pump.query("TV,?").strip().rstrip('\x00') + '\n')
-                   #blynk.virtual_write(98, dosage.name + " ATV =" + dosage.pump.query("ATV,?").strip().rstrip('\x00') + '\n')
-                   #blynk.virtual_write(98, dosage.name + " R =" + dosage.pump.query("R").strip().rstrip('\x00') + '\n')
-                   #blynk.virtual_write(98, dosage.name + " Pump id " + str(dosage.pumpId) + " has dosed = " + str(dosage.volume) + '\n')
-            _log.info("Pumps all read")          
-        except:
-            _log.info("Expected error: Use Atlas Error")
-            blynk.set_property(pumpLED, 'color', colours['OFFLINE'])
-            blynk.virtual_write(98, "Expected error: Atlas Error" + '\n') 
             
 	
     def doSingleDose():        
