@@ -26,7 +26,8 @@ import drone
 bootup = True
 colours = {0: '#FF0000', 1: '#00FF00', '0': '#FF0000', '1': '#00FF00', 'OFFLINE': '#0000FF', 'ONLINE': '#00FF00'}
 systemLED=101
-
+sensorLED=102
+pumpLED=103
 
 try:
 
@@ -66,8 +67,9 @@ try:
            blynk.set_property(sensor.displayPin, 'color', colours['ONLINE'])
            blynk.set_property(sensor.displayPin, 'label', sensor.name)
        blynk.virtual_write(98, "Sensors created" + '\n') 
+       blynk.set_property(sensorLED, 'color', colours['ONLINE'])
     except:
-
+        blynk.set_property(sensorLED, 'color', colours['OFFLINE'])
         blynk.virtual_write(98, "Unexpected error: atlas" + '\n') 
         _log.info("Unexpected error: Atlas")
     else:
@@ -91,9 +93,11 @@ try:
                    #blynk.virtual_write(98, dosage.name + " ATV =" + dosage.pump.query("ATV,?").strip().rstrip('\x00') + '\n')
                    #blynk.virtual_write(98, dosage.name + " R =" + dosage.pump.query("R").strip().rstrip('\x00') + '\n')
                    #blynk.virtual_write(98, dosage.name + " Pump id " + str(dosage.pumpId) + " has dosed = " + str(dosage.volume) + '\n')
+            blynk.set_property(pumpLED, 'color', colours['ONLINE'])
             _log.info("Pumps all read")          
         except:
             _log.info("Expected error: Use Atlas Error")
+	    blynk.set_property(pumpLED, 'color', colours['OFFLINE'])
             blynk.virtual_write(98, "Expected error: Atlas Error" + '\n') 
             
 	
