@@ -332,6 +332,8 @@ try:
               for l in LED:
                   blynk.virtual_write(l, 255)
               blynk.virtual_write(systemLED, 255)
+              blynk.virtual_write(sensorLED, 255)
+              blynk.virtual_write(pumpLED, 255)
               #blynk.virtual_write(98, "clr")
               blynk.virtual_write(98, "System now updated and restarted " + '\n')
               blynk.virtual_write(255, 0)
