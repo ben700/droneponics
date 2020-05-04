@@ -1,5 +1,7 @@
 # The ID and range of a sample spreadsheet.
-BLYNK_AUTH = 'n0OuchdtamBdO0V1X_3v3EIwBashSr4n' #envornmental
+import sys 
+sys.path.append('/home/pi')
+from config import BLYNK_AUTH 
 colours = {1: '#FF0000', 0: '#00FF00', 'OFFLINE': '#0000FF'}
 
 try:
@@ -56,7 +58,7 @@ try:
 
 
     # Initialize the I2C bus.
-    i2c = busio.I2C(board.SCL, board.SDA)
+    i2c = busio.I2C(board.P1, board.P0)
 
     # Initialize the sensor.
     try:
