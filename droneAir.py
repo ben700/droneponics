@@ -63,7 +63,7 @@ try:
 
 
     # Initialize the I2C bus.
-    if (parser.get('droneAir', 'BLYNK_AUTH', fallback=True)):
+    if (parser.get('droneAir', 'BLYNK_AUTH', fallback=True)  == True):
         i2c = busio.I2C(board.SCL, board.SDA)
     else:
         print("i2c-0")    
