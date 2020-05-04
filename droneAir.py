@@ -345,7 +345,7 @@ try:
   
 except:
    _log.info('Unexpected error')
-   blynkErr = blynklib.Blynk(configParser.get('droneAir', 'BLYNK_AUTH'))
+   blynkErr = blynklib.Blynk(parser.get('droneAir', 'BLYNK_AUTH'))
    blynkErr.virtual_write(98, "System has error" + '\n')
    blynkErr.set_property(1, 'color', colours['OFFLINE'])
    blynkErr.set_property(2, 'color', colours['OFFLINE'])
