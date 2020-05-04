@@ -1,6 +1,6 @@
 from configparser import SafeConfigParser
 
-parser = SafeConfigParser()
+parser = ConfigParser()
 parser.read('/home/pi/config.ini')
 
 print(parser.get('droneAir', 'BLYNK_AUTH'))
@@ -80,7 +80,7 @@ try:
 
 
     # Initialize Blynk
-    blynk = blynklib.Blynk()
+    blynk = blynklib.Blynk(parser.get('droneAir', 'BLYNK_AUTH'))
     timer = blynktimer.Timer()
     #blynk.run()
     APP_CONNECT_PRINT_MSG = '[APP_CONNECT_EVENT]'
