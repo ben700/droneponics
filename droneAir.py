@@ -67,7 +67,7 @@ try:
         i2c = busio.I2C(board.SCL, board.SDA)
     else:
         print("i2c-0")    
-        i2c = busio.I2C(board.P1, board.P0)
+        i2c = busio.I2C(board.D1, board.D0)
 
     # Initialize the sensor.
     try:
