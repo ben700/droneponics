@@ -23,13 +23,10 @@ try:
     import adafruit_tsl2591
     import sys
     import os
-    import ConfigParser
+    from ConfigParser import SafeConfigParser
 
-   
-    configParser = ConfigParser.RawConfigParser()   
-    configFilePath = r'c:\abc.txt'
-    configParser.read(configFilePath)
-    self.path = 
+    parser = SafeConfigParser()
+    parser.read('/home/pi/config.ini')
     
     class Counter:
         cycle = 0
@@ -77,7 +74,7 @@ try:
 
 
     # Initialize Blynk
-    blynk = blynklib.Blynk(configParser.get('droneAir', 'BLYNK_AUTH'))
+    blynk = blynklib.Blynk(parser.get('droneAir', 'BLYNK_AUTH'))
     timer = blynktimer.Timer()
     #blynk.run()
     APP_CONNECT_PRINT_MSG = '[APP_CONNECT_EVENT]'
