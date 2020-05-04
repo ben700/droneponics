@@ -7,61 +7,62 @@ print(parser.get('droneAir', 'BLYNK_AUTH'))
 # The ID and range of a sample spreadsheet.
 colours = {1: '#FF0000', 0: '#00FF00', 'OFFLINE': '#0000FF'}
 
-try:
 
 
+from python_tsl2591 import tsl2591
+import datetime
+import time
+import shlex, requests
+import board
+import busio
+import smbus 
+from ctypes import c_short
+from ctypes import c_byte
+from ctypes import c_ubyte
+import mh_z19
+import blynklib
+import blynktimer
+import logging
+from datetime import datetime
+import adafruit_tsl2591
+import sys
+import os
+from ConfigParser import SafeConfigParser
 
-    from python_tsl2591 import tsl2591
-    import datetime
-    import time
-    import shlex, requests
-    import board
-    import busio
-    import smbus 
-    from ctypes import c_short
-    from ctypes import c_byte
-    from ctypes import c_ubyte
-    import mh_z19
-    import blynklib
-    import blynktimer
-    import logging
-    from datetime import datetime
-    import adafruit_tsl2591
-    import sys
-    import os
-    from ConfigParser import SafeConfigParser
-
-    parser = SafeConfigParser()
-    parser.read('/home/pi/config.ini')
+parser = SafeConfigParser()
+parser.read('/home/pi/config.ini')
     
-    class Counter:
-        cycle = 0
+class Counter:
+     cycle = 0
 
-    bootup = True
-    T_CRI_VALUE = 10.5  # 16.5°C
-    T_CRI_MSG = 'Low TEMP!!!'
-    T_CRI_COLOR = '#c0392b'
+bootup = True
+T_CRI_VALUE = 10.5  # 16.5°C
+T_CRI_MSG = 'Low TEMP!!!'
+T_CRI_COLOR = '#c0392b'
 
-    T_COLOR = '#f5b041'
-    H_COLOR = '#85c1e9'
-    P_COLOR = '#a2d9ce'
+T_COLOR = '#f5b041'
+H_COLOR = '#85c1e9'
+P_COLOR = '#a2d9ce'
 
-    TL_COLOR = '#cea2d9'
-    IR_COLOR = '#a2add9'
-    VL_COLOR = '#d9cea2'
-    FS_COLOR = '#add9a2'
+TL_COLOR = '#cea2d9'
+IR_COLOR = '#a2add9'
+VL_COLOR = '#d9cea2'
+FS_COLOR = '#add9a2'
 
-    CO2_COLOR = '#d9b3a2'
+CO2_COLOR = '#d9b3a2'
 
-    ERR_COLOR = '#444444'
+ERR_COLOR = '#444444'
 
-    # tune console logging
-    _log = logging.getLogger('BlynkLog')
-    logFormatter = logging.Formatter("%(asctime)s [%(levelname)s]  %(message)s")
-    consoleHandler = logging.StreamHandler()
-    consoleHandler.setFormatter(logFormatter)
-    _log.addHandler(consoleHandler)
-    _log.setLevel(logging.DEBUG)
+# tune console logging
+_log = logging.getLogger('BlynkLog')
+logFormatter = logging.Formatter("%(asctime)s [%(levelname)s]  %(message)s")
+consoleHandler = logging.StreamHandler()
+consoleHandler.setFormatter(logFormatter)
+_log.addHandler(consoleHandler)
+_log.setLevel(logging.DEBUG)
+
+
+try:
 
 
     # Initialize the I2C bus.
