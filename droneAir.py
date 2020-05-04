@@ -1,7 +1,4 @@
 # The ID and range of a sample spreadsheet.
-import sys 
-sys.path.append('/home/pi')
-from config import BLYNK_AUTH 
 colours = {1: '#FF0000', 0: '#00FF00', 'OFFLINE': '#0000FF'}
 
 try:
@@ -26,7 +23,14 @@ try:
     import adafruit_tsl2591
     import sys
     import os
+    import ConfigParser
 
+   
+    configParser = ConfigParser.RawConfigParser()   
+    configFilePath = r'c:\abc.txt'
+    configParser.read(configFilePath)
+    self.path = 
+    
     class Counter:
         cycle = 0
 
@@ -73,7 +77,7 @@ try:
 
 
     # Initialize Blynk
-    blynk = blynklib.Blynk(BLYNK_AUTH)
+    blynk = blynklib.Blynk(configParser.get('droneAir', 'BLYNK_AUTH'))
     timer = blynktimer.Timer()
     #blynk.run()
     APP_CONNECT_PRINT_MSG = '[APP_CONNECT_EVENT]'
@@ -336,7 +340,7 @@ try:
   
 except:
    _log.info('Unexpected error')
-   blynkErr = blynklib.Blynk(BLYNK_AUTH)
+   blynkErr = blynklib.Blynk(configParser.get('droneAir', 'BLYNK_AUTH'))
    blynkErr.virtual_write(98, "System has error" + '\n')
    blynkErr.set_property(1, 'color', colours['OFFLINE'])
    blynkErr.set_property(2, 'color', colours['OFFLINE'])
