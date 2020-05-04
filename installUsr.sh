@@ -6,6 +6,7 @@ sudo pip3 install python-tsl2591
 pip3 install adafruit-blinka
 
 pip3 install adafruit-circuitpython-bme280
+pip3 install adafruit-circuitpython-bme680
 pip3 install adafruit-circuitpython-lis3dh
 pip3 install adafruit-circuitpython-ads1x15
 sudo pip3 install mh-z19
