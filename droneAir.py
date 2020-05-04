@@ -1,4 +1,4 @@
-import configparser
+from configparser import ConfigParser
 
 parser = ConfigParser()
 parser.read('/home/pi/config.ini')
