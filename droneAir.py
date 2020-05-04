@@ -1,3 +1,9 @@
+from ConfigParser import SafeConfigParser
+
+parser = SafeConfigParser()
+parser.read('/home/pi/config.ini')
+
+print(parser.get('droneAir', 'BLYNK_AUTH'))
 # The ID and range of a sample spreadsheet.
 colours = {1: '#FF0000', 0: '#00FF00', 'OFFLINE': '#0000FF'}
 
@@ -74,7 +80,7 @@ try:
 
 
     # Initialize Blynk
-    blynk = blynklib.Blynk(parser.get('droneAir', 'BLYNK_AUTH'))
+    blynk = blynklib.Blynk()
     timer = blynktimer.Timer()
     #blynk.run()
     APP_CONNECT_PRINT_MSG = '[APP_CONNECT_EVENT]'
