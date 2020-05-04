@@ -77,7 +77,7 @@ try:
        tsl.integration_time = adafruit_tsl2591.INTEGRATIONTIME_100MS
     except:
         tsl = None
-        print("Unexpected error: TSL2591")
+        print("Unexpected error: TSL2591. Paser was " + str(parser.get('droneAir', 'TSLI2C0', fallback=True)))
 
 
 
