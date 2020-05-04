@@ -1,9 +1,6 @@
-from configparser import ConfigParser
 
-parser = ConfigParser()
-parser.read('/home/pi/config.ini')
 
-print(parser.get('droneAir', 'BLYNK_AUTH'))
+
 # The ID and range of a sample spreadsheet.
 colours = {1: '#FF0000', 0: '#00FF00', 'OFFLINE': '#0000FF'}
 
@@ -27,11 +24,11 @@ from datetime import datetime
 import adafruit_tsl2591
 import sys
 import os
-from ConfigParser import SafeConfigParser
+from configparser import ConfigParser
 
-parser = SafeConfigParser()
+parser = ConfigParser()
 parser.read('/home/pi/config.ini')
-    
+
 class Counter:
      cycle = 0
 
