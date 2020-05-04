@@ -65,7 +65,11 @@ try:
 
 
     # Initialize the I2C bus.
-    i2c = busio.I2C(board.P1, board.P0)
+    if (parser.get('droneAir', 'BLYNK_AUTH')):
+        i2c = busio.I2C(board.SCL, board.SDA)
+    else
+        print("i2c-0")    
+        i2c = busio.I2C(board.P1, board.P0)
 
     # Initialize the sensor.
     try:
