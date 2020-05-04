@@ -77,7 +77,7 @@ try:
     # Initialize the sensor.
     try:
        i2c1 = busio.I2C(board.SCL, board.SDA)
-       bme680 = adafruit_bme680.Adafruit_BME680_I2C(i2c)
+       bme680 = adafruit_bme680.Adafruit_BME680_I2C(i2c1)
        # change this to match the location's pressure (hPa) at sea level
        bme680.sea_level_pressure = 1013.25
     except:
