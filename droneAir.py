@@ -28,22 +28,6 @@ class Counter:
      cycle = 0
 
 bootup = True
-T_CRI_VALUE = 10.5  # 16.5°C
-T_CRI_MSG = 'Low TEMP!!!'
-T_CRI_COLOR = '#c0392b'
-
-T_COLOR = '#f5b041'
-H_COLOR = '#85c1e9'
-P_COLOR = '#a2d9ce'
-
-TL_COLOR = '#cea2d9'
-IR_COLOR = '#a2add9'
-VL_COLOR = '#d9cea2'
-FS_COLOR = '#add9a2'
-
-CO2_COLOR = '#d9b3a2'
-
-ERR_COLOR = '#444444'
 
 # tune console logging
 _log = logging.getLogger('BlynkLog')
@@ -150,38 +134,38 @@ try:
            lux = tsl.lux
            _log.info('Total light: {0:.2f}lux'.format(lux))
            blynk.virtual_write(6, str("{0:.2f}".format(lux))) 
-           blynk.set_property(6 'color', TL_COLOR)
+           blynk.set_property(6 'color', colours['ONLINE'])
 
            infrared = tsl.infrared
            _log.info('Infrared light: {0:d}'.format(infrared))
            blynk.virtual_write(7, str("{0:d}".format(infrared)))
-           blynk.set_property(7, 'color', IR_COLOR)
+           blynk.set_property(7, 'color', colours['ONLINE'])
 
            visible = tsl.visible
            _log.info('Visible light: {0:d}'.format(visible))
            blynk.virtual_write(8, ("{0:d}".format(visible)))
-           blynk.set_property(8, 'color', VL_COLOR)
+           blynk.set_property(8, 'color', colours['ONLINE'])
 
            full_spectrum = tsl.full_spectrum
            _log.info('Full spectrum (IR + visible) light: {0:d}'.format(full_spectrum))
            blynk.virtual_write(9, ("{0:d}".format(full_spectrum)))
-           blynk.set_property(9, 'color', FS_COLOR)
+           blynk.set_property(9, 'color', colours['ONLINE'])
         else:
-           blynk.set_property(6, 'color', ERR_COLOR)
-           blynk.set_property(7, 'color', ERR_COLOR)
-           blynk.set_property(8, 'color', ERR_COLOR)
-           blynk.set_property(9, 'color', ERR_COLOR)
+           blynk.set_property(6, 'color', colours['OFFLINE'])
+           blynk.set_property(7, 'color', colours['OFFLINE'])
+           blynk.set_property(8, 'color', colours['OFFLINE'])
+           blynk.set_property(9, 'color', colours['OFFLINE'])
 
 
         if mhz19b is not None:
             blynk.virtual_write(10, '{0:d}'.format(mhz19b['co2']))
-            blynk.set_property(10, 'color', CO2_COLOR)
+            blynk.set_property(10, 'color', colours['ONLINE'])
             _log.info('CO2: {0:d}'.format(mhz19b['co2']))
 
         else:
             blynk.virtual_write(98, 'Unexpected error: mhz19b' + '\n')
             _log.info('Unexpected error: mhz19b')
-            blynk.set_property(10, 'color', ERR_COLOR)
+            blynk.set_property(10, 'color', colours['OFFLINE'])
 
         blynk.virtual_write(98, "Completed Timer Function" + '\n') 
 
