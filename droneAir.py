@@ -3,6 +3,8 @@
 
 # The ID and range of a sample spreadsheet.
 colours = {1: '#FF0000', 0: '#00FF00', 'OFFLINE': '#0000FF', 'ONLINE': '#00FF00'}
+systemLED=101
+
 import datetime
 import time
 import shlex, requests
