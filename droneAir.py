@@ -104,7 +104,7 @@ try:
                 _log.info("Humidity: %0.1f %%" % bme680.humidity)
                 _log.info("Pressure: %0.3f hPa" % bme680.pressure)
                 _log.info("Altitude = %0.2f meters" % bme680.altitude)   
-                blynk.virtual_write(1, str("{0.1f}".format(bme680.temperature)))
+ #               blynk.virtual_write(1, str("{0.1f}".format(bme680.temperature)))
 #                blynk.virtual_write(2, str("{d}".format(bme680.gas)))
 #                blynk.virtual_write(3, str("{0.1f}".format(bme680.humidity)))
 #                blynk.virtual_write(4, str("{0.3f}".format(bme680.pressure)))
