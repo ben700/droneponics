@@ -2,7 +2,7 @@
 
 
 # The ID and range of a sample spreadsheet.
-colours = {1: '#FF0000', 0: '#00FF00', 'OFFLINE': '#0000FF'}
+colours = {1: '#FF0000', 0: '#00FF00', 'OFFLINE': '#0000FF', 'ONLINE': '#FF0000'}
 import datetime
 import time
 import shlex, requests
@@ -115,20 +115,30 @@ try:
         mhz19b = mh_z19.read()    
         now = datetime.now()
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
+          
 
-        _log.info("\nTemperature: %0.1f C" % bme680.temperature)
-        _log.info("Gas: %d ohm" % bme680.gas)
-        _log.info("Humidity: %0.1f %%" % bme680.humidity)
-        _log.info("Pressure: %0.3f hPa" % bme680.pressure)
-        _log.info("Altitude = %0.2f meters" % bme680.altitude)
-
-        
-        blynk.virtual_write(1, str("{0.1f}".format(bme680.temperature)))
-        blynk.virtual_write(2, str("{d}".format(bme680.gas)))
-        blynk.virtual_write(3, str("{0.1f}".format(bme680.humidity)))
-        blynk.virtual_write(4, str("{0.3f}".format(bme680.pressure)))
-        blynk.virtual_write(5, str("{0.2f}".format( bme680.altitude)))
-
+        if(bme680 is not None):
+                _log.info("\nTemperature: %0.1f C" % bme680.temperature)
+                _log.info("Gas: %d ohm" % bme680.gas)
+                _log.info("Humidity: %0.1f %%" % bme680.humidity)
+                _log.info("Pressure: %0.3f hPa" % bme680.pressure)
+                _log.info("Altitude = %0.2f meters" % bme680.altitude)   
+                blynk.virtual_write(1, str("{0.1f}".format(bme680.temperature)))
+                blynk.virtual_write(2, str("{d}".format(bme680.gas)))
+                blynk.virtual_write(3, str("{0.1f}".format(bme680.humidity)))
+                blynk.virtual_write(4, str("{0.3f}".format(bme680.pressure)))
+                blynk.virtual_write(5, str("{0.2f}".format( bme680.altitude)))
+                blynk.set_property(1, 'color', colours['ONLINE'])
+                blynk.set_property(2, 'color', colours['ONLINE'])
+                blynk.set_property(3, 'color', colours['ONLINE'])
+                blynk.set_property(4, 'color', colours['ONLINE'])
+                blynk.set_property(5, 'color', colours['ONLINE'])
+        else:
+                blynk.set_property(1, 'color', colours['OFFLINE'])
+                blynk.set_property(2, 'color', colours['OFFLINE'])
+                blynk.set_property(3, 'color', colours['OFFLINE'])
+                blynk.set_property(4, 'color', colours['OFFLINE'])
+                blynk.set_property(5, 'color', colours['OFFLINE'])
 
         if (tsl is not None):
            lux = tsl.lux
