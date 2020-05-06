@@ -134,7 +134,7 @@ try:
            lux = tsl.lux
            _log.info('Total light: {0:.2f}lux'.format(lux))
            blynk.virtual_write(6, str("{0:.2f}".format(lux))) 
-           blynk.set_property(6 'color', colours['ONLINE'])
+           blynk.set_property(6, 'color', colours['ONLINE'])
 
            infrared = tsl.infrared
            _log.info('Infrared light: {0:d}'.format(infrared))
