@@ -16,6 +16,7 @@ import logging
 from datetime import datetime
 import adafruit_tsl2591
 import adafruit_bme680
+from meteocalc import Temp, dew_point
 import sys
 import os
 from configparser import ConfigParser
@@ -128,17 +129,22 @@ try:
                 blynk.virtual_write(3, str("{0.1f}".format(bme680.humidity)))
                 blynk.virtual_write(4, str("{0.3f}".format(bme680.pressure)))
                 blynk.virtual_write(5, str("{0.2f}".format( bme680.altitude)))
+                t = Temp(bme680.temperature, 'c')
+                blynk.virtual_write(11, dew_point(temperature=t, humidity=bme680.humidity))
                 blynk.set_property(1, 'color', colours['ONLINE'])
                 blynk.set_property(2, 'color', colours['ONLINE'])
                 blynk.set_property(3, 'color', colours['ONLINE'])
                 blynk.set_property(4, 'color', colours['ONLINE'])
                 blynk.set_property(5, 'color', colours['ONLINE'])
+                blynk.set_property(11, 'color', colours['ONLINE'])
+               
         else:
                 blynk.set_property(1, 'color', colours['OFFLINE'])
                 blynk.set_property(2, 'color', colours['OFFLINE'])
                 blynk.set_property(3, 'color', colours['OFFLINE'])
                 blynk.set_property(4, 'color', colours['OFFLINE'])
                 blynk.set_property(5, 'color', colours['OFFLINE'])
+                blynk.set_property(11, 'color', colours['OFFLINE'])
 
         if (tsl is not None):
            lux = tsl.lux
