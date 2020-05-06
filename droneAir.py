@@ -79,7 +79,7 @@ try:
     TWEET_MSG = "New value='{}' on VPIN({})"
 
 
-    @blynk.handle_event("write V255")
+    @blynk.handle_event('write V255')
     def buttonV255Pressed(value):
         blynk.virtual_write(98, "User Reboot " + '\n')
         os.system('sh /home/pi/updateDroneponics.sh')
