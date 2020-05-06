@@ -24,9 +24,6 @@ from configparser import ConfigParser
 parser = ConfigParser()
 parser.read('/home/pi/config.ini')
 
-class Counter:
-     cycle = 0
-
 bootup = True
 
 # tune console logging
@@ -95,77 +92,76 @@ try:
     @timer.register(interval=10, run_once=False)
     def blynk_data():
         _log.info("Update Timer Run")
-        Counter.cycle += 1
         
-        mhz19b = mh_z19.read()    
+#        mhz19b = mh_z19.read()    
         now = datetime.now()
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
           
 
-        if(bme680 is not None):
-                _log.info("\nTemperature: %0.1f C" % bme680.temperature)
-                _log.info("Gas: %d ohm" % bme680.gas)
-                _log.info("Humidity: %0.1f %%" % bme680.humidity)
-                _log.info("Pressure: %0.3f hPa" % bme680.pressure)
-                _log.info("Altitude = %0.2f meters" % bme680.altitude)   
-                blynk.virtual_write(1, str("{0.1f}".format(bme680.temperature)))
-                blynk.virtual_write(2, str("{d}".format(bme680.gas)))
-                blynk.virtual_write(3, str("{0.1f}".format(bme680.humidity)))
-                blynk.virtual_write(4, str("{0.3f}".format(bme680.pressure)))
-                blynk.virtual_write(5, str("{0.2f}".format( bme680.altitude)))
-                t = Temp(bme680.temperature, 'c')
-                blynk.virtual_write(11, dew_point(temperature=t, humidity=bme680.humidity))
-                blynk.set_property(1, 'color', colours['ONLINE'])
-                blynk.set_property(2, 'color', colours['ONLINE'])
-                blynk.set_property(3, 'color', colours['ONLINE'])
-                blynk.set_property(4, 'color', colours['ONLINE'])
-                blynk.set_property(5, 'color', colours['ONLINE'])
-                blynk.set_property(11, 'color', colours['ONLINE'])
+#        if(bme680 is not None):
+#                _log.info("\nTemperature: %0.1f C" % bme680.temperature)
+#                _log.info("Gas: %d ohm" % bme680.gas)
+#                _log.info("Humidity: %0.1f %%" % bme680.humidity)
+#                _log.info("Pressure: %0.3f hPa" % bme680.pressure)
+#                _log.info("Altitude = %0.2f meters" % bme680.altitude)   
+#                blynk.virtual_write(1, str("{0.1f}".format(bme680.temperature)))
+#                blynk.virtual_write(2, str("{d}".format(bme680.gas)))
+#                blynk.virtual_write(3, str("{0.1f}".format(bme680.humidity)))
+#                blynk.virtual_write(4, str("{0.3f}".format(bme680.pressure)))
+#                blynk.virtual_write(5, str("{0.2f}".format( bme680.altitude)))
+#                t = Temp(bme680.temperature, 'c')
+#                blynk.virtual_write(11, dew_point(temperature=t, humidity=bme680.humidity))
+#                blynk.set_property(1, 'color', colours['ONLINE'])
+#                blynk.set_property(2, 'color', colours['ONLINE'])
+#                blynk.set_property(3, 'color', colours['ONLINE'])
+#                blynk.set_property(4, 'color', colours['ONLINE'])
+#                blynk.set_property(5, 'color', colours['ONLINE'])
+#                blynk.set_property(11, 'color', colours['ONLINE'])
                
-        else:
-                blynk.set_property(1, 'color', colours['OFFLINE'])
-                blynk.set_property(2, 'color', colours['OFFLINE'])
-                blynk.set_property(3, 'color', colours['OFFLINE'])
-                blynk.set_property(4, 'color', colours['OFFLINE'])
-                blynk.set_property(5, 'color', colours['OFFLINE'])
-                blynk.set_property(11, 'color', colours['OFFLINE'])
+#        else:
+#                blynk.set_property(1, 'color', colours['OFFLINE'])
+#                blynk.set_property(2, 'color', colours['OFFLINE'])
+#                blynk.set_property(3, 'color', colours['OFFLINE'])
+#                blynk.set_property(4, 'color', colours['OFFLINE'])
+#                blynk.set_property(5, 'color', colours['OFFLINE'])
+#                blynk.set_property(11, 'color', colours['OFFLINE'])
 
-        if (tsl is not None):
-           lux = tsl.lux
-           _log.info('Total light: {0:.2f}lux'.format(lux))
-           blynk.virtual_write(6, str("{0:.2f}".format(lux))) 
-           blynk.set_property(6, 'color', colours['ONLINE'])
+#        if (tsl is not None):
+#           lux = tsl.lux
+#           _log.info('Total light: {0:.2f}lux'.format(lux))
+#           blynk.virtual_write(6, str("{0:.2f}".format(lux))) 
+#           blynk.set_property(6, 'color', colours['ONLINE'])#
 
-           infrared = tsl.infrared
-           _log.info('Infrared light: {0:d}'.format(infrared))
-           blynk.virtual_write(7, str("{0:d}".format(infrared)))
-           blynk.set_property(7, 'color', colours['ONLINE'])
+#           infrared = tsl.infrared
+#           _log.info('Infrared light: {0:d}'.format(infrared))
+#           blynk.virtual_write(7, str("{0:d}".format(infrared)))
+#           blynk.set_property(7, 'color', colours['ONLINE'])
 
-           visible = tsl.visible
-           _log.info('Visible light: {0:d}'.format(visible))
-           blynk.virtual_write(8, ("{0:d}".format(visible)))
-           blynk.set_property(8, 'color', colours['ONLINE'])
+#           visible = tsl.visible
+#           _log.info('Visible light: {0:d}'.format(visible))
+#           blynk.virtual_write(8, ("{0:d}".format(visible)))
+#           blynk.set_property(8, 'color', colours['ONLINE'])
 
-           full_spectrum = tsl.full_spectrum
-           _log.info('Full spectrum (IR + visible) light: {0:d}'.format(full_spectrum))
-           blynk.virtual_write(9, ("{0:d}".format(full_spectrum)))
-           blynk.set_property(9, 'color', colours['ONLINE'])
-        else:
-           blynk.set_property(6, 'color', colours['OFFLINE'])
-           blynk.set_property(7, 'color', colours['OFFLINE'])
-           blynk.set_property(8, 'color', colours['OFFLINE'])
-           blynk.set_property(9, 'color', colours['OFFLINE'])
+#           full_spectrum = tsl.full_spectrum
+#           _log.info('Full spectrum (IR + visible) light: {0:d}'.format(full_spectrum))
+#           blynk.virtual_write(9, ("{0:d}".format(full_spectrum)))
+#           blynk.set_property(9, 'color', colours['ONLINE'])
+#        else:
+#           blynk.set_property(6, 'color', colours['OFFLINE'])
+#           blynk.set_property(7, 'color', colours['OFFLINE'])
+#           blynk.set_property(8, 'color', colours['OFFLINE'])
+#           blynk.set_property(9, 'color', colours['OFFLINE'])
 
 
-        if mhz19b is not None:
-            blynk.virtual_write(10, '{0:d}'.format(mhz19b['co2']))
-            blynk.set_property(10, 'color', colours['ONLINE'])
-            _log.info('CO2: {0:d}'.format(mhz19b['co2']))
+#        if mhz19b is not None:
+#            blynk.virtual_write(10, '{0:d}'.format(mhz19b['co2']))
+#            blynk.set_property(10, 'color', colours['ONLINE'])
+#            _log.info('CO2: {0:d}'.format(mhz19b['co2']))
 
-        else:
-            blynk.virtual_write(98, 'Unexpected error: mhz19b' + '\n')
-            _log.info('Unexpected error: mhz19b')
-            blynk.set_property(10, 'color', colours['OFFLINE'])
+ #       else:
+ #           blynk.virtual_write(98, 'Unexpected error: mhz19b' + '\n')
+ #           _log.info('Unexpected error: mhz19b')
+ #           blynk.set_property(10, 'color', colours['OFFLINE'])
 
         blynk.virtual_write(98, "Completed Timer Function" + '\n') 
 
