@@ -2,7 +2,7 @@
 
 
 # The ID and range of a sample spreadsheet.
-colours = {1: '#FF0000', 0: '#00FF00', 'OFFLINE': '#0000FF', 'ONLINE': '#FF0000'}
+colours = {1: '#FF0000', 0: '#00FF00', 'OFFLINE': '#0000FF', 'ONLINE': '#00FF00'}
 import datetime
 import time
 import shlex, requests
@@ -104,19 +104,19 @@ try:
                 _log.info("Humidity: %0.1f %%" % bme680.humidity)
                 _log.info("Pressure: %0.3f hPa" % bme680.pressure)
                 _log.info("Altitude = %0.2f meters" % bme680.altitude)   
-#                blynk.virtual_write(1, str("{0.1f}".format(bme680.temperature)))
-#                blynk.virtual_write(2, str("{d}".format(bme680.gas)))
-#                blynk.virtual_write(3, str("{0.1f}".format(bme680.humidity)))
-#                blynk.virtual_write(4, str("{0.3f}".format(bme680.pressure)))
-#                blynk.virtual_write(5, str("{0.2f}".format( bme680.altitude)))
+                blynk.virtual_write(1, "{0.1f}".format(bme680.temperature))
+                blynk.virtual_write(2, "{d}".format(bme680.gas))
+                blynk.virtual_write(3, "{0.1f}".format(bme680.humidity))
+                blynk.virtual_write(4, "{0.3f}".format(bme680.pressure))
+                blynk.virtual_write(5, "{0.2f}".format( bme680.altitude))
 #                t = Temp(bme680.temperature, 'c')
 #                blynk.virtual_write(11, dew_point(temperature=t, humidity=bme680.humidity))
-#                blynk.set_property(1, 'color', colours['ONLINE'])
-#                blynk.set_property(2, 'color', colours['ONLINE'])
-#                blynk.set_property(3, 'color', colours['ONLINE'])
-#                blynk.set_property(4, 'color', colours['ONLINE'])
-#                blynk.set_property(5, 'color', colours['ONLINE'])
-#                blynk.set_property(11, 'color', colours['ONLINE'])
+                blynk.set_property(1, 'color', colours['ONLINE'])
+                blynk.set_property(2, 'color', colours['ONLINE'])
+                blynk.set_property(3, 'color', colours['ONLINE'])
+                blynk.set_property(4, 'color', colours['ONLINE'])
+                blynk.set_property(5, 'color', colours['ONLINE'])
+                blynk.set_property(11, 'color', colours['ONLINE'])
                
         else:
                 blynk.set_property(1, 'color', colours['OFFLINE'])
