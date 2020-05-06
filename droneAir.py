@@ -143,29 +143,28 @@ try:
         if (tsl is not None):
            lux = tsl.lux
            _log.info('Total light: {0:.2f}lux'.format(lux))
-           blynk.virtual_write(4, str("{0:.2f}".format(lux))) 
-           blynk.set_property(4, 'color', TL_COLOR)
-
+           blynk.virtual_write(6, str("{0:.2f}".format(lux))) 
+           blynk.set_property(6 'color', TL_COLOR)
 
            infrared = tsl.infrared
            _log.info('Infrared light: {0:d}'.format(infrared))
-           blynk.virtual_write(5, str("{0:d}".format(infrared)))
-           blynk.set_property(4, 'color', IR_COLOR)
+           blynk.virtual_write(7, str("{0:d}".format(infrared)))
+           blynk.set_property(7, 'color', IR_COLOR)
 
            visible = tsl.visible
            _log.info('Visible light: {0:d}'.format(visible))
-           blynk.virtual_write(6, ("{0:d}".format(visible)))
-           blynk.set_property(4, 'color', VL_COLOR)
+           blynk.virtual_write(8, ("{0:d}".format(visible)))
+           blynk.set_property(8, 'color', VL_COLOR)
 
            full_spectrum = tsl.full_spectrum
            _log.info('Full spectrum (IR + visible) light: {0:d}'.format(full_spectrum))
-           blynk.virtual_write(7, ("{0:d}".format(full_spectrum)))
-           blynk.set_property(4, 'color', FS_COLOR)
+           blynk.virtual_write(9, ("{0:d}".format(full_spectrum)))
+           blynk.set_property(9, 'color', FS_COLOR)
         else:
-           blynk.set_property(4, 'color', ERR_COLOR)
-           blynk.set_property(5, 'color', ERR_COLOR)
            blynk.set_property(6, 'color', ERR_COLOR)
            blynk.set_property(7, 'color', ERR_COLOR)
+           blynk.set_property(8, 'color', ERR_COLOR)
+           blynk.set_property(9, 'color', ERR_COLOR)
 
 
         if mhz19b is not None:
