@@ -79,6 +79,8 @@ try:
     if (bmeI2C is not None):
        try:
            bme680 = adafruit_bme680.Adafruit_BME680_I2C(bmeI2C)
+           _log.debug("---------------Try to read BME680")
+           _log.debug(bme680.temperature)
            # change this to match the location's pressure (hPa) at sea level
            openWeatherAPI = requests.get("https://api.openweathermap.org/data/2.5/onecall?lat=53.801277&lon=-1.548567&exclude=hourly,daily&units=metric&appid=7ab0c16c9b00854f26df8a57435ad6ce")   
            openWeather = openWeatherAPI.json()
