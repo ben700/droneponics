@@ -38,23 +38,12 @@ _log.setLevel(logging.DEBUG)
 
 
 try:
-
-    try:
-        print("try bus 1")
-        i2c0 = busio.I2C(board.SCL, board.SDA)
-        tsl = adafruit_tsl2591.TSL2591(i2c0)
-        print("done bus 1")
-    except IOError:
-        print("try bus 0")
-        i2c0 = busio.I2C(board.D1, board.D0)
-        tsl = adafruit_tsl2591.TSL2591(i2c0)
-        print("done bus 0")
-        
+       
     # Initialize the I2C bus.
-    #if (parser.get('droneAir', 'TSLI2C0', fallback=True) == True):
-    #    i2c0 = busio.I2C(board.SCL, board.SDA)
-    #else:   
-    #    i2c0 = busio.I2C(board.D1, board.D0)
+    if (parser.get('droneAir', 'TSLI2C0', fallback=True) == True):
+        i2c0 = busio.I2C(board.SCL, board.SDA)
+    else:   
+        i2c0 = busio.I2C(board.D1, board.D0)
 
     # Initialize the sensor.
     try:
@@ -72,7 +61,7 @@ try:
        i2c1 = busio.I2C(board.SCL, board.SDA)
        bme680 = adafruit_bme680.Adafruit_BME680_I2C(i2c1)
        # change this to match the location's pressure (hPa) at sea level
-       bme680.sea_level_pressure = 1013.25
+       bme680.sea_level_pressure = 1026
     except:
         bme680 = None
         print("Unexpected error: bme680")
