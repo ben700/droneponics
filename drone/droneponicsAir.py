@@ -28,7 +28,7 @@ def setBMEFormOnline(*args, **kwargs):
       consoleHandler.setFormatter(logFormatter)
       _log.addHandler(consoleHandler)
       _log.setLevel(logging.DEBUG)
-   _log.debug("in setFormOffline")
+   _log.debug("in setFormOnline")
    
    if blynk is None:
       blynk = blynklib.Blynk(parser.get('droneAir', 'BLYNK_AUTH'))
