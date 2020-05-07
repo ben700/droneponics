@@ -211,12 +211,12 @@ try:
         except:
            _log.info('Unexpected error')
            blynk.virtual_write(98, "System has main loop error" + '\n')
-           setFormOffline(blynk)
+           drone.setFormOffline(blynk)
          #  os.system('sh /home/pi/updateDroneponics.sh')
          #  os.system('sudo reboot') 
   
   
 except:
-   setFormOffline(blynk)
+   drone.setFormOffline(blynk)
   # os.system('sh /home/pi/updateDroneponics.sh')
   # os.system('sudo reboot')
