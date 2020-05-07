@@ -39,7 +39,7 @@ _log.setLevel(logging.DEBUG)
 def setFormOffline(blynkObj=None):
    if blynkObj is None:
       blynkObj = blynklib.Blynk(parser.get('droneAir', 'BLYNK_AUTH'))
-      blynkObj.run()
+   blynkObj.run()
    for i in range(255): 
       blynkObj.set_property(i, 'color', colours['OFFLINE'])
    
@@ -194,7 +194,7 @@ try:
               for i in range(0,9):
                    blynk.virtual_write(98, str(q.stdout.readline()) + '\n')
               bootup = False
-             _log.info("Just about to complete Booting")
+              _log.info("Just about to complete Booting")
               now = datetime.now()
               blynk.virtual_write(99, now.strftime("%d/%m/%Y %H:%M:%S"))
               blynk.virtual_write(98, "clr")
