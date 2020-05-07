@@ -94,7 +94,7 @@ try:
     blynk = blynklib.Blynk(parser.get('droneAir', 'BLYNK_AUTH'))
     timer = blynktimer.Timer()
     #blynk.run()
-
+    print(blynk.getProperty(98, 'colour'))
     @blynk.handle_event('write V255')
     def rebooter(pin, value):
         blynk.virtual_write(98, "User Reboot " + '\n')
