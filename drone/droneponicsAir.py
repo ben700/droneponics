@@ -63,3 +63,86 @@ def setBMEFormOffline(*args, **kwargs):
    blynk.set_property(4, 'color', colours['OFFLINE'])
    blynk.set_property(5, 'color', colours['OFFLINE'])
    blynk.set_property(11, 'color', colours['OFFLINE'])
+
+   
+
+def setTSLFormOnline(*args, **kwargs):
+   blynk = kwargs.get('blynkObj', None)
+   _log = kwargs.get('loggerObj', None)
+   if _log is None:
+      _log = logging.getLogger('BlynkLog')
+      logFormatter = logging.Formatter("%(asctime)s [%(levelname)s]  %(message)s")
+      consoleHandler = logging.StreamHandler()
+      consoleHandler.setFormatter(logFormatter)
+      _log.addHandler(consoleHandler)
+      _log.setLevel(logging.DEBUG)
+   _log.debug("in setFormOnline")
+   
+   if blynk is None:
+      blynk = blynklib.Blynk(parser.get('droneAir', 'BLYNK_AUTH'))
+   
+   blynk.run()
+   blynk.set_property(6, 'color', colours['ONLINE'])
+   blynk.set_property(7, 'color', colours['ONLINE'])
+   blynk.set_property(8, 'color', colours['ONLINE'])
+   blynk.set_property(9, 'color', colours['ONLINE'])
+
+
+def setTSLFormOffline(*args, **kwargs):
+   blynk = kwargs.get('blynkObj', None)
+   _log = kwargs.get('loggerObj', None)
+   if _log is None:
+      _log = logging.getLogger('BlynkLog')
+      logFormatter = logging.Formatter("%(asctime)s [%(levelname)s]  %(message)s")
+      consoleHandler = logging.StreamHandler()
+      consoleHandler.setFormatter(logFormatter)
+      _log.addHandler(consoleHandler)
+      _log.setLevel(logging.DEBUG)
+   _log.debug("in setFormOffline")
+   
+   if blynk is None:
+      blynk = blynklib.Blynk(parser.get('droneAir', 'BLYNK_AUTH'))
+   blynk.run()
+   blynk.set_property(6, 'color', colours['OFFLINE'])
+   blynk.set_property(7, 'color', colours['OFFLINE'])
+   blynk.set_property(8, 'color', colours['OFFLINE'])
+   blynk.set_property(9, 'color', colours['OFFLINE'])
+   
+   
+   
+   
+def setMHZFormOnline(*args, **kwargs):
+   blynk = kwargs.get('blynkObj', None)
+   _log = kwargs.get('loggerObj', None)
+   if _log is None:
+      _log = logging.getLogger('BlynkLog')
+      logFormatter = logging.Formatter("%(asctime)s [%(levelname)s]  %(message)s")
+      consoleHandler = logging.StreamHandler()
+      consoleHandler.setFormatter(logFormatter)
+      _log.addHandler(consoleHandler)
+      _log.setLevel(logging.DEBUG)
+   _log.debug("in setFormOnline")
+   
+   if blynk is None:
+      blynk = blynklib.Blynk(parser.get('droneAir', 'BLYNK_AUTH'))
+   
+   blynk.run()
+   blynk.set_property(10, 'color', colours['ONLINE'])
+
+def setMHZFormOffline(*args, **kwargs):
+   blynk = kwargs.get('blynkObj', None)
+   _log = kwargs.get('loggerObj', None)
+   if _log is None:
+      _log = logging.getLogger('BlynkLog')
+      logFormatter = logging.Formatter("%(asctime)s [%(levelname)s]  %(message)s")
+      consoleHandler = logging.StreamHandler()
+      consoleHandler.setFormatter(logFormatter)
+      _log.addHandler(consoleHandler)
+      _log.setLevel(logging.DEBUG)
+   _log.debug("in setFormOffline")
+   
+   if blynk is None:
+      blynk = blynklib.Blynk(parser.get('droneAir', 'BLYNK_AUTH'))
+   blynk.run()
+   blynk.set_property(10, 'color', colours['OFFLINE'])
+
