@@ -36,7 +36,13 @@ consoleHandler.setFormatter(logFormatter)
 _log.addHandler(consoleHandler)
 _log.setLevel(logging.DEBUG)
 
-
+def setFormOffline(blynkObj=None)
+   if blynkObj is None:
+      blynkObj = blynklib.Blynk(parser.get('droneAir', 'BLYNK_AUTH'))
+      blynkObj.run()
+   for i in range(255): 
+      blynkObj.set_property(i, 'color', colours['OFFLINE'])
+   
 try:
     
     tslI2C = busio.I2C(board.SCL, board.SDA)
@@ -197,15 +203,7 @@ try:
         except:
            _log.info('Unexpected error')
            blynk.virtual_write(98, "System has main loop error" + '\n')
-           blynk.set_property(systemLED, 'color', colours['OFFLINE'])
-           blynk.set_property(1, 'color', colours['OFFLINE'])
-           blynk.set_property(2, 'color', colours['OFFLINE'])
-           blynk.set_property(3, 'color', colours['OFFLINE'])
-           blynk.set_property(4, 'color', colours['OFFLINE'])
-           blynk.set_property(5, 'color', colours['OFFLINE'])
-           blynk.set_property(6, 'color', colours['OFFLINE'])
-           blynk.set_property(7, 'color', colours['OFFLINE'])
-           blynk.set_property(10, 'color', colours['OFFLINE'])
+           setFormOffline(blynk)
            os.system('sh /home/pi/updateDroneponics.sh')
            os.system('sudo reboot') 
   
