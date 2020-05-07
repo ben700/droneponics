@@ -36,8 +36,8 @@ def setFormOffline(*args, **kwargs):
       blynk = blynklib.Blynk(parser.get('droneAir', 'BLYNK_AUTH'))
    blynk.run()
    _log.debug("Going to set Msg from setFormOffline")
-   if Msg is not None:
-       blynk.virtual_write(98, Msg + " " + '\n')
+   if msg is not None:
+       blynk.virtual_write(98, msg + " " + '\n')
        _log.info(Msg)
    _log.debug("Going to set from colour Offline from setFormOffline")
    for i in range(255): 
