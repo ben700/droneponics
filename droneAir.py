@@ -24,6 +24,7 @@ from configparser import ConfigParser
 import subprocess
 import re
 import drone
+import json
 
 parser = ConfigParser()
 parser.read('/home/pi/config.ini')
@@ -64,15 +65,10 @@ _log.setLevel(logging.DEBUG)
 openWeatherAPI = requests.get("https://api.openweathermap.org/data/2.5/onecall?lat=53.801277&lon=-1.548567&exclude=hourly,daily&units=metric&appid=7ab0c16c9b00854f26df8a57435ad6ce")   
 openWeather = openWeatherAPI.json()
 print("---------------------------------------------------")
-print(openWeather[0])
-print(openWeather["current"]["pressure"])
-print(openWeather["current"]["pressure"]["icon"])
-
-openWeather = openWeather.replace('[','',openWeather)
-openWeather = openWeather.replace(']','',openWeather)
-
-print(openWeather["current"]["pressure"]["icon"])
-
+print(openWeather["current"]["dew_point"])
+print(openWeather["current"]["weather"])
+oWeather = json.loads(openWeather["current"]["weather"])
+print(openWeather["oWeather"]["icon"])
 
 
 try:
@@ -116,7 +112,9 @@ try:
        try:
            bme680 = adafruit_bme680.Adafruit_BME680_I2C(bmeI2C)
            # change this to match the location's pressure (hPa) at sea level
-           bme680.sea_level_pressure = 1026
+           openWeatherAPI = requests.get("https://api.openweathermap.org/data/2.5/onecall?lat=53.801277&lon=-1.548567&exclude=hourly,daily&units=metric&appid=7ab0c16c9b00854f26df8a57435ad6ce")   
+           openWeather = openWeatherAPI.json()
+           bme680.sea_level_pressure = openWeather["current"]["pressure"]
        except:
            bme680 = None
            _log.info("Unexpected error: bme680")
@@ -128,6 +126,12 @@ try:
     timer = blynktimer.Timer()
     #blynk.run()
     #print(blynk.getProperty(98, 'colour'))
+   
+   def blynkOpenWeather(openWeather):
+        print(openWeather["current"]["dew_point"])
+        print(openWeather["current"]["temp"])
+        print(openWeather["current"]["pressure"])
+        print(openWeather["current"]["humidity"])
    
     @blynk.handle_event('write V255')
     def rebooter(pin, value):
@@ -144,6 +148,9 @@ try:
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
           
         if(bme680 is not None):
+           openWeatherAPI = requests.get("https://api.openweathermap.org/data/2.5/onecall?lat=53.801277&lon=-1.548567&exclude=hourly,daily&units=metric&appid=7ab0c16c9b00854f26df8a57435ad6ce")   
+           openWeather = openWeatherAPI.json()
+           bme680.sea_level_pressure = openWeather["current"]["pressure"]
 
            _log.info("Temperature: %0.1f C" % bme680.temperature)
            _log.info("Gas: %d ohm" % bme680.gas)
