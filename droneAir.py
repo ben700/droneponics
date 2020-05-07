@@ -60,7 +60,7 @@ try:
        except:
            tsl = None
            print("Unexpected error: TSL2591. Paser was " + str(parser.get('droneAir', 'TSLI2C0', fallback=True)))
-     else:
+    else:
            tsl = None
               
     # Initialize the sensor.
