@@ -36,7 +36,7 @@ consoleHandler.setFormatter(logFormatter)
 _log.addHandler(consoleHandler)
 _log.setLevel(logging.DEBUG)
 
-def setFormOffline(blynkObj=None)
+def setFormOffline(blynkObj=None):
    if blynkObj is None:
       blynkObj = blynklib.Blynk(parser.get('droneAir', 'BLYNK_AUTH'))
       blynkObj.run()
