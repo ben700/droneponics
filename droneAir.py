@@ -145,25 +145,19 @@ try:
            blynk.virtual_write(8, ("{0:d}".format(tsl.visible)))
            blynk.virtual_write(9, ("{0:d}".format(tsl.full_spectrum)))
 
-           blynk.set_property(6, 'color', colours['ONLINE'])#
-           blynk.set_property(7, 'color', colours['ONLINE'])
-           blynk.set_property(8, 'color', colours['ONLINE'])
-           blynk.set_property(9, 'color', colours['ONLINE'])
+           drone.setTSLFormOnline(blynkObj=blynk, loggerObj=_log)
         else:
-           blynk.set_property(6, 'color', colours['OFFLINE'])
-           blynk.set_property(7, 'color', colours['OFFLINE'])
-           blynk.set_property(8, 'color', colours['OFFLINE'])
-           blynk.set_property(9, 'color', colours['OFFLINE'])
+           drone.setTSLFormOnline(blynkObj=blynk, loggerObj=_log)
 
         mhz19b = mh_z19.read()  
         if mhz19b is not None:
             blynk.virtual_write(10, '{0:d}'.format(mhz19b['co2']))
-            blynk.set_property(10, 'color', colours['ONLINE'])
             _log.info('CO2: {0:d}'.format(mhz19b['co2']))
+            drone.setMHZFormOnline(blynkObj=blynk, loggerObj=_log)
         else:
             blynk.virtual_write(98, 'Unexpected error: mhz19b' + '\n')
             _log.info('Unexpected error: mhz19b')
-            blynk.set_property(10, 'color', colours['OFFLINE'])
+            drone.setMHZFormOffline(blynkObj=blynk, loggerObj=_log)
 
         blynk.virtual_write(98, "Completed Timer Function" + '\n') 
 
