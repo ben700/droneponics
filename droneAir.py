@@ -180,25 +180,22 @@ try:
               for i in range(0,9):
                    blynk.virtual_write(98, str(q.stdout.readline()) + '\n')
               bootup = False
-              _log.info("Just about to complete Booting")
+              _log.debug("Just about to complete Booting")
               now = datetime.now()
               blynk.virtual_write(99, now.strftime("%d/%m/%Y %H:%M:%S"))
               blynk.virtual_write(systemLED, 255)
-              blynk.set_property(systemLED, 'color', colours['ONLINE'])
-              blynk.virtual_write(98, "System now updated and restarted " + '\n')
+              drone.setFormOnline(blynkObj=blynk, loggerObj=_log, Msg="System now updated and restarted")
               blynk.virtual_write(255, 0)
               _log.info('Just Booted')
 
            timer.run()
         except:
-           _log.info('Unexpected error')
-           blynk.virtual_write(98, "System has main loop error" + '\n')
-           drone.setFormOffline(blynk)
+           drone.setFormOffline(blynkObj=blynk, loggerObj=_log, Msg="System has main loop error")
            os.system('sh /home/pi/updateDroneponics.sh')
            os.system('sudo reboot') 
   
   
 except:
-   drone.setFormOffline(blynk)
+   drone.setFormOffline(blynkObj=blynk, loggerObj=_log)
    os.system('sh /home/pi/updateDroneponics.sh')
    os.system('sudo reboot')
