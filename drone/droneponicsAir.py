@@ -24,6 +24,7 @@ def setFormOnline(*args, **kwargs):
    _log.debug("Going to set from colour Offline from setFormOnline")
    for i in range(255): 
       blynk.set_property(i, 'color', colours['ONLINE'])
+   blynk.set_property(98, 'color', "#000000")   
    _log.debug("Completed setFormOnline")
    
    
