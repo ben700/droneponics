@@ -142,6 +142,7 @@ try:
         _log.info("Update Timer Run")
         now = datetime.now()
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
+        _log.debug(bme680.temperature)
           
         if(bme680 is not None):
            openWeatherAPI = requests.get("https://api.openweathermap.org/data/2.5/onecall?lat=53.801277&lon=-1.548567&exclude=hourly,daily&units=metric&appid=7ab0c16c9b00854f26df8a57435ad6ce")   
@@ -151,7 +152,7 @@ try:
            _log.debug("calling blynkOpenWeather")        
            blynkOpenWeather(openWeather)
            _log.debug("returned from blynkOpenWeather")
-           _log.debug(bme680)
+           _log.debug(bme680.temperature)
             
            _log.info(bme680.temperature)
            _log.info('Temperature: {%0.1f} C'.format(bme680.temperature))
