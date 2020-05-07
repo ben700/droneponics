@@ -38,24 +38,31 @@ _log.setLevel(logging.DEBUG)
 
 
 try:
-       
+    
+    tslI2C = busio.I2C(board.SCL, board.SDA)
+    if not 0x29 in tslI2C.scan():
+        tslI2C = busio.I2C(board.D1, board.D0)   
+        if not 0x29 in tslI2C.scan():
+            _log.info("Didn't find TSL2591")
+            tslI2C = None  
+              
     # Initialize the I2C bus.
-    if (parser.get('droneAir', 'TSLI2C0', fallback=True) == True):
-        i2c0 = busio.I2C(board.SCL, board.SDA)
-    else:   
-        i2c0 = busio.I2C(board.D1, board.D0)
+    #if (parser.get('droneAir', 'TSLI2C0', fallback=True) == True):
+        
 
     # Initialize the sensor.
-    try:
-       tsl = adafruit_tsl2591.TSL2591(i2c0)
-       # You can optionally change the gain and integration time:
-       tsl.gain = adafruit_tsl2591.GAIN_LOW
-       tsl.integration_time = adafruit_tsl2591.INTEGRATIONTIME_100MS
-    except:
-        tsl = None
-        print("Unexpected error: TSL2591. Paser was " + str(parser.get('droneAir', 'TSLI2C0', fallback=True)))
-
-
+    if (tslI2C is not None):
+       try:
+          tsl = adafruit_tsl2591.TSL2591(i2c0)
+          # You can optionally change the gain and integration time:
+          tsl.gain = adafruit_tsl2591.GAIN_LOW
+          tsl.integration_time = adafruit_tsl2591.INTEGRATIONTIME_100MS
+       except:
+           tsl = None
+           print("Unexpected error: TSL2591. Paser was " + str(parser.get('droneAir', 'TSLI2C0', fallback=True)))
+     else:
+           tsl = None
+              
     # Initialize the sensor.
     try:
        i2c1 = busio.I2C(board.SCL, board.SDA)
