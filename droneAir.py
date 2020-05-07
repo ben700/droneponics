@@ -65,13 +65,10 @@ openWeatherAPI = requests.get("https://api.openweathermap.org/data/2.5/onecall?l
 openWeather = openWeatherAPI.json()
 print(openWeatherAPI.text)
 print(openWeather)
-
-for key, value in openWeather.text.items():
-    print(key, value)
-  
-print(openWeather.text[0])
-print(openWeather.text["current"]["pressure"])
-print(openWeather.text['current']['weather']['icon'])
+print("---------------------------------------------------")
+print(openWeather[0])
+print(openWeather["current"]["pressure"])
+print(openWeather['current']['weather']['icon'])
 
 try:
     
