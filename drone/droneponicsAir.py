@@ -18,10 +18,21 @@ def setFormOffline(blynkObj=None, Msg=None):
 
 
 
-def setBMEFormOnline(blynkObj=None, Msg=None):
-   logging.debug("in setFormOffline")
+def setBMEFormOnline(*args, **kwargs):
+   blynkObj = kwargs.get('blynkObj', None)
+   _log = kwargs.get('_log', None)
+   if _log is None:
+      _log = logging.getLogger('BlynkLog')
+      logFormatter = logging.Formatter("%(asctime)s [%(levelname)s]  %(message)s")
+      consoleHandler = logging.StreamHandler()
+      consoleHandler.setFormatter(logFormatter)
+      _log.addHandler(consoleHandler)
+      _log.setLevel(logging.DEBUG)
+   _log.debug("in setFormOffline")
+   
    if blynkObj is None:
       blynkObj = blynklib.Blynk(parser.get('droneAir', 'BLYNK_AUTH'))
+   
    blynkObj.run()
    blynkObj.set_property(1, 'color', colours['ONLINE'])
    blynkObj.set_property(2, 'color', colours['ONLINE'])
