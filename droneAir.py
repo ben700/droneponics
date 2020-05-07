@@ -36,12 +36,19 @@ consoleHandler.setFormatter(logFormatter)
 _log.addHandler(consoleHandler)
 _log.setLevel(logging.DEBUG)
 
-def setFormOffline(blynkObj=None):
+def setFormOffline(blynkObj=None, Msg=None):
+   print("in setFormOffline")
    if blynkObj is None:
       blynkObj = blynklib.Blynk(parser.get('droneAir', 'BLYNK_AUTH'))
    blynkObj.run()
+   _log.info("Going to set Msg from setFormOffline")
+   if Msg is not None:
+       blynkObj.virtual_write(98, Msg + " " + '\n')
+       _log.info(Msg)
+    _log.info("Going to set from colour Offline from setFormOffline")
    for i in range(255): 
       blynkObj.set_property(i, 'color', colours['OFFLINE'])
+   _log.info("Completed setFormOffline")
    
 try:
     
@@ -214,18 +221,6 @@ try:
   
   
 except:
-   _log.info('Unexpected error')
-   blynkErr = blynklib.Blynk(parser.get('droneAir', 'BLYNK_AUTH'))
-   blynkErr.run()
-   blynkErr.virtual_write(98, "System has error" + '\n')
-   blynkErr.set_property(systemLED, 'color', colours['OFFLINE'])
-   blynkErr.set_property(1, 'color', colours['OFFLINE'])
-   blynkErr.set_property(2, 'color', colours['OFFLINE'])
-   blynkErr.set_property(3, 'color', colours['OFFLINE'])
-   blynkErr.set_property(4, 'color', colours['OFFLINE'])
-   blynkErr.set_property(5, 'color', colours['OFFLINE'])
-   blynkErr.set_property(6, 'color', colours['OFFLINE'])
-   blynkErr.set_property(7, 'color', colours['OFFLINE'])
-   blynkErr.set_property(10, 'color', colours['OFFLINE'])
+   setFormOffline(blynk)
    os.system('sh /home/pi/updateDroneponics.sh')
    os.system('sudo reboot')
