@@ -157,11 +157,11 @@ try:
            _log.debug(bme680.temperature)
             
            _log.info(bme680.temperature)
-           _log.info('Temperature: {%0.1f} C'.format(bme680.temperature))
-           _log.info('Gas: {%d} ohm'.format(bme680.gas))
-           _log.info('Humidity: {%0.1f} %%'.format(bme680.humidity))
-           _log.info('Pressure: {%0.3f} hPa'.format(bme680.pressure))
-           _log.info('Altitude = {%0.2f} meters'.format(bme680.altitude))
+           _log.info('Temperature: {0:.2f} C'.format(bme680.temperature))
+           _log.info('Gas: {0:d} ohm'.format(bme680.gas))
+           _log.info('Humidity: {0.1f} %%'.format(bme680.humidity))
+           _log.info('Pressure: {0.3f} hPa'.format(bme680.pressure))
+           _log.info('Altitude = {0.2f} meters'.format(bme680.altitude))
 
            blynk.virtual_write(1, bme680.temperature)
            blynk.virtual_write(2, bme680.gas)
