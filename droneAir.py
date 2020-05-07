@@ -38,8 +38,26 @@ consoleHandler.setFormatter(logFormatter)
 _log.addHandler(consoleHandler)
 _log.setLevel(logging.DEBUG)
 
-#https://api.openweathermap.org/data/2.5/onecall?lat=53.801277&lon=-1.548567&exclude=hourly,daily&appid={YOUR API KEY}
-   
+#https://api.openweathermap.org/data/2.5/onecall?lat=53.801277&lon=-1.548567&exclude=hourly,daily&appid=7ab0c16c9b00854f26df8a57435ad6ce
+ #  {"lat":53.8,
+ #   "lon":-1.55,
+ #   "timezone":"Europe/London",
+ #   "current":{"dt":1588830963,
+ #              "sunrise":1588825069,
+ #              "sunset":1588880857,
+#               "temp":278,
+#               "feels_like":276.25,
+#               "pressure":1023,
+#               "humidity":90,
+#               "dew_point":276.5,
+#               "uvi":4.78,
+#               "clouds":0,
+#               "wind_speed":0.44,
+#               "wind_deg":170,
+#               "weather":[{"id":800,
+#                           "main":"Clear",
+#                           "description":"clear sky",
+#                           "icon":"01d"}]}}
 try:
     
     tslI2C = busio.I2C(board.SCL, board.SDA)
