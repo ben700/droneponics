@@ -57,7 +57,7 @@ def setBMEFormOnline(*args, **kwargs):
       consoleHandler.setFormatter(logFormatter)
       _log.addHandler(consoleHandler)
       _log.setLevel(logging.DEBUG)
-   _log.debug("in setFormOnline")
+   _log.debug("in setBMEFormOnline")
    
    if blynk is None:
       blynk = blynklib.Blynk(parser.get('droneAir', 'BLYNK_AUTH'))
@@ -81,7 +81,7 @@ def setBMEFormOffline(*args, **kwargs):
       consoleHandler.setFormatter(logFormatter)
       _log.addHandler(consoleHandler)
       _log.setLevel(logging.DEBUG)
-   _log.debug("in setFormOffline")
+   _log.debug("in setBMEFormOffline")
    
    if blynk is None:
       blynk = blynklib.Blynk(parser.get('droneAir', 'BLYNK_AUTH'))
@@ -105,7 +105,7 @@ def setTSLFormOnline(*args, **kwargs):
       consoleHandler.setFormatter(logFormatter)
       _log.addHandler(consoleHandler)
       _log.setLevel(logging.DEBUG)
-   _log.debug("in setFormOnline")
+   _log.debug("in setTSLFormOnline")
    
    if blynk is None:
       blynk = blynklib.Blynk(parser.get('droneAir', 'BLYNK_AUTH'))
@@ -127,7 +127,7 @@ def setTSLFormOffline(*args, **kwargs):
       consoleHandler.setFormatter(logFormatter)
       _log.addHandler(consoleHandler)
       _log.setLevel(logging.DEBUG)
-   _log.debug("in setFormOffline")
+   _log.debug("in setTSLFormOffline")
    
    if blynk is None:
       blynk = blynklib.Blynk(parser.get('droneAir', 'BLYNK_AUTH'))
@@ -150,7 +150,7 @@ def setMHZFormOnline(*args, **kwargs):
       consoleHandler.setFormatter(logFormatter)
       _log.addHandler(consoleHandler)
       _log.setLevel(logging.DEBUG)
-   _log.debug("in setFormOnline")
+   _log.debug("in setMHZFormOnline")
    
    if blynk is None:
       blynk = blynklib.Blynk(parser.get('droneAir', 'BLYNK_AUTH'))
@@ -168,7 +168,7 @@ def setMHZFormOffline(*args, **kwargs):
       consoleHandler.setFormatter(logFormatter)
       _log.addHandler(consoleHandler)
       _log.setLevel(logging.DEBUG)
-   _log.debug("in setFormOffline")
+   _log.debug("in setMHZFormOffline")
    
    if blynk is None:
       blynk = blynklib.Blynk(parser.get('droneAir', 'BLYNK_AUTH'))
