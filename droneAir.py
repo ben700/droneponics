@@ -127,7 +127,7 @@ try:
     #blynk.run()
     #print(blynk.getProperty(98, 'colour'))
    
-   def blynkOpenWeather(openWeather):
+    def blynkOpenWeather(openWeather):
         print(openWeather["current"]["dew_point"])
         print(openWeather["current"]["temp"])
         print(openWeather["current"]["pressure"])
