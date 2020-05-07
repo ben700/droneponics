@@ -127,7 +127,7 @@ try:
 
         if(bme680 is not None):
 
-                _log.info("\nTemperature: %0.1f C" % bme680.temperature)
+                _log.info("Temperature: %0.1f C" % bme680.temperature)
                 _log.info("Gas: %d ohm" % bme680.gas)
                 _log.info("Humidity: %0.1f %%" % bme680.humidity)
                 _log.info("Pressure: %0.3f hPa" % bme680.pressure)
