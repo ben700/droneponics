@@ -151,7 +151,7 @@ try:
            _log.debug("calling blynkOpenWeather")        
            blynkOpenWeather(openWeather)
            _log.debug("returned from blynkOpenWeather")
-            _log.debug(bme680)
+           _log.debug(bme680)
            _log.info("Temperature: {%0.1f} C".format(bme680.temperature))
            _log.info("Gas: {%d} ohm".format(bme680.gas))
            _log.info("Humidity: {%0.1f} %%".format(bme680.humidity))
