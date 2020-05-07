@@ -104,11 +104,9 @@ try:
     @timer.register(interval=10, run_once=False)
     def blynk_data():
         _log.info("Update Timer Run")
-         
         now = datetime.now()
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
           
-
         if(bme680 is not None):
 
            _log.info("Temperature: %0.1f C" % bme680.temperature)
@@ -126,23 +124,19 @@ try:
            t = Temp(bme680.temperature, 'c')
            blynk.virtual_write(11, dew_point(temperature=t, humidity=bme680.humidity))
 
-           drone.setBMEFormOnline(blynkObj=blynk, loggerObj=_log)
-               
+           drone.setBMEFormOnline(blynkObj=blynk, loggerObj=_log)     
         else:
            drone.setBMEFormOffline(blynkObj=blynk, loggerObj=_log)
 
         if (tsl is not None):
-
            _log.info('Total light: {0:.2f}lux'.format(tsl.lux))
            _log.info('Infrared light: {0:d}'.format(tsl.infrared))
            _log.info('Visible light: {0:d}'.format(tsl.visible))
            _log.info('Full spectrum (IR + visible) light: {0:d}'.format(tsl.full_spectrum))
-           
            blynk.virtual_write(6, str("{0:.2f}".format(tsl.lux))) 
            blynk.virtual_write(7, str("{0:d}".format(tsl.infrared)))
            blynk.virtual_write(8, ("{0:d}".format(tsl.visible)))
            blynk.virtual_write(9, ("{0:d}".format(tsl.full_spectrum)))
-
            drone.setTSLFormOnline(blynkObj=blynk, loggerObj=_log)
         else:
            drone.setTSLFormOnline(blynkObj=blynk, loggerObj=_log)
@@ -156,9 +150,6 @@ try:
             blynk.virtual_write(98, 'Unexpected error: mhz19b' + '\n')
             _log.info('Unexpected error: mhz19b')
             drone.setMHZFormOffline(blynkObj=blynk, loggerObj=_log)
-
-        blynk.virtual_write(98, "Completed Timer Function" + '\n') 
-
 
 
     while True:
