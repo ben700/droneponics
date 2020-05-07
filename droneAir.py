@@ -63,12 +63,17 @@ _log.setLevel(logging.DEBUG)
  
 openWeatherAPI = requests.get("https://api.openweathermap.org/data/2.5/onecall?lat=53.801277&lon=-1.548567&exclude=hourly,daily&units=metric&appid=7ab0c16c9b00854f26df8a57435ad6ce")   
 openWeather = openWeatherAPI.json()
-print(openWeatherAPI.text)
-print(openWeather)
 print("---------------------------------------------------")
 print(openWeather[0])
 print(openWeather["current"]["pressure"])
-print(openWeather['current']['weather']['icon'])
+print(openWeather["current"]["pressure"]["icon"])
+
+openWeather = openWeather.replace('[','',openWeather)
+openWeather = openWeather.replace(']','',openWeather)
+
+print(openWeather["current"]["pressure"]["icon"])
+
+
 
 try:
     
