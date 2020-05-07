@@ -63,7 +63,7 @@ try:
             tslI2C = None  
         else:
             _log.info("Found TSL2591 on I2C-0")
-     else:
+    else:
          _log.info("Found TSL2591 on I2C-1")
     # Initialize the I2C bus.
     #if (parser.get('droneAir', 'TSLI2C0', fallback=True) == True):
@@ -90,7 +90,7 @@ try:
             bmeI2C = None      
         else:
             _log.info("Found BME680 on I2C-0")
-     else:
+    else:
          _log.info("Found BME680 on I2C-1")
     # Initialize the sensor.
     if (bmeI2C is not None):
