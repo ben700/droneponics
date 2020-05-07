@@ -221,12 +221,14 @@ try:
 
            timer.run()
         except:
+           _log.info("in while loop except")            
            drone.setFormOffline(blynkObj=blynk, loggerObj=_log, Msg="System has main loop error")
     #       os.system('sh /home/pi/updateDroneponics.sh')
     #       os.system('sudo reboot') 
   
   
-except:
+except: 
+   _log.info("in main loop except")
    drone.setFormOffline(blynkObj=blynk, loggerObj=_log)
    #os.system('sh /home/pi/updateDroneponics.sh')
    #os.system('sudo reboot')
