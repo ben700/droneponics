@@ -198,13 +198,13 @@ try:
            blynk.run()
            if bootup :
               
-              _log.info("I2C 0 devices")
+              _log.info("Posting I2C 0 devices to app")
               p = subprocess.Popen(['i2cdetect', '-y','0'],stdout=subprocess.PIPE,)
               #cmdout = str(p.communicate())
               for i in range(0,9):
                    blynk.virtual_write(98, str(p.stdout.readline()) + '\n')
               
-              _log.info("I2C 1 devices")
+              _log.info("Posting I2C 1 devices to app")
               q = subprocess.Popen(['i2cdetect', '-y','1'],stdout=subprocess.PIPE,)
               #cmdout = str(p.communicate())
               for i in range(0,9):
