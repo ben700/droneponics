@@ -22,6 +22,9 @@ from meteocalc import Temp, dew_point
 import sys
 import os
 from configparser import ConfigParser
+import subprocess
+import re
+import drone
 
 parser = ConfigParser()
 parser.read('/home/pi/config.ini')
@@ -189,7 +192,7 @@ try:
            blynk.run()
            if bootup :
               
-              _log.info("I2C 1 devices")
+              _log.info("I2C 0 devices")
               p = subprocess.Popen(['i2cdetect', '-y','0'],stdout=subprocess.PIPE,)
               #cmdout = str(p.communicate())
               for i in range(0,9):
