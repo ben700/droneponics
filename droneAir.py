@@ -61,7 +61,10 @@ try:
         if not 0x29 in tslI2C.scan():
             _log.info("Didn't find TSL2591")
             tslI2C = None  
-              
+        else:
+            _log.info("Found TSL2591 on I2C-0")
+     else:
+         _log.info("Found TSL2591 on I2C-1")
     # Initialize the I2C bus.
     #if (parser.get('droneAir', 'TSLI2C0', fallback=True) == True):
         
@@ -85,7 +88,10 @@ try:
         if not 0x77 in bmeI2C.scan():
             _log.info("Didn't find BME680")
             bmeI2C = None      
-    
+        else:
+            _log.info("Found BME680 on I2C-0")
+     else:
+         _log.info("Found BME680 on I2C-1")
     # Initialize the sensor.
     if (bmeI2C is not None):
        try:
