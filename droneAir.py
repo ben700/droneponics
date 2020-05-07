@@ -73,7 +73,7 @@ try:
     if not 0x77 in bmeI2C.scan():
         bmeI2C = busio.I2C(board.D1, board.D0)   
         if not 0x77 in bmeI2C.scan():
-            _log.info("Didn't find TSL2591")
+            _log.info("Didn't find BME680")
             bmeI2C = None      
     
     # Initialize the sensor.
