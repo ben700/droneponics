@@ -104,6 +104,7 @@ try:
         print(openWeather["current"]["temp"])
         print(openWeather["current"]["pressure"])
         print(openWeather["current"]["humidity"])
+        return
 #https://api.openweathermap.org/data/2.5/onecall?lat=53.801277&lon=-1.548567&exclude=hourly,daily&units=metric&appid=7ab0c16c9b00854f26df8a57435ad6ce
  #  {"lat":53.8,
  #   "lon":-1.55,
@@ -220,11 +221,7 @@ try:
               _log.info('Just Booted')
 
            timer.run()
-        except:
-           _log.info("in while loop except")            
-           drone.setFormOffline(blynkObj=blynk, loggerObj=_log, Msg="System has main loop error")
-    #       os.system('sh /home/pi/updateDroneponics.sh')
-    #       os.system('sudo reboot') 
+
   
   
 except: 
