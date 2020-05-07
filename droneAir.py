@@ -64,9 +64,9 @@ try:
            tsl = None
      
     bmeI2C = busio.I2C(board.SCL, board.SDA)
-    if not 0x29 in tslI2C.scan():
+    if not 0x77 in bmeI2C.scan():
         bmeI2C = busio.I2C(board.D1, board.D0)   
-        if not 0x29 in tslI2C.scan():
+        if not 0x77 in bmeI2C.scan():
             _log.info("Didn't find TSL2591")
             bmeI2C = None      
     
