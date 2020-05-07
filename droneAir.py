@@ -184,7 +184,7 @@ try:
         try:
            blynk.run()
            if bootup :
-              
+              blynk.virtual_write(98, "clr")
               _log.info("Posting I2C 0 devices to app")
               p = subprocess.Popen(['i2cdetect', '-y','0'],stdout=subprocess.PIPE,)
               #cmdout = str(p.communicate())
@@ -200,7 +200,6 @@ try:
               _log.info("Just about to complete Booting")
               now = datetime.now()
               blynk.virtual_write(99, now.strftime("%d/%m/%Y %H:%M:%S"))
-              blynk.virtual_write(98, "clr")
               blynk.virtual_write(systemLED, 255)
               blynk.set_property(systemLED, 'color', colours['ONLINE'])
               blynk.virtual_write(98, "System now updated and restarted " + '\n')
