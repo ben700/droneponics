@@ -1,7 +1,14 @@
 import logging
+
 def setFormOffline(blynkObj=None, Msg=None):
-   global _log
-   print("in setFormOffline")
+   _log = logging.getLogger('BlynkLog')
+   logFormatter = logging.Formatter("%(asctime)s [%(levelname)s]  %(message)s")
+   consoleHandler = logging.StreamHandler()
+   consoleHandler.setFormatter(logFormatter)
+   _log.addHandler(consoleHandler)
+   _log.setLevel(logging.DEBUG)
+   _log.info("in setFormOffline")
+   
    if blynkObj is None:
       blynkObj = blynklib.Blynk(parser.get('droneAir', 'BLYNK_AUTH'))
    blynkObj.run()
