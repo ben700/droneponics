@@ -39,38 +39,6 @@ consoleHandler.setFormatter(logFormatter)
 _log.addHandler(consoleHandler)
 _log.setLevel(logging.DEBUG)
 
-#https://api.openweathermap.org/data/2.5/onecall?lat=53.801277&lon=-1.548567&exclude=hourly,daily&units=metric&appid=7ab0c16c9b00854f26df8a57435ad6ce
- #  {"lat":53.8,
- #   "lon":-1.55,
- #   "timezone":"Europe/London",
- #   "current":{"dt":1588830963,
- #              "sunrise":1588825069,
- #              "sunset":1588880857,
-#               "temp":278,
-#               "feels_like":276.25,
-#               "pressure":1023,
-#               "humidity":90,
-#               "dew_point":276.5,
-#               "uvi":4.78,
-#               "clouds":0,
-#               "wind_speed":0.44,
-#               "wind_deg":170,
-#               "weather":[{"id":800,
-#                           "main":"Clear",
-#                           "description":"clear sky",
-#                           "icon":"01d"}]}}
- 
- 
- 
-openWeatherAPI = requests.get("https://api.openweathermap.org/data/2.5/onecall?lat=53.801277&lon=-1.548567&exclude=hourly,daily&units=metric&appid=7ab0c16c9b00854f26df8a57435ad6ce")   
-openWeather = openWeatherAPI.json()
-print("---------------------------------------------------")
-print(openWeather["current"]["dew_point"])
-print(openWeather["current"]["weather"])
-print(openWeather["current"]["weather"][0]["icon"])
-oWeather = json.loads(openWeather["current"]["weather"][0])
-
-
 try:
     
     tslI2C = busio.I2C(board.SCL, board.SDA)
@@ -128,10 +96,37 @@ try:
     #print(blynk.getProperty(98, 'colour'))
    
     def blynkOpenWeather(openWeather):
+        openWeatherAPI = requests.get("https://api.openweathermap.org/data/2.5/onecall?lat=53.801277&lon=-1.548567&exclude=hourly,daily&units=metric&appid=7ab0c16c9b00854f26df8a57435ad6ce")   
+        openWeather = openWeatherAPI.json()
+        print("---------------------------------------------------")
+        print(openWeather["current"]["weather"][0]["icon"])
         print(openWeather["current"]["dew_point"])
         print(openWeather["current"]["temp"])
         print(openWeather["current"]["pressure"])
         print(openWeather["current"]["humidity"])
+#https://api.openweathermap.org/data/2.5/onecall?lat=53.801277&lon=-1.548567&exclude=hourly,daily&units=metric&appid=7ab0c16c9b00854f26df8a57435ad6ce
+ #  {"lat":53.8,
+ #   "lon":-1.55,
+ #   "timezone":"Europe/London",
+ #   "current":{"dt":1588830963,
+ #              "sunrise":1588825069,
+ #              "sunset":1588880857,
+#               "temp":278,
+#               "feels_like":276.25,
+#               "pressure":1023,
+#               "humidity":90,
+#               "dew_point":276.5,
+#               "uvi":4.78,
+#               "clouds":0,
+#               "wind_speed":0.44,
+#               "wind_deg":170,
+#               "weather":[{"id":800,
+#                           "main":"Clear",
+#                           "description":"clear sky",
+#                           "icon":"01d"}]}}
+ 
+ 
+ 
    
     @blynk.handle_event('write V255')
     def rebooter(pin, value):
@@ -151,7 +146,8 @@ try:
            openWeatherAPI = requests.get("https://api.openweathermap.org/data/2.5/onecall?lat=53.801277&lon=-1.548567&exclude=hourly,daily&units=metric&appid=7ab0c16c9b00854f26df8a57435ad6ce")   
            openWeather = openWeatherAPI.json()
            bme680.sea_level_pressure = openWeather["current"]["pressure"]
-
+           blynkOpenWeather(openWeather)
+           
            _log.info("Temperature: %0.1f C" % bme680.temperature)
            _log.info("Gas: %d ohm" % bme680.gas)
            _log.info("Humidity: %0.1f %%" % bme680.humidity)
