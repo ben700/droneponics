@@ -180,6 +180,14 @@ try:
         try:
            blynk.run()
            if bootup :
+              p = subprocess.Popen(['i2cdetect', '-y','0'],stdout=subprocess.PIPE,)
+              #cmdout = str(p.communicate())
+              for i in range(0,9):
+                   blynk.virtual_write(98, str(p.stdout.readline()) + '\n')
+              p = subprocess.Popen(['i2cdetect', '-y','1'],stdout=subprocess.PIPE,)
+              #cmdout = str(p.communicate())
+              for i in range(0,9):
+                   blynk.virtual_write(98, str(p.stdout.readline()) + '\n')
               bootup = False
               now = datetime.now()
               blynk.virtual_write(99, now.strftime("%d/%m/%Y %H:%M:%S"))
