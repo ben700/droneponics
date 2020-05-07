@@ -1,4 +1,5 @@
 def setFormOffline(blynkObj=None, Msg=None):
+   global _log
    print("in setFormOffline")
    if blynkObj is None:
       blynkObj = blynklib.Blynk(parser.get('droneAir', 'BLYNK_AUTH'))
