@@ -1,3 +1,4 @@
+import logging
 def setFormOffline(blynkObj=None, Msg=None):
    global _log
    print("in setFormOffline")
