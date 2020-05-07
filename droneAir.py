@@ -62,30 +62,30 @@ try:
            print("Unexpected error: TSL2591. Paser was " + str(parser.get('droneAir', 'TSLI2C0', fallback=True)))
     else:
            tsl = None
-              
+     
+    bmeI2C = busio.I2C(board.SCL, board.SDA)
+    if not 0x29 in tslI2C.scan():
+        bmeI2C = busio.I2C(board.D1, board.D0)   
+        if not 0x29 in tslI2C.scan():
+            _log.info("Didn't find TSL2591")
+            bmeI2C = None      
+    
     # Initialize the sensor.
-    try:
-       i2c1 = busio.I2C(board.SCL, board.SDA)
-       bme680 = adafruit_bme680.Adafruit_BME680_I2C(i2c1)
-       # change this to match the location's pressure (hPa) at sea level
-       bme680.sea_level_pressure = 1026
-    except:
-        bme680 = None
-        print("Unexpected error: bme680")
-
+    if (bmeI2C is not None):
+       try:
+           bme680 = adafruit_bme680.Adafruit_BME680_I2C(bmeI2C)
+           # change this to match the location's pressure (hPa) at sea level
+           bme680.sea_level_pressure = 1026
+       except:
+           bme680 = None
+           _log.info("Unexpected error: bme680")
+    else:
+       bme680 = None
+        
     # Initialize Blynk
     blynk = blynklib.Blynk(parser.get('droneAir', 'BLYNK_AUTH'))
     timer = blynktimer.Timer()
     #blynk.run()
-    APP_CONNECT_PRINT_MSG = '[APP_CONNECT_EVENT]'
-    APP_DISCONNECT_PRINT_MSG = '[APP_DISCONNECT_EVENT]'
-    CONNECT_PRINT_MSG = '[CONNECT_EVENT]'
-    DISCONNECT_PRINT_MSG = '[DISCONNECT_EVENT]'
-    WRITE_EVENT_PRINT_MSG = "[WRITE_VIRTUAL_PIN_EVENT] Pin: V{} Value: '{}'"
-    READ_PRINT_MSG = "[READ_VIRTUAL_PIN_EVENT] Pin: V{}"
-    ALLOWED_COMMANDS_LIST = ['ls', 'lsusb', 'ip a', 'ip abc']
-    TWEET_MSG = "New value='{}' on VPIN({})"
-
 
     @blynk.handle_event('write V255')
     def rebooter(pin, value):
@@ -94,9 +94,6 @@ try:
         os.system('sh /home/pi/updateDroneponics.sh')
         blynk.virtual_write(98, "System updated and restarting " + '\n')
         os.system('sudo reboot')
-
-
-
 
     @timer.register(interval=10, run_once=False)
     def blynk_data():
