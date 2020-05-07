@@ -1,6 +1,5 @@
 
 
-
 # The ID and range of a sample spreadsheet.
 colours = {1: '#FF0000', 0: '#00FF00', 'OFFLINE': '#0000FF', 'ONLINE': '#00FF00'}
 systemLED=101
@@ -114,35 +113,25 @@ try:
 
         if(bme680 is not None):
 
-                _log.info("Temperature: %0.1f C" % bme680.temperature)
-                _log.info("Gas: %d ohm" % bme680.gas)
-                _log.info("Humidity: %0.1f %%" % bme680.humidity)
-                _log.info("Pressure: %0.3f hPa" % bme680.pressure)
-                _log.info("Altitude = %0.2f meters" % bme680.altitude)
+           _log.info("Temperature: %0.1f C" % bme680.temperature)
+           _log.info("Gas: %d ohm" % bme680.gas)
+           _log.info("Humidity: %0.1f %%" % bme680.humidity)
+           _log.info("Pressure: %0.3f hPa" % bme680.pressure)
+           _log.info("Altitude = %0.2f meters" % bme680.altitude)
 
-                blynk.virtual_write(1, bme680.temperature)
-                blynk.virtual_write(2, bme680.gas)
-                blynk.virtual_write(3, bme680.humidity)
-                blynk.virtual_write(4, bme680.pressure)
-                blynk.virtual_write(5, bme680.altitude)
+           blynk.virtual_write(1, bme680.temperature)
+           blynk.virtual_write(2, bme680.gas)
+           blynk.virtual_write(3, bme680.humidity)
+           blynk.virtual_write(4, bme680.pressure)
+           blynk.virtual_write(5, bme680.altitude)
 
-                t = Temp(bme680.temperature, 'c')
-                blynk.virtual_write(11, dew_point(temperature=t, humidity=bme680.humidity))
+           t = Temp(bme680.temperature, 'c')
+           blynk.virtual_write(11, dew_point(temperature=t, humidity=bme680.humidity))
 
-                blynk.set_property(1, 'color', colours['ONLINE'])
-                blynk.set_property(2, 'color', colours['ONLINE'])
-                blynk.set_property(3, 'color', colours['ONLINE'])
-                blynk.set_property(4, 'color', colours['ONLINE'])
-                blynk.set_property(5, 'color', colours['ONLINE'])
-                blynk.set_property(11, 'color', colours['ONLINE'])
+           drone.setBMEFormOnline()
                
         else:
-                blynk.set_property(1, 'color', colours['OFFLINE'])
-                blynk.set_property(2, 'color', colours['OFFLINE'])
-                blynk.set_property(3, 'color', colours['OFFLINE'])
-                blynk.set_property(4, 'color', colours['OFFLINE'])
-                blynk.set_property(5, 'color', colours['OFFLINE'])
-                blynk.set_property(11, 'color', colours['OFFLINE'])
+           drone.setBMEFormOffline()
 
         if (tsl is not None):
 
