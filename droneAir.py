@@ -147,8 +147,10 @@ try:
            openWeatherAPI = requests.get("https://api.openweathermap.org/data/2.5/onecall?lat=53.801277&lon=-1.548567&exclude=hourly,daily&units=metric&appid=7ab0c16c9b00854f26df8a57435ad6ce")   
            openWeather = openWeatherAPI.json()
            bme680.sea_level_pressure = openWeather["current"]["pressure"]
+           _log.debug("calling blynkOpenWeather")        
            blynkOpenWeather(openWeather)
-           
+           _log.debug("returned from blynkOpenWeather")
+            
            _log.info("Temperature: %0.1f C" % bme680.temperature)
            _log.info("Gas: %d ohm" % bme680.gas)
            _log.info("Humidity: %0.1f %%" % bme680.humidity)
