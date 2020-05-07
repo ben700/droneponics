@@ -39,12 +39,20 @@ _log.setLevel(logging.DEBUG)
 
 try:
 
-
-    # Initialize the I2C bus.
-    if (parser.get('droneAir', 'TSLI2C0', fallback=True) == True):
+    try:
+        print("try bus 1")
         i2c0 = busio.I2C(board.SCL, board.SDA)
-    else:   
+        print("done bus 1")
+    except IOError:
+        print("try bus 0")
         i2c0 = busio.I2C(board.D1, board.D0)
+        print("done bus 0")
+        
+    # Initialize the I2C bus.
+    #if (parser.get('droneAir', 'TSLI2C0', fallback=True) == True):
+    #    i2c0 = busio.I2C(board.SCL, board.SDA)
+    #else:   
+    #    i2c0 = busio.I2C(board.D1, board.D0)
 
     # Initialize the sensor.
     try:
