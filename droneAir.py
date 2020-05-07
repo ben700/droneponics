@@ -146,16 +146,17 @@ try:
         if(bme680 is not None):
            openWeatherAPI = requests.get("https://api.openweathermap.org/data/2.5/onecall?lat=53.801277&lon=-1.548567&exclude=hourly,daily&units=metric&appid=7ab0c16c9b00854f26df8a57435ad6ce")   
            openWeather = openWeatherAPI.json()
-           #bme680.sea_level_pressure = openWeather["current"]["pressure"]
+           _log.debug(bme680)
+           bme680.sea_level_pressure = openWeather["current"]["pressure"]
            _log.debug("calling blynkOpenWeather")        
            blynkOpenWeather(openWeather)
            _log.debug("returned from blynkOpenWeather")
-            
-           _log.info("Temperature: %0.1f C" % bme680.temperature)
-           _log.info("Gas: %d ohm" % bme680.gas)
-           _log.info("Humidity: %0.1f %%" % bme680.humidity)
-           _log.info("Pressure: %0.3f hPa" % bme680.pressure)
-           _log.info("Altitude = %0.2f meters" % bme680.altitude)
+            _log.debug(bme680)
+           _log.info("Temperature: {%0.1f} C".format(bme680.temperature))
+           _log.info("Gas: {%d} ohm".format(bme680.gas))
+           _log.info("Humidity: {%0.1f} %%".format(bme680.humidity))
+           _log.info("Pressure: {%0.3f} hPa".format(bme680.pressure))
+           _log.info("Altitude = {%0.2f} meters".format(bme680.altitude))
 
            blynk.virtual_write(1, bme680.temperature)
            blynk.virtual_write(2, bme680.gas)
