@@ -128,10 +128,10 @@ try:
            t = Temp(bme680.temperature, 'c')
            blynk.virtual_write(11, dew_point(temperature=t, humidity=bme680.humidity))
 
-           drone.setBMEFormOnline()
+           drone.setBMEFormOnline(blynk)
                
         else:
-           drone.setBMEFormOffline()
+           drone.setBMEFormOffline(blynk)
 
         if (tsl is not None):
 
