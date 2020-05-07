@@ -53,7 +53,7 @@ try:
     # Initialize the sensor.
     if (tslI2C is not None):
        try:
-          tsl = adafruit_tsl2591.TSL2591(i2c0)
+          tsl = adafruit_tsl2591.TSL2591(tslI2C)
           # You can optionally change the gain and integration time:
           tsl.gain = adafruit_tsl2591.GAIN_LOW
           tsl.integration_time = adafruit_tsl2591.INTEGRATIONTIME_100MS
