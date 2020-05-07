@@ -67,8 +67,8 @@ openWeather = openWeatherAPI.json()
 print("---------------------------------------------------")
 print(openWeather["current"]["dew_point"])
 print(openWeather["current"]["weather"])
+print(openWeather["current"]["weather"][0]["icon"])
 oWeather = json.loads(openWeather["current"]["weather"][0])
-print(openWeather["oWeather"]["icon"])
 
 
 try:
