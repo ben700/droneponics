@@ -106,9 +106,24 @@ try:
         print(openWeather["current"]["temp"])
         print(openWeather["current"]["pressure"])
         print(openWeather["current"]["humidity"])
-      #  blynk.set_property(200, 'url', "http://openweathermap.org/img/wn/"+openWeather["current"]["weather"][0]["icon"]+".png")
-        print ("http://openweathermap.org/img/wn/"+openWeather["current"]["weather"][0]["icon"]+".png")
-        blynk.set_property(200, 'urls', "http://openweathermap.org/img/wn/"+openWeather["current"]["weather"][0]["icon"]+".png")
+        blynk.set_property(200, "urls", "http://openweathermap.org/img/wn/"+openWeather["current"]["weather"][0]["icon"]+".png")
+        blynk.set_property(200, "label", openWeather["current"]["weather"][0]["description"])
+        
+        blynk.virtual_write(201,openWeather["current"]["temp"])
+        blynk.set_property(201, "label", "Outside Temp")
+        blynk.set_property(201, "color", colours['ONLINE'])
+        
+        blynk.virtual_write(202,openWeather["current"]["dew_point"])
+        blynk.set_property(202, "label", "Outside Dew Point")
+        blynk.set_property(202, "color", colours['ONLINE'])
+        
+        blynk.virtual_write(203,openWeather["current"]["pressure"])
+        blynk.set_property(203, "label", "Outside Pressure")
+        blynk.set_property(203, "color", colours['ONLINE'])
+        
+        blynk.virtual_write(204,openWeather["current"]["humidity"])
+        blynk.set_property(204, "label", "Outside Humidity")
+        blynk.set_property(204, "color", colours['ONLINE'])
         
         return
 #https://api.openweathermap.org/data/2.5/onecall?lat=53.801277&lon=-1.548567&exclude=hourly,daily&units=metric&appid=7ab0c16c9b00854f26df8a57435ad6ce
