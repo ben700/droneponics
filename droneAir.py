@@ -158,7 +158,7 @@ try:
             
            _log.info('Temperature: {0:.2f} C'.format(bme680.temperature))
            _log.info('Gas: {0:d} ohm'.format(bme680.gas))
-           _log.info("Humidity1: {0.1f} ".format(bme680.humidity))
+           _log.info('Humidity1: {0.1f} '.format(bme680.humidity))
            _log.info("Humidity: {0.1f} %%".format(bme680.humidity))
            _log.info('Pressure: {0.3f} hPa'.format(bme680.pressure))
            _log.info('Altitude = {0.2f} meters'.format(me680.altitude))
