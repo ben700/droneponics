@@ -137,6 +137,11 @@ try:
         blynk.virtual_write(207, time.strftime("%H:%M:%S", local_time))
         blynk.set_property(207, "color", colours['ONLINE'])
         
+        local_time = time.gmtime(openWeather["current"]["dt"])
+        blynk.set_property(208, "label", "Web Time")
+        blynk.virtual_write(208, time.strftime("%H:%M:%S", local_time))
+        blynk.set_property(208, "color", colours['ONLINE'])
+        
         return
 #https://api.openweathermap.org/data/2.5/onecall?lat=53.801277&lon=-1.548567&exclude=hourly,daily&units=metric&appid=7ab0c16c9b00854f26df8a57435ad6ce
  #  {"lat":53.8,
@@ -264,5 +269,5 @@ try:
 except: 
    _log.info("in main loop except")
    drone.setFormOffline(blynkObj=blynk, loggerObj=_log)
-#   os.system('sh /home/pi/updateDroneponics.sh')
-#   os.system('sudo reboot')
+   os.system('sh /home/pi/updateDroneponics.sh')
+   os.system('sudo reboot')
