@@ -97,7 +97,7 @@ try:
     #blynk.run()
     #print(blynk.getProperty(98, 'colour'))
    
-    def blynkOpenWeather(openWeather):
+    def blynkOpenWeather(openWeather, blynk):
         openWeatherAPI = requests.get("https://api.openweathermap.org/data/2.5/onecall?lat=53.801277&lon=-1.548567&exclude=hourly,daily&units=metric&appid=7ab0c16c9b00854f26df8a57435ad6ce")   
         openWeather = openWeatherAPI.json()
         print("---------------------------------------------------")
@@ -106,6 +106,7 @@ try:
         print(openWeather["current"]["temp"])
         print(openWeather["current"]["pressure"])
         print(openWeather["current"]["humidity"])
+        blynk.virtual_write(98, "http://openweathermap.org/img/wn/"+openWeather["current"]["weather"][0]["icon"]+".png")
         return
 #https://api.openweathermap.org/data/2.5/onecall?lat=53.801277&lon=-1.548567&exclude=hourly,daily&units=metric&appid=7ab0c16c9b00854f26df8a57435ad6ce
  #  {"lat":53.8,
@@ -152,7 +153,7 @@ try:
            _log.debug(bme680)
            bme680.sea_level_pressure = openWeather["current"]["pressure"]
            _log.debug("calling blynkOpenWeather")        
-           blynkOpenWeather(openWeather)
+           blynkOpenWeather(openWeather, blynk)
            _log.debug("returned from blynkOpenWeather")
            _log.debug(bme680.temperature)
             
