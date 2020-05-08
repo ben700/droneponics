@@ -100,12 +100,7 @@ try:
     def blynkOpenWeather(openWeather, blynk):
         openWeatherAPI = requests.get("https://api.openweathermap.org/data/2.5/onecall?lat=53.801277&lon=-1.548567&exclude=hourly,daily&units=metric&appid=7ab0c16c9b00854f26df8a57435ad6ce")   
         openWeather = openWeatherAPI.json()
-        print("---------------------------------------------------")
-        print(openWeather["current"]["weather"][0]["icon"])
-        print(openWeather["current"]["dew_point"])
-        print(openWeather["current"]["temp"])
-        print(openWeather["current"]["pressure"])
-        print(openWeather["current"]["humidity"])
+
         blynk.set_property(200, "urls", "http://openweathermap.org/img/wn/"+openWeather["current"]["weather"][0]["icon"]+".png")
         blynk.set_property(200, "label", openWeather["current"]["weather"][0]["description"])
         
@@ -266,5 +261,5 @@ try:
 except: 
    _log.info("in main loop except")
    drone.setFormOffline(blynkObj=blynk, loggerObj=_log)
-   os.system('sh /home/pi/updateDroneponics.sh')
-   os.system('sudo reboot')
+#   os.system('sh /home/pi/updateDroneponics.sh')
+#   os.system('sudo reboot')
