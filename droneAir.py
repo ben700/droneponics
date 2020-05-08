@@ -125,6 +125,9 @@ try:
         blynk.set_property(204, "label", "Outside Humidity")
         blynk.set_property(204, "color", colours['ONLINE'])
         
+        local_time = time.ctime(openWeather["current"]["sunset"])
+        print("Local time:", local_time)
+
         return
 #https://api.openweathermap.org/data/2.5/onecall?lat=53.801277&lon=-1.548567&exclude=hourly,daily&units=metric&appid=7ab0c16c9b00854f26df8a57435ad6ce
  #  {"lat":53.8,
