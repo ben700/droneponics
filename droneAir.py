@@ -127,6 +127,9 @@ try:
         print("going to start doing time")
         local_time = time.ctime(openWeather["current"]["sunrise"])
         print(local_time)
+        print(local_time.strftime("%H:%M:%S"))
+        print(time.strftime("%H:%M:%S", local_time))
+        
         blynk.set_property(206, "label", "Sunrise")
         blynk.virtual_write(206, time.strftime("%H:%M:%S", local_time))
         blynk.set_property(206, "color", colours['ONLINE'])
