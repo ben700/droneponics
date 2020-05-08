@@ -132,7 +132,7 @@ try:
         blynk.virtual_write(206, time.strftime("%H:%M:%S", local_time))
         blynk.set_property(206, "color", colours['ONLINE'])
         
-        local_time = time.ctime(openWeather["current"]["sunset"])
+        local_time = time.gmtime(openWeather["current"]["sunset"])
         blynk.set_property(207, "label", "Sunset")
         blynk.virtual_write(207, time.strftime("%H:%M:%S", local_time))
         blynk.set_property(207, "color", colours['ONLINE'])
