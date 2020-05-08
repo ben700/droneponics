@@ -98,6 +98,7 @@ try:
     #print(blynk.getProperty(98, 'colour'))
    
     def blynkOpenWeather(openWeather, blynk):
+        
         openWeatherAPI = requests.get("https://api.openweathermap.org/data/2.5/onecall?lat=53.801277&lon=-1.548567&exclude=hourly,daily&units=metric&appid=7ab0c16c9b00854f26df8a57435ad6ce")   
         openWeather = openWeatherAPI.json()
 
@@ -126,12 +127,12 @@ try:
         
         local_time = time.ctime(openWeather["current"]["sunrise"])
         blynk.set_property(206, "label", "Sunrise")
-        blynk.virtual_write(206, local_time.strftime("%d/%m/%Y %H:%M:%S"))
+        blynk.virtual_write(206, time.strftime("%H:%M:%S", local_time))
         blynk.set_property(206, "color", colours['ONLINE'])
         
         local_time = time.ctime(openWeather["current"]["sunset"])
         blynk.set_property(207, "label", "Sunset")
-        blynk.virtual_write(207, local_time.strftime("%d/%m/%Y %H:%M:%S"))
+        blynk.virtual_write(207, time.strftime("%H:%M:%S", local_time))
         blynk.set_property(207, "color", colours['ONLINE'])
         
         return
