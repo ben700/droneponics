@@ -263,6 +263,8 @@ try:
            blynk.virtual_write(systemLED, 255)
            drone.setFormOnline(blynkObj=blynk, loggerObj=_log, Msg="System now updated and restarted")
            blynk.virtual_write(255, 0)
+           blynk.virtual_write(150, "add", 0, "Max Temp", "20.0")
+        
            _log.info('Just Booted')
 
         timer.run()
