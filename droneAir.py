@@ -117,7 +117,7 @@ try:
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
           
         if(bme680 is not None):
-           openWeather = new OpenWeather() 
+           openWeather = OpenWeather() 
            openWeather = openWeather.blynkOpenWeather(blynk)
            bme680.sea_level_pressure = openWeather.getPressure()
             
