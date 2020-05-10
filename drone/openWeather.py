@@ -12,42 +12,42 @@ class OpenWeather:
    
    def blynkOpenWeather(self, blynk):
         
-        blynk.set_property(200, "urls", "http://openweathermap.org/img/wn/"+openWeather["current"]["weather"][0]["icon"]+".png")
-        blynk.set_property(200, "label", openWeather["current"]["weather"][0]["description"])
+        blynk.set_property(200, "urls", "http://openweathermap.org/img/wn/"+self.openWeather["current"]["weather"][0]["icon"]+".png")
+        blynk.set_property(200, "label", self.openWeather["current"]["weather"][0]["description"])
         
-        blynk.virtual_write(201,openWeather["current"]["temp"])
+        blynk.virtual_write(201,self.openWeather["current"]["temp"])
         blynk.set_property(201, "label", "Outside Temp")
         blynk.set_property(201, "color", colours['ONLINE'])
         
-        blynk.virtual_write(202,openWeather["current"]["dew_point"])
+        blynk.virtual_write(202,self.openWeather["current"]["dew_point"])
         blynk.set_property(202, "label", "Outside Dew Point")
         blynk.set_property(202, "color", colours['ONLINE'])
         
-        blynk.virtual_write(203,openWeather["current"]["pressure"])
+        blynk.virtual_write(203,self.openWeather["current"]["pressure"])
         blynk.set_property(203, "label", "Outside Pressure")
         blynk.set_property(203, "color", colours['ONLINE'])
         
-        blynk.virtual_write(204,openWeather["current"]["humidity"])
+        blynk.virtual_write(204,self.openWeather["current"]["humidity"])
         blynk.set_property(204, "label", "Outside Humidity")
         blynk.set_property(204, "color", colours['ONLINE'])
         
-        blynk.virtual_write(205,openWeather["current"]["feels_like"])
+        blynk.virtual_write(205,self.openWeather["current"]["feels_like"])
         blynk.set_property(205, "label", "Feels Like")
         blynk.set_property(205, "color", colours['ONLINE'])
         print("going to start doing time")
-        local_time = time.gmtime(openWeather["current"]["sunrise"])
+        local_time = time.gmtime(self.openWeather["current"]["sunrise"])
         print(time.strftime("%H:%M:%S", local_time))
         
         blynk.set_property(206, "label", "Sunrise")
         blynk.virtual_write(206, time.strftime("%H:%M:%S", local_time))
         blynk.set_property(206, "color", colours['ONLINE'])
         
-        local_time = time.gmtime(openWeather["current"]["sunset"])
+        local_time = time.gmtime(self.openWeather["current"]["sunset"])
         blynk.set_property(207, "label", "Sunset")
         blynk.virtual_write(207, time.strftime("%H:%M:%S", local_time))
         blynk.set_property(207, "color", colours['ONLINE'])
        
-        local_time = time.gmtime(openWeather["current"]["dt"])
+        local_time = time.gmtime(self.openWeather["current"]["dt"])
         blynk.set_property(208, "label", "Web Time")
         blynk.virtual_write(208, time.strftime("%H:%M:%S", local_time))
         blynk.set_property(208, "color", colours['ONLINE'])        
