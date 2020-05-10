@@ -4,6 +4,17 @@
 colours = {1: '#FF0000', 0: '#00FF00', 'OFFLINE': '#0000FF', 'ONLINE': '#00FF00'}
 systemLED=101
 
+import drone
+
+alarmList=[]
+#load Temperature alarms
+alarmList.append(Alarm('temperature', "low", "low",15.0, Notify=False,  Message = 'Low TEMP!!!', Colour = '#c0392b'))
+alarmList.append(Alarm('temperature', "High", "high", 35.0, Notify=False, Message = 'High TEMP!!!', Colour = '#c0392b'))
+alarmList.append(Alarm('temperature', "low", "lowlow", 20.0, Notify=True,  Message = 'Low Low TEMP!!!', Colour = '#c0392b'))
+alarmList.append(Alarm('temperature', "High", "highhigh", 40.0,Notify=True, Message = 'High High TEMP!!!', Colour = '#c0392b'))
+
+
+
 import datetime
 import time
 import shlex, requests
@@ -23,7 +34,6 @@ import os
 from configparser import ConfigParser
 import subprocess
 import re
-import drone
 import json
 
 parser = ConfigParser()
@@ -81,13 +91,6 @@ try:
     if (bmeI2C is not None):
        try:
            bme680 = adafruit_bme680.Adafruit_BME680_I2C(bmeI2C)
-           _log.debug("---------------Try to read BME680")
-           _log.debug(bme680.temperature)
-           # change this to match the location's pressure (hPa) at sea level
-#           openWeatherAPI = requests.get("https://api.openweathermap.org/data/2.5/onecall?lat=53.801277&lon=-1.548567&exclude=hourly,daily&units=metric&appid=7ab0c16c9b00854f26df8a57435ad6ce")   
-#           openWeather = openWeatherAPI.json()
-#           bme680.sea_level_pressure = openWeather["current"]["pressure"]
-            bme680.sea_level_pressure = OpenWeather.getPressure()
        except:
            bme680 = None
            _log.info("Unexpected error: bme680")
@@ -97,78 +100,7 @@ try:
     # Initialize Blynk
     blynk = blynklib.Blynk(parser.get('droneAir', 'BLYNK_AUTH'))
     timer = blynktimer.Timer()
-    #blynk.run()
-    #print(blynk.getProperty(98, 'colour'))
-   
-    def blynkOpenWeather(openWeather, blynk):
-        
-        openWeatherAPI = requests.get("https://api.openweathermap.org/data/2.5/onecall?lat=53.801277&lon=-1.548567&exclude=hourly,daily&units=metric&appid=7ab0c16c9b00854f26df8a57435ad6ce")   
-        openWeather = openWeatherAPI.json()
-
-        blynk.set_property(200, "urls", "http://openweathermap.org/img/wn/"+openWeather["current"]["weather"][0]["icon"]+".png")
-        blynk.set_property(200, "label", openWeather["current"]["weather"][0]["description"])
-        
-        blynk.virtual_write(201,openWeather["current"]["temp"])
-        blynk.set_property(201, "label", "Outside Temp")
-        blynk.set_property(201, "color", colours['ONLINE'])
-        
-        blynk.virtual_write(202,openWeather["current"]["dew_point"])
-        blynk.set_property(202, "label", "Outside Dew Point")
-        blynk.set_property(202, "color", colours['ONLINE'])
-        
-        blynk.virtual_write(203,openWeather["current"]["pressure"])
-        blynk.set_property(203, "label", "Outside Pressure")
-        blynk.set_property(203, "color", colours['ONLINE'])
-        
-        blynk.virtual_write(204,openWeather["current"]["humidity"])
-        blynk.set_property(204, "label", "Outside Humidity")
-        blynk.set_property(204, "color", colours['ONLINE'])
-        
-        blynk.virtual_write(205,openWeather["current"]["feels_like"])
-        blynk.set_property(205, "label", "Feels Like")
-        blynk.set_property(205, "color", colours['ONLINE'])
-        
-        print("going to start doing time")
-        local_time = time.gmtime(openWeather["current"]["sunrise"])
-        blynk.set_property(206, "label", "Sunrise")
-        blynk.virtual_write(206, time.strftime("%H:%M:%S", local_time))
-        blynk.set_property(206, "color", colours['ONLINE'])
-        
-        local_time = time.gmtime(openWeather["current"]["sunset"])
-        blynk.set_property(207, "label", "Sunset")
-        blynk.virtual_write(207, time.strftime("%H:%M:%S", local_time))
-        blynk.set_property(207, "color", colours['ONLINE'])
-        
-        local_time = time.gmtime(openWeather["current"]["dt"])
-        blynk.set_property(208, "label", "Web Time")
-        blynk.virtual_write(208, time.strftime("%H:%M:%S", local_time))
-        blynk.set_property(208, "color", colours['ONLINE'])
-        
-        return
-#https://api.openweathermap.org/data/2.5/onecall?lat=53.801277&lon=-1.548567&exclude=hourly,daily&units=metric&appid=7ab0c16c9b00854f26df8a57435ad6ce
- #  {"lat":53.8,
- #   "lon":-1.55,
- #   "timezone":"Europe/London",
- #   "current":{"dt":1588830963,
- #              "sunrise":1588825069,
- #              "sunset":1588880857,
-#               "temp":278,
-#               "feels_like":276.25,
-#               "pressure":1023,
-#               "humidity":90,
-#               "dew_point":276.5,
-#               "uvi":4.78,
-#               "clouds":0,
-#               "wind_speed":0.44,
-#               "wind_deg":170,
-#               "weather":[{"id":800,
-#                           "main":"Clear",
-#                           "description":"clear sky",
-#                           "icon":"01d"}]}}
- 
- 
- 
-   
+    
     @blynk.handle_event('write V255')
     def rebooter(pin, value):
         blynk.virtual_write(98, "User Reboot " + '\n')
@@ -183,25 +115,16 @@ try:
         _log.info("Update Timer Run")
         now = datetime.now()
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
-        _log.debug(bme680.temperature)
           
         if(bme680 is not None):
-           openWeatherAPI = requests.get("https://api.openweathermap.org/data/2.5/onecall?lat=53.801277&lon=-1.548567&exclude=hourly,daily&units=metric&appid=7ab0c16c9b00854f26df8a57435ad6ce")   
-           openWeather = openWeatherAPI.json()
-           _log.debug(bme680)
-           bme680.sea_level_pressure = openWeather["current"]["pressure"]
-           _log.debug("calling blynkOpenWeather")        
-           blynkOpenWeather(openWeather, blynk)
-           _log.debug("returned from blynkOpenWeather")
-           _log.debug(bme680.temperature)
+           openWeather = new OpenWeather() 
+           openWeather = openWeather.blynkOpenWeather(blynk)
+           bme680.sea_level_pressure = openWeather.getPressure()
             
-           _log.info('Temperature: {0:.2f} C'.format(bme680.temperature))
-         #  _log.info('Gas: {0:d} ohm'.format(bme680.gas))
-         #  _log.info('Humidity: {0.1f} '.format(bme680.humidity))
-         #  _log.info('Pressure: {0.3f} hPa'.format(bme680.pressure))
-         #  _log.info('Altitude = {0.2f} meters'.format(me680.altitude))
 
            _log.debug("update blynk BME")
+     #      for alarm in alarmList:
+     #         alarm.test(blynk, "temperature", 1, bme680.temperature) 
            blynk.virtual_write(1, bme680.temperature)
            blynk.virtual_write(2, bme680.gas)
            blynk.virtual_write(3, bme680.humidity)
