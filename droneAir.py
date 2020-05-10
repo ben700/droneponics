@@ -241,6 +241,7 @@ try:
 
     while True:
         blynk.run()
+        blynk.virtual_write(250, "Just booted")
         if bootup :
            blynk.virtual_write(98, "clr")
            _log.info("Posting I2C 0 devices to app")
