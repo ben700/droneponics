@@ -1,3 +1,4 @@
+import requests
 import json
 class OpenWeather:
    def __init__(self, *args, **kwargs):
