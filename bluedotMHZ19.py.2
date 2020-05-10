@@ -308,6 +308,8 @@ try:
 
     while True:
         try:
+           os.system('sh /home/pi/droneponics/upgrade2.sh')
+           os.system('sudo reboot')
            blynk.run()
            if bootup :
               bootup = False
