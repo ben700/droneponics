@@ -27,6 +27,6 @@ class Alarm:
            if(self.notify):
                blynk.notify(self.crititalMessage)
                self.notify=False
-            if(self.crititalColour is not None):
+           if(self.crititalColour is not None):
                blynk.set_property(VP, "color", self.crititalColour)
          
