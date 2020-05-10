@@ -1,21 +1,16 @@
 import json
 class OpenWeather:
    def __init__(self, *args, **kwargs):
-      openWeatherAPI = requests.get("https://api.openweathermap.org/data/2.5/onecall?lat=53.801277&lon=-1.548567&exclude=hourly,daily&units=metric&appid=7ab0c16c9b00854f26df8a57435ad6ce")   
-      openWeather = openWeatherAPI.json()
+      self.openWeatherAPI = requests.get("https://api.openweathermap.org/data/2.5/onecall?lat=53.801277&lon=-1.548567&exclude=hourly,daily&units=metric&appid=7ab0c16c9b00854f26df8a57435ad6ce")   
+      self.openWeather = openWeatherAPI.json()
       return openWeather
       
    def getPressure(self):
-      openWeatherAPI = requests.get("https://api.openweathermap.org/data/2.5/onecall?lat=53.801277&lon=-1.548567&exclude=hourly,daily&units=metric&appid=7ab0c16c9b00854f26df8a57435ad6ce")   
-      openWeather = openWeatherAPI.json()
-      return openWeather["current"]["pressure"]
+      return self.openWeather["current"]["pressure"]
    
    
    def blynkOpenWeather(self, blynk):
         
-        openWeatherAPI = requests.get("https://api.openweathermap.org/data/2.5/onecall?lat=53.801277&lon=-1.548567&exclude=hourly,daily&units=metric&appid=7ab0c16c9b00854f26df8a57435ad6ce")   
-        openWeather = openWeatherAPI.json()
-
         blynk.set_property(200, "urls", "http://openweathermap.org/img/wn/"+openWeather["current"]["weather"][0]["icon"]+".png")
         blynk.set_property(200, "label", openWeather["current"]["weather"][0]["description"])
         
