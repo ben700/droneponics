@@ -2,6 +2,7 @@ import requests
 import json
 class OpenWeather:
    def __init__(self, *args, **kwargs):
+      print("in OpenWeather constructor")
       self.openWeatherAPI = requests.get("https://api.openweathermap.org/data/2.5/onecall?lat=53.801277&lon=-1.548567&exclude=hourly,daily&units=metric&appid=7ab0c16c9b00854f26df8a57435ad6ce")   
       self.openWeather = openWeatherAPI.json()
       return openWeather
@@ -11,7 +12,10 @@ class OpenWeather:
    
    
    def blynkOpenWeather(self, blynk):
-        
+        if (self.openWeather is None)
+              self.openWeatherAPI = requests.get("https://api.openweathermap.org/data/2.5/onecall?lat=53.801277&lon=-1.548567&exclude=hourly,daily&units=metric&appid=7ab0c16c9b00854f26df8a57435ad6ce")   
+              self.openWeather = openWeatherAPI.json()
+         
         blynk.set_property(200, "urls", "http://openweathermap.org/img/wn/"+self.openWeather["current"]["weather"][0]["icon"]+".png")
         blynk.set_property(200, "label", self.openWeather["current"]["weather"][0]["description"])
         
