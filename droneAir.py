@@ -117,8 +117,6 @@ try:
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
           
         if(bme680 is not None):
-           _log.debug("going to get OpenWeather data")
-           openWeather = OpenWeather() 
            _log.debug("going to update Blynk")
            openWeather = openWeather.blynkOpenWeather(blynk)
            _log.debug("Going to read pressure")
