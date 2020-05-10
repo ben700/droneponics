@@ -13,7 +13,7 @@ alarmList.append(Alarm('temperature', "High", "high", 35.0, Notify=False, Messag
 alarmList.append(Alarm('temperature', "low", "lowlow", 20.0, Notify=True,  Message = 'Low Low TEMP!!!', Colour = '#c0392b'))
 alarmList.append(Alarm('temperature', "High", "highhigh", 40.0,Notify=True, Message = 'High High TEMP!!!', Colour = '#c0392b'))
 
-
+openWeather = OpenWeather() 
 
 import datetime
 import time
