@@ -70,11 +70,13 @@ try:
         bmeI2C = busio.I2C(board.D1, board.D0)   
         if not 0x77 in bmeI2C.scan():
             _log.info("Didn't find BME680")
+            blynk.virtual_write(250, "no BME680")
             bmeI2C = None      
         else:
             _log.info("Found BME680 on I2C-0")
     else:
          _log.info("Found BME680 on I2C-1")
+            
     # Initialize the sensor.
     if (bmeI2C is not None):
        try:
@@ -82,9 +84,10 @@ try:
            _log.debug("---------------Try to read BME680")
            _log.debug(bme680.temperature)
            # change this to match the location's pressure (hPa) at sea level
-           openWeatherAPI = requests.get("https://api.openweathermap.org/data/2.5/onecall?lat=53.801277&lon=-1.548567&exclude=hourly,daily&units=metric&appid=7ab0c16c9b00854f26df8a57435ad6ce")   
-           openWeather = openWeatherAPI.json()
-           bme680.sea_level_pressure = openWeather["current"]["pressure"]
+#           openWeatherAPI = requests.get("https://api.openweathermap.org/data/2.5/onecall?lat=53.801277&lon=-1.548567&exclude=hourly,daily&units=metric&appid=7ab0c16c9b00854f26df8a57435ad6ce")   
+#           openWeather = openWeatherAPI.json()
+#           bme680.sea_level_pressure = openWeather["current"]["pressure"]
+            bme680.sea_level_pressure = OpenWeather.getPressure()
        except:
            bme680 = None
            _log.info("Unexpected error: bme680")
@@ -177,6 +180,7 @@ try:
 
     @timer.register(interval=10, run_once=False)
     def blynk_data():
+        blynk.virtual_write(250, "Running")
         _log.info("Update Timer Run")
         now = datetime.now()
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
@@ -242,6 +246,7 @@ try:
     while True:
         blynk.run()
         blynk.virtual_write(250, "Just booted")
+        blynk.virtual_write(250, "Start-up")
         if bootup :
            blynk.virtual_write(98, "clr")
            _log.info("Posting I2C 0 devices to app")
