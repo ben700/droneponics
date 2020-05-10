@@ -1,22 +1,33 @@
-import requests
+import datetime 
+import time
+import shlex, requests
 import json
 class OpenWeather:
    def __init__(self, *args, **kwargs):
       print("in OpenWeather constructor")
+      self.timestamp = None
+      self.useByTime = None
+      self.openWeatherAPI = None 
+      self.openWeather = None
+     
+   def refresh(self):
+      print("in OpenWeather refresh")
+      self.timestamp = datetime.now()
+      self.useByTime = self.timestamp + datetime.timedelta(minutes=30)
+      print(self.useByTime.strftime("%d/%m/%Y %H:%M:%S"))
       self.openWeatherAPI = requests.get("https://api.openweathermap.org/data/2.5/onecall?lat=53.801277&lon=-1.548567&exclude=hourly,daily&units=metric&appid=7ab0c16c9b00854f26df8a57435ad6ce")   
       print("OpenWeather:-  going to json")
       self.openWeather = openWeatherAPI.json()
-      return openWeather
-      
+         
    def getPressure(self):
+      if (self.useByTime < datetime.now()):
+         refresh()
       return self.openWeather["current"]["pressure"]
    
    
    def blynkOpenWeather(self, blynk):
-        if (self.openWeather is None):
-              self.openWeatherAPI = requests.get("https://api.openweathermap.org/data/2.5/onecall?lat=53.801277&lon=-1.548567&exclude=hourly,daily&units=metric&appid=7ab0c16c9b00854f26df8a57435ad6ce")   
-              self.openWeather = openWeatherAPI.json()
-         
+      if (self.useByTime < datetime.now()):
+         refresh()   
         blynk.set_property(200, "urls", "http://openweathermap.org/img/wn/"+self.openWeather["current"]["weather"][0]["icon"]+".png")
         blynk.set_property(200, "label", self.openWeather["current"]["weather"][0]["description"])
         
