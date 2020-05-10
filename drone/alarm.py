@@ -1,7 +1,7 @@
  
 class Alarm:
    
-   def __init__(self, Metric, Type, Name, Value, notify=False *args, **kwargs):
+   def __init__(self, Metric, Type, Name, Value, notify=False, *args, **kwargs):
       self.metric = Metric
       self.type = Type
       self.name = Name
