@@ -11,6 +11,7 @@ sudo pip3 install meteocalc
 pip3 install adafruit-circuitpython-lis3dh
 pip3 install adafruit-circuitpython-ads1x15
 sudo pip3 install mh-z19
+sudo pip3 install colour
 sudo pip3 install configparser
 sudo apt-get install lxde
 sudo apt-get install xterm -y
