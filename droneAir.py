@@ -215,7 +215,7 @@ try:
            ip_address = socket.gethostbyname(hostname)
            ## printing the hostname and ip_address
            #blynk.virtual_write(251, hostname + " " + ip_address)
-           get_ip()
+           IP = get_ip()
            blynk.virtual_write(251, "IP=" +IP)
            _log.info('Just Booted')
 
