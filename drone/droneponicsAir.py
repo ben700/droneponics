@@ -3,6 +3,9 @@ import socket
 import blynklib
 from drone.droneObj import colours
 
+def gethostname():
+    return socket.gethostname()
+
 def get_ip():
     s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     try:
