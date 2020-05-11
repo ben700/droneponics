@@ -111,7 +111,7 @@ try:
 
     @timer.register(interval=10, run_once=False)
     def blynk_data():
-        blynk.virtual_write(250, "Running " + drone.gethostname())
+        blynk.virtual_write(250, drone.gethostname())
         _log.info("Update Timer Run")
         now = datetime.now()
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
