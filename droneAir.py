@@ -194,8 +194,7 @@ try:
            blynk.virtual_write(systemLED, 255)
            drone.setFormOnline(blynkObj=blynk, loggerObj=_log, Msg="System now updated and restarted")
            blynk.virtual_write(255, 0)
-           IP = drone.get_ip()
-           blynk.virtual_write(251, "IP=" +IP)
+           blynk.virtual_write(251, drone.get_ip())
            _log.info('Just Booted')
 
         timer.run()
