@@ -14,7 +14,7 @@ class OpenWeather:
       print("in OpenWeather refresh")
       self.timestamp = datetime.now()
       print("in OpenWeather refresh got time")
-      self.useByTime = datetime.now() +  datetime.timedelta(minutes=30)
+      self.useByTime = datetime.datetime.now() + datetime.timedelta(minutes=30)
       print("in OpenWeather refresh got time delta")
       print(self.useByTime)
       print("OpenWeather:-  going to get data")
