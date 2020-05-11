@@ -118,7 +118,7 @@ try:
           
         if(bme680 is not None):
            _log.debug("going to update Blynk")
-           openWeather = openWeather.blynkOpenWeather(blynk)
+           openWeather.blynkOpenWeather(blynk)
            _log.debug("Going to read pressure")
            bme680.sea_level_pressure = openWeather.getPressure()
             
