@@ -33,7 +33,7 @@ class OpenWeather:
         blynk.set_property(200, "urls", "http://openweathermap.org/img/wn/"+self.openWeather["current"]["weather"][0]["icon"]+".png")
         blynk.set_property(200, "label", self.openWeather["current"]["weather"][0]["description"])
         
-      #  drone.displaySensor(blynk, 201, self.openWeather["current"]["temp"], "Outside Temp", 0, 20)
+        drone.displaySensor(blynk, 201, self.openWeather["current"]["temp"], "Outside Temp", 0, 20)
         
         blynk.virtual_write(202,self.openWeather["current"]["dew_point"])
         blynk.set_property(202, "label", "Outside Dew Point")
@@ -55,16 +55,16 @@ class OpenWeather:
         local_time = time.gmtime(self.openWeather["current"]["sunrise"])
         print(time.strftime("%H:%M:%S", local_time)) 
         blynk.set_property(206, "label", "Sunrise")
-        blynk.virtual_write(206, "\xF0\x9F\x8C\x85" + time.strftime("%H:%M:%S", local_time))
+        blynk.virtual_write(206, time.strftime("%H:%M:%S", local_time))
         blynk.set_property(206, "color", colours['ONLINE'])
         
         local_time = time.gmtime(self.openWeather["current"]["sunset"])
         blynk.set_property(207, "label", "Sunset")
-        blynk.virtual_write(207, "xF0\x9F\x8C\x87" + time.strftime("%H:%M:%S", local_time))
+        blynk.virtual_write(207, time.strftime("%H:%M:%S", local_time))
         blynk.set_property(207, "color", colours['ONLINE'])
        
         local_time = time.gmtime(self.openWeather["current"]["dt"])
         blynk.set_property(208, "label", "Web Time")
-        blynk.virtual_write(208, "\xE2\x8F\xB0" + time.strftime("%H:%M:%S", local_time))
+        blynk.virtual_write(208, time.strftime("%H:%M:%S", local_time))
         blynk.set_property(208, "color", colours['ONLINE'])        
         return
