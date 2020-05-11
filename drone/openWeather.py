@@ -32,7 +32,7 @@ class OpenWeather:
         blynk.set_property(200, "urls", "http://openweathermap.org/img/wn/"+self.openWeather["current"]["weather"][0]["icon"]+".png")
         blynk.set_property(200, "label", self.openWeather["current"]["weather"][0]["description"])
         
-        drone.displaySensor(201, self.openWeather["current"]["temp"], "Outside Temp", 0, 20)
+        drone.displaySensor(blynk, 201, self.openWeather["current"]["temp"], "Outside Temp", 0, 20)
         
         blynk.virtual_write(202,self.openWeather["current"]["dew_point"])
         blynk.set_property(202, "label", "Outside Dew Point")
