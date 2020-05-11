@@ -109,9 +109,9 @@ try:
         os.system('sh /home/pi/updateDroneponics.sh')
         os.system('sudo reboot')
 
-    @timer.register(interval=10, run_once=False)
+    @timer.register(interval=30, run_once=False)
     def blynk_data():
-        blynk.virtual_write(250, drone.gethostname())
+        blynk.virtual_write(250, "Updating")
         _log.info("Update Timer Run")
         now = datetime.now()
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
@@ -164,7 +164,7 @@ try:
             blynk.virtual_write(98, 'Unexpected error: mhz19b' + '\n')
             _log.info('Unexpected error: mhz19b')
             drone.setMHZFormOffline(blynkObj=blynk, loggerObj=_log)
-
+        blynk.virtual_write(250, "Running")
 
     while True:
         blynk.run()
@@ -194,14 +194,12 @@ try:
            blynk.virtual_write(systemLED, 255)
            drone.setFormOnline(blynkObj=blynk, loggerObj=_log, Msg="System now updated and restarted")
            blynk.virtual_write(255, 0)
-           blynk.virtual_write(251, drone.gethostname())
-           blynk.virtual_write(252, drone.get_ip())
            _log.info('Just Booted')
 
         timer.run()
 except: 
    _log.info("in main loop except")
-   blynk.virtual_write(250, "Offline")
+   blynk.virtual_write(250, "Crashed")
    drone.setFormOffline(blynkObj=blynk, loggerObj=_log)
    os.system('sh /home/pi/updateDroneponics.sh')
    os.system('sudo reboot')
