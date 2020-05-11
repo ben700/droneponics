@@ -199,7 +199,8 @@ try:
            ## getting the IP address using socket.gethostbyname() method
            ip_address = socket.gethostbyname(hostname)
            ## printing the hostname and ip_address
-           blynk.virtual_write(251, hostname + " " + ip_address)
+           #blynk.virtual_write(251, hostname + " " + ip_address)
+           blynk.virtual_write(251,  ip_address)
            _log.info('Just Booted')
 
         timer.run()
