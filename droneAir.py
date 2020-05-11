@@ -111,11 +111,13 @@ try:
 
     @blynk.handle_event("connect")
     def connect_handler():
+        print("Connected")
         blynk.virtual_write(250, "Connected")
     
 
     @blynk.handle_event("disconnect")
     def disconnect_handler():
+        print("Connected")
         blynk.virtual_write(250, "Disconnected")
   
     
