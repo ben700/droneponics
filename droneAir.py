@@ -177,7 +177,8 @@ try:
            blynk.virtual_write(98, "I2C 0 devices"+'\n')
            for i in range(0,9):
                 blynk.virtual_write(98, str(p.stdout.readline()) + '\n')
-              
+           for alarm in alarmList:
+                alarm.display(blynk)    
            _log.info("Posting I2C 1 devices to app")
            blynk.virtual_write(98, "I2C 1 devices"+'\n')
            q = subprocess.Popen(['i2cdetect', '-y','1'],stdout=subprocess.PIPE,)
