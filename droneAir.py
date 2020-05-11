@@ -104,7 +104,7 @@ try:
     @blynk.handle_event('write V255')
     def rebooter(pin, value):
         blynk.virtual_write(250, "User Reboot")
-        drone.setFormOffline(blynkObj=blynk, loggerObj=_log, Msg="User Reboot")
+        #drone.setFormOffline(blynkObj=blynk, loggerObj=_log, Msg="User Reboot")
         blynk.set_property(systemLED, 'color', colours['OFFLINE'])
         os.system('sh /home/pi/updateDroneponics.sh')
         os.system('sudo reboot')
