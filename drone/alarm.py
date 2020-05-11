@@ -11,9 +11,11 @@ class Alarm:
       self.colour = kwargs.get('Colour', None)
       #blynk.virtual_write(150, "add", 0, "Max Temp", "20.0")
   
-      
-  
-   def test(blynk, Metric, VP, VALUE):
+   def display(self,blynk,id):      
+     blynk.virtual_write(150, "add", id, self.name, self.value)
+     return
+    
+   def test(self,blynk, Metric, VP, VALUE):
        if (Metric == self.metric):
          blynk.virtual_write(VP, VALUE)
          blynk.set_property(VP, "label", self.name)
