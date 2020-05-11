@@ -21,7 +21,7 @@ class OpenWeather:
          
    def getPressure(self):
       if (self.useByTime < datetime.now()):
-         refresh()
+         self.refresh()
       return self.openWeather["current"]["pressure"]
    
    
@@ -30,7 +30,7 @@ class OpenWeather:
         print(self.useByTime) 
         if (self.useByTime < datetime.now()):
            print("in OpenWeather blynkOpenWeather calling refresh")
-           refresh()   
+           self.refresh()   
         print(self.openWeather["current"]["weather"][0]["icon"])    
         blynk.set_property(200, "urls", "http://openweathermap.org/img/wn/"+self.openWeather["current"]["weather"][0]["icon"]+".png")
         blynk.set_property(200, "label", self.openWeather["current"]["weather"][0]["description"])
