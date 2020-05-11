@@ -48,6 +48,7 @@ def get_ip():
         IP = '127.0.0.1'
     finally:
         s.close()
+    print("returning IP=" + IP)    
     return IP
 
 parser = ConfigParser()
