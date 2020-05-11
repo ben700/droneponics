@@ -5,8 +5,8 @@ import json
 class OpenWeather:
    def __init__(self, *args, **kwargs):
       print("in OpenWeather constructor")
-      self.timestamp = None
-      self.useByTime = None
+      self.timestamp = datetime.now()
+      self.useByTime = datetime.now()
       self.openWeatherAPI = None 
       self.openWeather = None
      
@@ -27,7 +27,9 @@ class OpenWeather:
    
    def blynkOpenWeather(self, blynk):
         print("in OpenWeather blynkOpenWeather")
+        print(self.useByTime) 
         if (self.useByTime < datetime.now()):
+           print("in OpenWeather blynkOpenWeather calling refresh")
            refresh()   
         print(self.openWeather["current"]["weather"][0]["icon"])    
         blynk.set_property(200, "urls", "http://openweathermap.org/img/wn/"+self.openWeather["current"]["weather"][0]["icon"]+".png")
