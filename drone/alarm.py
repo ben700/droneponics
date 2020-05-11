@@ -12,7 +12,9 @@ class Alarm:
       #blynk.virtual_write(150, "add", 0, "Max Temp", "20.0")
   
    def display(self,blynk,id):      
-     blynk.virtual_write(150, "add", id, self.metric + " " + self.name, self.value)
+     blynk.virtual_write(150, "add", id, self.name, self.value)
+    
+     #blynk.virtual_write(150, "add", id, self.metric + " " + self.name, self.value)
      return
     
    def test(self,blynk, Metric, VP, VALUE):
