@@ -126,7 +126,7 @@ try:
 
     @timer.register(interval=10, run_once=False)
     def blynk_data():
-        blynk.virtual_write(250, "Running")
+        blynk.virtual_write(250, "Running " + socket.gethostname())
         _log.info("Update Timer Run")
         now = datetime.now()
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
@@ -209,12 +209,6 @@ try:
            blynk.virtual_write(systemLED, 255)
            drone.setFormOnline(blynkObj=blynk, loggerObj=_log, Msg="System now updated and restarted")
            blynk.virtual_write(255, 0)
-           ## getting the hostname by socket.gethostname() method
-           hostname = socket.gethostname()
-           ## getting the IP address using socket.gethostbyname() method
-           ip_address = socket.gethostbyname(hostname)
-           ## printing the hostname and ip_address
-           #blynk.virtual_write(251, hostname + " " + ip_address)
            IP = get_ip()
            blynk.virtual_write(251, "IP=" +IP)
            _log.info('Just Booted')
