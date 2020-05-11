@@ -199,5 +199,5 @@ try:
 except: 
    _log.info("in main loop except")
    drone.setFormOffline(blynkObj=blynk, loggerObj=_log)
-   os.system('sh /home/pi/updateDroneponics.sh')
-   os.system('sudo reboot')
+#   os.system('sh /home/pi/updateDroneponics.sh')
+#   os.system('sudo reboot')
