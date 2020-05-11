@@ -215,7 +215,7 @@ try:
            ## printing the hostname and ip_address
            #blynk.virtual_write(251, hostname + " " + ip_address)
            get_ip()
-           blynk.virtual_write(251, "IP=" IP)
+           blynk.virtual_write(251, "IP=" +IP)
            _log.info('Just Booted')
 
         timer.run()
