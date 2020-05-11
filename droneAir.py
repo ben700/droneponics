@@ -111,7 +111,7 @@ try:
 
     @timer.register(interval=30, run_once=False)
     def blynk_data():
-        blynk.set_property(systemLED, 'color', colours['0'])
+      #  blynk.set_property(systemLED, 'color', colours['0'])
         blynk.virtual_write(250, "Updating")
         _log.info("Update Timer Run")
         now = datetime.now()
@@ -166,7 +166,7 @@ try:
             _log.info('Unexpected error: mhz19b')
             drone.setMHZFormOffline(blynkObj=blynk, loggerObj=_log)
         blynk.virtual_write(250, "Running")
-        blynk.set_property(systemLED, 'color', colours['1'])
+       # blynk.set_property(systemLED, 'color', colours['1'])
 
     while True:
         blynk.run()
