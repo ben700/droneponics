@@ -168,9 +168,8 @@ try:
 
     while True:
         blynk.run()
-        blynk.virtual_write(250, "Just booted")
-        blynk.virtual_write(250, "Start-up")
         if bootup :
+           blynk.virtual_write(250, "Start-up")
            blynk.virtual_write(98, "clr")
            _log.info("Posting I2C 0 devices to app")
            p = subprocess.Popen(['i2cdetect', '-y','0'],stdout=subprocess.PIPE,)
@@ -198,6 +197,7 @@ try:
         timer.run()
 except: 
    _log.info("in main loop except")
+   blynk.virtual_write(250, "Offline")
    drone.setFormOffline(blynkObj=blynk, loggerObj=_log)
-#   os.system('sh /home/pi/updateDroneponics.sh')
-#   os.system('sudo reboot')
+   os.system('sh /home/pi/updateDroneponics.sh')
+   os.system('sudo reboot')
