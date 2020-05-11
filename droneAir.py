@@ -109,6 +109,16 @@ try:
         os.system('sh /home/pi/updateDroneponics.sh')
         os.system('sudo reboot')
 
+    @blynk.handle_event("connect")
+    def connect_handler():
+        blynk.virtual_write(250, "Connected")
+    
+
+    @blynk.handle_event("disconnect")
+    def disconnect_handler():
+        blynk.virtual_write(250, "Disconnected")
+  
+    
     @timer.register(interval=30, run_once=False)
     def blynk_data():
         blynk.set_property(systemLED, 'color', colours[1])
