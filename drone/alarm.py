@@ -1,7 +1,17 @@
  
-class Alarm:
+from colour import Color
+
+red = Color("red")
+colors = list(red.range_to(Color("green"),10))
+def displaySensor(VP, VALUE, NAME NAME, LOW, HIGH):
+   blynk.virtual_write(VP,VALUE)
+   blynk.set_property(VP, "label", NAME)
+   blynk.set_property(VP, "color", colors[round((HIGH-LOW)/10,0)])
+   return
+
+ class Alarm:
    
-   def __init__(self, Metric, Type, Name, Value, notify=False, *args, **kwargs):
+   def __init__(self, Metric, Type, Name, Value, notify=False, *args, **kwrgs):
       self.metric = Metric
       self.type = Type
       self.name = Name
