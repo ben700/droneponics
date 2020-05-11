@@ -184,6 +184,8 @@ try:
         blynk.run()
         if bootup :
            blynk.virtual_write(250, "Start-up")
+           blynk.virtual_write(251, drone.gethostname())
+           blynk.virtual_write(252, drone.get_ip())        
            blynk.virtual_write(98, "clr")
            _log.info("Posting I2C 0 devices to app")
            p = subprocess.Popen(['i2cdetect', '-y','0'],stdout=subprocess.PIPE,)
