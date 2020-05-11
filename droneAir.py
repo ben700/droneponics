@@ -35,19 +35,6 @@ from configparser import ConfigParser
 import subprocess
 import re
 import json
-import socket
-
-def get_ip():
-    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-    try:
-        # doesn't even have to be reachable
-        s.connect(('10.255.255.255', 1))
-        IP = s.getsockname()[0]
-    except:
-        IP = '127.0.0.1'
-    finally:
-        s.close()
-    return IP
 
 parser = ConfigParser()
 parser.read('/home/pi/config.ini')
@@ -124,7 +111,7 @@ try:
 
     @timer.register(interval=10, run_once=False)
     def blynk_data():
-        blynk.virtual_write(250, "Running " + socket.gethostname())
+        blynk.virtual_write(250, "Running " + drone.gethostname())
         _log.info("Update Timer Run")
         now = datetime.now()
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
@@ -207,7 +194,7 @@ try:
            blynk.virtual_write(systemLED, 255)
            drone.setFormOnline(blynkObj=blynk, loggerObj=_log, Msg="System now updated and restarted")
            blynk.virtual_write(255, 0)
-           IP = get_ip()
+           IP = drone.get_ip()
            blynk.virtual_write(251, "IP=" +IP)
            _log.info('Just Booted')
 
