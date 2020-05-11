@@ -41,13 +41,9 @@ def buildNutrientMix(nutrientMix, _log, scheduleWeek='Grow'):
     nutrientMix.append( Dose(115, 4.00, LED[4], "Enzyme", VolumePin[4], 5000))
     nutrientMix.append( Dose(116, 1.00, LED[5], "Magne-Cal", VolumePin[5], 5000)) 
     nutrientMix.append( Dose(113, 6.00, LED[2], "Hydro Bloom B", VolumePin[2], 5000)) 
- else (scheduleWeek==8):
+ else :
     nutrientMix.append( Dose(119, 1.00, LED[0], "pH", VolumePin[0], 1000))
-    nutrientMix.append( Dose(111, 6.00, LED[1], "Hydro Bloom A", VolumePin[1], 5000))
-    nutrientMix.append( Dose(114, 10.00, LED[3], "Ignition", VolumePin[3], 1000))
-    nutrientMix.append( Dose(115, 4.00, LED[4], "Enzyme", VolumePin[4], 5000))
-    nutrientMix.append( Dose(116, 1.00, LED[5], "Magne-Cal", VolumePin[5], 5000)) 
-    nutrientMix.append( Dose(113, 6.00, LED[2], "Hydro Bloom B", VolumePin[2], 5000)) 
+    
     return nutrientMix
 
             
