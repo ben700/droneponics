@@ -26,6 +26,7 @@ class OpenWeather:
    
    
    def blynkOpenWeather(self, blynk):
+        print("in OpenWeather blynkOpenWeather")
         if (self.useByTime < datetime.now()):
            refresh()   
         blynk.set_property(200, "urls", "http://openweathermap.org/img/wn/"+self.openWeather["current"]["weather"][0]["icon"]+".png")
