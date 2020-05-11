@@ -22,6 +22,8 @@ class OpenWeather:
       self.openWeatherAPI = requests.get("https://api.openweathermap.org/data/2.5/onecall?lat=53.801277&lon=-1.548567&exclude=hourly,daily&units=metric&appid=7ab0c16c9b00854f26df8a57435ad6ce")   
       print("OpenWeather:-  going to json")
       self.openWeather = openWeatherAPI.json()
+      print("OpenWeather:-  completed refresh")
+      return
          
    def getPressure(self):
       if (self.useByTime < datetime.now()):
@@ -35,7 +37,8 @@ class OpenWeather:
         if (self.useByTime < datetime.now()):
            print("in OpenWeather blynkOpenWeather calling refresh")
            self.refresh()   
-        print(self.openWeather["current"]["weather"][0]["icon"])    
+        print(self.openWeather)
+        print(self.openWeather["current"]["weather"][0]["icon"])
         blynk.set_property(200, "urls", "http://openweathermap.org/img/wn/"+self.openWeather["current"]["weather"][0]["icon"]+".png")
         blynk.set_property(200, "label", self.openWeather["current"]["weather"][0]["description"])
         
