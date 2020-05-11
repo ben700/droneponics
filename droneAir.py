@@ -177,7 +177,7 @@ try:
            blynk.virtual_write(98, "I2C 0 devices"+'\n')
            for i in range(0,9):
                 blynk.virtual_write(98, str(p.stdout.readline()) + '\n')
-           x=0
+           x=1
            for alarm in alarmList:
                 alarm.display(blynk,x)
                 x=x+1
