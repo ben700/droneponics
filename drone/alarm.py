@@ -9,7 +9,8 @@ def displaySensor(VP, VALUE, NAME , LOW, HIGH):
    blynk.set_property(VP, "color", colors[round((HIGH-LOW)/10,0)])
    return
 
- class Alarm:
+  
+class Alarm:
    
    def __init__(self, Metric, Type, Name, Value, notify=False, *args, **kwrgs):
       self.metric = Metric
