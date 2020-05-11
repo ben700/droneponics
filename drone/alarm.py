@@ -3,7 +3,7 @@ from colour import Color
 
 red = Color("red")
 colors = list(red.range_to(Color("green"),10))
-def displaySensor(VP, VALUE, NAME , LOW, HIGH):
+def displaySensor(blynk, VP, VALUE, NAME , LOW, HIGH):
    blynk.virtual_write(VP,VALUE)
    blynk.set_property(VP, "label", NAME)
    blynk.set_property(VP, "color", colors[round((HIGH-LOW)/10,0)])
