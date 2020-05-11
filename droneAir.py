@@ -195,7 +195,7 @@ try:
            drone.setFormOnline(blynkObj=blynk, loggerObj=_log, Msg="System now updated and restarted")
            blynk.virtual_write(255, 0)
            blynk.virtual_write(251, drone.gethostname())
-           blynk.virtual_write(122, drone.get_ip())
+           blynk.virtual_write(252, drone.get_ip())
            _log.info('Just Booted')
 
         timer.run()
