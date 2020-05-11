@@ -35,9 +35,8 @@ from configparser import ConfigParser
 import subprocess
 import re
 import json
-
-IP = '127.0.0.1'
 import socket
+
 def get_ip():
     s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     try:
@@ -48,7 +47,6 @@ def get_ip():
         IP = '127.0.0.1'
     finally:
         s.close()
-    print("returning IP=" + IP)    
     return IP
 
 parser = ConfigParser()
