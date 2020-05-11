@@ -36,6 +36,20 @@ import subprocess
 import re
 import json
 
+IP = '127.0.0.1'
+import socket
+def get_ip():
+    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    try:
+        # doesn't even have to be reachable
+        s.connect(('10.255.255.255', 1))
+        IP = s.getsockname()[0]
+    except:
+        IP = '127.0.0.1'
+    finally:
+        s.close()
+    return IP
+
 parser = ConfigParser()
 parser.read('/home/pi/config.ini')
 
@@ -200,7 +214,8 @@ try:
            ip_address = socket.gethostbyname(hostname)
            ## printing the hostname and ip_address
            #blynk.virtual_write(251, hostname + " " + ip_address)
-           blynk.virtual_write(251,  ip_address)
+           get_ip()
+           blynk.virtual_write(251,  IP)
            _log.info('Just Booted')
 
         timer.run()
