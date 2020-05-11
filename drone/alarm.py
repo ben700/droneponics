@@ -19,7 +19,7 @@ class Alarm:
       self.value = Value
       self.notify = kwargs.get('Notify', None)
       self.message = kwargs.get('Message', None)
-      self.colour = kwargs.get('Colour', None)
+      #self.colour = kwargs.get('Colour', None)
       #blynk.virtual_write(150, "add", 0, "Max Temp", "20.0")
   
    def display(self,blynk,id):      
