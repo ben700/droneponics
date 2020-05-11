@@ -2,6 +2,7 @@ from datetime import datetime
 import time
 import shlex, requests
 import json
+colours = {1: '#FF0000', 0: '#00FF00', 'OFFLINE': '#0000FF', 'ONLINE': '#00FF00'}
 class OpenWeather:
    def __init__(self, *args, **kwargs):
       print("in OpenWeather constructor")
