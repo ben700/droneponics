@@ -3,7 +3,7 @@
 # The ID and range of a sample spreadsheet.
 colours = {1: '#FF0000', 0: '#00FF00', 'OFFLINE': '#0000FF', 'ONLINE': '#00FF00'}
 systemLED=101
-
+import socket
 import drone
 from drone import Alarm, OpenWeather
 alarmList=[]
@@ -194,7 +194,12 @@ try:
            blynk.virtual_write(systemLED, 255)
            drone.setFormOnline(blynkObj=blynk, loggerObj=_log, Msg="System now updated and restarted")
            blynk.virtual_write(255, 0)
-      
+           ## getting the hostname by socket.gethostname() method
+           hostname = socket.gethostname()
+           ## getting the IP address using socket.gethostbyname() method
+           ip_address = socket.gethostbyname(hostname)
+           ## printing the hostname and ip_address
+           blynk.virtual_write(251, hostname + " " + ip_address)
            _log.info('Just Booted')
 
         timer.run()
