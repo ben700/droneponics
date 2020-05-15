@@ -1,12 +1,12 @@
 [droneRelay]
 BLYNK_AUTH=sovoOQHytL_YkDc2WKMFCwzG6cOgQ_2H
 RelaySize=8
-Relay1=Relay1
-Relay2=Relay1
-Relay3=Relay1
-Relay4=Relay1
-Relay5=Relay1
-Relay6=Relay1
-Relay7=Relay1
-Relay8=Relay1
+Relay1=Feed
+Relay2=Waste
+Relay3=Bubbles
+Relay4=Circ Pump
+Relay5=UV
+Relay6=Chiller
+Relay7=Fan
+Relay8=CO2
 
