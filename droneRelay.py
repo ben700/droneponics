@@ -124,7 +124,6 @@ if True:
     def buttonV3Pressed(pin, value):
         blynk.set_property(systemLED, 'color', colours[1])
         blynk.virtual_write(250, "Updating")
-        blynk.set_property(3, 'color', colours[value[0]])
         if(value[0] == '1'):
             blynk.set_property(13, 'color', colours[1])
             blynk.virtual_write(98,"Relay 1 turned off" + '\n')
@@ -140,11 +139,12 @@ if True:
     def buttonV4Pressed(pin, value):
         blynk.set_property(systemLED, 'color', colours[1])
         blynk.virtual_write(250, "Updating")
-        blynk.set_property(4, 'color', colours[value[0]])
         if(value[0] == '1'):
+            blynk.set_property(14, 'color', colours[0])
             blynk.virtual_write(98,"Relay 1 turned off" + '\n')
             GPIO.output(Relay4,GPIO.HIGH)
         else:
+            blynk.set_property(14, 'color', colours[0])
             blynk.virtual_write(98,"Relay 1 turned on" + '\n')
             GPIO.output(Relay4,GPIO.LOW)
         blynk.virtual_write(250, "Running")
@@ -154,11 +154,12 @@ if True:
     def buttonV5Pressed(pin, value):
         blynk.set_property(systemLED, 'color', colours[1])
         blynk.virtual_write(250, "Updating")
-        blynk.set_property(5, 'color', colours[value[0]])
         if(value[0] == '1'):
+            blynk.set_property(15, 'color', colours[0])
             blynk.virtual_write(98,"Relay 1 turned off" + '\n')
             GPIO.output(Relay5,GPIO.HIGH)
         else:
+            blynk.set_property(15, 'color', colours[0])
             blynk.virtual_write(98,"Relay 1 turned on" + '\n')
             GPIO.output(Relay5,GPIO.LOW)
         blynk.virtual_write(250, "Running")
@@ -168,11 +169,12 @@ if True:
     def buttonV6Pressed(pin, value):
         blynk.set_property(systemLED, 'color', colours[1])
         blynk.virtual_write(250, "Updating")
-        blynk.set_property(6, 'color', colours[value[0]])
         if(value[0] == '1'):
+            blynk.set_property(16, 'color', colours[0])
             blynk.virtual_write(98,"Relay 1 turned off" + '\n')
             GPIO.output(Relay6,GPIO.HIGH)
         else:
+            blynk.set_property(16, 'color', colours[0])
             blynk.virtual_write(98,"Relay 1 turned on" + '\n')
             GPIO.output(Relay6,GPIO.LOW)
         blynk.virtual_write(250, "Running")
@@ -182,11 +184,12 @@ if True:
     def buttonV7Pressed(pin, value):
         blynk.set_property(systemLED, 'color', colours[1])
         blynk.virtual_write(250, "Updating")
-        blynk.set_property(7, 'color', colours[value[0]])
         if(value[0] == '1'):
+            blynk.set_property(17, 'color', colours[0])
             blynk.virtual_write(98,"Relay 1 turned off" + '\n')
             GPIO.output(Relay7,GPIO.HIGH)
         else:
+            blynk.set_property(17, 'color', colours[0])
             blynk.virtual_write(98,"Relay 1 turned on" + '\n')
             GPIO.output(Relay7,GPIO.LOW)
         blynk.virtual_write(250, "Running")
@@ -196,11 +199,12 @@ if True:
     def buttonV8Pressed(pin, value):
         blynk.set_property(systemLED, 'color', colours[1])
         blynk.virtual_write(250, "Updating")
-        blynk.set_property(8, 'color', colours[value[0]])
         if(value[0] == '1'):
+            blynk.set_property(18, 'color', colours[0])
             blynk.virtual_write(98,"Relay 1 turned off" + '\n')
             GPIO.output(Relay8,GPIO.HIGH)
         else:
+            blynk.set_property(18, 'color', colours[0])
             blynk.virtual_write(98,"Relay 1 turned on" + '\n')
             GPIO.output(Relay8,GPIO.LOW)
         blynk.virtual_write(250, "Running")
