@@ -248,6 +248,8 @@ try:
 
         timer.run()
 except: 
+   blynk = blynklib.Blynk(parser.get('droneRelay', 'BLYNK_AUTH'))
+   blynk.run()
    _log.info("in main loop except")
    blynk.virtual_write(250, "Crashed")
    os.system('sh /home/pi/updateDroneponics.sh')
