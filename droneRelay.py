@@ -229,7 +229,7 @@ if True:
         blynk.run()
         if bootup :
            blynk.virtual_write(250, "Start-up")
-           blynk.virtual_write(251, drone.gethostname())
+           blynk.set_property(251, "label",drone.gethostname())
            blynk.virtual_write(252, drone.get_ip())
         
         
