@@ -138,7 +138,7 @@ try:
             blynk.virtual_write(98,"Relay 1 turned on" + '\n')
             GPIO.output(Relay4,GPIO.LOW)
         blynk.virtual_write(250, "Running")
-        blynk.set_property(systemLED, 'color', colours[0]
+        blynk.set_property(systemLED, 'color', colours[0])
                           
     @blynk.handle_event('write V5')
     def buttonV5Pressed(pin, value):
