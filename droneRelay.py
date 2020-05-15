@@ -77,8 +77,11 @@ if True:
     @blynk.handle_event("connect")
     def connect_handler():
         print("Connected")
-        for pin in range(18):
-           _log.info('Syncing virtual pin {}'.format(pin))
+        for pin in range(8):
+           _log.info('Syncing virtual buttons {}'.format(pin))
+           blynk.virtual_sync(pin)
+        for pin in range(11,18):
+           _log.info('Syncing virtual LEDS{}'.format(pin))
            blynk.virtual_sync(pin)
         blynk.virtual_write(250, "Connected")
     
