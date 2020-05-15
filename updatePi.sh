@@ -1,8 +1,8 @@
 echo "--------update pip3---------------------------------------------"
 apt-get install libcairo2-dev -y
-pip3 freeze > /home/pi/droneponics/requirements.txt
-python3 /home/pi/droneponics/replace.py /home/pi/droneponics/requirements.txt
-pip3 install -r /home/pi/droneponics/requirements.txt --upgrade
+sudo pip3 freeze > /home/pi/droneponics/requirements.txt
+sudo python3 /home/pi/droneponics/replace.py /home/pi/droneponics/requirements.txt
+sudo pip3 install -r /home/pi/droneponics/requirements.txt --upgrade
 
 echo "--------installUsr---------------------------------------------"
 /home/pi/droneponics.installUsr.sh
