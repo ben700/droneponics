@@ -55,7 +55,7 @@ if True:
     GPIO.setup(Relay2,GPIO.OUT)
     GPIO.setup(Relay3,GPIO.OUT)
     GPIO.setup(Relay4,GPIO.OUT)
-    if(parser.get('droneRelay', 'BLYNK_AUTH', 4) == 8):
+    if(parser.get('droneRelay', 'BLYNK_AUTH') == 8):
        GPIO.setup(Relay5,GPIO.OUT)
        GPIO.setup(Relay6,GPIO.OUT)
        GPIO.setup(Relay7,GPIO.OUT)
@@ -220,7 +220,7 @@ if True:
            blynk.set_property(2, "label", parser.get('droneRelay', 'Relay2'))
            blynk.set_property(3, "label", parser.get('droneRelay', 'Relay3'))
            blynk.set_property(4, "label", parser.get('droneRelay', 'Relay4'))
-           if(parser.get('droneRelay', 'BLYNK_AUTH', 4) == 8):
+           if(parser.get('droneRelay', 'BLYNK_AUTH') == 8):
               blynk.set_property(5, "label", parser.get('droneRelay', 'Relay5'))
               blynk.set_property(6, "label", parser.get('droneRelay', 'Relay6'))
               blynk.set_property(7, "label", parser.get('droneRelay', 'Relay7'))
