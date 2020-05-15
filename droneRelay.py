@@ -226,14 +226,14 @@ if True:
               blynk.set_property(7, "label", parser.get('droneRelay', 'Relay7'))
               blynk.set_property(8, "label", parser.get('droneRelay', 'Relay8'))
     
-           #blynk.virtual_write(98, "clr")
-           #_log.info("Posting I2C 0 devices to app")
-           #p = subprocess.Popen(['i2cdetect', '-y','0'],stdout=subprocess.PIPE,)
+           blynk.virtual_write(98, "clr")
+           _log.info("Posting I2C 0 devices to app")
+           p = subprocess.Popen(['i2cdetect', '-y','0'],stdout=subprocess.PIPE,)
            #cmdout = str(p.communicate())
-           #blynk.virtual_write(98, "I2C 0 devices"+'\n')
-           #for i in range(0,9):
-           #     blynk.virtual_write(98, str(p.stdout.readline()) + '\n')
-           #_log.info("Posting I2C 1 devices to app")
+           blynk.virtual_write(98, "I2C 0 devices"+'\n')
+           for i in range(0,9):
+                blynk.virtual_write(98, str(p.stdout.readline()) + '\n')
+           _log.info("Posting I2C 1 devices to app")
            #blynk.virtual_write(98, "I2C 1 devices"+'\n')
            #q = subprocess.Popen(['i2cdetect', '-y','1'],stdout=subprocess.PIPE,)
            #cmdout = str(p.communicate())
