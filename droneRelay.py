@@ -108,125 +108,35 @@ if True:
   
     @blynk.handle_event('write V1')
     def buttonV1Pressed(pin, value):
-        blynk.set_property(systemLED, 'color', colours[1])
-        blynk.virtual_write(250, "Updating")
-        blynk.set_property(11, 'color', colours[value[0]])
-        
-        blynk.set_property(1, 'onBackColor', colours[value[0]])
-        blynk.set_property(2, 'color', colours[value[0]])
-        blynk.set_property(3, 'onColor', colours[value[0]])
-        blynk.set_property(4, 'offBackColor', colours[value[0]])
-        blynk.set_property(5, 'offColor', colours[value[0]])
-        
-        GPIO.output(Relay1,value[0])
-        blynk.virtual_write(98,"Flipped Switch 1" + '\n')
-        blynk.virtual_write(250, "Running")
-        blynk.set_property(systemLED, 'color', colours[0])
+        drone.processButtinePressed(blynk, 11, 1, Relay1,value[0])
     
     @blynk.handle_event('write V2')
     def buttonV2Pressed(pin, value):
-        blynk.set_property(systemLED, 'color', colours[1])
-        blynk.virtual_write(250, "Updating")
-        if(value[0] == '1'):
-            blynk.set_property(12, 'color', colours[1])
-            blynk.virtual_write(98,"Relay 1 turned off" + '\n')
-            GPIO.output(Relay2,GPIO.HIGH)
-        else:
-            blynk.set_property(12, 'color', colours[0])
-            blynk.virtual_write(98,"Relay 1 turned on" + '\n')
-            GPIO.output(Relay2,GPIO.LOW)
-        blynk.virtual_write(250, "Running")
-        blynk.set_property(systemLED, 'color', colours[0])
+        drone.processButtinePressed(blynk, 12, 2, Relay2,value[0])
         
     @blynk.handle_event('write V3')
     def buttonV3Pressed(pin, value):
-        blynk.set_property(systemLED, 'color', colours[1])
-        blynk.virtual_write(250, "Updating")
-        if(value[0] == '1'):
-            blynk.set_property(13, 'color', colours[1])
-            blynk.virtual_write(98,"Relay 1 turned off" + '\n')
-            GPIO.output(Relay3,GPIO.HIGH)
-        else:
-            blynk.set_property(13, 'color', colours[0])
-            blynk.virtual_write(98,"Relay 1 turned on" + '\n')
-            GPIO.output(Relay3,GPIO.LOW)
-        blynk.virtual_write(250, "Running")
-        blynk.set_property(systemLED, 'color', colours[0])
-        
+        drone.processButtinePressed(blynk, 13, 3, Relay3,value[0])
+    
     @blynk.handle_event('write V4')        
     def buttonV4Pressed(pin, value):
-        blynk.set_property(systemLED, 'color', colours[1])
-        blynk.virtual_write(250, "Updating")
-        if(value[0] == '1'):
-            blynk.set_property(14, 'color', colours[1])
-            blynk.virtual_write(98,"Relay 1 turned off" + '\n')
-            GPIO.output(Relay4,GPIO.HIGH)
-        else:
-            blynk.set_property(14, 'color', colours[0])
-            blynk.virtual_write(98,"Relay 1 turned on" + '\n')
-            GPIO.output(Relay4,GPIO.LOW)
-        blynk.virtual_write(250, "Running")
-        blynk.set_property(systemLED, 'color', colours[0])
+        drone.processButtinePressed(blynk, 14, 4, Relay4,value[0])
                           
     @blynk.handle_event('write V5')
     def buttonV5Pressed(pin, value):
-        blynk.set_property(systemLED, 'color', colours[1])
-        blynk.virtual_write(250, "Updating")
-        if(value[0] == '1'):
-            blynk.set_property(15, 'color', colours[1])
-            blynk.virtual_write(98,"Relay 1 turned off" + '\n')
-            GPIO.output(Relay5,GPIO.HIGH)
-        else:
-            blynk.set_property(15, 'color', colours[0])
-            blynk.virtual_write(98,"Relay 1 turned on" + '\n')
-            GPIO.output(Relay5,GPIO.LOW)
-        blynk.virtual_write(250, "Running")
-        blynk.set_property(systemLED, 'color', colours[0])
+        drone.processButtinePressed(blynk, 15, 5, Relay5,value[0])
     
     @blynk.handle_event('write V6')
     def buttonV6Pressed(pin, value):
-        blynk.set_property(systemLED, 'color', colours[1])
-        blynk.virtual_write(250, "Updating")
-        if(value[0] == '1'):
-            blynk.set_property(16, 'color', colours[1])
-            blynk.virtual_write(98,"Relay 1 turned off" + '\n')
-            GPIO.output(Relay6,GPIO.HIGH)
-        else:
-            blynk.set_property(16, 'color', colours[0])
-            blynk.virtual_write(98,"Relay 1 turned on" + '\n')
-            GPIO.output(Relay6,GPIO.LOW)
-        blynk.virtual_write(250, "Running")
-        blynk.set_property(systemLED, 'color', colours[0])
+        drone.processButtinePressed(blynk, 16, 6, Relay6,value[0])
         
     @blynk.handle_event('write V7')
     def buttonV7Pressed(pin, value):
-        blynk.set_property(systemLED, 'color', colours[1])
-        blynk.virtual_write(250, "Updating")
-        if(value[0] == '1'):
-            blynk.set_property(17, 'color', colours[1])
-            blynk.virtual_write(98,"Relay 1 turned off" + '\n')
-            GPIO.output(Relay7,GPIO.HIGH)
-        else:
-            blynk.set_property(17, 'color', colours[0])
-            blynk.virtual_write(98,"Relay 1 turned on" + '\n')
-            GPIO.output(Relay7,GPIO.LOW)
-        blynk.virtual_write(250, "Running")
-        blynk.set_property(systemLED, 'color', colours[0])
+        drone.processButtinePressed(blynk, 17, 7, Relay7,value[0])
         
     @blynk.handle_event('write V8')        
     def buttonV8Pressed(pin, value):
-        blynk.set_property(systemLED, 'color', colours[1])
-        blynk.virtual_write(250, "Updating")
-        if(value[0] == '1'):
-            blynk.set_property(18, 'color', colours[1])
-            blynk.virtual_write(98,"Relay 1 turned off" + '\n')
-            GPIO.output(Relay8,GPIO.HIGH)
-        else:
-            blynk.set_property(18, 'color', colours[0])
-            blynk.virtual_write(98,"Relay 1 turned on" + '\n')
-            GPIO.output(Relay8,GPIO.LOW)
-        blynk.virtual_write(250, "Running")
-        blynk.set_property(systemLED, 'color', colours[0])
+        drone.processButtinePressed(blynk, 18, 8, Relay8,value[0])
                           
    
     @timer.register(interval=180, run_once=False)
