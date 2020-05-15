@@ -237,7 +237,7 @@ if True:
         if bootup :
            blynk.virtual_write(250, "Start-up")
            blynk.set_property(251, "label",drone.gethostname())
-           blynk.virtual_write(252, drone.get_ip())
+           blynk.virtual_write(251, drone.get_ip())
         
         
            blynk.set_property(11, 'color', colours[0])
