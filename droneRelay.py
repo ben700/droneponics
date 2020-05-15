@@ -109,35 +109,35 @@ if True:
     @blynk.handle_event('write V1')
     def buttonV1Pressed(pin, value):
         drone.processButtinePressed(blynk, 11, 1, GPIO, Relay1,value[0])
-        GPIO.output(Relay1,value[0])
+  
     
     @blynk.handle_event('write V2')
     def buttonV2Pressed(pin, value):
-        drone.processButtinePressed(blynk, 12, 2, Relay2,value[0])
+        drone.processButtinePressed(blynk, 12, 2, GPIO, Relay2,value[0])
         
     @blynk.handle_event('write V3')
     def buttonV3Pressed(pin, value):
-        drone.processButtinePressed(blynk, 13, 3, Relay3,value[0])
+        drone.processButtinePressed(blynk, 13, 3, GPIO, Relay3,value[0])
     
     @blynk.handle_event('write V4')        
     def buttonV4Pressed(pin, value):
-        drone.processButtinePressed(blynk, 14, 4, Relay4,value[0])
+        drone.processButtinePressed(blynk, 14, 4, GPIO, Relay4,value[0])
                           
     @blynk.handle_event('write V5')
     def buttonV5Pressed(pin, value):
-        drone.processButtinePressed(blynk, 15, 5, Relay5,value[0])
+        drone.processButtinePressed(blynk, 15, 5, GPIO, Relay5,value[0])
     
     @blynk.handle_event('write V6')
     def buttonV6Pressed(pin, value):
-        drone.processButtinePressed(blynk, 16, 6, Relay6,value[0])
+        drone.processButtinePressed(blynk, 16, 6, GPIO, Relay6,value[0])
         
     @blynk.handle_event('write V7')
     def buttonV7Pressed(pin, value):
-        drone.processButtinePressed(blynk, 17, 7, Relay7,value[0])
+        drone.processButtinePressed(blynk, 17, 7, GPIO, Relay7,value[0])
         
     @blynk.handle_event('write V8')        
     def buttonV8Pressed(pin, value):
-        drone.processButtinePressed(blynk, 18, 8, Relay8,value[0])
+        drone.processButtinePressed(blynk, 18, 8, GPIO, Relay8,value[0])
                           
    
     @timer.register(interval=180, run_once=False)
