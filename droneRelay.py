@@ -108,7 +108,8 @@ if True:
   
     @blynk.handle_event('write V1')
     def buttonV1Pressed(pin, value):
-        drone.processButtinePressed(blynk, 11, 1, Relay1,value[0])
+        drone.processButtinePressed(blynk, 11, 1, GPIO, Relay1,value[0])
+        GPIO.output(Relay1,value[0])
     
     @blynk.handle_event('write V2')
     def buttonV2Pressed(pin, value):
