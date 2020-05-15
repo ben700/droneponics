@@ -140,7 +140,7 @@ if True:
         blynk.set_property(systemLED, 'color', colours[1])
         blynk.virtual_write(250, "Updating")
         if(value[0] == '1'):
-            blynk.set_property(14, 'color', colours[0])
+            blynk.set_property(14, 'color', colours[1])
             blynk.virtual_write(98,"Relay 1 turned off" + '\n')
             GPIO.output(Relay4,GPIO.HIGH)
         else:
@@ -155,7 +155,7 @@ if True:
         blynk.set_property(systemLED, 'color', colours[1])
         blynk.virtual_write(250, "Updating")
         if(value[0] == '1'):
-            blynk.set_property(15, 'color', colours[0])
+            blynk.set_property(15, 'color', colours[1])
             blynk.virtual_write(98,"Relay 1 turned off" + '\n')
             GPIO.output(Relay5,GPIO.HIGH)
         else:
@@ -170,7 +170,7 @@ if True:
         blynk.set_property(systemLED, 'color', colours[1])
         blynk.virtual_write(250, "Updating")
         if(value[0] == '1'):
-            blynk.set_property(16, 'color', colours[0])
+            blynk.set_property(16, 'color', colours[1])
             blynk.virtual_write(98,"Relay 1 turned off" + '\n')
             GPIO.output(Relay6,GPIO.HIGH)
         else:
@@ -185,7 +185,7 @@ if True:
         blynk.set_property(systemLED, 'color', colours[1])
         blynk.virtual_write(250, "Updating")
         if(value[0] == '1'):
-            blynk.set_property(17, 'color', colours[0])
+            blynk.set_property(17, 'color', colours[1])
             blynk.virtual_write(98,"Relay 1 turned off" + '\n')
             GPIO.output(Relay7,GPIO.HIGH)
         else:
@@ -200,7 +200,7 @@ if True:
         blynk.set_property(systemLED, 'color', colours[1])
         blynk.virtual_write(250, "Updating")
         if(value[0] == '1'):
-            blynk.set_property(18, 'color', colours[0])
+            blynk.set_property(18, 'color', colours[1])
             blynk.virtual_write(98,"Relay 1 turned off" + '\n')
             GPIO.output(Relay8,GPIO.HIGH)
         else:
