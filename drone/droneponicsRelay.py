@@ -1,23 +1,9 @@
 colours = {1: '#FF0000', 0: '#00FF00', '1': '#FF0000', '0': '#00FF00', 'OFFLINE': '#0000FF', 'ONLINE': '#00FF00'}
 systemLED=101
 
-import socket
-import drone
-from drone import Alarm, OpenWeather
-import datetime
-import time
-import shlex, requests
 import blynklib
 import blynktimer
-import logging
-from datetime import datetime 
 import RPi.GPIO as GPIO   
-import sys
-import os
-from configparser import ConfigParser
-import subprocess
-import re
-import json
 
 def processButtinePressed(blynk, LED, Button, Relay,VALUE):
         blynk.set_property(systemLED, 'color', colours[1])
