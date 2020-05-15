@@ -89,11 +89,15 @@ if True:
     def buttonV1Pressed(pin, value):
         blynk.set_property(systemLED, 'color', colours[1])
         blynk.virtual_write(250, "Updating")
+        
+        _log.info("about to set colour to " + colours[value[0]])
         blynk.set_property(1, 'color', colours[value[0]])
         if(value[0] == '1'):
+            _log.info("Relay 1 turned off")
             blynk.virtual_write(98,"Relay 1 turned off" + '\n')
             GPIO.output(Relay1,GPIO.HIGH)
         else:
+            _log.info("Relay 1 turned on")
             blynk.virtual_write(98,"Relay 1 turned on" + '\n')
             GPIO.output(Relay1,GPIO.LOW)
         blynk.virtual_write(250, "Running")
