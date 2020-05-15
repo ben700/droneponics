@@ -77,6 +77,9 @@ if True:
     @blynk.handle_event("connect")
     def connect_handler():
         print("Connected")
+        for pin in range(18):
+           _log.info('Syncing virtual pin {}'.format(pin))
+           blynk.virtual_sync(pin)
         blynk.virtual_write(250, "Connected")
     
 
@@ -106,11 +109,12 @@ if True:
     def buttonV2Pressed(pin, value):
         blynk.set_property(systemLED, 'color', colours[1])
         blynk.virtual_write(250, "Updating")
-        blynk.set_property(2, 'color', colours[value[0]])
         if(value[0] == '1'):
+            blynk.set_property(12, 'color', colours[1])
             blynk.virtual_write(98,"Relay 1 turned off" + '\n')
             GPIO.output(Relay2,GPIO.HIGH)
         else:
+            blynk.set_property(12, 'color', colours[0])
             blynk.virtual_write(98,"Relay 1 turned on" + '\n')
             GPIO.output(Relay2,GPIO.LOW)
         blynk.virtual_write(250, "Running")
@@ -122,9 +126,11 @@ if True:
         blynk.virtual_write(250, "Updating")
         blynk.set_property(3, 'color', colours[value[0]])
         if(value[0] == '1'):
+            blynk.set_property(13, 'color', colours[1])
             blynk.virtual_write(98,"Relay 1 turned off" + '\n')
             GPIO.output(Relay3,GPIO.HIGH)
         else:
+            blynk.set_property(13, 'color', colours[0])
             blynk.virtual_write(98,"Relay 1 turned on" + '\n')
             GPIO.output(Relay3,GPIO.LOW)
         blynk.virtual_write(250, "Running")
@@ -219,6 +225,16 @@ if True:
            blynk.virtual_write(251, drone.gethostname())
            blynk.virtual_write(252, drone.get_ip())
         
+        
+           blynk.set_property(11, 'color', colours[0])
+           blynk.set_property(12, 'color', colours[0])
+           blynk.set_property(13, 'color', colours[0])
+           blynk.set_property(14, 'color', colours[0])
+           blynk.set_property(15, 'color', colours[0])
+           blynk.set_property(16, 'color', colours[0])
+           blynk.set_property(17, 'color', colours[0])
+           blynk.set_property(18, 'color', colours[0])
+           
            blynk.set_property(1, "label", parser.get('droneRelay', 'Relay1'))
            blynk.set_property(11, "label", parser.get('droneRelay', 'Relay1'))
            blynk.virtual_write(11, 255)
@@ -271,5 +287,16 @@ if True:
 #   blynk.run()
 #   _log.info("in main loop except")
 #   blynk.virtual_write(250, "Crashed")
+
+
+#   blynk.set_property(11, 'color', colours['OFFLINE'])
+#   blynk.set_property(12, 'color', colours['OFFLINE'])
+#   blynk.set_property(13, 'color', colours['OFFLINE'])
+#   blynk.set_property(14, 'color', colours['OFFLINE'])
+#   blynk.set_property(15, 'color', colours['OFFLINE'])
+#   blynk.set_property(16, 'color', colours['OFFLINE'])
+#   blynk.set_property(17, 'color', colours['OFFLINE'])
+#   blynk.set_property(18, 'color', colours['OFFLINE'])
+           
   # os.system('sh /home/pi/updateDroneponics.sh')
   # os.system('sudo reboot')
