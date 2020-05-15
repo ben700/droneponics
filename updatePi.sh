@@ -1,10 +1,13 @@
+echo "--------update pip3---------------------------------------------"
 apt-get install libcairo2-dev -y
 pip3 freeze > /home/pi/droneponics/requirements.txt
 python3 /home/pi/droneponics/replace.py /home/pi/droneponics/requirements.txt
 pip3 install -r /home/pi/droneponics/requirements.txt --upgrade
 
+echo "--------installUsr---------------------------------------------"
+/home/pi/droneponics.installUsr.sh
 
-echo "Update PI"
+echo "---------------------------------------------"Update PI---------------------------------------------""
 sudo apt full-upgrade -y
 sudo apt update
 sudo apt full-upgrade -y
@@ -12,5 +15,7 @@ sudo apt upgrade -y
 sudo apt dist-upgrade -y
 sudo apt autoremove -y
 sudo apt autoclean -y
+echo "---------------------------------------------"Update droneponics---------------------------------------------""
 /home/pi/updateDroneponics.sh
-#sudo reboot
+echo "---------------------------------------------"reboot---------------------------------------------""
+sudo reboot
