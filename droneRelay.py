@@ -91,12 +91,12 @@ if True:
         blynk.virtual_write(250, "Updating")
         if(value[0] == '1'):
             _log.info("Relay 1 turned off")
-            blynk.set_property(1, 'color', colours[1])
+            blynk.set_property(11, 'color', colours[1])
             blynk.virtual_write(98,"Relay 1 turned off" + '\n')
             GPIO.output(Relay1,GPIO.HIGH)
         else:
             _log.info("Relay 1 turned on")
-            blynk.set_property(1, 'color', colours[0])
+            blynk.set_property(11, 'color', colours[0])
             blynk.virtual_write(98,"Relay 1 turned on" + '\n')
             GPIO.output(Relay1,GPIO.LOW)
         blynk.virtual_write(250, "Running")
@@ -220,6 +220,8 @@ if True:
            blynk.virtual_write(252, drone.get_ip())
         
            blynk.set_property(1, "label", parser.get('droneRelay', 'Relay1'))
+           blynk.set_property(11, "label", parser.get('droneRelay', 'Relay1'))
+           blynk.virtual_write(11, 255)
            blynk.set_property(2, "label", parser.get('droneRelay', 'Relay2'))
            blynk.set_property(3, "label", parser.get('droneRelay', 'Relay3'))
            blynk.set_property(4, "label", parser.get('droneRelay', 'Relay4'))
