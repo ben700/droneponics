@@ -90,7 +90,7 @@ if True:
         blynk.set_property(systemLED, 'color', colours[1])
         blynk.virtual_write(250, "Updating")
         
-        _log.info("about to set colour to " + colours[value[0]])
+        _log.info("about to set colour to " )
         blynk.set_property(1, 'color', colours[value[0]])
         if(value[0] == '1'):
             _log.info("Relay 1 turned off")
