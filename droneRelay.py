@@ -1,7 +1,7 @@
 
 
 # The ID and range of a sample spreadsheet.
-colours = {1: '#FF0000', 0: '#00FF00', 'OFFLINE': '#0000FF', 'ONLINE': '#00FF00'}
+colours = {1: '#FF0000', 0: '#00FF00', '1': '#FF0000', '0': '#00FF00', 'OFFLINE': '#0000FF', 'ONLINE': '#00FF00'}
 systemLED=101
 
 import socket
@@ -102,6 +102,7 @@ if True:
     def buttonV1Pressed(pin, value):
         blynk.set_property(systemLED, 'color', colours[1])
         blynk.virtual_write(250, "Updating")
+        blynk.set_property(1, 'color', colours[value[0]])   
         if(value[0] == '1'):
             _log.info("Relay 1 turned off")
             blynk.set_property(11, 'color', colours[1])
