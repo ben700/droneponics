@@ -223,7 +223,7 @@ if True:
         blynk.set_property(systemLED, 'color', colours[0])
                           
    
-    @timer.register(interval=30, run_once=False)
+    @timer.register(interval=180, run_once=False)
     def blynk_data():
         blynk.set_property(systemLED, 'color', colours[1])
         blynk.virtual_write(250, "Updating")
