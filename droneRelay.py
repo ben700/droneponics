@@ -69,6 +69,14 @@ if True:
     @blynk.handle_event('write V255')
     def rebooter(pin, value):
         blynk.virtual_write(250, "User Reboot")
+        blynk.set_property(1, 'color', colours['OFFLINE'])
+        blynk.set_property(2, 'color', colours['OFFLINE'])
+        blynk.set_property(3, 'color', colours['OFFLINE'])
+        blynk.set_property(4, 'color', colours['OFFLINE'])
+        blynk.set_property(5, 'color', colours['OFFLINE'])
+        blynk.set_property(6, 'color', colours['OFFLINE'])
+        blynk.set_property(7, 'color', colours['OFFLINE'])
+        blynk.set_property(8, 'color', colours['OFFLINE'])
         blynk.set_property(11, 'color', colours['OFFLINE'])
         blynk.set_property(12, 'color', colours['OFFLINE'])
         blynk.set_property(13, 'color', colours['OFFLINE'])
@@ -102,17 +110,10 @@ if True:
     def buttonV1Pressed(pin, value):
         blynk.set_property(systemLED, 'color', colours[1])
         blynk.virtual_write(250, "Updating")
-        blynk.set_property(1, 'color', colours[value[0]])   
-        if(value[0] == '1'):
-            _log.info("Relay 1 turned off")
-            blynk.set_property(11, 'color', colours[1])
-            blynk.virtual_write(98,"Relay 1 turned off" + '\n')
-            GPIO.output(Relay1,GPIO.HIGH)
-        else:
-            _log.info("Relay 1 turned on")
-            blynk.set_property(11, 'color', colours[0])
-            blynk.virtual_write(98,"Relay 1 turned on" + '\n')
-            GPIO.output(Relay1,GPIO.LOW)
+        blynk.set_property(1, 'color', colours[value[0]])
+        blynk.set_property(11, 'color', colours[value[0]])
+        GPIO.output(Relay1,value[0])
+        blynk.virtual_write(98,"Flipped Switch 1" + '\n')
         blynk.virtual_write(250, "Running")
         blynk.set_property(systemLED, 'color', colours[0])
     
