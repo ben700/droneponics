@@ -252,5 +252,5 @@ except:
    blynk.run()
    _log.info("in main loop except")
    blynk.virtual_write(250, "Crashed")
-   os.system('sh /home/pi/updateDroneponics.sh')
-   os.system('sudo reboot')
+  # os.system('sh /home/pi/updateDroneponics.sh')
+  # os.system('sudo reboot')
