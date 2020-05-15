@@ -15,7 +15,8 @@ sudo apt upgrade -y
 sudo apt dist-upgrade -y
 sudo apt autoremove -y
 sudo apt autoclean -y
-echo "---------------------------------------------"Update droneponics---------------------------------------------""
-/home/pi/updateDroneponics.sh
+#echo "---------------------------------------------"Update droneponics---------------------------------------------""
+#/home/pi/updateDroneponics.sh
+#moved to non root
 echo "---------------------------------------------"reboot---------------------------------------------""
 sudo reboot
