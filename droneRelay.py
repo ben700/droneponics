@@ -111,7 +111,7 @@ if True:
         blynk.set_property(systemLED, 'color', colours[1])
         blynk.virtual_write(250, "Updating")
         blynk.set_property(1, 'color', colours[value[0]])
-        blynk.set_property(11, 'color', colours[value[0]])
+        blynk.set_property(11, 'onBackColor', colours[value[0]])
         GPIO.output(Relay1,value[0])
         blynk.virtual_write(98,"Flipped Switch 1" + '\n')
         blynk.virtual_write(250, "Running")
