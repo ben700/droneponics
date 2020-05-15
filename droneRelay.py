@@ -10,17 +10,11 @@ from drone import Alarm, OpenWeather
 import datetime
 import time
 import shlex, requests
-import board
-import busio
-import smbus 
-import mh_z19
 import blynklib
 import blynktimer
 import logging
-from datetime import datetime
-import adafruit_tsl2591
-import adafruit_bme680
-from meteocalc import Temp, dew_point
+from datetime import datetime 
+import RPi.GPIO as GPIO   
 import sys
 import os
 from configparser import ConfigParser
@@ -42,7 +36,31 @@ _log.addHandler(consoleHandler)
 _log.setLevel(logging.DEBUG)
 
 try:
+    GPIO.setmode(GPIO.BCM)
+    GPIO.setwarnings(False)
 
+    
+    Relay1 = 21 #heater
+    Relay2 = 20 #Feed
+    Relay3 = 16 #Air
+    Relay4 = 12 #heater
+    Relay5 = 25 #Feed
+    Relay6 = 24 #Air
+    Relay7 = 23 #Mixer - turned off with low water 
+    Relay8 = 18  #Mixer - turned off with low water 
+
+
+    GPIO.setup(Relay1,GPIO.OUT)
+    GPIO.setup(Relay2,GPIO.OUT)
+    GPIO.setup(Relay3,GPIO.OUT)
+    GPIO.setup(Relay4,GPIO.OUT)
+    if(parser.get('droneRelay', 'BLYNK_AUTH', 4) == 8):
+       GPIO.setup(Relay5,GPIO.OUT)
+       GPIO.setup(Relay6,GPIO.OUT)
+       GPIO.setup(Relay7,GPIO.OUT)
+       GPIO.setup(Relay8,GPIO.OUT)
+    
+    
     # Initialize Blynk
     blynk = blynklib.Blynk(parser.get('droneRelay', 'BLYNK_AUTH'))
     timer = blynktimer.Timer()
@@ -66,7 +84,16 @@ try:
         print("Connected")
         blynk.virtual_write(250, "Disconnected")
   
-    
+    @blynk.handle_event('write V1')
+    def buttonV1Pressed(pin, value):
+        blynk.set_property(1, 'color', colours[value[0]])
+        if(value[0] == '1'):
+            blynk.virtual_write(98,"Relay 1 turned off" + '\n')
+            GPIO.output(Relay1,GPIO.HIGH)
+        else:
+            blynk.virtual_write(98,"Relay 1 turned on" + '\n')
+            GPIO.output(Relay1,GPIO.LOW)
+            
     @timer.register(interval=30, run_once=False)
     def blynk_data():
         blynk.set_property(systemLED, 'color', colours[1])
