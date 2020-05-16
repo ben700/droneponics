@@ -35,8 +35,7 @@ consoleHandler.setFormatter(logFormatter)
 _log.addHandler(consoleHandler)
 _log.setLevel(logging.DEBUG)
 
-if True:
-#try:
+try:
     GPIO.setmode(GPIO.BCM)
     GPIO.setwarnings(False)
 
