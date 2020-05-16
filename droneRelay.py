@@ -168,8 +168,8 @@ try:
         
     @blynk.handle_event('write V8')
     def write_handler(pin, value):
-        startTime  = value[0]
-        stopTime = value[1]
+        startTime  = time.mktime(value[0])
+        stopTime = time.mktime(value[1])
         print(startTime)
         print(stopTime)
         
