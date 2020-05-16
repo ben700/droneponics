@@ -83,6 +83,7 @@ if True:
         for pin in range(1,9):
            _log.info('Syncing virtual buttons {}'.format(pin))
            blynk.virtual_sync(pin)
+           blynk.read_response(timeout=0.5)
         blynk.virtual_write(250, "Connected")
     
 
@@ -91,56 +92,19 @@ if True:
         print("Connected")
         blynk.virtual_write(250, "Disconnected")
   
-    @blynk.handle_event('write V1,v2,v3,v4,v5,v6,v7,v8')
+    @blynk.handle_event('write V*')
     def write_handler(pin, value):
-        button_state = value[0]
-        print(pin)
-        drone.processButtonPressed(blynk, (10+pin), pin, GPIO, "Relay"+str(pin),value[0])
-        
- #   @blynk.handle_event('write V1')
- #   def buttonV1Pressed(pin, value):
- ##       _log.info("-------------------Button code 1----------------------" +str(value[0]))
-  #      _log.info(str(value[0]))
-  #      drone.processButtonPressed(blynk, 11, 1, GPIO, Relay1,value[0])
-  
-    
-   # @blynk.handle_event('write V2')
-   # def buttonV2Pressed(pin, value):
-   #     _log.info("-------------------Button code 2----------------------" +str(value[0]))
-    #    drone.processButtonPressed(blynk, 12, 2, GPIO, Relay2,value[0])
-        
-    #@blynk.handle_event('write V4')
-  #  def buttonV3Pressed(pin, value):
-  #      _log.info("-------------------Button code 4----------------------" +str(value[0]))
-  #      drone.processButtonPressed(blynk, 14, 4, GPIO, Relay4,value[0])
-  #  
-  #  @blynk.handle_event('write V3')        
-  #  def buttonV4Pressed(pin, value):
-  #      _log.info("-------------------Button code 3----------------------" +str(value[0]))
-  #      drone.processButtonPressed(blynk, 13, 3, GPIO, Relay3,value[0])
-  #                        
-  #  @blynk.handle_event('write V5')
-  #  def buttonV5Pressed(pin, value):
-  #      _log.info("-------------------Button code 5----------------------" +str(value[0]))
-  #      drone.processButtonPressed(blynk, 15, 5, GPIO, Relay5,value[0])
-  #  
-  #  @blynk.handle_event('write V6')
-  #  def buttonV6Pressed(pin, value):
-  #      _log.info("-------------------Button code 6----------------------" +str(value[0]))
-  #      drone.processButtonPressed(blynk, 16, 6, GPIO, Relay6,value[0])
-  #      
-  #  @blynk.handle_event('write V7')
-  #  def buttonV7Pressed(pin, value):
-  #      _log.info("-------------------Button code 7----------------------" +str(value[0]))
-  #      drone.processButtonPressed(blynk, 17, 7, GPIO, Relay7,value[0])
-  #      
-  #  @blynk.handle_event('write V8')        
-  #  def buttonV8Pressed(pin, value):
-  ##      _log.info("-------------------Button code 8----------------------" +str(value[0]))
-   #     drone.processButtonPressed(blynk, 18, 8, GPIO, Relay8,value[0])
- #                         
- #  
-    @timer.register(interval=180, run_once=False)
+        print("Now in button function")
+        blynk.set_property(systemLED, 'color', colours[1])
+        blynk.virtual_write(250, "Updating")
+        blynk.set_property(10+pin, 'color', colours[button_state])
+        blynk.set_property(pin, 'onBackColor', colours[button_state])
+        GPIO.output("Relay"+str(pin),button_state)
+        blynk.virtual_write(98,"Flipped Switch 1" + '\n')
+        blynk.virtual_write(250, "Running")
+        blynk.set_property(systemLED, 'color', colours[0])
+   
+    @timer.register(interval=60, run_once=False)
     def blynk_data():
         blynk.set_property(systemLED, 'color', colours[1])
         blynk.virtual_write(250, "Updating")
