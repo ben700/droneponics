@@ -150,11 +150,11 @@ if True:
         
         
         _log.info("=================pre if"+'\n')
-        if(button_state == 0 or button_state == '0'):
+        if(button_state == '0'):
            _log.info("=================turn off"+'\n') 
            GPIO.output(relays[pin],0)
            blynk.virtual_write(250, "Running")
-        elif (button_state == 1):
+        elif (button_state == '1'):
            _log.info("=================turn on"+'\n')
            GPIO.output(relays[pin],1)
            blynk.virtual_write(250, "Waiting")
@@ -173,10 +173,10 @@ if True:
         blynk.virtual_write(250, "Updating")
         blynk.set_property(10+pin, 'color', colours[button_state])
         blynk.set_property(pin, 'onBackColor', colours[button_state])
-        if(button_state == 0):
+        if(button_state == '0'):
            GPIO.output(relays[pin],0)
            blynk.virtual_write(250, "Running")
-        elif (button_state == 1):
+        elif (button_state == '1'):
            GPIO.output(relays[pin],1)
            blynk.virtual_write(250, "Running")
         
@@ -193,10 +193,10 @@ if True:
         blynk.virtual_write(250, "Updating")
         blynk.set_property(10+pin, 'color', colours[button_state])
         blynk.set_property(pin, 'onBackColor', colours[button_state])
-        if(button_state == 0):
+        if(button_state == '0'):
            GPIO.output(relays[pin],0)
            blynk.virtual_write(250, "Running")
-        elif (button_state == 1):
+        elif (button_state == '1'):
            GPIO.output(relays[pin],1)
            blynk.virtual_write(250, "Running")
         
@@ -213,10 +213,10 @@ if True:
         blynk.virtual_write(250, "Updating")
         blynk.set_property(10+pin, 'color', colours[button_state])
         blynk.set_property(pin, 'onBackColor', colours[button_state])
-        if(button_state == 0):
+        if(button_state == '0'):
            GPIO.output(relays[pin],0)
            blynk.virtual_write(250, "Running")
-        elif (button_state == 1):
+        elif (button_state == '1'):
            GPIO.output(relays[pin],1)
            blynk.virtual_write(250, "Running")
         
@@ -233,10 +233,10 @@ if True:
         blynk.virtual_write(250, "Updating")
         blynk.set_property(10+pin, 'color', colours[button_state])
         blynk.set_property(pin, 'onBackColor', colours[button_state])
-        if(button_state == 0):
+        if(button_state == '0'):
            GPIO.output(relays[pin],0)
            blynk.virtual_write(250, "Running")
-        elif (button_state == 1):
+        elif (button_state == '1'):
            GPIO.output(relays[pin],1)
            blynk.virtual_write(250, "Running")
         
@@ -253,10 +253,10 @@ if True:
         blynk.virtual_write(250, "Updating")
         blynk.set_property(10+pin, 'color', colours[button_state])
         blynk.set_property(pin, 'onBackColor', colours[button_state])
-        if(button_state == 0):
+        if(button_state == '0'):
            GPIO.output(relays[pin],0)
            blynk.virtual_write(250, "Running")
-        elif (button_state == 1):
+        elif (button_state == '1'):
            GPIO.output(relays[pin],1)
            blynk.virtual_write(250, "Running")
         
@@ -273,10 +273,10 @@ if True:
         blynk.virtual_write(250, "Updating")
         blynk.set_property(10+pin, 'color', colours[button_state])
         blynk.set_property(pin, 'onBackColor', colours[button_state])
-        if(button_state == 0):
+        if(button_state == '0'):
            GPIO.output(relays[pin],0)
            blynk.virtual_write(250, "Running")
-        elif (button_state == 1):
+        elif (button_state == '1'):
            GPIO.output(relays[pin],1)
            blynk.virtual_write(250, "Running")
         
