@@ -90,9 +90,12 @@ try:
     # Initialize the sensor.
     if (bmeI2C is not None):
        try:
-           bme680 = adafruit_bme680.Adafruit_BME680_I2C(bmeI2C)
+           if (parser.get('droneAir', 'TSLI2C0', fallback=True)):
+              bmex80 = adafruit_bme680.Adafruit_BME680_I2C(bmeI2C)
+            else:
+              bmex80 = adafruit_bme280.Adafruit_BME280_I2C(bmeI2C)
        except:
-           bme680 = None
+           bmex80 = None
            _log.info("Unexpected error: bme680")
     else:
        bme680 = None
@@ -129,7 +132,7 @@ try:
         now = datetime.now()
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
           
-        if(bme680 is not None):
+        if(bmex80 is not None):
            _log.debug("going to update Blynk")
            openWeather.blynkOpenWeather(blynk)
            _log.debug("Going to read pressure")
@@ -139,15 +142,18 @@ try:
            _log.debug("update blynk BME")
      #      for alarm in alarmList:
      #         alarm.test(blynk, "temperature", 1, bme680.temperature) 
-           blynk.virtual_write(1, bme680.temperature)
-           blynk.virtual_write(2, bme680.gas)
-           blynk.virtual_write(3, bme680.humidity)
-           blynk.virtual_write(4, bme680.pressure)
-           blynk.virtual_write(5, bme680.altitude)
+           blynk.virtual_write(1, bmex80.temperature)
+           if (parser.get('droneAir', 'TSLI2C0', fallback=True)): 
+              blynk.virtual_write(2, bmex80.gas)
+           else
+              blynk.virtual_write(2, None)        
+           blynk.virtual_write(3, bmex80.humidity)
+           blynk.virtual_write(4, bmex80.pressure)
+           blynk.virtual_write(5, bmex80.altitude)
         
            _log.debug("find dew point")
-           t = Temp(bme680.temperature, 'c')
-           blynk.virtual_write(11, dew_point(temperature=t, humidity=bme680.humidity))
+           t = Temp(bmex80.temperature, 'c')
+           blynk.virtual_write(11, dew_point(temperature=t, humidity=bmex80.humidity))
 
            _log.debug("set BME form display")
            drone.setBMEFormOnline(blynkObj=blynk, loggerObj=_log)     
