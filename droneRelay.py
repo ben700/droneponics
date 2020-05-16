@@ -95,6 +95,7 @@ if True:
   
     @blynk.handle_event('write V1')
     def buttonV1Pressed(pin, value):
+        GPIO.output(Relay1,value[0])
         drone.processButtinePressed(blynk, 11, 1, GPIO, Relay1,value[0])
   
     
