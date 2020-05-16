@@ -174,15 +174,9 @@ try:
         today = date.today()
         seconds_since_midnight = int(time.time() - time.mktime(today.timetuple()))
         
-        if( startTime < seconds_since_midnight):
-            print("startTime < localtime")
-            
-        if (stopTime > seconds_since_midnight):
-            print("localtime < stopTime")
+        if( startTime < seconds_since_midnight and stopTime > seconds_since_midnight):
             iValue = 1
-        elif (stopTime <= seconds_since_midnight):
-            print(seconds_since_midnight)
-            print(stopTime)
+        else:
             iValue = 0
         
         now = datetime.now()
