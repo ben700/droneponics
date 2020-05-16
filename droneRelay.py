@@ -150,7 +150,7 @@ if True:
         
         
         _log.info("=================pre if"+'\n')
-        if(button_state == 0):
+        if(button_state == 0 or button_state == '0'):
            _log.info("=================turn off"+'\n') 
            GPIO.output(relays[pin],0)
            blynk.virtual_write(250, "Running")
