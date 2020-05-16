@@ -135,12 +135,6 @@ if True:
         blynk.set_property(systemLED, 'color', colours[0])
         
     @blynk.handle_event('write V2')
-    @blynk.handle_event('write V3')
-    @blynk.handle_event('write V4')
-    @blynk.handle_event('write V5')
-    @blynk.handle_event('write V6')
-    @blynk.handle_event('write V7')
-    @blynk.handle_event('write V8')
     def write_handler(pin, value):
         now = datetime.now()
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
