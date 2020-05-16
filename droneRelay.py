@@ -112,19 +112,19 @@ if True:
         blynk.set_property(pin, 'onBackColor', colours[button_state])
         blynk.set_property(pin, 'color', colours[button_state])
         
-        if (button_state=='0' ):
+        if (button_state==0 ):
             GPIO.output(relays[1],0)
             blynk.virtual_write(250, "Feeding")
             blynk.virtual_write(98, "Feeding")
-        if (button_state=='1' ):
+        if (button_state==1 ):
             GPIO.output(relays[1],1)
             blynk.virtual_write(250, "Running")
             blynk.virtual_write(98, "Running")
-        elif (button_state=='2'):
+        elif (button_state==2):
             GPIO.output(relays[1],0)
             blynk.virtual_write(250, "Timed")
             blynk.virtual_write(98, "Timed")
-        elif (button_state=='3'):
+        elif (button_state==3):
             GPIO.output(relays[1],0)
             blynk.virtual_write(250, "Dry")
             blynk.virtual_write(98, "Dry")
