@@ -95,9 +95,8 @@ if True:
     def write_handler(pin, value):
         button_state = value[0]
         print(pin)
-        drone.processButtonPressed(blynk, 11, 1, GPIO, Relay1,value[0])
-        blynk.set_property(pin, 'color', colors[button_state])
-    
+        drone.processButtonPressed(blynk, (10+pin), pin, GPIO, "Relay"+str(pin),value[0])
+        
  #   @blynk.handle_event('write V1')
  #   def buttonV1Pressed(pin, value):
  ##       _log.info("-------------------Button code 1----------------------" +str(value[0]))
