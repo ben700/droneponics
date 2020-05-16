@@ -123,12 +123,12 @@ try:
         elif button_state=='2':
             halfOn=True
             justOn=False
-            GPIO.output(relays[1],2)
+            GPIO.output(relays[1],0)
             blynk.virtual_write(250, "Timed")
         else:
             halfOn=False
             justOn=True
-            GPIO.output(relays[1],3)
+            GPIO.output(relays[1],0)
             blynk.virtual_write(250, "Dry")
 
         if(button_state == '0'):
@@ -163,6 +163,7 @@ try:
         Counter.cycle += 1
         now = datetime.now()
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
+        _log.info("=======================================button_state =" + button_state  + '\n')
         if(button_state == '2'):
             if Counter.cycle % 2 == 0:
               Counter.cycle = 0
