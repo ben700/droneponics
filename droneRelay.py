@@ -170,7 +170,7 @@ try:
         startTime  =value[0]
         stopTime = value[1]
         
-        today = datetime.date.today()
+        today = date.today()
         seconds_since_midnight = time.time() - time.mktime(today.timetuple())
         
         if( startTime < seconds_since_midnight):
