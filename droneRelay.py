@@ -167,9 +167,9 @@ try:
         drone.droneRelayWriteHandler(pin, value, blynk, relays)
         
     @blynk.handle_event('write V8')
-    def write_handler(pin, value):
+    def write_handler(pin, value, eTime):
         print(value[0])
-        print(value[1])
+        print(eTime)
         drone.droneRelayWriteHandler(pin, value, blynk, relays)
         
     @timer.register(interval=60, run_once=False)
