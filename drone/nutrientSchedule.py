@@ -54,8 +54,8 @@ def buildOxyMix(nutrientMix, _log):
    
 def buildSensors(sensors, _log, scheduleWeek='Grow'):
     sensors.append( Sensor(102, "Temprature", 30, Target=20, LowAlarm=10, HighAlarm=25))
-    sensors.append( Sensor(100, "EC", 31 , Target=100, LowAlarm=500, HighAlarm=1500))
-    sensors.append( Sensor(100, "EC", 31 , Target=1000, LowAlarm=500, HighAlarm=1500))
+    sensors.append( Sensor(100, "EC", 31 , Target=600, LowAlarm=500, HighAlarm=1500))
+#    sensors.append( Sensor(100, "EC", 31 , Target=1000, LowAlarm=500, HighAlarm=1500))
   #week6-8  sensors.append( Sensor(100, "EC", 31 , Target=100, LowAlarm=500, HighAlarm=1500))
     sensors.append( Sensor(99, "pH", 32, Target=5.5, LowAlarm=5.3, HighAlarm=6.5))
     return sensors
