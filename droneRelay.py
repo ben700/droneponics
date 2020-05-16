@@ -38,8 +38,8 @@ consoleHandler = logging.StreamHandler()
 consoleHandler.setFormatter(logFormatter)
 _log.addHandler(consoleHandler)
 _log.setLevel(logging.DEBUG)
-if True:
-#try:
+
+try:
     GPIO.setmode(GPIO.BCM)
     GPIO.setwarnings(False)
 
@@ -154,21 +154,12 @@ if True:
         blynk.virtual_write(250, "Updating")
         blynk.set_property(10+pin, 'color', colours[button_state])
         blynk.set_property(pin, 'onBackColor', colours[button_state])
-        _log.info("=================button_state" + str(button_state)+ '\n')
-        _log.info("=================pin" + str(pin)+ '\n')
-        
-        
-        _log.info("=================pre if"+'\n')
         if(button_state == '0'):
-           _log.info("=================turn off"+'\n') 
            GPIO.output(relays[pin],0)
            blynk.virtual_write(250, "Running")
         elif (button_state == '1'):
-           _log.info("=================turn on"+'\n')
            GPIO.output(relays[pin],1)
-           blynk.virtual_write(250, "Waiting")
-        _log.info("=================post if"+'\n')
-        
+           blynk.virtual_write(250, "Waiting") 
         blynk.set_property(systemLED, 'color', colours[0])
    
     @blynk.handle_event('write V3')
@@ -358,15 +349,15 @@ if True:
            blynk.virtual_write(250, "Running")
            blynk.set_property(systemLED, 'color', colours[0])
         timer.run()
-#except: 
-#   blynk = blynklib.Blynk(parser.get('droneRelay', 'BLYNK_AUTH'))
-#   blynk.run()
-#   blynk.virtual_write(98,"in main loop except"+ '\n')
-#   blynk.virtual_write(250, "Crashed")
+except: 
+   blynk = blynklib.Blynk(parser.get('droneRelay', 'BLYNK_AUTH'))
+   blynk.run()
+   blynk.virtual_write(98,"in main loop except"+ '\n')
+   blynk.virtual_write(250, "Crashed")
 
-#   drone.turnLEDsOffline(blynk)
-#   drone.turnButtonsOffline(blynk)
-#   GPIO.cleanup()
+   drone.turnLEDsOffline(blynk)
+   drone.turnButtonsOffline(blynk)
+   GPIO.cleanup()
 
- #  os.system('sh /home/pi/updateDroneponics.sh')
- #  os.system('sudo reboot')
+   os.system('sh /home/pi/updateDroneponics.sh')
+   os.system('sudo reboot')
