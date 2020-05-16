@@ -145,6 +145,7 @@ if True:
         blynk.virtual_write(250, "Updating")
         blynk.set_property(10+pin, 'color', colours[button_state])
         blynk.set_property(pin, 'onBackColor', colours[button_state])
+        _log.info("=================button_state" + str(button_state)+ '\n')
         if(button_state == 0):
            GPIO.output(relays[pin],0)
            blynk.virtual_write(250, "Running")
