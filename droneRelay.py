@@ -1,7 +1,7 @@
 
 
 # The ID and range of a sample spreadsheet.
-colours = {1: '#FF0000', 0: '#00FF00', '1': '#FF0000', '0': '#00FF00', '2': '#80FF00', '3': '#00FF80', 'OFFLINE': '#0000FF', 'ONLINE': '#00FF00'}
+colours = {1: '#FF0000', 0: '#00FF00', '1': '#FF0000', '0': '#00FF00', '2': '#80FF00', '3': '#00FF80','4': '#00FF80', 'OFFLINE': '#0000FF', 'ONLINE': '#00FF00'}
 systemLED=101
 
 import socket
