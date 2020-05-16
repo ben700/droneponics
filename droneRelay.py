@@ -101,7 +101,10 @@ if True:
         blynk.set_property(10+pin, 'color', colours[button_state])
         blynk.set_property(pin, 'onBackColor', colours[button_state])
         print(button_state)
-        GPIO.output(relays[pin],0)
+        if(button_state == '0'):
+           GPIO.output(relays[pin],0)
+        else:
+           GPIO.output(relays[pin],1)
         blynk.virtual_write(98,"Flipped Switch 1" + '\n')
         blynk.virtual_write(250, "Running")
         blynk.set_property(systemLED, 'color', colours[0])
