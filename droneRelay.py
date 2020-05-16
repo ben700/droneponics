@@ -64,7 +64,7 @@ if True:
     
     # Initialize Blynk
     blynk = blynklib.Blynk(parser.get('droneRelay', 'BLYNK_AUTH'))
-    timer = blynktimer.Timer()
+  #  timer = blynktimer.Timer()
     
     @blynk.handle_event('write V255')
     def rebooter(pin, value):
@@ -108,16 +108,16 @@ if True:
         blynk.virtual_write(250, "Running")
         blynk.set_property(systemLED, 'color', colours[0])
    
-    @timer.register(interval=60, run_once=False)
-    def blynk_data():
-        blynk.set_property(systemLED, 'color', colours[1])
-        blynk.virtual_write(250, "Updating")
-        _log.info("Update Timer Run")
-        now = datetime.now()
-        blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
+  #  @timer.register(interval=60, run_once=False)
+  #  def blynk_data():
+  #      blynk.set_property(systemLED, 'color', colours[1])
+  #      blynk.virtual_write(250, "Updating")
+   #     _log.info("Update Timer Run")
+   #     now = datetime.now()
+    #    blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
           
-        blynk.virtual_write(250, "Running")
-        blynk.set_property(systemLED, 'color', colours[0])
+     #   blynk.virtual_write(250, "Running")
+     #   blynk.set_property(systemLED, 'color', colours[0])
 
     while True:
         blynk.run()
@@ -172,16 +172,18 @@ if True:
            blynk.virtual_write(255, 0)
            _log.info('Just Booted')
 
-        timer.run()
-#except: 
-#   blynk = blynklib.Blynk(parser.get('droneRelay', 'BLYNK_AUTH'))
-#   blynk.run()
-#   _log.info("in main loop except")
-#   blynk.virtual_write(250, "Crashed")
+       # timer.run()
+       blynk.virtual_write(250, "Running")
+       blynk.set_property(systemLED, 'color', colours[0])
+excep: 
+   blynk = blynklib.Blynk(parser.get('droneRelay', 'BLYNK_AUTH'))
+   blynk.run()
+   _log.info("in main loop except")
+   blynk.virtual_write(250, "Crashed")
 
-#   drone.turnLEDsOffline(blynk)
-#   drone.turnButtonsOffline(blynk)
-#   GPIO.cleanup()
+   drone.turnLEDsOffline(blynk)
+   drone.turnButtonsOffline(blynk)
+   GPIO.cleanup()
 
-  # os.system('sh /home/pi/updateDroneponics.sh')
+   os.system('sh /home/pi/updateDroneponics.sh')
   # os.system('sudo reboot')
