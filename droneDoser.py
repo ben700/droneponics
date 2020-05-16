@@ -23,6 +23,22 @@ import subprocess
 import re
 import drone
 
+from drone import Alarm, OpenWeather
+alarmList=[]
+#load Temperature alarms
+alarmList.append(Alarm('temperature', "low", "low",18.0, Notify=False,  Message = 'Low TEMP!!!', Colour = '#c0392b'))
+alarmList.append(Alarm('temperature', "High", "high", 26.0, Notify=False, Message = 'High TEMP!!!', Colour = '#c0392b'))
+alarmList.append(Alarm('temperature', "low", "lowlow", 15.0, Notify=True,  Message = 'Low Low TEMP!!!', Colour = '#c0392b'))
+alarmList.append(Alarm('temperature', "High", "highhigh", 30.0,Notify=True, Message = 'High High TEMP!!!', Colour = '#c0392b'))
+
+#from drone import Alarm, OpenWeather
+#sensorList=[]
+#load Temperature alarms
+#sensorList.append(PH())
+#sensorList.append(EC())
+#sensorList.append(TEMP())#
+
+
 bootup = True
 colours = {0: '#FF0000', 1: '#00FF00', '0': '#FF0000', '1': '#00FF00', 'OFFLINE': '#0000FF', 'ONLINE': '#00FF00'}
 systemLED=101
