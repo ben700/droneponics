@@ -1,7 +1,7 @@
 
 
 # The ID and range of a sample spreadsheet.
-colours = {1: '#FF0000', 0: '#00FF00', '1': '#FF0000', '0': '#00FF00', 'OFFLINE': '#0000FF', 'ONLINE': '#00FF00'}
+colours = {1: '#FF0000', 0: '#00FF00', '1': '#FF0000', '0': '#00FF00', '2': '#80FF00', '3': '#00FF80', 'OFFLINE': '#0000FF', 'ONLINE': '#00FF00'}
 systemLED=101
 
 import socket
@@ -25,7 +25,13 @@ import json
 parser = ConfigParser()
 parser.read('/home/pi/config.ini')
 
+class Counter:
+    cycle = 0
+        
 bootup = True
+halfOn=False
+justOn=False
+button_state=0
 
 # tune console logging
 _log = logging.getLogger('BlynkLog')
@@ -55,15 +61,15 @@ try:
     GPIO.setup(Relay3,GPIO.OUT, initial=1)
     GPIO.setup(Relay4,GPIO.OUT, initial=1)
     if(parser.get('droneRelay', 'RelaySize') == "8"):
-       GPIO.setup(Relay5,GPIO.OUT, initial=0)
-       GPIO.setup(Relay6,GPIO.OUT, initial=0)
-       GPIO.setup(Relay7,GPIO.OUT, initial=0)
-       GPIO.setup(Relay8,GPIO.OUT, initial=0)
+       GPIO.setup(Relay5,GPIO.OUT, initial=1)
+       GPIO.setup(Relay6,GPIO.OUT, initial=1)
+       GPIO.setup(Relay7,GPIO.OUT, initial=1)
+       GPIO.setup(Relay8,GPIO.OUT, initial=1)
     
     
     # Initialize Blynk
     blynk = blynklib.Blynk(parser.get('droneRelay', 'BLYNK_AUTH'))
-  #  timer = blynktimer.Timer()
+    timer = blynktimer.Timer()
     
     @blynk.handle_event('write V255')
     def rebooter(pin, value):
@@ -93,6 +99,28 @@ try:
         print("Connected")
         blynk.virtual_write(250, "Disconnected")
   
+    @blynk.handle_event('write V1')
+    def write_handler(pin, value):
+        now = datetime.now()
+        blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
+        blynk.virtual_write(98, "Change state of button "+ str(pin) + '\n')
+        blynk.set_property(systemLED, 'color', colours[1])
+        blynk.virtual_write(250, "Updating")
+        
+        button_state = value[0]
+        blynk.set_property(10+pin, 'color', colours[button_state])
+        blynk.set_property(pin, 'onBackColor', colours[button_state])
+        
+        if (button_state=='0' or button_state=='1' ):
+            halfOn=False
+            justOn=False
+        if(button_state == '0'):
+           GPIO.output(relays[pin],0)
+        else:
+           GPIO.output(relays[pin],1)
+        blynk.virtual_write(250, "Running")
+        blynk.set_property(systemLED, 'color', colours[0])
+        
     @blynk.handle_event('write V*')
     def write_handler(pin, value):
         now = datetime.now()
@@ -111,6 +139,23 @@ try:
         blynk.virtual_write(250, "Running")
         blynk.set_property(systemLED, 'color', colours[0])
    
+
+    @timer.register(interval=60, run_once=False)
+    def blynk_data():
+        _log.info("Update Timer Run")
+        Counter.cycle += 1
+        now = datetime.now()
+        blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
+        if(button_state == '2'):
+            if Counter.cycle % 2 == 0:
+              Counter.cycle = 0
+        if(button_state =='3'):
+             if Counter.cycle % 10 == 0:
+              Counter.cycle = 0
+        if (Counter.cycle = 0):
+           GPIO.output(relays[1],0)
+        else:
+           GPIO.output(relays[1],1)
 
     while True:
         blynk.run()
@@ -157,6 +202,7 @@ try:
            _log.info('Just Booted')
            blynk.virtual_write(250, "Running")
            blynk.set_property(systemLED, 'color', colours[0])
+        timer.run()
 except: 
    blynk = blynklib.Blynk(parser.get('droneRelay', 'BLYNK_AUTH'))
    blynk.run()
