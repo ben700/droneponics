@@ -132,8 +132,9 @@ try:
             blynk.virtual_write(250, "Timed and dry")
 
         if(button_state == '0'):
+           GPIO.output(relays[1],0)
         else:
-           GPIO.output(relays[pin],1)
+           GPIO.output(relays[1],1)
         blynk.virtual_write(250, "Running")
         blynk.set_property(systemLED, 'color', colours[0])
         
