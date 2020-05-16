@@ -94,13 +94,13 @@ if True:
   
     @blynk.handle_event('write V*')
     def write_handler(pin, value):
+        button_state = value[0]
         print("Now in button function")
-        state = value[0]
         blynk.set_property(systemLED, 'color', colours[1])
         blynk.virtual_write(250, "Updating")
-        blynk.set_property(10+pin, 'color', colours[value[0]])
-        blynk.set_property(pin, 'onBackColor', colours[value[0]])
-        GPIO.output(relays[pin],state)
+        blynk.set_property(10+pin, 'color', colours[button_state])
+        blynk.set_property(pin, 'onBackColor', colours[button_state])
+        GPIO.output(relays[pin],button_state)
         blynk.virtual_write(98,"Flipped Switch 1" + '\n')
         blynk.virtual_write(250, "Running")
         blynk.set_property(systemLED, 'color', colours[0])
