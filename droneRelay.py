@@ -101,6 +101,7 @@ try:
   
     @blynk.handle_event('write V1')
     def write_handler(pin, value):
+        print(value)
         now = datetime.now()
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
         blynk.virtual_write(98, "Change state of button 1 to "+ value[0]+ '\n')
