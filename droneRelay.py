@@ -107,7 +107,6 @@ if True:
         blynk.virtual_write(250, "Updating")
         
         button_state = int(value[0])-1
-        _log.info("==================button_state =" + str(button_state)  + '\n') 
         blynk.set_property(10+pin, 'color', colours[button_state])
         blynk.set_property(pin, 'onBackColor', colours[button_state])
         blynk.set_property(pin, 'color', colours[button_state])
@@ -136,6 +135,12 @@ if True:
         blynk.set_property(systemLED, 'color', colours[0])
         
     @blynk.handle_event('write V2')
+    @blynk.handle_event('write V3')
+    @blynk.handle_event('write V4')
+    @blynk.handle_event('write V5')
+    @blynk.handle_event('write V6')
+    @blynk.handle_event('write V7')
+    @blynk.handle_event('write V8')
     def write_handler(pin, value):
         now = datetime.now()
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
@@ -163,7 +168,6 @@ if True:
         Counter.cycle += 1
         now = datetime.now()
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
-        _log.info("=======================================button_state =" + str(button_state)  + '\n')
         if(button_state == 2):
             if Counter.cycle % 2 == 0:
               Counter.cycle = 0
