@@ -131,8 +131,8 @@ if True:
            blynk.virtual_write(251, drone.get_ip())
         
         
-           drone.turnLEDsOnline(blynk)
-           drone.turnButtonsOnline(blynk)
+          # drone.turnLEDsOnline(blynk)
+          # drone.turnButtonsOnline(blynk)
            blynk.set_property(1, "label", parser.get('droneRelay', 'Relay1'))
            blynk.set_property(11, "label", parser.get('droneRelay', 'Relay1'))
            blynk.virtual_write(11, 255)
