@@ -50,15 +50,15 @@ try:
     Relay8 = 18  #Mixer - turned off with low water 
 
 
-    GPIO.setup(Relay1,GPIO.OUT)
-    GPIO.setup(Relay2,GPIO.OUT)
-    GPIO.setup(Relay3,GPIO.OUT)
-    GPIO.setup(Relay4,GPIO.OUT)
+    GPIO.setup(Relay1,GPIO.OUT, initial=1)
+    GPIO.setup(Relay2,GPIO.OUT, initial=1)
+    GPIO.setup(Relay3,GPIO.OUT, initial=1)
+    GPIO.setup(Relay4,GPIO.OUT, initial=1)
     if(parser.get('droneRelay', 'RelaySize') == "8"):
-       GPIO.setup(Relay5,GPIO.OUT)
-       GPIO.setup(Relay6,GPIO.OUT)
-       GPIO.setup(Relay7,GPIO.OUT)
-       GPIO.setup(Relay8,GPIO.OUT)
+       GPIO.setup(Relay5,GPIO.OUT, initial=0)
+       GPIO.setup(Relay6,GPIO.OUT, initial=0)
+       GPIO.setup(Relay7,GPIO.OUT, initial=0)
+       GPIO.setup(Relay8,GPIO.OUT, initial=0)
     
     
     # Initialize Blynk
