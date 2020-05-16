@@ -10,7 +10,7 @@ def processButtinePressed(blynk, LED, Button, iGPIO, Relay,VALUE):
         blynk.virtual_write(250, "Updating")
         blynk.set_property(LED, 'color', colours[VALUE])
         blynk.set_property(Button, 'onBackColor', colours[VALUE])
-        iGPIO.output(Relay,VALUE)
+       # iGPIO.output(Relay,VALUE)
         blynk.virtual_write(98,"Flipped Switch 1" + '\n')
         blynk.virtual_write(250, "Running")
         blynk.set_property(systemLED, 'color', colours[0])
