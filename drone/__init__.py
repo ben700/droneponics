@@ -6,5 +6,5 @@ from drone.droneponicsAir import *
 from drone.droneponicsRelay import *
 from drone.openWeather import *
 from drone.alarm import *
-from drone.sensor import *
+#from drone.sensor import *
 
