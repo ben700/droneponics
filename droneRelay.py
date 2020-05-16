@@ -148,6 +148,8 @@ if True:
         _log.info("=================button_state" + str(button_state)+ '\n')
         _log.info("=================pin" + str(pin)+ '\n')
         
+        
+        _log.info("=================pre if"+'\n')
         if(button_state == 0):
            _log.info("=================turn off"+'\n') 
            GPIO.output(relays[pin],0)
@@ -156,6 +158,7 @@ if True:
            _log.info("=================turn on"+'\n')
            GPIO.output(relays[pin],1)
            blynk.virtual_write(250, "Waiting")
+        _log.info("=================post if"+'\n')
         
         blynk.set_property(systemLED, 'color', colours[0])
    
