@@ -95,37 +95,37 @@ if True:
     def buttonV1Pressed(pin, value):
         _log.info("-------------------Button code 1----------------------" +str(value[0]))
         _log.info(str(value[0]))
-        drone.processButtinePressed(blynk, 11, 1, GPIO, Relay1,value[0])
+        drone.processButtonPressed(blynk, 11, 1, GPIO, Relay1,value[0])
   
     
     @blynk.handle_event('write V2')
     def buttonV2Pressed(pin, value):
         _log.info("-------------------Button code 2----------------------" +str(value[0]))
-        drone.processButtinePressed(blynk, 12, 2, GPIO, Relay2,value[0])
+        drone.processButtonPressed(blynk, 12, 2, GPIO, Relay2,value[0])
         
     @blynk.handle_event('write V3')
     def buttonV3Pressed(pin, value):
-        drone.processButtinePressed(blynk, 13, 3, GPIO, Relay3,value[0])
+        drone.processButtonPressed(blynk, 13, 3, GPIO, Relay3,value[0])
     
     @blynk.handle_event('write V4')        
     def buttonV4Pressed(pin, value):
-        drone.processButtinePressed(blynk, 14, 4, GPIO, Relay4,value[0])
+        drone.processButtonPressed(blynk, 14, 4, GPIO, Relay4,value[0])
                           
     @blynk.handle_event('write V5')
     def buttonV5Pressed(pin, value):
-        drone.processButtinePressed(blynk, 15, 5, GPIO, Relay5,value[0])
+        drone.processButtonPressed(blynk, 15, 5, GPIO, Relay5,value[0])
     
     @blynk.handle_event('write V6')
     def buttonV6Pressed(pin, value):
-        drone.processButtinePressed(blynk, 16, 6, GPIO, Relay6,value[0])
+        drone.processButtonPressed(blynk, 16, 6, GPIO, Relay6,value[0])
         
     @blynk.handle_event('write V7')
     def buttonV7Pressed(pin, value):
-        drone.processButtinePressed(blynk, 17, 7, GPIO, Relay7,value[0])
+        drone.processButtonPressed(blynk, 17, 7, GPIO, Relay7,value[0])
         
     @blynk.handle_event('write V8')        
     def buttonV8Pressed(pin, value):
-        drone.processButtinePressed(blynk, 18, 8, GPIO, Relay8,value[0])
+        drone.processButtonPressed(blynk, 18, 8, GPIO, Relay8,value[0])
                           
    
     @timer.register(interval=180, run_once=False)
