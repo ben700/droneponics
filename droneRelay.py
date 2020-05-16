@@ -175,9 +175,16 @@ try:
         
         print(time.localtime())
         
-       
+        if( startTime < time.localtime() and time.localtime() < stopTime):
+            print("run")
+            iValue = 1
+        else
+            print("stop")
+            iValue = 0
+        
+        now = datetime.now()
         blynk.virtual_write(99, now.strftime("%d/%m/%Y %H:%M:%S"))
-        drone.droneRelayWriteHandler(pin, value, blynk, relays)
+        drone.droneRelayWriteHandler(pin, iValue, blynk, relays)
         
     @timer.register(interval=60, run_once=False)
     def blynk_data():
