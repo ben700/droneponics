@@ -178,7 +178,7 @@ try:
         if( startTime < time.localtime() and time.localtime() < stopTime):
             print("run")
             iValue = 1
-        else
+        else:
             print("stop")
             iValue = 0
         
