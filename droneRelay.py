@@ -112,6 +112,10 @@ if True:
         blynk.set_property(pin, 'onBackColor', colours[button_state])
         blynk.set_property(pin, 'color', colours[button_state])
         
+        if (button_state=='0' ):
+            GPIO.output(relays[1],0)
+            blynk.virtual_write(250, "Feeding")
+            blynk.virtual_write(98, "Feeding")
         if (button_state=='1' ):
             GPIO.output(relays[1],1)
             blynk.virtual_write(250, "Running")
@@ -124,11 +128,8 @@ if True:
             GPIO.output(relays[1],0)
             blynk.virtual_write(250, "Dry")
             blynk.virtual_write(98, "Dry")
-        else:
-            GPIO.output(relays[1],0)
-            blynk.virtual_write(250, "Feeding")
-            blynk.virtual_write(98, "Feeding")
         
+            
         blynk.set_property(systemLED, 'color', colours[0])
         
     @blynk.handle_event('write V2')
