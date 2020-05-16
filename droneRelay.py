@@ -43,16 +43,25 @@ if True:
     GPIO.setmode(GPIO.BCM)
     GPIO.setwarnings(False)
 
-    relays=[0,21,20,16,12,25,24,23,18]
-    Relay1 = 21 #heater
-    Relay2 = 20 #Feed
-    Relay3 = 16 #Air
-    Relay4 = 12 #heater
-    Relay5 = 25 #Feed
-    Relay6 = 24 #Air
-    Relay7 = 23 #Mixer - turned off with low water 
-    Relay8 = 18  #Mixer - turned off with low water 
+    #relays=[0,21,20,16,12,25,24,23,18]
+    #Relay1 = 21 #heater
+    #Relay2 = 20 #Feed
+    #Relay3 = 16 #Air
+    #Relay4 = 12 #heater
+    #Relay5 = 25 #Feed
+    #Relay6 = 24 #Air
+    #Relay7 = 23 #Mixer - turned off with low water 
+    #Relay8 = 18  #Mixer - turned off with low water 
 
+    relays=[0,18,23,24,25,12,16,20,21]
+    Relay1 = 18 #heater
+    Relay2 = 23 #Feed
+    Relay3 = 24 #Air
+    Relay4 = 25 #heater
+    Relay5 = 12 #Feed
+    Relay6 = 16 #Air
+    Relay7 = 20 #Mixer - turned off with low water 
+    Relay8 = 21  #Mixer - turned off with low water 
 
     GPIO.setup(Relay1,GPIO.OUT, initial=1)
     GPIO.setup(Relay2,GPIO.OUT, initial=1)
