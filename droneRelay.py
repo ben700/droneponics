@@ -1,7 +1,7 @@
 
 
 # The ID and range of a sample spreadsheet.
-colours = {1: '#FF0000', 0: '#00FF00', '0': '#00FF00', '1': '#FF0000', 2: '#00FF00', 3: '#80FF00',4: '#00FF80', 5: '#80FF80','OFFLINE': '#0000FF', 'ONLINE': '#00FF00'}
+colours = {1: '#FF0000', 0: '#00FF00', '0': '#00FF00', '1': '#FF0000', 2: '#00FF00', 3: '#80FF00',4: '#00FF80', 5: '#80FF80','OFFLINE': '#0000FF', 'ONLINE': '#00FF00', 'UNAVILABLE': '#002700'}
 systemLED=101
 
 import socket
@@ -77,7 +77,17 @@ try:
     # Initialize Blynk
     blynk = blynklib.Blynk(parser.get('droneRelay', 'BLYNK_AUTH'))
     timer = blynktimer.Timer()
-    
+   
+    if(parser.get('droneRelay', 'RelaySize') == "4"):
+        blynk.set_property(5, 'color', colours['UNAVILABLE'])
+        blynk.set_property(6, 'color', colours['UNAVILABLE'])
+        blynk.set_property(7, 'color', colours['UNAVILABLE'])
+        blynk.set_property(8, 'color', colours['UNAVILABLE'])
+        blynk.set_property(15, 'color', colours['UNAVILABLE'])
+        blynk.set_property(16, 'color', colours['UNAVILABLE'])
+        blynk.set_property(17, 'color', colours['UNAVILABLE'])
+        blynk.set_property(18, 'color', colours['UNAVILABLE'])
+        
     @blynk.handle_event('write V255')
     def rebooter(pin, value):
         blynk.virtual_write(98, "User update and reboot button v255"+ '\n')       
@@ -94,10 +104,16 @@ try:
     @blynk.handle_event("connect")
     def connect_handler():
         print("Connected")
-        for pin in range(1,9):
-           _log.info('Syncing virtual buttons {}'.format(pin))
-           blynk.virtual_sync(pin)
-           blynk.read_response(timeout=0.5)
+        if(parser.get('droneRelay', 'RelaySize') == "4"):
+           for pin in range(1,5):
+              _log.info('Syncing virtual buttons {}'.format(pin))
+              blynk.virtual_sync(pin)
+              blynk.read_response(timeout=0.5)
+        if(parser.get('droneRelay', 'RelaySize') == "8"):
+           for pin in range(1,9):
+              _log.info('Syncing virtual buttons {}'.format(pin))
+              blynk.virtual_sync(pin)
+              blynk.read_response(timeout=0.5)
         blynk.virtual_write(250, "Connected")
     
 
