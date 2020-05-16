@@ -1,4 +1,4 @@
-colours = {1: '#FF0000', 0: '#00FF00', '1': '#FF0000', '0': '#00FF00', 'OFFLINE': '#0000FF', 'ONLINE': '#00FF80'}
+colours = {1: '#FF0000', 0: '#00FF00', '0': '#00FF00', '1': '#FF0000', 2: '#00FF00', 3: '#80FF00',4: '#00FF80', 5: '#80FF80','OFFLINE': '#0000FF', 'ONLINE': '#00FF00'}
 systemLED=101
 
 import blynklib
@@ -8,7 +8,7 @@ from datetime import datetime
 import time
 
         
-def droneRelayWriteHandler(pin, value, blynk):
+def droneRelayWriteHandler(pin, value, blynk, relays):
         now = datetime.now()
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
         blynk.virtual_write(98, "Change state of button "+ str(pin) + '\n')
