@@ -171,12 +171,8 @@ try:
         startTime  = time.localtime(int(value[0]))
         stopTime = time.localtime(int(value[1]))
         localtime = time.localtime()
-        print(startTime)
-        print(stopTime)
-        print(localtime)
-        print(time.localtime())
         
-        if( startTime < time.localtime() and time.localtime() < stopTime):
+        if( startTime < localtime and localtime < stopTime):
             print("run")
             iValue = 1
         else:
