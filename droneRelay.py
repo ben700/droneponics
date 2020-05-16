@@ -149,9 +149,11 @@ if True:
         _log.info("=================pin" + str(pin)+ '\n')
         
         if(button_state == 0):
+           _log.info("=================turn off"+'\n') 
            GPIO.output(relays[pin],0)
            blynk.virtual_write(250, "Running")
         elif (button_state == 1):
+           _log.info("=================turn on"+'\n')
            GPIO.output(relays[pin],1)
            blynk.virtual_write(250, "Waiting")
         
