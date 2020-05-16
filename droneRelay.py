@@ -91,7 +91,7 @@ if True:
         print("Connected")
         blynk.virtual_write(250, "Disconnected")
   
-    @blynk.handle_event('write V*')
+    @blynk.handle_event('write V1-8')
     def write_handler(pin, value):
         button_state = value[0]
         print(pin)
