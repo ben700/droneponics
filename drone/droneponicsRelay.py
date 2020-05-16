@@ -6,7 +6,23 @@ import blynktimer
 import RPi.GPIO as GPIO   
 
         
+def droneRelayWriteHandler(pin, value):
+        now = datetime.now()
+        blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
+        blynk.virtual_write(98, "Change state of button "+ str(pin) + '\n')
         
+        button_state = value[0]
+        blynk.set_property(systemLED, 'color', colours[1])
+        blynk.virtual_write(250, "Updating")
+        blynk.set_property(10+pin, 'color', colours[button_state])
+        blynk.set_property(pin, 'onBackColor', colours[button_state])
+        if(button_state == '0'):
+           GPIO.output(relays[pin],0)
+           blynk.virtual_write(250, "Running")
+        elif (button_state == '1'):
+           GPIO.output(relays[pin],1)
+           blynk.virtual_write(250, "Waiting") 
+        blynk.set_property(systemLED, 'color', colours[0])        
         
 def turnButtonsOffline(blynk):
         blynk.set_property(1, 'color', colours['OFFLINE'])
