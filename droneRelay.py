@@ -103,11 +103,11 @@ if True:
         global button_state
         now = datetime.now()
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
-        blynk.virtual_write(98, "Change state of button 1 to "+ value[0]+ '\n')
         blynk.set_property(systemLED, 'color', colours[1])
         blynk.virtual_write(250, "Updating")
         
         button_state = int(value[0])-1
+        _log.info("==================button_state =" + str(button_state) +  + '\n') 
         blynk.set_property(10+pin, 'color', colours[button_state])
         blynk.set_property(pin, 'onBackColor', colours[button_state])
         blynk.set_property(pin, 'color', colours[button_state])
