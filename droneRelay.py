@@ -171,9 +171,9 @@ try:
            blynk.virtual_write(255, 0)
            _log.info('Just Booted')
 
-       # timer.run()
-       blynk.virtual_write(250, "Running")
-       blynk.set_property(systemLED, 'color', colours[0])
+        #timer.run()
+        blynk.virtual_write(250, "Running")
+        blynk.set_property(systemLED, 'color', colours[0])
 excep: 
    blynk = blynklib.Blynk(parser.get('droneRelay', 'BLYNK_AUTH'))
    blynk.run()
