@@ -107,7 +107,7 @@ if True:
         blynk.virtual_write(250, "Updating")
         
         button_state = int(value[0])-1
-        _log.info("==================button_state =" + str(button_state) +  + '\n') 
+        _log.info("==================button_state =" + str(button_state)  + '\n') 
         blynk.set_property(10+pin, 'color', colours[button_state])
         blynk.set_property(pin, 'onBackColor', colours[button_state])
         blynk.set_property(pin, 'color', colours[button_state])
