@@ -174,7 +174,7 @@ try:
         #timer.run()
         blynk.virtual_write(250, "Running")
         blynk.set_property(systemLED, 'color', colours[0])
-excep: 
+except: 
    blynk = blynklib.Blynk(parser.get('droneRelay', 'BLYNK_AUTH'))
    blynk.run()
    _log.info("in main loop except")
