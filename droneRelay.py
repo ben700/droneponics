@@ -107,20 +107,11 @@ try:
         blynk.virtual_write(250, "Running")
         blynk.set_property(systemLED, 'color', colours[0])
    
-  #  @timer.register(interval=60, run_once=False)
-  #  def blynk_data():
-  #      blynk.set_property(systemLED, 'color', colours[1])
-  #      blynk.virtual_write(250, "Updating")
-   #     _log.info("Update Timer Run")
-   #     now = datetime.now()
-    #    blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
-          
-     #   blynk.virtual_write(250, "Running")
-     #   blynk.set_property(systemLED, 'color', colours[0])
 
     while True:
         blynk.run()
         if bootup :
+           blynk.virtual_write(98, "clr")
            blynk.virtual_write(250, "Start-up")
            blynk.set_property(251, "label",drone.gethostname())
            blynk.virtual_write(251, drone.get_ip())
@@ -150,19 +141,7 @@ try:
               blynk.set_property(8, "label", parser.get('droneRelay', 'Relay8'))
               blynk.set_property(18, "label", parser.get('droneRelay', 'Relay8'))
               blynk.virtual_write(18, 255)
-          # blynk.virtual_write(98, "clr")
-          # _log.info("Posting I2C 0 devices to app")
-          # p = subprocess.Popen(['i2cdetect', '-y','0'],stdout=subprocess.PIPE,)
-           #cmdout = str(p.communicate())
-          # blynk.virtual_write(98, "I2C 0 devices"+'\n')
-          # for i in range(0,9):
-          #      blynk.virtual_write(98, str(p.stdout.readline()) + '\n')
-          # _log.info("Posting I2C 1 devices to app")
-           #blynk.virtual_write(98, "I2C 1 devices"+'\n')
-           #q = subprocess.Popen(['i2cdetect', '-y','1'],stdout=subprocess.PIPE,)
-           #cmdout = str(p.communicate())
-          # for i in range(0,9):
-          #     blynk.virtual_write(98, str(q.stdout.readline()) + '\n')
+          
            bootup = False
            _log.debug("Just about to complete Booting")
            now = datetime.now()
