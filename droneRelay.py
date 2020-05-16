@@ -144,31 +144,31 @@ try:
         
     @blynk.handle_event('write V2')
     def write_handler(pin, value):
-        drone.droneRelayWriteHandler(pin, value)
+        drone.droneRelayWriteHandler(pin, value, blynk)
         
     @blynk.handle_event('write V3')
     def write_handler(pin, value):
-        drone.droneRelayWriteHandler(pin, value)
+        drone.droneRelayWriteHandler(pin, value, blynk)
         
     @blynk.handle_event('write V4')
     def write_handler(pin, value):
-        drone.droneRelayWriteHandler(pin, value)
+        drone.droneRelayWriteHandler(pin, value, blynk)
         
     @blynk.handle_event('write V5')
     def write_handler(pin, value):
-        drone.droneRelayWriteHandler(pin, value)
+        drone.droneRelayWriteHandler(pin, value,blynk)
         
     @blynk.handle_event('write V6')
     def write_handler(pin, value):
-        drone.droneRelayWriteHandler(pin, value)
+        drone.droneRelayWriteHandler(pin, value,blynk)
         
     @blynk.handle_event('write V7')
     def write_handler(pin, value):
-        drone.droneRelayWriteHandler(pin, value)
+        drone.droneRelayWriteHandler(pin, value, blynk)
         
     @blynk.handle_event('write V8')
     def write_handler(pin, value):
-        drone.droneRelayWriteHandler(pin, value)
+        drone.droneRelayWriteHandler(pin, value, blynk)
         
     @timer.register(interval=60, run_once=False)
     def blynk_data():
