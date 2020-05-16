@@ -104,13 +104,12 @@ if True:
     @blynk.handle_event("connect")
     def connect_handler():
         print("Connected")
-        if(parser.get('droneRelay', 'RelaySize') == "4"):
-           for pin in range(1,5):
-              _log.info('Syncing virtual buttons {}'.format(pin))
-              blynk.virtual_sync(pin)
-              blynk.read_response(timeout=0.5)
+        for pin in range(1,5):
+           _log.info('Syncing virtual buttons {}'.format(pin))
+           blynk.virtual_sync(pin)
+           blynk.read_response(timeout=0.5)
         if(parser.get('droneRelay', 'RelaySize') == "8"):
-           for pin in range(1,9):
+           for pin in range(5,9):
               _log.info('Syncing virtual buttons {}'.format(pin))
               blynk.virtual_sync(pin)
               blynk.read_response(timeout=0.5)
