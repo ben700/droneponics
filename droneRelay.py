@@ -38,7 +38,7 @@ consoleHandler = logging.StreamHandler()
 consoleHandler.setFormatter(logFormatter)
 _log.addHandler(consoleHandler)
 _log.setLevel(logging.DEBUG)
-if True
+if True:
 #try:
     GPIO.setmode(GPIO.BCM)
     GPIO.setwarnings(False)
