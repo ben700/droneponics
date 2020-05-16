@@ -95,7 +95,7 @@ try:
     def write_handler(pin, value):
         now = datetime.now()
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
-        blynk.virtual_write(98, "Change state of button "+ str(pin))
+        blynk.virtual_write(98, "Change state of button "+ str(pin) + '\n')
         
         button_state = value[0]
         blynk.set_property(systemLED, 'color', colours[1])
@@ -114,6 +114,7 @@ try:
         blynk.run()
         if bootup :
            blynk.virtual_write(98, "clr")
+           blynk.virtual_write(98, "Rebooted")
            blynk.virtual_write(250, "Start-up")
            blynk.set_property(251, "label",drone.gethostname())
            blynk.virtual_write(251, drone.get_ip())
@@ -150,15 +151,14 @@ try:
            blynk.virtual_write(99, now.strftime("%d/%m/%Y %H:%M:%S"))
            blynk.virtual_write(systemLED, 255)
            blynk.virtual_write(255, 0)
+           blynk.virtual_write(98, "Running")
            _log.info('Just Booted')
-
-        #timer.run()
-        blynk.virtual_write(250, "Running")
-        blynk.set_property(systemLED, 'color', colours[0])
+           blynk.virtual_write(250, "Running")
+           blynk.set_property(systemLED, 'color', colours[0])
 except: 
    blynk = blynklib.Blynk(parser.get('droneRelay', 'BLYNK_AUTH'))
    blynk.run()
-   _log.info("in main loop except")
+   blynk.virtual_write(98,"in main loop except")
    blynk.virtual_write(250, "Crashed")
 
    drone.turnLEDsOffline(blynk)
@@ -166,4 +166,4 @@ except:
    GPIO.cleanup()
 
    os.system('sh /home/pi/updateDroneponics.sh')
-  # os.system('sudo reboot')
+   os.system('sudo reboot')
