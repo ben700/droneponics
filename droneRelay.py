@@ -7,8 +7,8 @@ systemLED=101
 import socket
 import drone
 from drone import Alarm, OpenWeather
-from datetime import datetime
-import date
+from datetime import datetime, date
+#import date
 import time
 import shlex, requests
 import blynklib
