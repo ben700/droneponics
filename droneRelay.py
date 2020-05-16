@@ -125,7 +125,7 @@ try:
             justOn=False
             GPIO.output(relays[1],2)
             blynk.virtual_write(250, "Timed")
-        else
+        else:
             halfOn=False
             justOn=True
             GPIO.output(relays[1],3)
