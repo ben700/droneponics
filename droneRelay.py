@@ -95,15 +95,10 @@ if True:
     @blynk.handle_event('write V*')
     def write_handler(pin, value):
         button_state = value[0]
-        print("Now in button function")
         blynk.set_property(systemLED, 'color', colours[1])
         blynk.virtual_write(250, "Updating")
-        print("Updating LED to -------------------------------------------------"+str(colours[button_state]))
-        print(10+pin)
         blynk.set_property(10+pin, 'color', colours[button_state])
         blynk.set_property(pin, 'onBackColor', colours[button_state])
-        print("updated colour for button "+str(pin)+" and also led "+str(10+pin))
-        print(button_state)
         if(button_state == '0'):
            GPIO.output(relays[pin],0)
         else:
@@ -130,9 +125,6 @@ if True:
            blynk.set_property(251, "label",drone.gethostname())
            blynk.virtual_write(251, drone.get_ip())
         
-        
-          # drone.turnLEDsOnline(blynk)
-          # drone.turnButtonsOnline(blynk)
            blynk.set_property(1, "label", parser.get('droneRelay', 'Relay1'))
            blynk.set_property(11, "label", parser.get('droneRelay', 'Relay1'))
            blynk.virtual_write(11, 255)
