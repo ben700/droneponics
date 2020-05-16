@@ -103,7 +103,7 @@ try:
     def write_handler(pin, value):
         now = datetime.now()
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
-        blynk.virtual_write(98, "Change state of button "+ str(pin) + '\n')
+        blynk.virtual_write(98, "Change state of button 1 to "+ value[0]+ '\n')
         blynk.set_property(systemLED, 'color', colours[1])
         blynk.virtual_write(250, "Updating")
         
