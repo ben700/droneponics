@@ -68,12 +68,13 @@ if True:
     
     @blynk.handle_event('write V255')
     def rebooter(pin, value):
+        blynk.set_property(255, 'onlabel', "Updating")
         blynk.virtual_write(250, "User Reboot")
-
         drone.turnLEDsOffline(blynk)
         drone.turnButtonsOffline(blynk)
         blynk.set_property(systemLED, 'color', colours['OFFLINE'])
         os.system('sh /home/pi/updateDroneponics.sh')
+        blynk.set_property(255, 'onlabel', "Rebooting")
         os.system('sudo reboot')
 
     @blynk.handle_event("connect")
