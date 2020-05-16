@@ -83,9 +83,6 @@ if True:
         for pin in range(1,9):
            _log.info('Syncing virtual buttons {}'.format(pin))
            blynk.virtual_sync(pin)
-        for pin in range(11,19):
-           _log.info('Syncing virtual LEDS{}'.format(pin))
-           blynk.virtual_sync(pin)
         blynk.virtual_write(250, "Connected")
     
 
@@ -96,6 +93,7 @@ if True:
   
     @blynk.handle_event('write V1')
     def buttonV1Pressed(pin, value):
+        _log.info("-------------------Button code----------------------")
         drone.processButtinePressed(blynk, 11, 1, GPIO, Relay1,value[0])
   
     
