@@ -172,11 +172,15 @@ try:
         stopTime = time.localtime(int(value[1]))
         localtime = time.localtime()
         
-        if( startTime < localtime and localtime < stopTime):
-            print("run")
+        if( startTime < localtime):
+            print("startTime < localtime")
+            
+        if (localtime < stopTime):
+            print("localtime < stopTime")
             iValue = 1
         else:
-            print("stop")
+            print(localtime)
+            print(stopTime)
             iValue = 0
         
         now = datetime.now()
