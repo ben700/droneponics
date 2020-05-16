@@ -13,7 +13,6 @@ import shlex, requests
 import blynklib
 import blynktimer
 import logging
-from datetime import datetime 
 import RPi.GPIO as GPIO   
 import sys
 import os
