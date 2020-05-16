@@ -16,3 +16,34 @@ def displaySensor(blynk, VP, VALUE, NAME , LOW, HIGH):
  print("####################################################")
  return
 
+class Sensor:
+   def __init__(self, SensorId, name *args, **kwargs):
+       self.sensor = AtlasI2C(SensorId)
+       self.sensorId = SensorId
+       self.name = Name
+       self.displayPin = kwargs.get('DisplayPin', None)
+       self.target = kwargs.get('Target', None)
+       self.value = None
+       self.lowAlarm = kwargs.get('LowAlarm', None)
+       self.highAlarm = kwargs.get('HighAlarm', None)
+       
+      self.name = None
+      self.object = AtlasI2C(SensorId)
+  def read():
+  return self.sensor.query("R").split(":")[1].strip().rstrip('\x00')
+    
+class PH(Sensor):  
+   def __init__(self, *args, **kwargs):
+    Sensor.__init__(self, 99, "pH", 31, *args, **kwargs)
+ def read(cTemp):
+  return self.sensor.query("RT,"+cTemp).split(":")[1].strip().rstrip('\x00')
+ 
+class EC(Sensor):
+   def __init__(self, *args, **kwargs):
+      Sensor.__init__(self, 100, "EC", 32, *args, **kwargs) 
+   def read(cTemp):
+      return self.sensor.query("RT,"+cTemp).split(":")[1].strip().rstrip('\x00')
+  
+class TEMP(Sensor):  
+   def __init__(self, *args, **kwargs):
+      Sensor.__init__(self, 102, "Temprature", 30, Target=20, LowAlarm=10, HighAlarm=25, *args, **kwargs) 
