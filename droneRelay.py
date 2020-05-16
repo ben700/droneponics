@@ -150,7 +150,7 @@ if True:
            blynk.virtual_write(250, "Running")
         elif (button_state == 1):
            GPIO.output(relays[pin],1)
-           blynk.virtual_write(250, "Running")
+           blynk.virtual_write(250, "Waiting")
         
         blynk.set_property(systemLED, 'color', colours[0])
    
