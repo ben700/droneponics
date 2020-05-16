@@ -77,7 +77,7 @@ if True:
     # Initialize Blynk
     blynk = blynklib.Blynk(parser.get('droneRelay', 'BLYNK_AUTH'))
     timer = blynktimer.Timer()
-   
+    blynk.run()
     if(parser.get('droneRelay', 'RelaySize') == "4"):
         blynk.set_property(5, 'color', colours['UNAVILABLE'])
         blynk.set_property(6, 'color', colours['UNAVILABLE'])
