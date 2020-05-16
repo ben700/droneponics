@@ -108,7 +108,7 @@ try:
         blynk.set_property(systemLED, 'color', colours[1])
         blynk.virtual_write(250, "Updating")
         
-        button_state = value[0]
+        button_state = value[0]-1
         blynk.set_property(10+pin, 'color', colours[button_state])
         blynk.set_property(pin, 'onBackColor', colours[button_state])
         
