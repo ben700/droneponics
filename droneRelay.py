@@ -38,8 +38,8 @@ consoleHandler = logging.StreamHandler()
 consoleHandler.setFormatter(logFormatter)
 _log.addHandler(consoleHandler)
 _log.setLevel(logging.DEBUG)
-if True:
-#try:
+
+try:
     GPIO.setmode(GPIO.BCM)
     GPIO.setwarnings(False)
 
@@ -67,26 +67,15 @@ if True:
     GPIO.setup(Relay2,GPIO.OUT, initial=1)
     GPIO.setup(Relay3,GPIO.OUT, initial=1)
     GPIO.setup(Relay4,GPIO.OUT, initial=1)
-    if(parser.get('droneRelay', 'RelaySize') == "8"):
-       GPIO.setup(Relay5,GPIO.OUT, initial=1)
-       GPIO.setup(Relay6,GPIO.OUT, initial=1)
-       GPIO.setup(Relay7,GPIO.OUT, initial=1)
-       GPIO.setup(Relay8,GPIO.OUT, initial=1)
+    GPIO.setup(Relay5,GPIO.OUT, initial=1)
+    GPIO.setup(Relay6,GPIO.OUT, initial=1)
+    GPIO.setup(Relay7,GPIO.OUT, initial=1)
+    GPIO.setup(Relay8,GPIO.OUT, initial=1)
     
     
     # Initialize Blynk
     blynk = blynklib.Blynk(parser.get('droneRelay', 'BLYNK_AUTH'))
     timer = blynktimer.Timer()
-    blynk.run()
-    if(parser.get('droneRelay', 'RelaySize') == "4"):
-        blynk.set_property(5, 'onBackColor', colours['UNAVILABLE'])
-        blynk.set_property(6, 'onBackColor', colours['UNAVILABLE'])
-        blynk.set_property(7, 'onBackColor', colours['UNAVILABLE'])
-        blynk.set_property(8, 'onBackColor', colours['UNAVILABLE'])
-        blynk.set_property(15, 'color', colours['UNAVILABLE'])
-        blynk.set_property(16, 'color', colours['UNAVILABLE'])
-        blynk.set_property(17, 'color', colours['UNAVILABLE'])
-        blynk.set_property(18, 'color', colours['UNAVILABLE'])
         
     @blynk.handle_event('write V255')
     def rebooter(pin, value):
@@ -262,15 +251,15 @@ if True:
            blynk.virtual_write(250, "Running")
            blynk.set_property(systemLED, 'color', colours[0])
         timer.run()
-#except: 
-#   blynk = blynklib.Blynk(parser.get('droneRelay', 'BLYNK_AUTH'))
-#   blynk.run()
-#   blynk.virtual_write(98,"in main loop except"+ '\n')
-#   blynk.virtual_write(250, "Crashed")
+except: 
+   blynk = blynklib.Blynk(parser.get('droneRelay', 'BLYNK_AUTH'))
+   blynk.run()
+   blynk.virtual_write(98,"in main loop except"+ '\n')
+   blynk.virtual_write(250, "Crashed")
 
- #  drone.turnLEDsOffline(blynk)
- #  drone.turnButtonsOffline(blynk)
- #  GPIO.cleanup()
+   drone.turnLEDsOffline(blynk)
+   drone.turnButtonsOffline(blynk)
+   GPIO.cleanup()
 
-  # os.system('sh /home/pi/updateDroneponics.sh')
-  # os.system('sudo reboot')
+   os.system('sh /home/pi/updateDroneponics.sh')
+   os.system('sudo reboot')
