@@ -114,7 +114,7 @@ try:
         blynk.run()
         if bootup :
            blynk.virtual_write(98, "clr")
-           blynk.virtual_write(98, "Rebooted")
+           blynk.virtual_write(98, "Rebooted"+ '\n')
            blynk.virtual_write(250, "Start-up")
            blynk.set_property(251, "label",drone.gethostname())
            blynk.virtual_write(251, drone.get_ip())
@@ -151,14 +151,14 @@ try:
            blynk.virtual_write(99, now.strftime("%d/%m/%Y %H:%M:%S"))
            blynk.virtual_write(systemLED, 255)
            blynk.virtual_write(255, 0)
-           blynk.virtual_write(98, "Running")
+           blynk.virtual_write(98, "Running"+ '\n')
            _log.info('Just Booted')
            blynk.virtual_write(250, "Running")
            blynk.set_property(systemLED, 'color', colours[0])
 except: 
    blynk = blynklib.Blynk(parser.get('droneRelay', 'BLYNK_AUTH'))
    blynk.run()
-   blynk.virtual_write(98,"in main loop except")
+   blynk.virtual_write(98,"in main loop except"+ '\n')
    blynk.virtual_write(250, "Crashed")
 
    drone.turnLEDsOffline(blynk)
