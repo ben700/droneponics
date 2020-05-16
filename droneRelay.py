@@ -144,143 +144,32 @@ try:
         
     @blynk.handle_event('write V2')
     def write_handler(pin, value):
-        now = datetime.now()
-        blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
-        blynk.virtual_write(98, "Change state of button "+ str(pin) + '\n')
+        drone.droneRelayWriteHandler(pin, value)
         
-        button_state = value[0]
-        blynk.set_property(systemLED, 'color', colours[1])
-        blynk.virtual_write(250, "Updating")
-        blynk.set_property(10+pin, 'color', colours[button_state])
-        blynk.set_property(pin, 'onBackColor', colours[button_state])
-        if(button_state == '0'):
-           GPIO.output(relays[pin],0)
-           blynk.virtual_write(250, "Running")
-        elif (button_state == '1'):
-           GPIO.output(relays[pin],1)
-           blynk.virtual_write(250, "Waiting") 
-        blynk.set_property(systemLED, 'color', colours[0])
-   
     @blynk.handle_event('write V3')
     def write_handler(pin, value):
-        now = datetime.now()
-        blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
-        blynk.virtual_write(98, "Change state of button "+ str(pin) + '\n')
-        
-        button_state = value[0]
-        blynk.set_property(systemLED, 'color', colours[1])
-        blynk.virtual_write(250, "Updating")
-        blynk.set_property(10+pin, 'color', colours[button_state])
-        blynk.set_property(pin, 'onBackColor', colours[button_state])
-        if(button_state == '0'):
-           GPIO.output(relays[pin],0)
-           blynk.virtual_write(250, "Running")
-        elif (button_state == '1'):
-           GPIO.output(relays[pin],1)
-           blynk.virtual_write(250, "Running")
-        
-        blynk.set_property(systemLED, 'color', colours[0])
+        drone.droneRelayWriteHandler(pin, value)
         
     @blynk.handle_event('write V4')
     def write_handler(pin, value):
-        now = datetime.now()
-        blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
-        blynk.virtual_write(98, "Change state of button "+ str(pin) + '\n')
-        
-        button_state = value[0]
-        blynk.set_property(systemLED, 'color', colours[1])
-        blynk.virtual_write(250, "Updating")
-        blynk.set_property(10+pin, 'color', colours[button_state])
-        blynk.set_property(pin, 'onBackColor', colours[button_state])
-        if(button_state == '0'):
-           GPIO.output(relays[pin],0)
-           blynk.virtual_write(250, "Running")
-        elif (button_state == '1'):
-           GPIO.output(relays[pin],1)
-           blynk.virtual_write(250, "Running")
-        
-        blynk.set_property(systemLED, 'color', colours[0])
+        drone.droneRelayWriteHandler(pin, value)
         
     @blynk.handle_event('write V5')
     def write_handler(pin, value):
-        now = datetime.now()
-        blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
-        blynk.virtual_write(98, "Change state of button "+ str(pin) + '\n')
-        
-        button_state = value[0]
-        blynk.set_property(systemLED, 'color', colours[1])
-        blynk.virtual_write(250, "Updating")
-        blynk.set_property(10+pin, 'color', colours[button_state])
-        blynk.set_property(pin, 'onBackColor', colours[button_state])
-        if(button_state == '0'):
-           GPIO.output(relays[pin],0)
-           blynk.virtual_write(250, "Running")
-        elif (button_state == '1'):
-           GPIO.output(relays[pin],1)
-           blynk.virtual_write(250, "Running")
-        
-        blynk.set_property(systemLED, 'color', colours[0])
+        drone.droneRelayWriteHandler(pin, value)
         
     @blynk.handle_event('write V6')
     def write_handler(pin, value):
-        now = datetime.now()
-        blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
-        blynk.virtual_write(98, "Change state of button "+ str(pin) + '\n')
-        
-        button_state = value[0]
-        blynk.set_property(systemLED, 'color', colours[1])
-        blynk.virtual_write(250, "Updating")
-        blynk.set_property(10+pin, 'color', colours[button_state])
-        blynk.set_property(pin, 'onBackColor', colours[button_state])
-        if(button_state == '0'):
-           GPIO.output(relays[pin],0)
-           blynk.virtual_write(250, "Running")
-        elif (button_state == '1'):
-           GPIO.output(relays[pin],1)
-           blynk.virtual_write(250, "Running")
-        
-        blynk.set_property(systemLED, 'color', colours[0])
+        drone.droneRelayWriteHandler(pin, value)
         
     @blynk.handle_event('write V7')
     def write_handler(pin, value):
-        now = datetime.now()
-        blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
-        blynk.virtual_write(98, "Change state of button "+ str(pin) + '\n')
-        
-        button_state = value[0]
-        blynk.set_property(systemLED, 'color', colours[1])
-        blynk.virtual_write(250, "Updating")
-        blynk.set_property(10+pin, 'color', colours[button_state])
-        blynk.set_property(pin, 'onBackColor', colours[button_state])
-        if(button_state == '0'):
-           GPIO.output(relays[pin],0)
-           blynk.virtual_write(250, "Running")
-        elif (button_state == '1'):
-           GPIO.output(relays[pin],1)
-           blynk.virtual_write(250, "Running")
-        
-        blynk.set_property(systemLED, 'color', colours[0])
+        drone.droneRelayWriteHandler(pin, value)
         
     @blynk.handle_event('write V8')
     def write_handler(pin, value):
-        now = datetime.now()
-        blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
-        blynk.virtual_write(98, "Change state of button "+ str(pin) + '\n')
+        drone.droneRelayWriteHandler(pin, value)
         
-        button_state = value[0]
-        blynk.set_property(systemLED, 'color', colours[1])
-        blynk.virtual_write(250, "Updating")
-        blynk.set_property(10+pin, 'color', colours[button_state])
-        blynk.set_property(pin, 'onBackColor', colours[button_state])
-        if(button_state == '0'):
-           GPIO.output(relays[pin],0)
-           blynk.virtual_write(250, "Running")
-        elif (button_state == '1'):
-           GPIO.output(relays[pin],1)
-           blynk.virtual_write(250, "Running")
-        
-        blynk.set_property(systemLED, 'color', colours[0])
-
     @timer.register(interval=60, run_once=False)
     def blynk_data():
         global button_state
