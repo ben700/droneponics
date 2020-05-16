@@ -93,12 +93,14 @@ if True:
   
     @blynk.handle_event('write V1')
     def buttonV1Pressed(pin, value):
-        _log.info("-------------------Button code----------------------" +str(value[0]))
+        _log.info("-------------------Button code 1----------------------" +str(value[0]))
+        _log.info(str(value[0]))
         drone.processButtinePressed(blynk, 11, 1, GPIO, Relay1,value[0])
   
     
     @blynk.handle_event('write V2')
     def buttonV2Pressed(pin, value):
+        _log.info("-------------------Button code 2----------------------" +str(value[0]))
         drone.processButtinePressed(blynk, 12, 2, GPIO, Relay2,value[0])
         
     @blynk.handle_event('write V3')
