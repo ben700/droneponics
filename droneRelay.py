@@ -40,7 +40,7 @@ if True:
     GPIO.setmode(GPIO.BCM)
     GPIO.setwarnings(False)
 
-    
+    relays=[0,21,20,16,12,25,24,23,18]
     Relay1 = 21 #heater
     Relay2 = 20 #Feed
     Relay3 = 16 #Air
@@ -101,7 +101,8 @@ if True:
         blynk.set_property(pin, 'onBackColor', colours[value[0]])
         relay = "Relay"+str(pin)
         print(relay)
-        GPIO.output("Relay"+str(pin),0)
+        print(value[0])
+        GPIO.output(relays[pin],0)
         blynk.virtual_write(98,"Flipped Switch 1" + '\n')
         blynk.virtual_write(250, "Running")
         blynk.set_property(systemLED, 'color', colours[0])
