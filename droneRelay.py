@@ -202,9 +202,9 @@ if True:
 #   _log.info("in main loop except")
 #   blynk.virtual_write(250, "Crashed")
 
-
 #   drone.turnLEDsOffline(blynk)
 #   drone.turnButtonsOffline(blynk)
-           
+#   GPIO.cleanup()
+
   # os.system('sh /home/pi/updateDroneponics.sh')
   # os.system('sudo reboot')
