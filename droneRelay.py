@@ -172,7 +172,7 @@ try:
         stopTime = value[1]
         print(startTime)
         print(stopTime)
-        today = datetime.date.today()
+        today = datetime.today()
         seconds_since_midnight = time.time() - time.mktime(today.timetuple())
         print(seconds_since_midnight)
         blynk.virtual_write(99, now.strftime("%d/%m/%Y %H:%M:%S"))
