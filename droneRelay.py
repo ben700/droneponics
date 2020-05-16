@@ -1,7 +1,7 @@
 
 
 # The ID and range of a sample spreadsheet.
-colours = {1: '#FF0000', 0: '#00FF00', '1': '#FF0000', '0': '#00FF00', '2': '#80FF00', '3': '#00FF80','4': '#00FF80', 'OFFLINE': '#0000FF', 'ONLINE': '#00FF00'}
+colours = {1: '#FF0000', 0: '#00FF00', '1': '#FF0000', '0': '#00FF00', 2: '#80FF00', 3: '#80FF80', 'OFFLINE': '#0000FF', 'ONLINE': '#00FF00'}
 systemLED=101
 
 import socket
@@ -112,11 +112,26 @@ try:
         blynk.set_property(10+pin, 'color', colours[button_state])
         blynk.set_property(pin, 'onBackColor', colours[button_state])
         
-        if (button_state=='0' or button_state=='1' ):
+        if (button_state=='0'):
             halfOn=False
             justOn=False
+           GPIO.output(relays[1],0)
+        elif (button_state=='1' ):
+            halfOn=False
+            justOn=False
+            GPIO.output(relays[1],1)
+        elif button_state=='2':
+            halfOn=True
+            justOn=False
+            GPIO.output(relays[1],2)
+            blynk.virtual_write(250, "Timed")
+        else
+            halfOn=False
+            justOn=True
+            GPIO.output(relays[1],3)
+            blynk.virtual_write(250, "Timed and dry")
+
         if(button_state == '0'):
-           GPIO.output(relays[pin],0)
         else:
            GPIO.output(relays[pin],1)
         blynk.virtual_write(250, "Running")
