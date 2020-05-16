@@ -5,8 +5,8 @@ import blynklib
 import blynktimer
 import RPi.GPIO as GPIO   
 
-def processButtinePressed(blynk, LED, Button, iGPIO, Relay,VALUE):
-        print("Not in button function")
+def processButtonPressed(blynk, LED, Button, iGPIO, Relay,VALUE):
+        print("Now in button function")
         blynk.set_property(systemLED, 'color', colours[1])
         blynk.virtual_write(250, "Updating")
         blynk.set_property(LED, 'color', colours[VALUE])
