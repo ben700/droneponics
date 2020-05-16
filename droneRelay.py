@@ -29,8 +29,6 @@ class Counter:
     cycle = 0
         
 bootup = True
-halfOn=False
-justOn=False
 button_state=0
 
 # tune console logging
@@ -40,8 +38,8 @@ consoleHandler = logging.StreamHandler()
 consoleHandler.setFormatter(logFormatter)
 _log.addHandler(consoleHandler)
 _log.setLevel(logging.DEBUG)
-
-try:
+if True
+#try:
     GPIO.setmode(GPIO.BCM)
     GPIO.setwarnings(False)
 
@@ -102,6 +100,7 @@ try:
     @blynk.handle_event('write V1')
     def write_handler(pin, value):
         print(value)
+        global button_state
         now = datetime.now()
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
         blynk.virtual_write(98, "Change state of button 1 to "+ value[0]+ '\n')
@@ -112,30 +111,19 @@ try:
         blynk.set_property(10+pin, 'color', colours[button_state])
         blynk.set_property(pin, 'onBackColor', colours[button_state])
         
-        if (button_state=='0'):
-            halfOn=False
-            justOn=False
-            GPIO.output(relays[1],0)
-        elif (button_state=='1' ):
-            halfOn=False
-            justOn=False
+        if (button_state=='1' ):
             GPIO.output(relays[1],1)
-        elif button_state=='2':
-            halfOn=True
-            justOn=False
+            blynk.virtual_write(250, "Running")
+        elif (button_state=='2'):
             GPIO.output(relays[1],0)
             blynk.virtual_write(250, "Timed")
-        else:
-            halfOn=False
-            justOn=True
+        elif (button_state=='3'):
             GPIO.output(relays[1],0)
             blynk.virtual_write(250, "Dry")
-
-        if(button_state == '0'):
-           GPIO.output(relays[1],0)
         else:
-           GPIO.output(relays[1],1)
-        blynk.virtual_write(250, "Running")
+            GPIO.output(relays[1],0)
+            blynk.virtual_write(250, "Feeding")
+        
         blynk.set_property(systemLED, 'color', colours[0])
         
     @blynk.handle_event('write V*')
@@ -157,8 +145,9 @@ try:
         blynk.set_property(systemLED, 'color', colours[0])
    
 
-    @timer.register(interval=60, run_once=False)
+    @timer.register(interval=30, run_once=False)
     def blynk_data():
+        global button_state
         _log.info("Update Timer Run")
         Counter.cycle += 1
         now = datetime.now()
@@ -221,15 +210,15 @@ try:
            blynk.virtual_write(250, "Running")
            blynk.set_property(systemLED, 'color', colours[0])
         timer.run()
-except: 
-   blynk = blynklib.Blynk(parser.get('droneRelay', 'BLYNK_AUTH'))
-   blynk.run()
-   blynk.virtual_write(98,"in main loop except"+ '\n')
-   blynk.virtual_write(250, "Crashed")
+#except: 
+#   blynk = blynklib.Blynk(parser.get('droneRelay', 'BLYNK_AUTH'))
+#   blynk.run()
+#   blynk.virtual_write(98,"in main loop except"+ '\n')
+#   blynk.virtual_write(250, "Crashed")
 
-   drone.turnLEDsOffline(blynk)
-   drone.turnButtonsOffline(blynk)
-   GPIO.cleanup()
+#   drone.turnLEDsOffline(blynk)
+#   drone.turnButtonsOffline(blynk)
+#   GPIO.cleanup()
 
-   os.system('sh /home/pi/updateDroneponics.sh')
-   os.system('sudo reboot')
+ #  os.system('sh /home/pi/updateDroneponics.sh')
+ #  os.system('sudo reboot')
