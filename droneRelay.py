@@ -175,10 +175,10 @@ try:
         if( startTime < localtime):
             print("startTime < localtime")
             
-        if (localtime < stopTime):
+        if (stopTime > localtime):
             print("localtime < stopTime")
             iValue = 1
-        else:
+        elif (stopTime <= localtime):
             print(localtime)
             print(stopTime)
             iValue = 0
