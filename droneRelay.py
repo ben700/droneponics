@@ -168,11 +168,11 @@ try:
         
     @blynk.handle_event('write V8')
     def write_handler(pin, value):
-        startTime  =value[0]
-        stopTime = value[1]
+        startTime  =int(value[0])
+        stopTime = int(value[1])
         
         today = date.today()
-        seconds_since_midnight = time.time() - time.mktime(today.timetuple())
+        seconds_since_midnight = int(time.time() - time.mktime(today.timetuple()))
         
         if( startTime < seconds_since_midnight):
             print("startTime < localtime")
