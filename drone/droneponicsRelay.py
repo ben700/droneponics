@@ -1,4 +1,4 @@
-colours = {1: '#FF0080', 0: '#80FF00', '1': '#FF0080', '0': '#80FF00', 'OFFLINE': '#8000FF', 'ONLINE': '#00FF80'}
+colours = {1: '#FF0000', 0: '#00FF00', '1': '#FF0000', '0': '#00FF00', 'OFFLINE': '#0000FF', 'ONLINE': '#00FF80'}
 systemLED=101
 
 import blynklib
