@@ -8,12 +8,12 @@ from datetime import datetime
 import time
 
         
-def droneRelayWriteHandler(pin, value, blynk, relays):
+def droneRelayWriteHandler(pin, button_state, blynk, relays):
         now = datetime.now()
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
         blynk.virtual_write(98, "Change state of button "+ str(pin) + '\n')
         
-        button_state = value[0]
+       
         blynk.set_property(systemLED, 'color', colours[1])
         blynk.virtual_write(250, "Updating")
         blynk.set_property(10+pin, 'color', colours[button_state])
