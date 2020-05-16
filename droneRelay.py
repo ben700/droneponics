@@ -169,20 +169,18 @@ try:
     def write_handler(pin, value):
         startTime  =value[0]
         stopTime = value[1]
-        localtime = time.localtime()
         
-        now = datetime.now()
-        midnight = datetime.combine(now.date(), datetime.time())
-        seconds = (now - midnight).seconds
+        today = datetime.date.today()
+        seconds_since_midnight = time.time() - time.mktime(today.timetuple())
         
-        if( startTime < seconds):
+        if( startTime < seconds_since_midnight):
             print("startTime < localtime")
             
-        if (stopTime > seconds):
+        if (stopTime > seconds_since_midnight):
             print("localtime < stopTime")
             iValue = 1
-        elif (stopTime <= seconds):
-            print(seconds)
+        elif (stopTime <= seconds_since_midnight):
+            print(seconds_since_midnight)
             print(stopTime)
             iValue = 0
         
