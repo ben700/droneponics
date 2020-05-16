@@ -176,9 +176,10 @@ try:
         
         if( startTime < seconds_since_midnight and stopTime > seconds_since_midnight):
             iValue = 1
+            blynk.virtual_write(98,"Relay is on")    
         else:
             iValue = 0
-        
+            blynk.virtual_write(98,"Relay is off")
         now = datetime.now()
         blynk.virtual_write(99, now.strftime("%d/%m/%Y %H:%M:%S"))
         drone.droneRelayWriteHandler(pin, iValue, blynk, relays)
