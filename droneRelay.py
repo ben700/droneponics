@@ -129,7 +129,7 @@ try:
             halfOn=False
             justOn=True
             GPIO.output(relays[1],3)
-            blynk.virtual_write(250, "Timed and dry")
+            blynk.virtual_write(250, "Dry")
 
         if(button_state == '0'):
            GPIO.output(relays[1],0)
