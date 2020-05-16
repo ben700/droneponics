@@ -34,13 +34,13 @@ class Sensor:
     
 class PH(Sensor):  
    def __init__(self, *args, **kwargs):
-    Sensor.__init__(self, 99, "pH", 31, *args, **kwargs)
+    Sensor.__init__(self, 99, "pH", 32, Target=5.5, LowAlarm=5.3, HighAlarm=6.5, *args, **kwargs)
  def read(cTemp):
   return self.sensor.query("RT,"+cTemp).split(":")[1].strip().rstrip('\x00')
  
 class EC(Sensor):
    def __init__(self, *args, **kwargs):
-      Sensor.__init__(self, 100, "EC", 32, *args, **kwargs) 
+      Sensor.__init__(self, 100, "EC",  31 , Target=600, LowAlarm=500, HighAlarm=1500, *args, **kwargs) 
    def read(cTemp):
       return self.sensor.query("RT,"+cTemp).split(":")[1].strip().rstrip('\x00')
   
