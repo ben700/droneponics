@@ -98,10 +98,11 @@ if True:
         print("Now in button function")
         blynk.set_property(systemLED, 'color', colours[1])
         blynk.virtual_write(250, "Updating")
-        print("-------------------------------------------------")
-        print(colours[button_state])
+        print("Updating LED to -------------------------------------------------"+str(colours[button_state]))
+        print(10+pin)
         blynk.set_property(10+pin, 'color', colours[button_state])
         blynk.set_property(pin, 'onBackColor', colours[button_state])
+        print("updated colour for button "+str(pin)+" and also led "+str(10+pin))
         print(button_state)
         if(button_state == '0'):
            GPIO.output(relays[pin],0)
