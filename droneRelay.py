@@ -115,7 +115,7 @@ try:
         if (button_state=='0'):
             halfOn=False
             justOn=False
-           GPIO.output(relays[1],0)
+            GPIO.output(relays[1],0)
         elif (button_state=='1' ):
             halfOn=False
             justOn=False
