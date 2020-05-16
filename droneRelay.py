@@ -173,7 +173,7 @@ try:
         print(startTime)
         print(stopTime)
         
-        print(datetime.localtime())
+        print(time.localtime())
         
        
         blynk.virtual_write(99, now.strftime("%d/%m/%Y %H:%M:%S"))
