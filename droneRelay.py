@@ -152,7 +152,7 @@ try:
         if(button_state =='3'):
              if Counter.cycle % 10 == 0:
               Counter.cycle = 0
-        if (Counter.cycle = 0):
+        if (Counter.cycle == 0):
            GPIO.output(relays[1],0)
         else:
            GPIO.output(relays[1],1)
