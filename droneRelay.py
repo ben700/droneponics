@@ -152,11 +152,11 @@ if True:
         Counter.cycle += 1
         now = datetime.now()
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
-        _log.info("=======================================button_state =" + button_state  + '\n')
-        if(button_state == '2'):
+        _log.info("=======================================button_state =" + str(button_state)  + '\n')
+        if(button_state == 2):
             if Counter.cycle % 2 == 0:
               Counter.cycle = 0
-        if(button_state =='3'):
+        if(button_state ==3):
              if Counter.cycle % 10 == 0:
               Counter.cycle = 0
         if (Counter.cycle == 0):
