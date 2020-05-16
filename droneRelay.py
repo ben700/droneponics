@@ -108,7 +108,6 @@ try:
   
     @blynk.handle_event('write V1')
     def write_handler(pin, value):
-        print(value)
         global button_state
         now = datetime.now()
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
@@ -282,7 +281,7 @@ try:
         
         blynk.set_property(systemLED, 'color', colours[0])
 
-    @timer.register(interval=30, run_once=False)
+    @timer.register(interval=60, run_once=False)
     def blynk_data():
         global button_state
         _log.info("Update Timer Run")
