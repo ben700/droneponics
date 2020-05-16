@@ -110,6 +110,7 @@ if True:
         button_state = value[0]-1
         blynk.set_property(10+pin, 'color', colours[button_state])
         blynk.set_property(pin, 'onBackColor', colours[button_state])
+        blynk.set_property(pin, 'color', colours[button_state])
         
         if (button_state=='1' ):
             GPIO.output(relays[1],1)
