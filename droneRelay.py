@@ -7,7 +7,7 @@ systemLED=101
 import socket
 import drone
 from drone import Alarm, OpenWeather
-import datetime
+from datetime import datetime
 import time
 import shlex, requests
 import blynklib
@@ -171,8 +171,8 @@ try:
         stopTime = value[1]
         localtime = time.localtime()
         
-        now = datetime.datetime.now()
-        midnight = datetime.datetime.combine(now.date(), datetime.time())
+        now = datetime.now()
+        midnight = datetime.combine(now.date(), datetime.time())
         seconds = (now - midnight).seconds
         
         if( startTime < seconds):
