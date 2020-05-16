@@ -115,15 +115,19 @@ if True:
         if (button_state=='1' ):
             GPIO.output(relays[1],1)
             blynk.virtual_write(250, "Running")
+            blynk.virtual_write(98, "Running")
         elif (button_state=='2'):
             GPIO.output(relays[1],0)
             blynk.virtual_write(250, "Timed")
+            blynk.virtual_write(98, "Timed")
         elif (button_state=='3'):
             GPIO.output(relays[1],0)
             blynk.virtual_write(250, "Dry")
+            blynk.virtual_write(98, "Dry")
         else:
             GPIO.output(relays[1],0)
             blynk.virtual_write(250, "Feeding")
+            blynk.virtual_write(98, "Feeding")
         
         blynk.set_property(systemLED, 'color', colours[0])
         
