@@ -11,7 +11,7 @@ class Relays:
       GPIO.setwarnings(False)
       relays=[]
       
-   def add(self, Relay *args, **kwargs)
+   def add(self, Relay, *args, **kwargs)
       return self.relays.append(Relay)
     
  
