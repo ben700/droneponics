@@ -106,7 +106,7 @@ if True:
            now = datetime.now()
            blynk.virtual_write(99, now.strftime("%d/%m/%Y %H:%M:%S"))
            blynk.virtual_write(drone.systemLED, 255)
-           blynk.set_property(drone.systemLED, 'color', colours[0])
+           blynk.set_property(drone.systemLED, 'color', drone.colours[0])
            blynk.virtual_write(255, 0)
            blynk.virtual_write(98, "Running"+ '\n')
            _log.info('Just Booted')
