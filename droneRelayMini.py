@@ -45,7 +45,7 @@ if True:
     _log.debug("£££££££££££££££££ Done relays going to create blynk")
     
     # Initialize Blynk
-    blynk = blynklib.Blynk(parser.get('droneRelay', 'BLYNK_AUTH'))
+    blynk = blynklib.Blynk(parser.get('blynk', 'BLYNK_AUTH'))
     timer = blynktimer.Timer()
         
     @blynk.handle_event('write V255')
