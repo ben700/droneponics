@@ -72,21 +72,21 @@ class Relay:
       
       
     def timerHandler(blynk):
-         if(self.state == 0):
-            return
-         if(self.state == 1):
-            return         
-         self.cycle += 1
-         if(self.state == 2):
-            if self.cycle % 2 == 0:
-              self.cycle = 0
-        if(self.state ==3):
-             if self.cycle % 4 == 0:
-              self.cycle = 0
-        if(self.state ==4):
-             if self.cycle % 10 == 0:
-              self.cycle = 0
-        if (self.cycle == 0): 
-           self.turnOn
-        else:
-           self.turnOn
+      if(self.state == 0):
+         return
+      if(self.state == 1):
+         return         
+      self.cycle += 1
+      if(self.state == 2):
+         if self.cycle % 2 == 0:
+            self.cycle = 0
+      if(self.state ==3):
+         if self.cycle % 4 == 0:
+            self.cycle = 0
+      if(self.state ==4):
+         if self.cycle % 10 == 0:
+            self.cycle = 0
+      if (self.cycle == 0): 
+         self.turnOn
+      else:
+         self.turnOn
