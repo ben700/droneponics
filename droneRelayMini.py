@@ -87,9 +87,9 @@ if True:
         _log.debug("£££££££££££££££££ Update Timer Run")
         now = datetime.now()
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
-        for relay in relays:
-            _log.debug("£££££££££££££££££ timerHandler for relay " + relay.name)
-            relay.timerHandler(blynk)
+        for switchRelay in relays:
+            _log.debug("£££££££££££££££££ timerHandler for relay " + switchRelay.name)
+            switchRelay.timerHandler(blynk)
         
     while True:
         blynk.run()
