@@ -79,7 +79,7 @@ if True:
     @blynk.handle_event('write V*')
     def write_handler(pin, value):
         _log.debug("£££££££££££££££££ write_handler for " + str(pin) + " the value is " + str(value[0]))
-        relays[pin-1].writeHandler(value[0])
+        relays.relays[pin-1].writeHandler(value[0])
         
     @timer.register(interval=60, run_once=False)
     def blynk_data():
@@ -99,7 +99,7 @@ if True:
            blynk.virtual_write(250, "Start-up")
            blynk.set_property(251, "label",drone.gethostname())
            blynk.virtual_write(251, drone.get_ip())
-           for relay in relays:
+           for relay in relays.relays:
               relay.setDisplay(blynk)  
            bootup = False
            _log.debug("Just about to complete Booting")
