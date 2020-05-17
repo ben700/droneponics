@@ -54,7 +54,7 @@ class SwitchRelay:
        self.state = STATE
        return
  
-    def blynkWriteHandler(blynk, STATE):
+    def blynkWriteHandler(self, blynk, STATE):
         self.setState(STATE)
         now = datetime.now()
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
@@ -72,7 +72,7 @@ class SwitchRelay:
         blynk.set_property(systemLED, 'color', colours[0]) 
       
       
-    def timerHandler(blynk):
+    def blynkTimerHandler(self, blynk):
       if(self.state == 0):
          return
       if(self.state == 1):
