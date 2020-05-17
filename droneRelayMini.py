@@ -81,7 +81,7 @@ if True:
         _log.debug("£££££££££££££££££ write_handler for " + str(pin) + " the value is " + str(value[0]))
         relays.relays[pin-1].writeHandler(value[0])
         
-    @timer.register(interval=60, run_once=False)
+    @timer.register(interval=10, run_once=False)
     def blynk_data():
         global button_state
         _log.debug("£££££££££££££££££ Update Timer Run")
