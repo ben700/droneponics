@@ -54,7 +54,7 @@ class SwitchRelay:
        self.state = STATE
        return
  
-    def writeHandler(blynk, STATE):
+    def blynkWriteHandler(blynk, STATE):
         self.setState(STATE)
         now = datetime.now()
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
