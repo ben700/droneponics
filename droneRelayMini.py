@@ -79,7 +79,7 @@ if True:
     @blynk.handle_event('write V*')
     def write_handler(pin, value):
         _log.debug("£££££££££££££££££ write_handler for " + str(pin) + " the value is " + str(value[0]))
-        relays.relays[pin-1].writeHandler(value[0])
+        relays.relays[pin-1].blynkWriteHandler(blynk, value[0])
         
     @timer.register(interval=10, run_once=False)
     def blynk_data():
@@ -89,7 +89,7 @@ if True:
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
         for switchRelay in relays.relays:
             _log.debug("£££££££££££££££££ timerHandler for relay " + switchRelay.name)
-            switchRelay.timerHandler(blynk)
+            switchRelay.blynkTimerHandler(blynk)
         
     while True:
         blynk.run()
