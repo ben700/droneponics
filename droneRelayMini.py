@@ -34,6 +34,8 @@ if True:
 
     _log.debug("£££££££££££££££££ Caling Relays construtor")
     relays=drone.Relays()
+    relayName = parser.get('droneRelayMini', 'Relay1')
+    relay=drone.Relay(15,relayName , 1)
     _log.debug("£££££££££££££££££ going to add relay")
     relays.add( drone.Relay(15, parser.get('droneRelayMini', 'Relay1'), 1))
     _log.debug("£££££££££££££££££ going to add rest of relay")
