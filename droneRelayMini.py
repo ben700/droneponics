@@ -35,13 +35,13 @@ if True:
     _log.debug("£££££££££££££££££ Caling Relays construtor")
     relays=drone.Relays()
     relayName = parser.get('droneRelayMini', 'Relay1')
-    relay=drone.Relay(15,relayName , 1)
+    relay=drone.SwitchRelay(15,relayName , 1)
     _log.debug("£££££££££££££££££ going to add relay")
-    relays.add( drone.Relay(15, parser.get('droneRelayMini', 'Relay1'), 1))
+    relays.add( drone.SwitchRelay(15, parser.get('droneRelayMini', 'Relay1'), 1))
     _log.debug("£££££££££££££££££ going to add rest of relay")
-    relays.add( drone.Relay(18, parser.get('droneRelayMini', 'Relay2'), 2))
-    relays.add( drone.Relay(23, parser.get('droneRelayMini', 'Relay3'), 3))
-    relays.add( drone.Relay(24, parser.get('droneRelayMini', 'Relay4'), 4))
+    relays.add( drone.SwitchRelay(18, parser.get('droneRelayMini', 'Relay2'), 2))
+    relays.add( drone.SwitchRelay(23, parser.get('droneRelayMini', 'Relay3'), 3))
+    relays.add( drone.SwitchRelay(24, parser.get('droneRelayMini', 'Relay4'), 4))
     _log.debug("£££££££££££££££££ Done relays going to create blynk")
     
     # Initialize Blynk
