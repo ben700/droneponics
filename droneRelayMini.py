@@ -1,9 +1,3 @@
-
-
-# The ID and range of a sample spreadsheet.
-colours = {1: '#FF0000', 0: '#00FF00', '0': '#00FF00', '1': '#FF0000', 2: '#00FF00', 3: '#80FF00',4: '#00FF80', 5: '#80FF80','OFFLINE': '#0000FF', 'ONLINE': '#00FF00', 'UNAVILABLE': '#002700'}
-systemLED=101
-
 import socket
 import drone
 from drone import Alarm, OpenWeather
@@ -43,22 +37,18 @@ try:
     GPIO.setmode(GPIO.BCM)
     GPIO.setwarnings(False)
 
-    #relays=[0,21,20,16,12]
-    #Relay1 = 21 #heater
-    #Relay2 = 20 #Feed
-    #Relay3 = 16 #Air
-    #Relay4 = 12 #heater
 
-    relays=[0,18,23,24,25]
-    Relay1 = 18 #heater
-    Relay2 = 23 #Feed
-    Relay3 = 24 #Air
-    Relay4 = 25 #heater
-
-    GPIO.setup(Relay1,GPIO.OUT, initial=1)
-    GPIO.setup(Relay2,GPIO.OUT, initial=1)
-    GPIO.setup(Relay3,GPIO.OUT, initial=1)
-    GPIO.setup(Relay4,GPIO.OUT, initial=1)
+    relays=[]
+    relays.append( drone.Relay(15, "Feed"))
+    relays.append( drone.Relay(18, "Air"))
+    relays.append( drone.Relay(23, "Waste"))
+    relays.append( drone.Relay(24, "Chiller"))
+    
+    
+  #  GPIO.setup(Relay1,GPIO.OUT, initial=1)
+  #  GPIO.setup(Relay2,GPIO.OUT, initial=1)
+  #  GPIO.setup(Relay3,GPIO.OUT, initial=1)
+  #  GPIO.setup(Relay4,GPIO.OUT, initial=1)
     
     
     # Initialize Blynk
@@ -157,8 +147,7 @@ try:
         if(button_state ==4):
              if Counter.cycle % 10 == 0:
               Counter.cycle = 0
-        if (Counter.cycle == 0):
-            
+        if (Counter.cycle == 0): 
            GPIO.output(relays[1],0)
         else:
            GPIO.output(relays[1],1)
