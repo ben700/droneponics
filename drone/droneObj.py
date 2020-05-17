@@ -6,7 +6,7 @@ colours = {1: '#FF0000', 0: '#00FF00', '0': '#00FF00', '1': '#FF0000', 2: '#00FF
 systemLED=101
 
 class Relays:
-   def __init__(self, PIN, NAME, VPIN, *args, **kwargs):
+   def __init__(self):
       GPIO.setmode(GPIO.BCM)
       GPIO.setwarnings(False)
       relays=[]
