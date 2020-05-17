@@ -39,10 +39,10 @@ try:
 
 
     relays=[]
-    relays.append( drone.Relay(15, "Feed"))
-    relays.append( drone.Relay(18, "Air"))
-    relays.append( drone.Relay(23, "Waste"))
-    relays.append( drone.Relay(24, "Chiller"))
+    relays.append( drone.Relay(15, parser.get('droneRelay', 'Relay1'), 1))
+    relays.append( drone.Relay(18, parser.get('droneRelay', 'Relay2'), 2))
+    relays.append( drone.Relay(23, parser.get('droneRelay', 'Relay3'), 3))
+    relays.append( drone.Relay(24, parser.get('droneRelay', 'Relay4'), 4))
     
     
   #  GPIO.setup(Relay1,GPIO.OUT, initial=1)
@@ -83,75 +83,19 @@ try:
         print("Connected")
         blynk.virtual_write(250, "Disconnected")
   
-    @blynk.handle_event('write V1')
+    @blynk.handle_event('write V*')
     def write_handler(pin, value):
-        global button_state
-        now = datetime.now()
-        blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
-        blynk.set_property(systemLED, 'color', colours[1])
-        blynk.virtual_write(250, "Updating")
-        
-        button_state = int(value[0])-1
-        blynk.set_property(10+pin, 'color', colours[button_state])
-        blynk.set_property(pin, 'onBackColor', colours[button_state])
-        blynk.set_property(pin, 'color', colours[button_state])
-        
-        if (button_state==0 ):
-            GPIO.output(relays[1],0)
-            blynk.virtual_write(250, "Feeding")
-            blynk.virtual_write(98, "Feeding"+ '\n')
-        if (button_state==1 ):
-            GPIO.output(relays[1],1)
-            blynk.virtual_write(250, "Running")
-            blynk.virtual_write(98, "Running"+ '\n')
-        elif (button_state==2):
-            GPIO.output(relays[1],0)
-            blynk.virtual_write(250, "50-50")
-            blynk.virtual_write(98, "50-50"+ '\n')
-        elif (button_state==3):
-            GPIO.output(relays[1],0)
-            blynk.virtual_write(250, "Just-on")
-            blynk.virtual_write(98, "Just-on"+ '\n')
-        elif (button_state==4):
-            GPIO.output(relays[1],0)
-            blynk.virtual_write(250, "Dry")
-            blynk.virtual_write(98, "Dry"+ '\n')
-            
-        blynk.set_property(systemLED, 'color', colours[0])
-        
-    @blynk.handle_event('write V2')
-    def write_handler(pin, value):
-        drone.droneRelayWriteHandler(pin, value[0], blynk, relays)
-        
-    @blynk.handle_event('write V3')
-    def write_handler(pin, value):
-        drone.droneRelayWriteHandler(pin, value[0], blynk, relays)
-        
-    @blynk.handle_event('write V4')
-    def write_handler(pin, value):
-        drone.droneRelayWriteHandler(pin, value[0], blynk, relays)
+        relays[pin-1].writeHandler(value[0])
         
     @timer.register(interval=60, run_once=False)
     def blynk_data():
         global button_state
         _log.info("Update Timer Run")
-        Counter.cycle += 1
         now = datetime.now()
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
-        if(button_state == 2):
-            if Counter.cycle % 2 == 0:
-              Counter.cycle = 0
-        if(button_state ==3):
-             if Counter.cycle % 4 == 0:
-              Counter.cycle = 0
-        if(button_state ==4):
-             if Counter.cycle % 10 == 0:
-              Counter.cycle = 0
-        if (Counter.cycle == 0): 
-           GPIO.output(relays[1],0)
-        else:
-           GPIO.output(relays[1],1)
-
+        for relay in relays:
+            relay.timerHandler(blynk)
+        
     while True:
         blynk.run()
         if bootup :
@@ -160,20 +104,8 @@ try:
            blynk.virtual_write(250, "Start-up")
            blynk.set_property(251, "label",drone.gethostname())
            blynk.virtual_write(251, drone.get_ip())
-        
-           blynk.set_property(1, "label", parser.get('droneRelay', 'Relay1'))
-           blynk.set_property(11, "label", parser.get('droneRelay', 'Relay1'))
-           blynk.virtual_write(11, 255)
-           blynk.set_property(2, "label", parser.get('droneRelay', 'Relay2'))
-           blynk.set_property(12, "label", parser.get('droneRelay', 'Relay2'))
-           blynk.virtual_write(12, 255)
-           blynk.set_property(3, "label", parser.get('droneRelay', 'Relay3'))
-           blynk.set_property(13, "label", parser.get('droneRelay', 'Relay3'))
-           blynk.virtual_write(13, 255)
-           blynk.set_property(4, "label", parser.get('droneRelay', 'Relay4'))
-           blynk.set_property(14, "label", parser.get('droneRelay', 'Relay4'))
-           blynk.virtual_write(14, 255)
-          
+           for relay in relays:
+              relay.setDisplay(blynk)  
            bootup = False
            _log.debug("Just about to complete Booting")
            now = datetime.now()
