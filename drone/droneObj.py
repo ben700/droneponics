@@ -9,10 +9,11 @@ class Relays:
    def __init__(self):
       GPIO.setmode(GPIO.BCM)
       GPIO.setwarnings(False)
-      return []
+      self.relays =[]
+
       
    def add(self, Relay):
-      return self.append(Relay)
+      return self.relays.append(Relay)
     
  
 class SwitchRelay:
