@@ -15,7 +15,7 @@ class Relays:
       return self.relays.append(Relay)
     
  
-class switchRelay:
+class SwitchRelay:
     def __init__(self, PIN, NAME, VPIN):
        print("++++++++++++++++++++++Creating Relay " + NAME + " on pin " + STR(PIN) + '/n')
        self.pin = PIN
