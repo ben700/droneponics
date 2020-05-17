@@ -11,12 +11,12 @@ class Relays:
       GPIO.setwarnings(False)
       relays=[]
       
-   def add(self, Relay, *args, **kwargs):
+   def add(self, Relay):
       return self.relays.append(Relay)
     
  
 class Relay:
-    def __init__(self, PIN, NAME, VPIN, *args, **kwargs):
+    def __init__(self, PIN, NAME, VPIN):
        print("++++++++++++++++++++++Creating Relay " + NAME + " on pin " + STR(PIN) + '/n')
        self.pin = PIN
        self.name=NAME
