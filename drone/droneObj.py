@@ -11,7 +11,9 @@ class Relay:
        print("++++++++++++++++++++++Creating Relay " + NAME + " on pin " + STR(PIN) + '/n')
        self.pin = PIN
        self.name=NAME
+       self.state = 0;
        GPIO.setup(PIN,GPIO.OUT, initial=1)
+       return
     
     def turnOn(self):
        print("++++++++++++++++++++++turnOn Relay " + self.NAME + " on pin " + STR(self.PIN) + '/n')
@@ -19,4 +21,9 @@ class Relay:
     
     def turnOff(self):
        print("++++++++++++++++++++++turnOff Relay " + self.NAME + " on pin " + STR(self.PIN) + '/n')
-       return GPIO.output(self.pin,GPIO.HIGH)
+       GPIO.output(self.pin,GPIO.HIGH)
+       return 
+
+    def setState(self, STATE):
+       self.state = STATE
+       return
