@@ -113,15 +113,15 @@ try:
         blynk.set_property(systemLED, 'color', colours[1])
         blynk.virtual_write(250, "Updating")
         
-        button_state = int(value[0])-1
+        button_state = int(value[0])
         blynk.set_property(10+pin, 'color', colours[button_state])
         blynk.set_property(pin, 'onBackColor', colours[button_state])
         blynk.set_property(pin, 'color', colours[button_state])
         
         if (button_state==0 ):
             GPIO.output(relays[1],0)
-            blynk.virtual_write(250, "Feeding")
-            blynk.virtual_write(98, "Feeding"+ '\n')
+            blynk.virtual_write(250, "Stopped")
+            blynk.virtual_write(98, "Stopped"+ '\n')
         if (button_state==1 ):
             GPIO.output(relays[1],1)
             blynk.virtual_write(250, "Running")
