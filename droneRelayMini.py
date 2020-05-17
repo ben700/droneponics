@@ -18,12 +18,8 @@ import json
 
 parser = ConfigParser()
 parser.read('/home/pi/droneponics/configDroneRelayMini.ini')
-
-class Counter:
-    cycle = 0
         
 bootup = True
-button_state=0
 
 # tune console logging
 _log = logging.getLogger('BlynkLog')
@@ -33,23 +29,18 @@ consoleHandler.setFormatter(logFormatter)
 _log.addHandler(consoleHandler)
 _log.setLevel(logging.DEBUG)
 
-try:
-    GPIO.setmode(GPIO.BCM)
-    GPIO.setwarnings(False)
+if True:
+#try:
 
-
-    relays=[]
-    relays.append( drone.Relay(15, parser.get('droneRelay', 'Relay1'), 1))
-    relays.append( drone.Relay(18, parser.get('droneRelay', 'Relay2'), 2))
-    relays.append( drone.Relay(23, parser.get('droneRelay', 'Relay3'), 3))
-    relays.append( drone.Relay(24, parser.get('droneRelay', 'Relay4'), 4))
-    
-    
-  #  GPIO.setup(Relay1,GPIO.OUT, initial=1)
-  #  GPIO.setup(Relay2,GPIO.OUT, initial=1)
-  #  GPIO.setup(Relay3,GPIO.OUT, initial=1)
-  #  GPIO.setup(Relay4,GPIO.OUT, initial=1)
-    
+    _log.debug("£££££££££££££££££ Caling Relays construtor")
+    relays=drone.Relays()
+    _log.debug("£££££££££££££££££ going to add relay")
+    relays.add( drone.Relay(15, parser.get('droneRelay', 'Relay1'), 1))
+    _log.debug("£££££££££££££££££ going to add rest of relay")
+    relays.add( drone.Relay(18, parser.get('droneRelay', 'Relay2'), 2))
+    relays.add( drone.Relay(23, parser.get('droneRelay', 'Relay3'), 3))
+    relays.add( drone.Relay(24, parser.get('droneRelay', 'Relay4'), 4))
+    _log.debug("£££££££££££££££££ Done relays going to create blynk")
     
     # Initialize Blynk
     blynk = blynklib.Blynk(parser.get('droneRelay', 'BLYNK_AUTH'))
@@ -85,15 +76,17 @@ try:
   
     @blynk.handle_event('write V*')
     def write_handler(pin, value):
+        _log.debug("£££££££££££££££££ write_handler for " + str(pin) + " the value is " + str(value[0]))
         relays[pin-1].writeHandler(value[0])
         
     @timer.register(interval=60, run_once=False)
     def blynk_data():
         global button_state
-        _log.info("Update Timer Run")
+        _log.debug("£££££££££££££££££ Update Timer Run")
         now = datetime.now()
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
         for relay in relays:
+            _log.debug("£££££££££££££££££ timerHandler for relay " + relay.name)
             relay.timerHandler(blynk)
         
     while True:
@@ -117,15 +110,15 @@ try:
            blynk.virtual_write(250, "Running")
            blynk.set_property(systemLED, 'color', colours[0])
         timer.run()
-except: 
-   blynk = blynklib.Blynk(parser.get('droneRelay', 'BLYNK_AUTH'))
-   blynk.run()
-   blynk.virtual_write(98,"in main loop except"+ '\n')
-   blynk.virtual_write(250, "Crashed")
+#except: 
+#   blynk = blynklib.Blynk(parser.get('droneRelay', 'BLYNK_AUTH'))
+#   blynk.run()
+#   blynk.virtual_write(98,"in main loop except"+ '\n')
+#   blynk.virtual_write(250, "Crashed")
 
-   drone.turnLEDsOffline(blynk)
-   drone.turnButtonsOffline(blynk)
-   GPIO.cleanup()
+ #  drone.turnLEDsOffline(blynk)
+ #  drone.turnButtonsOffline(blynk)
+ #  GPIO.cleanup()
 
-   os.system('sh /home/pi/updateDroneponics.sh')
-   os.system('sudo reboot')
+#   os.system('sh /home/pi/updateDroneponics.sh')
+#   os.system('sudo reboot')
