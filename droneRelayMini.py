@@ -83,13 +83,13 @@ if True:
         
     @timer.register(interval=10, run_once=False)
     def blynk_data():
-        global button_state
         _log.debug("£££££££££££££££££ Update Timer Run")
         now = datetime.now()
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
         for switchRelay in relays.relays:
             _log.debug("£££££££££££££££££ timerHandler for relay " + switchRelay.name)
             switchRelay.blynkTimerHandler(blynk)
+        _log.debug("£££££££££££££££££ Update Timer Run completed")
         
     while True:
         blynk.run()
