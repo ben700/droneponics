@@ -20,7 +20,7 @@ parser = ConfigParser()
 parser.read('/home/pi/configDroneRelayMini.ini')
        
 bootup = True
-
+CO2=0
 # tune console logging
 _log = logging.getLogger('BlynkLog')
 logFormatter = logging.Formatter("%(asctime)s [%(levelname)s]  %(message)s")
@@ -32,17 +32,11 @@ _log.setLevel(logging.DEBUG)
 if True:
 #try:
 
-    _log.debug("£££££££££££££££££ Caling Relays construtor")
     relays=drone.Relays()
-    relayName = parser.get('droneRelayMini', 'Relay1')
-    relay=drone.SwitchRelay(15,relayName , 1)
-    _log.debug("£££££££££££££££££ going to add relay")
     relays.add( drone.SwitchRelay(15, parser.get('droneRelayMini', 'Relay1'), 1))
-    _log.debug("£££££££££££££££££ going to add rest of relay")
     relays.add( drone.SwitchRelay(18, parser.get('droneRelayMini', 'Relay2'), 2))
     relays.add( drone.SwitchRelay(23, parser.get('droneRelayMini', 'Relay3'), 3))
     relays.add( drone.SwitchRelay(24, parser.get('droneRelayMini', 'Relay4'), 4))
-    _log.debug("£££££££££££££££££ Done relays going to create blynk")
     
     # Initialize Blynk
     blynk = blynklib.Blynk(parser.get('blynk', 'BLYNK_AUTH'))
@@ -76,11 +70,32 @@ if True:
         print("Connected")
         blynk.virtual_write(250, "Disconnected")
   
-    @blynk.handle_event('write V*')
+    @blynk.handle_event('write V1')
     def write_handler(pin, value):
         _log.debug("£££££££££££££££££ write_handler for " + str(pin) + " the value is " + str(value[0]))
         relays.relays[pin-1].blynkWriteHandler(blynk, value[0])
-        
+    
+    @blynk.handle_event('write V2')
+    def write_handler(pin, value):
+        _log.debug("£££££££££££££££££ write_handler for " + str(pin) + " the value is " + str(value[0]))
+        relays.relays[pin-1].blynkWriteHandler(blynk, value[0])
+    
+    @blynk.handle_event('write V3')
+    def write_handler(pin, value):
+        _log.debug("£££££££££££££££££ write_handler for " + str(pin) + " the value is " + str(value[0]))
+        relays.relays[pin-1].blynkWriteHandler(blynk, value[0])
+    
+    @blynk.handle_event('write V4')
+    def write_handler(pin, value):
+        _log.debug("£££££££££££££££££ write_handler for " + str(pin) + " the value is " + str(value[0]))
+        relays.relays[pin-1].blynkWriteHandler(blynk, value[0])
+    
+    @blynk.handle_event('write V10')
+    def write_handler(pin, value):
+        global CO2
+        CO2 = value[0]
+        _log.info("!!!!!!!!!!!!!!!!!!!!!!!   CO2=" + str(CO2))
+              
     @timer.register(interval=10, run_once=False)
     def blynk_data():
         _log.debug("£££££££££££££££££ Update Timer Run")
