@@ -164,7 +164,7 @@ try:
         _log.debug("Now work on TSL2591 sensor")
         _log.debug(tsl)
         if (tsl is not None):
-            _log.debug("tsl.lux =" str(tsl.lux))
+            _log.debug("tsl.lux =" + str(tsl.lux))
            _log.info('Total light: {0:.2f}lux'.format(tsl.lux))
            _log.info('Infrared light: {0:d}'.format(tsl.infrared))
            _log.info('Visible light: {0:d}'.format(tsl.visible))
@@ -177,6 +177,7 @@ try:
         else:
            drone.setTSLFormOnline(blynkObj=blynk, loggerObj=_log)
 
+        _log.debug("Now work on mhz19b sensor")
         mhz19b = mh_z19.read()  
         if mhz19b is not None:
             blynk.virtual_write(10, '{0:d}'.format(mhz19b['co2']))
