@@ -92,7 +92,7 @@ try:
        try:
            if (parser.get('droneAir', 'BME680', fallback=False)):
               bmex80 = adafruit_bme680.Adafruit_BME680_I2C(bmeI2C)            
-            else:
+           else:
               bmex80 = adafruit_bme280.Adafruit_BME280_I2C(bmeI2C)
        except:
            bmex80 = None
