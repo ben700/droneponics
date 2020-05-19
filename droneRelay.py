@@ -102,7 +102,7 @@ try:
 
     @blynk.handle_event("disconnect")
     def disconnect_handler():
-        print("Connected")
+        print("Disconnected")
         blynk.virtual_write(250, "Disconnected")
   
     @blynk.handle_event('write V1')
