@@ -29,8 +29,8 @@ consoleHandler.setFormatter(logFormatter)
 _log.addHandler(consoleHandler)
 _log.setLevel(logging.DEBUG)
 
-#if True:
-try:
+if True:
+#try:
 
     relays=drone.Relays()
     relays.add( drone.SwitchRelay(15, parser.get('droneRelayMini', 'Relay1'), 1))
@@ -126,15 +126,15 @@ try:
            _log.info('Just Booted')
            blynk.virtual_write(250, "Running")
         timer.run()
-except: 
-   blynk = blynklib.Blynk(parser.get('blynk', 'BLYNK_AUTH'))
-   blynk.run()
-   blynk.virtual_write(98,"in main loop except"+ '\n')
-   blynk.virtual_write(250, "Crashed")
+#except: 
+#   blynk = blynklib.Blynk(parser.get('blynk', 'BLYNK_AUTH'))
+#   blynk.run()
+#   blynk.virtual_write(98,"in main loop except"+ '\n')
+#   blynk.virtual_write(250, "Crashed")
 
-   drone.turnLEDsOffline(blynk)
-   drone.turnButtonsOffline(blynk)
-   GPIO.cleanup()
+#   drone.turnLEDsOffline(blynk)
+#   drone.turnButtonsOffline(blynk)
+#   GPIO.cleanup()
 
-   os.system('sh /home/pi/updateDroneponics.sh')
-   os.system('sudo reboot')
+ #  os.system('sh /home/pi/updateDroneponics.sh')
+ #  os.system('sudo reboot')
