@@ -37,7 +37,7 @@ import re
 import json
 
 parser = ConfigParser()
-parser.read('/home/pi/config.ini')
+parser.read('/home/pi/configAir.ini')
 
 bootup = True
 
@@ -71,7 +71,7 @@ try:
           tsl.integration_time = adafruit_tsl2591.INTEGRATIONTIME_100MS
        except:
            tsl = None
-           print("Unexpected error: TSL2591. Paser was " + str(parser.get('droneAir', 'TSLI2C0', fallback=True)))
+           print("Unexpected error: TSL2591. Paser was " + str(parser.get('droneAir', 'BME680', fallback=False)))
     else:
            tsl = None
      
@@ -90,7 +90,7 @@ try:
     # Initialize the sensor.
     if (bmeI2C is not None):
        try:
-           if (parser.get('droneAir', 'TSLI2C0', fallback=True)):
+           if (parser.get('droneAir', 'BME680', fallback=False)):
               bmex80 = adafruit_bme680.Adafruit_BME680_I2C(bmeI2C)
             else:
               bmex80 = adafruit_bme280.Adafruit_BME280_I2C(bmeI2C)
@@ -101,7 +101,7 @@ try:
        bme680 = None
         
     # Initialize Blynk
-    blynk = blynklib.Blynk(parser.get('droneAir', 'BLYNK_AUTH'))
+    blynk = blynklib.Blynk(parser.get('blynk', 'BLYNK_AUTH'))
     timer = blynktimer.Timer()
     
     @blynk.handle_event('write V255')
@@ -143,10 +143,11 @@ try:
      #      for alarm in alarmList:
      #         alarm.test(blynk, "temperature", 1, bme680.temperature) 
            blynk.virtual_write(1, bmex80.temperature)
-           if (parser.get('droneAir', 'TSLI2C0', fallback=True)): 
+           if (parser.get('droneAir', 'BME680', fallback=False)): 
               blynk.virtual_write(2, bmex80.gas)
            else
-              blynk.virtual_write(2, None)        
+              blynk.virtual_write(2, None)
+              blynk.set_property(2, 'color', colours['OFFLINE'])
            blynk.virtual_write(3, bmex80.humidity)
            blynk.virtual_write(4, bmex80.pressure)
            blynk.virtual_write(5, bmex80.altitude)
