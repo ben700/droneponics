@@ -74,6 +74,7 @@ class SwitchRelay:
       
       
     def blynkTimerHandler(self, blynk):
+      print("Now in blynkTimerHandler")
       if(self.state == 0):
          return
       if(self.state == 1):
@@ -88,7 +89,10 @@ class SwitchRelay:
       if(self.state ==4):
          if self.cycle % 10 == 0:
             self.cycle = 0
+      print("self.cycle is " + str(self.cycle))
       if (self.cycle == 0): 
          self.turnOn()
       else:
          self.turnOff()
+      print("Now completed blynkTimerHandler")
+      
