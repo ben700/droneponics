@@ -20,13 +20,13 @@ class Relays:
 class SwitchRelay:
     def __init__(self, PIN, NAME, VPIN):
        print("++++++++++++++++++++++Creating Relay " + NAME + " on pin " + str(PIN) + '/n')
-       self.pin = PIN
+       self.gpioPin = PIN
        self.name=NAME
        self.vPin=VPIN
        self.dPin=VPIN+10
        self.state = 0
        self.cycle=0
-       GPIO.setup(PIN,GPIO.OUT, initial=1)
+       GPIO.setup(self.gpioPin,GPIO.OUT, initial=1)
        return
     
     def setDisplay(self, blynk):
@@ -43,12 +43,12 @@ class SwitchRelay:
            
             
     def turnOn(self):
-       print("++++++++++++++++++++++turnOn Relay " + self.NAME + " on pin " + str(self.PIN) + '/n')
-       return GPIO.output(self.pin,GPIO.LOW)
+       print("++++++++++++++++++++++turnOn Relay " + self.NAME + " on pin " + str(self.gpioPin) + '/n')
+       return GPIO.output(self.gpioPin,GPIO.LOW)
     
     def turnOff(self):
-       print("++++++++++++++++++++++turnOff Relay " + self.NAME + " on pin " + str(self.PIN) + '/n')
-       GPIO.output(self.pin,GPIO.HIGH)
+       print("++++++++++++++++++++++turnOff Relay " + self.NAME + " on pin " + str(self.gpioPin) + '/n')
+       GPIO.output(self.gpioPin,GPIO.HIGH)
        return 
 
     def setState(self, STATE):
@@ -62,13 +62,13 @@ class SwitchRelay:
         blynk.virtual_write(98, "Change state of button "+ str(self.pin) + '\n')
         blynk.set_property(systemLED, 'color', colours[1])
         blynk.virtual_write(250, "Updating")
-        blynk.set_property(10+pin, 'color', colours[self.state])
-        blynk.set_property(pin, 'onBackColor', colours[self.state])
+        blynk.set_property(self.dPin, 'color', colours[self.state])
+        blynk.set_property(self.vPin, 'onBackColor', colours[self.state])
         if(self.state == '0'):
            self.turnOn()
            blynk.virtual_write(250, "Running")
         elif (button_state == '1'):
-           self.turnOn()
+           self.turnOff()
            blynk.virtual_write(250, "Waiting") 
         blynk.set_property(systemLED, 'color', colours[0]) 
       
@@ -89,6 +89,6 @@ class SwitchRelay:
          if self.cycle % 10 == 0:
             self.cycle = 0
       if (self.cycle == 0): 
-         self.turnOn
+         self.turnOn()
       else:
-         self.turnOn
+         self.turnOff()
