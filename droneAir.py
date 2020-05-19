@@ -145,7 +145,7 @@ try:
            blynk.virtual_write(1, bmex80.temperature)
            if (parser.get('droneAir', 'BME680', fallback=False)): 
               blynk.virtual_write(2, bmex80.gas)
-           else
+           else:
               blynk.virtual_write(2, None)
               blynk.set_property(2, 'color', colours['OFFLINE'])
            blynk.virtual_write(3, bmex80.humidity)
