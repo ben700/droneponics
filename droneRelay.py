@@ -74,7 +74,7 @@ try:
     
     
     # Initialize Blynk
-    blynk = blynklib.Blynk(parser.get('droneRelay', 'BLYNK_AUTH'))
+    blynk = blynklib.Blynk(parser.get('blynk', 'BLYNK_AUTH'))
     timer = blynktimer.Timer()
         
     @blynk.handle_event('write V255')
@@ -257,7 +257,7 @@ try:
            blynk.set_property(systemLED, 'color', colours[0])
         timer.run()
 except: 
-   blynk = blynklib.Blynk(parser.get('droneRelay', 'BLYNK_AUTH'))
+   blynk = blynklib.Blynk(parser.get('blynk', 'BLYNK_AUTH'))
    blynk.run()
    blynk.virtual_write(98,"in main loop except"+ '\n')
    blynk.virtual_write(250, "Crashed")
