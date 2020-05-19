@@ -18,7 +18,7 @@ import json
 
 parser = ConfigParser()
 parser.read('/home/pi/configDroneRelayMini.ini')
-        
+       
 bootup = True
 
 # tune console logging
