@@ -17,7 +17,7 @@ import re
 import json
 
 parser = ConfigParser()
-parser.read('/home/pi/droneponics/configDroneRelayMini.ini')
+parser.read('/home/pi/configDroneRelayMini.ini')
         
 bootup = True
 
