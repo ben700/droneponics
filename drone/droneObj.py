@@ -65,10 +65,8 @@ class SwitchRelay:
         blynk.set_property(self.vPin, 'onBackColor', colours[self.state])
         if(self.state == '0'):
            self.turnOn()
-           blynk.virtual_write(250, "Running")
         elif (self.state == '1'):
            self.turnOff()
-           blynk.virtual_write(250, "Waiting") 
         blynk.set_property(systemLED, 'color', colours[0]) 
       
       
