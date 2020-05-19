@@ -102,7 +102,7 @@ if True:
         for switchRelay in relays.relays:
            # _log.debug("TimerHandler for relay " + switchRelay.name)
             switchRelay.blynkTimerHandler(blynk)
-        _log.debug("Update Timer Run completed")
+      #  _log.debug("Update Timer Run completed")
         
     while True:
         blynk.run()
@@ -115,14 +115,14 @@ if True:
            for relay in relays.relays:
               relay.setDisplay(blynk)  
            bootup = False
-           _log.debug("Just about to complete Booting")
+        #   _log.debug("Just about to complete Booting")
            now = datetime.now()
            blynk.virtual_write(99, now.strftime("%d/%m/%Y %H:%M:%S"))
            blynk.virtual_write(drone.systemLED, 255)
            blynk.set_property(drone.systemLED, 'color', drone.colours[0])
            blynk.virtual_write(255, 0)
            blynk.virtual_write(98, "Running"+ '\n')
-           _log.info('Just Booted')
+        #   _log.info('Just Booted')
            blynk.virtual_write(250, "Running")
         timer.run()
 #except: 
