@@ -30,7 +30,7 @@ class Counter:
         
 bootup = True
 button_state=0
-
+CO2=0
 # tune console logging
 _log = logging.getLogger('BlynkLog')
 logFormatter = logging.Formatter("%(asctime)s [%(levelname)s]  %(message)s")
@@ -182,7 +182,13 @@ try:
         now = datetime.now()
         blynk.virtual_write(99, now.strftime("%d/%m/%Y %H:%M:%S"))
         drone.droneRelayWriteHandler(pin, iValue, blynk, relays)
-        
+  
+    @blynk.handle_event('write V10')
+    def write_handler(pin, value):
+        global CO2
+        CO2 = value[0]
+        _log.info("!!!!!!!!!!!!!!!!!!!!!!!   CO2=" + str(CO2))
+    
     @timer.register(interval=60, run_once=False)
     def blynk_data():
         global button_state
