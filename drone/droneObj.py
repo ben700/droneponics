@@ -59,7 +59,7 @@ class SwitchRelay:
         self.setState(STATE)
         now = datetime.now()
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
-        blynk.virtual_write(98, "Change state of button "+ str(self.pin) + '\n')
+        blynk.virtual_write(98, "Change state of button "+ str(self.gpioPin) + '\n')
         blynk.set_property(systemLED, 'color', colours[1])
         blynk.virtual_write(250, "Updating")
         blynk.set_property(self.dPin, 'color', colours[self.state])
