@@ -72,22 +72,22 @@ if True:
   
     @blynk.handle_event('write V1')
     def write_handler(pin, value):
-        _log.debug("£££££££££££££££££ write_handler for " + str(pin) + " the value is " + str(value[0]))
+        _log.debug("Write_handler for " + str(pin) + " the value is " + str(value[0]))
         relays.relays[pin-1].blynkWriteHandler(blynk, value[0])
     
     @blynk.handle_event('write V2')
     def write_handler(pin, value):
-        _log.debug("£££££££££££££££££ write_handler for " + str(pin) + " the value is " + str(value[0]))
+        _log.debug("Write_handler for " + str(pin) + " the value is " + str(value[0]))
         relays.relays[pin-1].blynkWriteHandler(blynk, value[0])
     
     @blynk.handle_event('write V3')
     def write_handler(pin, value):
-        _log.debug("£££££££££££££££££ write_handler for " + str(pin) + " the value is " + str(value[0]))
+        _log.debug("Write_handler for " + str(pin) + " the value is " + str(value[0]))
         relays.relays[pin-1].blynkWriteHandler(blynk, value[0])
     
     @blynk.handle_event('write V4')
     def write_handler(pin, value):
-        _log.debug("£££££££££££££££££ write_handler for " + str(pin) + " the value is " + str(value[0]))
+        _log.debug("Write_handler for " + str(pin) + " the value is " + str(value[0]))
         relays.relays[pin-1].blynkWriteHandler(blynk, value[0])
     
     @blynk.handle_event('write V10')
@@ -98,13 +98,12 @@ if True:
               
     @timer.register(interval=10, run_once=False)
     def blynk_data():
-        _log.debug("£££££££££££££££££ Update Timer Run")
         now = datetime.now()
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
         for switchRelay in relays.relays:
-            _log.debug("£££££££££££££££££ timerHandler for relay " + switchRelay.name)
+            _log.debug("TimerHandler for relay " + switchRelay.name)
             switchRelay.blynkTimerHandler(blynk)
-        _log.debug("£££££££££££££££££ Update Timer Run completed")
+        _log.debug("Update Timer Run completed")
         
     while True:
         blynk.run()
