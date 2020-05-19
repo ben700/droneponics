@@ -162,7 +162,9 @@ try:
            drone.setBMEFormOffline(blynkObj=blynk, loggerObj=_log)
 
         _log.debug("Now work on TSL2591 sensor")
+        _log.debug(tsl)
         if (tsl is not None):
+            _log.debug("tsl.lux =" str(tsl.lux))
            _log.info('Total light: {0:.2f}lux'.format(tsl.lux))
            _log.info('Infrared light: {0:d}'.format(tsl.infrared))
            _log.info('Visible light: {0:d}'.format(tsl.visible))
