@@ -57,9 +57,8 @@ if True:
 
     @blynk.handle_event("connect")
     def connect_handler():
-        print("Connected")
         for pin in range(1,5):
-           _log.info('Syncing virtual buttons {}'.format(pin))
+       #    _log.info('Syncing virtual buttons {}'.format(pin))
            blynk.virtual_sync(pin)
            blynk.read_response(timeout=0.5)
         blynk.virtual_write(250, "Connected")
@@ -72,22 +71,22 @@ if True:
   
     @blynk.handle_event('write V1')
     def write_handler(pin, value):
-        _log.debug("Write_handler for " + str(pin) + " the value is " + str(value[0]))
+#        _log.debug("Write_handler for pin " + str(pin) + " the value is " + str(value[0]))
         relays.relays[pin-1].blynkWriteHandler(blynk, value[0])
     
     @blynk.handle_event('write V2')
     def write_handler(pin, value):
-        _log.debug("Write_handler for " + str(pin) + " the value is " + str(value[0]))
+#        _log.debug("Write_handler for pin " + str(pin) + " the value is " + str(value[0]))
         relays.relays[pin-1].blynkWriteHandler(blynk, value[0])
     
     @blynk.handle_event('write V3')
     def write_handler(pin, value):
-        _log.debug("Write_handler for " + str(pin) + " the value is " + str(value[0]))
+#        _log.debug("Write_handler for pin " + str(pin) + " the value is " + str(value[0]))
         relays.relays[pin-1].blynkWriteHandler(blynk, value[0])
     
     @blynk.handle_event('write V4')
     def write_handler(pin, value):
-        _log.debug("Write_handler for " + str(pin) + " the value is " + str(value[0]))
+#        _log.debug("Write_handler for pin " + str(pin) + " the value is " + str(value[0]))
         relays.relays[pin-1].blynkWriteHandler(blynk, value[0])
     
     @blynk.handle_event('write V10')
