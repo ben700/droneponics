@@ -23,7 +23,7 @@ import re
 import json
 
 parser = ConfigParser()
-parser.read('/home/pi/droneponics/configRelay.ini')
+parser.read('/home/pi/configRelay.ini')
 
 class Counter:
     cycle = 0
