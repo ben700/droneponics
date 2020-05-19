@@ -101,7 +101,7 @@ try:
         now = datetime.now()
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
         for switchRelay in relays.relays:
-            _log.debug("TimerHandler for relay " + switchRelay.name)
+           # _log.debug("TimerHandler for relay " + switchRelay.name)
             switchRelay.blynkTimerHandler(blynk)
         _log.debug("Update Timer Run completed")
         
