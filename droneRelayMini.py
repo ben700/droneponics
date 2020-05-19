@@ -127,7 +127,7 @@ try:
            blynk.virtual_write(250, "Running")
         timer.run()
 except: 
-   blynk = blynklib.Blynk(parser.get('droneRelay', 'BLYNK_AUTH'))
+   blynk = blynklib.Blynk(parser.get('blynk', 'BLYNK_AUTH'))
    blynk.run()
    blynk.virtual_write(98,"in main loop except"+ '\n')
    blynk.virtual_write(250, "Crashed")
