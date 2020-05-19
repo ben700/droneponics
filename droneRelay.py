@@ -74,9 +74,9 @@ try:
     
     
     # Initialize Blynk
-    #blynk = blynklib.Blynk(parser.get('blynk', 'BLYNK_AUTH'))
+    blynk = blynklib.Blynk(parser.get('blynk', 'BLYNK_AUTH'))
     _log.info("BLYNK_AUTH = " + parser.get('blynk', 'BLYNK_AUTH'))
-    blynk = blynklib.Blynk(sovoOQHytL_YkDc2WKMFCwzG6cOgQ_2H)
+    #blynk = blynklib.Blynk(sovoOQHytL_YkDc2WKMFCwzG6cOgQ_2H)
     
     timer = blynktimer.Timer()
         
