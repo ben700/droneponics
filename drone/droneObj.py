@@ -19,7 +19,7 @@ class Relays:
  
 class SwitchRelay:
     def __init__(self, PIN, NAME, VPIN):
-       print("++++++++++++++++++++++Creating Relay " + NAME + " on pin " + str(PIN) + '/n')
+       print("++++++++++++++++++++++Creating Relay " + NAME + " on pin " + str(PIN) )
        self.gpioPin = PIN
        self.name=NAME
        self.vPin=VPIN
@@ -43,11 +43,11 @@ class SwitchRelay:
            
             
     def turnOn(self):
-       print("++++++++++++++++++++++turnOn Relay " + self.name + " on pin " + str(self.gpioPin) + '/n')
+       print("++++++++++++++++++++++turnOn Relay " + self.name + " on pin " + str(self.gpioPin) )
        return GPIO.output(self.gpioPin,GPIO.LOW)
     
     def turnOff(self):
-       print("++++++++++++++++++++++turnOff Relay " + self.name + " on pin " + str(self.gpioPin) + '/n')
+       print("++++++++++++++++++++++turnOff Relay " + self.name + " on pin " + str(self.gpioPin) )
        GPIO.output(self.gpioPin,GPIO.HIGH)
        return 
 
