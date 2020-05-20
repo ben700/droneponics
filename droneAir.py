@@ -148,7 +148,7 @@ def connect_handler():
 @blynk.handle_event("disconnect")
 def disconnect_handler():
     _log.info("Disconnected")
-blynk.virtual_write(250, "Disconnected")
+    blynk.virtual_write(250, "Disconnected")
   
     
 @timer.register(interval=30, run_once=False)
