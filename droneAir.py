@@ -205,7 +205,7 @@ try:
         _log.debug("End of timer.register fx")
         
         
-        
+    blynk.run() #need to call here so you can update app outside main while loop    
     blynk.virtual_write(250, "Start-up")
     blynk.virtual_write(251, drone.gethostname())
     blynk.virtual_write(252, drone.get_ip())        
