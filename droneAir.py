@@ -144,13 +144,12 @@ def rebooter(pin, value):
     
     @timer.register(interval=30, run_once=False)
     def blynk_data():
-        _log.info("Start of timer.register fx")
-        blynk.set_property(systemLED, 'color', colours[1])
-        blynk.virtual_write(250, "Updating")
-        _log.debug("Going to get timestamp")
-        now = datetime.now()
-        blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
-          
+         _log.info("Start of timer.register fx")
+         blynk.set_property(systemLED, 'color', colours[1])
+         blynk.virtual_write(250, "Updating")
+         _log.debug("Going to get timestamp")
+         now = datetime.now()
+         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
          if(bmex80 is not None):            
             _log.debug("bmex80 is not None so going to get openweather")
             openWeather.blynkOpenWeather(blynk)
