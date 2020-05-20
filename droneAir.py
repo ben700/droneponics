@@ -120,7 +120,7 @@ try:
 
     @blynk.handle_event("disconnect")
     def disconnect_handler():
-        print("Connected")
+        print("Disconnected")
         blynk.virtual_write(250, "Disconnected")
   
     
@@ -143,7 +143,7 @@ try:
      #      for alarm in alarmList:
      #         alarm.test(blynk, "temperature", 1, bme680.temperature) 
            blynk.virtual_write(1, bmex80.temperature)
-           if (parser.get('droneAir', 'BME680', fallback=False)): 
+           if (parser.get('droneAir', 'BME680', fallback=False)=="True"): 
               blynk.virtual_write(2, bmex80.gas)
            else:
               blynk.virtual_write(2, None)
@@ -164,11 +164,11 @@ try:
         _log.debug("Now work on TSL2591 sensor")
         _log.debug(tsl)
         if (tsl is not None):
-     #      _log.debug("tsl.lux =" + str(tsl.lux))
-     #      _log.info('Total light: {0:.2f}lux'.format(tsl.lux))
-     #      _log.info('Infrared light: {0:d}'.format(tsl.infrared))
-     #      _log.info('Visible light: {0:d}'.format(tsl.visible))
-     #      _log.info('Full spectrum (IR + visible) light: {0:d}'.format(tsl.full_spectrum))
+           _log.debug("tsl.lux =" + str(tsl.lux))
+           _log.info('Total light: {0:.2f}lux'.format(tsl.lux))
+           _log.info('Infrared light: {0:d}'.format(tsl.infrared))
+           _log.info('Visible light: {0:d}'.format(tsl.visible))
+           _log.info('Full spectrum (IR + visible) light: {0:d}'.format(tsl.full_spectrum))
            blynk.virtual_write(6, str("{0:.2f}".format(tsl.lux))) 
            blynk.virtual_write(7, str("{0:d}".format(tsl.infrared)))
            blynk.virtual_write(8, ("{0:d}".format(tsl.visible)))
@@ -186,9 +186,10 @@ try:
             drone.setMHZFormOnline(blynkObj=blynk, loggerObj=_log)
             _log.info("blynkBridge BLYNK_AUTH = " + parser.get('blynkBridge', 'BLYNK_AUTH', fallback="Fallback"))
             if (parser.get('blynkBridge', 'BLYNK_AUTH', fallback=None) is not None):
+                _log.info("Send CO2 data via blynkBridge")
                 blynkBridge = blynklib.Blynk(parser.get('blynkBridge', 'BLYNK_AUTH'))
                 blynkBridge.run()
-                blynkBridge.virtual_write(parser.get('blynkBridge', 'CO2_VPIN'), '{0:d}'.format(mhz19b['co2']))
+                blynkBridge.virtual_write(parser.get('blynkBridge', 'CO2_VPIN', fallback=10), '{0:d}'.format(mhz19b['co2']))
                 _log.info("blynkBridge CO2 data sent")
         else:
             blynk.virtual_write(98, 'Unexpected error: mhz19b' + '\n')
@@ -204,8 +205,7 @@ try:
            blynk.virtual_write(251, drone.gethostname())
            blynk.virtual_write(252, drone.get_ip())        
            blynk.virtual_write(98, "clr")
-           _log.info(parser.get('droneAir', 'BME680'))
-           if (parser.get('droneAir', 'BME680') == True):                
+           if (parser.get('droneAir', 'BME680') == "True"):                
                 _log.info("Posting I2C 0 devices to app")
                 p = subprocess.Popen(['i2cdetect', '-y','0'],stdout=subprocess.PIPE,)
                 #cmdout = str(p.communicate())        
@@ -240,5 +240,5 @@ except:
    _log.info("in main loop except")
    blynk.virtual_write(250, "Crashed")
    drone.setFormOffline(blynkObj=blynk, loggerObj=_log)
-#   os.system('sh /home/pi/updateDroneponics.sh')
-#   os.system('sudo reboot')
+   os.system('sh /home/pi/updateDroneponics.sh')
+   os.system('sudo reboot')
