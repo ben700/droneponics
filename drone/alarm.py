@@ -15,7 +15,7 @@ class Alarm:
       #blynk.virtual_write(150, "add", 0, "Max Temp", "20.0")
   
    def display(self,blynk,id):      
-     print("alarm id = " + str(id) + " Alarm Name :- " + self.metric + " " + self.name + " Alarm Value :-" + str(self.value))
+     print("alarm id = " + str(id) + " Alarm Name :- " + self.metric + " " + self.name + " Alarm Value =" + str(self.value))
      
      blynk.virtual_write(150, "add", id, self.metric + " " + self.name, self.value)
      return
