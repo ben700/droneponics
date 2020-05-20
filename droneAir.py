@@ -227,33 +227,34 @@ def rebooter(pin, value):
 _log.info("Created all the objects. Now starting the drone")        
 blynk.run() #need to call here so you can update app outside main while loop    
 blynk.virtual_write(250, "Start-up")
-    blynk.virtual_write(251, drone.gethostname())
-    blynk.virtual_write(252, drone.get_ip())        
-    blynk.virtual_write(98, "clr")
-    if (parser.get('droneAir', 'I2C-0') == "True"):                
-        _log.info("Posting I2C 0 devices to app")
+blynk.virtual_write(251, drone.gethostname())
+blynk.virtual_write(252, drone.get_ip())        
+blynk.virtual_write(98, "clr")
+if (parser.get('logging', 'logLevel', fallback=logging.CRITICAL) =="DEBUG"):
+    if (parser.get('droneAir', 'I2C-0') == "True"):
+        _log.debug("Posting I2C 0 devices to app")
         p = subprocess.Popen(['i2cdetect', '-y','0'],stdout=subprocess.PIPE,)
-        #cmdout = str(p.communicate())        
         blynk.virtual_write(98, "I2C 0 devices"+'\n')
         for i in range(0,9):
-            blynk.virtual_write(98, str(p.stdout.readline()) + '\n')
-            
+            blynk.virtual_write(98, str(p.stdout.readline()) + '\n')    
+    
     _log.info("Posting I2C 1 devices to app")
     blynk.virtual_write(98, "I2C 1 devices"+'\n')
     q = subprocess.Popen(['i2cdetect', '-y','1'],stdout=subprocess.PIPE,)
     for i in range(0,9):
         blynk.virtual_write(98, str(q.stdout.readline()) + '\n')
     x=1
-    for alarm in alarmList:
-         alarm.display(blynk,x)
-         x=x+1
-    _log.debug("Just about to complete Booting")
-    now = datetime.now()
-    blynk.virtual_write(99, now.strftime("%d/%m/%Y %H:%M:%S"))
-    blynk.virtual_write(systemLED, 255)
-    drone.setFormOnline(blynkObj=blynk, loggerObj=_log, Msg="System now updated and restarted")
-    blynk.virtual_write(255, 0)
-    _log.info('Completed Boot')
+for alarm in alarmList:
+    alarm.display(blynk,x)
+    x=x+1
+_log.debug("Just about to get boot timestamp and change system LED")
+now = datetime.now()
+blynk.virtual_write(99, now.strftime("%d/%m/%Y %H:%M:%S"))
+blynk.virtual_write(systemLED, 255)
+_log.debug('Set the app to online colours')
+drone.setFormOnline(blynkObj=blynk, loggerObj=_log, Msg="System now updated and restarted")
+blynk.virtual_write(255, 0)
+_log.info('Completed Boot')
 
 try:        
     while True:
