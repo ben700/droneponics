@@ -254,19 +254,22 @@ blynk.virtual_write(systemLED, 255)
 _log.debug('Set the app to online colours')
 drone.setFormOnline(blynkObj=blynk, loggerObj=_log, Msg="System now updated and restarted")
 blynk.virtual_write(255, 0)
-_log.info('Completed Boot')
+_log.info("--------------------------Completed Boot--------------------------")
 
-try:        
-    while True:
+while True:
+    try:
+        
+        _log.info("--------------------------blynk.run()--------------------------")
         blynk.run()
+        _log.info("--------------------------timer.run()--------------------------")
         timer.run()
-        _log.debug("End of main while loop")
-except: 
-   _log.error("in main loop except")
-   blynk.virtual_write(250, "Crashed")
-   drone.setFormOffline(blynkObj=blynk, loggerObj=_log)
-   if (parser.get('logging', 'logLevel', fallback=logging.DEBUG) =="CRITICAL"):
-        os.system('sh /home/pi/updateDroneponics.sh')
-        os.system('sudo reboot')
-   else:
-        _log.critical("Main Loop exception :- Set log evel to CRITICAL to auto reboot")
+        _log.info("--------------------------while loop--------------------------")
+    except: 
+       _log.error("in main loop except")
+       blynk.virtual_write(250, "Crashed")
+       drone.setFormOffline(blynkObj=blynk, loggerObj=_log)
+       if (parser.get('logging', 'logLevel', fallback=logging.DEBUG) =="CRITICAL"):
+            os.system('sh /home/pi/updateDroneponics.sh')
+            os.system('sudo reboot')
+       else:
+            _log.critical("Main Loop exception :- Set log evel to CRITICAL to auto reboot")
