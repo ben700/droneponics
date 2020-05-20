@@ -255,7 +255,7 @@ except:
    _log.error("in main loop except")
    blynk.virtual_write(250, "Crashed")
    drone.setFormOffline(blynkObj=blynk, loggerObj=_log)
-   if (parser.get('logging', 'logLevel', fallback=DEBUG) =="CRITICAL"):
+   if (parser.get('logging', 'logLevel', fallback=logging.DEBUG) =="CRITICAL"):
         os.system('sh /home/pi/updateDroneponics.sh')
         os.system('sudo reboot')
    else:
