@@ -54,8 +54,7 @@ _log.warning("warning")
 _log.info("info")
 _log.debug("debug")
 
-try:
-    
+try:    
     tslI2C = busio.I2C(board.SCL, board.SDA)
     if not 0x29 in tslI2C.scan():
         tslI2C = busio.I2C(board.D1, board.D0)   
@@ -66,20 +65,23 @@ try:
             _log.info("Found TSL2591 on I2C-0")
     else:
          _log.info("Found TSL2591 on I2C-1")
-
+except:
+    _log.critical("Can't find I2C device 29 should be the Light sensor")
+    tslI2C = None
+try:     
     # Initialize the sensor.
     if (tslI2C is not None):
-       try:
-          tsl = adafruit_tsl2591.TSL2591(tslI2C)
-          # You can optionally change the gain and integration time:
-          tsl.gain = adafruit_tsl2591.GAIN_LOW
-          tsl.integration_time = adafruit_tsl2591.INTEGRATIONTIME_100MS
-       except:
-           tsl = None
-           print("Unexpected error: TSL2591. Paser was " + str(parser.get('droneAir', 'BME680', fallback=False)))
+       tsl = adafruit_tsl2591.TSL2591(tslI2C)
+       # You can optionally change the gain and integration time:
+       tsl.gain = adafruit_tsl2591.GAIN_LOW
+       tsl.integration_time = adafruit_tsl2591.INTEGRATIONTIME_100MS
     else:
-           tsl = None
-     
+       tsl = None
+except:
+    _log.critical("Failed to create object for Light sensor")
+    tsl = None
+
+try:
     bmeI2C = busio.I2C(board.SCL, board.SDA)
     if not 0x77 in bmeI2C.scan():
         bmeI2C = busio.I2C(board.D1, board.D0)   
@@ -91,7 +93,11 @@ try:
             _log.info("Found BME680 on I2C-0")
     else:
          _log.info("Found BME680 on I2C-1")
-            
+except:
+    _log.critical("Can't find I2C device 77 should be the BME280/680 sensor")
+    bmeI2C = None
+
+try:
     # Initialize the sensor.
     if (bmeI2C is not None):
        try:
@@ -104,105 +110,111 @@ try:
            _log.info("Unexpected error: bme680")
     else:
        bme680 = None
-        
+except:
+    _log.critical("Failed to create object for the BME280/680 sensor")
+    bmeI2C = None
+
+try:
     # Initialize Blynk
     blynk = blynklib.Blynk(parser.get('blynk', 'BLYNK_AUTH'))
     timer = blynktimer.Timer()
+except:
+    _log.critical("Failed to create object for the blynk")
+    bmeI2C = None
     
-    @blynk.handle_event('write V255')
-    def rebooter(pin, value):
-        blynk.virtual_write(250, "User Reboot")
-        #drone.setFormOffline(blynkObj=blynk, loggerObj=_log, Msg="User Reboot")
-        blynk.set_property(systemLED, 'color', colours['OFFLINE'])
-        os.system('sh /home/pi/updateDroneponics.sh')
-        os.system('sudo reboot')
+@blynk.handle_event('write V255')
+def rebooter(pin, value):
+    _log.info("User Reboot")
+    blynk.virtual_write(250, "User Reboot")
+    blynk.set_property(systemLED, 'color', colours['OFFLINE'])
+    os.system('sh /home/pi/updateDroneponics.sh')
+    os.system('sudo reboot')
 
     @blynk.handle_event("connect")
     def connect_handler():
-        print("Connected")
+        _log.info("Connected")
         blynk.virtual_write(250, "Connected")
     
 
     @blynk.handle_event("disconnect")
     def disconnect_handler():
-        print("Disconnected")
+        _log.info("Disconnected")
         blynk.virtual_write(250, "Disconnected")
   
     
     @timer.register(interval=30, run_once=False)
     def blynk_data():
-        _log.debug("Start of timer.register fx")
+        _log.info("Start of timer.register fx")
         blynk.set_property(systemLED, 'color', colours[1])
         blynk.virtual_write(250, "Updating")
-        _log.info("Update Timer Run")
+        _log.debug("Going to get timestamp")
         now = datetime.now()
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
           
-        if(bmex80 is not None):
-           _log.debug("going to update Blynk")
-           openWeather.blynkOpenWeather(blynk)
-           _log.debug("Going to read pressure")
-           bme680.sea_level_pressure = openWeather.getPressure()
+        if(bmex80 is not None):            
+            _log.debug("bmex80 is not None so going to get openweather")
+            openWeather.blynkOpenWeather(blynk)
+            _log.info("Going to update BME sensor with openWeather sea level pressure")
+            bme680.sea_level_pressure = openWeather.getPressure()
             
 
-           _log.debug("update blynk BME")
-     #      for alarm in alarmList:
-     #         alarm.test(blynk, "temperature", 1, bme680.temperature) 
-           blynk.virtual_write(1, bmex80.temperature)
-           if (parser.get('droneAir', 'BME680', fallback=False)=="True"): 
-              blynk.virtual_write(2, bmex80.gas)
-           else:
-              blynk.virtual_write(2, None)
-              blynk.set_property(2, 'color', colours['OFFLINE'])
-           blynk.virtual_write(3, bmex80.humidity)
-           blynk.virtual_write(4, bmex80.pressure)
-           blynk.virtual_write(5, bmex80.altitude)
+            _log.debug("Update blynk with BME data")
+     #       for alarm in alarmList:
+     #          alarm.test(blynk, "temperature", 1, bme680.temperature) 
+            blynk.virtual_write(1, bmex80.temperature)
+            if (parser.get('droneAir', 'BME680', fallback=False)=="True"): 
+               blynk.virtual_write(2, bmex80.gas)
+            else:
+               blynk.virtual_write(2, None)
+               blynk.set_property(2, 'color', colours['OFFLINE'])
+            blynk.virtual_write(3, bmex80.humidity)
+            blynk.virtual_write(4, bmex80.pressure)
+            blynk.virtual_write(5, bmex80.altitude)
         
-           _log.debug("find dew point")
-           t = Temp(bmex80.temperature, 'c')
-           blynk.virtual_write(11, dew_point(temperature=t, humidity=bmex80.humidity))
+            _log.debug("find dew point")
+            t = Temp(bmex80.temperature, 'c')
+            blynk.virtual_write(11, dew_point(temperature=t, humidity=bmex80.humidity))
 
-           _log.debug("set BME form display")
-           drone.setBMEFormOnline(blynkObj=blynk, loggerObj=_log)     
-        else:
-           drone.setBMEFormOffline(blynkObj=blynk, loggerObj=_log)
+            _log.debug("set BME form display")
+            drone.setBMEFormOnline(blynkObj=blynk, loggerObj=_log)     
+         else:
+            drone.setBMEFormOffline(blynkObj=blynk, loggerObj=_log)
 
-        _log.debug("Now work on TSL2591 sensor")
-        if (tsl is not None):
-           _log.debug("tsl.lux =" + str(tsl.lux))
-           _log.info('Total light: {0:.2f}lux'.format(tsl.lux))
-           _log.info('Infrared light: {0:d}'.format(tsl.infrared))
-           _log.info('Visible light: {0:d}'.format(tsl.visible))
-           _log.info('Full spectrum (IR + visible) light: {0:d}'.format(tsl.full_spectrum))
-           blynk.virtual_write(6, str("{0:.2f}".format(tsl.lux))) 
-           blynk.virtual_write(7, str("{0:d}".format(tsl.infrared)))
-           blynk.virtual_write(8, ("{0:d}".format(tsl.visible)))
-           blynk.virtual_write(9, ("{0:d}".format(tsl.full_spectrum)))
-           _log.debug("Now drone.setTSLFormOnline") 
-           drone.setTSLFormOnline(blynkObj=blynk, loggerObj=_log)
-        else:
-           drone.setTSLFormOnline(blynkObj=blynk, loggerObj=_log)
+         _log.debug("Now work on TSL2591 sensor")
+         if (tsl is not None):
+            _log.debug('Total light: {0:.2f}lux'.format(tsl.lux))
+            _log.debug('Infrared light: {0:d}'.format(tsl.infrared))
+            _log.debug('Visible light: {0:d}'.format(tsl.visible))
+            _log.debug('Full spectrum (IR + visible) light: {0:d}'.format(tsl.full_spectrum))
+            blynk.virtual_write(6, str("{0:.2f}".format(tsl.lux))) 
+            blynk.virtual_write(7, str("{0:d}".format(tsl.infrared)))
+            blynk.virtual_write(8, ("{0:d}".format(tsl.visible)))
+            blynk.virtual_write(9, ("{0:d}".format(tsl.full_spectrum)))
+            _log.debug("Now drone.setTSLFormOnline") 
+            drone.setTSLFormOnline(blynkObj=blynk, loggerObj=_log)
+         else:
+            drone.setTSLFormOnline(blynkObj=blynk, loggerObj=_log)
 
-        _log.debug("Now work on mhz19b sensor")
-        mhz19b = mh_z19.read()  
-        if mhz19b is not None:
-            blynk.virtual_write(10, '{0:d}'.format(mhz19b['co2']))
-            _log.info('CO2: {0:d}'.format(mhz19b['co2']))
-            drone.setMHZFormOnline(blynkObj=blynk, loggerObj=_log)
-            _log.info("blynkBridge BLYNK_AUTH = " + parser.get('blynkBridge', 'BLYNK_AUTH', fallback="Fallback"))
-            if (parser.get('blynkBridge', 'BLYNK_AUTH', fallback=None) is not None):
-                _log.info("Send CO2 data via blynkBridge")
-                blynkBridge = blynklib.Blynk(parser.get('blynkBridge', 'BLYNK_AUTH'))
-                blynkBridge.run()
-                blynkBridge.virtual_write(parser.get('blynkBridge', 'CO2_VPIN', fallback=10), '{0:d}'.format(mhz19b['co2']))
-                _log.info("blynkBridge CO2 data sent")
-        else:
-            blynk.virtual_write(98, 'Unexpected error: mhz19b' + '\n')
-            _log.info('Unexpected error: mhz19b')
-            drone.setMHZFormOffline(blynkObj=blynk, loggerObj=_log)
-        blynk.virtual_write(250, "Running")
-        blynk.set_property(systemLED, 'color', colours[0])
-        _log.debug("End of timer.register fx")
+         _log.debug("Now work on mhz19b sensor")
+         mhz19b = mh_z19.read()  
+         if mhz19b is not None:
+             blynk.virtual_write(10, '{0:d}'.format(mhz19b['co2']))
+             _log.info('CO2: {0:d}'.format(mhz19b['co2']))
+             drone.setMHZFormOnline(blynkObj=blynk, loggerObj=_log)
+             _log.info("blynkBridge BLYNK_AUTH = " + parser.get('blynkBridge', 'BLYNK_AUTH', fallback="Fallback"))
+             if (parser.get('blynkBridge', 'BLYNK_AUTH', fallback=None) is not None):
+                 _log.info("Send CO2 data via blynkBridge")
+                 blynkBridge = blynklib.Blynk(parser.get('blynkBridge', 'BLYNK_AUTH'))
+                 blynkBridge.run()
+                 blynkBridge.virtual_write(parser.get('blynkBridge', 'CO2_VPIN', fallback=10), '{0:d}'.format(mhz19b['co2']))
+                 _log.info("blynkBridge CO2 data sent")
+         else:
+             blynk.virtual_write(98, 'Unexpected error: mhz19b' + '\n')
+             _log.error('Unexpected error: mhz19b')
+             drone.setMHZFormOffline(blynkObj=blynk, loggerObj=_log)
+         blynk.virtual_write(250, "Running")
+         blynk.set_property(systemLED, 'color', colours[0])
+         _log.debug("End of timer.register fx")
         
         
     blynk.run() #need to call here so you can update app outside main while loop    
@@ -234,7 +246,8 @@ try:
     drone.setFormOnline(blynkObj=blynk, loggerObj=_log, Msg="System now updated and restarted")
     blynk.virtual_write(255, 0)
     _log.info('Completed Boot')
-        
+
+try:        
     while True:
         blynk.run()
         timer.run()
@@ -243,5 +256,8 @@ except:
    _log.error("in main loop except")
    blynk.virtual_write(250, "Crashed")
    drone.setFormOffline(blynkObj=blynk, loggerObj=_log)
-   os.system('sh /home/pi/updateDroneponics.sh')
-   os.system('sudo reboot')
+   if (parser.get('logging', 'logLevel', fallback=logging.CRITICAL) =="CRITICAL"):
+        os.system('sh /home/pi/updateDroneponics.sh')
+        os.system('sudo reboot')
+   else:
+        _log.critical("Main Loop exception :- Set log evel to CRITICAL to auto reboot")
