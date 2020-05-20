@@ -126,7 +126,7 @@ try:
     
     @timer.register(interval=30, run_once=False)
     def blynk_data():
-        _log.debug("Now in the timer fx")
+        _log.debug("Start of timer.register fx")
         blynk.set_property(systemLED, 'color', colours[1])
         blynk.virtual_write(250, "Updating")
         _log.info("Update Timer Run")
@@ -197,7 +197,7 @@ try:
             drone.setMHZFormOffline(blynkObj=blynk, loggerObj=_log)
         blynk.virtual_write(250, "Running")
         blynk.set_property(systemLED, 'color', colours[0])
-        _log.debug("Now finished the timer fx")
+        _log.debug("End of timer.register fx")
         
     while True:
         blynk.run()
@@ -235,9 +235,9 @@ try:
            drone.setFormOnline(blynkObj=blynk, loggerObj=_log, Msg="System now updated and restarted")
            blynk.virtual_write(255, 0)
            _log.info('Just Booted')
-        _log.debug("Now start the timer")
+        _log.debug("About to call timer.run() and start the timer")
         timer.run()
-        _log.debug("Started the timer")
+        _log.debug("timer.run() called and timer now running")
 except: 
    _log.info("in main loop except")
    blynk.virtual_write(250, "Crashed")
