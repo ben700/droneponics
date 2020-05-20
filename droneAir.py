@@ -184,8 +184,8 @@ try:
             blynk.virtual_write(10, '{0:d}'.format(mhz19b['co2']))
             _log.info('CO2: {0:d}'.format(mhz19b['co2']))
             drone.setMHZFormOnline(blynkObj=blynk, loggerObj=_log)
-            _log.info("blynkBridge BLYNK_AUTH = " + parser.get('blynkBridge', 'BLYNK_AUTH'))
-            if (parser.get('blynkBridge', 'BLYNK_AUTH') is not None):
+            _log.info("blynkBridge BLYNK_AUTH = " + parser.get('blynkBridge', 'BLYNK_AUTH', fallback="Fallback"))
+            if (parser.get('blynkBridge', 'BLYNK_AUTH', fallback=None) is not None):
                 blynkBridge = blynklib.Blynk(parser.get('blynkBridge', 'BLYNK_AUTH'))
                 blynkBridge.run()
                 blynkBridge.virtual_write(parser.get('blynkBridge', 'CO2_VPIN'), '{0:d}'.format(mhz19b['co2']))
