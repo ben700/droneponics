@@ -90,7 +90,7 @@ try:
     # Initialize the sensor.
     if (bmeI2C is not None):
        try:
-           if (parser.get('droneAir', 'BME680', fallback=False)):
+           if (parser.get('droneAir', 'BME680', fallback=False) == "True"):
               bmex80 = adafruit_bme680.Adafruit_BME680_I2C(bmeI2C)            
            else:
               bmex80 = adafruit_bme280.Adafruit_BME280_I2C(bmeI2C)
