@@ -28,6 +28,7 @@ import logging
 from datetime import datetime
 import adafruit_tsl2591
 import adafruit_bme680
+import adafruit_bme280
 from meteocalc import Temp, dew_point
 import sys
 import os
