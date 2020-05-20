@@ -86,13 +86,13 @@ try:
     if not 0x77 in bmeI2C.scan():
         bmeI2C = busio.I2C(board.D1, board.D0)   
         if not 0x77 in bmeI2C.scan():
-            _log.info("Didn't find BME680")
-            blynk.virtual_write(250, "no BME680")
+            _log.error("Can't find I2C device 77 should be the BME280/680 sensor")
+            blynk.virtual_write(250, "no BMEx80")
             bmeI2C = None      
         else:
-            _log.info("Found BME680 on I2C-0")
+            _log.info("Found I2C device 77 should be the BME280/680 sensor on I2C-0")
     else:
-         _log.info("Found BME680 on I2C-1")
+         _log.info("Found I2C device 77 should be the BME280/680 sensor on I2C-1")
 except:
     _log.critical("Can't find I2C device 77 should be the BME280/680 sensor")
     bmeI2C = None
@@ -102,17 +102,19 @@ try:
     if (bmeI2C is not None):
        try:
            if (parser.get('droneAir', 'BME680', fallback=False) == "True"):
-              bmex80 = adafruit_bme680.Adafruit_BME680_I2C(bmeI2C)            
+                _log.info("Creating BME680 object for device 77 should be the BME680 sensor") 
+                bmex80 = adafruit_bme680.Adafruit_BME680_I2C(bmeI2C)            
            else:
-              bmex80 = adafruit_bme280.Adafruit_BME280_I2C(bmeI2C)
+                _log.info("Creating BME280 object for device 77 should be the BME280 sensor") 
+                bmex80 = adafruit_bme280.Adafruit_BME280_I2C(bmeI2C)
        except:
+           _log.error("Failed to create object for device 77 should be the BME280/680 sensor")
            bmex80 = None
-           _log.info("Unexpected error: bme680")
     else:
-       bme680 = None
+       bmex80 = None
 except:
     _log.critical("Failed to create object for the BME280/680 sensor")
-    bmeI2C = None
+    bmex80 = None
 
 try:
     # Initialize Blynk
