@@ -102,11 +102,13 @@ try:
     # Initialize the sensor.
     if (bmeI2C is not None):
         if (parser.get('droneAir', 'BME680', fallback=False) == "True"):
-            _log.info("Creating BME680 object for device 77 should be the BME680 sensor") 
+            _log.debug("Creating BME680 object for device 77 should be the BME680 sensor") 
             bmex80 = adafruit_bme680.Adafruit_BME680_I2C(bmeI2C)            
+            _log.info("Created BME680 object for device 77 should be the BME680 sensor") 
         else:
-            _log.info("Creating BME280 object for device 77 should be the BME280 sensor") 
+            _log.debug("Creating BME280 object for device 77 should be the BME280 sensor") 
             bmex80 = adafruit_bme280.Adafruit_BME280_I2C(bmeI2C)
+            _log.info("Created BME280 object for device 77 should be the BME280 sensor") 
     else:
        bmex80 = None
 except:
@@ -115,11 +117,19 @@ except:
 
 try:
     # Initialize Blynk
+    _log.debug("Creating blynk object for BLYNK_AUTH " + parser.get('blynk', 'BLYNK_AUTH')) 
     blynk = blynklib.Blynk(parser.get('blynk', 'BLYNK_AUTH'))
     timer = blynktimer.Timer()
+    _log.debug("Created blynk object and timer for BLYNK_AUTH " + parser.get('blynk', 'BLYNK_AUTH')) 
 except:
     _log.critical("Failed to create object for the blynk")
-    bmeI2C = None
+    _log.critical("Set log level to CRITICAL to auto reboot")
+    if (parser.get('logging', 'logLevel', fallback=logging.DEBUG) =="CRITICAL"):
+        os.system('sh /home/pi/updateDroneponics.sh')
+        os.system('sudo reboot')
+    
+    
+    
     
 @blynk.handle_event('write V255')
 def rebooter(pin, value):
