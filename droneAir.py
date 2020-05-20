@@ -139,90 +139,88 @@ def rebooter(pin, value):
     os.system('sh /home/pi/updateDroneponics.sh')
     os.system('sudo reboot')
 
-    @blynk.handle_event("connect")
-    def connect_handler():
-        _log.info("Connected")
-        blynk.virtual_write(250, "Connected")
+@blynk.handle_event("connect")
+def connect_handler():
+    _log.info("Connected")
+    blynk.virtual_write(250, "Connected")
     
 
-    @blynk.handle_event("disconnect")
-    def disconnect_handler():
-        _log.info("Disconnected")
-        blynk.virtual_write(250, "Disconnected")
+@blynk.handle_event("disconnect")
+def disconnect_handler():
+    _log.info("Disconnected")
+blynk.virtual_write(250, "Disconnected")
   
     
-    @timer.register(interval=30, run_once=False)
-    def blynk_data():
-         _log.info("Start of timer.register fx")
-         blynk.set_property(systemLED, 'color', colours[1])
-         blynk.virtual_write(250, "Updating")
-         _log.debug("Going to get timestamp")
-         now = datetime.now()
-         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
-         if(bmex80 is not None):            
-            _log.debug("bmex80 is not None so going to get openweather")
-            openWeather.blynkOpenWeather(blynk)
-            _log.info("Going to update BME sensor with openWeather sea level pressure")
-            bme680.sea_level_pressure = openWeather.getPressure()
+@timer.register(interval=30, run_once=False)
+def blynk_data():
+    _log.info("Start of timer.register fx")
+    blynk.set_property(systemLED, 'color', colours[1])
+    blynk.virtual_write(250, "Updating")
+    _log.debug("Going to get timestamp")
+    now = datetime.now()
+    blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
+    if(bmex80 is not None):            
+        _log.debug("bmex80 is not None so going to get openweather")
+        openWeather.blynkOpenWeather(blynk)
+        _log.info("Going to update BME sensor with openWeather sea level pressure")
+        bme680.sea_level_pressure = openWeather.getPressure()
             
 
-            _log.debug("Update blynk with BME data")
-     #       for alarm in alarmList:
-     #          alarm.test(blynk, "temperature", 1, bme680.temperature) 
-            blynk.virtual_write(1, bmex80.temperature)
-            if (parser.get('droneAir', 'BME680', fallback=False)=="True"): 
-               blynk.virtual_write(2, bmex80.gas)
-            else:
-               blynk.virtual_write(2, None)
-               blynk.set_property(2, 'color', colours['OFFLINE'])
+        _log.debug("Update blynk with BME data")
+        blynk.virtual_write(1, bmex80.temperature)
+        if (parser.get('droneAir', 'BME680', fallback=False)=="True"): 
+            blynk.virtual_write(2, bmex80.gas)
+        else:
+            blynk.virtual_write(2, None)
+            blynk.set_property(2, 'color', colours['OFFLINE'])
             blynk.virtual_write(3, bmex80.humidity)
             blynk.virtual_write(4, bmex80.pressure)
             blynk.virtual_write(5, bmex80.altitude)
         
-            _log.debug("find dew point")
-            t = Temp(bmex80.temperature, 'c')
-            blynk.virtual_write(11, dew_point(temperature=t, humidity=bmex80.humidity))
+        _log.debug("find dew point")
+        t = Temp(bmex80.temperature, 'c')
+        blynk.virtual_write(11, dew_point(temperature=t, humidity=bmex80.humidity))
 
-            _log.debug("set BME form display")
-            drone.setBMEFormOnline(blynkObj=blynk, loggerObj=_log)     
-         else:
-            drone.setBMEFormOffline(blynkObj=blynk, loggerObj=_log)
+        _log.debug("set BME form display")
+        drone.setBMEFormOnline(blynkObj=blynk, loggerObj=_log)     
+    else:
+        drone.setBMEFormOffline(blynkObj=blynk, loggerObj=_log)
 
-         _log.debug("Now work on TSL2591 sensor")
-         if (tsl is not None):
-            _log.debug('Total light: {0:.2f}lux'.format(tsl.lux))
-            _log.debug('Infrared light: {0:d}'.format(tsl.infrared))
-            _log.debug('Visible light: {0:d}'.format(tsl.visible))
-            _log.debug('Full spectrum (IR + visible) light: {0:d}'.format(tsl.full_spectrum))
-            blynk.virtual_write(6, str("{0:.2f}".format(tsl.lux))) 
-            blynk.virtual_write(7, str("{0:d}".format(tsl.infrared)))
-            blynk.virtual_write(8, ("{0:d}".format(tsl.visible)))
-            blynk.virtual_write(9, ("{0:d}".format(tsl.full_spectrum)))
-            _log.debug("Now drone.setTSLFormOnline") 
-            drone.setTSLFormOnline(blynkObj=blynk, loggerObj=_log)
-         else:
-            drone.setTSLFormOnline(blynkObj=blynk, loggerObj=_log)
+    _log.debug("Now work on TSL2591 sensor")
+    if (tsl is not None):
+        _log.debug('Total light: {0:.2f}lux'.format(tsl.lux))
+        _log.debug('Infrared light: {0:d}'.format(tsl.infrared))
+        _log.debug('Visible light: {0:d}'.format(tsl.visible))
+        _log.debug('Full spectrum (IR + visible) light: {0:d}'.format(tsl.full_spectrum))
+        blynk.virtual_write(6, str("{0:.2f}".format(tsl.lux))) 
+        blynk.virtual_write(7, str("{0:d}".format(tsl.infrared)))
+        blynk.virtual_write(8, ("{0:d}".format(tsl.visible)))
+        blynk.virtual_write(9, ("{0:d}".format(tsl.full_spectrum)))
+        _log.debug("Now drone.setTSLFormOnline") 
+        drone.setTSLFormOnline(blynkObj=blynk, loggerObj=_log)
+    else:
+        drone.setTSLFormOnline(blynkObj=blynk, loggerObj=_log)
 
-         _log.debug("Now work on mhz19b sensor")
-         mhz19b = mh_z19.read()  
-         if mhz19b is not None:
-             blynk.virtual_write(10, '{0:d}'.format(mhz19b['co2']))
-             _log.info('CO2: {0:d}'.format(mhz19b['co2']))
-             drone.setMHZFormOnline(blynkObj=blynk, loggerObj=_log)
-             _log.info("blynkBridge BLYNK_AUTH = " + parser.get('blynkBridge', 'BLYNK_AUTH', fallback="Fallback"))
-             if (parser.get('blynkBridge', 'BLYNK_AUTH', fallback=None) is not None):
-                 _log.info("Send CO2 data via blynkBridge")
-                 blynkBridge = blynklib.Blynk(parser.get('blynkBridge', 'BLYNK_AUTH'))
-                 blynkBridge.run()
-                 blynkBridge.virtual_write(parser.get('blynkBridge', 'CO2_VPIN', fallback=10), '{0:d}'.format(mhz19b['co2']))
-                 _log.info("blynkBridge CO2 data sent")
-         else:
-             blynk.virtual_write(98, 'Unexpected error: mhz19b' + '\n')
-             _log.error('Unexpected error: mhz19b')
-             drone.setMHZFormOffline(blynkObj=blynk, loggerObj=_log)
-         blynk.virtual_write(250, "Running")
-         blynk.set_property(systemLED, 'color', colours[0])
-         _log.debug("End of timer.register fx")
+    _log.debug("Now work on mhz19b sensor")
+    mhz19b = mh_z19.read()  
+    if mhz19b is not None:
+        blynk.virtual_write(10, '{0:d}'.format(mhz19b['co2']))
+        _log.info('CO2: {0:d}'.format(mhz19b['co2']))
+        drone.setMHZFormOnline(blynkObj=blynk, loggerObj=_log)
+        _log.info("blynkBridge BLYNK_AUTH = " + parser.get('blynkBridge', 'BLYNK_AUTH', fallback="Fallback"))
+        if (parser.get('blynkBridge', 'BLYNK_AUTH', fallback=None) is not None):
+            _log.info("Send CO2 data via blynkBridge")
+            blynkBridge = blynklib.Blynk(parser.get('blynkBridge', 'BLYNK_AUTH'))
+            blynkBridge.run()
+            blynkBridge.virtual_write(parser.get('blynkBridge', 'CO2_VPIN', fallback=10), '{0:d}'.format(mhz19b['co2']))
+            _log.info("blynkBridge CO2 data sent")
+    else:
+        blynk.virtual_write(98, 'Unexpected error: mhz19b' + '\n')
+        _log.error('Unexpected error: mhz19b')
+        drone.setMHZFormOffline(blynkObj=blynk, loggerObj=_log)
+    blynk.virtual_write(250, "Running")
+    blynk.set_property(systemLED, 'color', colours[0])
+    _log.debug("End of timer.register fx")
         
 _log.info("Created all the objects. Now starting the drone")        
 blynk.run() #need to call here so you can update app outside main while loop    
@@ -262,7 +260,7 @@ while True:
         _log.info("--------------------------blynk.run()--------------------------")
         blynk.run()
         _log.info("--------------------------timer.run()--------------------------")
-      #  timer.run()
+        timer.run()
         _log.info("--------------------------while loop--------------------------")
     except: 
        _log.error("in main loop except")
