@@ -115,18 +115,20 @@ except:
     _log.critical("Failed to create object for device 77 should be the BME280/680 sensor")
     bmex80 = None
 
-try:
-    # Initialize Blynk
-    _log.debug("Creating blynk object for BLYNK_AUTH " + parser.get('blynk', 'BLYNK_AUTH')) 
-    blynk = blynklib.Blynk(parser.get('blynk', 'BLYNK_AUTH'))
-    timer = blynktimer.Timer()
-    _log.debug("Created blynk object and timer for BLYNK_AUTH " + parser.get('blynk', 'BLYNK_AUTH')) 
-except:
-    _log.critical("Failed to create object for the blynk")
-    _log.critical("Set log level to CRITICAL to auto reboot")
-    if (parser.get('logging', 'logLevel', fallback=logging.DEBUG) =="CRITICAL"):
-        os.system('sh /home/pi/updateDroneponics.sh')
-        os.system('sudo reboot')
+blynk = blynklib.Blynk(parser.get('blynk', 'BLYNK_AUTH'))
+timer = blynktimer.Timer()
+#try:
+#    # Initialize Blynk
+#    _log.debug("Creating blynk object for BLYNK_AUTH " + parser.get('blynk', 'BLYNK_AUTH')) 
+#    blynk = blynklib.Blynk(parser.get('blynk', 'BLYNK_AUTH'))
+#    timer = blynktimer.Timer()
+#    _log.debug("Created blynk object and timer for BLYNK_AUTH " + parser.get('blynk', 'BLYNK_AUTH')) 
+#except:
+#    _log.critical("Failed to create object for the blynk")
+##    _log.critical("Set log level to CRITICAL to auto reboot")
+#    if (parser.get('logging', 'logLevel', fallback=logging.DEBUG) =="CRITICAL"):
+ #       os.system('sh /home/pi/updateDroneponics.sh')
+ #       os.system('sudo reboot')
     
     
     
