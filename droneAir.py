@@ -231,7 +231,7 @@ blynk.virtual_write(251, drone.gethostname())
 blynk.virtual_write(252, drone.get_ip())        
 blynk.virtual_write(98, "clr")
 if (parser.get('logging', 'logLevel', fallback=logging.CRITICAL) =="DEBUG"):
-    if (parser.get('droneAir', 'I2C-0') == "True"):
+    if (parser.get('droneAir', 'I2C-0', fallback=False) == "True"):
         _log.debug("Posting I2C 0 devices to app")
         p = subprocess.Popen(['i2cdetect', '-y','0'],stdout=subprocess.PIPE,)
         blynk.virtual_write(98, "I2C 0 devices"+'\n')
