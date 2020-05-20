@@ -48,6 +48,11 @@ consoleHandler = logging.StreamHandler()
 consoleHandler.setFormatter(logFormatter)
 _log.addHandler(consoleHandler)
 _log.setLevel(parser.get('logging', 'logLevel', fallback=logging.CRITICAL))
+_log.critical("critical")
+_log.error("error")
+_log.warning("warning")
+_log.info("info")
+_log.debug("debug")
 
 try:
     
