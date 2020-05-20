@@ -204,23 +204,22 @@ try:
         blynk.set_property(systemLED, 'color', colours[0])
         _log.debug("End of timer.register fx")
         
-    while True:
-        blynk.run()
-        if bootup :
-           blynk.virtual_write(250, "Start-up")
-           blynk.virtual_write(251, drone.gethostname())
-           blynk.virtual_write(252, drone.get_ip())        
-           blynk.virtual_write(98, "clr")
-           if (parser.get('droneAir', 'BME680') == "True"):                
-                _log.info("Posting I2C 0 devices to app")
-                p = subprocess.Popen(['i2cdetect', '-y','0'],stdout=subprocess.PIPE,)
-                #cmdout = str(p.communicate())        
-                blynk.virtual_write(98, "I2C 0 devices"+'\n')
-                for i in range(0,9):
-                    blynk.virtual_write(98, str(p.stdout.readline()) + '\n')
+        
+        
+    blynk.virtual_write(250, "Start-up")
+    blynk.virtual_write(251, drone.gethostname())
+    blynk.virtual_write(252, drone.get_ip())        
+    blynk.virtual_write(98, "clr")
+    if (parser.get('droneAir', 'BME680') == "True"):                
+         _log.info("Posting I2C 0 devices to app")
+         p = subprocess.Popen(['i2cdetect', '-y','0'],stdout=subprocess.PIPE,)
+         #cmdout = str(p.communicate())        
+         blynk.virtual_write(98, "I2C 0 devices"+'\n')
+         for i in range(0,9):
+             blynk.virtual_write(98, str(p.stdout.readline()) + '\n')
            else:
-                _log.info("No I2C 0 ")
-                blynk.virtual_write(98, "No I2C 0 devices"+'\n')
+             _log.info("No I2C 0 ")
+             blynk.virtual_write(98, "No I2C 0 devices"+'\n')
             
            _log.info("Posting I2C 1 devices to app")
            blynk.virtual_write(98, "I2C 1 devices"+'\n')
@@ -228,23 +227,25 @@ try:
            #cmdout = str(p.communicate())
            for i in range(0,9):
                 blynk.virtual_write(98, str(q.stdout.readline()) + '\n')
-           x=1
-           for alarm in alarmList:
-                alarm.display(blynk,x)
-                x=x+1
-           bootup = False
-           _log.debug("Just about to complete Booting")
-           now = datetime.now()
-           blynk.virtual_write(99, now.strftime("%d/%m/%Y %H:%M:%S"))
-           blynk.virtual_write(systemLED, 255)
-           drone.setFormOnline(blynkObj=blynk, loggerObj=_log, Msg="System now updated and restarted")
-           blynk.virtual_write(255, 0)
-           _log.info('Just Booted')
-        _log.debug("About to call timer.run() and start the timer")
+    x=1
+    for alarm in alarmList:
+         alarm.display(blynk,x)
+         x=x+1
+    bootup = False
+    _log.debug("Just about to complete Booting")
+    now = datetime.now()
+    blynk.virtual_write(99, now.strftime("%d/%m/%Y %H:%M:%S"))
+    blynk.virtual_write(systemLED, 255)
+    drone.setFormOnline(blynkObj=blynk, loggerObj=_log, Msg="System now updated and restarted")
+    blynk.virtual_write(255, 0)
+    _log.info('Completed Boot')
+        
+    while True:
+        blynk.run()
         timer.run()
-        _log.debug("timer.run() called and timer now running")
+        _log.debug("End of main while loop")
 except: 
-   _log.info("in main loop except")
+   _log.error("in main loop except")
    blynk.virtual_write(250, "Crashed")
    drone.setFormOffline(blynkObj=blynk, loggerObj=_log)
    os.system('sh /home/pi/updateDroneponics.sh')
