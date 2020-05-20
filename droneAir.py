@@ -151,7 +151,7 @@ def rebooter(pin, value):
         now = datetime.now()
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
           
-        if(bmex80 is not None):            
+         if(bmex80 is not None):            
             _log.debug("bmex80 is not None so going to get openweather")
             openWeather.blynkOpenWeather(blynk)
             _log.info("Going to update BME sensor with openWeather sea level pressure")
