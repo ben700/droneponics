@@ -100,20 +100,16 @@ except:
 try:
     # Initialize the sensor.
     if (bmeI2C is not None):
-       try:
-           if (parser.get('droneAir', 'BME680', fallback=False) == "True"):
-                _log.info("Creating BME680 object for device 77 should be the BME680 sensor") 
-                bmex80 = adafruit_bme680.Adafruit_BME680_I2C(bmeI2C)            
-           else:
-                _log.info("Creating BME280 object for device 77 should be the BME280 sensor") 
-                bmex80 = adafruit_bme280.Adafruit_BME280_I2C(bmeI2C)
-       except:
-           _log.error("Failed to create object for device 77 should be the BME280/680 sensor")
-           bmex80 = None
+        if (parser.get('droneAir', 'BME680', fallback=False) == "True"):
+            _log.info("Creating BME680 object for device 77 should be the BME680 sensor") 
+            bmex80 = adafruit_bme680.Adafruit_BME680_I2C(bmeI2C)            
+        else:
+            _log.info("Creating BME280 object for device 77 should be the BME280 sensor") 
+            bmex80 = adafruit_bme280.Adafruit_BME280_I2C(bmeI2C)
     else:
        bmex80 = None
 except:
-    _log.critical("Failed to create object for the BME280/680 sensor")
+    _log.critical("Failed to create object for device 77 should be the BME280/680 sensor")
     bmex80 = None
 
 try:
