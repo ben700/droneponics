@@ -117,6 +117,8 @@ except:
 
 blynk = blynklib.Blynk(parser.get('blynk', 'BLYNK_AUTH'))
 timer = blynktimer.Timer()
+blynk.run()
+timer.run()
 #try:
 #    # Initialize Blynk
 #    _log.debug("Creating blynk object for BLYNK_AUTH " + parser.get('blynk', 'BLYNK_AUTH')) 
