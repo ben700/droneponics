@@ -120,25 +120,29 @@ try:
         button_state = int(value[0])
         blynk.set_property(10+pin, 'color', colours[button_state])
         blynk.set_property(pin, 'onBackColor', colours[button_state])
-        blynk.set_property(pin, 'color', colours[button_state])
         
         if (button_state==0 ):
+            blynk.set_property(pin, 'color', colours[1])
             GPIO.output(relays[1],0)
             blynk.virtual_write(250, "Stopped")
             blynk.virtual_write(98, "Stopped"+ '\n')
         if (button_state==1 ):
+            blynk.set_property(pin, 'color', colours[0])
             GPIO.output(relays[1],1)
             blynk.virtual_write(250, "Running")
             blynk.virtual_write(98, "Running"+ '\n')
         elif (button_state==2):
+            blynk.set_property(pin, 'color', colours[0])
             GPIO.output(relays[1],0)
             blynk.virtual_write(250, "50-50")
             blynk.virtual_write(98, "50-50"+ '\n')
         elif (button_state==3):
+            blynk.set_property(pin, 'color', colours[0])
             GPIO.output(relays[1],0)
             blynk.virtual_write(250, "Just-on")
             blynk.virtual_write(98, "Just-on"+ '\n')
         elif (button_state==4):
+            blynk.set_property(pin, 'color', colours[0])
             GPIO.output(relays[1],0)
             blynk.virtual_write(250, "Dry")
             blynk.virtual_write(98, "Dry"+ '\n')
@@ -196,10 +200,10 @@ try:
         seconds_since_midnight = int(time.time() - time.mktime(today.timetuple()))
         
         if( startTime < seconds_since_midnight and stopTime > seconds_since_midnight):
-            iValue = 1
+            iValue = "1"
             blynk.virtual_write(98,"Relay is on")    
         else:
-            iValue = 0
+            iValue = "0"
             blynk.virtual_write(98,"Relay is off")
         now = datetime.now()
         blynk.virtual_write(99, now.strftime("%d/%m/%Y %H:%M:%S"))
