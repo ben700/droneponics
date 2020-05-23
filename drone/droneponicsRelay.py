@@ -9,6 +9,9 @@ import time
 
         
 def droneRelayWriteHandler(pin, button_state, blynk, relays):
+        if button_state not in (0,1,"0","1"):
+            print ("button_state was " + str(button_state) + " so updated to 0")
+            button_state = 0
         now = datetime.now()
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
         blynk.virtual_write(98, "Change state of button "+ str(pin) + '\n')
