@@ -98,22 +98,31 @@ except:
     _log.critical("Can't find I2C device 77 should be the BME280/680 sensor")
     bmeI2C = None
 
+bme680 = None
+bme280 = None
+
 try:
     # Initialize the sensor.
     if (bmeI2C is not None):
         if (parser.get('droneAir', 'BME680', fallback=False) == "True"):
             _log.debug("Creating BME680 object for device 77 should be the BME680 sensor") 
-            bmex80 = adafruit_bme680.Adafruit_BME680_I2C(bmeI2C)            
+     #      bmex80 = adafruit_bme680.Adafruit_BME680_I2C(bmeI2C)     
+            bme680 = adafruit_bme680.Adafruit_BME680_I2C(bmeI2C)     
             _log.info("Created BME680 object for device 77 should be the BME680 sensor") 
         else:
             _log.debug("Creating BME280 object for device 77 should be the BME280 sensor") 
-            bmex80 = adafruit_bme280.Adafruit_BME280_I2C(bmeI2C)
+       #     bmex80 = adafruit_bme280.Adafruit_BME280_I2C(bmeI2C)
+            bme280 = adafruit_bme280.Adafruit_BME280_I2C(bmeI2C)
             _log.info("Created BME280 object for device 77 should be the BME280 sensor") 
     else:
        bmex80 = None
+       bme680 = None
+       bme280 = None
 except:
     _log.critical("Failed to create object for device 77 should be the BME280/680 sensor")
     bmex80 = None
+    bme680 = None
+    bme280 = None
 
 try:
     # Initialize Blynk
@@ -159,29 +168,28 @@ def blynk_data():
     _log.debug("Going to get timestamp")
     now = datetime.now()
     blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
-    if(bmex80 is not None):            
-        _log.debug("bmex80 is not None so going to get openweather")
+    _log.debug("Going to get openweather")
+    openWeather.blynkOpenWeather(blynk)
+    if(bme680 is not None):            
+        _log.debug("bme680 is not None so going to get openweather")
         openWeather.blynkOpenWeather(blynk)
-        _log.info("Going to update BME sensor with openWeather sea level pressure")
-        if (parser.get('droneAir', 'BME680', fallback=False)=="True"): 
-            bmex80.sea_level_pressure = openWeather.getPressure()
-           
-        _log.debug("Update blynk with BME data")
-        blynk.virtual_write(1, bmex80.temperature)
-        _log.debug("Update blynk with data only from BME680")
-        if (parser.get('droneAir', 'BME680', fallback=False)=="True"): 
-            blynk.virtual_write(2, bmex80.gas)
-        else:
-            blynk.virtual_write(2, None)
-            blynk.set_property(2, 'color', colours['OFFLINE'])
-        _log.debug("Update blynk with data from BME280/680")
-        blynk.virtual_write(3, bmex80.humidity)
-        blynk.virtual_write(4, bmex80.pressure)
-        blynk.virtual_write(5, bmex80.altitude)
-        
-        _log.debug("find dew point")
-        t = Temp(bmex80.temperature, 'c')
-        blynk.virtual_write(11, dew_point(temperature=t, humidity=bmex80.humidity))
+        bme680.sea_level_pressure = openWeather.getPressure()
+        blynk.virtual_write(2, bme680.gas)
+        blynk.virtual_write(1, bme680.temperature)
+        blynk.virtual_write(3, bme680.humidity)
+        blynk.virtual_write(4, bme680.pressure)
+        blynk.virtual_write(5, bme680.altitude)
+        t = Temp(bme680.temperature, 'c')
+        blynk.virtual_write(11, dew_point(temperature=t, humidity=bme680.humidity))
+    else:           
+        blynk.virtual_write(2, "BME280")
+        blynk.set_property(2, 'color', colours['OFFLINE'])
+        blynk.virtual_write(1, bme280.temperature)
+        blynk.virtual_write(3, bme280.humidity)
+        blynk.virtual_write(4, bme280.pressure)
+        blynk.virtual_write(5, bme280.altitude)
+        t = Temp(bme280.temperature, 'c')
+        blynk.virtual_write(11, dew_point(temperature=t, humidity=bme280.humidity))
 
         _log.debug("set BME form display")
         drone.setBMEFormOnline(blynkObj=blynk, loggerObj=_log)     
