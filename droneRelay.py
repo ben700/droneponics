@@ -109,8 +109,6 @@ try:
     @blynk.handle_event('write V1')
     def write_handler(pin, value):
         _log.debug("droneRelayWriteHandler on pin " + str(pin) + " value is " + str(value[0]))
-        if (str(value[0]) == "0.0"):
-            value[0] = 0
         global button_state
         now = datetime.now()
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
@@ -119,6 +117,7 @@ try:
         
         button_state = int(value[0])
         
+        blynk.virtual_write(98, "droneRelayWriteHandler on pin " + str(pin) + " value is " + str(button_state) + '/n')
             
         if (button_state==0 ):
             blynk.set_property(pin, 'onBackColor', colours[0])
