@@ -107,7 +107,8 @@ try:
         if (parser.get('droneAir', 'BME680', fallback=False) == "True"):
             _log.debug("Creating BME680 object for device 77 should be the BME680 sensor") 
      #      bmex80 = adafruit_bme680.Adafruit_BME680_I2C(bmeI2C)     
-            bme680 = adafruit_bme680.Adafruit_BME680_I2C(bmeI2C)     
+            bme680 = adafruit_bme680.Adafruit_BME680_I2C(bmeI2C)
+            _log.debug("Temperature: %0.1f C" % bme680.temperature)
             _log.info("Created BME680 object for device 77 should be the BME680 sensor") 
         else:
             _log.debug("Creating BME280 object for device 77 should be the BME280 sensor") 
