@@ -241,7 +241,7 @@ if (parser.get('logging', 'logLevel', fallback=logging.CRITICAL) =="DEBUG"):
     q = subprocess.Popen(['i2cdetect', '-y','1'],stdout=subprocess.PIPE,)
     for i in range(0,9):
         blynk.virtual_write(98, str(q.stdout.readline()) + '\n')
-    x=1
+x=1
 for alarm in alarmList:
     alarm.display(blynk,x)
     x=x+1
