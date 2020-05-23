@@ -159,8 +159,8 @@ try:
         
     @blynk.handle_event('write V3')
     def write_handler(pin, value):
-        _log.debug("isinstance(value[0], int) = " + isinstance(value[0], int))
-        _log.debug("isinstance(value[0], float) = " + isinstance(value[0], float))
+        _log.debug("isinstance(value[0], int) = " + str(isinstance(value[0], int)))
+        _log.debug("isinstance(value[0], float) = " + str(isinstance(value[0], float)))
         if (isinstance(value[0], float)):
             _log.debug("droneRelayWriteHandler on pin " + str(pin) + " value was float " + str(value[0]))            
         if (isinstance(value[0], int)):
