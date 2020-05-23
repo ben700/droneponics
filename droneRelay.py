@@ -1,7 +1,7 @@
 
 
 # The ID and range of a sample spreadsheet.
-colours = {1: '#FF0000', 0: '#00FF00', '0': '#00FF00', '1': '#FF0000', 2: '#00FF00', 3: '#80FF00',4: '#00FF80', 5: '#80FF80','OFFLINE': '#0000FF', 'ONLINE': '#00FF00', 'UNAVILABLE': '#002700'}
+colours = {1: '#FF0000', 0: '#00FF00', '0': '#00FF00', 1: '#FF0000', '1': '#FF0000', 2: '#00FF00', 3: '#80FF00',4: '#00FF80', 5: '#80FF80','OFFLINE': '#0000FF', 'ONLINE': '#00FF00', 'UNAVILABLE': '#002700'}
 systemLED=101
 
 import socket
@@ -109,7 +109,7 @@ try:
     def write_handler(pin, value):
         _log.debug("droneRelayWriteHandler on pin " + str(pin) + " value is " + str(value[0]))
         try:
-            colours(value[0])
+            c=colours(value[0])
         except:
             value[0] = 0
         _log.debug("droneRelayWriteHandler on pin " + str(pin) + " value is " + str(value[0]))            
@@ -151,7 +151,7 @@ try:
     def write_handler(pin, value):
         _log.debug("droneRelayWriteHandler on pin " + str(pin) + " value is " + str(value[0]))
         try:
-            colours(value[0])
+            c=colours(value[0])
         except:
             value[0] = 0
         _log.debug("droneRelayWriteHandler on pin " + str(pin) + " value is " + str(value[0]))            
@@ -172,7 +172,7 @@ try:
     def write_handler(pin, value):
         _log.debug("droneRelayWriteHandler on pin " + str(pin) + " value is " + str(value[0]))
         try:
-            colours(value[0])
+            c=colours(value[0])
         except:
             value[0] = 0
         _log.debug("droneRelayWriteHandler on pin " + str(pin) + " value is " + str(value[0]))            
@@ -182,7 +182,7 @@ try:
     def write_handler(pin, value):
         _log.debug("droneRelayWriteHandler on pin " + str(pin) + " value is " + str(value[0]))
         try:
-            colours(value[0])
+            c=colours(value[0])
         except:
             value[0] = 0
         _log.debug("droneRelayWriteHandler on pin " + str(pin) + " value is " + str(value[0]))            
@@ -192,7 +192,7 @@ try:
     def write_handler(pin, value):
         _log.debug("droneRelayWriteHandler on pin " + str(pin) + " value is " + str(value[0]))
         try:
-            colours(value[0])
+            c=colours(value[0])
         except:
             value[0] = 0
         _log.debug("droneRelayWriteHandler on pin " + str(pin) + " value is " + str(value[0]))            
@@ -202,7 +202,7 @@ try:
     def write_handler(pin, value):
         _log.debug("droneRelayWriteHandler on pin " + str(pin) + " value is " + str(value[0]))
         try:
-            colours(value[0])
+            c=colours(value[0])
         except:
             value[0] = 0
         _log.debug("droneRelayWriteHandler on pin " + str(pin) + " value is " + str(value[0]))            
