@@ -122,27 +122,27 @@ try:
         blynk.set_property(pin, 'onBackColor', colours[button_state])
         
         if (button_state==0 ):
-            blynk.set_property(pin, 'color', colours[1])
+            blynk.set_property(pin, 'color', colours[0])
             GPIO.output(relays[1],0)
             blynk.virtual_write(250, "Stopped")
             blynk.virtual_write(98, "Stopped"+ '\n')
         if (button_state==1 ):
-            blynk.set_property(pin, 'color', colours[0])
+            blynk.set_property(pin, 'color', colours[1])
             GPIO.output(relays[1],1)
             blynk.virtual_write(250, "Running")
             blynk.virtual_write(98, "Running"+ '\n')
         elif (button_state==2):
-            blynk.set_property(pin, 'color', colours[0])
+            blynk.set_property(pin, 'color', colours[1])
             GPIO.output(relays[1],0)
             blynk.virtual_write(250, "50-50")
             blynk.virtual_write(98, "50-50"+ '\n')
         elif (button_state==3):
-            blynk.set_property(pin, 'color', colours[0])
+            blynk.set_property(pin, 'color', colours[1])
             GPIO.output(relays[1],0)
             blynk.virtual_write(250, "Just-on")
             blynk.virtual_write(98, "Just-on"+ '\n')
         elif (button_state==4):
-            blynk.set_property(pin, 'color', colours[0])
+            blynk.set_property(pin, 'color', colours[1])
             GPIO.output(relays[1],0)
             blynk.virtual_write(250, "Dry")
             blynk.virtual_write(98, "Dry"+ '\n')
