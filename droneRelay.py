@@ -160,7 +160,10 @@ try:
     @blynk.handle_event('write V3')
     def write_handler(pin, value):
         if (isinstance(value[0], float)):
-            value[0]=0
+            _log.debug("droneRelayWriteHandler on pin " + str(pin) + " value was float " + str(value[0]))            
+        if (isinstance(value[0], int)):
+            _log.debug("droneRelayWriteHandler on pin " + str(pin) + " value was int " + str(value[0]))            
+            
         _log.debug("droneRelayWriteHandler on pin " + str(pin) + " value is " + str(value[0]))            
         drone.droneRelayWriteHandler(pin, value[0], blynk, relays)
         
