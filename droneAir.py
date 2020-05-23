@@ -181,7 +181,9 @@ def blynk_data():
         blynk.virtual_write(5, bme680.altitude)
         t = Temp(bme680.temperature, 'c')
         blynk.virtual_write(11, dew_point(temperature=t, humidity=bme680.humidity))
-    else:           
+        _log.debug("set BME form display")
+        drone.setBMEFormOnline(blynkObj=blynk, loggerObj=_log)     
+    elif(bme680 is not None):           
         blynk.virtual_write(2, "BME280")
         blynk.set_property(2, 'color', colours['OFFLINE'])
         blynk.virtual_write(1, bme280.temperature)
@@ -190,7 +192,6 @@ def blynk_data():
         blynk.virtual_write(5, bme280.altitude)
         t = Temp(bme280.temperature, 'c')
         blynk.virtual_write(11, dew_point(temperature=t, humidity=bme280.humidity))
-
         _log.debug("set BME form display")
         drone.setBMEFormOnline(blynkObj=blynk, loggerObj=_log)     
     else:
