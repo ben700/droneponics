@@ -116,36 +116,28 @@ try:
         blynk.virtual_write(250, "Updating")
         
         button_state = int(value[0])
-        
+        blynk.set_property(pin, 'onBackColor', colours[button_state])
+        blynk.set_property(10+pin, 'color', colours[button_state])
+            
         blynk.virtual_write(98, "droneRelayWriteHandler on pin " + str(pin) + " value is " + str(button_state) + '/n')
             
         if (button_state==0 ):
-            blynk.set_property(pin, 'onBackColor', colours[0])
-            blynk.set_property(10+pin, 'color', colours[1])
             GPIO.output(relays[1],0)
             blynk.virtual_write(250, "Stopped")
             blynk.virtual_write(98, "Stopped"+ '\n')
         if (button_state==1 ):
-            blynk.set_property(pin, 'onBackColor', colours[1])
-            blynk.set_property(10+pin, 'color', colours[0])
             GPIO.output(relays[1],1)
             blynk.virtual_write(250, "Running")
             blynk.virtual_write(98, "Running"+ '\n')
         elif (button_state==2):
-            blynk.set_property(pin, 'onBackColor', colours[1])
-            blynk.set_property(10+pin, 'color', colours[0])
             GPIO.output(relays[1],0)
             blynk.virtual_write(250, "50-50")
             blynk.virtual_write(98, "50-50"+ '\n')
         elif (button_state==3):
-            blynk.set_property(pin, 'onBackColor', colours[1])
-            blynk.set_property(10+pin, 'color', colours[0])
             GPIO.output(relays[1],0)
             blynk.virtual_write(250, "Just-on")
             blynk.virtual_write(98, "Just-on"+ '\n')
         elif (button_state==4):
-            blynk.set_property(pin, 'onBackColor', colours[1])
-            blynk.set_property(10+pin, 'color', colours[0])
             GPIO.output(relays[1],0)
             blynk.virtual_write(250, "Dry")
             blynk.virtual_write(98, "Dry"+ '\n')
