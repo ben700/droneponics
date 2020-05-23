@@ -159,10 +159,9 @@ try:
         
     @blynk.handle_event('write V3')
     def write_handler(pin, value):
-        _log.debug("droneRelayWriteHandler on pin " + str(pin) + " value is " + str(value[0]))
         try:
+            _log.debug("droneRelayWriteHandler on pin " + str(pin) + " value is " + str(value[0]))
             _log.debug("droneRelayWriteHandler on pin " + str(pin) + " colour will be " + colours(value[0]))
-            c=colours(value[0])
         except:
             _log.debug("needed to change value[0] from " + str(value[0]))
             value[0] = 0
