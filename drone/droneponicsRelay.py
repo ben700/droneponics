@@ -20,10 +20,9 @@ def droneRelayWriteHandler(pin, button_state, blynk, relays):
         blynk.set_property(pin, 'onBackColor', colours[button_state])
         if(button_state == '0'):
            GPIO.output(relays[pin],0)
-           blynk.virtual_write(250, "Running")
         elif (button_state == '1'):
            GPIO.output(relays[pin],1)
-           blynk.virtual_write(250, "Waiting") 
+        blynk.virtual_write(250, "Running")
         blynk.set_property(systemLED, 'color', colours[0])        
         
 def turnButtonsOffline(blynk):
