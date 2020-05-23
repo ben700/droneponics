@@ -108,6 +108,11 @@ try:
     @blynk.handle_event('write V1')
     def write_handler(pin, value):
         _log.debug("droneRelayWriteHandler on pin " + str(pin) + " value is " + str(value[0]))
+        try:
+            colours(value[0])
+        except:
+            value[0] = 0
+        _log.debug("droneRelayWriteHandler on pin " + str(pin) + " value is " + str(value[0]))            
         global button_state
         now = datetime.now()
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
@@ -145,36 +150,71 @@ try:
     @blynk.handle_event('write V2')
     def write_handler(pin, value):
         _log.debug("droneRelayWriteHandler on pin " + str(pin) + " value is " + str(value[0]))
+        try:
+            colours(value[0])
+        except:
+            value[0] = 0
+        _log.debug("droneRelayWriteHandler on pin " + str(pin) + " value is " + str(value[0]))            
         drone.droneRelayWriteHandler(pin, value[0], blynk, relays)
         
     @blynk.handle_event('write V3')
     def write_handler(pin, value):
         _log.debug("droneRelayWriteHandler on pin " + str(pin) + " value is " + str(value[0]))
+        try:
+            colours(value[0])
+        except:
+            value[0] = 0
+        _log.debug("droneRelayWriteHandler on pin " + str(pin) + " value is " + str(value[0]))            
         drone.droneRelayWriteHandler(pin, value[0], blynk, relays)
         
     @blynk.handle_event('write V4')
     def write_handler(pin, value):
         _log.debug("droneRelayWriteHandler on pin " + str(pin) + " value is " + str(value[0]))
+        try:
+            colours(value[0])
+        except:
+            value[0] = 0
+        _log.debug("droneRelayWriteHandler on pin " + str(pin) + " value is " + str(value[0]))            
         drone.droneRelayWriteHandler(pin, value[0], blynk, relays)
         
     @blynk.handle_event('write V5')
     def write_handler(pin, value):
         _log.debug("droneRelayWriteHandler on pin " + str(pin) + " value is " + str(value[0]))
+        try:
+            colours(value[0])
+        except:
+            value[0] = 0
+        _log.debug("droneRelayWriteHandler on pin " + str(pin) + " value is " + str(value[0]))            
         drone.droneRelayWriteHandler(pin, value[0],blynk, relays)
         
     @blynk.handle_event('write V6')
     def write_handler(pin, value):
         _log.debug("droneRelayWriteHandler on pin " + str(pin) + " value is " + str(value[0]))
+        try:
+            colours(value[0])
+        except:
+            value[0] = 0
+        _log.debug("droneRelayWriteHandler on pin " + str(pin) + " value is " + str(value[0]))            
         drone.droneRelayWriteHandler(pin, value[0],blynk, relays)
         
     @blynk.handle_event('write V7')
     def write_handler(pin, value):
         _log.debug("droneRelayWriteHandler on pin " + str(pin) + " value is " + str(value[0]))
+        try:
+            colours(value[0])
+        except:
+            value[0] = 0
+        _log.debug("droneRelayWriteHandler on pin " + str(pin) + " value is " + str(value[0]))            
         drone.droneRelayWriteHandler(pin, value[0], blynk, relays)
         
     @blynk.handle_event('write V8')
     def write_handler(pin, value):
         _log.debug("droneRelayWriteHandler on pin " + str(pin) + " value is " + str(value[0]))
+        try:
+            colours(value[0])
+        except:
+            value[0] = 0
+        _log.debug("droneRelayWriteHandler on pin " + str(pin) + " value is " + str(value[0]))            
         startTime  =int(value[0])
         stopTime = int(value[1])
         
