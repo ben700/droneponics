@@ -108,20 +108,21 @@ try:
             _log.debug("Creating BME680 object for device 77 should be the BME680 sensor") 
      #      bmex80 = adafruit_bme680.Adafruit_BME680_I2C(bmeI2C)     
             bme680 = adafruit_bme680.Adafruit_BME680_I2C(bmeI2C)
-          #  _log.debug("Temperature: %0.1f C" % bme680.temperature)
             _log.info("Created BME680 object for device 77 should be the BME680 sensor") 
-        else:
+            test = bme680.temperature
+            _log.info("BME680 object for device 77 tested and working OK") 
+         else:
             _log.debug("Creating BME280 object for device 77 should be the BME280 sensor") 
        #     bmex80 = adafruit_bme280.Adafruit_BME280_I2C(bmeI2C)
             bme280 = adafruit_bme280.Adafruit_BME280_I2C(bmeI2C)
-            _log.info("Created BME280 object for device 77 should be the BME280 sensor") 
+            _log.info("Created BME280 object for device 77 should be the BME280 sensor")
+            test = bme280.temperature
+            _log.info("BME280 object for device 77 tested and working OK") 
     else:
-       bmex80 = None
        bme680 = None
        bme280 = None
 except:
-    _log.critical("Failed to create object for device 77 should be the BME280/680 sensor")
-    bmex80 = None
+    _log.critical("Failed to create and test object for device 77 should be the BME280/680 sensor")
     bme680 = None
     bme280 = None
 
