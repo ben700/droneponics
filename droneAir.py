@@ -163,7 +163,7 @@ def blynk_data():
         _log.debug("bmex80 is not None so going to get openweather")
         openWeather.blynkOpenWeather(blynk)
         _log.info("Going to update BME sensor with openWeather sea level pressure")
-        bme680.sea_level_pressure = openWeather.getPressure()
+        bmex80.sea_level_pressure = openWeather.getPressure()
             
 
         _log.debug("Update blynk with BME data")
