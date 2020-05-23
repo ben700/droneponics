@@ -129,7 +129,8 @@ try:
                 bme680 = None
                 bme280 = None
                 _log.critical("Failed to test object for device 77 should be the BME680 sensor")
-                blynk.notify_msg("BME680 sensor fail on " + drone.gethostname())
+                blynklib.Blynk.notify_msg("BME680 sensor fail on " + drone.gethostname())
+                blynklib.Blynk.email("{DEVICE_OWNER_EMAIL}", "{DEVICE_NAME} : Alarm", "Your {DEVICE_NAME} has critical BME680 error!") 
         else:
             _log.debug("Creating BME280 object for device 77 should be the BME280 sensor") 
        #     bmex80 = adafruit_bme280.Adafruit_BME280_I2C(bmeI2C)
