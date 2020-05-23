@@ -15,7 +15,7 @@ def droneRelayWriteHandler(pin, button_state, blynk, relays):
         blynk.set_property(systemLED, 'color', colours[1])
         blynk.virtual_write(250, "Updating")
         print(button_state)
-        if (button_state == 1):
+        if (button_state == "1"):
            print("set button on")     
            blynk.set_property(10+pin, 'color', colours[1])
            blynk.set_property(pin, 'onBackColor', colours[1])
