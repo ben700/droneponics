@@ -11,16 +11,15 @@ import time
 def droneRelayWriteHandler(pin, button_state, blynk, relays):
         now = datetime.now()
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
-        blynk.virtual_write(98, "Change state of button "+ str(pin) + '\n')
     #    blynk.set_property(systemLED, 'color', colours[1])
    #     blynk.virtual_write(250, "Updating")
    #     print("[" + str(button_state) +"]")
         if (button_state in (1,"1",'1')):
-           print("set button on")     
+           blynk.virtual_write(98, "Change state of button "+ str(pin) + " now on" + '\n')
            blynk.set_property(10+pin, 'color', colours[1])
            GPIO.output(relays[pin],1)
         else:
-           print("set button off")     
+           blynk.virtual_write(98, "Change state of button "+ str(pin) + " now off" + '\n')
            blynk.set_property(10+pin, 'color', colours[0])
            GPIO.output(relays[pin],0)
     #    blynk.virtual_write(250, "Running")
