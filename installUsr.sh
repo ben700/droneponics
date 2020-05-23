@@ -5,7 +5,7 @@ sudo pip3 install adafruit-circuitpython-tsl2591
 sudo pip3 install python-tsl2591
 pip3 install adafruit-blinka
 
-pip3 install adafruit-circuitpython-bme280
+sudo pip3 install adafruit-circuitpython-bme280
 sudo pip3 install adafruit-circuitpython-bme680
 sudo pip3 install meteocalc
 pip3 install adafruit-circuitpython-lis3dh
