@@ -122,7 +122,7 @@ try:
         blynk.set_property(pin, 'onBackColor', colours[button_state])
         
         if (button_state==0 ):
-            blynk.set_property(pin, 'color', colours[0])
+            blynk.set_property(pin, 'color', colours[1])
             GPIO.output(relays[1],0)
             blynk.virtual_write(250, "Stopped")
             blynk.virtual_write(98, "Stopped"+ '\n')
