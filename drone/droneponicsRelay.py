@@ -19,6 +19,7 @@ def droneRelayWriteHandler(pin, button_state, blynk, relays):
            print("set button on")     
            blynk.set_property(10+pin, 'color', colours[1])
            blynk.set_property(pin, 'onBackColor', colours[1])
+           blynk.set_property(pin, 'offBackColor', colours[1])
            GPIO.output(relays[pin],1)
         else:
            print("set button off")     
