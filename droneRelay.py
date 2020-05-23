@@ -209,14 +209,10 @@ try:
         
     @blynk.handle_event('write V8')
     def write_handler(pin, value):
-        _log.debug("droneRelayWriteHandler on pin " + str(pin) + " value is " + str(value[0]))
-        try:
-            colours(value[0])
-        except:
-            value[0] = 0
-        _log.debug("droneRelayWriteHandler on pin " + str(pin) + " value is " + str(value[0]))            
         startTime  =int(value[0])
         stopTime = int(value[1])
+        _log.debug("droneRelayWriteHandler on pin " + str(pin) + " startTime is " + str(startTime))
+        _log.debug("droneRelayWriteHandler on pin " + str(pin) + " stopTime is " + str(stopTime))            
         
         today = date.today()
         seconds_since_midnight = int(time.time() - time.mktime(today.timetuple()))
