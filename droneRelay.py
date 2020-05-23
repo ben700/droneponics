@@ -154,6 +154,7 @@ try:
         
     @blynk.handle_event('write V3')
     def write_handler(pin, value):
+        _log.debug("write_handler for V3")
         drone.droneRelayWriteHandler(pin, value[0], blynk, relays)
         
     @blynk.handle_event('write V4')
