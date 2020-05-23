@@ -163,19 +163,21 @@ def blynk_data():
         _log.debug("bmex80 is not None so going to get openweather")
         openWeather.blynkOpenWeather(blynk)
         _log.info("Going to update BME sensor with openWeather sea level pressure")
-        bmex80.sea_level_pressure = openWeather.getPressure()
-            
-
+        if (parser.get('droneAir', 'BME680', fallback=False)=="True"): 
+            bmex80.sea_level_pressure = openWeather.getPressure()
+           
         _log.debug("Update blynk with BME data")
         blynk.virtual_write(1, bmex80.temperature)
+        _log.debug("Update blynk with data only from BME680")
         if (parser.get('droneAir', 'BME680', fallback=False)=="True"): 
             blynk.virtual_write(2, bmex80.gas)
         else:
             blynk.virtual_write(2, None)
             blynk.set_property(2, 'color', colours['OFFLINE'])
-            blynk.virtual_write(3, bmex80.humidity)
-            blynk.virtual_write(4, bmex80.pressure)
-            blynk.virtual_write(5, bmex80.altitude)
+        _log.debug("Update blynk with data from BME280/680")
+        blynk.virtual_write(3, bmex80.humidity)
+        blynk.virtual_write(4, bmex80.pressure)
+        blynk.virtual_write(5, bmex80.altitude)
         
         _log.debug("find dew point")
         t = Temp(bmex80.temperature, 'c')
@@ -256,12 +258,8 @@ _log.info("--------------------------Completed Boot--------------------------")
 
 while True:
     try:
-        
-        _log.info("--------------------------blynk.run()--------------------------")
         blynk.run()
-        _log.info("--------------------------timer.run()--------------------------")
         timer.run()
-        _log.info("--------------------------while loop--------------------------")
     except: 
        _log.error("in main loop except")
        blynk.virtual_write(250, "Crashed")
