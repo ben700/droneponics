@@ -159,7 +159,7 @@ def rebooter(pin, value):
 
 @blynk.handle_event("connect")
 def connect_handler():
-    _log.waring("Connected")
+    _log.warning("Connected")
     blynk.virtual_write(250, "Connected")
     
 
