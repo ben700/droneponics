@@ -117,7 +117,7 @@ try:
         blynk.set_property(systemLED, 'color', colours[1])
         blynk.virtual_write(250, "Updating")
         
-        button_state = int(value[0])
+        button_state = int(value[0])-1
         blynk.set_property(10+pin, 'onBackColor', colours[button_state])
         blynk.set_property(pin, 'color', colours[button_state])
             
@@ -200,6 +200,7 @@ try:
         
         if( startTime < seconds_since_midnight and stopTime > seconds_since_midnight):
             if all([CO2, CO2Target]):
+                blynk.virtual_write(98,"CO2Target : "+ str(CO2Target) + " and co2 level : " +str(CO2))    
                 if (CO2 <CO2Target):
                     _log.info("CO2 is less than target")
                     blynk.virtual_write(98,"CO2 Relay is on")    
