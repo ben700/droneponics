@@ -44,7 +44,7 @@ def setFromBlynkLogObjects(*args, **kwargs):
    return blynk, _log
 
 def setFormOnline(*args, **kwargs):
-   blynk, _log = drone.setFromBlynkLogObjects (kwargs.get('blynkObj', None),kwargs.get('loggerObj', None))  
+   blynk, _log = setFromBlynkLogObjects (kwargs.get('blynkObj', None),kwargs.get('loggerObj', None))  
    _log.debug("setFormOnline :- Going to set from colour Online e.g.("+colours['ONLINE']+") for everything")
    blynk.run()
    for i in range(255): 
