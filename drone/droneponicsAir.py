@@ -62,8 +62,9 @@ def setFormOffline(*args, **kwargs):
 def setBMEFormOnline(*args, **kwargs):
    blynk, _log = drone.setFromBlynkLogObjects (kwargs.get('blynkObj', None),kwargs.get('loggerObj', None))    
    blynk.run()
-   for (i in [1,2,3,4,5,11]): 
-      blynk.set_property(i, 'color', colours['ONLINE']) 
+   pins = [1,2,3,4,5,11]
+   for pin in pins:
+        blynk.set_property(pin, 'color', colours['ONLINE']) 
   
 def setBMEFormOffline(*args, **kwargs):
    blynk, _log = drone.setFromBlynkLogObjects (kwargs.get('blynkObj', None),kwargs.get('loggerObj', None))    
