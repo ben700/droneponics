@@ -272,7 +272,6 @@ try:
         Counter.cycle += 1
         now = datetime.now()
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
-        blynk.notify(drone.gethostname() + " just tested notify link at " + now.strftime("%d/%m/%Y %H:%M:%S"))
         if(button_state == 2):
             if Counter.cycle % 2 == 0:
               Counter.cycle = 0
