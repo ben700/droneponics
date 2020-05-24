@@ -18,7 +18,7 @@ def get_ip():
         s.close()
     return IP
 
-def setFromBlynkLogObjects(*args, **kwargs)
+def setFromBlynkLogObjects(*args, **kwargs):
    blynk = kwargs.get('blynkObj', None)
    _log = kwargs.get('loggerObj', None)
    msg =  kwargs.get('Msg', None)
