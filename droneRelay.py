@@ -239,6 +239,7 @@ try:
     def blynk_data():
         global button_state
         _log.info("Update Timer Run")
+        blynk.virtual_sync(10)
         Counter.cycle += 1
         now = datetime.now()
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
