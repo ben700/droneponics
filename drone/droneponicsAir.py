@@ -33,7 +33,7 @@ def setFromBlynkLogObjects(*args, **kwargs):
    if blynk is None:
       _log.info("setFormOnline :- Didn't have blynk")
       blynk = blynklib.Blynk(parser.get('droneAir', 'BLYNK_AUTH'))
-       _log.info("setFormOnline :- We do now")
+      _log.info("setFormOnline :- We do now")
    _log.debug("setFromBlynkLogObjects :- See if anything to send to terminal to set update blynk")
    if msg is not None:
       _log.debug("setFromBlynkLogObjects :- sending msg to terminal")
@@ -75,13 +75,13 @@ def setTSLFormOnline(*args, **kwargs):
    blynk, _log = drone.setFromBlynkLogObjects (kwargs.get('blynkObj', None),kwargs.get('loggerObj', None))    
    blynk.run()
    for i in [6,7,8,9]): 
-     blynk.set_property(i, 'color', colours['ONLINE']) 
+      blynk.set_property(i, 'color', colours['ONLINE']) 
   
 def setTSLFormOffline(*args, **kwargs):
    blynk, _log = drone.setFromBlynkLogObjects (kwargs.get('blynkObj', None),kwargs.get('loggerObj', None))    
    blynk.run()
    for i in [6,7,8,9]): 
-     blynk.set_property(i, 'color', colours['OFFLINE']) 
+      blynk.set_property(i, 'color', colours['OFFLINE']) 
  
    
 def setMHZFormOnline(*args, **kwargs):
