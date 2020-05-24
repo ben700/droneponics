@@ -54,7 +54,7 @@ def setFormOnline(*args, **kwargs):
    _log.debug("setFormOnline :- Going to set from colour Online e.g.("+colours['ONLINE']+") for everything")
    blynk.run()
    for i in range(255): 
-      drone.set_property(i, 'color', colours['ONLINE']) 
+      blynk.set_property(i, 'color', colours['ONLINE']) 
    _log.debug("setFormOnline :- end of fx setFormOnline")
       
 def setFormOffline(*args, **kwargs):
