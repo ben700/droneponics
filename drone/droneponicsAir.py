@@ -67,7 +67,7 @@ def setFormOffline(*args, **kwargs):
 
 def setBMEFormOnline(*args, **kwargs):
     blynk, _log = setFromBlynkLogObjects (blynkObj=kwargs.get('blynkObj', None), loggerObj=kwargs.get('loggerObj', None))  
-    _log.debug("setBMEFormOnline : start blynk")
+    _log.debug("setBMEFormOnline : start fx")
     blynk.run()
     pins = [1,2,3,4,5,11]
     for pin in pins:
@@ -76,6 +76,7 @@ def setBMEFormOnline(*args, **kwargs):
   
 def setBMEFormOffline(*args, **kwargs):
    blynk, _log = setFromBlynkLogObjects (blynkObj=kwargs.get('blynkObj', None), loggerObj=kwargs.get('loggerObj', None))  
+   _log.debug("setBMEFormOffline : start fx")
    blynk.run()
    pins = [1,2,3,4,5,11]
    for pin in pins:
@@ -84,6 +85,7 @@ def setBMEFormOffline(*args, **kwargs):
   
 def setTSLFormOnline(*args, **kwargs):
    blynk, _log = setFromBlynkLogObjects (blynkObj=kwargs.get('blynkObj', None), loggerObj=kwargs.get('loggerObj', None))  
+   _log.debug("setTSLFormOnline : start fx")
    blynk.run()
    pins = [6,7,8,9]
    for pin in pins: 
@@ -92,6 +94,7 @@ def setTSLFormOnline(*args, **kwargs):
    
 def setTSLFormOffline(*args, **kwargs):
    blynk, _log = setFromBlynkLogObjects (blynkObj=kwargs.get('blynkObj', None), loggerObj=kwargs.get('loggerObj', None))  
+   _log.debug("setTSLFormOffline : start fx")
    blynk.run()
    pins = [6,7,8,9]
    for pin in pins:
@@ -101,11 +104,13 @@ def setTSLFormOffline(*args, **kwargs):
    
 def setMHZFormOnline(*args, **kwargs):
    blynk, _log = setFromBlynkLogObjects (blynkObj=kwargs.get('blynkObj', None), loggerObj=kwargs.get('loggerObj', None))  
+   _log.debug("setMHZFormOnline : start fx")
    blynk.run()
    _log.debug("setBMEFormOnline : update colour online eg(" + colours['ONLINE']+ ") for vPin = 10")
    blynk.set_property(10, 'color', colours['ONLINE'])
 
 def setMHZFormOffline(*args, **kwargs):
    blynk, _log = setFromBlynkLogObjects (blynkObj=kwargs.get('blynkObj', None), loggerObj=kwargs.get('loggerObj', None))  
+   _log.debug("setMHZFormOffline : start fx")
    blynk.run()
    blynk.set_property(10, 'color', colours['OFFLINE'])
