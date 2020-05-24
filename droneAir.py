@@ -291,7 +291,13 @@ while True:
        blynk.virtual_write(250, "Crashed")
        drone.setFormOfflineColours(blynkObj=blynk, loggerObj=_log)
        if (parser.get('logging', 'logLevel', fallback=logging.DEBUG) =="CRITICAL"):
+            blynk.notify("Production blynk crashed and is auto-restarting; hostname " +  drone.gethostname() + " at: " + now.strftime("%d/%m/%Y %H:%M:%S"))
+            blynk.email(drone.TARGET_EMAIL, 'Production Blynk Crash', "Production blynk crashed and is auto-restarting; hostname " +  drone.gethostname() + " at: " + now.strftime("%d/%m/%Y %H:%M:%S"))            
             os.system('sh /home/pi/updateDroneponics.sh')
             os.system('sudo reboot')
+       elif (parser.get('logging', 'logLevel', fallback=logging.DEBUG) not "DEBUG"):
+            blynk.notify("non-Production blynk crashed and is not-restarting; hostname " +  drone.gethostname() + " at: " + now.strftime("%d/%m/%Y %H:%M:%S"))
+            _log.critical("Main Loop exception :- Set log evel to CRITICAL to auto reboot")
        else:
             _log.critical("Main Loop exception :- Set log evel to CRITICAL to auto reboot")
+        
