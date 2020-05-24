@@ -49,16 +49,6 @@ try:
     GPIO.setmode(GPIO.BCM)
     GPIO.setwarnings(False)
 
-    #relays=[0,21,20,16,12,25,24,23,18]
-    #Relay1 = 21 #heater
-    #Relay2 = 20 #Feed
-    #Relay3 = 16 #Air
-    #Relay4 = 12 #heater
-    #Relay5 = 25 #Feed
-    #Relay6 = 24 #Air
-    #Relay7 = 23 #Mixer - turned off with low water 
-    #Relay8 = 18  #Mixer - turned off with low water 
-
     relays=[0,18,23,24,25,12,16,20,21]
     Relay1 = 18 #heater
     Relay2 = 23 #Feed
@@ -282,6 +272,7 @@ try:
         Counter.cycle += 1
         now = datetime.now()
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
+        blynk.tweet(drone.gethostname() " just tested twitter link at " + now.strftime("%d/%m/%Y %H:%M:%S"))
         if(button_state == 2):
             if Counter.cycle % 2 == 0:
               Counter.cycle = 0
@@ -300,7 +291,7 @@ try:
     while True:
         blynk.run()
         if bootup :
-          # blynk.virtual_write(98, "clr")
+           blynk.virtual_write(98, "clr")
            blynk.virtual_write(98, "Rebooted"+ '\n')
            blynk.virtual_write(250, "Start-up")
            blynk.set_property(251, "label",drone.gethostname())
@@ -347,6 +338,8 @@ except:
    blynk.run()
    blynk.virtual_write(98,"in main loop except"+ '\n')
    blynk.virtual_write(250, "Crashed")
+   now = datetime.now()
+   blynk.tweet(drone.gethostname() " just crashed at " + now.strftime("%d/%m/%Y %H:%M:%S"))
 
    drone.turnLEDsOffline(blynk)
    drone.turnButtonsOffline(blynk)
