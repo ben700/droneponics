@@ -189,7 +189,7 @@ try:
         
     
     
-    def v8_CO2_write_handler(CO2, CO2Target, startTime stopTime):         
+    def v8_CO2_write_handler(CO2, CO2Target, startTime, stopTime):         
         _log.debug("droneRelayWriteHandler on pin " + str(pin) + " startTime is " + str(startTime))
         _log.debug("droneRelayWriteHandler on pin " + str(pin) + " stopTime is " + str(stopTime))            
         
