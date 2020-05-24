@@ -32,6 +32,8 @@ class Counter:
 bootup = True
 button_state=0
 CO2=0
+CO2Target=0
+
 # tune console logging
 _log = logging.getLogger('BlynkLog')
 logFormatter = logging.Formatter("%(asctime)s [%(levelname)s]  %(message)s")
@@ -186,6 +188,8 @@ try:
         
     @blynk.handle_event('write V8')
     def write_handler(pin, value):
+        global CO2Target
+        global CO2
         startTime  =int(value[0])
         stopTime = int(value[1])
         _log.debug("droneRelayWriteHandler on pin " + str(pin) + " startTime is " + str(startTime))
@@ -195,15 +199,33 @@ try:
         seconds_since_midnight = int(time.time() - time.mktime(today.timetuple()))
         
         if( startTime < seconds_since_midnight and stopTime > seconds_since_midnight):
-            iValue = "1"
-            blynk.virtual_write(98,"Relay is on")    
+            if all([CO2, CO2Target]):
+                if (CO2 <CO2Target):
+                    _log.info("CO2 is less than target")
+                    blynk.virtual_write(98,"CO2 Relay is on")    
+                    iValue = "1"
+                else:
+                    _log.info("CO2 is above target")
+                    iValue = "0"
+                    blynk.virtual_write(98,"Co2 Relay is off due to level")
+            else:
+                _log.info("CO2 target not set")
+                iValue = "0"
+                blynk.virtual_write(98,"Co2 Relay is on due to time and no level or current co2 reading")
+                    
         else:
             iValue = "0"
-            blynk.virtual_write(98,"Relay is off")
+            blynk.virtual_write(98,"Co2 Relay is off due to time")
         now = datetime.now()
         blynk.virtual_write(99, now.strftime("%d/%m/%Y %H:%M:%S"))
         drone.droneRelayWriteHandler(pin, iValue, blynk, relays)
-  
+        
+    @blynk.handle_event('write V9')
+    def write_handler(pin, value):
+        global CO2Target
+        CO2Target = value[0]
+        _log.info("!!!!!!!!!!!!!!!!!!!!!!!   CO2Target=" + str(CO2Target))
+        
     @blynk.handle_event('write V10')
     def write_handler(pin, value):
         global CO2
