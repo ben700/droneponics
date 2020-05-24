@@ -103,7 +103,7 @@ def setMHZFormOnline(*args, **kwargs):
    blynk, _log = setFromBlynkLogObjects (blynkObj=kwargs.get('blynkObj', None), loggerObj=kwargs.get('loggerObj', None))  
    blynk.run()
    _log.debug("setBMEFormOnline : update colour online eg(" + colours['ONLINE']+ ") for vPin = 10")
-    blynk.set_property(10, 'color', colours['ONLINE'])
+   blynk.set_property(10, 'color', colours['ONLINE'])
 
 def setMHZFormOffline(*args, **kwargs):
    blynk, _log = setFromBlynkLogObjects (blynkObj=kwargs.get('blynkObj', None), loggerObj=kwargs.get('loggerObj', None))  
