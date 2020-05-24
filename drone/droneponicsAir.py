@@ -69,7 +69,7 @@ def setBME680FormColours(*args, **kwargs):
         _log.debug("setBME680FormColours : update colour online eg(" + colours['ONLINE']+ ") for vPin = " + str(pin))
         blynk.set_property(pin, 'color', colours['ONLINE']) 
         
-  def setBME280FormColours(*args, **kwargs):
+def setBME280FormColours(*args, **kwargs):
     blynk, _log = setFormBlynkLogObjects (blynkObj=kwargs.get('blynkObj', None), loggerObj=kwargs.get('loggerObj', None))  
     _log.debug("setBME280FormColours : start fx")
     blynk.run()
