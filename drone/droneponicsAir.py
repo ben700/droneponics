@@ -41,7 +41,7 @@ def setFromBlynkLogObjects(*args, **kwargs):
       blynk.virtual_write(98, msg + " " + '\n')
       _log.info("setFromBlynkLogObjects msg : " +msg)
    _log.debug("setFromBlynkLogObjects :- returning")
-    return blynk, _log
+   return blynk, _log
 
 def setFormOnline(*args, **kwargs):
     blynk, _log = drone.setFromBlynkLogObjects (kwargs.get('blynkObj', None),kwargs.get('loggerObj', None))  
