@@ -210,9 +210,9 @@ try:
                     iValue = "0"
                     blynk.virtual_write(98,"Co2 Relay is off due to level")
             else:
-                _log.info("CO2 target not set")
-                iValue = "0"
-                blynk.virtual_write(98,"Co2 Relay is on due to time and no level or current co2 reading")
+                _log.info("Co2 Relay is on due to time and not overwritten by current co2 reading")
+                iValue = ""
+                blynk.virtual_write(98,"Co2 Relay is on due to time and not overwritten by current co2 reading")
                     
         else:
             iValue = "0"
