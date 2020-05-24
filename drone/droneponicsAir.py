@@ -40,13 +40,6 @@ def setupBasicFormObjects(*args, **kwargs):
       parser.read('/home/pi/configAir.ini')
       blynk = blynklib.Blynk(parser.get('blynk', 'BLYNK_AUTH'))
       _log.info("setFormOnline :- We do now")
-   _log.debug("setFromBlynkLogObjects :- See if anything to send to terminal to set update blynk")
-   if msg is not None:
-      _log.debug("setFromBlynkLogObjects :- sending msg to terminal")
-      blynk.run()
-      blynk.virtual_write(98, msg + " " + '\n')
-      _log.info("setFromBlynkLogObjects msg : " +msg)
-   _log.debug("setFromBlynkLogObjects :- returning")
    return blynk, _log
 
 def setFormOnline(*args, **kwargs):
