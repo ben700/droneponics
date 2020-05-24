@@ -38,7 +38,7 @@ def setFromBlynkLogObjects(*args, **kwargs):
       _log.info("setFormOnline :- Didn't have blynk")
       parser = ConfigParser()
       parser.read('/home/pi/configAir.ini')
-      blynk = blynklib.Blynk(parser.get('droneAir', 'BLYNK_AUTH'))
+      blynk = blynklib.Blynk(parser.get('blynk', 'BLYNK_AUTH'))
       _log.info("setFormOnline :- We do now")
    _log.debug("setFromBlynkLogObjects :- See if anything to send to terminal to set update blynk")
    if msg is not None:
@@ -50,7 +50,7 @@ def setFromBlynkLogObjects(*args, **kwargs):
    return blynk, _log
 
 def setFormOnline(*args, **kwargs):
-   blynk, _log = setFromBlynkLogObjects (kwargs.get('blynkObj', None),kwargs.get('loggerObj', None))  
+   blynk, _log = setFromBlynkLogObjects (blynkObj=kwargs.get('blynkObj', None), loggerObj=kwargs.get('loggerObj', None))  
    _log.debug("setFormOnline :- Going to set from colour Online e.g.("+colours['ONLINE']+") for everything")
    blynk.run()
    for i in range(255): 
@@ -58,7 +58,7 @@ def setFormOnline(*args, **kwargs):
    _log.debug("setFormOnline :- end of fx setFormOnline")
       
 def setFormOffline(*args, **kwargs):
-   blynk, _log = drone.setFromBlynkLogObjects (kwargs.get('blynkObj', None),kwargs.get('loggerObj', None))  
+   blynk, _log = setFromBlynkLogObjects (blynkObj=kwargs.get('blynkObj', None), loggerObj=kwargs.get('loggerObj', None))  
    _log.debug("setFormOffline :- Going to set from colour Online e.g.("+colours['ONLINE']+") for everything")
    blynk.run()
    for i in range(255): 
@@ -66,28 +66,28 @@ def setFormOffline(*args, **kwargs):
    _log.debug("setFormOnline :- end of fx setFormOnline")
 
 def setBMEFormOnline(*args, **kwargs):
-   blynk, _log = drone.setFromBlynkLogObjects (kwargs.get('blynkObj', None),kwargs.get('loggerObj', None))    
+   blynk, _log = setFromBlynkLogObjects (blynkObj=kwargs.get('blynkObj', None), loggerObj=kwargs.get('loggerObj', None))  
    blynk.run()
    pins = [1,2,3,4,5,11]
    for pin in pins:
         blynk.set_property(pin, 'color', colours['ONLINE']) 
   
 def setBMEFormOffline(*args, **kwargs):
-   blynk, _log = drone.setFromBlynkLogObjects (kwargs.get('blynkObj', None),kwargs.get('loggerObj', None))    
+   blynk, _log = setFromBlynkLogObjects (blynkObj=kwargs.get('blynkObj', None), loggerObj=kwargs.get('loggerObj', None))  
    blynk.run()
    pins = [1,2,3,4,5,11]
    for pin in pins:
       blynk.set_property(pin, 'color', colours['OFFLINE']) 
   
 def setTSLFormOnline(*args, **kwargs):
-   blynk, _log = drone.setFromBlynkLogObjects (kwargs.get('blynkObj', None),kwargs.get('loggerObj', None))    
+   blynk, _log = setFromBlynkLogObjects (blynkObj=kwargs.get('blynkObj', None), loggerObj=kwargs.get('loggerObj', None))  
    blynk.run()
    pins = [6,7,8,9]
    for pin in pins: 
       blynk.set_property(pin, 'color', colours['ONLINE']) 
   
 def setTSLFormOffline(*args, **kwargs):
-   blynk, _log = drone.setFromBlynkLogObjects (kwargs.get('blynkObj', None),kwargs.get('loggerObj', None))    
+   blynk, _log = setFromBlynkLogObjects (blynkObj=kwargs.get('blynkObj', None), loggerObj=kwargs.get('loggerObj', None))  
    blynk.run()
    pins = [6,7,8,9]
    for pin in pins:
@@ -95,11 +95,11 @@ def setTSLFormOffline(*args, **kwargs):
  
    
 def setMHZFormOnline(*args, **kwargs):
-   blynk, _log = drone.setFromBlynkLogObjects (kwargs.get('blynkObj', None),kwargs.get('loggerObj', None))    
+   blynk, _log = setFromBlynkLogObjects (blynkObj=kwargs.get('blynkObj', None), loggerObj=kwargs.get('loggerObj', None))  
    blynk.run()
    blynk.set_property(10, 'color', colours['ONLINE'])
 
 def setMHZFormOffline(*args, **kwargs):
-   blynk, _log = drone.setFromBlynkLogObjects (kwargs.get('blynkObj', None),kwargs.get('loggerObj', None))    
+   blynk, _log = setFromBlynkLogObjects (blynkObj=kwargs.get('blynkObj', None), loggerObj=kwargs.get('loggerObj', None))  
    blynk.run()
    blynk.set_property(10, 'color', colours['OFFLINE'])
