@@ -71,7 +71,7 @@ def setBMEFormOnline(*args, **kwargs):
     blynk.run()
     pins = [1,2,3,4,5,11]
     for pin in pins:
-        _log.debug("setBMEFormOnline : update colour online eg(" + colours['ONLINE+ ") for vPin = " + str(pin))
+        _log.debug("setBMEFormOnline : update colour online eg(" + colours['ONLINE']+ ") for vPin = " + str(pin))
         blynk.set_property(pin, 'color', colours['ONLINE']) 
   
 def setBMEFormOffline(*args, **kwargs):
@@ -79,7 +79,7 @@ def setBMEFormOffline(*args, **kwargs):
    blynk.run()
    pins = [1,2,3,4,5,11]
    for pin in pins:
-        _log.debug("setBMEFormOnline : update colour online eg(" + colours['ONLINE+ ") for vPin = " + str(pin))
+        _log.debug("setBMEFormOnline : update colour online eg(" + colours['ONLINE']+ ") for vPin = " + str(pin))
         blynk.set_property(pin, 'color', colours['OFFLINE']) 
   
 def setTSLFormOnline(*args, **kwargs):
@@ -87,7 +87,7 @@ def setTSLFormOnline(*args, **kwargs):
    blynk.run()
    pins = [6,7,8,9]
    for pin in pins: 
-        _log.debug("setBMEFormOnline : update colour online eg(" + colours['ONLINE+ ") for vPin = " + str(pin))
+        _log.debug("setBMEFormOnline : update colour online eg(" + colours['ONLINE']+ ") for vPin = " + str(pin))
         blynk.set_property(pin, 'color', colours['ONLINE']) 
    
 def setTSLFormOffline(*args, **kwargs):
@@ -95,14 +95,14 @@ def setTSLFormOffline(*args, **kwargs):
    blynk.run()
    pins = [6,7,8,9]
    for pin in pins:
-        _log.debug("setBMEFormOnline : update colour online eg(" + colours['ONLINE+ ") for vPin = " + str(pin))
+        _log.debug("setBMEFormOnline : update colour online eg(" + colours['ONLINE']+ ") for vPin = " + str(pin))
         blynk.set_property(pin, 'color', colours['OFFLINE']) 
  
    
 def setMHZFormOnline(*args, **kwargs):
    blynk, _log = setFromBlynkLogObjects (blynkObj=kwargs.get('blynkObj', None), loggerObj=kwargs.get('loggerObj', None))  
    blynk.run()
-   _log.debug("setBMEFormOnline : update colour online eg(" + colours['ONLINE+ ") for vPin = 10")
+   _log.debug("setBMEFormOnline : update colour online eg(" + colours['ONLINE']+ ") for vPin = 10")
     blynk.set_property(10, 'color', colours['ONLINE'])
 
 def setMHZFormOffline(*args, **kwargs):
