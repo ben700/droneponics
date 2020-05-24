@@ -96,7 +96,7 @@ try:
 
     @blynk.handle_event("connect")
     def connect_handler():
-        print("Connected")
+        _log.warning("Connected")
         for pin in range(1,11):
            _log.info('Syncing virtual buttons {}'.format(pin))
            blynk.virtual_sync(pin)
@@ -106,7 +106,7 @@ try:
 
     @blynk.handle_event("disconnect")
     def disconnect_handler():
-        print("Disconnected")
+        _log.warning("Disconnected")
         blynk.virtual_write(250, "Disconnected")
   
     @blynk.handle_event('write V1')
