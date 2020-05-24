@@ -41,7 +41,7 @@ logFormatter = logging.Formatter("%(asctime)s [%(levelname)s]  %(message)s")
 consoleHandler = logging.StreamHandler()
 consoleHandler.setFormatter(logFormatter)
 _log.addHandler(consoleHandler)
-_log.setLevel(parser.get('logging', 'logLevel', fallback=DEBUG))
+_log.setLevel(parser.get('logging', 'logLevel', fallback=logging.DEBUG))
 
 try:
     GPIO.setmode(GPIO.BCM)
