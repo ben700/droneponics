@@ -228,8 +228,7 @@ try:
         global stopTime
         startTime  =int(value[0])
         stopTime = int(value[1])
-        
-        v8_CO2_write_handler(CO2, CO2Target, startTime stopTime)
+        v8_CO2_write_handler(CO2, CO2Target, startTime, stopTime)
             
     @blynk.handle_event('write V9')
     def write_handler(pin, value):
@@ -240,7 +239,7 @@ try:
         CO2Target = value[0]        
         blynk.virtual_write(98,"Current CO2Target :" + str(CO2Target) +'\n')
         _log.info("CO2Target updated to :" + str(CO2Target))
-        v8_CO2_write_handler(CO2, CO2Target, startTime stopTime)
+        v8_CO2_write_handler(CO2, CO2Target, startTime, stopTime)
         
     @blynk.handle_event('write V10')
     def write_handler(pin, value):
@@ -251,7 +250,7 @@ try:
         CO2 = value[0]
         blynk.virtual_write(98,"Current CO2 :" + str(CO2) +'\n')
         _log.info("CO2 updated to :" + str(CO2))
-        v8_CO2_write_handler(CO2, CO2Target, startTime stopTime)
+        v8_CO2_write_handler(CO2, CO2Target, startTime, stopTime)
         
         
     @timer.register(interval=60, run_once=False)
