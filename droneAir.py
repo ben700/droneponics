@@ -238,6 +238,7 @@ def blynk_data():
             CO2_VPIN = parser.get('blynkBridge', 'CO2_VPIN', fallback=10)
             blynkBridge.virtual_write(CO2_VPIN, '{0:d}'.format(mhz19b['co2']))
             blynkBridge.set_property(CO2_VPIN, 'label', "from " + drone.gethostname())
+            blynkBridge.virtual_write(CO2_VPIN+1, now)
             _log.info("blynkBridge CO2 data sent")
     else:
         blynk.virtual_write(98, 'Unexpected error: mhz19b' + '\n')
