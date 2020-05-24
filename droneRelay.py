@@ -207,17 +207,17 @@ try:
                 else:
                     _log.info("CO2 is above target")
                     iValue = "0"
-                    blynk.virtual_write(20,"CO2 Off : Level"
+                    blynk.virtual_write(20,"CO2 Off : Level")
                     blynk.virtual_write(98,"Co2 Relay is off due to level"+ '\n')
             else:
                 _log.info("Co2 Relay is on due to time and not being overwritten by current co2 reading " +str(CO2) + " with target " + str(CO2Target))
                 iValue = "1"
-                blynk.virtual_write(20,"CO2 On : Default"
+                blynk.virtual_write(20,"CO2 On : Default")
                 blynk.virtual_write(98,"Co2 Relay is on due to time and not being overwritten by current co2 reading " +str(CO2) + " with target " + str(CO2Target) + '\n')
                     
         else:
             iValue = "0"
-            blynk.virtual_write(20,"CO2 Off : Time"
+            blynk.virtual_write(20,"CO2 Off : Time")
             blynk.virtual_write(98,"Co2 Relay is off due to time"+ '\n')    
         now = datetime.now()
         blynk.virtual_write(99, now.strftime("%d/%m/%Y %H:%M:%S"))
