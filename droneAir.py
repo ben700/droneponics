@@ -295,7 +295,7 @@ while True:
             blynk.email(drone.TARGET_EMAIL, 'Production Blynk Crash', "Production blynk crashed and is auto-restarting; hostname " +  drone.gethostname() + " at: " + now.strftime("%d/%m/%Y %H:%M:%S"))            
             os.system('sh /home/pi/updateDroneponics.sh')
             os.system('sudo reboot')
-       elif (parser.get('logging', 'logLevel', fallback=logging.DEBUG) not "DEBUG"):
+       elif (parser.get('logging', 'logLevel', fallback=logging.DEBUG) is not "DEBUG"):
             blynk.notify("non-Production blynk crashed and is not-restarting; hostname " +  drone.gethostname() + " at: " + now.strftime("%d/%m/%Y %H:%M:%S"))
             _log.critical("Main Loop exception :- Set log evel to CRITICAL to auto reboot")
        else:
