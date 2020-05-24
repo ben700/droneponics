@@ -201,20 +201,24 @@ try:
                 blynk.virtual_write(98,"CO2Target : "+ str(CO2Target) + " and co2 level : " +str(CO2)+ '\n')    
                 if (CO2 <CO2Target):
                     _log.info("CO2 is less than target")
+                    blynk.virtual_write(20,"CO2 On")
                     blynk.virtual_write(98,"CO2 Relay is on"+ '\n')    
                     iValue = "1"
                 else:
                     _log.info("CO2 is above target")
                     iValue = "0"
+                    blynk.virtual_write(20,"CO2 Off : Level"
                     blynk.virtual_write(98,"Co2 Relay is off due to level"+ '\n')
             else:
                 _log.info("Co2 Relay is on due to time and not being overwritten by current co2 reading " +str(CO2) + " with target " + str(CO2Target))
                 iValue = "1"
+                blynk.virtual_write(20,"CO2 On : Default"
                 blynk.virtual_write(98,"Co2 Relay is on due to time and not being overwritten by current co2 reading " +str(CO2) + " with target " + str(CO2Target) + '\n')
                     
         else:
             iValue = "0"
-            blynk.virtual_write(98,"Co2 Relay is off due to time"+ '\n')
+            blynk.virtual_write(20,"CO2 Off : Time"
+            blynk.virtual_write(98,"Co2 Relay is off due to time"+ '\n')    
         now = datetime.now()
         blynk.virtual_write(99, now.strftime("%d/%m/%Y %H:%M:%S"))
         drone.droneRelayWriteHandler(pin, iValue, blynk, relays)
