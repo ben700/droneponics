@@ -68,20 +68,23 @@ def setBMEFormOnline(*args, **kwargs):
 def setBMEFormOffline(*args, **kwargs):
    blynk, _log = drone.setFromBlynkLogObjects (kwargs.get('blynkObj', None),kwargs.get('loggerObj', None))    
    blynk.run()
-   for (i in [1,2,3,4,5,11]): 
-      blynk.set_property(i, 'color', colours['OFFLINE']) 
+   pins = [1,2,3,4,5,11]
+   for pin in pins:
+      blynk.set_property(pin, 'color', colours['OFFLINE']) 
   
 def setTSLFormOnline(*args, **kwargs):
    blynk, _log = drone.setFromBlynkLogObjects (kwargs.get('blynkObj', None),kwargs.get('loggerObj', None))    
    blynk.run()
-   for (i in [6,7,8,9]): 
-      blynk.set_property(i, 'color', colours['ONLINE']) 
+   pins = [6,7,8,9]
+   for pin in pins: 
+      blynk.set_property(pin, 'color', colours['ONLINE']) 
   
 def setTSLFormOffline(*args, **kwargs):
    blynk, _log = drone.setFromBlynkLogObjects (kwargs.get('blynkObj', None),kwargs.get('loggerObj', None))    
    blynk.run()
-   for (i in [6,7,8,9]): 
-      blynk.set_property(i, 'color', colours['OFFLINE']) 
+   pins = [6,7,8,9]
+   for pin in pins:
+      blynk.set_property(pin, 'color', colours['OFFLINE']) 
  
    
 def setMHZFormOnline(*args, **kwargs):
