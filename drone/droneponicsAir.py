@@ -47,6 +47,7 @@ def setFormOnline(*args, **kwargs):
    _log.debug("setFormOnline :- Going to set from colour Online e.g.("+colours['ONLINE']+") for everything")
    blynk.run()
    for i in range(255): 
+      _log.debug("setFormOnline :- Going to set from colour Online e.g.("+colours['ONLINE']+") for vPin " + str(i))  
       blynk.set_property(i, 'color', colours['ONLINE']) 
    _log.debug("setFormOnline :- end of fx setFormOnline")
       
@@ -55,6 +56,7 @@ def setFormOffline(*args, **kwargs):
    _log.debug("setFormOffline :- Going to set from colour Online e.g.("+colours['ONLINE']+") for everything")
    blynk.run()
    for i in range(255): 
+      _log.debug("setFormOffline :- Going to set from colour Offline e.g.("+colours['OFFLINE']+") for vPin " + str(i))  
       blynk.set_property(i, 'color', colours['OFFLINE']) 
    _log.debug("setFormOnline :- end of fx setFormOnline")
 
