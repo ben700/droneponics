@@ -177,7 +177,7 @@ def blynk_data():
     _log.debug("Going to get timestamp")
     now = datetime.now()
     blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
-    
+    blynk.set_property(0, 'color', colours['ONLINE'])
     _log.debug("Going to get openweather")
     openWeather.blynkOpenWeather(blynk)
     if(bme680 is not None):            
