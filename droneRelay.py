@@ -225,14 +225,14 @@ try:
     def write_handler(pin, value):
         global CO2Target
         CO2Target = value[0]
-        blynk.virtual_write(98,"Current CO2Target :" + str(CO2Target))
+        blynk.virtual_write(98,"Current CO2Target :" + str(CO2Target) +'\n')
         _log.info("CO2Target updated to :" + str(CO2Target))
         
     @blynk.handle_event('write V10')
     def write_handler(pin, value):
         global CO2
         CO2 = value[0]
-        blynk.virtual_write(98,"Current CO2 :" + str(CO2))
+        blynk.virtual_write(98,"Current CO2 :" + str(CO2) +'\n')
         _log.info("CO2 updated to :" + str(CO2))
     
     @timer.register(interval=60, run_once=False)
