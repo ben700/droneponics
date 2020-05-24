@@ -70,7 +70,7 @@ try:
     
     
     # Initialize Blynk
-    blynk = blynklib.Blynk(parser.get('blynk', 'BLYNK_AUTH')) 
+    blynk = blynklib.Blynk(parser.get('blynk', 'BLYNK_AUTH'), log=_log.info) 
     timer = blynktimer.Timer()
         
     @blynk.handle_event('write V255')
