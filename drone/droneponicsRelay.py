@@ -24,11 +24,11 @@ def droneRelayWriteHandler(pin, button_state, blynk, relays):
         
         
         if (button_state in (1,"1")):
-           blynk.virtual_write(98, "Change state of button "+ str(pin) + " now on" + '\n')
+           blynk.virtual_write(98, "State of button "+ str(pin) + " now on" + '\n')
            blynk.set_property(10+pin, 'color', colours[0])
            GPIO.output(relays[pin],1)
         else:
-           blynk.virtual_write(98, "Change state of button "+ str(pin) + " now off" + '\n')
+           blynk.virtual_write(98, "State of button "+ str(pin) + " now off" + '\n')
            blynk.set_property(10+pin, 'color', colours[1])
            GPIO.output(relays[pin],0)
         blynk.virtual_write(250, "Running")
