@@ -33,7 +33,8 @@ bootup = True
 button_state=0
 CO2=0
 CO2Target=0
-
+startTime =None
+stopTime=None
 # tune console logging
 _log = logging.getLogger('BlynkLog')
 logFormatter = logging.Formatter("%(asctime)s [%(levelname)s]  %(message)s")
@@ -186,12 +187,9 @@ try:
            value[0] = 0
         drone.droneRelayWriteHandler(pin, value[0], blynk, relays)
         
-    @blynk.handle_event('write V8')
-    def write_handler(pin, value):
-        global CO2Target
-        global CO2
-        startTime  =int(value[0])
-        stopTime = int(value[1])
+    
+    
+    def v8_CO2_write_handler(CO2, CO2Target, startTime stopTime):         
         _log.debug("droneRelayWriteHandler on pin " + str(pin) + " startTime is " + str(startTime))
         _log.debug("droneRelayWriteHandler on pin " + str(pin) + " stopTime is " + str(stopTime))            
         
@@ -220,21 +218,42 @@ try:
         now = datetime.now()
         blynk.virtual_write(99, now.strftime("%d/%m/%Y %H:%M:%S"))
         drone.droneRelayWriteHandler(pin, iValue, blynk, relays)
+
+    
+    @blynk.handle_event('write V8')
+    def write_handler(pin, value):
+        global CO2Target
+        global CO2
+        global startTime 
+        global stopTime
+        startTime  =int(value[0])
+        stopTime = int(value[1])
         
+        v8_CO2_write_handler(CO2, CO2Target, startTime stopTime)
+            
     @blynk.handle_event('write V9')
     def write_handler(pin, value):
         global CO2Target
-        CO2Target = value[0]
+        global CO2
+        global startTime 
+        global stopTime
+        CO2Target = value[0]        
         blynk.virtual_write(98,"Current CO2Target :" + str(CO2Target) +'\n')
         _log.info("CO2Target updated to :" + str(CO2Target))
+        v8_CO2_write_handler(CO2, CO2Target, startTime stopTime)
         
     @blynk.handle_event('write V10')
     def write_handler(pin, value):
+        global CO2Target
         global CO2
+        global startTime 
+        global stopTime
         CO2 = value[0]
         blynk.virtual_write(98,"Current CO2 :" + str(CO2) +'\n')
         _log.info("CO2 updated to :" + str(CO2))
-    
+        v8_CO2_write_handler(CO2, CO2Target, startTime stopTime)
+        
+        
     @timer.register(interval=60, run_once=False)
     def blynk_data():
         global button_state
