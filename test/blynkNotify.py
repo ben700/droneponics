@@ -18,7 +18,7 @@ consoleHandler.setFormatter(logFormatter)
 _log.addHandler(consoleHandler)
 _log.setLevel(parser.get('logging', 'logLevel', fallback=logging.DEBUG))
 
- blynk = blynklib.Blynk(parser.get('blynk', 'BLYNK_AUTH'), log=_log.info) 
- blynk.run()  
+blynk = blynklib.Blynk(parser.get('blynk', 'BLYNK_AUTH'), log=_log.info) 
+blynk.run()  
 
 blynk.notify("Testing blynk notify from " +  drone.gethostname() + " at " + now.strftime("%d/%m/%Y %H:%M:%S"))
