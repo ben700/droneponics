@@ -37,7 +37,7 @@ def setFormOnline(*args, **kwargs):
    if msg is not None:
        blynk.virtual_write(98, msg + " " + '\n')
        _log.info(msg)
-   _log.debug("Going to set from colour Offline from setFormOnline")
+   _log.debug("Going to set from colour Online from setFormOnline")
    for i in range(255): 
       blynk.set_property(i, 'color', colours['ONLINE'])
    blynk.set_property(98, 'color', "#000000")   
