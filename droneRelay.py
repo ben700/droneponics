@@ -35,6 +35,8 @@ CO2=0
 CO2Target=0
 startTime =None
 stopTime=None
+waterTemp=99
+
 # tune console logging
 _log = logging.getLogger('BlynkLog')
 logFormatter = logging.Formatter("%(asctime)s [%(levelname)s]  %(message)s")
@@ -101,6 +103,7 @@ try:
            _log.info('Syncing virtual buttons {}'.format(pin))
            blynk.virtual_sync(pin)
            blynk.read_response(timeout=0.5)
+        blynk.virtual_sync(30)
         blynk.virtual_write(250, "Connected")
     
 
@@ -180,13 +183,22 @@ try:
             value[0] = 0
         drone.droneRelayWriteHandler(pin, value[0],blynk, relays)
         
+        
+    def v7_Temp_write_handler(pin, VALUE, waterTemp):
+        if (waterTemp>15 and VALUE == 1):
+            drone.droneRelayWriteHandler(pin, 1, blynk, relays)
+        else:
+            drone.droneRelayWriteHandler(pin, 0, blynk, relays)
+       
+        
     @blynk.handle_event('write V7')
     def write_handler(pin, value):
+        global waterTemp
         _log.debug("droneRelayWriteHandler on pin " + str(pin) + " value is " + str(value[0]))
         if (str(value[0]) == "0.0"):
            value[0] = 0
-        drone.droneRelayWriteHandler(pin, value[0], blynk, relays)
-        
+        v7_Temp_write_handler(pin, value[0], waterTemp)
+           
     
     
     def v8_CO2_write_handler(pin, CO2, CO2Target, startTime, stopTime):         
@@ -256,6 +268,11 @@ try:
         _log.info("CO2 updated to :" + str(CO2))
         v8_CO2_write_handler(8, CO2, CO2Target, startTime, stopTime)
         
+    @blynk.handle_event('write V30')
+    def write_handler(pin, value):
+        global waterTemp
+        waterTemp = value[0]
+        v7_Temp_write_handler(7, waterTemp)
         
     @timer.register(interval=60, run_once=False)
     def blynk_data():
