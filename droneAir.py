@@ -177,6 +177,7 @@ def blynk_data():
     _log.debug("Going to get timestamp")
     now = datetime.now()
     blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
+    
     _log.debug("Going to get openweather")
     openWeather.blynkOpenWeather(blynk)
     if(bme680 is not None):            
@@ -275,8 +276,7 @@ _log.debug("Just about to get boot timestamp and change system LED")
 now = datetime.now()
 blynk.virtual_write(99, now.strftime("%d/%m/%Y %H:%M:%S"))
 blynk.virtual_write(systemLED, 255)
-_log.debug('Set the app to online colours')
-drone.setFormOnline(blynkObj=blynk, loggerObj=_log, Msg="System now updated and restarted")
+drone.setFormOnline(blynkObj=blynk, loggerObj=_log)
 blynk.virtual_write(255, 0)
 _log.info("--------------------------Completed Boot--------------------------")
 
