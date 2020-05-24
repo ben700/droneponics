@@ -1,6 +1,7 @@
 import logging
 import socket
 import blynklib
+from configparser import ConfigParser
 from drone.droneObj import colours
 
 def gethostname():
@@ -22,16 +23,21 @@ def setFromBlynkLogObjects(*args, **kwargs):
    blynk = kwargs.get('blynkObj', None)
    _log = kwargs.get('loggerObj', None)
    msg =  kwargs.get('Msg', None)
+
    if _log is None:
       _log = logging.getLogger('BlynkLog')
       logFormatter = logging.Formatter("%(asctime)s [%(levelname)s]  %(message)s")
       consoleHandler = logging.StreamHandler()
       consoleHandler.setFormatter(logFormatter)
       _log.addHandler(consoleHandler)
-      _log.setLevel(logging.DEBUG)
+      parser = ConfigParser()
+      parser.read('/home/pi/configAir.ini')
+      _log.setLevel(parser.get('logging', 'logLevel', fallback=logging.CRITICAL))
    _log.debug("setFromBlynkLogObjects :- Just created log and now checking if we still have blynk")
    if blynk is None:
       _log.info("setFormOnline :- Didn't have blynk")
+      parser = ConfigParser()
+      parser.read('/home/pi/configAir.ini')
       blynk = blynklib.Blynk(parser.get('droneAir', 'BLYNK_AUTH'))
       _log.info("setFormOnline :- We do now")
    _log.debug("setFromBlynkLogObjects :- See if anything to send to terminal to set update blynk")
