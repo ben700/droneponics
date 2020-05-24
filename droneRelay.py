@@ -119,7 +119,7 @@ try:
         blynk.virtual_write(250, "Updating")
         
         button_state = int(value[0])-1
-        blynk.set_property(10+pin, 'onBackColor', colours[button_state])
+        blynk.set_property(10+pin, 'color', colours[button_state])
         blynk.set_property(pin, 'color', colours[button_state])
             
         blynk.virtual_write(98, "droneRelayWriteHandler on pin " + str(pin) + " value is " + str(button_state) + " colour : " + str(colours[button_state]) + '\n')
