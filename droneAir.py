@@ -159,13 +159,13 @@ def rebooter(pin, value):
 
 @blynk.handle_event("connect")
 def connect_handler():
-    _log.info("Connected")
+    _log.waring("Connected")
     blynk.virtual_write(250, "Connected")
     
 
 @blynk.handle_event("disconnect")
 def disconnect_handler():
-    _log.info("Disconnected")
+    _log.warning("Disconnected")
     blynk.virtual_write(250, "Disconnected")
   
     
@@ -193,7 +193,7 @@ def blynk_data():
         t = Temp(bme680.temperature, 'c')
         blynk.virtual_write(11, dew_point(temperature=t, humidity=bme680.humidity))
         _log.debug("set BME form display")
-        drone.setBMEFormOnline(blynkObj=blynk, loggerObj=_log)     
+        drone.setBME680FormColours(bme680, blynkObj=blynk, loggerObj=_log)     
     elif(bme680 is not None):           
         _log.debug("Going to send bme280 data to blynk app")
         blynk.virtual_write(2, "BME280")
@@ -206,9 +206,9 @@ def blynk_data():
         t = Temp(bme280.temperature, 'c')
         blynk.virtual_write(11, dew_point(temperature=t, humidity=bme280.humidity))
         _log.debug("set BME form display")
-        drone.setBMEFormOnline(blynkObj=blynk, loggerObj=_log)     
+        drone.setBME280FormColours(bme280, blynkObj=blynk, loggerObj=_log)          
     else:
-        drone.setBMEFormOffline(blynkObj=blynk, loggerObj=_log)
+        drone.setBMEFormOfflineColours(blynkObj=blynk, loggerObj=_log)
 
     _log.debug("Now work on TSL2591 sensor")
     if (tsl is not None):
@@ -221,19 +221,19 @@ def blynk_data():
         blynk.virtual_write(8, ("{0:d}".format(tsl.visible)))
         blynk.virtual_write(9, ("{0:d}".format(tsl.full_spectrum)))
         _log.debug("Now drone.setTSLFormOnline") 
-        drone.setTSLFormOnline(blynkObj=blynk, loggerObj=_log)
+        drone.setTSLFormOnlineColours(blynkObj=blynk, loggerObj=_log)
     else:
-        drone.setTSLFormOnline(blynkObj=blynk, loggerObj=_log)
+        drone.setTSLFormOfflineColours(blynkObj=blynk, loggerObj=_log)
 
     _log.debug("Now work on mhz19b sensor")
     mhz19b = mh_z19.read()  
     if mhz19b is not None:
         blynk.virtual_write(10, '{0:d}'.format(mhz19b['co2']))
         _log.info('CO2: {0:d}'.format(mhz19b['co2']))
-        drone.setMHZFormOnline(blynkObj=blynk, loggerObj=_log)
+        drone.setMHZFormOnlineColours(blynkObj=blynk, loggerObj=_log)
         _log.info("blynkBridge BLYNK_AUTH = " + parser.get('blynkBridge', 'BLYNK_AUTH', fallback="Fallback"))
         if (parser.get('blynkBridge', 'BLYNK_AUTH', fallback=None) is not None):
-            _log.info("Send CO2 data via blynkBridge")
+            _log.warning("Send CO2 data via blynkBridge")
             blynkBridge = blynklib.Blynk(parser.get('blynkBridge', 'BLYNK_AUTH'))
             blynkBridge.run()
             CO2_VPIN = parser.get('blynkBridge', 'CO2_VPIN', fallback=10)
@@ -244,7 +244,7 @@ def blynk_data():
     else:
         blynk.virtual_write(98, 'Unexpected error: mhz19b' + '\n')
         _log.error('Unexpected error: mhz19b')
-        drone.setMHZFormOffline(blynkObj=blynk, loggerObj=_log)
+        drone.setMHZFormOfflineColours(blynkObj=blynk, loggerObj=_log)
     blynk.virtual_write(250, "Running")
     blynk.set_property(systemLED, 'color', colours[0])
     _log.debug("End of timer.register fx")
@@ -277,7 +277,7 @@ now = datetime.now()
 blynk.virtual_write(99, now.strftime("%d/%m/%Y %H:%M:%S"))
 blynk.virtual_write(systemLED, 255)
 _log.debug("Main fx:- calling drone.setFormOnline to remove blue")
-drone.setFormOnline(blynkObj=blynk, loggerObj=_log)
+drone.setFormOnlineColours(blynkObj=blynk, loggerObj=_log)
 blynk.virtual_write(255, 0)
 _log.info("--------------------------Completed Boot--------------------------")
 
@@ -288,7 +288,7 @@ while True:
     except: 
        _log.error("in main loop except")
        blynk.virtual_write(250, "Crashed")
-       drone.setFormOffline(blynkObj=blynk, loggerObj=_log)
+       drone.setFormOfflineColours(blynkObj=blynk, loggerObj=_log)
        if (parser.get('logging', 'logLevel', fallback=logging.DEBUG) =="CRITICAL"):
             os.system('sh /home/pi/updateDroneponics.sh')
             os.system('sudo reboot')
