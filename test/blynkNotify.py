@@ -2,6 +2,7 @@ from configparser import ConfigParser
 from datetime import datetime, date
 import logging
 import blynklib
+import sys
 sys.path.append('/home/pi/droneponics')
 import drone
 
