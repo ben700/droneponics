@@ -12,4 +12,5 @@ ser = serial.Serial(
 
 
 ser.write(str.encode("R\r"))
-print (ser.readline().decode())
+while 1:
+        print (ser.readline().decode())
