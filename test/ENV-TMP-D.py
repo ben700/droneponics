@@ -12,7 +12,7 @@ import os.path
 
 
 class AtlasTemp:
-   def __init__()
+   def __init__():
       # setting
       pimodel        = getrpimodel.model
       pimodel_strict = getrpimodel.model_strict()
