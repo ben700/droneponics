@@ -43,8 +43,13 @@ while True:
   try:
     ser.write(str.encode("R" + '\r'))
     output = ser.readline().decode('utf-8')
-    if (output is not None && isFloat(output) == True ):
+    print("------------------------------------------------------------------------------------------")
+    print(output)
+    print(isFloat(output))
+    print("------------------------------------------------------------------------------------------")
+    if (output is not None):
       print('Temprature : ' + output)
+      print("NO CR --------------")
   except:
     pass
 ser.close()
