@@ -47,6 +47,7 @@ class AtlasTemp:
              float(o) 
              print("is float = " + str(o))
          except : 
+             self.getTemp()
              print("Not a float") 
              
          return o
