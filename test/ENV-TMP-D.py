@@ -42,15 +42,13 @@ class AtlasTemp:
          self.ser.write(str.encode("R"+'\r'))
          self.rawOutput = self.ser.read(5)
          o = self.rawOutput.decode()
-         
-         try :  
-             float(o) 
-             print("is float = " + str(o))
-         except : 
-             self.getTemp()
-             print("Not a float") 
+         while True:
+            try :
+               float(o)
+               return o
+            except : 
+               getTemp(self)
              
-         return o
 
       
 atlasTemp = AtlasTemp()
