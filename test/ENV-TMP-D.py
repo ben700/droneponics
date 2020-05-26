@@ -32,13 +32,11 @@ ser = serial.Serial(
         bytesize=serial.EIGHTBITS,
         timeout=1
 )
-
-if True:
+ser.write(str.encode("DO"+'\r'))
+ser.write(str.encode("SC"+'\r'))
   
-  result=ser.write(str.encode("DO"+'\r'))
-  result=ser.write(str.encode("SC"+'\r'))
+while True:
+  
   result=ser.write(str.encode("R"+'\r'))
-  readLine=ser.read(20)
-  print(result)
-  print(readLine)
-  print (readLine.decode('utf-8'))
+  print("Temperature is " + ser.read(20).decode('utf-8'))
+  
