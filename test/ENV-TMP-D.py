@@ -43,7 +43,7 @@ while True:
         line = ser.readline()
         print(str(count) + str(': '))
         print(line)
-        print(line.decode('utf-8')
+        print(line.decode('utf-8'))
         count = count+1
  
 ser.close()
