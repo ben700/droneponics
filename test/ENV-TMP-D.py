@@ -35,7 +35,8 @@ ser.write(str.encode("SC"+'\r'))
 print("connected to: " + ser.portstr)
 
 print(ser.write(str.encode("R" + '\r')))
-output = ser.readline()
+output = ser.read(5)
 print(output)
-print("Temprature :" + output.decode('utf-8'))
+
+#print("Temprature :" + output.decode('utf-8'))
 ser.close()
