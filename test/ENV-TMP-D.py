@@ -43,7 +43,7 @@ while True:
   try:
     ser.write(str.encode("R" + '\r'))
     output = ser.readline().decode('utf-8')
-    if (output is not None):
+    if (output is not None && isFloat(output) == True ):
       print('Temprature : ' + output)
   except:
     pass
