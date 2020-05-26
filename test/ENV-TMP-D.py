@@ -30,16 +30,11 @@ ser = serial.Serial(
         baudrate = 38400
 )
 ser.write(str.encode("DO"+'\r'))
-ser.write(str.encode("SC"+'\r'))
+ser.write(str.encode("sk"+'\r'))
 
 print("connected to: " + ser.portstr)
 
-print(ser.write(str.encode("R" + '\r')))
 output = ser.read(5)
-print(output)
-
 print("Temprature :" + output.decode())
 
-print("Temprature :" + output.decode('ascii'))
-print("Temprature :" + output.decode('utf-8'))
 ser.close()
