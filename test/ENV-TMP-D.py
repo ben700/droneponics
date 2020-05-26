@@ -12,7 +12,7 @@ import os.path
 
 
 class AtlasTemp:
-   def __init__():
+   def __init__(self):
       self.rawOutput = None
       # setting
       pimodel        = getrpimodel.model
@@ -35,7 +35,7 @@ class AtlasTemp:
       self.ser.write(str.encode("SC"+'\r'))
 
     
-   def __del__():
+   def __del__(self):
       self.ser.close()
 
    def getTemp(self):
