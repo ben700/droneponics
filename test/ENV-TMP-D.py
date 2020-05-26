@@ -40,7 +40,7 @@ print("connected to: " + ser.portstr)
 count=1
 
 while True:
-        print(str(count) + str(': ') + decode(ser.read(5)) )
+        print(str(count) + str(': ') + str.decode(ser.read(5)) )
         count = count+1
 
 ser.close()
