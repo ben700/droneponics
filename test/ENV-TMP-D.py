@@ -41,7 +41,8 @@ count=1
 
 while True:
         line = ser.readline()
-        print(str(count) + str(': ') + chr(line) )
+        print(str(count) + str(': '))
+        print(chr(line) )
         count = count+1
  
 ser.close()
