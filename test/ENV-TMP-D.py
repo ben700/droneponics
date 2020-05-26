@@ -34,9 +34,9 @@ ser = serial.Serial(
 )
 ser.write(str.encode("DO"+'\r'))
 ser.write(str.encode("SC"+'\r'))
-  
+
 while True:
   
-  result=ser.write(str.encode("R"+'\r'))
+  result=ser.write(str.encode('R\n\r'))
   print("Temperature is " + ser.read(20).decode('utf-8'))
   
