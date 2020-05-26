@@ -10,32 +10,39 @@ import sys
 import json
 import os.path
 
-# setting
-pimodel        = getrpimodel.model
-pimodel_strict = getrpimodel.model_strict()
 
-if os.path.exists('/dev/serial0'):
-  partial_serial_dev = 'serial0'
-elif pimodel == "3 Model B" or pimodel_strict == "Zero W":
-  partial_serial_dev = 'ttyS0'
-else:
-  partial_serial_dev = 'ttyAMA0'
+class AtlasTemp:
+   def __init__()
+      # setting
+      pimodel        = getrpimodel.model
+      pimodel_strict = getrpimodel.model_strict()
 
-serial_dev = '/dev/%s' % partial_serial_dev
+      if os.path.exists('/dev/serial0'):
+         partial_serial_dev = 'serial0'
+      elif pimodel == "3 Model B" or pimodel_strict == "Zero W":
+         partial_serial_dev = 'ttyS0'
+      else:
+         partial_serial_dev = 'ttyAMA0'
 
-print("serial_dev = " + serial_dev)
+      self.serial_dev = '/dev/%s' % partial_serial_dev
+      self.ser = serial.Serial(
+           port=self.serial_dev, #Replace ttyS0 with ttyAM0 for Pi1,Pi2,Pi0
+           baudrate = 38400
+      )
+      #set the default units on probe 
+      self.ser.write(str.encode("D0"+'\r'))
+      self.ser.write(str.encode("SC"+'\r'))
 
-ser = serial.Serial(
-        port=serial_dev, #Replace ttyS0 with ttyAM0 for Pi1,Pi2,Pi0
-        baudrate = 38400
-)
-ser.write(str.encode("D0"+'\r'))
-ser.write(str.encode("SC"+'\r'))
+    
+   def __del__():
+      self.ser.close()
 
-print("connected to: " + ser.portstr)
+   def getTemp(self):
+      ser.write(str.encode("R"+'\r'))
+      output = ser.read(5)
+      retrun output.decode()
 
-ser.write(str.encode("R"+'\r'))
-output = ser.read(5)
-print("Temprature :" + output.decode())
-
-ser.close()
+      
+atlasTemp = AtlasTemp()
+while True:
+   print(atlasTemp.getTemp())
