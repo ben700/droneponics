@@ -1,0 +1,4 @@
+[Desktop Entry]
+Type=Application
+Name=DroneponicsRelayMini
+Exec=xterm -hold -e 'sudo /usr/bin/python3 /home/pi/droneponics/droneRelayMicro.py'
