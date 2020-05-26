@@ -29,11 +29,12 @@ ser = serial.Serial(
         port=serial_dev, #Replace ttyS0 with ttyAM0 for Pi1,Pi2,Pi0
         baudrate = 38400
 )
-ser.write(str.encode("DO"+'\r'))
-ser.write(str.encode("sk"+'\r'))
+ser.write(str.encode("D0"+'\r'))
+ser.write(str.encode("SC"+'\r'))
 
 print("connected to: " + ser.portstr)
 
+ser.write(str.encode("R"+'\r'))
 output = ser.read(5)
 print("Temprature :" + output.decode())
 
