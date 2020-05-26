@@ -34,6 +34,7 @@ ser = serial.Serial(
 )
 
 
-ser.write(str.encode("R\r"))
+ser.write(str.encode('R\r'))
 readLine = ser.readline()
+print(readLine)
 print (readLine.decode())
