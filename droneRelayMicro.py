@@ -175,9 +175,9 @@ def disconnect_handler():
 @blynk.handle_event('write V1')
 def write_handler(pin, value):
     _log.debug("droneRelayWriteHandler on pin " + str(pin) + " value is " + str(value[0]))
-     if (str(value[0]) == "0.0"):
-         value[0] = 0
-     drone.droneRelayWriteHandler(pin, value[0], blynk, relays)
+    if (str(value[0]) == "0.0"):
+        value[0] = 0
+    drone.droneRelayWriteHandler(pin, value[0], blynk, relays)
         
 @timer.register(interval=30, run_once=False)
 def blynk_data():
