@@ -45,7 +45,7 @@ while True:
     output = ser.readline().decode('utf-8')
     print("----------------------------------START--------------------------------------------------------")
     print(output)
-    print(output.isFloat())
+    print(isinstance(output,Float))
     print("----------------------------------END--------------------------------------------------------")
     if (output is not None):
       print('Temprature : ' + output)
