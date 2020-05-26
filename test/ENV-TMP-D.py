@@ -37,14 +37,9 @@ ser.write(str.encode("DO"+'\r'))
 ser.write(str.encode("SC"+'\r'))
 
 print("connected to: " + ser.portstr)
-count=1
 
-while True:
-  try:
-    print(ser.write(str.encode("R" + '\r')))
-    output = ser.readline().decode('utf-8')
-    print("Temprature :" + output)
-    print('Temprature format : {0:d}'.format(output))
-  except:
-    pass
+print(ser.write(str.encode("R" + '\r')))
+output = ser.readline().decode('utf-8')
+print("Temprature :" + output)
+print('Temprature format : {0:d}'.format(output))
 ser.close()
