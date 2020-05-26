@@ -41,8 +41,9 @@ count=1
 
 while True:
   try:
-    ser.write(str.encode("R" + '\r'))
+    print(ser.write(str.encode("R" + '\r')))
     output = ser.readline().decode('utf-8')
+    print(output)
     print('Temprature : {0:d}'.format(output))
   except:
     pass
