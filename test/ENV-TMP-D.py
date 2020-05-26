@@ -40,8 +40,8 @@ print("connected to: " + ser.portstr)
 count=1
 
 while True:
-        line = ser.readline()
-        print(str(count) + str(': ') + line.decode('utf-8'))
-        count = count+1
- 
+  try:
+    print('Temprature : ') + ser.readline().decode('utf-8'))
+ except:
+    pass
 ser.close()
