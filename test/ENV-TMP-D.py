@@ -35,6 +35,6 @@ ser = serial.Serial(
 
 while 1:
   result=ser.write(str.encode("R"))
-  readLine=ser.read(20)
-  print(readLine)
-  print (readLine.decode())
+#  readLine=ser.read(20)
+  print(result)
+#  print (readLine.decode())
