@@ -46,11 +46,10 @@ while True:
     print("----------------------------------START--------------------------------------------------------")
     print(output)
     print(isinstance(output, numbers.Real))
-    print(isinstance(output,Float))
     print("----------------------------------END--------------------------------------------------------")
-    if (output is not None):
-      print('Temprature : ' + output)
-      print("NO CR --------------")
+    
+    print('Temprature : ' + output)
+    print("NO CR --------------")
   except:
     pass
 ser.close()
