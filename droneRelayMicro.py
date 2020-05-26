@@ -31,6 +31,10 @@ import subprocess
 import re
 import json
 import RPi.GPIO as GPIO 
+import lcddriver
+from time import *
+
+lcd = lcddriver.lcd()
 
 parser = ConfigParser()
 parser.read('/home/pi/configDroneRelayMicro.ini')
@@ -181,6 +185,8 @@ def write_handler(pin, value):
         
 @timer.register(interval=30, run_once=False)
 def blynk_data():
+
+
     _log.info("Start of timer.register fx")
     blynk.set_property(systemLED, 'color', colours[1])
     blynk.virtual_write(250, "Updating")
@@ -193,6 +199,11 @@ def blynk_data():
     if(bme680 is not None):            
         _log.debug("bme680 is not None so going to set pressure")
         bme680.sea_level_pressure = openWeather.getPressure()
+        
+        _log.debug("Going to update OLED display BME680 data")
+        lcd.lcd_display_string("Temperature is " + str(bme680.temperature), 1)
+        lcd.lcd_display_string("Humidity is " +  + str(bme680.humidity), 2)
+
         _log.debug("Going to send bme680 data to blynk app")
         blynk.virtual_write(2, bme680.gas)
         blynk.virtual_write(1, bme680.temperature)
@@ -205,6 +216,10 @@ def blynk_data():
         _log.debug("set BME form display")
         drone.setBME680FormColours(bme680, blynkObj=blynk, loggerObj=_log)     
     elif(bme680 is not None):           
+        _log.debug("Going to update OLED display bme280 data")
+        lcd.lcd_display_string("Temperature is " + str(bme280.temperature), 1)
+        lcd.lcd_display_string("Humidity is " +  + str(bme280.humidity), 2)
+
         _log.debug("Going to send bme280 data to blynk app")
         blynk.virtual_write(2, "BME280")
         blynk.set_property(2, 'color', colours['OFFLINE'])
@@ -238,6 +253,7 @@ def blynk_data():
     _log.debug("Now work on mhz19b sensor")
     mhz19b = mh_z19.read()  
     if mhz19b is not None:
+        lcd.lcd_display_string('CO2 level is {0:d} ppm'.format(mhz19b['co2']), 3)
         blynk.virtual_write(10, '{0:d}'.format(mhz19b['co2']))
         _log.info('CO2: {0:d}'.format(mhz19b['co2']))
         drone.setMHZFormOnlineColours(blynkObj=blynk, loggerObj=_log)
@@ -256,6 +272,12 @@ def blynk_data():
         blynk.virtual_write(98, 'Unexpected error: mhz19b' + '\n')
         _log.error('Unexpected error: mhz19b')
         drone.setMHZFormOfflineColours(blynkObj=blynk, loggerObj=_log)
+    
+    if(GPIO.input(relays[1]) == GPIO.LOW): 
+        lcd.lcd_display_string("Plug is on", 4)
+    else:
+        lcd.lcd_display_string("Plug is off", 4)
+    
     blynk.virtual_write(250, "Running")
     blynk.set_property(systemLED, 'color', colours[0])
     _log.debug("End of timer.register fx")
