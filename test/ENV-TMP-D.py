@@ -41,7 +41,7 @@ class AtlasTemp:
    def getTemp(self):
       self.ser.write(str.encode("R"+'\r'))
       self.rawOutput = self.ser.read(5)
-      retrun self.rawOutput.decode()
+      return self.rawOutput.decode()
 
       
 atlasTemp = AtlasTemp()
