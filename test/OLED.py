@@ -1,84 +1,70 @@
-#!/usr/bin/python
-# Example using a character LCD connected to a Raspberry Pi or BeagleBone Black.
-import time
+"""
+This demo will fill the screen with white, draw a black box on top
+and then print Hello World! in the center of the display
 
-import Adafruit_CharLCD as LCD
+This example is for use on (Linux) computers that are using CPython with
+Adafruit Blinka to support CircuitPython libraries. CircuitPython does
+not support PIL/pillow (python imaging library)!
+"""
 
+import board
+import digitalio
+from PIL import Image, ImageDraw, ImageFont
+import adafruit_ssd1306
 
-# Raspberry Pi pin configuration:
-lcd_rs        = 27  # Note this might need to be changed to 21 for older revision Pi's.
-lcd_en        = 22
-lcd_d4        = 25
-lcd_d5        = 24
-lcd_d6        = 23
-lcd_d7        = 18
-lcd_backlight = 4
+# Define the Reset Pin
+oled_reset = digitalio.DigitalInOut(board.D4)
 
-# BeagleBone Black configuration:
-# lcd_rs        = 'P8_8'
-# lcd_en        = 'P8_10'
-# lcd_d4        = 'P8_18'
-# lcd_d5        = 'P8_16'
-# lcd_d6        = 'P8_14'
-# lcd_d7        = 'P8_12'
-# lcd_backlight = 'P8_7'
+# Change these
+# to the right size for your display!
+WIDTH = 128
+HEIGHT = 32  # Change to 64 if needed
+BORDER = 5
 
-# Define LCD column and row size for 16x2 LCD.
-lcd_columns = 16
-lcd_rows    = 2
+# Use for I2C.
+i2c = board.I2C(board.D1, board.D0)
+oled = adafruit_ssd1306.SSD1306_I2C(WIDTH, HEIGHT, i2c, addr=0x29, reset=oled_reset)
 
-# Alternatively specify a 20x4 LCD.
-# lcd_columns = 20
-# lcd_rows    = 4
+# Use for SPI
+# spi = board.SPI()
+# oled_cs = digitalio.DigitalInOut(board.D5)
+# oled_dc = digitalio.DigitalInOut(board.D6)
+# oled = adafruit_ssd1306.SSD1306_SPI(WIDTH, HEIGHT, spi, oled_dc, oled_reset, oled_cs)
 
-# Initialize the LCD using the pins above.
-lcd = LCD.Adafruit_CharLCD(lcd_rs, lcd_en, lcd_d4, lcd_d5, lcd_d6, lcd_d7,
-                           lcd_columns, lcd_rows, lcd_backlight)
+# Clear display.
+oled.fill(0)
+oled.show()
 
-# Print a two line message
-lcd.message('Hello\nworld!')
+# Create blank image for drawing.
+# Make sure to create image with mode '1' for 1-bit color.
+image = Image.new("1", (oled.width, oled.height))
 
-# Wait 5 seconds
-time.sleep(5.0)
+# Get drawing object to draw on image.
+draw = ImageDraw.Draw(image)
 
-# Demo showing the cursor.
-lcd.clear()
-lcd.show_cursor(True)
-lcd.message('Show cursor')
+# Draw a white background
+draw.rectangle((0, 0, oled.width, oled.height), outline=255, fill=255)
 
-time.sleep(5.0)
+# Draw a smaller inner rectangle
+draw.rectangle(
+    (BORDER, BORDER, oled.width - BORDER - 1, oled.height - BORDER - 1),
+    outline=0,
+    fill=0,
+)
 
-# Demo showing the blinking cursor.
-lcd.clear()
-lcd.blink(True)
-lcd.message('Blink cursor')
+# Load default font.
+font = ImageFont.load_default()
 
-time.sleep(5.0)
+# Draw Some Text
+text = "Hello World!"
+(font_width, font_height) = font.getsize(text)
+draw.text(
+    (oled.width // 2 - font_width // 2, oled.height // 2 - font_height // 2),
+    text,
+    font=font,
+    fill=255,
+)
 
-# Stop blinking and showing cursor.
-lcd.show_cursor(False)
-lcd.blink(False)
-
-# Demo scrolling message right/left.
-lcd.clear()
-message = 'Scroll'
-lcd.message(message)
-for i in range(lcd_columns-len(message)):
-    time.sleep(0.5)
-    lcd.move_right()
-for i in range(lcd_columns-len(message)):
-    time.sleep(0.5)
-    lcd.move_left()
-
-# Demo turning backlight off and on.
-lcd.clear()
-lcd.message('Flash backlight\nin 5 seconds...')
-time.sleep(5.0)
-# Turn backlight off.
-lcd.set_backlight(0)
-time.sleep(2.0)
-# Change message.
-lcd.clear()
-lcd.message('Goodbye!')
-# Turn backlight on.
-lcd.set_backlight(1)
+# Display image
+oled.image(image)
+oled.show()
