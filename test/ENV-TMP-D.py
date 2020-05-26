@@ -45,6 +45,7 @@ while True:
     output = ser.readline().decode('utf-8')
     print("----------------------------------START--------------------------------------------------------")
     print(output)
+    print(isinstance(output, numbers.Real))
     print(isinstance(output,Float))
     print("----------------------------------END--------------------------------------------------------")
     if (output is not None):
