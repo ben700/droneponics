@@ -43,7 +43,7 @@ class AtlasTemp:
          self.ser.write(str.encode("R"+'\r'))
          self.rawOutput = self.ser.read(5)
       except:
-         return getTemp()
+         return self.getTemp()
       return self.rawOutput.decode()
 
       
