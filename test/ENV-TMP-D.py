@@ -27,11 +27,7 @@ print("serial_dev = " + serial_dev)
 
 ser = serial.Serial(
         port=serial_dev, #Replace ttyS0 with ttyAM0 for Pi1,Pi2,Pi0
-        baudrate = 38400,
-#        parity=serial.PARITY_NONE,
-#        stopbits=serial.STOPBITS_ONE,
-        bytesize=serial.EIGHTBITS,
-        timeout=1
+        baudrate = 38400
 )
 ser.write(str.encode("DO"+'\r'))
 ser.write(str.encode("SC"+'\r'))
