@@ -30,6 +30,7 @@ from configparser import ConfigParser
 import subprocess
 import re
 import json
+import RPi.GPIO as GPIO 
 
 parser = ConfigParser()
 parser.read('/home/pi/configDroneRelayMicro.ini')
@@ -48,6 +49,15 @@ _log.error("error")
 _log.warning("warning")
 _log.info("info")
 _log.debug("debug")
+
+GPIO.setmode(GPIO.BCM)
+GPIO.setwarnings(False)
+
+relays=[0,18,23,24,25,12,16,20,21]
+Relay1 = 18 #heater
+GPIO.setup(Relay1,GPIO.OUT, initial=1)
+    
+
 
 try:
     # Initialize Blynk
@@ -162,7 +172,13 @@ def disconnect_handler():
     _log.warning("Disconnected")
     blynk.virtual_write(250, "Disconnected")
   
-    
+@blynk.handle_event('write V1')
+def write_handler(pin, value):
+    _log.debug("droneRelayWriteHandler on pin " + str(pin) + " value is " + str(value[0]))
+     if (str(value[0]) == "0.0"):
+         value[0] = 0
+     drone.droneRelayWriteHandler(pin, value[0], blynk, relays)
+        
 @timer.register(interval=30, run_once=False)
 def blynk_data():
     _log.info("Start of timer.register fx")
