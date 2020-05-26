@@ -4,6 +4,10 @@ pip3 install blynklib
 sudo pip3 install adafruit-circuitpython-tsl2591
 sudo pip3 install python-tsl2591
 pip3 install adafruit-blinka
+sudo pip3 install adafruit-blinka
+sudo pip3 install board
+sudo pip3 install digitalio
+sudo pip3 install Adafruit-SSD1306
 
 sudo pip3 install adafruit-circuitpython-bme280
 sudo pip3 install adafruit-circuitpython-bme680
