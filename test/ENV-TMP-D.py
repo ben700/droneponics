@@ -47,10 +47,9 @@ class AtlasTemp:
                float(o)
                return o
             except : 
-               getTemp(self)
+               self.getTemp(self)
              
 
       
 atlasTemp = AtlasTemp()
-while True:
-   print("Temprature is " + atlasTemp.getTemp())
+print("Temprature is " + atlasTemp.getTemp())
