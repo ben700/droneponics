@@ -43,13 +43,7 @@ while True:
   try:
     ser.write(str.encode("R" + '\r'))
     output = ser.readline().decode('utf-8')
-    print("----------------------------------START--------------------------------------------------------")
-    print(output)
-    print(isinstance(output, numbers.Real))
-    print("----------------------------------END--------------------------------------------------------")
-    
-    print('Temprature : ' + output)
-    print("NO CR --------------")
+    print('Temprature : {0:d}'.format(output))
   except:
     pass
 ser.close()
