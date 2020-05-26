@@ -39,14 +39,16 @@ class AtlasTemp:
       self.ser.close()
 
    def getTemp(self):
-      try:
          self.ser.write(str.encode("R"+'\r'))
          self.rawOutput = self.ser.read(5)
-      except:
-         return self.getTemp()
-      return self.rawOutput.decode()
+         o = self.rawOutput.decode()
+         print("isfloat = " + str(isFloat(o)))
+         print("isInt = " + str(isInt(o)))
+         print("isNum = " + str(isNum(o)))
+         print("isReal = " + str(isReal(o)))
+      return o
 
       
 atlasTemp = AtlasTemp()
 while True:
-   print(atlasTemp.getTemp())
+   print("Temprature is " + atlasTemp.getTemp())
