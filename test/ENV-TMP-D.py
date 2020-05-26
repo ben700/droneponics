@@ -38,7 +38,7 @@ ser.write(str.encode("SC"+'\r'))
 while True:
   try:
     ser.write(str.encode("R" + '\r'))
-    print("Temperature is " + ser.read(20).decode('utf-8'))
+    print("Temperature is " + ser.read().decode('utf-8'))
   except:
     pass
   
