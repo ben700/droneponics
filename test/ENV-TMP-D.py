@@ -41,7 +41,7 @@ count=1
 
 while True:
   try:
-    print('Temprature : ') + ser.readline().decode('utf-8'))
+    print('Temprature : ' + ser.readline().decode('utf-8'))
  except:
     pass
 ser.close()
