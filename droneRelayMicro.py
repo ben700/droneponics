@@ -32,7 +32,7 @@ import re
 import json
 
 parser = ConfigParser()
-parser.read('/home/pi/configRelayMicro.ini')
+parser.read('/home/pi/configDroneRelayMicro.ini')
 
 bootup = True
 
