@@ -34,8 +34,11 @@ ser = serial.Serial(
 )
 
 if True:
+  
+  result=ser.write(str.encode("DO"+'\r'))
+  result=ser.write(str.encode("SC"+'\r'))
   result=ser.write(str.encode("R"+'\r'))
   readLine=ser.read(20)
   print(result)
   print(readLine)
-  print (readLine.decode())
+  print (readLine.decode('utf-8'))
