@@ -44,7 +44,8 @@ class AtlasTemp:
             self.rawOutput = self.ser.read(5)
             o = self.rawOutput.decode()
             float(o)
-            return o
+            if (o is not None):
+               return o
          except:
             self.getTemp()
             
