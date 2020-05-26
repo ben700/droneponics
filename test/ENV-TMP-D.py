@@ -33,8 +33,8 @@ ser = serial.Serial(
         timeout=1
 )
 
-
-ser.write(str.encode('R\r'))
-readLine = ser.readline()
-print(readLine)
-print (readLine.decode())
+while 1:
+  result=ser.write(str.encode("R"))
+  readLine=ser.read(20)
+  print(readLine)
+  print (readLine.decode())
