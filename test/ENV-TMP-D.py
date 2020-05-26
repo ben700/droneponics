@@ -42,7 +42,7 @@ count=1
 while True:
         line = ser.readline()
         print(str(count) + str(': '))
-        print(chr(line) )
+        print(line.decode() )
         count = count+1
  
 ser.close()
