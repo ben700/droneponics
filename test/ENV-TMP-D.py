@@ -43,14 +43,14 @@ class AtlasTemp:
          try:
             self.rawOutput = self.ser.read(5)
          except:
-               self.getTemp(self)
+               self.getTemp()
          o = self.rawOutput.decode()
          while True:
             try :
                float(o)
                return o
             except : 
-               self.getTemp(self)
+               self.getTemp()
              
 
       
