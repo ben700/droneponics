@@ -12,4 +12,4 @@ ser = serial.Serial(
 
 
 ser.write(str.encode("R"))
-print (ser.readline())
+print (ser.readline().decode("ascii"))
