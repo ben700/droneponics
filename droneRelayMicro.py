@@ -172,7 +172,7 @@ def disconnect_handler():
     _log.warning("Disconnected")
     blynk.virtual_write(250, "Disconnected")
   
-@blynk.handle_event('write V1')
+@blynk.handle_event('write V20')
 def write_handler(pin, value):
     _log.debug("droneRelayWriteHandler on pin " + str(pin) + " value is " + str(value[0]))
     if (str(value[0]) == "0.0"):
