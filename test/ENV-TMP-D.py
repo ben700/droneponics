@@ -34,13 +34,15 @@ ser = serial.Serial(
 )
 ser.write(str.encode("DO"+'\r'))
 ser.write(str.encode("SC"+'\r'))
+ser.write(str.encode("R" + '\r'))
+
+print("connected to: " + ser.portstr)
+count=1
 
 while True:
-  try:
-    ser.write(str.encode("R" + '\r'))
-    ser.flush()
-    readLine = ser.read(10).decode('utf-8')
-    print("Temperature is " + readLine)
-  except:
-    pass
-  
+    for line in ser.read():
+
+        print(str(count) + str(': ') + chr(line) )
+        count = count+1
+
+ser.close()
