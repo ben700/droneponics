@@ -46,7 +46,7 @@ class AtlasTemp:
          print("isInt = " + str(isInt(o)))
          print("isNum = " + str(isNum(o)))
          print("isReal = " + str(isReal(o)))
-      return o
+         return o
 
       
 atlasTemp = AtlasTemp()
