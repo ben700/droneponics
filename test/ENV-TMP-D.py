@@ -42,7 +42,9 @@ count=1
 while True:
   try:
     ser.write(str.encode("R" + '\r'))
-    print('Temprature : ' + ser.readline().decode('utf-8'))
+    output = ser.readline().decode('utf-8')
+    if (output is not None):
+      print('Temprature : ' + output)
   except:
     pass
 ser.close()
