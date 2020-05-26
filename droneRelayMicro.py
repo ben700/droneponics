@@ -188,6 +188,7 @@ def blynk_data():
 
 
     _log.info("Start of timer.register fx")
+    lcd.backlight(1)
     blynk.set_property(systemLED, 'color', colours[1])
     blynk.virtual_write(250, "Updating")
     _log.debug("Going to get timestamp")
