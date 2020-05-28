@@ -1,16 +1,9 @@
 #!/usr/bin/python
 import serial
-print "Welcome to the Atlas Scientific Raspberry Pi example."
-usbport = '/dev/ttyAMA0'
-ser = serial.Serial(usbport, 38400)
-# turn on the LEDs
-ser.write("L1\r")
-ser.write("C\r")
-line = ""
-while True:
-data = ser.read()
-if(data == "\r"):
-print "Received from sensor:" + line
-line = ""
-else:
-line = line + data
+self.ser = serial.Serial(
+           port='/dev/ttyAMA0', #Replace ttyS0 with ttyAM0 for Pi1,Pi2,Pi0
+           baudrate = 38400
+      )
+#set the default units on probe 
+self.ser.write(str.encode("I2C,104"+'\r'))
+      
