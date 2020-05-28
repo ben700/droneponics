@@ -327,7 +327,7 @@ try:
              doSinglePHDose()
              blynk.virtual_write(98,"Automatic dose Ph"+ '\n')
        
-         if (parser.get('blynkBridge', 'BLYNK_AUTH', fallback=None) is not None):
+        if (parser.get('blynkBridge', 'BLYNK_AUTH', fallback=None) is not None):
             _log.warning("Send Temp data via blynkBridge")
             blynkBridge = blynklib.Blynk(parser.get('blynkBridge', 'BLYNK_AUTH'))
             blynkBridge.run()
