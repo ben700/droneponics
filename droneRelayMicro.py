@@ -203,7 +203,7 @@ def blynk_data():
         
         _log.debug("Going to update OLED display BME680 data")
         lcd.lcd_display_string("Temperature is " + str(bme680.temperature), 1)
-        lcd.lcd_display_string("Humidity is " +  + str(bme680.humidity), 2)
+        lcd.lcd_display_string("Humidity is " +  str(bme680.humidity), 2)
 
         _log.debug("Going to send bme680 data to blynk app")
         blynk.virtual_write(2, bme680.gas)
@@ -219,7 +219,7 @@ def blynk_data():
     elif(bme280 is not None):           
         _log.debug("Going to update OLED display bme280 data")
         lcd.lcd_display_string("Temperature is " + str(bme280.temperature), 1)
-        lcd.lcd_display_string("Humidity is " +  + str(bme280.humidity), 2)
+        lcd.lcd_display_string("Humidity is " +  str(bme280.humidity), 2)
 
         _log.debug("Going to send bme280 data to blynk app")
         blynk.virtual_write(2, "BME280")
