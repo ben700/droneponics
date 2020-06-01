@@ -286,8 +286,8 @@ def blynk_data():
 _log.info("Created all the objects. Now starting the drone")        
 blynk.run() #need to call here so you can update app outside main while loop    
 blynk.virtual_write(250, "Start-up")
-blynk.virtual_write(251, drone.gethostname())
-blynk.virtual_write(252, drone.get_ip())        
+blynk.set_property(251, 'label', drone.gethostname())
+blynk.virtual_write(251, drone.get_ip())        
 blynk.virtual_write(98, "clr")
 if (parser.get('logging', 'logLevel', fallback=logging.CRITICAL) =="DEBUG"):
     if (parser.get('droneAir', 'I2C-0', fallback=False) == "True"):
