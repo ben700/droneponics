@@ -8,7 +8,9 @@ sudo pip3 install adafruit-blinka
 sudo pip3 install board
 sudo pip3 install digitalio
 sudo pip3 install Adafruit-SSD1306
-
+pip3 install adafruit-circuitpython-ssd1306
+sudo apt-get install python3-pil
+sudo pip3 install --force-reinstall adafruit-blinka
 sudo pip3 install adafruit-circuitpython-bme280
 sudo pip3 install adafruit-circuitpython-bme680
 sudo pip3 install meteocalc
