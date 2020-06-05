@@ -1,39 +1,7 @@
-ome python code for the raspberry to run this display.
-
-uses good old PythonImagingLibrary
-can load any Image
-allows image manipulation and drawing
-can fetch images from the internet
-demo code shows some search results from duckduckgo.com
-References
-Here is the waveshare Wiki page with the somewhat useful info's you may need. Unfortunately I am missing info about the memory layout just to know where I can expect to write a bit for a certain pixel. It also lacks timing infos, the code does a lot of delay's and there is a busy pin to read from but when and how I use which ??? The code also contains initialization code that is copied to the display and you will get no glue what it is. And no the PDF document about the display does not reveal this either.
-
-After some experimentation, I can get a refresh rate of about 2fps for a complete image refresh, with the partial update function. The pixels do not completely reset, I guess you need to do the long refresh cycle which inverts everything a view times to get completely clean display back.
-
-Update:
-
-Extensive explanation of the Waveshare example code...
 
 
-
-Connections to Raspberry
-I used a Pi3 but it should work with any.
-
-Search the web for "Raspberry pinout" e.g. this one and match with the waveshare doc, or simply use this table..
-
-e-Paper  RaspberryPi<br>3.3V     3.3V (pin1)<br>GND      GND  (pin6)<br>DIN      MOSI (pin19)<br>CLK      SCLK (pin23)<br>CS       CE0  (pin24)<br>DC       BCM25(pin22)<br>RST      BCM17(pin11)<br>BUSY     BCM24(pin18)
-The Code
-There is the main.py which runs the fancy stuff and there is EPD_driver.py which is a stripped down version of the interfacing code provided py waveshare. I thrown out almost everything which did not just copy an image to the display - it.. eh.. well they tried, but putting the frame together is much easier done on the Pi and the copied over with a single command.
-
-Just download the attached paperDisp.zip. Then run the code with "python main.py". You will need to install at least PIL and GPIO phyton libs like this.
-
-sudo apt-get install python-requests python-pil python-rpi.gpio
-Also make sure the SPI is enabled, edit /boot/config.txt and uncomment the line
-
-dtparam=spi=on
-main.py - this does init the display, gets some data from a duckduckgo search and displays that along with the current time. (instructables messed up the code, use the attached zip file)
-
-#!/usr/bin/python<br>import spidev as SPI   # where the display connects
+#!/usr/bin/python
+impor portspidev as SPI   # where the display connects
 
 import Image, ImageDraw, ImageFont  # PIL - PythonImageLibrary
 
