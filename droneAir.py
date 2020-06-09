@@ -172,7 +172,7 @@ def disconnect_handler():
 @timer.register(interval=30, run_once=False)
 def blynk_data():
     try:
-        log.debug(bme680.gas)
+        _log.debug(bme680.gas)
     except:
         bme680 = None
 
