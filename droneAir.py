@@ -171,6 +171,11 @@ def disconnect_handler():
     
 @timer.register(interval=30, run_once=False)
 def blynk_data():
+    try:
+        bme680.gas
+    except:
+        bme680 = None
+
     _log.info("Start of timer.register fx")
     blynk.set_property(systemLED, 'color', colours[1])
     blynk.virtual_write(250, "Updating")
