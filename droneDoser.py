@@ -58,7 +58,7 @@ try:
     eC=9999	
     sensors = []
     nutrientMix = []
-    nutrientMix = drone.buildNutrientMix(nutrientMix, _log)
+    nutrientMix = drone.buildNutrientMix(nutrientMix, _log, scheduleWeek='Grow')
     sensors = drone.buildSensors(sensors, _log)
     
     # Initialize Blynk
