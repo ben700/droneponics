@@ -61,6 +61,7 @@ try:
     nutrientMix = drone.buildNutrientMix(nutrientMix, _log, scheduleWeek='Grow')
     sensors = drone.buildSensors(sensors, _log)
     
+
     # Initialize Blynk
     blynk = blynklib.Blynk(parser.get('droneDoser', 'BLYNK_AUTH'))        
     timer = blynktimer.Timer()
@@ -69,12 +70,13 @@ try:
     blynk.set_property(systemLED, 'color', colours['ONLINE'])
 
     
-    
     # Initialize the sensor.
     try:
        # Create the I2C bus
        for dosage in nutrientMix:
+           _log.info("Pre Pump" + str(dosage.pumpId))
            dosage.pump = AtlasI2C(dosage.pumpId)
+           _log.info("Pump" + str(dosage.pumpId))
        blynk.virtual_write(98, "Pumps created" + '\n') 
        for sensor in sensors:
            sensor.sensor = AtlasI2C(sensor.sensorId)
