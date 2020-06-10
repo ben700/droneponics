@@ -62,7 +62,7 @@ try:
     nutrientMix = drone.buildNutrientMix(nutrientMix, _log, scheduleWeek='Grow')
     _log.info("drone.buildSensors(sensors")
     sensors = drone.buildSensors(sensors, _log)
-    
+    _log.info("all senses created")
 
     # Initialize Blynk
     blynk = blynklib.Blynk(parser.get('droneDoser', 'BLYNK_AUTH'))        
@@ -70,7 +70,7 @@ try:
     blynk.run()
     #blynk.virtual_write(98, "clr")
     blynk.set_property(systemLED, 'color', colours['ONLINE'])
-
+    _log.info("Blynk created")
     
     # Initialize the sensor.
     try:
