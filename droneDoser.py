@@ -58,7 +58,9 @@ try:
     eC=9999	
     sensors = []
     nutrientMix = []
+    _log.info("drone.buildNutrientMix")
     nutrientMix = drone.buildNutrientMix(nutrientMix, _log, scheduleWeek='Grow')
+    _log.info("drone.buildSensors(sensors")
     sensors = drone.buildSensors(sensors, _log)
     
 
