@@ -57,7 +57,9 @@ def buildSensors(sensors, _log):
     sensors.append( Sensor(102, "Temprature", 30, Target=20, LowAlarm=10, HighAlarm=25))
     _log.debug("built temperature sensor")
     sensors.append( Sensor(100, "EC", 31 , Target=600, LowAlarm=500, HighAlarm=15))
+    _log.debug("built ec sensor")
     sensors.append( Sensor(99, "pH", 32, Target=5.5, LowAlarm=5.3, HighAlarm=6.5))
+    _log.debug("built ph sensor")
     return sensors
 
 def buildOxySensors(sensors, _log):
