@@ -50,14 +50,14 @@ try:
     GPIO.setwarnings(False)
 
     relays=[0,18,23,24,25,12,16,20,21]
-    Relay1 = 18 #heater
-    Relay2 = 23 #Feed
-    Relay3 = 24 #Air
-    Relay4 = 25 #heater
-    Relay5 = 12 #Feed
-    Relay6 = 16 #Air
-    Relay7 = 20 #Mixer - turned off with low water 
-    Relay8 = 21  #Mixer - turned off with low water 
+    Relay1 = relays[1] #heater
+    Relay2 = relays[2] #Feed
+    Relay3 = relays[3] #Air
+    Relay4 = relays[4] #heater
+    Relay5 = relays[5] #Feed
+    Relay6 = relays[6] #Air
+    Relay7 = relays[7] #Mixer - turned off with low water 
+    Relay8 = relays[8]  #Mixer - turned off with low water 
 
     GPIO.setup(Relay1,GPIO.OUT, initial=1)
     GPIO.setup(Relay2,GPIO.OUT, initial=1)
