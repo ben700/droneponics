@@ -50,8 +50,8 @@ try:
     GPIO.setwarnings(False)
 
     relays=[0,18,23,24,25,12,16,20,21]
-    Relay1 = relays[1] #heater
-    Relay2 = relays[2] #Feed
+    Relay1 = relays[1] #feed
+    Relay2 = relays[2] #fan
     Relay3 = relays[3] #Air
     Relay4 = relays[4] #heater
     Relay5 = relays[5] #Feed
@@ -143,8 +143,6 @@ try:
     @blynk.handle_event('write V2')
     def write_handler(pin, value):
         _log.debug("droneRelayWriteHandler on pin " + str(pin) + " value is " + str(value[0]))
-        if (str(value[0]) == "0.0"):
-            value[0] = 0
         drone.droneRelayWriteHandler(pin, value[0], blynk, relays)
         
     @blynk.handle_event('write V3')
