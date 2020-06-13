@@ -181,12 +181,16 @@ try:
         
     @blynk.handle_event('write V7')
     def write_handler(pin, value):
-        global waterTemp
+      #  global waterTemp
+      #  _log.debug("droneRelayWriteHandler on pin " + str(pin) + " value is " + str(value[0]))
+      #  if (str(value[0]) == "0.0"):
+      #     value[0] = 0
+     #   v7_Temp_write_handler(pin, value[0], waterTemp)
         _log.debug("droneRelayWriteHandler on pin " + str(pin) + " value is " + str(value[0]))
         if (str(value[0]) == "0.0"):
-           value[0] = 0
-        v7_Temp_write_handler(pin, value[0], waterTemp)
-           
+            value[0] = 0
+        drone.droneRelayWriteHandler(pin, value[0],blynk, relays)
+  
     
     
     def v8_CO2_write_handler(pin, CO2, CO2Target, startTime, stopTime):         
