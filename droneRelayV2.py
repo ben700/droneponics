@@ -31,15 +31,19 @@ class Counter:
     def isItAnOnCycle() :
         _log.debug("in class counter function isItAnOnCycle")
         if (this.cycle < this.onCycle):
+            _log.debug("in class counter function isItAnOnCycle and it is true")
             return True
         else:
+            _log.debug("in class counter function isItAnOnCycle and it is false")
             return False
         
     def isItAnOffCycle(_log) :
         _log.debug("in class counter function isItAnOffCycle")
         if ((this.cycle-this.onCycle) < this.onCycle):
+            _log.debug("in class counter function isItAnOffCycle and it is true")
             return True
         else:
+            _log.debug("in class counter function isItAnOffCycle and if is false")
             return False
         
     def  incCycle(_log):
