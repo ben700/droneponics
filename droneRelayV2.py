@@ -110,7 +110,7 @@ try:
   
     @blynk.handle_event('write V1')
     def write_handler(pin, value):
-         staus = value[0]
+        staus = value[0]
         _log.debug("droneRelayWriteHandler on pin " + str(pin) + " value is " + str(staus))  
         if (staus =="1" ):
             _log.info("pin 1 value==2")
