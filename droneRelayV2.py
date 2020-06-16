@@ -286,16 +286,17 @@ try:
     
         blynk.virtual_write(24, counter.info())
         blynk.virtual_write(23, counter.infoCounter())
-
-        if (counter.isItAnOnCycle(_log)):
-            _log.info("Turn Relay ON") 
-            GPIO.output(relays[1],GPIO.LOW)
-        elif (counter.isItAnOffCycle(_log)):
-            _log.info("Turn off RELAY")
-            GPIO.output(relays[1],GPIO.HIGH)
-        else:
-            counter.reset(_log)
-            _log.info("reset counter")
+        
+        if(counter.isAutomatic()):
+            if (counter.isItAnOnCycle(_log)):
+                _log.info("Turn Relay ON") 
+                GPIO.output(relays[1],GPIO.LOW)
+            elif (counter.isItAnOffCycle(_log)):
+                _log.info("Turn off RELAY")
+                GPIO.output(relays[1],GPIO.HIGH)
+            else:
+                counter.reset(_log)
+                _log.info("reset counter")
 
         _log.debug("rememer to inc the counter")
         counter.incCycle(_log)
