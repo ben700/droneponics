@@ -281,36 +281,16 @@ try:
     
         blynk.virtual_write(24, counter.info())
         blynk.virtual_write(23, counter.infoCounter())
-        _log.debug(counter.infoCounter())
-        _log.debug("285")
-        counter.incCycle(_log) 
-        _log.debug(counter.infoCounter())
-        counter.incCycle(_log) 
-        _log.debug(counter.infoCounter())
-        _log.debug("290")
-         
-        counter.incCycle(_log) 
-        _log.debug(counter.infoCounter())
-        _log.debug(counter.isItAnOnCycle(_log))
-        _log.debug(counter.isItAnOffCycle(_log))         
-        counter.incCycle(_log) 
-        _log.debug(counter.infoCounter())
-        _log.debug(counter.isItAnOnCycle(_log))
-        _log.debug(counter.isItAnOffCycle(_log))
-        _log.debug("300") 
-        if (Counter.isItAnOnCycle(_log)):
+
+        if (counter.isItAnOnCycle(_log)):
             _log.info("Turn Relay ON") 
             #GPIO.output(relays[1],0)
-            blynk.virtual_write(23, "Counter " + str(counter.cycle) +" of " + str(counter.onCycle) + " mins on" )
+        elif (counter.isItAnOffCycle(_log)):
+            _log.info("Turn off RELAY")
+            #GPIO.output(relays[1],1)
         else:
-            _log.info("see if we need to turn relay off")
-            if (Counter.isItAnOffCycle(_log)):
-                _log.info("Turn off RELAY")
-                #GPIO.output(relays[1],1)
-                blynk.virtual_write(23, "Counter " + str(counter.cycle) +" of " + str(counter.offCycle) + " mins off" )
-            else:
-                _log.info("reset counter")
-                blynk.virtual_write(23, "Counter reset to" + str(counter.cycle) +" leave relay as is" )
+            _log.info("reset counter")
+
         _log.debug("rememer to inc the counter")
         counter.incCycle(_log)
         _log.debug("The End")
