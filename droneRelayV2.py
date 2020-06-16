@@ -29,7 +29,7 @@ class Counter:
     onCycle=0 
     offCycle=0 
     def isItAnOnCycle() :
-        _log.debug("in class counter function isItAnOnCycle")
+        _log.debug("in class counter function isItAnOnCycle states are")
         _log.debug("in class counter function isItAnOnCycle this.cycle = " + str(this.cycle))
         _log.debug("in class counter function isItAnOnCycle this.onCycle = " + str(this.onCycle))
         _log.debug("in class counter function isItAnOnCycle this.offCycle = " + str(this.offCycle))
