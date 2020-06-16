@@ -28,16 +28,16 @@ class DroneCounter:
     self.offCycle=0 
     self.overwrite = False
    
-    def manual(self, _log, value):
+   def manual(self, _log, value):
          overwrite = value
          
-    def isAutomatic(self):
+   def isAutomatic(self):
       if (overwrite is False):
            return True
       else:
            return False
           
-    def isItAnOnCycle(self, _log) :
+   def isItAnOnCycle(self, _log) :
         _log.debug("in class counter function isItAnOnCycle states are")
         _log.debug("in class counter function isItAnOnCycle this.cycle = " + str(self.cycle))
         _log.debug("in class counter function isItAnOnCycle this.onCycle = " + str(self.onCycle))
@@ -55,7 +55,7 @@ class DroneCounter:
             else:
                 return False
         
-    def isItAnOffCycle(self, _log) :
+   def isItAnOffCycle(self, _log) :
         _log.debug("in class counter function isItAnOffCycle")
         if (overwrite == "On"):
              return False
@@ -76,25 +76,25 @@ class DroneCounter:
                 _log.debug("in class counter function isItAnOffCycle and if is false")
                 return False
         
-    def setOnCycle(self, _log, onCycleValue):
+   def setOnCycle(self, _log, onCycleValue):
       _log.debug("current this.cycle = " + str(self.cycle))
       _log.debug("current this.onCycle = " + str(self.onCycle))
       _log.debug("going to set onCycleValue to " + str(onCycleValue))
       self.onCycle = int(onCycleValue) 
         
-    def setOffCycle(self, _log, offCycleValue):
+   def setOffCycle(self, _log, offCycleValue):
       _log.debug("current this.cycle = " + str(self.cycle))
       _log.debug("current this.onCycle = " + str(self.onCycle))
       _log.debug("going to set offCycleValue to " + str(offCycleValue))
       self.offCycle = int(offCycleValue) 
       
-    def info(self):
+   def info(self):
         return "Feed is on for " + str(self.onCycle) + " mins and then off for " + str(self.offCycle) + " mins."
    
-    def infoCounter(self):
+   def infoCounter(self):
          return "Counter.cycle = " + str(self.cycle) + " and Counter.onCycle is " + str(self.onCycle) + " and Counter.offCycle = " + str(self.offCycle)
         
-    def  incCycle(self, _log):
+   def  incCycle(self, _log):
         _log.debug("in class counter function incCycle")
         _log.debug("Cycle was " + str(self.cycle))
         self.cycle = self.cycle + 1
