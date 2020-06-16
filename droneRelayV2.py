@@ -285,23 +285,23 @@ try:
     def blynk_data():
         _log.info("Update Timer Run")
        # blynk.virtual_sync(10)
-        now = datetime.now()
-        blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
+    #    now = datetime.now()
+    #    blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
     
       #  blynk.virtual_write(24, counter.info())
       #  blynk.virtual_write(23, counter.infoCounter())
         
-     #   if(counter.isAutomatic()):
-         #   if (counter.isItAnOnCycle(_log)):
-        #        _log.info("Turn Relay ON") 
-       #         GPIO.output(relays[1],GPIO.LOW)
-      #      elif (counter.isItAnOffCycle(_log)):
-     #           _log.info("Turn off RELAY")
-    #            GPIO.output(relays[1],GPIO.HIGH)
-   #         else:
-  #              counter.reset(_log)
- #               _log.info("reset counter")
-#
+        if(counter.isAutomatic()):
+            if (counter.isItAnOnCycle(_log)):
+                _log.info("Turn Relay ON") 
+                GPIO.output(relays[1],GPIO.LOW)
+            elif (counter.isItAnOffCycle(_log)):
+                _log.info("Turn off RELAY")
+                GPIO.output(relays[1],GPIO.HIGH)
+            else:
+                counter.reset(_log)
+                _log.info("reset counter")
+
      #   _log.debug("rememer to inc the counter")
     #    counter.incCycle(_log)
         _log.debug("The End")
