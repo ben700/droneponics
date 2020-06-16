@@ -28,13 +28,17 @@ class Counter:
     cycle = 0
     onCycle=0 
     offCycle=0 
+    o=0
+    f=0
+    x=0
+    
     def isItAnOnCycle() :
         _log.debug("in class counter function isItAnOnCycle states are")
-        _log.debug("in class counter function isItAnOnCycle this.cycle = " + str(this.cycle))
-        _log.debug("in class counter function isItAnOnCycle this.onCycle = " + str(this.onCycle))
-        _log.debug("in class counter function isItAnOnCycle this.offCycle = " + str(this.offCycle))
+        _log.debug("in class counter function isItAnOnCycle this.cycle = " + str(this.x))
+        _log.debug("in class counter function isItAnOnCycle this.onCycle = " + str(this.o))
+        _log.debug("in class counter function isItAnOnCycle this.offCycle = " + str(this.f))
         
-        if (this.cycle < this.onCycle):
+        if (this.x < this.o):
             _log.debug("in class counter function isItAnOnCycle and it is true")
             return True
         else:
@@ -43,7 +47,7 @@ class Counter:
         
     def isItAnOffCycle(_log) :
         _log.debug("in class counter function isItAnOffCycle")
-        if ((this.cycle-this.onCycle) < this.onCycle):
+        if ((this.x-this.o) < this.f):
             _log.debug("in class counter function isItAnOffCycle and it is true")
             return True
         else:
@@ -52,10 +56,10 @@ class Counter:
         
     def  incCycle(_log):
         _log.debug("in class counter function incCycle")
-        _log.debug("Cycle was " + str(this.cycle))
-        this.cycle = this.cycle + 1
-        _log.debug("Cycle now " + str(this.cycle))
-        return this.cycle
+        _log.debug("Cycle was " + str(this.x))
+        this.x = this.x + 1
+        _log.debug("Cycle now " + str(this.x))
+        return this.x
             
 bootup = True
 button_state=0
