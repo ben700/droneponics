@@ -113,7 +113,7 @@ try:
         staus = value[0]
         _log.debug("droneRelayWriteHandler on pin " + str(pin) + " value is " + str(staus))  
         if (staus is "1" ):
-            _log.info("pin 1 value==2")
+            _log.info("pin 1 value==1")
 #     #       counter.manual(_log, "Off")
             GPIO.output(relays[1],GPIO.HIGH)
             blynk.virtual_write(250, "Stopped")
