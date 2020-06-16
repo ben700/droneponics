@@ -283,11 +283,11 @@ try:
         blynk.virtual_write(23, counter.infoCounter())
         _log.debug(counter.infoCounter())
         _log.debug("285")
-         
-         
-         
-         
-         
+        counter.incCycle(_log) 
+        _log.debug(counter.infoCounter())
+        counter.incCycle(_log) 
+        _log.debug(counter.infoCounter())
+        _log.debug("290")
          
          
          
@@ -312,7 +312,7 @@ try:
                 _log.info("reset counter")
                 blynk.virtual_write(23, "Counter reset to" + str(counter.cycle) +" leave relay as is" )
         _log.debug("rememer to inc the counter")
-        Counter.incCycle(_log)
+        counter.incCycle(_log)
         _log.debug("The End")
             
   
