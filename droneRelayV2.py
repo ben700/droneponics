@@ -294,13 +294,15 @@ try:
         
     @timer.register(interval=60, run_once=False)
     def blynk_data():
+        global onTime
+        global offTime
         global button_state
         _log.info("Update Timer Run")
         blynk.virtual_sync(10)
         Counter.cycle += 1
         now = datetime.now()
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
-        blynk.virtual_write(23, "Counter " + str(Counter.cycle))
+        blynk.virtual_write(23, "Counter " + str(Counter.cycle) +" of " + onTime + "mins on" )
         
         
         if(button_state == 2):
