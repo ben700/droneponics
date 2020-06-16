@@ -61,10 +61,10 @@ class Counter:
       _log.debug("going to set offCycleValue to " + str(offCycleValue))
       this.offCycle = offCycleValue 
       
-    def info(self)
+    def info(self):
         return "Feed is on for " + str(this.onCycle) + " mins and then off for " + str(this.offCycle) + " mins."
    
-    def infoCounter(self)
+    def infoCounter(self):
          return "Counter.cycle = " + str(this.cycle) + " and Counter.onCycle is " + str(this.onCycle) + " and Counter.offCycle = " + str(this.offCycle)
         
     def  incCycle(self, _log):
