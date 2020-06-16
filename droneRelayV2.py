@@ -293,7 +293,7 @@ try:
         _log.debug(counter.infoCounter())
         _log.debug(counter.isItAnOnCycle())
         _log.debug(counter.isItAnOffCycle())         
-         counter.incCycle(_log) 
+        counter.incCycle(_log) 
         _log.debug(counter.infoCounter())
         _log.debug(counter.isItAnOnCycle())
         _log.debug(counter.isItAnOffCycle())
