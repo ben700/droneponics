@@ -17,7 +17,45 @@ class Relays:
       
    def add(self, Relay):
       return self.relays.append(Relay)
-    
+  
+
+
+class Counter:
+    cycle = 0
+    onCycle=0 
+    offCycle=0 
+    def __init__(self):
+      pass
+    def isItAnOnCycle() :
+        _log.debug("in class counter function isItAnOnCycle states are")
+        _log.debug("in class counter function isItAnOnCycle this.cycle = " + str(this.cycle))
+        _log.debug("in class counter function isItAnOnCycle this.onCycle = " + str(this.onCycle))
+        _log.debug("in class counter function isItAnOnCycle this.offCycle = " + str(this.offCycle))
+        
+        if (this.cycle < this.onCycle):
+            _log.debug("in class counter function isItAnOnCycle and it is true")
+            return True
+        else:
+            _log.debug("in class counter function isItAnOnCycle and it is false")
+            return False
+        
+    def isItAnOffCycle(_log) :
+        _log.debug("in class counter function isItAnOffCycle")
+        if ((this.cycle-this.onCycle) < this.offCycle):
+            _log.debug("in class counter function isItAnOffCycle and it is true")
+            return True
+        else:
+            _log.debug("in class counter function isItAnOffCycle and if is false")
+            return False
+        
+    def  incCycle(_log):
+        _log.debug("in class counter function incCycle")
+        _log.debug("Cycle was " + str(this.x))
+        this.cycle = this.cycle + 1
+        _log.debug("Cycle now " + str(this.x))
+        return this.cycle
+         
+         
  
 class SwitchRelay:
     def __init__(self, PIN, NAME, VPIN):
