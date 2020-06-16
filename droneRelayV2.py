@@ -26,6 +26,8 @@ import numbers
 
 class Counter:
     cycle = 0
+    onCycle=0 
+    offCycle=0 
         
 bootup = True
 button_state=0
@@ -34,8 +36,6 @@ CO2Target=0
 startTime =None
 stopTime=None
 waterTemp=99
-onTime=0 
-offTime=0 
         
 
 parser = ConfigParser()
@@ -273,17 +273,13 @@ try:
    
     @blynk.handle_event('write V25')
     def write_handler(pin, value):
-        global onTime
-        global offTime
-        onTime = value[0]
-        blynk.virtual_write(24, "Feed is on for " + str(onTime) + " mins and then off for " + str(offTime) + " mins.")
+        Counter.onCycle = value[0]
+        blynk.virtual_write(24, "Feed is on for " + str(Counter.onCycle) + " mins and then off for " + str(Counter.offCycle) + " mins.")
         
     @blynk.handle_event('write V26')
     def write_handler(pin, value):
-        global onTime
-        global offTime
-        offTime = value[0]
-        blynk.virtual_write(24, "Feed is on for " + str(onTime) + " mins and then off for " + str(offTime) + " mins.")
+        Counter.offCycle = value[0]
+        blynk.virtual_write(24, "Feed is on for " + str(Counter.onCycle) + " mins and then off for " + str(Counter.offCycle) + " mins.")
         
         
     @blynk.handle_event('write V30')
@@ -299,30 +295,21 @@ try:
         global button_state
         _log.info("Update Timer Run")
         blynk.virtual_sync(10)
-        Counter.cycle += 1
         now = datetime.now()
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
-        if (Counter.cycle >= onTime):
-            blynk.virtual_write(23, "Counter " + str(Counter.cycle) +" of " + onTime + " mins on" )
+        if (Counter.cycle > Counter.onCycle):
+            GPIO.output(relays[1],0)
+            blynk.virtual_write(23, "Counter " + str(Counter.cycle) +" of " + str(Counter.onCycle) + " mins on" )
         else:
-            blynk.virtual_write(23, "Counter " + str(Counter.cycle) +" of " + offTime + " mins off" )
+            if (Counter.cycle - Counter.onCycle > Counter.offCycle):
+                blynk.virtual_write(23, "Counter " + str(Counter.cycle) +" of " + str(Counter.offCycle) + " mins off" )
+                GPIO.output(relays[1],1)
+           else:
+                Counter.cycle = 0 
+                blynk.virtual_write(23, "Counter reset to" + str(Counter.cycle) +" leave relay as is" )
+        Counter.cycle += 1
             
-        
-        if(button_state == 2):
-            if Counter.cycle % 2 == 0:
-              Counter.cycle = 0
-        if(button_state ==3):
-             if Counter.cycle % 4 == 0:
-              Counter.cycle = 0
-        if(button_state ==4):
-             if Counter.cycle % 10 == 0:
-              Counter.cycle = 0
-        if (Counter.cycle == 0):
-            
-           GPIO.output(relays[1],0)
-        else:
-           GPIO.output(relays[1],1)
-
+  
     while True:
         blynk.run()
         if bootup :
