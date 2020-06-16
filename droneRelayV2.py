@@ -29,9 +29,9 @@ class Counter:
     onCycle=0 
     offCycle=0 
     def isItAnOnCycle() :
-        if (this.cycle < this.onCycle)
+        if (this.cycle < this.onCycle):
             return True
-        else
+        else:
             return False
     def incCyclc():
         this.cycle = this.cycle + 1
