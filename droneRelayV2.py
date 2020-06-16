@@ -265,14 +265,14 @@ try:
         v8_CO2_write_handler(8, CO2, CO2Target, startTime, stopTime)
    
     @blynk.handle_event('write V25')
-    def write_handler(pin, value):
-        counter.setOnCycle(_log, value[0])
-        blynk.virtual_write(24, counter.info())
+    def v25write_handler(pin, value):
+        droneCounter.setOnCycle(_log, value[0])
+        blynk.virtual_write(24, droneCounter.info())
         
     @blynk.handle_event('write V26')
-    def write_handler(pin, value):
-        counter.setOffCycle(_log, value[0])
-        blynk.virtual_write(24, counter.info())
+    def v26write_handler(pin, value):
+        droneCounter.setOffCycle(_log, value[0])
+        blynk.virtual_write(24, droneCounter.info())
         
         
     @blynk.handle_event('write V30')
