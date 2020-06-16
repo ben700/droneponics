@@ -283,6 +283,7 @@ try:
         
     @timer.register(interval=10, run_once=False)
     def blynk_data():
+         global counter
         _log.info("Update Timer Run")
        # blynk.virtual_sync(10)
     #    now = datetime.now()
@@ -290,17 +291,17 @@ try:
     
       #  blynk.virtual_write(24, counter.info())
       #  blynk.virtual_write(23, counter.infoCounter())
-        
-        if(counter.isAutomatic()):
-            if (counter.isItAnOnCycle(_log)):
-                _log.info("Turn Relay ON") 
-                GPIO.output(relays[1],GPIO.LOW)
-            elif (counter.isItAnOffCycle(_log)):
-                _log.info("Turn off RELAY")
-                GPIO.output(relays[1],GPIO.HIGH)
-            else:
-                counter.reset(_log)
-                _log.info("reset counter")
+_log.info(counter.isAutomatic())        
+  #      if(counter.isAutomatic()):
+  #          if (counter.isItAnOnCycle(_log)):
+   #             _log.info("Turn Relay ON") 
+   #             GPIO.output(relays[1],GPIO.LOW)
+   #         elif (counter.isItAnOffCycle(_log)):
+   #             _log.info("Turn off RELAY")
+    #            GPIO.output(relays[1],GPIO.HIGH)
+   #         else:
+     #           counter.reset(_log)
+    #            _log.info("reset counter")
 
      #   _log.debug("rememer to inc the counter")
     #    counter.incCycle(_log)
