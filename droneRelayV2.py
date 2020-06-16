@@ -288,7 +288,7 @@ try:
         waterTemp = value[0]
         v7_Temp_write_handler(7, waterTemp)
         
-    @timer.register(interval=60, run_once=False)
+    @timer.register(interval=10, run_once=False)
     def blynk_data():
         global onTime
         global offTime
@@ -297,6 +297,7 @@ try:
         blynk.virtual_sync(10)
         now = datetime.now()
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
+        _log.debug("Counter.cycle = " + str(Counter.cycle) + " and Counter.onCycle is " + str(Counter.onCycle) + " and Counter.offCycle = " + str(Counter.offCycle)) 
         if (Counter.cycle > Counter.onCycle):
             GPIO.output(relays[1],0)
             blynk.virtual_write(23, "Counter " + str(Counter.cycle) +" of " + str(Counter.onCycle) + " mins on" )
