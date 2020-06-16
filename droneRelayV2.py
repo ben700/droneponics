@@ -34,6 +34,7 @@ class Counter:
         return True
     def incCyclc():
         this.cycle = this.cycle + 1
+        return this.cycle
             
 bootup = True
 button_state=0
@@ -304,7 +305,9 @@ try:
             else:
                 _log.info("reset counter")
                 blynk.virtual_write(23, "Counter reset to" + str(Counter.cycle) +" leave relay as is" )
-        Counter.incCycle()
+      _log.debug("rememer to inc the counter")
+      Counter.incCycle()
+      _log.debug("The End")
             
   
     while True:
