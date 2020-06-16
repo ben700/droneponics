@@ -305,7 +305,7 @@ try:
             else:
                 _log.info("reset counter")
                 blynk.virtual_write(23, "Counter reset to" + str(Counter.cycle) +" leave relay as is" )
-      _log.debug("rememer to inc the counter")
+       _log.debug("rememer to inc the counter")
       Counter.incCycle()
       _log.debug("The End")
             
