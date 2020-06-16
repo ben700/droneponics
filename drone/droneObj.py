@@ -36,6 +36,7 @@ class Counter:
         _log.debug("now = " + str(now))
         now = self.cycle
         _log.debug("now = " + str(now))
+        _log.debug("self.onCycle = " + str(self.onCycle))
         now = now - self.onCycle
         _log.debug("now = " + str(now))
         if (False):
