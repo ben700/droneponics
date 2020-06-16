@@ -124,14 +124,17 @@ try:
         blynk.virtual_write(98, "droneRelayWriteHandler on pin " + str(pin) + " value is " + str(button_state) + " colour : " + str(colours[button_state]) + '\n')
             
         if (button_state==0 ):
+            counter.manual(_log, "Off")
             GPIO.output(relays[1],GPIO.HIGH)
             blynk.virtual_write(250, "Stopped")
             blynk.virtual_write(98, "Stopped"+ '\n')
         if (button_state==1 ):
+            counter.manual(_log, "On")
             GPIO.output(relays[1],GPIO.LOW)
             blynk.virtual_write(250, "Running")
             blynk.virtual_write(98, "Running"+ '\n')
         elif (button_state==2):
+            counter.manual(_log, False)
             blynk.virtual_write(250, "Automatic")
             blynk.virtual_write(98, "Automatic"+ '\n')
             
