@@ -50,11 +50,14 @@ class Counter:
             return False
         
     def setOnCycle(self, _log, onCycleValue):
+      _log.debug("current this.cycle = " + str(this.cycle))
       _log.debug("current this.onCycle = " + str(this.onCycle))
       _log.debug("going to set onCycleValue to " + str(onCycleValue))
       this.onCycle = onCycleValue 
         
     def setOffCycle(self, _log, offCycleValue):
+       _log.debug("current this.cycle = " + str(this.cycle))
+      _log.debug("current this.onCycle = " + str(this.onCycle))
       _log.debug("going to set offCycleValue to " + str(offCycleValue))
       this.offCycle = offCycleValue 
       
