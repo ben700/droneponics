@@ -46,7 +46,7 @@ _log.addHandler(consoleHandler)
 _log.setLevel(parser.get('logging', 'logLevel', fallback=logging.DEBUG))
 
 _log.info("/home/pi/droneponics/config/configRelay_"+drone.gethostname()+".ini")
-droneCounter = drone.Counter()
+droneCounter = drone.DroneCounter()
 
 
 try:
