@@ -49,6 +49,12 @@ class Counter:
             _log.debug("in class counter function isItAnOffCycle and if is false")
             return False
         
+    def  setOnCycle(onCycleValue):
+      this.onCycle = onCycleValue 
+        
+    def  setOffCycle(offCycleValue):
+      this.offCycle = offCycleValue 
+        
     def  incCycle(_log):
         _log.debug("in class counter function incCycle")
         _log.debug("Cycle was " + str(this.x))
