@@ -257,12 +257,12 @@ try:
    
     @blynk.handle_event('write V25')
     def write_handler(pin, value):
-        counter.setOnCycle(value[0])
+        counter.setOnCycle(_log, value[0])
         blynk.virtual_write(24, "Feed is on for " + str(counter.onCycle) + " mins and then off for " + str(counter.offCycle) + " mins.")
         
     @blynk.handle_event('write V26')
     def write_handler(pin, value):
-        counter.setOffCycle(value[0])
+        counter.setOffCycle(_log, value[0])
         blynk.virtual_write(24, "Feed is on for " + str(counter.onCycle) + " mins and then off for " + str(counter.offCycle) + " mins.")
         
         
