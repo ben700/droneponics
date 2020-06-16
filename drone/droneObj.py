@@ -24,37 +24,48 @@ class Counter:
     cycle = 0
     onCycle=0 
     offCycle=0 
-         
+    overwrite = False
+   
+    def manual(self, _log, value):
+         overwrite = value
     def isItAnOnCycle(self, _log) :
         _log.debug("in class counter function isItAnOnCycle states are")
         _log.debug("in class counter function isItAnOnCycle this.cycle = " + str(self.cycle))
         _log.debug("in class counter function isItAnOnCycle this.onCycle = " + str(self.onCycle))
         _log.debug("in class counter function isItAnOnCycle this.offCycle = " + str(self.offCycle))
-        
-#        if (self.cycle < self.onCycle):
-        now = 0
-        now = self.cycle
-        now = now - self.onCycle
-        if (now < 0):
-            return True
+        if (overwrite == "On"):
+             return True
+        elif(overwrite == "Off"):
+             return False
         else:
-            return False
+            now = 0
+            now = self.cycle
+            now = now - self.onCycle
+            if (now < 0):
+                return True
+            else:
+                return False
         
     def isItAnOffCycle(self, _log) :
         _log.debug("in class counter function isItAnOffCycle")
-        now = 0
-        if(self.offCycle == 0):
-            return False
-        now = self.cycle
-        now = now - self.onCycle
-        now = now - self.offCycle
-        _log.debug("now = " + str(now))
-        if (now < 0):
-            _log.debug("in class counter function isItAnOffCycle and it is true")
-            return True
+        if (overwrite == "On"):
+             return False
+        elif(overwrite == "Off"):
+             return True
         else:
-            _log.debug("in class counter function isItAnOffCycle and if is false")
-            return False
+            if(self.offCycle == 0):
+                return False
+            now = 0
+            now = self.cycle
+            now = now - self.onCycle
+            now = now - self.offCycle
+            _log.debug("now = " + str(now))
+            if (now < 0):
+                _log.debug("in class counter function isItAnOffCycle and it is true")
+                return True
+            else:
+                _log.debug("in class counter function isItAnOffCycle and if is false")
+                return False
         
     def setOnCycle(self, _log, onCycleValue):
       _log.debug("current this.cycle = " + str(self.cycle))
