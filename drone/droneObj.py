@@ -32,7 +32,7 @@ class Counter:
     def isAutomatic(self):
       if (overwrite is false):
            return True
-      else
+      else:
            return False
           
     def isItAnOnCycle(self, _log) :
