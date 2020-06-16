@@ -278,13 +278,11 @@ try:
         
     @timer.register(interval=10, run_once=False)
     def blynk_data():
-        global onTime
-        global offTime
-        global button_state
         _log.info("Update Timer Run")
         blynk.virtual_sync(10)
         now = datetime.now()
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
+    
         _log.debug("Counter.cycle = " + str(Counter.cycle) + " and Counter.onCycle is " + str(Counter.onCycle) + " and Counter.offCycle = " + str(Counter.offCycle)) 
         if (Counter.cycle > Counter.onCycle):
             GPIO.output(relays[1],0)
