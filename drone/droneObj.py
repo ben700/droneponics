@@ -49,13 +49,10 @@ class Counter:
     def isItAnOffCycle(self, _log) :
         _log.debug("in class counter function isItAnOffCycle")
         now = 0
-        _log.debug("now = " + str(now))
+        if(self.offCycle == 0):
+            return False
         now = self.cycle
-        _log.debug("now = " + str(now))
-        _log.debug("self.onCycle = " + str(self.onCycle))
         now = now - self.onCycle
-        _log.debug("now = " + str(now))
-        _log.debug("self.offCycle = " + str(self.offCycle))
         now = now - self.offCycle
         _log.debug("now = " + str(now))
         if (now <= 0):
