@@ -289,7 +289,7 @@ try:
         _log.debug(counter.infoCounter())
         _log.debug("290")
          
-         counter.incCycle(_log) 
+        counter.incCycle(_log) 
         _log.debug(counter.infoCounter())
         counter.incCycle(_log) 
         _log.debug(counter.infoCounter())
