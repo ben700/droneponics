@@ -59,6 +59,9 @@ class Counter:
       
     def info(self)
         return "Feed is on for " + str(this.onCycle) + " mins and then off for " + str(this.offCycle) + " mins."
+   
+    def infoCounter(self)
+        return "Counter is now " + str(this.cycle)
         
     def  incCycle(self, _log):
         _log.debug("in class counter function incCycle")
