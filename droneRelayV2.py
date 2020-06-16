@@ -28,6 +28,8 @@ class Counter:
     cycle = 0
     onCycle=0 
     offCycle=0 
+    def whatCycle() :
+        return True
         
 bootup = True
 button_state=0
@@ -284,7 +286,8 @@ try:
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
     
         _log.debug("Counter.cycle = " + str(Counter.cycle) + " and Counter.onCycle is " + str(Counter.onCycle) + " and Counter.offCycle = " + str(Counter.offCycle)) 
-        if (Counter.cycle > Counter.onCycle):
+        
+        if (Counter.whatCycle()):
             _log.error("Turn Relay ON") 
             #GPIO.output(relays[1],0)
             blynk.virtual_write(23, "Counter " + str(Counter.cycle) +" of " + str(Counter.onCycle) + " mins on" )
