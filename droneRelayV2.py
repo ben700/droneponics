@@ -110,13 +110,14 @@ try:
   
     @blynk.handle_event('write V1')
     def write_handler(pin, value):
-        _log.debug("droneRelayWriteHandler on pin " + str(pin) + " value is " + str(value[0]))  
-        if (value[0]=="1" ):
+         staus = value[0]
+        _log.debug("droneRelayWriteHandler on pin " + str(pin) + " value is " + str(staus))  
+        if (staus =="1" ):
             _log.info("pin 1 value==2")
 #     #       counter.manual(_log, "Off")
             GPIO.output(relays[1],GPIO.HIGH)
             blynk.virtual_write(250, "Stopped")
-        if (value[0]=="2" ):
+        if (staus =="2" ):
             _log.info("pin 1 value ==2")
 #      #      counter.manual(_log, "On")
             GPIO.output(relays[1],GPIO.LOW)
