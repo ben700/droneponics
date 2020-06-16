@@ -31,7 +31,7 @@ class Counter:
     def isItAnOnCycle() :
         return False
     def isItAnOffCycle() :
-        return False
+        return True
     def incCyclc():
         this.cycle = this.cycle + 1
             
