@@ -27,7 +27,7 @@ class Counter:
     def __init__(self, _log):
        _log.debug("in counter constructor")
          
-    def isItAnOnCycle() :
+    def isItAnOnCycle(self, _log) :
         _log.debug("in class counter function isItAnOnCycle states are")
         _log.debug("in class counter function isItAnOnCycle this.cycle = " + str(this.cycle))
         _log.debug("in class counter function isItAnOnCycle this.onCycle = " + str(this.onCycle))
@@ -40,7 +40,7 @@ class Counter:
             _log.debug("in class counter function isItAnOnCycle and it is false")
             return False
         
-    def isItAnOffCycle(_log) :
+    def isItAnOffCycle(self, _log) :
         _log.debug("in class counter function isItAnOffCycle")
         if ((this.cycle-this.onCycle) < this.offCycle):
             _log.debug("in class counter function isItAnOffCycle and it is true")
@@ -49,13 +49,15 @@ class Counter:
             _log.debug("in class counter function isItAnOffCycle and if is false")
             return False
         
-    def  setOnCycle(onCycleValue):
+    def setOnCycle(self, _log, onCycleValue):
+      _log.debug("going to set onCycleValue to " + str(onCycleValue))
       this.onCycle = onCycleValue 
         
-    def  setOffCycle(offCycleValue):
+    def setOffCycle(self, _log, offCycleValue):
+      _log.debug("going to set offCycleValue to " + str(offCycleValue))
       this.offCycle = offCycleValue 
         
-    def  incCycle(_log):
+    def  incCycle(self, _log):
         _log.debug("in class counter function incCycle")
         _log.debug("Cycle was " + str(this.x))
         this.cycle = this.cycle + 1
