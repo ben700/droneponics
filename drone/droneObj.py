@@ -67,9 +67,9 @@ class Counter:
         
     def  incCycle(self, _log):
         _log.debug("in class counter function incCycle")
-        _log.debug("Cycle was " + str(self.x))
+        _log.debug("Cycle was " + str(self.cycle))
         self.cycle = self.cycle + 1
-        _log.debug("Cycle now " + str(self.x))
+        _log.debug("Cycle now " + str(self.cycle))
         return self.cycle
          
          
