@@ -46,7 +46,7 @@ _log.addHandler(consoleHandler)
 _log.setLevel(parser.get('logging', 'logLevel', fallback=logging.DEBUG))
 
 _log.info("/home/pi/droneponics/config/configRelay_"+drone.gethostname()+".ini")
-counter = drone.Counter()
+droneCounter = drone.Counter()
 
 
 try:
@@ -291,7 +291,8 @@ try:
     
       #  blynk.virtual_write(24, counter.info())
       #  blynk.virtual_write(23, counter.infoCounter())
-  #       _log.info(counter.isAutomatic())        
+         _log.debug(droneCounter)
+         _log.debug(droneCounter.isAutomatic())        
   #      if(counter.isAutomatic()):
   #          if (counter.isItAnOnCycle(_log)):
    #             _log.info("Turn Relay ON") 
