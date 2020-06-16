@@ -31,7 +31,6 @@ CO2Target=0
 startTime =None
 stopTime=None
 waterTemp=99
-counter = drone.Counter()
         
 
 parser = ConfigParser()
@@ -47,6 +46,7 @@ _log.addHandler(consoleHandler)
 _log.setLevel(parser.get('logging', 'logLevel', fallback=logging.DEBUG))
 
 _log.info("/home/pi/droneponics/config/configRelay_"+drone.gethostname()+".ini")
+counter = drone.Counter(_log)
 
 
 try:
@@ -257,13 +257,13 @@ try:
    
     @blynk.handle_event('write V25')
     def write_handler(pin, value):
-        Counter.onCycle = value[0]
-        blynk.virtual_write(24, "Feed is on for " + str(Counter.onCycle) + " mins and then off for " + str(Counter.offCycle) + " mins.")
+        counter.setOnCycle(value[0])
+        blynk.virtual_write(24, "Feed is on for " + str(counter.onCycle) + " mins and then off for " + str(counter.offCycle) + " mins.")
         
     @blynk.handle_event('write V26')
     def write_handler(pin, value):
-        Counter.offCycle = value[0]
-        blynk.virtual_write(24, "Feed is on for " + str(Counter.onCycle) + " mins and then off for " + str(Counter.offCycle) + " mins.")
+        counter.setOffCycle(value[0])
+        blynk.virtual_write(24, "Feed is on for " + str(counter.onCycle) + " mins and then off for " + str(counter.offCycle) + " mins.")
         
         
     @blynk.handle_event('write V30')
@@ -279,21 +279,21 @@ try:
         now = datetime.now()
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
     
-        _log.debug("Counter.cycle = " + str(Counter.cycle) + " and Counter.onCycle is " + str(Counter.onCycle) + " and Counter.offCycle = " + str(Counter.offCycle)) 
+        _log.debug("Counter.cycle = " + str(counter.cycle) + " and Counter.onCycle is " + str(counter.onCycle) + " and Counter.offCycle = " + str(Counter.offCycle)) 
         
-        if (Counter.isItAnOnCycle()):
+        if (Counter.isItAnOnCycle(_log)):
             _log.error("Turn Relay ON") 
             #GPIO.output(relays[1],0)
-            blynk.virtual_write(23, "Counter " + str(Counter.cycle) +" of " + str(Counter.onCycle) + " mins on" )
+            blynk.virtual_write(23, "Counter " + str(counter.cycle) +" of " + str(counter.onCycle) + " mins on" )
         else:
             _log.info("see if we need to turn relay off")
-            if (Counter.isItAnOffCycle()):
+            if (Counter.isItAnOffCycle(_log)):
                 _log.error("Turn off RELAY")
                 #GPIO.output(relays[1],1)
-                blynk.virtual_write(23, "Counter " + str(Counter.cycle) +" of " + str(Counter.offCycle) + " mins off" )
+                blynk.virtual_write(23, "Counter " + str(counter.cycle) +" of " + str(counter.offCycle) + " mins off" )
             else:
                 _log.info("reset counter")
-                blynk.virtual_write(23, "Counter reset to" + str(Counter.cycle) +" leave relay as is" )
+                blynk.virtual_write(23, "Counter reset to" + str(counter.cycle) +" leave relay as is" )
         _log.debug("rememer to inc the counter")
         Counter.incCycle(_log)
         _log.debug("The End")
