@@ -28,6 +28,13 @@ class Counter:
    
     def manual(self, _log, value):
          overwrite = value
+         
+    def isAutomatic(self):
+      if (overwrite is false)
+           return True
+      else
+           return False
+          
     def isItAnOnCycle(self, _log) :
         _log.debug("in class counter function isItAnOnCycle states are")
         _log.debug("in class counter function isItAnOnCycle this.cycle = " + str(self.cycle))
