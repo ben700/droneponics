@@ -289,6 +289,7 @@ try:
             _log.info("Turn off RELAY")
             #GPIO.output(relays[1],1)
         else:
+            counter.reset(_log)
             _log.info("reset counter")
 
         _log.debug("rememer to inc the counter")
