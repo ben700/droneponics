@@ -117,13 +117,14 @@ try:
 #     #       counter.manual(_log, "Off")
             GPIO.output(relays[1],GPIO.HIGH)
             blynk.virtual_write(250, "Stopped")
-        if (staus =="2" ):
+        elif (staus =="2" ):
             _log.info("pin 1 value ==2")
 #      #      counter.manual(_log, "On")
             GPIO.output(relays[1],GPIO.LOW)
             blynk.virtual_write(250, "Running")
         else:
             _log.info("pin 1 value !=1 or 2")
+            _log.info("status = " + str(staus))
  #      #     counter.manual(_log, False)
             blynk.virtual_write(250, "Automatic")
       
