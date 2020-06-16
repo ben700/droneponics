@@ -35,6 +35,11 @@ startTime =None
 stopTime=None
 waterTemp=99
 
+
+parser = ConfigParser()
+parser.read("/home/pi/droneponics/config/configRelay_"+drone.gethostname()+".ini")
+
+
 # tune console logging
 _log = logging.getLogger('BlynkLog')
 logFormatter = logging.Formatter("%(asctime)s [%(levelname)s]  %(message)s")
@@ -44,8 +49,6 @@ _log.addHandler(consoleHandler)
 _log.setLevel(parser.get('logging', 'logLevel', fallback=logging.DEBUG))
 
 _log.info("/home/pi/droneponics/config/configRelay_"+drone.gethostname()+".ini")
-parser = ConfigParser()
-parser.read("/home/pi/droneponics/config/configRelay_"+drone.gethostname()+".ini")
 
 
 try:
