@@ -32,9 +32,14 @@ class Counter:
         _log.debug("in class counter function isItAnOnCycle this.offCycle = " + str(self.offCycle))
         
 #        if (self.cycle < self.onCycle):
-        if (True):
-         
-            _log.debug("in class counter function isItAnOnCycle and it is true")
+        now = 0
+        _log.debug("now = " + str(now))
+        now = self.cycle
+        _log.debug("now = " + str(now))
+        now = now - self.onCycle
+        _log.debug("now = " + str(now))
+        if (False):
+        _log.debug("now = " + str(now))
             return True
         else:
             _log.debug("in class counter function isItAnOnCycle and it is false")
