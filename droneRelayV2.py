@@ -34,7 +34,9 @@ CO2Target=0
 startTime =None
 stopTime=None
 waterTemp=99
-
+onTime=0 
+offTime=0 
+        
 
 parser = ConfigParser()
 parser.read("/home/pi/droneponics/config/configRelay_"+drone.gethostname()+".ini")
@@ -100,6 +102,8 @@ try:
            _log.info('Syncing virtual buttons {}'.format(pin))
            blynk.virtual_sync(pin)
            blynk.read_response(timeout=0.5)
+        blynk.virtual_sync(25)
+        blynk.virtual_sync(26)
         blynk.virtual_sync(30)
         blynk.virtual_write(250, "Connected")
     
@@ -266,6 +270,21 @@ try:
         blynk.virtual_write(98,"Current CO2 :" + str(CO2) +'\n')
         _log.info("CO2 updated to :" + str(CO2))
         v8_CO2_write_handler(8, CO2, CO2Target, startTime, stopTime)
+   
+    @blynk.handle_event('write V25')
+    def write_handler(pin, value):
+        global onTime
+        global offTime
+        onTime = value[0]
+        blynk.virtual_write(24, "Feed is on for " + onTime + " mins and then off for " + offTime + " mins.")
+        
+    @blynk.handle_event('write V26')
+    def write_handler(pin, value):
+        global onTime
+        global offTime
+        offTime = value[0]
+        blynk.virtual_write(24, "Feed is on for " + onTime + " mins and then off for " + offTime + " mins.")
+        
         
     @blynk.handle_event('write V30')
     def write_handler(pin, value):
