@@ -101,8 +101,7 @@ try:
         blynk.virtual_sync(25)
         blynk.virtual_sync(26)
         blynk.virtual_sync(30)
-        blynk.virtual_write(250, "Connected")
-    
+        
 
     @blynk.handle_event("disconnect")
     def disconnect_handler():
