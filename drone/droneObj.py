@@ -21,10 +21,12 @@ class Relays:
 
 
 class Counter:
-    cycle = 0
-    onCycle=0 
-    offCycle=0 
-    overwrite = False
+   
+   def __init__(self):
+    self.cycle = 0
+    self.onCycle=0 
+    self.offCycle=0 
+    self.overwrite = False
    
     def manual(self, _log, value):
          overwrite = value
