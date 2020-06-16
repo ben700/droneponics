@@ -24,8 +24,9 @@ class Counter:
     cycle = 0
     onCycle=0 
     offCycle=0 
-    def __init__(self):
-      pass
+    def __init__(self, _log):
+       _log.debug("in counter constructor")
+         
     def isItAnOnCycle() :
         _log.debug("in class counter function isItAnOnCycle states are")
         _log.debug("in class counter function isItAnOnCycle this.cycle = " + str(this.cycle))
