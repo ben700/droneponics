@@ -33,8 +33,7 @@ class Counter:
     def isItAnOffCycle() :
         return True
     def incCyclc():
-        this.cycle = this.cycle + 1
-        return this.cycle
+        return 1
             
 bootup = True
 button_state=0
