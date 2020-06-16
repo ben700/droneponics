@@ -295,10 +295,10 @@ try:
             blynk.virtual_write(23, "Counter " + str(Counter.cycle) +" of " + str(Counter.onCycle) + " mins on" )
         else:
             _log.info("see if we need to turn relay off")
-            if (Counter.cycle - Counter.onCycle > Counter.offCycle):
+            if (Counter.isItAnOffCycle()):
                 _log.error("Turn off RELAY")
-                blynk.virtual_write(23, "Counter " + str(Counter.cycle) +" of " + str(Counter.offCycle) + " mins off" )
                 #GPIO.output(relays[1],1)
+                blynk.virtual_write(23, "Counter " + str(Counter.cycle) +" of " + str(Counter.offCycle) + " mins off" )
             else:
                 _log.info("reset counter")
                 blynk.virtual_write(23, "Counter reset to" + str(Counter.cycle) +" leave relay as is" )
