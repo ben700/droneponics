@@ -287,7 +287,7 @@ try:
             GPIO.output(relays[1],GPIO.LOW)
         elif (counter.isItAnOffCycle(_log)):
             _log.info("Turn off RELAY")
-            GPIO.output(relays[1],GPIO.LOW)
+            GPIO.output(relays[1],GPIO.HIGH)
         else:
             counter.reset(_log)
             _log.info("reset counter")
