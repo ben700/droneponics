@@ -101,7 +101,7 @@ class DroneCounter:
         _log.debug("Cycle now " + str(self.cycle))
         return self.cycle
              
-    def  reset(self, _log):
+   def  reset(self, _log):
         _log.debug("in class counter function reset")
         _log.debug("Cycle was " + str(self.cycle))
         self.cycle = 0
