@@ -39,7 +39,7 @@ class Counter:
         now = now - self.onCycle
         _log.debug("now = " + str(now))
         if (False):
-        _log.debug("now = " + str(now))
+            _log.debug("now = " + str(now))
             return True
         else:
             _log.debug("in class counter function isItAnOnCycle and it is false")
