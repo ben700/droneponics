@@ -20,7 +20,7 @@ class Relays:
   
 
 
-class Counter:
+class DroneCounter:
    
    def __init__(self):
     self.cycle = 0
