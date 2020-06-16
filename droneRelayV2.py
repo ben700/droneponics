@@ -29,12 +29,25 @@ class Counter:
     onCycle=0 
     offCycle=0 
     def isItAnOnCycle() :
-        return False
-    def isItAnOffCycle() :
-        return True
-    def incCycle(_log):
+        _log.debug("in class counter function isItAnOnCycle")
+        if (this.cycle < this.onCycle):
+            return True
+        else
+            return False
+        
+    def isItAnOffCycle(_log) :
+        _log.debug("in class counter function isItAnOffCycle")
+        if ((this.cycle-this.onCycle) < this.onCycle):
+            return True
+        else
+            return False
+        
+    def  incCycle(_log):
         _log.debug("in class counter function incCycle")
-        return 1
+        _log.debug("Cycle was " + str(this.cycle))
+        this.cycle = this.cycle + 1
+        _log.debug("Cycle now " + str(this.cycle))
+        return this.cycle
             
 bootup = True
 button_state=0
