@@ -23,44 +23,7 @@ import re
 import json
 import numbers
 
-
-class Counter:
-    cycle = 0
-    onCycle=0 
-    offCycle=0 
-    o=0
-    f=0
-    x=0
-    
-    def isItAnOnCycle() :
-        _log.debug("in class counter function isItAnOnCycle states are")
-        _log.debug("in class counter function isItAnOnCycle this.cycle = " + str(this.x))
-        _log.debug("in class counter function isItAnOnCycle this.onCycle = " + str(this.o))
-        _log.debug("in class counter function isItAnOnCycle this.offCycle = " + str(this.f))
-        
-        if (this.x < this.o):
-            _log.debug("in class counter function isItAnOnCycle and it is true")
-            return True
-        else:
-            _log.debug("in class counter function isItAnOnCycle and it is false")
-            return False
-        
-    def isItAnOffCycle(_log) :
-        _log.debug("in class counter function isItAnOffCycle")
-        if ((this.x-this.o) < this.f):
-            _log.debug("in class counter function isItAnOffCycle and it is true")
-            return True
-        else:
-            _log.debug("in class counter function isItAnOffCycle and if is false")
-            return False
-        
-    def  incCycle(_log):
-        _log.debug("in class counter function incCycle")
-        _log.debug("Cycle was " + str(this.x))
-        this.x = this.x + 1
-        _log.debug("Cycle now " + str(this.x))
-        return this.x
-            
+   
 bootup = True
 button_state=0
 CO2=0
@@ -68,6 +31,7 @@ CO2Target=0
 startTime =None
 stopTime=None
 waterTemp=99
+counter = drone.Counter()
         
 
 parser = ConfigParser()
