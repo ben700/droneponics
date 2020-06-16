@@ -302,8 +302,11 @@ try:
         Counter.cycle += 1
         now = datetime.now()
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
-        blynk.virtual_write(23, "Counter " + str(Counter.cycle) +" of " + onTime + "mins on" )
-        
+        if (Counter.cycle >= onTime):
+            blynk.virtual_write(23, "Counter " + str(Counter.cycle) +" of " + onTime + " mins on" )
+        else:
+            blynk.virtual_write(23, "Counter " + str(Counter.cycle) +" of " + offTime + " mins off" )
+            
         
         if(button_state == 2):
             if Counter.cycle % 2 == 0:
