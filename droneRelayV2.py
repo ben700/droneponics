@@ -111,7 +111,23 @@ try:
   
     @blynk.handle_event('write V1')
     def write_handler(pin, value):
-        _log.debug("droneRelayWriteHandler on pin " + str(pin) + " value is " + str(value[0]))
+        _log.debug("droneRelayWriteHandler on pin " + str(pin) + " value is " + str(value[0]))  
+        if (value[0]==0 ):
+            _log.info("button_state==0")
+#            counter.manual(_log, "Off")
+            GPIO.output(relays[1],GPIO.HIGH)
+            blynk.virtual_write(250, "Stopped")
+        if (value[0]==1 ):
+            _log.info("button_state==1")
+#            counter.manual(_log, "On")
+            GPIO.output(relays[1],GPIO.LOW)
+            blynk.virtual_write(250, "Running")
+        else:
+            _log.info("button_state==2")
+ #           counter.manual(_log, False)
+            blynk.virtual_write(250, "Automatic")
+      
+      
    #     global button_state
    #now = datetime.now()
    #     blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
@@ -123,20 +139,7 @@ try:
             
    #     blynk.virtual_write(98, "droneRelayWriteHandler on pin " + str(pin) + " value is " + str(button_state) + " colour : " + str(colours[button_state]) + '\n')
             
-        if (button_state==0 ):
-            _log.info("button_state==0")
-#            counter.manual(_log, "Off")
-            GPIO.output(relays[1],GPIO.HIGH)
-            blynk.virtual_write(250, "Stopped")
-        if (button_state==1 ):
-            _log.info("button_state==1")
-#            counter.manual(_log, "On")
-            GPIO.output(relays[1],GPIO.LOW)
-            blynk.virtual_write(250, "Running")
-        else:
-            _log.info("button_state==2")
- #           counter.manual(_log, False)
-            blynk.virtual_write(250, "Automatic")
+
             
       #  blynk.set_property(systemLED, 'color', colours[0])
         
