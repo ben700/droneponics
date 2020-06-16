@@ -283,15 +283,15 @@ try:
         
     @timer.register(interval=10, run_once=False)
     def blynk_data():
-         global counter
-         _log.info("Update Timer Run")
+     #    global counter
+     #    _log.info("Update Timer Run")
        # blynk.virtual_sync(10)
     #    now = datetime.now()
     #    blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
     
       #  blynk.virtual_write(24, counter.info())
       #  blynk.virtual_write(23, counter.infoCounter())
-         _log.info(counter.isAutomatic())        
+  #       _log.info(counter.isAutomatic())        
   #      if(counter.isAutomatic()):
   #          if (counter.isItAnOnCycle(_log)):
    #             _log.info("Turn Relay ON") 
