@@ -280,15 +280,17 @@ try:
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
     
         _log.debug(counter.infoCounter())
+        Counter.incCycle(_log)
+        _log.debug(counter.infoCounter())
       
         if (Counter.isItAnOnCycle(_log)):
-            _log.error("Turn Relay ON") 
+            _log.info("Turn Relay ON") 
             #GPIO.output(relays[1],0)
             blynk.virtual_write(23, "Counter " + str(counter.cycle) +" of " + str(counter.onCycle) + " mins on" )
         else:
             _log.info("see if we need to turn relay off")
             if (Counter.isItAnOffCycle(_log)):
-                _log.error("Turn off RELAY")
+                _log.info("Turn off RELAY")
                 #GPIO.output(relays[1],1)
                 blynk.virtual_write(23, "Counter " + str(counter.cycle) +" of " + str(counter.offCycle) + " mins off" )
             else:
