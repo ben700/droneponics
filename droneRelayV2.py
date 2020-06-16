@@ -276,14 +276,14 @@ try:
         global onTime
         global offTime
         onTime = value[0]
-        blynk.virtual_write(24, "Feed is on for " + onTime + " mins and then off for " + offTime + " mins.")
+        blynk.virtual_write(24, "Feed is on for " + str(onTime) + " mins and then off for " + str(offTime) + " mins.")
         
     @blynk.handle_event('write V26')
     def write_handler(pin, value):
         global onTime
         global offTime
         offTime = value[0]
-        blynk.virtual_write(24, "Feed is on for " + onTime + " mins and then off for " + offTime + " mins.")
+        blynk.virtual_write(24, "Feed is on for " + str(onTime) + " mins and then off for " + str(offTime) + " mins.")
         
         
     @blynk.handle_event('write V30')
