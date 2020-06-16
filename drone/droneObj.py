@@ -59,13 +59,13 @@ class Counter:
       _log.debug("current this.cycle = " + str(self.cycle))
       _log.debug("current this.onCycle = " + str(self.onCycle))
       _log.debug("going to set onCycleValue to " + str(onCycleValue))
-      self.onCycle = onCycleValue 
+      self.onCycle = int(onCycleValue) 
         
     def setOffCycle(self, _log, offCycleValue):
       _log.debug("current this.cycle = " + str(self.cycle))
       _log.debug("current this.onCycle = " + str(self.onCycle))
       _log.debug("going to set offCycleValue to " + str(offCycleValue))
-      self.offCycle = offCycleValue 
+      self.offCycle = int(offCycleValue) 
       
     def info(self):
         return "Feed is on for " + str(self.onCycle) + " mins and then off for " + str(self.offCycle) + " mins."
