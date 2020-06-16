@@ -125,17 +125,17 @@ try:
             
         if (button_state==0 ):
             _log.info("button_state==0")
-            counter.manual(_log, "Off")
+#            counter.manual(_log, "Off")
             GPIO.output(relays[1],GPIO.HIGH)
             blynk.virtual_write(250, "Stopped")
         if (button_state==1 ):
             _log.info("button_state==1")
-            counter.manual(_log, "On")
+#            counter.manual(_log, "On")
             GPIO.output(relays[1],GPIO.LOW)
             blynk.virtual_write(250, "Running")
         else:
             _log.info("button_state==2")
-            counter.manual(_log, False)
+ #           counter.manual(_log, False)
             blynk.virtual_write(250, "Automatic")
             
       #  blynk.set_property(systemLED, 'color', colours[0])
