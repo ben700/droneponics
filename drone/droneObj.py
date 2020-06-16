@@ -39,7 +39,7 @@ class Counter:
         _log.debug("self.onCycle = " + str(self.onCycle))
         now = now - self.onCycle
         _log.debug("now = " + str(now))
-        if (False):
+        if (now <= 0):
             _log.debug("now = " + str(now))
             return True
         else:
@@ -48,7 +48,17 @@ class Counter:
         
     def isItAnOffCycle(self, _log) :
         _log.debug("in class counter function isItAnOffCycle")
-        if ((self.cycle-self.onCycle) < self.offCycle):
+        now = 0
+        _log.debug("now = " + str(now))
+        now = self.cycle
+        _log.debug("now = " + str(now))
+        _log.debug("self.onCycle = " + str(self.onCycle))
+        now = now - self.onCycle
+        _log.debug("now = " + str(now))
+        _log.debug("self.offCycle = " + str(self.offCycle))
+        now = now - self.offCycle
+        _log.debug("now = " + str(now))
+        if (now <= 0):
             _log.debug("in class counter function isItAnOffCycle and it is true")
             return True
         else:
