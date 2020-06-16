@@ -293,7 +293,9 @@ try:
       #  blynk.virtual_write(24, counter.info())
       #  blynk.virtual_write(23, counter.infoCounter())
          _log.debug(droneCounter.overwrite)
-         _log.debug(droneCounter.isAutomatic(_log))        
+         _log.debug("going to call isAutomatic") 
+         isAuto = droneCounter.isAutomatic(_log)
+         _log.debug("call to isAutomatic returned " + isAuto)
   #      if(counter.isAutomatic()):
   #          if (counter.isItAnOnCycle(_log)):
    #             _log.info("Turn Relay ON") 
