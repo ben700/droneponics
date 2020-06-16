@@ -279,8 +279,8 @@ try:
         now = datetime.now()
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
     
-        _log.debug("Counter.cycle = " + str(counter.cycle) + " and Counter.onCycle is " + str(counter.onCycle) + " and Counter.offCycle = " + str(Counter.offCycle)) 
-        
+        _log.debug(counter.infoCounter())
+      
         if (Counter.isItAnOnCycle(_log)):
             _log.error("Turn Relay ON") 
             #GPIO.output(relays[1],0)
