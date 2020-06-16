@@ -30,7 +30,7 @@ class Counter:
          overwrite = value
          
     def isAutomatic(self):
-      if (overwrite is false):
+      if (overwrite is False):
            return True
       else:
            return False
