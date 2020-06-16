@@ -27,11 +27,11 @@ class Counter:
          
     def isItAnOnCycle(self, _log) :
         _log.debug("in class counter function isItAnOnCycle states are")
-        _log.debug("in class counter function isItAnOnCycle this.cycle = " + str(this.cycle))
-        _log.debug("in class counter function isItAnOnCycle this.onCycle = " + str(this.onCycle))
-        _log.debug("in class counter function isItAnOnCycle this.offCycle = " + str(this.offCycle))
+        _log.debug("in class counter function isItAnOnCycle this.cycle = " + str(self.cycle))
+        _log.debug("in class counter function isItAnOnCycle this.onCycle = " + str(self.onCycle))
+        _log.debug("in class counter function isItAnOnCycle this.offCycle = " + str(self.offCycle))
         
-        if (this.cycle < this.onCycle):
+        if (self.cycle < self.onCycle):
             _log.debug("in class counter function isItAnOnCycle and it is true")
             return True
         else:
@@ -40,7 +40,7 @@ class Counter:
         
     def isItAnOffCycle(self, _log) :
         _log.debug("in class counter function isItAnOffCycle")
-        if ((this.cycle-this.onCycle) < this.offCycle):
+        if ((self.cycle-self.onCycle) < self.offCycle):
             _log.debug("in class counter function isItAnOffCycle and it is true")
             return True
         else:
@@ -48,29 +48,29 @@ class Counter:
             return False
         
     def setOnCycle(self, _log, onCycleValue):
-      _log.debug("current this.cycle = " + str(this.cycle))
-      _log.debug("current this.onCycle = " + str(this.onCycle))
+      _log.debug("current this.cycle = " + str(self.cycle))
+      _log.debug("current this.onCycle = " + str(self.onCycle))
       _log.debug("going to set onCycleValue to " + str(onCycleValue))
-      this.onCycle = onCycleValue 
+      self.onCycle = onCycleValue 
         
     def setOffCycle(self, _log, offCycleValue):
-      _log.debug("current this.cycle = " + str(this.cycle))
-      _log.debug("current this.onCycle = " + str(this.onCycle))
+      _log.debug("current this.cycle = " + str(self.cycle))
+      _log.debug("current this.onCycle = " + str(self.onCycle))
       _log.debug("going to set offCycleValue to " + str(offCycleValue))
-      this.offCycle = offCycleValue 
+      self.offCycle = offCycleValue 
       
     def info(self):
-        return "Feed is on for " + str(this.onCycle) + " mins and then off for " + str(this.offCycle) + " mins."
+        return "Feed is on for " + str(self.onCycle) + " mins and then off for " + str(self.offCycle) + " mins."
    
     def infoCounter(self):
-         return "Counter.cycle = " + str(this.cycle) + " and Counter.onCycle is " + str(this.onCycle) + " and Counter.offCycle = " + str(this.offCycle)
+         return "Counter.cycle = " + str(self.cycle) + " and Counter.onCycle is " + str(self.onCycle) + " and Counter.offCycle = " + str(self.offCycle)
         
     def  incCycle(self, _log):
         _log.debug("in class counter function incCycle")
-        _log.debug("Cycle was " + str(this.x))
-        this.cycle = this.cycle + 1
-        _log.debug("Cycle now " + str(this.x))
-        return this.cycle
+        _log.debug("Cycle was " + str(self.x))
+        self.cycle = self.cycle + 1
+        _log.debug("Cycle now " + str(self.x))
+        return self.cycle
          
          
  
