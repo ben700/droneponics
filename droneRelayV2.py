@@ -291,10 +291,12 @@ try:
          
         counter.incCycle(_log) 
         _log.debug(counter.infoCounter())
-        counter.incCycle(_log) 
+        _log.debug(counter.isItAnOnCycle())
+        _log.debug(counter.isItAnOffCycle())         
+         counter.incCycle(_log) 
         _log.debug(counter.infoCounter())
-         
-         
+        _log.debug(counter.isItAnOnCycle())
+        _log.debug(counter.isItAnOffCycle())
         _log.debug("300") 
         if (Counter.isItAnOnCycle(_log)):
             _log.info("Turn Relay ON") 
