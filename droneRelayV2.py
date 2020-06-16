@@ -283,6 +283,21 @@ try:
         blynk.virtual_write(23, counter.infoCounter())
         _log.debug(counter.infoCounter())
         _log.debug("285")
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+        _log.debug("300") 
         if (Counter.isItAnOnCycle(_log)):
             _log.info("Turn Relay ON") 
             #GPIO.output(relays[1],0)
