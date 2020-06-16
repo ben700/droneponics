@@ -32,7 +32,8 @@ class Counter:
         return False
     def isItAnOffCycle() :
         return True
-    def incCyclc():
+    def incCycle(_log):
+        _log.debug("in class counter function incCycle")
         return 1
             
 bootup = True
@@ -305,7 +306,7 @@ try:
                 _log.info("reset counter")
                 blynk.virtual_write(23, "Counter reset to" + str(Counter.cycle) +" leave relay as is" )
         _log.debug("rememer to inc the counter")
-        Counter.incCycle()
+        Counter.incCycle(_log)
         _log.debug("The End")
             
   
