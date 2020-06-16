@@ -284,7 +284,7 @@ try:
         
     @timer.register(interval=10, run_once=False)
     def blynk_data():
-     #    global counter
+         global droneCounter
      #    _log.info("Update Timer Run")
        # blynk.virtual_sync(10)
     #    now = datetime.now()
