@@ -28,9 +28,14 @@ class Counter:
     cycle = 0
     onCycle=0 
     offCycle=0 
-    def whatCycle() :
-        return True
-        
+    def isItAnOnCycle() :
+        if (this.cycle < this.onCycle)
+            return True
+        else
+            return False
+    def incCyclc():
+        this.cycle = this.cycle + 1
+            
 bootup = True
 button_state=0
 CO2=0
@@ -287,7 +292,7 @@ try:
     
         _log.debug("Counter.cycle = " + str(Counter.cycle) + " and Counter.onCycle is " + str(Counter.onCycle) + " and Counter.offCycle = " + str(Counter.offCycle)) 
         
-        if (Counter.whatCycle()):
+        if (Counter.isItAnOnCycle()):
             _log.error("Turn Relay ON") 
             #GPIO.output(relays[1],0)
             blynk.virtual_write(23, "Counter " + str(Counter.cycle) +" of " + str(Counter.onCycle) + " mins on" )
@@ -299,9 +304,8 @@ try:
                 #GPIO.output(relays[1],1)
             else:
                 _log.info("reset counter")
-                Counter.cycle = 0 
                 blynk.virtual_write(23, "Counter reset to" + str(Counter.cycle) +" leave relay as is" )
-        Counter.cycle += 1
+        Counter.incCycle()
             
   
     while True:
