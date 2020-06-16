@@ -340,9 +340,7 @@ try:
            blynk.virtual_write(99, now.strftime("%d/%m/%Y %H:%M:%S"))
            blynk.virtual_write(systemLED, 255)
            blynk.virtual_write(255, 0)
-           blynk.virtual_write(98, "Running"+ '\n')
            _log.info('Just Booted')
-           blynk.virtual_write(250, "Running")
            blynk.set_property(systemLED, 'color', colours[0])
         timer.run()
 except: 
