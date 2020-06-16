@@ -279,10 +279,10 @@ try:
         now = datetime.now()
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
     
+        blynk.virtual_write(24, counter.info())
+        blynk.virtual_write(23, counter.infoCounter())
         _log.debug(counter.infoCounter())
-        Counter.incCycle(_log)
-        _log.debug(counter.infoCounter())
-      
+        _log.debug("285")
         if (Counter.isItAnOnCycle(_log)):
             _log.info("Turn Relay ON") 
             #GPIO.output(relays[1],0)
