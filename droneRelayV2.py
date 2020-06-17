@@ -281,6 +281,7 @@ try:
          _log.debug("Completed call to isAutomatic")
          _log.debug("call to isAutomatic returned " + str(isAuto))
          if(droneCounter.isAutomatic(_log)):
+            _log.debug("it is in Automatic operation")
             if (droneCounter.isItAnOnCycle(_log)):
                _log.info("Turn Relay ON") 
                GPIO.output(relays[1],GPIO.LOW)
