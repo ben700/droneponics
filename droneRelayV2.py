@@ -116,6 +116,7 @@ try:
         _log.debug("droneRelayWriteHandler on pin " + str(pin) + " value is " + str(staus))  
         if (staus is "1" ):
             _log.info("pin 1 value==1")
+            
 #     #       counter.manual(_log, "Off")
             GPIO.output(relays[1],GPIO.HIGH)
             blynk.virtual_write(250, "Stopped")
@@ -286,13 +287,13 @@ try:
     @timer.register(interval=10, run_once=False)
     def blynk_data():
          global droneCounter
-     #    _log.info("Update Timer Run")
+         _log.info("Update Timer Run")
        # blynk.virtual_sync(10)
-    #    now = datetime.now()
-    #    blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
+        now = datetime.now()
+        blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
     
-      #  blynk.virtual_write(24, counter.info())
-      #  blynk.virtual_write(23, counter.infoCounter())
+        blynk.virtual_write(24, counter.info())
+        blynk.virtual_write(23, counter.infoCounter())
          _log.debug(droneCounter.overwrite)
          _log.debug("going to call isAutomatic") 
          isAuto = droneCounter.isAutomatic(_log)
@@ -301,12 +302,12 @@ try:
          if(droneCounter.isAutomatic(_log)):
             if (droneCounter.isItAnOnCycle(_log)):
                _log.info("Turn Relay ON") 
-   #             GPIO.output(relays[1],GPIO.LOW)
+                GPIO.output(relays[1],GPIO.LOW)
             elif (droneCounter.isItAnOffCycle(_log)):
                 _log.info("Turn off RELAY")
                 GPIO.output(relays[1],GPIO.HIGH)
             else:
-    #            counter.reset(_log)
+                counter.reset(_log)
                 _log.info("reset counter")
 
          _log.debug("rememer to inc the counter")
