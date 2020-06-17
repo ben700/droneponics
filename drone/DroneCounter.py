@@ -33,29 +33,21 @@ class DroneCounter:
                 return True
             else:
                 return False
-        
+
    def isItAnOffCycle(self, _log) :
-        _log.debug("in class counter function isItAnOffCycle")
+        _log.debug("in class counter function isItAnOffCycle states are")
+        _log.debug("in class counter function isItAnOffCycle this.cycle = " + str(self.cycle))
+        _log.debug("in class counter function isItAnOffCycle this.onCycle = " + str(self.onCycle))
+        _log.debug("in class counter function isItAnOffCycle this.offCycle = " + str(self.offCycle))
         if (self.overwrite is "On"):
-             _log.debug("in class counter function isItAnOffCycle returning false because manually on")
              return False
-        elif(self.overwrite is  "Off"):
-             _log.debug("in class counter function isItAnOffCycle returning true because manually off")
+        elif(self.overwrite is "Off"):
              return True
         else:
-            if(self.offCycle == 0):
-                _log.debug("in class counter function isItAnOffCycle returning false because manually offCylce is zero")
-                return False
-               
-            now = self.cycle - self.onCycle
-            now = now - self.offCycle
-            _log.debug("now = " + str(now))
-            
+            now = self.cycle - self.onCycle - self.offCycle
             if (now < 0):
-                _log.debug("in class counter function isItAnOffCycle and it is true")
                 return True
             else:
-                _log.debug("in class counter function isItAnOffCycle and if is false")
                 return False
         
    def setOnCycle(self, _log, onCycleValue):
