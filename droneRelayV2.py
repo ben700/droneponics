@@ -1,7 +1,7 @@
 
 
 # The ID and range of a sample spreadsheet.
-colours = {1: '#FF0000', 0: '#00FF00', '0': '#00FF00', 1: '#FF0000', '1': '#FF0000', 2: '#FF8000', 3: '#FF00FF',4: '#00FFFF', 5: '#00FFFF','OFFLINE': '#0000FF', 'ONLINE': '#00FF00', 'UNAVILABLE': '#002700'}
+colours = {1: '#FF0000', 0: '#00FF00', '0': '#00FF00', 1: '#FF0000', '1': '#FF0000', 2: '#FF8000', 3: '#FF00FF',4: '#00FFFF', 5: '#00FFFF','OFFLINE': '#0000FF', 'AUTOMATIC': '#FF00DD', 'ONLINE': '#00FF00', 'UNAVILABLE': '#002700'}
 systemLED=101
 
 import socket
@@ -116,37 +116,20 @@ try:
         _log.debug("droneRelayWriteHandler on pin " + str(pin) + " value is " + str(staus))  
         if (staus is "1" ):
             _log.info("pin 1 value==1")
-            
-#     #       counter.manual(_log, "Off")
             GPIO.output(relays[1],GPIO.HIGH)
             blynk.virtual_write(250, "Stopped")
+            blynk.set_property(pin, 'color', colours[0])
         elif (staus is "2" ):
             _log.info("pin 1 value ==2")
-#      #      counter.manual(_log, "On")
             GPIO.output(relays[1],GPIO.LOW)
             blynk.virtual_write(250, "Running")
+            blynk.set_property(pin, 'color', colours[0])
         else:
             _log.info("pin 1 value !=1 or 2")
             _log.info("status = " + str(staus))
- #      #     counter.manual(_log, False)
             blynk.virtual_write(250, "Automatic")
+            blynk.set_property(pin, 'color', colours['AUTOMATIC'])
       
-      
-   #     global button_state
-   #now = datetime.now()
-   #     blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
-   #     blynk.set_property(systemLED, 'color', colours[1])
-                
-#        button_state = int(value[0])-1
-   ##     blynk.set_property(10+pin, 'color', colours[button_state])
-   #     blynk.set_property(pin, 'color', colours[button_state])
-            
-   #     blynk.virtual_write(98, "droneRelayWriteHandler on pin " + str(pin) + " value is " + str(button_state) + " colour : " + str(colours[button_state]) + '\n')
-            
-
-            
-      #  blynk.set_property(systemLED, 'color', colours[0])
-        
     @blynk.handle_event('write V2')
     def write_handler(pin, value):
         _log.debug("droneRelayWriteHandler on pin " + str(pin) + " value is " + str(value[0]))
