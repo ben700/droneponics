@@ -76,7 +76,7 @@ class DroneCounter:
              if(self.cycle < self.onCycle):
                   return "In minute " + str(self.cycle) + " pump is on till minute " + str(self.onCycle)
              else:
-                  return "In minute " + str(self.cycle) + " pump is on till minute " + str(self.onCycle+self.offCycle)
+                  return "In minute " + str(self.cycle) + " pump is off till minute " + str(self.onCycle+self.offCycle)
                
         
    def  incCycle(self, _log):
