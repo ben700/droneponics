@@ -298,11 +298,11 @@ try:
          isAuto = droneCounter.isAutomatic(_log)
          _log.debug("Completed call to isAutomatic")
          _log.debug("call to isAutomatic returned " + str(isAuto))
-        if(counter.isAutomatic()):
-            if (counter.isItAnOnCycle(_log)):
+        if(droneCounter.isAutomatic()):
+            if (droneCounter.isItAnOnCycle(_log)):
                _log.info("Turn Relay ON") 
    #             GPIO.output(relays[1],GPIO.LOW)
-            elif (counter.isItAnOffCycle(_log)):
+            elif (droneCounter.isItAnOffCycle(_log)):
                 _log.info("Turn off RELAY")
                 GPIO.output(relays[1],GPIO.HIGH)
             else:
