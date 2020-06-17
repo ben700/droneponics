@@ -1,0 +1,9 @@
+[droneAir]
+BME680=True
+[blynk]
+BLYNK_AUTH=QZi1860GkfLouzRBUQowzTYyV8WNjY2F
+[blynkBridge]
+CO2_VPIN=10
+BLYNK_AUTH=sovoOQHytL_YkDc2WKMFCwzG6cOgQ_2H
+[logging]
+logLevel=ERROR
