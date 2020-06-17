@@ -286,7 +286,7 @@ try:
         
     @timer.register(interval=10, run_once=False)
     def blynk_data():
-          _log.info("Update Timer Run")
+         _log.info("Update Timer Run")
        # blynk.virtual_sync(10)
          now = datetime.now()
          blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
