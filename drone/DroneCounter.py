@@ -67,7 +67,7 @@ class DroneCounter:
    def info(self):
         return "Feed is on for " + str(self.onCycle) + " mins and then off for " + str(self.offCycle) + " mins."
    
-   def infoCounter(self):
+   def infoCounter(self,_log):
          if (self.overwrite is "On"):
              return "Currently in minute " + str(self.cycle) + " pump is set manually ON " 
          elif(self.overwrite is  "Off"):
