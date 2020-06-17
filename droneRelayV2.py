@@ -297,17 +297,17 @@ try:
          _log.debug("going to call isAutomatic") 
          isAuto = droneCounter.isAutomatic(_log)
          _log.debug("Completed call to isAutomatic")
-         _log.debug("call to isAutomatic returned " + isAuto)
-  #      if(counter.isAutomatic()):
-  #          if (counter.isItAnOnCycle(_log)):
-   #             _log.info("Turn Relay ON") 
+         _log.debug("call to isAutomatic returned " + str(isAuto))
+        if(counter.isAutomatic()):
+            if (counter.isItAnOnCycle(_log)):
+               _log.info("Turn Relay ON") 
    #             GPIO.output(relays[1],GPIO.LOW)
-   #         elif (counter.isItAnOffCycle(_log)):
-   #             _log.info("Turn off RELAY")
-    #            GPIO.output(relays[1],GPIO.HIGH)
-   #         else:
-     #           counter.reset(_log)
-    #            _log.info("reset counter")
+            elif (counter.isItAnOffCycle(_log)):
+                _log.info("Turn off RELAY")
+                GPIO.output(relays[1],GPIO.HIGH)
+            else:
+    #            counter.reset(_log)
+                _log.info("reset counter")
 
      #   _log.debug("rememer to inc the counter")
     #    counter.incCycle(_log)
