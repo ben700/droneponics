@@ -77,7 +77,7 @@ class DroneCounter:
         _log.debug("in class counter function incCycle")
         _log.debug("Cycle was " + str(self.cycle))
         self.cycle = self.cycle + 1
-        if (self.cycle > (self.onCycle + self.offCycle))
+        if (self.cycle > (self.onCycle + self.offCycle)):
             self.cycle = 0
         _log.debug("Cycle now " + str(self.cycle))
         return self.cycle
