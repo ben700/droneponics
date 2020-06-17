@@ -73,10 +73,10 @@ class DroneCounter:
          elif(self.overwrite is  "Off"):
              return "In minute " + str(self.cycle) + "  pump is set manually OFF"
          else:   
-              if(self.cycle < self.onCycle)
-                   return "In minute " + str(self.cycle) + " pump is on till minute " + str(self.onCycle)
-              else:
-                   return "In minute " + str(self.cycle) + " pump is on till minute " + str(self.onCycle+self.offCycle)
+             if(self.cycle < self.onCycle)
+                  return "In minute " + str(self.cycle) + " pump is on till minute " + str(self.onCycle)
+             else:
+                  return "In minute " + str(self.cycle) + " pump is on till minute " + str(self.onCycle+self.offCycle)
                
         
    def  incCycle(self, _log):
