@@ -277,7 +277,7 @@ try:
          _log.debug("droneCounter.overwrite = " + str(droneCounter.overwrite)) 
          
          _log.debug("going to call isAutomatic") 
-          isAuto = droneCounter.isAutomatic(_log)
+         isAuto = droneCounter.isAutomatic(_log)
          _log.debug("Completed call to isAutomatic")
          _log.debug("call to isAutomatic returned " + str(isAuto))
          
