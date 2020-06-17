@@ -45,14 +45,12 @@ class DroneCounter:
         _log.debug("in class counter function isItAnOnCycle this.cycle = " + str(self.cycle))
         _log.debug("in class counter function isItAnOnCycle this.onCycle = " + str(self.onCycle))
         _log.debug("in class counter function isItAnOnCycle this.offCycle = " + str(self.offCycle))
-        if (self.overwrite == "On"):
+        if (self.overwrite is "On"):
              return True
-        elif(self.overwrite == "Off"):
+        elif(self.overwrite is "Off"):
              return False
         else:
-            now = 0
-            now = self.cycle
-            now = now - self.onCycle
+            now = self.cycle - self.onCycle
             if (now < 0):
                 return True
             else:
@@ -60,18 +58,18 @@ class DroneCounter:
         
    def isItAnOffCycle(self, _log) :
         _log.debug("in class counter function isItAnOffCycle")
-        if (self.overwrite == "On"):
+        if (self.overwrite is "On"):
              return False
-        elif(self.overwrite == "Off"):
+        elif(self.overwrite is  "Off"):
              return True
         else:
             if(self.offCycle == 0):
                 return False
-            now = 0
-            now = self.cycle
-            now = now - self.onCycle
+               
+            now = self.cycle - self.onCycle
             now = now - self.offCycle
             _log.debug("now = " + str(now))
+            
             if (now < 0):
                 _log.debug("in class counter function isItAnOffCycle and it is true")
                 return True
