@@ -32,7 +32,7 @@ class DroneCounter:
          overwrite = value
          
    def isAutomatic(self, _log):
-      _log.debug("in class DroneCounter function isAutomatic and manual mode is set to " + self.overwrite)
+      _log.debug("in class DroneCounter function isAutomatic and manual mode is set to " + str(self.overwrite))
       if (overwrite is False):
            return True
       else:
