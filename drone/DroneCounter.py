@@ -30,8 +30,10 @@ class DroneCounter:
         else:
             now = self.cycle - self.onCycle
             if (now < 0):
+                _log.debug("returning true form isItAnOnCycle")
                 return True
             else:
+                _log.debug("returning false form isItAnOnCycle")
                 return False
 
    def isItAnOffCycle(self, _log) :
