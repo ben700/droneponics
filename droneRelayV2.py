@@ -286,10 +286,7 @@ try:
             elif (droneCounter.isItAnOffCycle(_log)):
                 _log.info("Turn off RELAY")
                 GPIO.output(relays[1],GPIO.HIGH)
-            else:
-                droneCounter.reset(_log)
-                _log.info("reset counter")
-
+            
          _log.debug("rememer to inc the counter")
          droneCounter.incCycle(_log)
          _log.debug("The End")
