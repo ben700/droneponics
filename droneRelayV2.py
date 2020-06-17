@@ -289,11 +289,11 @@ try:
          global droneCounter
          _log.info("Update Timer Run")
        # blynk.virtual_sync(10)
-        now = datetime.now()
-        blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
+         now = datetime.now()
+         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
     
-        blynk.virtual_write(24, counter.info())
-        blynk.virtual_write(23, counter.infoCounter())
+         blynk.virtual_write(24, counter.info())
+         blynk.virtual_write(23, counter.infoCounter())
          _log.debug(droneCounter.overwrite)
          _log.debug("going to call isAutomatic") 
          isAuto = droneCounter.isAutomatic(_log)
