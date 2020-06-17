@@ -74,7 +74,7 @@ class DroneCounter:
              return "In minute " + str(self.cycle) + "  pump is set manually OFF"
          else:   
              _log.debug("self.cycle = " + str(self.cycle))
-             if(self.cycle < self.onCycle):
+             if(self.cycle <= self.onCycle):
                   return "In minute " + str(self.cycle) + " pump is on till minute " + str(self.onCycle)
              else:
                   return "In minute " + str(self.cycle) + " pump is off till minute " + str(self.onCycle+self.offCycle)
