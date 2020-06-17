@@ -284,7 +284,7 @@ try:
         waterTemp = value[0]
         v7_Temp_write_handler(7, waterTemp)
         
-    @timer.register(interval=60, run_once=False)
+    @timer.register(interval=6, run_once=False)
     def blynk_data():
          _log.info("Update Timer Run")
        # blynk.virtual_sync(10)
