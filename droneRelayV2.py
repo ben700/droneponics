@@ -302,7 +302,7 @@ try:
          if(droneCounter.isAutomatic(_log)):
             if (droneCounter.isItAnOnCycle(_log)):
                _log.info("Turn Relay ON") 
-                GPIO.output(relays[1],GPIO.LOW)
+               GPIO.output(relays[1],GPIO.LOW)
             elif (droneCounter.isItAnOffCycle(_log)):
                 _log.info("Turn off RELAY")
                 GPIO.output(relays[1],GPIO.HIGH)
