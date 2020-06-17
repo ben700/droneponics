@@ -275,7 +275,7 @@ try:
          blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
     
          blynk.virtual_write(24, droneCounter.info())
-         blynk.virtual_write(23, droneCounter.infoCounter())
+         blynk.virtual_write(23, droneCounter.infoCounter(_log))
          _log.debug("going to call isAutomatic") 
          isAuto = droneCounter.isAutomatic(_log)
          _log.debug("Completed call to isAutomatic")
