@@ -274,10 +274,13 @@ try:
     
          blynk.virtual_write(24, droneCounter.info())
          blynk.virtual_write(23, droneCounter.infoCounter(_log))
+         _log.debug("droneCounter.overwrite = " + str(droneCounter.overwrite)) 
+         
          _log.debug("going to call isAutomatic") 
-         isAuto = droneCounter.isAutomatic(_log)
+          isAuto = droneCounter.isAutomatic(_log)
          _log.debug("Completed call to isAutomatic")
          _log.debug("call to isAutomatic returned " + str(isAuto))
+         
          if(isAuto is True):
             _log.debug("it is in Automatic operation")
             if (droneCounter.isItAnOnCycle(_log)):
