@@ -58,9 +58,9 @@ class DroneCounter:
         
    def isItAnOffCycle(self, _log) :
         _log.debug("in class counter function isItAnOffCycle")
-        if (overwrite == "On"):
+        if (self.overwrite == "On"):
              return False
-        elif(overwrite == "Off"):
+        elif(self.overwrite == "Off"):
              return True
         else:
             if(self.offCycle == 0):
