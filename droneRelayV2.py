@@ -360,6 +360,7 @@ except:
    blynk.run()
    blynk.virtual_write(98,"in main loop except"+ '\n')
    blynk.virtual_write(250, "Crashed")
+   blynk.set_property(systemLED, 'color', colours['OFFLINE'])
    now = datetime.now()
    blynk.notify(drone.gethostname() + " just crashed at " + now.strftime("%d/%m/%Y %H:%M:%S"))
 
