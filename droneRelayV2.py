@@ -305,7 +305,7 @@ try:
                 _log.info("Turn off RELAY")
                 GPIO.output(relays[1],GPIO.HIGH)
             else:
-                counter.reset(_log)
+                droneCounter.reset(_log)
                 _log.info("reset counter")
 
          _log.debug("rememer to inc the counter")
