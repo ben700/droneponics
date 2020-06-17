@@ -310,7 +310,7 @@ try:
                 _log.info("reset counter")
 
          _log.debug("rememer to inc the counter")
-         counter.incCycle(_log)
+         droneCounter.incCycle(_log)
          _log.debug("The End")
             
   
