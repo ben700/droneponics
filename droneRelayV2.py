@@ -284,12 +284,12 @@ try:
          blynk.virtual_write(24, droneCounter.info())
          blynk.virtual_write(23, droneCounter.infoCounter(_log))
          
-      #   if(droneCounter.overwrite is False):
-      #      if (droneCounter.isItAnOnCycle(_log)):
-      #         _log.info("Turn Relay ON") 
+         if(droneCounter.automatic):
+            if (droneCounter.isItAnOnCycle(_log)):
+                _log.info("Turn Relay ON") 
       #         GPIO.output(relays[1],GPIO.LOW)
-      #      elif (droneCounter.isItAnOffCycle(_log)):
-      #          _log.info("Turn off RELAY")
+            elif (droneCounter.isItAnOffCycle(_log)):
+                _log.info("Turn off RELAY")
       #          GPIO.output(relays[1],GPIO.HIGH)
          
          droneCounter.incCycle(_log)
