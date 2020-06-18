@@ -265,7 +265,7 @@ try:
         waterTemp = value[0]
         v7_Temp_write_handler(7, waterTemp)
         
-    @timer.register(interval=6, run_once=False)
+    @timer.register(interval=30, run_once=False)
     def blynk_data():
          _log.info("Update Timer Run")
        # blynk.virtual_sync(10)
@@ -274,23 +274,15 @@ try:
     
          blynk.virtual_write(24, droneCounter.info())
          blynk.virtual_write(23, droneCounter.infoCounter(_log))
-         _log.debug("droneCounter.overwrite = " + str(droneCounter.overwrite)) 
          
-         _log.debug("going to call isAutomatic") 
-         isAuto = droneCounter.isAutomatic(_log)
-         _log.debug("Completed call to isAutomatic")
-         _log.debug("call to isAutomatic returned " + str(isAuto))
-         
-         if(isAuto is True):
-            _log.debug("it is in Automatic operation")
+         if(droneCounter.overwrite is False):
             if (droneCounter.isItAnOnCycle(_log)):
                _log.info("Turn Relay ON") 
                GPIO.output(relays[1],GPIO.LOW)
             elif (droneCounter.isItAnOffCycle(_log)):
                 _log.info("Turn off RELAY")
                 GPIO.output(relays[1],GPIO.HIGH)
-            
-         _log.debug("rememer to inc the counter")
+         
          droneCounter.incCycle(_log)
          _log.debug("The End")
             
