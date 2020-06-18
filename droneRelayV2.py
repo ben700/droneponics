@@ -324,7 +324,7 @@ try:
                 _log.info("Turn off RELAY")
                 GPIO.output(relays[1],GPIO.HIGH)
          else:
-            if(droneCounter.overwrite = "Off"):
+            if(droneCounter.overwrite == "Off"):
                 text = "Manual : Off"
             else:
                 text = "Manual : On"
