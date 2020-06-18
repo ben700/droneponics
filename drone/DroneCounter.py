@@ -28,8 +28,11 @@ class DroneCounter:
                 _log.debug("returning true form isItAnOnCycle")
                 return True
             else:
-                _log.debug("returning false form isItAnOnCycle")
-                return False
+                if (self.cycle >= (self.onCycle + self.offCycle)):
+                    return True
+                else:
+                    _log.debug("returning false form isItAnOnCycle")
+                    return False
 
    def isItAnOffCycle(self, _log) :
         _log.debug("in class counter function isItAnOffCycle states are")
