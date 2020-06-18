@@ -99,8 +99,11 @@ try:
            blynk.virtual_sync(pin)
            blynk.read_response(timeout=0.5)
         blynk.virtual_sync(25)
+        blynk.read_response(timeout=0.5)
         blynk.virtual_sync(26)
+        blynk.read_response(timeout=0.5)
         blynk.virtual_sync(30)
+        blynk.read_response(timeout=0.5)
         
 
     @blynk.handle_event("disconnect")
