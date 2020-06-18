@@ -288,11 +288,11 @@ try:
             if (droneCounter.isItAnOnCycle(_log)):
                 blynk.virtual_write(250, "Automatc : On")
                 _log.info("Turn Relay ON") 
-      #         GPIO.output(relays[1],GPIO.LOW)
+               GPIO.output(relays[1],GPIO.LOW)
             elif (droneCounter.isItAnOffCycle(_log)):
                 blynk.virtual_write(250, "Automatc : Off")
                 _log.info("Turn off RELAY")
-      #          GPIO.output(relays[1],GPIO.HIGH)
+                GPIO.output(relays[1],GPIO.HIGH)
          
          droneCounter.incCycle(_log)
          _log.debug("The End")
