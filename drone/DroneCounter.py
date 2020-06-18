@@ -5,15 +5,13 @@ class DroneCounter:
     self.onCycle=0 
     self.offCycle=0
     self.overwrite = False
+    self.automatic = False  
    
    def manual(self, _log, value):
          overwrite = value
          
    def isAutomatic(self, _log):
-      if (self.overwrite is False):
-           return True
-      else:
-           return False
+        return self.automatic
           
    def isItAnOnCycle(self, _log) :
         _log.debug("in class counter function isItAnOnCycle self.overwrite = " + str(self.overwrite))
@@ -59,8 +57,7 @@ class DroneCounter:
          elif(self.overwrite is  "Off"):
              return "In minute " + str(self.cycle) + "  pump is set manually OFF"
          else:   
-             _log.debug("self.cycle = " + str(self.cycle))
-             if(self.cycle <= self.onCycle):
+            if(self.cycle <= self.onCycle):
                   return "In minute " + str(self.cycle) + " pump is on till minute " + str(self.onCycle)
              else:
                   return "In minute " + str(self.cycle) + " pump is off till minute " + str(self.onCycle+self.offCycle)
