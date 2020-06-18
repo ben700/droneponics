@@ -340,9 +340,9 @@ try:
              text,
              font=font,
              fill=255,
-          )
-          oled.image(image)
-          oled.show()
+         )
+         oled.image(image)
+         oled.show()
 
          _log.debug("The End")
             
