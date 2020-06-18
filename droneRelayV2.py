@@ -119,19 +119,23 @@ try:
             GPIO.output(relays[1],GPIO.HIGH)
             blynk.virtual_write(250, "Stopped")
         #    blynk.set_property(pin, 'color', colours[0])
+            droneCounter.automatic = False
             droneCounter.overwrite = "Off"
         elif (staus is "2" ):
             _log.info("pin 1 value ==2")
             GPIO.output(relays[1],GPIO.LOW)
             blynk.virtual_write(250, "Running")
          #   blynk.set_property(pin, 'color', colours[0])
+            droneCounter.automatic = False
             droneCounter.overwrite = "On"
         else:
+            droneCounter.automatic = True
+            droneCounter.overwrite = False
             _log.info("pin 1 value !=1 or 2")
             _log.info("status = " + str(staus))
             blynk.virtual_write(250, "Automatic")
           #  blynk.set_property(pin, 'color', colours['AUTOMATIC'])
-            droneCounter.overwrite = False
+
       
     @blynk.handle_event('write V2')
     def write_handler(pin, value):
