@@ -112,7 +112,8 @@ try:
     def write_handler(pin, value):
         global droneCounter
         staus = value[0]
-        _log.debug("droneRelayWriteHandler on pin " + str(pin) + " value is " + str(staus))  
+        _log.debug("droneRelayWriteHandler on pin " + str(pin) + " value is " + str(staus)) 
+        blynk.virtual_write(24, droneCounter.info())
         if (staus is "1" ):
             _log.info("pin 1 value==1")
             GPIO.output(relays[1],GPIO.HIGH)
