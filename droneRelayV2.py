@@ -23,6 +23,10 @@ import subprocess
 import re
 import json
 import numbers
+import board
+import digitalio
+from PIL import Image, ImageDraw, ImageFont
+import adafruit_ssd1306
 
    
 bootup = True
@@ -36,6 +40,28 @@ waterTemp=99
 
 parser = ConfigParser()
 parser.read("/home/pi/droneponics/config/configRelay_"+drone.gethostname()+".ini")
+
+
+
+# Define the Reset Pin
+oled_reset = digitalio.DigitalInOut(board.D4)
+WIDTH = 128
+HEIGHT = 32  # Change to 64 if needed
+BORDER = 5
+i2c = board.I2C()
+oled = adafruit_ssd1306.SSD1306_I2C(WIDTH, HEIGHT, i2c, addr=0x3C, reset=oled_reset)
+oled.fill(0)
+oled.show()
+image = Image.new("1", (oled.width, oled.height))
+draw = ImageDraw.Draw(image)
+draw.rectangle((0, 0, oled.width, oled.height), outline=255, fill=255)
+draw.rectangle(
+    (BORDER, BORDER, oled.width - BORDER - 1, oled.height - BORDER - 1),
+    outline=0,
+    fill=0,
+)
+font = ImageFont.load_default()
+
 
 
 # tune console logging
@@ -72,6 +98,7 @@ try:
     GPIO.setup(Relay7,GPIO.OUT, initial=1)
     GPIO.setup(Relay8,GPIO.OUT, initial=1)
     
+   
     
     # Initialize Blynk
     _log.info("Initialize Blynk with BLYNK_AUTH = " + parser.get('blynk', 'BLYNK_AUTH'))
@@ -289,15 +316,34 @@ try:
          
          if(droneCounter.automatic):
             if (droneCounter.isItAnOnCycle(_log)):
-                blynk.virtual_write(250, "Automatc : On")
+                text = "Automatc : On"
                 _log.info("Turn Relay ON") 
                 GPIO.output(relays[1],GPIO.LOW)
             elif (droneCounter.isItAnOffCycle(_log)):
-                blynk.virtual_write(250, "Automatc : Off")
+                text = "Automatc : Off"
                 _log.info("Turn off RELAY")
                 GPIO.output(relays[1],GPIO.HIGH)
+         else:
+            if(droneCounter.overwrite = "Off");
+                text = "Manual : Off"
+            else
+                text = "Manual : On"
+               
+         blynk.virtual_write(250, text)
          
          droneCounter.incCycle(_log)
+         
+         
+         (font_width, font_height) = font.getsize(text)
+         draw.text(
+             (oled.width // 2 - font_width // 2, oled.height // 2 - font_height // 2),
+             text,
+             font=font,
+             fill=255,
+          )
+          oled.image(image)
+          oled.show()
+
          _log.debug("The End")
             
   
