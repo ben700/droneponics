@@ -22,23 +22,17 @@ class DroneCounter:
         elif(self.overwrite is "Off"):
              return False
         else:
-            _log.debug("not in manual mode")
             now = self.cycle - self.onCycle
             if (now < 0):
-                _log.debug("returning true form isItAnOnCycle")
                 return True
             else:
-                if (self.cycle >= (self.onCycle + self.offCycle)):
-                    return True
-                else:
-                    _log.debug("returning false form isItAnOnCycle")
+                now = self.cycle - self.onCycle - self.offCycle
+                if (now < 0):
                     return False
+                else:
+                    return True
 
    def isItAnOffCycle(self, _log) :
-        _log.debug("in class counter function isItAnOffCycle states are")
-        _log.debug("in class counter function isItAnOffCycle this.cycle = " + str(self.cycle))
-        _log.debug("in class counter function isItAnOffCycle this.onCycle = " + str(self.onCycle))
-        _log.debug("in class counter function isItAnOffCycle this.offCycle = " + str(self.offCycle))
         if (self.overwrite is "On"):
              return False
         elif(self.overwrite is "Off"):
@@ -51,15 +45,9 @@ class DroneCounter:
                 return False
         
    def setOnCycle(self, _log, onCycleValue):
-      _log.debug("current this.cycle = " + str(self.cycle))
-      _log.debug("current this.onCycle = " + str(self.onCycle))
-      _log.debug("going to set onCycleValue to " + str(onCycleValue))
       self.onCycle = int(onCycleValue) 
         
    def setOffCycle(self, _log, offCycleValue):
-      _log.debug("current this.cycle = " + str(self.cycle))
-      _log.debug("current this.onCycle = " + str(self.onCycle))
-      _log.debug("going to set offCycleValue to " + str(offCycleValue))
       self.offCycle = int(offCycleValue) 
       
    def info(self):
