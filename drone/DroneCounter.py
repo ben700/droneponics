@@ -25,7 +25,7 @@ class DroneCounter:
                 return True
             else:
                 now = self.cycle - self.onCycle - self.offCycle
-                if (now < 0):
+                if (now <= 0):
                     return False
                 else:
                     return True
@@ -37,7 +37,7 @@ class DroneCounter:
              return True
         else:
             now = self.cycle - self.onCycle - self.offCycle
-            if (now < 0):
+            if (now <= 0):
                 return True
             else:
                 return False
