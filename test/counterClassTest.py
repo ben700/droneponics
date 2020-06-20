@@ -55,19 +55,11 @@ for x in range(11):
    _log.info("droneCounter.cycle = " + str(droneCounter.cycle))
    
    
-   if(droneCounter.isAutomatic(_log)):
-            _log.info("droneCounter.isItAnOnCycle(_log)" + str(droneCounter.isItAnOnCycle(_log)))
-            if (droneCounter.isItAnOnCycle(_log)):
-                text = "Automatc : On"
-                _log.info("Turn Relay ON") 
-                GPIO.output(relays[1],GPIO.LOW)
-                droneCounter.incOnCycle()
-            else :
-                _log.info("droneCounter.offCycle = " + str(droneCounter.offCycle)) 
-                text = "Automatc : Off"
-                _log.info("Turn off RELAY")
-                GPIO.output(relays[1],GPIO.HIGH)
-                droneCounter.incOffCycle()
+   
+   if(droneCounter.feedState == "On"):
+        GPIO.output(relays[1],GPIO.LOW)
+   else :
+        GPIO.output(relays[1],GPIO.HIGH)
                
    _log.debug("-----------------------------" +text+" cycle ="+str(droneCounter.cycle))
    droneCounter.incCycle(_log)
