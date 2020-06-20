@@ -109,7 +109,9 @@ if (True):
   
   
     @blynk.handle_event('write V7')
-    def write_handler(pin, value):
+    def v7write_handler(pin, value):
+        staus = value[0]
+        _log.debug("in v7write_handler ans the staus = " + str(value[0]))
         if (staus is "1" ):
             try:
                  blynk.virtual_write(28, "Waste is Off")
