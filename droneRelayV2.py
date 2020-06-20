@@ -107,7 +107,7 @@ if (True):
                  relays[1].turnOff(_log)
            except:
                  _log.error("Except handle_event V2 Turning Off")
-        else
+        else:
            try:
                  relays[1].turnOff(_log)
            except:
