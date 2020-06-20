@@ -291,6 +291,15 @@ try:
              _log.info("Feed Off")
     #        GPIO.output(relays[1],GPIO.HIGH)
         droneCounter.incCycle(_log)
+        
+        if(droneCounter.wasteAutomatic == True):
+             if(droneCounter.isItWasteCycle(_log)):
+            #      GPIO.output(relays[7],GPIO.LOW)       
+                  blynk.virtual_write(27, "Waste is Auto - On")
+                  droneCounter.incWasteCycle(_log)
+             else:
+             #    GPIO.output(relays[7],GPIO.HIGH)
+                 blynk.virtual_write(27, "Waste is Off Auto - Completed")
      
         _log.debug("The End")
      
