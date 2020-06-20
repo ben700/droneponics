@@ -43,5 +43,5 @@ for x in range(11):
           #      GPIO.output(relays[1],GPIO.HIGH)
                 droneCounter.incOffCycle()
                
-   _log.debug("-----------------------------" +text+" cycle ="+str(droneCounter.cycle)
+   _log.debug("-----------------------------" +text+" cycle ="+str(droneCounter.cycle))
    droneCounter.incCycle(_log)
