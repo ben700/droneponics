@@ -211,13 +211,19 @@ try:
         _log.debug("droneRelayWriteHandler on pin " + str(pin) + " value is " + str(staus)) 
         if (staus is "1" ):
             _log.info("pin 7 value==1")
-            GPIO.output(relays[7],GPIO.HIGH)
+            try:
+                 GPIO.output(relays[7],GPIO.HIGH)
+            except:
+                 blynk.virtual_write(27, "Waste except turning Off")           
             droneCounter.wasteAutomatic = False
             droneCounter.wasteCycleState = "Off"
             blynk.virtual_write(27, "Waste is Off")
         elif (staus is "2" ):
             _log.info("pin 7 value==2")
-            GPIO.output(relays[7],GPIO.LOW)
+            try:
+                 GPIO.output(relays[7],GPIO.LOW)
+            except:
+                 blynk.virtual_write(27, "Waste except turning On")
             droneCounter.wasteAutomatic = False
             droneCounter.wasteCycleState = "On"
             blynk.virtual_write(27, "Waste is On")
