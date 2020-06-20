@@ -60,6 +60,7 @@ droneCounter.setOnCycle(_log, 1)
 droneCounter.setOffCycle(_log, 1)
 
 for x in range(11):
+    blynk.run()
    _log.info("droneCounter.isAutomatic(_log)" + str(droneCounter.isAutomatic(_log)))
    _log.info("droneCounter.onCycleReset = " + str(droneCounter.onCycleReset))
    _log.info("droneCounter.offCycleReset = " + str(droneCounter.offCycleReset))
@@ -69,7 +70,7 @@ for x in range(11):
    
    
    
-   if(droneCounter.getFeedState(_log) == "On"):
+   if(droneCounter.getFeedState(_log, blynk) == "On"):
         GPIO.output(relays[1],GPIO.LOW)
    else :
         GPIO.output(relays[1],GPIO.HIGH)
