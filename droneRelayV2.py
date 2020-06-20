@@ -50,14 +50,14 @@ if (True):
     GPIO.setwarnings(False)
 
     relays=[]
-    relay.append(Relay(18, parser.get('droneRelay', 'Relay1')
-    relay.append(Relay(23, parser.get('droneRelay', 'Relay2')
-    relay.append(Relay(24, parser.get('droneRelay', 'Relay3')
-    relay.append(Relay(25, parser.get('droneRelay', 'Relay4')
-    relay.append(Relay(12, parser.get('droneRelay', 'Relay5')
-    relay.append(Relay(16, parser.get('droneRelay', 'Relay6')
-    relay.append(Relay(10, parser.get('droneRelay', 'Relay7')
-    relay.append(Relay(21, parser.get('droneRelay', 'Relay8')
+    relay.append(Relay(18, parser.get('droneRelay', 'Relay1'))
+    relay.append(Relay(23, parser.get('droneRelay', 'Relay2'))
+    relay.append(Relay(24, parser.get('droneRelay', 'Relay3'))
+    relay.append(Relay(25, parser.get('droneRelay', 'Relay4'))
+    relay.append(Relay(12, parser.get('droneRelay', 'Relay5'))
+    relay.append(Relay(16, parser.get('droneRelay', 'Relay6'))
+    relay.append(Relay(10, parser.get('droneRelay', 'Relay7'))
+    relay.append(Relay(21, parser.get('droneRelay', 'Relay8'))
     
     
     # Initialize Blynk
