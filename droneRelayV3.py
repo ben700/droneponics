@@ -312,6 +312,7 @@ if (True):
              else:
                  GPIO.output(relays[7],GPIO.HIGH)
                  droneCounter.wasteAutomatic = False
+                 blynk.virtual_write(7, 1) #set button to off for after crash
                  droneCounter.wasteCycleState = "Off" 
                  blynk.virtual_write(28, "Waste is set to run for " + str(droneCounter.wasteCycleReset) + " mins and has Completed" )
      
