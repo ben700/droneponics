@@ -277,9 +277,11 @@ try:
         blynk.virtual_write(24, droneCounter.info())
         blynk.virtual_write(23, droneCounter.infoCounter(_log))
          
-    #    if(droneCounter.getFeedState(_log, blynk) == "On"):
+        if(droneCounter.getFeedState(_log, blynk) == "On"):
+             _log.info("Feed On")
     #        GPIO.output(relays[1],GPIO.LOW)
-    #    else :
+        else :
+             _log.info("Feed Off")
     #        GPIO.output(relays[1],GPIO.HIGH)
         droneCounter.incCycle(_log)
      
