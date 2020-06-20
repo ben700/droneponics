@@ -27,16 +27,18 @@ class Relay:
    def turnOn(self, _log): 
        try:
           _log.info("Turning on relay " + self.name)
-          self.gpio.output(self.gpioPin,GPIO.HIGH) 
+          GPIO.output(self.gpioPin,GPIO.HIGH) 
+            
+            
        except:
-          _log.error("Except: Turning on relay " + self.name)
+          _log.error("Except relayClass: Turning on relay " + self.name)
       
    def turnOff(self, _log): 
        try:
            _log.info("Turning off relay " + self.name)
-           self.gpio.output(self.gpioPin,GPIO.LOW) 
+           GPIO.output(self.gpioPin,GPIO.LOW) 
        except:
-           _log.error("Except: Turning off relay " + self.name)
+           _log.error("Except relayClass: Turning off relay " + self.name)
      
    def setManual(self):
          self.automatic = False
