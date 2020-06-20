@@ -100,22 +100,99 @@ if (True):
         blynk.virtual_write(250, "Disconnected")
 
     @blynk.handle_event('write V2')
-    def v2write_handler(pin, value):  
+    def write_handler(pin, value):  
         staus = value[0]
+        relay = 1
         _log.debug("in v2write_handler and the staus = " + str(value[0]))
         if (staus is "1" ):
            try:
-                 _log.debug("in v2write_handler turing on relay " + relays[1].name)
-                 relays[1].turnOn(_log)
+                 _log.debug("in v"+str(relay+1)+"write_handler turing on relay " + relays[relay].name)
+                 relays[relay].turnOn(_log)
            except:
-                 _log.error("Except handle_event V2 Turning On")
+                 _log.error("Except handle_event V"+str(relay+1)+" Turning On")
         else:
            try:
                  _log.debug("in v2write_handler turing off relay")
-                 relays[1].turnOff(_log)
+                 relays[relay].turnOff(_log)
            except:
-                 _log.error("Except handle_event V2 Turning Off")
-        
+                 _log.error("Except handle_event V"+str(relay+1)+" Turning Off")
+                
+    @blynk.handle_event('write V3')
+    def write_handler(pin, value):  
+        staus = value[0]
+        relay = 2
+        _log.debug("in v2write_handler and the staus = " + str(value[0]))
+        if (staus is "1" ):
+           try:
+                 _log.debug("in v"+str(relay+1)+"write_handler turing on relay " + relays[relay].name)
+                 relays[relay].turnOn(_log)
+           except:
+                 _log.error("Except handle_event V"+str(relay+1)+" Turning On")
+        else:
+           try:
+                 _log.debug("in v2write_handler turing off relay")
+                 relays[relay].turnOff(_log)
+           except:
+                 _log.error("Except handle_event V"+str(relay+1)+" Turning Off")
+ 
+
+    @blynk.handle_event('write V4')
+    def write_handler(pin, value):  
+        staus = value[0]
+        relay = 3
+        _log.debug("in v2write_handler and the staus = " + str(value[0]))
+        if (staus is "1" ):
+           try:
+                 _log.debug("in v"+str(relay+1)+"write_handler turing on relay " + relays[relay].name)
+                 relays[relay].turnOn(_log)
+           except:
+                 _log.error("Except handle_event V"+str(relay+1)+" Turning On")
+        else:
+           try:
+                 _log.debug("in v2write_handler turing off relay")
+                 relays[relay].turnOff(_log)
+           except:
+                 _log.error("Except handle_event V"+str(relay+1)+" Turning Off")
+                
+ 
+    @blynk.handle_event('write V5')
+    def write_handler(pin, value):  
+        staus = value[0]
+        relay = 4
+        _log.debug("in v2write_handler and the staus = " + str(value[0]))
+        if (staus is "1" ):
+           try:
+                 _log.debug("in v"+str(relay+1)+"write_handler turing on relay " + relays[relay].name)
+                 relays[relay].turnOn(_log)
+           except:
+                 _log.error("Except handle_event V"+str(relay+1)+" Turning On")
+        else:
+           try:
+                 _log.debug("in v2write_handler turing off relay")
+                 relays[relay].turnOff(_log)
+           except:
+                 _log.error("Except handle_event V"+str(relay+1)+" Turning Off")
+                
+ 
+    @blynk.handle_event('write V6')
+    def write_handler(pin, value):  
+        staus = value[0]
+        relay = 5
+        _log.debug("in v2write_handler and the staus = " + str(value[0]))
+        if (staus is "1" ):
+           try:
+                 _log.debug("in v"+str(relay+1)+"write_handler turing on relay " + relays[relay].name)
+                 relays[relay].turnOn(_log)
+           except:
+                 _log.error("Except handle_event V"+str(relay+1)+" Turning On")
+        else:
+           try:
+                 _log.debug("in v2write_handler turing off relay")
+                 relays[relay].turnOff(_log)
+           except:
+                 _log.error("Except handle_event V"+str(relay+1)+" Turning Off")
+
+                
     @blynk.handle_event('write V7')
     def v7write_handler(pin, value):
         staus = value[0]
