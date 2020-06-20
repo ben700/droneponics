@@ -10,7 +10,7 @@ class DroneCounter:
     self.wasteCycleReset=6  
     self.wasteAutomatic = False
     self.wasteCycleState = "Off"  
-    self.overwrite = False
+    self.feedState = "Off"
     self.automatic = False  
    
    def setManual(self):
