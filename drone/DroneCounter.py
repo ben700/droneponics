@@ -41,7 +41,7 @@ class DroneCounter:
              elif(self.feedState is "Off"):
                   return False
         else:
-             if(self.onCycle <=self.onCycleReset):
+             if(self.cycle <=self.onCycleReset):
                 return True
              else:
                 return False
@@ -53,7 +53,7 @@ class DroneCounter:
         elif(self.feedState is "Off"):
              return True
         else:
-             if(self.offCycle <=self.offCycleReset):
+             if(self.cycle <=self.offCycleReset):
                 return True
              else:
                 return False
@@ -68,9 +68,9 @@ class DroneCounter:
         return "Feed is on for " + str(self.onCycleReset) + " mins and then off for " + str(self.offCycleReset) + " mins."
    
    def infoCounter(self,_log):
-         if (self.overwrite is "On"):
+         if (self.feedState is "On"):
              return "Currently in minute " + str(self.cycle) + " pump is set manually ON " 
-         elif(self.overwrite is  "Off"):
+         elif(self.feedState is  "Off"):
              return "In minute " + str(self.cycle) + "  pump is set manually OFF"
          else:   
             if(self.cycle <= self.onCycle):
@@ -106,4 +106,5 @@ class DroneCounter:
         self.cycle = 0
         self.onCycle = 0 
         self.offCycle = 0 
+         
         return self.cycle
