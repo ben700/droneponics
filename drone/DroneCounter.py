@@ -24,7 +24,7 @@ class DroneCounter:
             else:
                return True
         else:
-            if(self.wasteCycleReset <= self.wasteCycle)
+            if(self.wasteCycleReset <= self.wasteCycle):
                return True
         return False
             
