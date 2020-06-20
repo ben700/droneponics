@@ -112,28 +112,27 @@ if (True):
     def v7write_handler(pin, value):
         staus = value[0]
         _log.debug("in v7write_handler ans the staus = " + str(value[0]))
-  #      if (staus is "1" ):
-  #          try:
-  #               blynk.virtual_write(28, "Waste is Off")
-  #          except:
-  #               _log.error("Except handle_event V7 Turning Off waste")
-  #               blynk.virtual_write(28, "Except handle_event V7 Turning Off waste")           
-  #      elif (staus is "2" ):
-  #          try:
-  #               blynk.virtual_write(28, "Waste is On")
-  #          except:
-  #               _log.error("Except handle_event V7 Turning on waste")
-  #               blynk.virtual_write(28, "Except handle_event V7 Turning on waste")
-  #      else : 
-   #         try:
-   #              blynk.virtual_write(28, "Waste is set to run for " + str(droneCounter.wasteCycleReset) + " mins.")
-   #              GPIO.output(relays[7],GPIO.LOW)
+        if (staus is "1" ):
+            try:
+                 blynk.virtual_write(28, "Waste is Off")
+            except:
+                 _log.error("Except handle_event V7 Turning Off waste")
+                 blynk.virtual_write(28, "Except handle_event V7 Turning Off waste")           
+        elif (staus is "2" ):
+            try:
+                 blynk.virtual_write(28, "Waste is On")
+            except:
+                 _log.error("Except handle_event V7 Turning on waste")
+                 blynk.virtual_write(28, "Except handle_event V7 Turning on waste")
+        else : 
+            try:
+                 blynk.virtual_write(28, "Waste is set to run for " + str(droneCounter.wasteCycleReset) + " mins.")
    #              droneCounter.wasteAutomatic = True
    #              droneCounter.wasteCycleState = "On"
    #              droneCounter.wasteCycle = 0
-    #        except:
-    #             _log.error("Except handle_event V7 Turning waste auto")
-    #             blynk.virtual_write(28, "Except handle_event V7 Turning waste auto")
+            except:
+                 _log.error("Except handle_event V7 Turning waste auto")
+                 blynk.virtual_write(28, "Except handle_event V7 Turning waste auto")
                  
             
     
