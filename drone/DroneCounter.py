@@ -41,19 +41,20 @@ class DroneCounter:
              elif(self.feedState is "Off"):
                   return False
         else:
-             if(self.cycle <=self.onCycleReset):
+             if(self.onCycle <=self.onCycleReset):
                 return True
              else:
                 return False
             
    def isItAnOffCycle(self, _log) :
         _log.debug("in class counter function isItAnOffCycle self.feedState = " + str(self.feedState))
-        if (self.feedState is "On"):
-             return False
-        elif(self.feedState is "Off"):
-             return True
+        if(self.isAutomatic(_log)):
+            if (self.feedState is "On"):
+                 return False
+            elif(self.feedState is "Off"):
+                 return True
         else:
-             if(self.cycle <=self.offCycleReset):
+             if(self.offCycle <=self.offCycleReset):
                 return True
              else:
                 return False
