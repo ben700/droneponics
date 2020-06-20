@@ -270,19 +270,17 @@ try:
     def blynk_data():
         global button_state
         _log.info("Update Timer Run")
-        blynk.virtual_sync(10)
-        Counter.cycle += 1
         now = datetime.now()
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
      
-        blynk.virtual_write(24, droneCounter.info())
-        blynk.virtual_write(23, droneCounter.infoCounter(_log))
+    #    blynk.virtual_write(24, droneCounter.info())
+    #    blynk.virtual_write(23, droneCounter.infoCounter(_log))
          
-        if(droneCounter.getFeedState(_log, blynk) == "On"):
-            GPIO.output(relays[1],GPIO.LOW)
-        else :
-            GPIO.output(relays[1],GPIO.HIGH)
-        droneCounter.incCycle(_log)
+    #    if(droneCounter.getFeedState(_log, blynk) == "On"):
+    #        GPIO.output(relays[1],GPIO.LOW)
+    #    else :
+    #        GPIO.output(relays[1],GPIO.HIGH)
+    #    droneCounter.incCycle(_log)
      
         _log.debug("The End")
      
