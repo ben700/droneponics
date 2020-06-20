@@ -203,27 +203,28 @@ try:
         if (str(value[0]) == "0.0"):
             value[0] = 0
         drone.droneRelayWriteHandler(pin, value[0],blynk, relays)
-        
-        
-    def v7_Temp_write_handler(pin, VALUE, waterTemp):
-        if (waterTemp>15 and VALUE == 1):
-            drone.droneRelayWriteHandler(pin, 1, blynk, relays)
-        else:
-            drone.droneRelayWriteHandler(pin, 0, blynk, relays)
        
-        
+         
     @blynk.handle_event('write V7')
     def write_handler(pin, value):
-      #  global waterTemp
-      #  _log.debug("droneRelayWriteHandler on pin " + str(pin) + " value is " + str(value[0]))
-      #  if (str(value[0]) == "0.0"):
-      #     value[0] = 0
-     #   v7_Temp_write_handler(pin, value[0], waterTemp)
-        _log.debug("droneRelayWriteHandler on pin " + str(pin) + " value is " + str(value[0]))
-        if (str(value[0]) == "0.0"):
-            value[0] = 0
-        drone.droneRelayWriteHandler(pin, value[0],blynk, relays)
-  
+        staus = value[0]
+        _log.debug("droneRelayWriteHandler on pin " + str(pin) + " value is " + str(staus)) 
+        if (staus is "1" ):
+            _log.info("pin 7 value==1")
+            GPIO.output(relays[7],GPIO.HIGH)
+            droneCounter.wasteAutomatic = False
+            droneCounter.wasteCycleState = "Off"
+        elif (staus is "2" ):
+            _log.info("pin 7 value==2")
+            GPIO.output(relays[7],GPIO.LOW)
+            droneCounter.wasteAutomatic = False
+            droneCounter.wasteCycleState = "On"
+        else :
+            _log.info("pin 7 value==3")
+            GPIO.output(relays[7],GPIO.LOW)
+            droneCounter.wasteAutomatic = True
+            droneCounter.wasteCycleState = "On"
+            droneCounter.wasteCycle = 0
     
     
     def v8_CO2_write_handler(pin, CO2, CO2Target, startTime, stopTime):         
@@ -336,9 +337,14 @@ try:
                 text = "Manual : On"
                
          blynk.virtual_write(250, text)
-         
          droneCounter.incCycle(_log)
-         
+                
+         if (self.wasteAutomatic):       
+             if(droneCounter.isItWasteCycle(_log)):
+                 GPIO.output(relays[7],GPIO.LOW)
+                 droneCounter.incWasteCycle(_log)
+             GPIO.output(relays[7],GPIO.HIGH)
+    
          
          (font_width, font_height) = font.getsize(text)
          draw.text(
