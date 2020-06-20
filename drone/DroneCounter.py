@@ -38,13 +38,9 @@ class DroneCounter:
         if(self.isAutomatic(_log) is not True):
              if (self.feedState is "On"):
                   return True
-             elif(self.feedState is "Off"):
+             else:
                   return False
-        else:
-             _log.debug("in class counter function isItAnOnCycle automatic")
-             _log.debug("self.onCycle = " + str(self.onCycle))
-             _log.debug("self.onCycleReset = " + str(self.onCycleReset))
-               
+        else:  
              if(self.onCycle < self.onCycleReset):
                 return True
              else:
@@ -55,7 +51,7 @@ class DroneCounter:
         if(self.isAutomatic(_log) is not True):
             if (self.feedState is "On"):
                  return False
-            elif(self.feedState is "Off"):
+            else:
                  return True
         else:
              if(self.offCycle < self.offCycleReset):
