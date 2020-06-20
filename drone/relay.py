@@ -8,8 +8,9 @@ class Relay:
    GPIO.setmode(GPIO.BCM)
    GPIO.setwarnings(False)
 
-   def __init__(self, gpioPin, Name, *args, **kwargs):
-       print("Building object")
+   def __init__(self, _log, gpioPin, Name, *args, **kwargs):
+       _log.info("Building Relay object for Relay " + Name)
+       self._log = _log
        self.gpioPin = gpioPin
        self.name = Name
        self.gpio = GPIO.setup(gpioPin, GPIO.OUT)
@@ -17,11 +18,11 @@ class Relay:
        self.cycle=0
        self.cycleReset=0
        
-def testIt(self, _log): 
-    try:
-         _log.info("Testing relay " + self.name)
-    except:
-         _log.error("Except: Testing relay " + self.name)
+   def testIt(self): 
+       try:
+          self._log.info("Testing relay " + self.name)
+       except:
+          self._log.error("Except: Testing relay " + self.name)
          
 def turnOn(self, _log): 
     try:
