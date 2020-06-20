@@ -20,7 +20,7 @@ droneCounter.reset(_log)
 droneCounter.setOnCycle(_log, 3)
 droneCounter.setOffCycle(_log, 2)
 
-while True:
+for x in range(11):
    _log.info("droneCounter.isAutomatic(_log)" + str(droneCounter.isAutomatic(_log)))
    _log.info("droneCounter.onCycleReset = " + str(droneCounter.onCycleReset))
    _log.info("droneCounter.offCycleReset = " + str(droneCounter.offCycleReset))
