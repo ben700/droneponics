@@ -45,7 +45,7 @@ class DroneCounter:
              _log.debug("self.onCycle = " + str(self.onCycle))
              _log.debug("self.onCycleReset = " + str(self.onCycleReset))
                
-             if(self.onCycle <=self.onCycleReset):
+             if(self.onCycle < self.onCycleReset):
                 return True
              else:
                 return False
@@ -58,7 +58,7 @@ class DroneCounter:
             elif(self.feedState is "Off"):
                  return True
         else:
-             if(self.offCycle <=self.offCycleReset):
+             if(self.offCycle < self.offCycleReset):
                 return True
              else:
                 return False
