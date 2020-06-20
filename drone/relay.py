@@ -17,6 +17,9 @@ class Relay:
        self.automatic = False
        self.cycle=0
        self.cycleReset=0
+       self.offCycle=False
+       self.offCycleReset=0
+      
        
    def testIt(self): 
        try:
@@ -49,9 +52,12 @@ class Relay:
    def isAutomatic(self, _log):
         return self.automatic
       
-   def cycleResetSet(self, _log, cycleReset):
+   def cycleResetSet(self, cycleReset):
       self.cycleReset = int(cycleReset) 
-   
+         
+   def cycleOffResetSet(self, cycleReset):
+      self.offCycleReset = int(cycleReset) 
+      
    def cycleReset(self, _log):
       self.cycle = 0 
       
