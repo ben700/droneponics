@@ -6,6 +6,8 @@ class DroneCounter:
     self.offCycle=0
     self.wasteCycle=0
     self.wasteCycleReset=6  
+    self.wasteAutomatic = False
+    self.wasteCycleState = "Off"  
     self.overwrite = False
     self.automatic = False  
    
@@ -14,7 +16,18 @@ class DroneCounter:
          
    def isAutomatic(self, _log):
         return self.automatic
-          
+   
+   def isItWasteCycle(self, _log) :
+        if(self.wasteAutomatic = False):
+            if(self.wasteCycleState == "Off"):
+               return False
+            else:
+               return True
+         else:
+            if(self.wasteCycleReset <= self.wasteCycle)
+               return True
+            return False
+            
    def isItAnOnCycle(self, _log) :
         _log.debug("in class counter function isItAnOnCycle self.overwrite = " + str(self.overwrite))
         if (self.overwrite is "On"):
