@@ -1,4 +1,9 @@
-from drone import * 
+import blynklib
+import blynktimer
+import logging
+from configparser import ConfigParser
+import RPi.GPIO as GPIO   
+
 class Relay:
    GPIO.setmode(GPIO.BCM)
    GPIO.setwarnings(False)
