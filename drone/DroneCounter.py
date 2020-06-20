@@ -94,8 +94,8 @@ class DroneCounter:
         else:
             self.offCycle = self.offCycle + 1
         
-         self.cycle = self.cycle + 1
-         return self.cycle
+        self.cycle = self.cycle + 1
+        return self.cycle
       
    def  reset(self, _log):
         self.cycle = 0
