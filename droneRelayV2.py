@@ -97,16 +97,30 @@ if (True):
     def disconnect_handler():
         _log.warning("Disconnected")
         blynk.virtual_write(250, "Disconnected")
-  
-  
+
+    @blynk.handle_event('write V2')
+    def v2write_handler(pin, value):  
+        staus = value[0]
+        _log.debug("in v2write_handler and the staus = " + str(value[0]))
+        if (staus is "1" ):
+           try:
+                 relays[1].turnOff(_log)
+           except:
+                 _log.error("Except handle_event V2 Turning Off")
+        else
+           try:
+                 relays[1].turnOff(_log)
+           except:
+                 _log.error("Except handle_event V2 Turning Off")
+        
     @blynk.handle_event('write V7')
     def v7write_handler(pin, value):
         staus = value[0]
-        _log.debug("in v7write_handler ans the staus = " + str(value[0]))
+        _log.debug("in v7write_handler and the staus = " + str(value[0]))
         _log.debug("Waste relay is "+ str(relays[7].name))
         if (staus is "1" ):
             try:
-                 relays[7].turnOff(_log)
+                 relays[6].turnOff(_log)
                  droneCounter.wasteAutomatic = False
                  droneCounter.wasteCycleState = "Off"
                  blynk.virtual_write(28, "Waste is Off")
@@ -115,7 +129,7 @@ if (True):
                  blynk.virtual_write(28, "Except handle_event V7 Turning Off waste")           
         elif (staus is "2" ):
             try:
-                 relays[7].turnOn(_log)
+                 relays[6].turnOn(_log)
                  blynk.virtual_write(28, "Waste is On")
                  droneCounter.wasteAutomatic = False
                  droneCounter.wasteCycleState = "On"
