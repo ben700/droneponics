@@ -84,18 +84,22 @@ class DroneCounter:
             return self.wasteCycle    
         self.wasteCycle = self.wasteCycle + 1
         return self.wasteCycle
+   
+   def incOnCycle(self):
+      self.onCycle = self.onCycle + 1
+      return self.onCycle
+   
+   def incOffCycle(self):
+      self.offCycle = self.offCycle + 1
+      return self.offCycle
       
    def  incCycle(self, _log):
-        if (self.cycle >= (self.onCycleReset+ self.offCycleReset) ):
+        self.cycle = self.cycle + 1
+        if (self.cycle > (self.onCycleReset+ self.offCycleReset) ):
             self.reset(_log)
             return self.cycle
-        if (self.onCycle <=  self.onCycleReset):
-            self.onCycle = self.onCycle + 1
         else:
-            self.offCycle = self.offCycle + 1
-        
-        self.cycle = self.cycle + 1
-        return self.cycle
+            return self.cycle
       
    def  reset(self, _log):
         self.cycle = 0
