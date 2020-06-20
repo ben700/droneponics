@@ -49,24 +49,15 @@ if (True):
     GPIO.setmode(GPIO.BCM)
     GPIO.setwarnings(False)
 
-    relays=[0,18,23,24,25,12,16,20,21]
-    Relay1 = relays[1] #feed
-    Relay2 = relays[2] #fan
-    Relay3 = relays[3] #Air
-    Relay4 = relays[4] #heater
-    Relay5 = relays[5] #Feed
-    Relay6 = relays[6] #Air
-    Relay7 = relays[7] #Mixer - turned off with low water 
-    Relay8 = relays[8]  #Mixer - turned off with low water 
-
-    GPIO.setup(Relay1,GPIO.OUT, initial=1)
-    GPIO.setup(Relay2,GPIO.OUT, initial=1)
-    GPIO.setup(Relay3,GPIO.OUT, initial=1)
-    GPIO.setup(Relay4,GPIO.OUT, initial=1)
-    GPIO.setup(Relay5,GPIO.OUT, initial=1)
-    GPIO.setup(Relay6,GPIO.OUT, initial=1)
-    GPIO.setup(Relay7,GPIO.OUT, initial=1)
-    GPIO.setup(Relay8,GPIO.OUT, initial=1)
+    relays=[]
+    relay.Append(Relay(18, parser.get('droneRelay', 'Relay1')
+    relay.Append(Relay(23, parser.get('droneRelay', 'Relay2')
+    relay.Append(Relay(24, parser.get('droneRelay', 'Relay3')
+    relay.Append(Relay(25, parser.get('droneRelay', 'Relay4')
+    relay.Append(Relay(12, parser.get('droneRelay', 'Relay5')
+    relay.Append(Relay(16, parser.get('droneRelay', 'Relay6')
+    relay.Append(Relay(10, parser.get('droneRelay', 'Relay7')
+    relay.Append(Relay(21, parser.get('droneRelay', 'Relay8')
     
     
     # Initialize Blynk
@@ -112,10 +103,10 @@ if (True):
     def v7write_handler(pin, value):
         staus = value[0]
         _log.debug("in v7write_handler ans the staus = " + str(value[0]))
-        _log.debug("Waste relay is "+ str(relays[7]))
+        _log.debug("Waste relay is "+ str(relays[7].name))
         if (staus is "1" ):
             try:
-               #  GPIO.output(relays[7],GPIO.HIGH)
+                 relays[7].turnOff(_log)
                  droneCounter.wasteAutomatic = False
                  droneCounter.wasteCycleState = "Off"
                  blynk.virtual_write(28, "Waste is Off")
@@ -124,7 +115,7 @@ if (True):
                  blynk.virtual_write(28, "Except handle_event V7 Turning Off waste")           
         elif (staus is "2" ):
             try:
-                # GPIO.output(relays[7],GPIO.LOW)
+                 relays[7].turnOn(_log)
                  blynk.virtual_write(28, "Waste is On")
                  droneCounter.wasteAutomatic = False
                  droneCounter.wasteCycleState = "On"
