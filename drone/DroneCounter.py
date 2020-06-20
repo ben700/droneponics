@@ -40,7 +40,7 @@ class DroneCounter:
         elif(self.overwrite is "Off"):
              return False
         else:
-             if(self.onCycle <=self.onCycleReset)
+             if(self.onCycle <=self.onCycleReset):
                 return True
             else:
                 return False
@@ -52,7 +52,7 @@ class DroneCounter:
         elif(self.overwrite is "Off"):
              return True
         else:
-             if(self.offCycle <=self.offCycleReset)
+             if(self.offCycle <=self.offCycleReset):
                 return True
             else:
                 return False
