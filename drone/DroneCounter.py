@@ -35,9 +35,9 @@ class DroneCounter:
             
    def isItAnOnCycle(self, _log) :
         _log.debug("in class counter function isItAnOnCycle self.feedState = " + str(self.feedState))
-        if (self.overwrite is "On"):
+        if (self.feedState is "On"):
              return True
-        elif(self.overwrite is "Off"):
+        elif(self.feedState is "Off"):
              return False
         else:
              if(self.onCycle <=self.onCycleReset):
@@ -47,9 +47,9 @@ class DroneCounter:
             
    def isItAnOffCycle(self, _log) :
         _log.debug("in class counter function isItAnOffCycle self.feedState = " + str(self.feedState))
-        if (self.overwrite is "On"):
+        if (self.feedState is "On"):
              return False
-        elif(self.overwrite is "Off"):
+        elif(self.feedState is "Off"):
              return True
         else:
              if(self.offCycle <=self.offCycleReset):
