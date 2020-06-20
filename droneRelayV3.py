@@ -167,7 +167,6 @@ if (True):
     @blynk.handle_event('write V7')
     def write_handler(pin, value):
         staus = value[0]
-        _log.debug("droneRelayWriteHandler on pin " + str(pin) + " value is " + str(staus)) 
         if (staus is "1" ):
             try:
                  _log.info("pin 7 value==1")
@@ -193,7 +192,7 @@ if (True):
             droneCounter.wasteAutomatic = True
             droneCounter.wasteCycleState = "On"
             droneCounter.wasteCycle = 0
-            blynk.virtual_write(28, "Waste is Auto, wasteCycle =" +str(droneCounter.wasteCycle) + " of " + str(droneCounter.wasteCycleReset))
+            blynk.virtual_write(28, "Waste is Auto, will run for " + str(droneCounter.wasteCycleReset) + " mins.")
     
     
     
