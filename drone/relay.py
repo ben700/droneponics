@@ -7,7 +7,7 @@ class Relay:
        print("Building object")
        self.gpioPin = gpioPin
        self.name = Name
-       self.gpio = GPIO.setup(gpioPin)
+       self.gpio = GPIO.setup(gpioPin, GPIO.OUT)
        
 def turnOn(relays, _log): 
     try:
