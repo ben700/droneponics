@@ -61,6 +61,5 @@ for x in range(11):
    else :
         GPIO.output(relays[1],GPIO.HIGH)
                
-   _log.debug("-----------------------------" +text+" cycle ="+str(droneCounter.cycle))
    droneCounter.incCycle(_log)
    time.sleep(5)
