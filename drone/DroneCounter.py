@@ -113,3 +113,26 @@ class DroneCounter:
         self.offCycle = 0 
          
         return self.cycle
+
+   
+   def  feedState(self, _log):
+      if(droneCounter.isAutomatic(_log)):
+            _log.info("droneCounter.isItAnOnCycle(_log)" + str(droneCounter.isItAnOnCycle(_log)))
+            if (droneCounter.isItAnOnCycle(_log)):
+                _log.info("Turn Relay ON") 
+                droneCounter.incOnCycle()
+                blynk.virtual_write(250, "Automatc : On")
+                return "On"  
+            else :
+                _log.info("droneCounter.offCycle = " + str(droneCounter.offCycle)) 
+                _log.info("Turn off RELAY")
+                droneCounter.incOffCycle()
+                blynk.virtual_write(250, "Automatc : Off")
+                return "Off"
+      elif(self.feedState is "On"):
+                blynk.virtual_write(250, "Manual : On")
+                return "On"
+      elif(self.feedState is "Off"):
+                blynk.virtual_write(250, "Manual : Off")
+                return "Off"
+      
