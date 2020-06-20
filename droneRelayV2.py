@@ -51,7 +51,9 @@ if (True):
 
     relays=[]
     relays.append(drone.Relay(18, parser.get('droneRelay', 'Relay1')))
+    relays.[0].test(_log)
     relays.append(drone.Relay(23, parser.get('droneRelay', 'Relay2')))
+    relays.[1].test(_log)
     relays.append(drone.Relay(24, parser.get('droneRelay', 'Relay3')))
     relays.append(drone.Relay(25, parser.get('droneRelay', 'Relay4')))
     relays.append(drone.Relay(12, parser.get('droneRelay', 'Relay5')))
