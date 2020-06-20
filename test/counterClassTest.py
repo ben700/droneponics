@@ -1,7 +1,10 @@
-import drone
 import logging
 import sys
 import os
+sys.path.append('/home/pi/droneponics')
+import drone
+
+
 
 _log = logging.getLogger('BlynkLog')
 logFormatter = logging.Formatter("%(asctime)s [%(levelname)s]  %(message)s")
