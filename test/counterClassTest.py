@@ -30,5 +30,5 @@ while True:
           #      GPIO.output(relays[1],GPIO.HIGH)
                 droneCounter.incOffCycle()
                
-         _log.debug(text)
-         droneCounter.incCycle(_log)
+   _log.debug(text)
+   droneCounter.incCycle(_log)
