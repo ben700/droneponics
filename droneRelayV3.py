@@ -93,9 +93,10 @@ try:
            _log.info('Syncing virtual buttons {}'.format(pin))
            blynk.virtual_sync(pin)
            blynk.read_response(timeout=0.5)
-        blynk.virtual_sync(25)
-        blynk.read_response(timeout=0.5)
-        blynk.virtual_sync(26)
+        for pin in range(24,27):
+           _log.info('Syncing virtual buttons {}'.format(pin))
+           blynk.virtual_sync(pin)
+           blynk.read_response(timeout=0.5)
         blynk.virtual_write(250, "Connected")
     
 
@@ -274,6 +275,12 @@ try:
         blynk.virtual_write(24, droneCounter.info())
         
         
+    @blynk.handle_event('write V27')
+    def v27write_handler(pin, value):
+        droneCounter.setWasteCycle(_log, value[0])
+        blynk.virtual_write(24, droneCounter.info())
+        
+        
     @timer.register(interval=60, run_once=False)
     def blynk_data():
         global button_state
@@ -295,11 +302,11 @@ try:
         if(droneCounter.wasteAutomatic == True):
              if(droneCounter.isItWasteCycle(_log)):
             #      GPIO.output(relays[7],GPIO.LOW)       
-                  blynk.virtual_write(27, "Waste is Auto - On")
+                  blynk.virtual_write(28, "Waste is Auto - On")
                   droneCounter.incWasteCycle(_log)
              else:
              #    GPIO.output(relays[7],GPIO.HIGH)
-                 blynk.virtual_write(27, "Waste is Off Auto - Completed")
+                 blynk.virtual_write(28, "Waste is Off Auto - Completed")
      
         _log.debug("The End")
      
