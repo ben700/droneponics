@@ -343,13 +343,14 @@ try:
          droneCounter.incCycle(_log)
                 
          if (self.wasteAutomatic):       
+             blynk.virtual_write(27, "Waste is Auto, wasteCycle =" +str(droneCounter.wasteCycle) + " of " + str(droneCounter.wasteCycleReset))
              if(droneCounter.isItWasteCycle(_log)):
                  GPIO.output(relays[7],GPIO.LOW)       
                  blynk.virtual_write(27, "Waste is Auto - On")
                  droneCounter.incWasteCycle(_log)
              GPIO.output(relays[7],GPIO.HIGH)
              blynk.virtual_write(27, "Waste is Off Auto - Completed")
-    
+             
          
          (font_width, font_height) = font.getsize(text)
          draw.text(
