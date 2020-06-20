@@ -23,10 +23,10 @@ class DroneCounter:
                return False
             else:
                return True
-         else:
+        else:
             if(self.wasteCycleReset <= self.wasteCycle)
                return True
-            return False
+        return False
             
    def isItAnOnCycle(self, _log) :
         _log.debug("in class counter function isItAnOnCycle self.overwrite = " + str(self.overwrite))
