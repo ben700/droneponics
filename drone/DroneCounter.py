@@ -68,6 +68,9 @@ class DroneCounter:
         
    def setOffCycle(self, _log, offCycleValue):
       self.offCycleReset = int(offCycleValue) 
+              
+   def setWasteCycle(self, _log, wasteCycleValue):
+      self.wasteCycleReset = int(wasteCycleValue) 
       
    def info(self):
         return "Feed is on for " + str(self.onCycleReset) + " mins and then off for " + str(self.offCycleReset) + " mins."
