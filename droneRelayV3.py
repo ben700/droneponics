@@ -104,41 +104,31 @@ try:
   
     @blynk.handle_event('write V1')
     def write_handler(pin, value):
-        _log.debug("droneRelayWriteHandler on pin " + str(pin) + " value is " + str(value[0]))
-        global button_state
-        now = datetime.now()
-        blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
-        blynk.set_property(systemLED, 'color', colours[1])
-        blynk.virtual_write(250, "Updating")
-        
-        button_state = int(value[0])-1
-        blynk.set_property(10+pin, 'color', colours[button_state])
-        blynk.set_property(pin, 'color', colours[button_state])
-            
-        blynk.virtual_write(98, "droneRelayWriteHandler on pin " + str(pin) + " value is " + str(button_state) + " colour : " + str(colours[button_state]) + '\n')
-            
-        if (button_state==0 ):
-            GPIO.output(relays[1],0)
+        staus = value[0]
+        _log.debug("droneRelayWriteHandler on pin " + str(pin) + " value is " + str(staus)) 
+        blynk.virtual_write(24, droneCounter.info())
+        if (staus is "1" ):
+            _log.info("pin 1 value==1")
+            GPIO.output(relays[1],GPIO.HIGH)
             blynk.virtual_write(250, "Stopped")
-            blynk.virtual_write(98, "Stopped"+ '\n')
-        if (button_state==1 ):
-            GPIO.output(relays[1],1)
+        #    blynk.set_property(pin, 'color', colours[0])
+            droneCounter.setManual()
+            droneCounter.feedState = "Off"
+        elif (staus is "2" ):
+            _log.info("pin 1 value ==2")
+            GPIO.output(relays[1],GPIO.LOW)
             blynk.virtual_write(250, "Running")
-            blynk.virtual_write(98, "Running"+ '\n')
-        elif (button_state==2):
-            GPIO.output(relays[1],0)
-            blynk.virtual_write(250, "50-50")
-            blynk.virtual_write(98, "50-50"+ '\n')
-        elif (button_state==3):
-            GPIO.output(relays[1],0)
-            blynk.virtual_write(250, "Just-on")
-            blynk.virtual_write(98, "Just-on"+ '\n')
-        elif (button_state==4):
-            GPIO.output(relays[1],0)
-            blynk.virtual_write(250, "Dry")
-            blynk.virtual_write(98, "Dry"+ '\n')
-            
-        blynk.set_property(systemLED, 'color', colours[0])
+         #   blynk.set_property(pin, 'color', colours[0])
+            droneCounter.setManual()
+            droneCounter.feedState = "On"
+        else:
+            droneCounter.setAutomatic()
+            droneCounter.reset(_log)
+            GPIO.output(relays[1],GPIO.LOW)
+            _log.info("pin 1 value !=1 or 2")
+            blynk.virtual_write(250, "Automatic :- On")
+          #  blynk.set_property(pin, 'color', colours['AUTOMATIC'])
+
         
     @blynk.handle_event('write V2')
     def write_handler(pin, value):
@@ -171,26 +161,37 @@ try:
             value[0] = 0
         drone.droneRelayWriteHandler(pin, value[0],blynk, relays)
         
-        
-    def v7_Temp_write_handler(pin, VALUE, waterTemp):
-        if (waterTemp>15 and VALUE == 1):
-            drone.droneRelayWriteHandler(pin, 1, blynk, relays)
-        else:
-            drone.droneRelayWriteHandler(pin, 0, blynk, relays)
-       
-        
     @blynk.handle_event('write V7')
     def write_handler(pin, value):
-      #  global waterTemp
-      #  _log.debug("droneRelayWriteHandler on pin " + str(pin) + " value is " + str(value[0]))
-      #  if (str(value[0]) == "0.0"):
-      #     value[0] = 0
-     #   v7_Temp_write_handler(pin, value[0], waterTemp)
-        _log.debug("droneRelayWriteHandler on pin " + str(pin) + " value is " + str(value[0]))
-        if (str(value[0]) == "0.0"):
-            value[0] = 0
-        drone.droneRelayWriteHandler(pin, value[0],blynk, relays)
-  
+        staus = value[0]
+        _log.debug("droneRelayWriteHandler on pin " + str(pin) + " value is " + str(staus)) 
+        if (staus is "1" ):
+            try:
+                 _log.info("pin 7 value==1")
+                 GPIO.output(relays[7],GPIO.HIGH)
+               #  droneCounter.wasteAutomatic = False
+                # droneCounter.wasteCycleState = "Off"
+                 blynk.virtual_write(27, "Waste is Off")
+            except:
+                 _log.error("Waste except turning Off")
+                 blynk.virtual_write(27, "Waste except turning Off")           
+        elif (staus is "2" ):
+            try:
+                  _log.info("pin 7 value==2")                        
+                  GPIO.output(relays[7],GPIO.LOW)
+            except:
+                 blynk.virtual_write(27, "Waste except turning On")
+            droneCounter.wasteAutomatic = False
+            droneCounter.wasteCycleState = "On"
+            blynk.virtual_write(27, "Waste is On")
+        else :
+            _log.info("pin 7 value==3")
+            GPIO.output(relays[7],GPIO.LOW)
+            droneCounter.wasteAutomatic = True
+            droneCounter.wasteCycleState = "On"
+            droneCounter.wasteCycle = 0
+            blynk.virtual_write(27, "Waste is Auto, wasteCycle =" +str(droneCounter.wasteCycle) + " of " + str(droneCounter.wasteCycleReset))
+    
     
     
     def v8_CO2_write_handler(pin, CO2, CO2Target, startTime, stopTime):         
