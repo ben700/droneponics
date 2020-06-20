@@ -277,7 +277,7 @@ try:
         
     @blynk.handle_event('write V27')
     def v27write_handler(pin, value):
-        if(value[0] > 0 ):
+        if(int(value[0]) > 0 ):
              droneCounter.setWasteCycle(_log, value[0])
         else:    
              blynk.virtual_write(27, 1)
