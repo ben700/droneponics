@@ -155,21 +155,21 @@ try:
             GPIO.output(relays[1],GPIO.HIGH)
             blynk.virtual_write(250, "Stopped")
         #    blynk.set_property(pin, 'color', colours[0])
-            droneCounter.automatic = False
-            droneCounter.overwrite = "Off"
+            droneCounter.setManual()
+            droneCounter.feedState = "Off"
         elif (staus is "2" ):
             _log.info("pin 1 value ==2")
             GPIO.output(relays[1],GPIO.LOW)
             blynk.virtual_write(250, "Running")
          #   blynk.set_property(pin, 'color', colours[0])
-            droneCounter.automatic = False
-            droneCounter.overwrite = "On"
+            droneCounter.setManual()
+            droneCounter.feedState = "On"
         else:
-            droneCounter.automatic = True
-            droneCounter.overwrite = False
+            droneCounter.setAutomatic()
+            droneCounter.reset(_log)
+            GPIO.output(relays[1],GPIO.LOW)
             _log.info("pin 1 value !=1 or 2")
-            _log.info("status = " + str(staus))
-            blynk.virtual_write(250, "Automatic")
+            blynk.virtual_write(250, "Automatic :- On")
           #  blynk.set_property(pin, 'color', colours['AUTOMATIC'])
 
       
@@ -212,7 +212,7 @@ try:
         if (staus is "1" ):
             try:
                  _log.info("pin 7 value==1")
-              #   GPIO.output(relays[7],GPIO.HIGH)
+                 GPIO.output(relays[7],GPIO.HIGH)
                  droneCounter.wasteAutomatic = False
                  droneCounter.wasteCycleState = "Off"
                  blynk.virtual_write(27, "Waste is Off")
@@ -222,7 +222,7 @@ try:
         elif (staus is "2" ):
             try:
                   _log.info("pin 7 value==2")                        
-               #  GPIO.output(relays[7],GPIO.LOW)
+                  GPIO.output(relays[7],GPIO.LOW)
             except:
                  blynk.virtual_write(27, "Waste except turning On")
             droneCounter.wasteAutomatic = False
@@ -331,17 +331,17 @@ try:
          blynk.virtual_write(24, droneCounter.info())
          blynk.virtual_write(23, droneCounter.infoCounter(_log))
          
-         if(droneCounter.automatic):
+         if(droneCounter.isAutomatic(_log)):
             if (droneCounter.isItAnOnCycle(_log)):
                 text = "Automatc : On"
                 _log.info("Turn Relay ON") 
                 GPIO.output(relays[1],GPIO.LOW)
-            elif (droneCounter.isItAnOffCycle(_log)):
+            else :
                 text = "Automatc : Off"
                 _log.info("Turn off RELAY")
                 GPIO.output(relays[1],GPIO.HIGH)
          else:
-            if(droneCounter.overwrite == "Off"):
+            if(droneCounter.feedState == "Off"):
                 text = "Manual : Off"
             else:
                 text = "Manual : On"
