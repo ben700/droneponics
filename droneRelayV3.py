@@ -174,26 +174,26 @@ try:
                  GPIO.output(relays[7],GPIO.HIGH)
                #  droneCounter.wasteAutomatic = False
                 # droneCounter.wasteCycleState = "Off"
-                 blynk.virtual_write(27, "Waste is Off")
+                 blynk.virtual_write(28, "Waste is Off")
             except:
                  _log.error("Waste except turning Off")
-                 blynk.virtual_write(27, "Waste except turning Off")           
+                 blynk.virtual_write(28, "Waste except turning Off")           
         elif (staus is "2" ):
             try:
                   _log.info("pin 7 value==2")                        
                   GPIO.output(relays[7],GPIO.LOW)
             except:
-                 blynk.virtual_write(27, "Waste except turning On")
+                 blynk.virtual_write(28, "Waste except turning On")
             droneCounter.wasteAutomatic = False
             droneCounter.wasteCycleState = "On"
-            blynk.virtual_write(27, "Waste is On")
+            blynk.virtual_write(28, "Waste is On")
         else :
             _log.info("pin 7 value==3")
             GPIO.output(relays[7],GPIO.LOW)
             droneCounter.wasteAutomatic = True
             droneCounter.wasteCycleState = "On"
             droneCounter.wasteCycle = 0
-            blynk.virtual_write(27, "Waste is Auto, wasteCycle =" +str(droneCounter.wasteCycle) + " of " + str(droneCounter.wasteCycleReset))
+            blynk.virtual_write(28, "Waste is Auto, wasteCycle =" +str(droneCounter.wasteCycle) + " of " + str(droneCounter.wasteCycleReset))
     
     
     
