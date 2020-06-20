@@ -336,15 +336,12 @@ try:
                 text = "Automatc : On"
                 _log.info("Turn Relay ON") 
                 GPIO.output(relays[1],GPIO.LOW)
+                droneCounter.incOnCycle()
             else :
                 text = "Automatc : Off"
                 _log.info("Turn off RELAY")
                 GPIO.output(relays[1],GPIO.HIGH)
-         else:
-            if(droneCounter.feedState == "Off"):
-                text = "Manual : Off"
-            else:
-                text = "Manual : On"
+                droneCounter.incOffCycle()
                
          blynk.virtual_write(250, text)
          droneCounter.incCycle(_log)
