@@ -226,15 +226,20 @@ if (True):
                  _log.error("Except handle_event V7 Turning waste auto")
                  blynk.virtual_write(28, "Except handle_event V7 Turning waste auto")
                  
-  
+    @blynk.handle_event('write V25')
+    def v25write_handler(pin, value):
+        relay[0].cycleResetSet(value[0])
+        blynk.virtual_write(24, droneCounter.info())
+        
+    @blynk.handle_event('write V26')
+    def v26write_handler(pin, value):
+        relay[0].setOffCycle(value[0])
+        relay[0].offCycle = True
+        blynk.virtual_write(24, droneCounter.info())  
          
     @blynk.handle_event('write V27')
     def v27write_handler(pin, value):
-        if(int(value[0]) > 0 ):
-             droneCounter.setWasteCycle(_log, value[0])
-        else:    
-             blynk.virtual_write(27, 1)
-             droneCounter.setWasteCycle(_log, 1)
+        relay[6].cycleResetSet(value[0])
         blynk.virtual_write(28, "Waste is set to run for " + str(droneCounter.wasteCycleReset) + " mins.")  
         
     @timer.register(interval=60, run_once=False)
