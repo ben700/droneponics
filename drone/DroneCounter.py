@@ -2,6 +2,8 @@ class DroneCounter:
    
    def __init__(self):
     self.cycle = 0
+    self.onCycleReset=0 
+    self.offCycleReset=0
     self.onCycle=0 
     self.offCycle=0
     self.wasteCycle=0
@@ -11,9 +13,12 @@ class DroneCounter:
     self.overwrite = False
     self.automatic = False  
    
-   def manual(self, _log, value):
-         overwrite = value
-         
+   def setManual(self):
+         self.automatic = False
+   
+   def setAutomatic(self):
+         self.automatic = True
+     
    def isAutomatic(self, _log):
         return self.automatic
    
@@ -35,36 +40,31 @@ class DroneCounter:
         elif(self.overwrite is "Off"):
              return False
         else:
-            now = self.cycle - self.onCycle
-            if (now <= 0):
+             if(self.onCycle <=self.onCycleReset)
                 return True
             else:
-                now = self.cycle - self.onCycle - self.offCycle
-                if (now <= 0):
-                    return False
-                else:
-                    return True
-
+                return False
+            
    def isItAnOffCycle(self, _log) :
+        _log.debug("in class counter function isItAnOffCycle self.overwrite = " + str(self.overwrite))
         if (self.overwrite is "On"):
              return False
         elif(self.overwrite is "Off"):
              return True
         else:
-            now = self.cycle - self.onCycle - self.offCycle
-            if (now <= 0):
+             if(self.offCycle <=self.offCycleReset)
                 return True
             else:
                 return False
         
    def setOnCycle(self, _log, onCycleValue):
-      self.onCycle = int(onCycleValue) 
+      self.onCycleReset = int(onCycleValue) 
         
    def setOffCycle(self, _log, offCycleValue):
-      self.offCycle = int(offCycleValue) 
+      self.offCycleReset = int(offCycleValue) 
       
    def info(self):
-        return "Feed is on for " + str(self.onCycle) + " mins and then off for " + str(self.offCycle) + " mins."
+        return "Feed is on for " + str(self.onCycleReset) + " mins and then off for " + str(self.offCycleReset) + " mins."
    
    def infoCounter(self,_log):
          if (self.overwrite is "On"):
@@ -85,13 +85,20 @@ class DroneCounter:
         self.wasteCycle = self.wasteCycle + 1
         return self.wasteCycle
       
-   def  incWasteCycle(self, _log):
-        if (self.cycle >= (self.onCycle + self.offCycle)):
+   def  incCycle(self, _log):
+        if (self.cycle >= (self.onCycleReset+ self.offCycleReset) ):
             self.reset(_log)
-            return self.cycle    
-        self.cycle = self.cycle + 1
-        return self.cycle
+            return self.cycle
+        if (self.onCycle <=  self.onCycleReset):
+            self.onCycle = self.onCycle + 1
+        else:
+            self.offCycle = self.offCycle + 1
+        
+         self.cycle = self.cycle + 1
+         return self.cycle
       
    def  reset(self, _log):
         self.cycle = 0
+        self.onCycle = 0 
+        self.offCycle = 0 
         return self.cycle
