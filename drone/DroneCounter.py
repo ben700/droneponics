@@ -4,7 +4,8 @@ class DroneCounter:
     self.cycle = 0
     self.onCycle=0 
     self.offCycle=0
-    self.wasteCycle=6
+    self.wasteCycle=0
+    self.wasteCycleReset=6  
     self.overwrite = False
     self.automatic = False  
    
@@ -64,13 +65,20 @@ class DroneCounter:
                   return "In minute " + str(self.cycle) + " pump is off till minute " + str(self.onCycle+self.offCycle)
                
         
-   def  incCycle(self, _log):
+   def  incWasteCycle(self, _log):
+        if (self.wasteCycle >= self.wasteCycleReset):
+            self.wasteCycle=0
+            return self.wasteCycle    
+        self.wasteCycle = self.wasteCycle + 1
+        return self.wasteCycle
+      
+   def  incWasteCycle(self, _log):
         if (self.cycle >= (self.onCycle + self.offCycle)):
             self.reset(_log)
             return self.cycle    
         self.cycle = self.cycle + 1
         return self.cycle
-             
+      
    def  reset(self, _log):
         self.cycle = 0
         return self.cycle
