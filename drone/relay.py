@@ -20,7 +20,7 @@ def turnOff(relays, _log):
     
     try:
          _log.info("Turning off relay " + self.name)
-         #self.gpio.output(self.gpioPin,GPIO.LOW) 
+         self.gpio.output(self.gpioPin,GPIO.LOW) 
     except:
          _log.error("Except: Turning off relay " + self.name)
       
