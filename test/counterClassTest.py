@@ -1,3 +1,4 @@
+import time
 import logging
 import sys
 import os
@@ -34,14 +35,15 @@ for x in range(11):
             if (droneCounter.isItAnOnCycle(_log)):
                 text = "Automatc : On"
                 _log.info("Turn Relay ON") 
-         #       GPIO.output(relays[1],GPIO.LOW)
+                GPIO.output(relays[1],GPIO.LOW)
                 droneCounter.incOnCycle()
             else :
                 _log.info("droneCounter.offCycle = " + str(droneCounter.offCycle)) 
                 text = "Automatc : Off"
                 _log.info("Turn off RELAY")
-          #      GPIO.output(relays[1],GPIO.HIGH)
+                GPIO.output(relays[1],GPIO.HIGH)
                 droneCounter.incOffCycle()
                
    _log.debug("-----------------------------" +text+" cycle ="+str(droneCounter.cycle))
    droneCounter.incCycle(_log)
+   time.sleep(5)
