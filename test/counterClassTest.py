@@ -60,7 +60,7 @@ droneCounter.setOnCycle(_log, 1)
 droneCounter.setOffCycle(_log, 1)
 
 for x in range(11):
-    blynk.run()
+   blynk.run()
    _log.info("droneCounter.isAutomatic(_log)" + str(droneCounter.isAutomatic(_log)))
    _log.info("droneCounter.onCycleReset = " + str(droneCounter.onCycleReset))
    _log.info("droneCounter.offCycleReset = " + str(droneCounter.offCycleReset))
