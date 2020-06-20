@@ -42,7 +42,7 @@ class DroneCounter:
         else:
              if(self.onCycle <=self.onCycleReset):
                 return True
-            else:
+             else:
                 return False
             
    def isItAnOffCycle(self, _log) :
@@ -54,7 +54,7 @@ class DroneCounter:
         else:
              if(self.offCycle <=self.offCycleReset):
                 return True
-            else:
+             else:
                 return False
         
    def setOnCycle(self, _log, onCycleValue):
