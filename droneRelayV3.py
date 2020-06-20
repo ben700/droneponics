@@ -89,11 +89,13 @@ try:
     @blynk.handle_event("connect")
     def connect_handler():
         _log.warning("Connected")
-        for pin in range(1,11):
+        for pin in range(0,11):
            _log.info('Syncing virtual buttons {}'.format(pin))
            blynk.virtual_sync(pin)
            blynk.read_response(timeout=0.5)
-        blynk.virtual_sync(30)
+        blynk.virtual_sync(25)
+        blynk.read_response(timeout=0.5)
+        blynk.virtual_sync(26)
         blynk.virtual_write(250, "Connected")
     
 
@@ -260,12 +262,17 @@ try:
         blynk.virtual_write(98,"Current CO2 :" + str(CO2) +'\n')
         _log.info("CO2 updated to :" + str(CO2))
         v8_CO2_write_handler(8, CO2, CO2Target, startTime, stopTime)
+    
+    @blynk.handle_event('write V25')
+    def v25write_handler(pin, value):
+        droneCounter.setOnCycle(_log, value[0])
+        blynk.virtual_write(24, droneCounter.info())
         
-    @blynk.handle_event('write V30')
-    def write_handler(pin, value):
-        global waterTemp
-        waterTemp = value[0]
-        v7_Temp_write_handler(7, waterTemp)
+    @blynk.handle_event('write V26')
+    def v26write_handler(pin, value):
+        droneCounter.setOffCycle(_log, value[0])
+        blynk.virtual_write(24, droneCounter.info())
+        
         
     @timer.register(interval=60, run_once=False)
     def blynk_data():
