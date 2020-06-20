@@ -22,11 +22,11 @@ droneCounter.setOffCycle(_log, 2)
 
 while True:
    _log.info("droneCounter.isAutomatic(_log)" + str(droneCounter.isAutomatic(_log)))
-   _log.info("self.onCycleReset = " + str(self.onCycleReset))
-   _log.info("self.offCycleReset = " + str(self.offCycleReset))
-   _log.info("self.onCycle = " + str(self.onCycle))
-   _log.info("self.offCycle = " + str(self.offCycle))
-   _log.info("self.cycle = " + str(self.cycle))
+   _log.info("droneCounter.onCycleReset = " + str(droneCounter.onCycleReset))
+   _log.info("droneCounter.offCycleReset = " + str(droneCounter.offCycleReset))
+   _log.info("droneCounter.onCycle = " + str(droneCounter.onCycle))
+   _log.info("droneCounter.offCycle = " + str(droneCounter.offCycle))
+   _log.info("droneCounter.cycle = " + str(droneCounter.cycle))
    
    
    if(droneCounter.isAutomatic(_log)):
