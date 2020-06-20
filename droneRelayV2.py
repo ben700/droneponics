@@ -331,20 +331,11 @@ try:
          blynk.virtual_write(24, droneCounter.info())
          blynk.virtual_write(23, droneCounter.infoCounter(_log))
          
-         if(droneCounter.isAutomatic(_log)):
-            if (droneCounter.isItAnOnCycle(_log)):
-                text = "Automatc : On"
-                _log.info("Turn Relay ON") 
-                GPIO.output(relays[1],GPIO.LOW)
-                droneCounter.incOnCycle()
-            else :
-                text = "Automatc : Off"
-                _log.info("Turn off RELAY")
-                GPIO.output(relays[1],GPIO.HIGH)
-                droneCounter.incOffCycle()
-               
-         blynk.virtual_write(250, text)
-         droneCounter.incCycle(_log)
+        if(droneCounter.getFeedState(_log, blynk) == "On"):
+             GPIO.output(relays[1],GPIO.LOW)
+        else :
+             GPIO.output(relays[1],GPIO.HIGH)
+        droneCounter.incCycle(_log)
                 
          if (self.wasteAutomatic):       
              blynk.virtual_write(27, "Waste is Auto, wasteCycle =" +str(droneCounter.wasteCycle) + " of " + str(droneCounter.wasteCycleReset))
