@@ -116,6 +116,8 @@ if (True):
         if (staus is "1" ):
             try:
              #    GPIO.output(relays[7],GPIO.HIGH)
+                 droneCounter.wasteAutomatic = False
+                 droneCounter.wasteCycleState = "Off"
                  blynk.virtual_write(28, "Waste is Off")
             except:
                  _log.error("Except handle_event V7 Turning Off waste")
@@ -124,15 +126,17 @@ if (True):
             try:
               #   GPIO.output(relays[7],GPIO.LOW)
                  blynk.virtual_write(28, "Waste is On")
+                 droneCounter.wasteAutomatic = False
+                 droneCounter.wasteCycleState = "On"
             except:
                  _log.error("Except handle_event V7 Turning on waste")
                  blynk.virtual_write(28, "Except handle_event V7 Turning on waste")
         else : 
             try:
                  blynk.virtual_write(28, "Waste is set to run for " + str(droneCounter.wasteCycleReset) + " mins.")
-   #              droneCounter.wasteAutomatic = True
-   #              droneCounter.wasteCycleState = "On"
-   #              droneCounter.wasteCycle = 0
+                 droneCounter.wasteAutomatic = True
+                 droneCounter.wasteCycleState = "Auto"
+                 droneCounter.wasteCycle = 0
             except:
                  _log.error("Except handle_event V7 Turning waste auto")
                  blynk.virtual_write(28, "Except handle_event V7 Turning waste auto")
