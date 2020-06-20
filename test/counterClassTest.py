@@ -56,7 +56,7 @@ for x in range(11):
    
    
    
-   if(droneCounter.feedState(_log) == "On"):
+   if(droneCounter.getFeedState(_log) == "On"):
         GPIO.output(relays[1],GPIO.LOW)
    else :
         GPIO.output(relays[1],GPIO.HIGH)
