@@ -5,7 +5,9 @@ import os
 sys.path.append('/home/pi/droneponics')
 import drone
 import RPi.GPIO as GPIO  
-   
+import blynklib
+import blynktimer   
+from configparser import ConfigParser
 
 _log = logging.getLogger('BlynkLog')
 logFormatter = logging.Formatter("%(asctime)s [%(levelname)s]  %(message)s")
@@ -14,6 +16,17 @@ consoleHandler.setFormatter(logFormatter)
 _log.addHandler(consoleHandler)
 _log.setLevel(logging.DEBUG)
 
+
+parser = ConfigParser()
+parser.read("/home/pi/droneponics/config/configRelay_"+drone.gethostname()+".ini")
+_log.info("/home/pi/droneponics/config/configRelay_"+drone.gethostname()+".ini")
+
+
+
+# Initialize Blynk
+_log.info("Initialize Blynk with BLYNK_AUTH = " + parser.get('blynk', 'BLYNK_AUTH'))
+blynk = blynklib.Blynk(parser.get('blynk', 'BLYNK_AUTH'), log=_log.info) 
+timer = blynktimer.Timer()
 
 try:
     GPIO.setmode(GPIO.BCM)
