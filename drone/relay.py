@@ -17,7 +17,7 @@ class Relay:
        self.cycle=0
        self.cycleReset=0
        
-def test(self, _log): 
+def testIt(self, _log): 
     try:
          _log.info("Testing relay " + self.name)
     except:
