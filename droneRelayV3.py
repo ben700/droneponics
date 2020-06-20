@@ -277,7 +277,12 @@ try:
         
     @blynk.handle_event('write V27')
     def v27write_handler(pin, value):
-        droneCounter.setWasteCycle(_log, value[0])
+        if(value[0] > 0 ):
+             droneCounter.setWasteCycle(_log, value[0])
+        else:    
+             blynk.virtual_write(27, 1)
+             droneCounter.setWasteCycle(_log, 1)
+                
         blynk.virtual_write(24, droneCounter.info())
         
         
@@ -301,11 +306,11 @@ try:
         
         if(droneCounter.wasteAutomatic == True):
              if(droneCounter.isItWasteCycle(_log)):
-            #      GPIO.output(relays[7],GPIO.LOW)       
+                  GPIO.output(relays[7],GPIO.LOW)       
                   blynk.virtual_write(28, "Waste is Auto - On")
                   droneCounter.incWasteCycle(_log)
              else:
-             #    GPIO.output(relays[7],GPIO.HIGH)
+                 GPIO.output(relays[7],GPIO.HIGH)
                  blynk.virtual_write(7, 1)
                  blynk.virtual_write(28, "Waste is Off Auto - Completed")
      
