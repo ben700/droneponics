@@ -104,11 +104,13 @@ if (True):
         _log.debug("in v2write_handler and the staus = " + str(value[0]))
         if (staus is "1" ):
            try:
-                 relays[1].turnOff(_log)
+                 _log.debug("in v2write_handler turing on relay")
+                 relays[1].turnOn(_log)
            except:
                  _log.error("Except handle_event V2 Turning Off")
         else:
            try:
+                 _log.debug("in v2write_handler turing off relay")
                  relays[1].turnOff(_log)
            except:
                  _log.error("Except handle_event V2 Turning Off")
