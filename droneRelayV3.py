@@ -192,7 +192,7 @@ if (True):
             droneCounter.wasteAutomatic = True
             droneCounter.wasteCycleState = "On"
             droneCounter.wasteCycle = 0
-            blynk.virtual_write(28, "Waste is Auto, will run for " + str(droneCounter.wasteCycleReset) + " mins.")
+            blynk.virtual_write(28, "Waste is set to run for " + str(droneCounter.wasteCycleReset) + " mins.")
     
     
     
@@ -281,8 +281,8 @@ if (True):
         else:    
              blynk.virtual_write(27, 1)
              droneCounter.setWasteCycle(_log, 1)
+        blynk.virtual_write(28, "Waste is set to run for " + str(droneCounter.wasteCycleReset) + " mins.")
                 
-        blynk.virtual_write(24, droneCounter.info())
         
         
     @timer.register(interval=60, run_once=False)
@@ -306,16 +306,14 @@ if (True):
         if(droneCounter.wasteAutomatic == True):
              _log.debug("waste is set to Automatic")
              if(droneCounter.isItWasteCycle(_log)):
-                  _log.debug("waste is set to Automatic and has been on for " + str(droneCounter.wasteCycle))
                   GPIO.output(relays[7],GPIO.LOW)       
-                  blynk.virtual_write(28, "Waste is Auto,  On for " +str(droneCounter.wasteCycle) + " of " + str(droneCounter.wasteCycleReset))
+                  blynk.virtual_write(28, "Waste is set to run for " + str(droneCounter.wasteCycleReset) + " mins and is in min " +str(droneCounter.wasteCycle))
                   droneCounter.incWasteCycle(_log)
              else:
-                 _log.debug("waste was set to Automatic and ran for " + str(droneCounter.wasteCycleReset))
                  GPIO.output(relays[7],GPIO.HIGH)
-                 blynk.virtual_write(7, 1)
-                 droneCounter.wasteAutomatic = False 
-                 blynk.virtual_write(28, "Waste is Off Auto - Completed")
+                 droneCounter.wasteAutomatic = False
+                 droneCounter.wasteCycleState = "Off" 
+                 blynk.virtual_write(28, "Waste is set to run for " + str(droneCounter.wasteCycleReset) + " mins and has Completed" )
      
         _log.debug("The End")
      
