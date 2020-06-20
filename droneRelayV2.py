@@ -214,17 +214,20 @@ try:
             GPIO.output(relays[7],GPIO.HIGH)
             droneCounter.wasteAutomatic = False
             droneCounter.wasteCycleState = "Off"
+            blynk.virtual_write(27, "Waste is Off")
         elif (staus is "2" ):
             _log.info("pin 7 value==2")
             GPIO.output(relays[7],GPIO.LOW)
             droneCounter.wasteAutomatic = False
             droneCounter.wasteCycleState = "On"
+            blynk.virtual_write(27, "Waste is On")
         else :
             _log.info("pin 7 value==3")
             GPIO.output(relays[7],GPIO.LOW)
             droneCounter.wasteAutomatic = True
             droneCounter.wasteCycleState = "On"
             droneCounter.wasteCycle = 0
+            blynk.virtual_write(27, "Waste is Auto")
     
     
     def v8_CO2_write_handler(pin, CO2, CO2Target, startTime, stopTime):         
@@ -341,9 +344,11 @@ try:
                 
          if (self.wasteAutomatic):       
              if(droneCounter.isItWasteCycle(_log)):
-                 GPIO.output(relays[7],GPIO.LOW)
+                 GPIO.output(relays[7],GPIO.LOW)       
+                 blynk.virtual_write(27, "Waste is Auto - On")
                  droneCounter.incWasteCycle(_log)
              GPIO.output(relays[7],GPIO.HIGH)
+             blynk.virtual_write(27, "Waste is Off Auto - Completed")
     
          
          (font_width, font_height) = font.getsize(text)
