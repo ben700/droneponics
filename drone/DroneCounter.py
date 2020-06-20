@@ -115,7 +115,7 @@ class DroneCounter:
         return self.cycle
 
    
-   def  feedState(self, _log):
+   def  getFeedState(self, _log):
       if(droneCounter.isAutomatic(_log)):
             _log.info("droneCounter.isItAnOnCycle(_log)" + str(droneCounter.isItAnOnCycle(_log)))
             if (droneCounter.isItAnOnCycle(_log)):
