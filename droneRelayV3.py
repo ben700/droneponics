@@ -280,7 +280,7 @@ try:
     #        GPIO.output(relays[1],GPIO.LOW)
     #    else :
     #        GPIO.output(relays[1],GPIO.HIGH)
-    #    droneCounter.incCycle(_log)
+        droneCounter.incCycle(_log)
      
         _log.debug("The End")
      
