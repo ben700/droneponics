@@ -1,8 +1,8 @@
 
 
 # The ID and range of a sample spreadsheet.
-colours = {1: '#FF0000', 0: '#00FF00', '0': '#00FF00', 1: '#FF0000', '1': '#FF0000', 2: '#FF8000', 3: '#FF00FF',4: '#00FFFF', 5: '#00FFFF','OFFLINE': '#0000FF', 'AUTOMATIC': '#FF00DD', 'ONLINE': '#00FF00', 'UNAVILABLE': '#002700'}
-systemLED=101
+#colours = {1: '#FF0000', 0: '#00FF00', '0': '#00FF00', 1: '#FF0000', '1': '#FF0000', 2: '#FF8000', 3: '#FF00FF',4: '#00FFFF', 5: '#00FFFF','OFFLINE': '#0000FF', 'AUTOMATIC': '#FF00DD', 'ONLINE': '#00FF00', 'UNAVILABLE': '#002700'}
+#systemLED=101
 
 import socket
 import drone
@@ -28,7 +28,7 @@ import digitalio
 from PIL import Image, ImageDraw, ImageFont
 import adafruit_ssd1306
 
-   
+
 bootup = True
 button_state=0
 CO2=0
@@ -71,6 +71,12 @@ consoleHandler = logging.StreamHandler()
 consoleHandler.setFormatter(logFormatter)
 _log.addHandler(consoleHandler)
 _log.setLevel(parser.get('logging', 'logLevel', fallback=logging.DEBUG))
+
+_log.info("Set colour")
+colours = drone.colours
+systemLED= drone.systemLED
+_log.info("done Set colour")
+
 
 _log.info("/home/pi/droneponics/config/configRelay_"+drone.gethostname()+".ini")
 droneCounter = drone.DroneCounter()
