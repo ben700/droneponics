@@ -305,13 +305,17 @@ try:
         droneCounter.incCycle(_log)
         
         if(droneCounter.wasteAutomatic == True):
+             _log.debug("waste is set to Automatic")
              if(droneCounter.isItWasteCycle(_log)):
+                 _log.debug("waste is set to Automatic and has been on for " + str(droneCounter.wasteCycle))
                   GPIO.output(relays[7],GPIO.LOW)       
                   blynk.virtual_write(28, "Waste is Auto,  On for " +str(droneCounter.wasteCycle) + " of " + str(droneCounter.wasteCycleReset))
                   droneCounter.incWasteCycle(_log)
              else:
+                 _log.debug("waste was set to Automatic and ran for " + str(droneCounter.wasteCycleReset))
                  GPIO.output(relays[7],GPIO.HIGH)
                  blynk.virtual_write(7, 1)
+                 droneCounter.wasteAutomatic = False 
                  blynk.virtual_write(28, "Waste is Off Auto - Completed")
      
         _log.debug("The End")
