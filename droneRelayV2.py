@@ -227,7 +227,7 @@ try:
             droneCounter.wasteAutomatic = True
             droneCounter.wasteCycleState = "On"
             droneCounter.wasteCycle = 0
-            blynk.virtual_write(27, "Waste is Auto")
+            blynk.virtual_write(27, "Waste is Auto, wasteCycle =" +str(droneCounter.wasteCycle) + " of " + str(droneCounter.wasteCycleReset))
     
     
     def v8_CO2_write_handler(pin, CO2, CO2Target, startTime, stopTime):         
