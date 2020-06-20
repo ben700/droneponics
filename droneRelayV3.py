@@ -367,5 +367,5 @@ except:
    drone.turnButtonsOffline(blynk)
    GPIO.cleanup()
 
-   os.system('sh /home/pi/updateDroneponics.sh')
-   os.system('sudo reboot')
+  # os.system('sh /home/pi/updateDroneponics.sh')
+   #os.system('sudo reboot')
