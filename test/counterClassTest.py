@@ -23,6 +23,7 @@ droneCounter.setOffCycle(_log, 2)
 while True:
    _log.info("droneCounter.isAutomatic(_log)" + str(droneCounter.isAutomatic(_log)))
    if(droneCounter.isAutomatic(_log)):
+            _log.info("droneCounter.isItAnOnCycle(_log)" + str(droneCounter.isItAnOnCycle(_log)))
             if (droneCounter.isItAnOnCycle(_log)):
                 text = "Automatc : On"
                 _log.info("Turn Relay ON") 
