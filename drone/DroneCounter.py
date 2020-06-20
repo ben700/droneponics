@@ -116,7 +116,7 @@ class DroneCounter:
 
    
    def  getFeedState(self, _log):
-      if(droneCounter.isAutomatic(_log)):
+      if(self.isAutomatic(_log)):
             _log.info("droneCounter.isItAnOnCycle(_log)" + str(droneCounter.isItAnOnCycle(_log)))
             if (droneCounter.isItAnOnCycle(_log)):
                 _log.info("Turn Relay ON") 
