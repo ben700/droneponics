@@ -4,6 +4,7 @@ class DroneCounter:
     self.cycle = 0
     self.onCycle=0 
     self.offCycle=0
+    self.wasteCycle=6
     self.overwrite = False
     self.automatic = False  
    
