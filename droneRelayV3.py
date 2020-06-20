@@ -307,7 +307,7 @@ try:
         if(droneCounter.wasteAutomatic == True):
              if(droneCounter.isItWasteCycle(_log)):
                   GPIO.output(relays[7],GPIO.LOW)       
-                  blynk.virtual_write(28, "Waste is Auto - On")
+                  blynk.virtual_write(28, "Waste is Auto - On for +" str(droneCounter.wasteCycleReset))
                   droneCounter.incWasteCycle(_log)
              else:
                  GPIO.output(relays[7],GPIO.HIGH)
