@@ -115,24 +115,24 @@ class DroneCounter:
         return self.cycle
 
    
-   def  getFeedState(self, _log):
+   def  getFeedState(self, _log, blynk):
       if(self.isAutomatic(_log)):
             _log.info("droneCounter.isItAnOnCycle(_log)" + str(self.isItAnOnCycle(_log)))
             if (self.isItAnOnCycle(_log)):
                 _log.info("Turn Relay ON") 
                 self.incOnCycle()
-                #blynk.virtual_write(250, "Automatc : On")
+                blynk.virtual_write(250, "Automatc : On")
                 return "On"  
             else :
                 _log.info("droneCounter.offCycle = " + str(self.offCycle)) 
                 _log.info("Turn off RELAY")
                 self.incOffCycle()
-                #blynk.virtual_write(250, "Automatc : Off")
+                blynk.virtual_write(250, "Automatc : Off")
                 return "Off"
       elif(self.feedState is "On"):
-                #blynk.virtual_write(250, "Manual : On")
+                blynk.virtual_write(250, "Manual : On")
                 return "On"
       elif(self.feedState is "Off"):
-                #blynk.virtual_write(250, "Manual : Off")
+                blynk.virtual_write(250, "Manual : Off")
                 return "Off"
       
