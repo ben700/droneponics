@@ -30,6 +30,7 @@ while True:
          #       GPIO.output(relays[1],GPIO.LOW)
                 droneCounter.incOnCycle()
             else :
+                _log.info("droneCounter.offCycle = " + str(droneCounter.offCycle)) 
                 text = "Automatc : Off"
                 _log.info("Turn off RELAY")
           #      GPIO.output(relays[1],GPIO.HIGH)
