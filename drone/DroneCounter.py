@@ -18,7 +18,7 @@ class DroneCounter:
         return self.automatic
    
    def isItWasteCycle(self, _log) :
-        if(self.wasteAutomatic = False):
+        if(self.wasteAutomatic is False):
             if(self.wasteCycleState == "Off"):
                return False
             else:
