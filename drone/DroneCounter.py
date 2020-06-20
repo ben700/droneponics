@@ -101,7 +101,7 @@ class DroneCounter:
       
    def  incCycle(self, _log):
         self.cycle = self.cycle + 1
-        if (self.cycle > (self.onCycleReset+ self.offCycleReset) ):
+        if (self.cycle >= (self.onCycleReset+ self.offCycleReset) ):
             self.reset(_log)
             return self.cycle
         else:
