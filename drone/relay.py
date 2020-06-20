@@ -24,36 +24,35 @@ class Relay:
        except:
           self._log.error("Except: Testing relay " + self.name)
          
-def turnOn(self, _log): 
-    try:
-         _log.info("Turning on relay " + self.name)
-         self.gpio.output(self.gpioPin,GPIO.HIGH) 
-    except:
-         _log.error("Except: Turning on relay " + self.name)
+   def turnOn(self, _log): 
+       try:
+          _log.info("Turning on relay " + self.name)
+          self.gpio.output(self.gpioPin,GPIO.HIGH) 
+       except:
+          _log.error("Except: Turning on relay " + self.name)
       
-def turnOff(self, _log): 
-    
-    try:
-         _log.info("Turning off relay " + self.name)
-         self.gpio.output(self.gpioPin,GPIO.LOW) 
-    except:
-         _log.error("Except: Turning off relay " + self.name)
+   def turnOff(self, _log): 
+       try:
+           _log.info("Turning off relay " + self.name)
+           self.gpio.output(self.gpioPin,GPIO.LOW) 
+       except:
+           _log.error("Except: Turning off relay " + self.name)
      
-def setManual(self):
+   def setManual(self):
          self.automatic = False
    
-def setAutomatic(self):
+   def setAutomatic(self):
          self.automatic = True
      
-def isAutomatic(self, _log):
+   def isAutomatic(self, _log):
         return self.automatic
       
-def cycleResetSet(self, _log, cycleReset):
+   def cycleResetSet(self, _log, cycleReset):
       self.cycleReset = int(cycleReset) 
    
-def cycleReset(self, _log):
+   def cycleReset(self, _log):
       self.cycle = 0 
       
-def incCycle(self):
+   def incCycle(self):
       self.cycle = self.cycle + 1
       return self.cycle
