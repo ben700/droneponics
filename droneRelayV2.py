@@ -233,7 +233,7 @@ if (True):
         
     @blynk.handle_event('write V26')
     def v26write_handler(pin, value):
-        relay[0].setOffCycle(value[0])
+        relay[0].cycleOffResetSet(value[0])
         relay[0].offCycle = True
         blynk.virtual_write(24, droneCounter.info())  
          
