@@ -33,6 +33,7 @@ CO2Target=0
 startTime =None
 stopTime=None
 waterTemp=99
+rowIndex=1
 droneCounter = drone.DroneCounter()
 
 # tune console logging
@@ -295,6 +296,7 @@ try:
     
     @blynk.handle_event('write V29')
     def v27write_handler(pin, value):
+        global rowIndex
         rowIndex = value[0]
         
     @timer.register(interval=60, run_once=False)
