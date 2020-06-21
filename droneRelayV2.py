@@ -224,13 +224,13 @@ if (True):
     def v7write_handler(pin, value):
         staus = value[0]
         relay = 6
-        _log.debug("in v7write_handler and the staus = " + str(value[0]))
-        _log.debug("Waste relay is "+ str(relays[relay].name))
         if (staus is "1" ):
             try:
                  _log.debug("in v7write_handler and turning off relay " + relays[relay].name + " on pin " + str(relays[relay].gpioPin))
                  relays[relay].turnOff(_log)
+                 _log.debug("waste turnOff() completed")
                  relays[relay].setManual("Off")
+                 _log.debug("waste setManual() completed")
                  blynk.virtual_write(28, "Waste is Off")
                  _log.debug("in v7write_handler and turning off relay completed")
             except:
