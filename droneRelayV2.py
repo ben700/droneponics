@@ -88,7 +88,7 @@ try:
            _log.info('Syncing virtual buttons {}'.format(pin))
            blynk.virtual_sync(pin)
            blynk.read_response(timeout=0.5)
-        for pin in range(24,28):
+        for pin in range(24,30):
            _log.info('Syncing virtual buttons {}'.format(pin))
            blynk.virtual_sync(pin)
            blynk.read_response(timeout=0.5)
@@ -292,6 +292,10 @@ try:
         relays[6].cycleResetSet(value[0])
         relays[6].cycleOffResetClear()
         blynk.virtual_write(relays[0].getInfoPin(), relays[0].info())
+    
+    @blynk.handle_event('write V29')
+    def v27write_handler(pin, value):
+        rowIndex = value[0]
         
     @timer.register(interval=60, run_once=False)
     def blynk_data(): 
@@ -334,7 +338,8 @@ try:
            _log.debug("Just about to complete Booting")
            now = datetime.now()
            blynk.virtual_write(99, now.strftime("%d/%m/%Y %H:%M:%S"))
-           blynk.virtual_write(97, "add", 1, "Reboot", now.strftime("%d/%m/%Y %H:%M:%S"))
+           blynk.virtual_write(97, "add", rowIndex, "Reboot", now.strftime("%d/%m/%Y %H:%M:%S"))
+           blynk.virtual_write(29,rowIndex+1)
            blynk.virtual_write(systemLED, 255)
            blynk.virtual_write(255, 0)
            blynk.virtual_write(98, "Running"+ '\n')
