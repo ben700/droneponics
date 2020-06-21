@@ -49,7 +49,7 @@ class Relay:
        try:
           _log.info("Turning on relay " + self.name)
           GPIO.output(self.gpioPin,GPIO.LOW) 
-          _log.info("Turned on relay " + self.name + " on pin " str(self.gpioPin))
+          _log.info("Turned on relay " + self.name + " on pin " + str(self.gpioPin))
        except:
           _log.error("Except relayClass: Turning on relay " + self.name)
       
@@ -57,7 +57,7 @@ class Relay:
        try:
            _log.info("Turning off relay " + self.name)
            GPIO.output(self.gpioPin,GPIO.HIGH) 
-           _log.info("Turned off relay " + self.name + " on pin " str(self.gpioPin))
+           _log.info("Turned off relay " + self.name + " on pin " + str(self.gpioPin))
        except:
            _log.error("Except relayClass: Turning off relay " + self.name)
          
