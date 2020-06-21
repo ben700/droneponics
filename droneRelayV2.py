@@ -334,6 +334,7 @@ try:
            _log.debug("Just about to complete Booting")
            now = datetime.now()
            blynk.virtual_write(99, now.strftime("%d/%m/%Y %H:%M:%S"))
+           blynk.virtual_write(97, "add", "Reboot", now.strftime("%d/%m/%Y %H:%M:%S"))
            blynk.virtual_write(systemLED, 255)
            blynk.virtual_write(255, 0)
            blynk.virtual_write(98, "Running"+ '\n')
