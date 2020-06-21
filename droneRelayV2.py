@@ -297,6 +297,7 @@ if (True):
     @timer.register(interval=60, run_once=False)
     def blynk_data(): 
            _log.info("Update Timer Run")
+           text = ""
            now = datetime.now()
            blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
 
@@ -312,7 +313,9 @@ if (True):
                     relay.incCycle()
            if(relay.hasInfoPin()):
                 blynk.virtual_write(relay.getInfoPin(), relay.info())
-           
+           else
+                text = text + self.name + " is " + relay.whatCycle() + " "
+            blynk.virtual_write(28,text)
            _log.debug("The End")
      
     while True:
