@@ -59,7 +59,7 @@ class Relay:
          self.automatic = True
          self.setState("Auto")
      
-   def isAutomatic(self, _log):
+   def isAutomatic(self):
         return self.automatic
       
    def cycleResetSet(self, cycleReset):
@@ -73,23 +73,23 @@ class Relay:
       self.hasOffCycle = False
       self.offCycleReset = 0    
    
-   def cycleReset(self, _log):
+   def cycleReset(self):
       self.cycle = 0 
    
-   def offCycleReset(self, _log):
+   def offCycleReset(self):
       self.offCycle = 0 
       
    def incCycle(self):
       if(self.automatic):
            self.cycle = self.cycle + 1
            if(self.cycle > (self.cycleReset+self.offCycleReset)):
-                self.cycleReset(_log)
+                self.cycleReset()
       return self.cycle
    
    def info(self):
         return "Feed is on for " + str(self.cycleReset) + " mins and then off for " + str(self.offCycleReset) + " mins."
    
-   def infoCounter(self,_log):
+   def infoCounter(self):
          if (self.feedState is "On"):
              return "Currently in minute " + str(self.cycle) + " pump is set manually ON " 
          elif(self.feedState is  "Off"):
