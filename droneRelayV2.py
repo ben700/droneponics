@@ -135,7 +135,7 @@ if (True):
            blynk.virtual_write(250, "Auto")
            relays[relay].cycleOnReset()
            relays[relay].setOffCycleReset() 
-           blynk.virtual_write(relays[relay].getInfoPin(), relays[relay].info())
+        blynk.virtual_write(relays[relay].getInfoPin(), relays[relay].info())
                  
                 
 
