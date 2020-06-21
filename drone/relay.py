@@ -38,11 +38,9 @@ class Relay:
             seconds_since_midnight = int(time.time() - time.mktime(today.timetuple()))
             if( self.startTime < seconds_since_midnight and self.stopTime > seconds_since_midnight):
                self._log.debug(self.name + " On")
-               blynk.virtual_write(20,self.name + " On")
                return "On"
             else:
                self._log.debug(self.name + " Off")
-               blynk.virtual_write(20,self.name + " Off")
                return "Off"
          else:
             return self.state
