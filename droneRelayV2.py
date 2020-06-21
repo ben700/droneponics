@@ -111,7 +111,7 @@ if (True):
                  _log.debug("in v"+str(relay+1)+"write_handler turing off relay " + relays[relay].name)
                  relays[relay].turnOff(_log)
                  relays[relay].setManual("Off")
-                 _log.debug(relays[relay].name " in now off : v1write_handler completed")
+                 _log.debug(relays[relay].name + " in now off : v1write_handler completed")
            except:
                  _log.error("Except handle_event V"+str(relay+1)+" Turning Off")
                 
@@ -121,7 +121,7 @@ if (True):
                  _log.debug("in v1write_handler turing on relay")
                  relays[relay].turnOn(_log)
                  relays[relay].setManual("On")
-                _log.debug(relays[relay].name " in now on : v1write_handler completed")
+                _log.debug(relays[relay].name + " in now on : v1write_handler completed")
                  
            except:
                  _log.error("Except handle_event V"+str(relay+1)+" Turning on")
