@@ -291,7 +291,7 @@ if (True):
             blynk.virtual_write(98,"Co2 Relay is off due to time"+ '\n')    
         now = datetime.now()
         blynk.virtual_write(99, now.strftime("%d/%m/%Y %H:%M:%S"))
-        drone.droneRelayWriteHandler(pin, iValue, blynk, relays)
+       # drone.droneRelayWriteHandler(pin, iValue, blynk, relays)
    
 
     @blynk.handle_event('write V8')
