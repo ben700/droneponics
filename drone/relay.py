@@ -86,7 +86,7 @@ class Relay:
       if(self.automatic):
            self.cycle = self.cycle + 1
            if(self.cycle > (self.cycleReset+self.offCycleReset)):
-                self.cycleReset()
+                self.cycleOnReset()
       return self.cycle
    
    def info(self):
