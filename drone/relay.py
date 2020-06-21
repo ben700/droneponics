@@ -20,20 +20,17 @@ class Relay:
        self.hasOffCycle=False
        self.offCycle=0
        self.offCycleReset=0
-      
+       self.state = "Off"
        
-   def testIt(self): 
-       try:
-          self._log.info("Testing relay " + self.name)
-       except:
-          self._log.error("Except: Testing relay " + self.name)
+   def whatCycle(self, _log): 
+       if(self.cycle > self.cycleReset):
+            return "Off"
+       return "On"
          
    def turnOn(self, _log): 
        try:
           _log.info("Turning on relay " + self.name)
           GPIO.output(self.gpioPin,GPIO.HIGH) 
-            
-            
        except:
           _log.error("Except relayClass: Turning on relay " + self.name)
       
@@ -51,11 +48,16 @@ class Relay:
            _log.error("Except relayClass: Turnin relay " + self.name+ " to auto")
      
    
-   def setManual(self):
+   def setState(self, state):
+         self.state = state
+         
+   def setManual(self, state):
          self.automatic = False
+         self.setState(state)
    
    def setAutomatic(self):
          self.automatic = True
+         self.setState("Auto")
      
    def isAutomatic(self, _log):
         return self.automatic
@@ -80,13 +82,25 @@ class Relay:
    def incCycle(self):
       if(self.automatic):
            self.cycle = self.cycle + 1
-           if(self.cycle > self.cycleReset):
+           if(self.cycle > (self.cycleReset+self.offCycleReset)):
                 self.cycleReset(_log)
       return self.cycle
    
-   def incOffCycle(self):
-      if(self.automatic):
-           self.offCycle = self.offCycle + 1
-           if(self.offCycle > self.offCycleReset):
-                self.offCycleReset(_log)
-      return self.offCycle
+   def info(self):
+        return "Feed is on for " + str(self.cycleReset) + " mins and then off for " + str(self.offCycleReset) + " mins."
+   
+   def infoCounter(self,_log):
+         if (self.feedState is "On"):
+             return "Currently in minute " + str(self.cycle) + " pump is set manually ON " 
+         elif(self.feedState is  "Off"):
+             return "In minute " + str(self.cycle) + "  pump is set manually OFF"
+         else:   
+            if(self.cycle <= self.onCycle):
+                  return "In minute " + str(self.cycle) + " pump is on till minute " + str(self.onCycle)
+            else:
+                  return "In minute " + str(self.cycle) + " pump is off till minute " + str(self.onCycle+self.offCycle)
+        
+   def setBlynkLabel(self, blynk, button, LED):
+           blynk.set_property(button, "label", self.name)
+           blynk.set_property(LED, "label", self.name)
+           blynk.virtual_write(LED, 255)
