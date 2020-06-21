@@ -275,7 +275,7 @@ if (True):
         
     @timer.register(interval=60, run_once=False)
     def blynk_data(): 
-          _log.info("Update Timer Run")
+           _log.info("Update Timer Run")
             
            for relay in relays:
                 _log.debug("Seeing if relay " + relay.name + " is automatic")
@@ -287,7 +287,7 @@ if (True):
                         relay.turnOff(_log)
                     relay.incCycle()
             
-          _log.debug("The End")
+           _log.debug("The End")
      
     while True:
         blynk.run()
