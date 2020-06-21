@@ -25,7 +25,17 @@ class Relay:
        self.state = "Off"
        self.startTime = None
        self.stopTime = None
+       self.infoPin = None
        
+   def setInfoPin(self, infoPin): 
+        self.infoPin = infoPin
+         
+   def hadInfoPin(self):
+      if(self.infoPin is None):
+         return False
+      else:
+         return True
+         
    def whatCycle(self): 
        self._log.debug("whatCycle for "+self.name+" self.cycle = " + str(self.cycle) + " reset at " +str(self.cycleReset))
        if(self.isAutomatic()):
@@ -124,13 +134,7 @@ class Relay:
                 self.cycleOnReset()
       return self.cycle
    
-   def info(self):
-        if (self.getState() is "Auto"): 
-             return self.name + " is on for " + str(self.cycleReset) + " mins and then off for " + str(self.offCycleReset) + " mins."
-        elif (self.getState() is "Timer"):
-             return self.name + " is on Timer mode and is " + str(self.whatCycle()) + "."
-         
-   def infoCounter(self):   
+   def info(self):   
          if (self.getState() is "Auto"):
             if(self.self.hasOffCycle):
                   return self.name + " is "+str(self.whatCycle())" In minute " + str(self.cycle) + " for " + str(self.cycleReset) + " mins.")
