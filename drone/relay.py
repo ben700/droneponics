@@ -23,6 +23,7 @@ class Relay:
        self.state = "Off"
        
    def whatCycle(self): 
+       self._log("whatCycle self.cycle = " + str(self.cycle) + " reset at " +str(self.cycleReset))
        if(self.cycle > self.cycleReset):
             return "Off"
        return "On"
