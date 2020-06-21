@@ -36,7 +36,7 @@ class Relay:
          elif(self.getState() == "Timer"):
             today = date.today()
             seconds_since_midnight = int(time.time() - time.mktime(today.timetuple()))
-            if( startTime < seconds_since_midnight and stopTime > seconds_since_midnight):
+            if( self.startTime < seconds_since_midnight and self.stopTime > seconds_since_midnight):
                self._log.debug(self.name + " On")
                blynk.virtual_write(20,self.name + " On")
                return "On"
