@@ -111,7 +111,7 @@ if (True):
                  _log.debug("in v"+str(relay+1)+"write_handler turing off relay " + relays[relay].name)
                  relays[relay].turnOff(_log)
                  relays[relay].setManual("Off")
-                _log.debug(relays[relay].name " in now off : v1write_handler completed")
+                 _log.debug(relays[relay].name " in now off : v1write_handler completed")
            except:
                  _log.error("Except handle_event V"+str(relay+1)+" Turning Off")
                 
