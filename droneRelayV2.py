@@ -124,6 +124,10 @@ if (True):
            except:
                  _log.error("Except handle_event V"+str(relay+1)+" Turning auto")
            blynk.virtual_write(250, "Auto")
+           relays[0].cycleOnReset()
+           relays[0].offCycleReset() 
+           blynk.virtual_write(24, relays[0].info())
+           blynk.virtual_write(23, relays[0.infoCounter())
         
 
     @blynk.handle_event('write V2')
@@ -286,6 +290,9 @@ if (True):
            _log.info("Update Timer Run")
            now = datetime.now()
            blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
+        
+           blynk.virtual_write(24, relays[0].info())
+           blynk.virtual_write(23, relays[0.infoCounter())
         
            for relay in relays:
                 _log.debug("Seeing if relay " + relay.name + " is automatic")
