@@ -98,6 +98,34 @@ if (True):
     def disconnect_handler():
         _log.warning("Disconnected")
         blynk.virtual_write(250, "Disconnected")
+        
+          
+    @blynk.handle_event('write V1')
+    def write_handler(pin, value):
+        staus = value[0]
+        relay = 0       
+        if (staus is "1" ):
+           try:
+                 _log.debug("in v"+str(relay+1)+"write_handler turing off relay " + relays[relay].name)
+                 relays[relay].turnOff(_log)
+           except:
+                 _log.error("Except handle_event V"+str(relay+1)+" Turning Off")
+                
+            blynk.virtual_write(250, "Stopped")
+        elif (staus is "2" ):
+           try:
+                 _log.debug("in v2write_handler turing on relay")
+                 relays[relay].turnOn(_log)
+           except:
+                 _log.error("Except handle_event V"+str(relay+1)+" Turning on")
+ 
+        else:
+          try:
+                 _log.debug("in v2write_handler turing on relay")
+                 relays[relay].turnAuto(_log)
+           except:
+                 _log.error("Except handle_event V"+str(relay+1)+" Turning auto")
+        
 
     @blynk.handle_event('write V2')
     def write_handler(pin, value):  
