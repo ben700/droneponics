@@ -297,6 +297,7 @@ try:
     @blynk.handle_event('write V29')
     def v29write_handler(pin, value):
         _log.debug("v29write_handler rowIndex =" + str(value[0]))
+        global rowIndex
         rowIndex = int(value[0])
           
         
