@@ -125,7 +125,7 @@ if (True):
                  _log.error("Except handle_event V"+str(relay+1)+" Turning auto")
            blynk.virtual_write(250, "Auto")
            relays[relay].cycleOnReset()
-           relays[relay].offCycleReset() 
+           relays[relay].setOffCycleReset() 
            blynk.virtual_write(24, relays[relay].info())
            blynk.virtual_write(23, relays[relay].infoCounter())
         
