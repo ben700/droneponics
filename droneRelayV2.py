@@ -44,8 +44,7 @@ _log.addHandler(consoleHandler)
 _log.setLevel(parser.get('logging', 'logLevel', fallback=logging.DEBUG))
 _log.info("/home/pi/droneponics/config/configRelay_"+drone.gethostname()+".ini")
 
-if (True):
-#try:
+try:
     GPIO.setmode(GPIO.BCM)
     GPIO.setwarnings(False)
 
@@ -342,3 +341,17 @@ if (True):
            blynk.virtual_write(250, "Running")
            blynk.set_property(systemLED, 'color', colours[0])
         timer.run()
+except: 
+   blynk = blynklib.Blynk(parser.get('blynk', 'BLYNK_AUTH'))
+   blynk.run()
+   blynk.virtual_write(98,"in main loop except"+ '\n')
+   blynk.virtual_write(250, "Crashed")
+   now = datetime.now()
+   blynk.notify(drone.gethostname() + " just crashed at " + now.strftime("%d/%m/%Y %H:%M:%S"))
+
+   drone.turnLEDsOffline(blynk)
+   drone.turnButtonsOffline(blynk)
+   GPIO.cleanup()
+
+   os.system('sh /home/pi/updateDroneponics.sh')
+   os.system('sudo reboot')
