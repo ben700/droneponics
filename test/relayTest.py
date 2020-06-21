@@ -1,19 +1,50 @@
-
+import socket
+import drone
+from drone import Alarm, OpenWeather
+from datetime import datetime, date
+#import date
+import time
+import shlex, requests
+import blynklib
+import blynktimer
+import logging
 import RPi.GPIO as GPIO   
+import sys
+import os
+from configparser import ConfigParser
+import subprocess
+import re
+import json
+import numbers
 
-relays=[0,18,23,24,25,12,16,20,21]
-Relay1 = relays[1] #feed
-Relay2 = relays[2] #fan
-Relay3 = relays[3] #Air
-Relay4 = relays[4] #heater
-Relay5 = relays[5] #Feed
-Relay6 = relays[6] #Air
-Relay7 = relays[7] #Mixer - turned off with low water 
-Relay8 = relays[8]  #Mixer - turned off with low water 
+
+# tune console logging
+_log = logging.getLogger('BlynkLog')
+logFormatter = logging.Formatter("%(asctime)s [%(levelname)s]  %(message)s")
+consoleHandler = logging.StreamHandler()
+consoleHandler.setFormatter(logFormatter)
+_log.addHandler(consoleHandler)
+_log.setLevel(logging.DEBUG)
 
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
-GPIO.setup(Relay1,GPIO.OUT, initial=1)
 
-GPIO.output(Relay1,1)
+relays=[]
+relays.append(drone.Relay(_log, 18, parser.get('droneRelay', 'Relay1')))
+relays.append(drone.Relay(_log, 23, parser.get('droneRelay', 'Relay2')))
+relays.append(drone.Relay(_log, 24, parser.get('droneRelay', 'Relay3')))
+relays.append(drone.Relay(_log, 25, parser.get('droneRelay', 'Relay4')))
+relays.append(drone.Relay(_log, 12, parser.get('droneRelay', 'Relay5')))
+relays.append(drone.Relay(_log, 16, parser.get('droneRelay', 'Relay6')))
+relays.append(drone.Relay(_log, 20, parser.get('droneRelay', 'Relay7')))
+relays.append(drone.Relay(_log, 21, parser.get('droneRelay', 'Relay8')))
+
+for relay in relays:
+    relay.turnOn(_log)
+ 
+time.sleep(10)
+
+for relay in relays:
+    relay.turnOff(_log)
+ 
