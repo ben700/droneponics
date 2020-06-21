@@ -284,7 +284,9 @@ if (True):
     @timer.register(interval=60, run_once=False)
     def blynk_data(): 
            _log.info("Update Timer Run")
-            
+           now = datetime.now()
+           blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
+        
            for relay in relays:
                 _log.debug("Seeing if relay " + relay.name + " is automatic")
                 if(relay.isAutomatic()):
