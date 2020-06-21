@@ -295,7 +295,7 @@ try:
         blynk.virtual_write(relays[0].getInfoPin(), relays[0].info())
     
     @blynk.handle_event('write V29')
-    def v27write_handler(pin, value):
+    def v29write_handler(pin, value):
         global rowIndex
         rowIndex = value[0]
         
