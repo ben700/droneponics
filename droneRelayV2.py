@@ -120,7 +120,7 @@ if (True):
         else:
            try:
                  _log.debug("in v2write_handler turing on relay")
-                 relays[relay].turnAuto(_log)
+                 relays[relay].turnAuto()
                  relays[relay].setAutomatic()
            except:
                  _log.error("Except handle_event V"+str(relay+1)+" Turning auto")
@@ -247,7 +247,7 @@ if (True):
             try:
                  blynk.virtual_write(28, "Waste is set to run for " + str(relays[relay].offCycleReset) + " mins.")
                  relays[relay].setAutomatic() 
-                 relays[relay].cycleReset(_log)
+                 relays[relay].cycleReset()
                  relays[relay].cycleOffResetClear()
             except:
                  _log.error("Except handle_event V7 Turning waste auto")
@@ -275,9 +275,9 @@ if (True):
             
            for relay in relays:
                 _log.debug("Seeing if relay " + relay.name + " is automatic")
-                if(relay.isAutomatic(_log)):
+                if(relay.isAutomatic()):
                     _log.debug("relay " + relay.name + " is automatic so test cycle")
-                    if(relay.whatCycle(_log) == "On"):
+                    if(relay.whatCycle() == "On"):
                         relay.turnOn(_log)
                     else:
                         relay.turnOff(_log)
