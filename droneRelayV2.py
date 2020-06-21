@@ -247,7 +247,7 @@ if (True):
                  blynk.virtual_write(28, "Waste is set to run for " + str(relays[relay].offCycleReset) + " mins.")
                  relays[relay].setAutomatic() 
                  _log.debug("waste setAutomatic()")
-                # relays[relay].cycleReset()
+                 relays[relay].cycleOnReset()
                  _log.debug("waste cycleReset()")
                  relays[relay].cycleOffResetClear()
                  _log.debug("waste cycleOffResetClear()")
