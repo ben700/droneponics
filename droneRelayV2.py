@@ -127,7 +127,7 @@ if (True):
            relays[0].cycleOnReset()
            relays[0].offCycleReset() 
            blynk.virtual_write(24, relays[0].info())
-           blynk.virtual_write(23, relays[0.infoCounter())
+           blynk.virtual_write(23, relays[0].infoCounter())
         
 
     @blynk.handle_event('write V2')
@@ -292,7 +292,7 @@ if (True):
            blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
         
            blynk.virtual_write(24, relays[0].info())
-           blynk.virtual_write(23, relays[0.infoCounter())
+           blynk.virtual_write(23, relays[0].infoCounter())
         
            for relay in relays:
                 _log.debug("Seeing if relay " + relay.name + " is automatic")
