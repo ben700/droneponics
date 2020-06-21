@@ -130,17 +130,19 @@ class Relay:
         elif (self.getState() is "Timer"):
              return self.name + " is on Timer mode and is " + str(self.whatCycle()) + "."
          
-   def infoCounter(self):
-         if (self.getState() is "On"):
-             return "Currently in minute " + str(self.cycle) + " pump is set manually ON " 
-         elif(self.getState() is  "Off"):
-             return "In minute " + str(self.cycle) + "  pump is set manually OFF"
-         else:   
-            if(self.cycle <= self.cycleReset):
-                  return "In minute " + str(self.cycle) + " pump is on till minute " + str(self.cycleReset)
+   def infoCounter(self):   
+         if (self.getState() is "Auto"):
+            if(self.self.hasOffCycle):
+                  return self.name + " is "+str(self.whatCycle())" In minute " + str(self.cycle) + " for " + str(self.cycleReset) + " mins.")
             else:
-                  return "In minute " + str(self.cycle) + " pump is off till minute " + str(self.cycleReset+self.offCycleReset)
-        
+                  return self.name + " is "+str(self.whatCycle())" In minute " + str(self.cycle) + " On " + str(self.cycleReset) + " off for "+ str(self.offCycleReset) + " mins.")
+         elif(self.getState() is  "Timer"):
+            return self.name + " is on Timer mode and is " + str(self.whatCycle()) + "."
+         elif(self.getState() is  "On"):
+            return self.name + " set manually ON " 
+         elif(self.getState() is  "Off"):   
+            return self.name + " set manually OFF"
+         
    def setBlynkLabel(self, blynk, button, LED):
            blynk.set_property(button, "label", self.name)
            blynk.set_property(LED, "label", self.name)
