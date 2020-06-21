@@ -31,7 +31,7 @@ class Relay:
         self.infoPin = infoPin
          
    def getInfoPin(self): 
-        return infoPin      
+        return self.infoPin      
    
    def hasInfoPin(self):
       if(self.infoPin is None):
