@@ -108,6 +108,9 @@ if (True):
            try:
                  _log.debug("in v"+str(relay+1)+"write_handler turing off relay " + relays[relay].name)
                  relays[relay].turnOff(_log)
+                 relays[relay].setManual("Off")
+                 
+                    
            except:
                  _log.error("Except handle_event V"+str(relay+1)+" Turning Off")
                 
@@ -116,6 +119,8 @@ if (True):
            try:
                  _log.debug("in v2write_handler turing on relay")
                  relays[relay].turnOn(_log)
+                 relays[relay].setManual("On")
+                 
            except:
                  _log.error("Except handle_event V"+str(relay+1)+" Turning on")
  
@@ -123,6 +128,7 @@ if (True):
           try:
                  _log.debug("in v2write_handler turing on relay")
                  relays[relay].turnAuto(_log)
+                 relays[relay].setAutomatic()
            except:
                  _log.error("Except handle_event V"+str(relay+1)+" Turning auto")
         
@@ -224,32 +230,31 @@ if (True):
     @blynk.handle_event('write V7')
     def v7write_handler(pin, value):
         staus = value[0]
+        relay = 6
         _log.debug("in v7write_handler and the staus = " + str(value[0]))
-        _log.debug("Waste relay is "+ str(relays[7].name))
+        _log.debug("Waste relay is "+ str(relays[relay].name))
         if (staus is "1" ):
             try:
-                 relays[6].turnOff(_log)
-                 droneCounter.wasteAutomatic = False
-                 droneCounter.wasteCycleState = "Off"
+                 relays[relay].turnOff(_log)
+                 relays[relay].setManual("Off")
                  blynk.virtual_write(28, "Waste is Off")
             except:
                  _log.error("Except handle_event V7 Turning Off waste")
                  blynk.virtual_write(28, "Except handle_event V7 Turning Off waste")           
         elif (staus is "2" ):
             try:
-                 relays[6].turnOn(_log)
+                 relays[relay].turnOn(_log)
+                 relays[relay].setManual("On")
                  blynk.virtual_write(28, "Waste is On")
-                 droneCounter.wasteAutomatic = False
-                 droneCounter.wasteCycleState = "On"
             except:
                  _log.error("Except handle_event V7 Turning on waste")
                  blynk.virtual_write(28, "Except handle_event V7 Turning on waste")
         else : 
             try:
-                 blynk.virtual_write(28, "Waste is set to run for " + str(droneCounter.wasteCycleReset) + " mins.")
-                 droneCounter.wasteAutomatic = True
-                 droneCounter.wasteCycleState = "Auto"
-                 droneCounter.wasteCycle = 0
+                 blynk.virtual_write(28, "Waste is set to run for " + str(relays[relay].offCycleReset) + " mins.")
+                 relays[relay].setAutomatic() 
+                 relays[relay].cycleReset(_log)
+                 relays[relay].cycleOffResetClear()
             except:
                  _log.error("Except handle_event V7 Turning waste auto")
                  blynk.virtual_write(28, "Except handle_event V7 Turning waste auto")
@@ -257,22 +262,33 @@ if (True):
     @blynk.handle_event('write V25')
     def v25write_handler(pin, value):
         relays[0].cycleResetSet(value[0])
-        blynk.virtual_write(24, droneCounter.info())
+        blynk.virtual_write(24, relays[0].info())
         
     @blynk.handle_event('write V26')
     def v26write_handler(pin, value):
         relays[0].cycleOffResetSet(value[0])
-        relays[0].offCycle = True
-        blynk.virtual_write(24, droneCounter.info())  
+        blynk.virtual_write(24, relays[0].info())  
          
     @blynk.handle_event('write V27')
     def v27write_handler(pin, value):
         relays[6].cycleResetSet(value[0])
-        blynk.virtual_write(28, "Waste is set to run for " + str(droneCounter.wasteCycleReset) + " mins.")  
+        relays[6].cycleOffResetClear()
+        blynk.virtual_write(28, "Waste is set to run for " + str(relays[6].cycleReset) + " mins.")  
         
     @timer.register(interval=60, run_once=False)
     def blynk_data(): 
           _log.info("Update Timer Run")
+            
+           for relay in relays:
+                _log.debug("Seeing if relay " + relay.name + " is automatic")
+                if(relay.isAutomatic(_log)):
+                    _log.debug("relay " + relay.name + " is automatic so test cycle")
+                    if(relay.whatCycle(_log) == "On"):
+                        relay.turnOn(_log)
+                    else:
+                        relay.turnOff(_log)
+                    relay.incCycle()
+            
           _log.debug("The End")
      
     while True:
@@ -283,32 +299,11 @@ if (True):
            blynk.virtual_write(250, "Start-up")
            blynk.set_property(251, "label",drone.gethostname())
            blynk.virtual_write(251, drone.get_ip())
-        
-           blynk.set_property(1, "label", parser.get('droneRelay', 'Relay1'))
-           blynk.set_property(11, "label", parser.get('droneRelay', 'Relay1'))
-           blynk.virtual_write(11, 255)
-           blynk.set_property(2, "label", parser.get('droneRelay', 'Relay2'))
-           blynk.set_property(12, "label", parser.get('droneRelay', 'Relay2'))
-           blynk.virtual_write(12, 255)
-           blynk.set_property(3, "label", parser.get('droneRelay', 'Relay3'))
-           blynk.set_property(13, "label", parser.get('droneRelay', 'Relay3'))
-           blynk.virtual_write(13, 255)
-           blynk.set_property(4, "label", parser.get('droneRelay', 'Relay4'))
-           blynk.set_property(14, "label", parser.get('droneRelay', 'Relay4'))
-           blynk.virtual_write(14, 255)
-           blynk.set_property(5, "label", parser.get('droneRelay', 'Relay5'))
-           blynk.set_property(15, "label", parser.get('droneRelay', 'Relay5'))
-           blynk.virtual_write(15, 255)
-           blynk.set_property(6, "label", parser.get('droneRelay', 'Relay6'))
-           blynk.set_property(16, "label", parser.get('droneRelay', 'Relay6'))
-           blynk.virtual_write(16, 255)
-           blynk.set_property(7, "label", parser.get('droneRelay', 'Relay7'))
-           blynk.set_property(17, "label", parser.get('droneRelay', 'Relay7'))
-           blynk.virtual_write(17, 255)
-           blynk.set_property(8, "label", parser.get('droneRelay', 'Relay8'))
-           blynk.set_property(18, "label", parser.get('droneRelay', 'Relay8'))
-           blynk.virtual_write(18, 255)
-          
+           x = 1 
+           for relay in relays:
+                 relay.setBlynkLabel(blynk, x, 10+x)
+                 x = x +1 
+           
            bootup = False
            _log.debug("Just about to complete Booting")
            now = datetime.now()
