@@ -113,8 +113,8 @@ class Relay:
       if(self.hasOffCycle):
           self.cycle = 0 
    
-   def offCycleReset(self):
-      self._log.debug("in offCycleReset")
+   def setOffCycleReset(self):
+      self._log.debug("in setOffCycleReset")
       self.offCycle = 0 
       
    def incCycle(self):
