@@ -228,6 +228,7 @@ if (True):
         _log.debug("Waste relay is "+ str(relays[relay].name))
         if (staus is "1" ):
             try:
+                 _log.debug("in v7write_handler and turning off relay " + relays[relay].name + " on pin " + str(relays[relay].gpioPin))
                  relays[relay].turnOff(_log)
                  relays[relay].setManual("Off")
                  blynk.virtual_write(28, "Waste is Off")
@@ -236,6 +237,7 @@ if (True):
                  blynk.virtual_write(28, "Except handle_event V7 Turning Off waste")           
         elif (staus is "2" ):
             try:
+                 _log.debug("in v7write_handler and turning on relay " + relays[relay].name + " on pin " + str(relays[relay].gpioPin))
                  relays[relay].turnOn(_log)
                  relays[relay].setManual("On")
                  blynk.virtual_write(28, "Waste is On")
@@ -244,6 +246,7 @@ if (True):
                  blynk.virtual_write(28, "Except handle_event V7 Turning on waste")
         else : 
             try:
+                 _log.debug("in v7write_handler and turning relay " + relays[relay].name + " auto on pin " + str(relays[relay].gpioPin))
                  blynk.virtual_write(28, "Waste is set to run for " + str(relays[relay].offCycleReset) + " mins.")
                  relays[relay].setAutomatic() 
                  _log.debug("waste setAutomatic()")
