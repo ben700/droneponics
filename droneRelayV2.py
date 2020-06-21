@@ -247,8 +247,11 @@ if (True):
             try:
                  blynk.virtual_write(28, "Waste is set to run for " + str(relays[relay].offCycleReset) + " mins.")
                  relays[relay].setAutomatic() 
+                 _log.debug("waste setAutomatic()")
                  relays[relay].cycleReset()
+                 _log.debug("waste cycleReset()")
                  relays[relay].cycleOffResetClear()
+                 _log.debug("waste cycleOffResetClear()")
             except:
                  _log.error("Except handle_event V7 Turning waste auto")
                  blynk.virtual_write(28, "Except handle_event V7 Turning waste auto")
