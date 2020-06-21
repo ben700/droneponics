@@ -49,6 +49,7 @@ class Relay:
      
    
    def setState(self, state):
+         self._log.debug("in setState")
          self.state = state
          
    def setManual(self, state):
@@ -56,6 +57,7 @@ class Relay:
          self.setState(state)
    
    def setAutomatic(self):
+         self._log.debug("in setAutomatic")
          self.automatic = True
          self.setState("Auto")
      
