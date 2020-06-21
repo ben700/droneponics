@@ -58,15 +58,11 @@ if (True):
     relays.append(drone.Relay(_log, 16, parser.get('droneRelay', 'Relay6')))
     relays.append(drone.Relay(_log, 10, parser.get('droneRelay', 'Relay7')))
     relays.append(drone.Relay(_log, 21, parser.get('droneRelay', 'Relay8')))
-    
-    relays[1].testIt()
-
+ 
     # Initialize Blynk
     blynk = blynklib.Blynk(parser.get('blynk', 'BLYNK_AUTH'), log=_log.info) 
     timer = blynktimer.Timer()
-    
-    
-        
+   
     @blynk.handle_event('write V255')
     def rebooter(pin, value):
         blynk.virtual_write(98, "User update and reboot button v255"+ '\n')       
