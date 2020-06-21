@@ -1,3 +1,6 @@
+import sys
+import os
+sys.path.append('/home/pi/droneponics')
 import socket
 import drone
 from drone import Alarm, OpenWeather
@@ -9,8 +12,6 @@ import blynklib
 import blynktimer
 import logging
 import RPi.GPIO as GPIO   
-import sys
-import os
 from configparser import ConfigParser
 import subprocess
 import re
