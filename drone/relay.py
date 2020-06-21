@@ -114,6 +114,7 @@ class Relay:
           self.cycle = 0 
    
    def offCycleReset(self):
+      self._log.debug("in offCycleReset")
       self.offCycle = 0 
       
    def incCycle(self):
