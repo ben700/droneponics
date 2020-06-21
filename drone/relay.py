@@ -17,7 +17,8 @@ class Relay:
        self.automatic = False
        self.cycle=0
        self.cycleReset=0
-       self.offCycle=False
+       self.hasOffCycle=False
+       self.offCycle=0
        self.offCycleReset=0
       
        
@@ -63,11 +64,29 @@ class Relay:
       self.cycleReset = int(cycleReset) 
          
    def cycleOffResetSet(self, cycleReset):
+      self.hasOffCycle = True
       self.offCycleReset = int(cycleReset) 
-      
+   
+   def cycleOffResetClear(self):
+      self.hasOffCycle = False
+      self.offCycleReset = 0    
+   
    def cycleReset(self, _log):
       self.cycle = 0 
+   
+   def offCycleReset(self, _log):
+      self.offCycle = 0 
       
    def incCycle(self):
-      self.cycle = self.cycle + 1
+      if(self.automatic):
+           self.cycle = self.cycle + 1
+           if(self.cycle > self.cycleReset):
+                self.cycleReset(_log)
       return self.cycle
+   
+   def incOffCycle(self):
+      if(self.automatic):
+           self.offCycle = self.offCycle + 1
+           if(self.offCycle > self.offCycleReset):
+                self.offCycleReset(_log)
+      return self.offCycle
