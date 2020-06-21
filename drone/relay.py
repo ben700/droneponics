@@ -22,7 +22,7 @@ class Relay:
        self.offCycleReset=0
        self.state = "Off"
        
-   def whatCycle(self, _log): 
+   def whatCycle(self): 
        if(self.cycle > self.cycleReset):
             return "Off"
        return "On"
@@ -74,6 +74,7 @@ class Relay:
       self.offCycleReset = 0    
    
    def cycleReset(self):
+      self._log.debug("in cycleReset")
       self.cycle = 0 
    
    def offCycleReset(self):
