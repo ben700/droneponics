@@ -21,12 +21,29 @@ class Relay:
        self.offCycle=0
        self.offCycleReset=0
        self.state = "Off"
+       self.startTime = None
+       self.stopTime = None
        
    def whatCycle(self): 
        self._log.debug("whatCycle for "+self.name+" self.cycle = " + str(self.cycle) + " reset at " +str(self.cycleReset))
-       if(self.cycle > self.cycleReset):
-            return "Off"
-       return "On"
+       if(self.isAutomatic()):
+         if(self.getState() == "Auto"):
+             if(self.cycle > self.cycleReset):
+                 return "Off"
+             return "On"
+         elif(self.getState() == "Timer"):
+            today = date.today()
+            seconds_since_midnight = int(time.time() - time.mktime(today.timetuple()))
+            if( startTime < seconds_since_midnight and stopTime > seconds_since_midnight):
+               self._log.debug(self.name + " On")
+               blynk.virtual_write(20,self.name + " On")
+               return "On"
+            else:
+               self._log.debug(self.name + " Off")
+               blynk.virtual_write(20,self.name + " Off")
+               return "Off"
+         else:
+            return self.state
          
    def turnOn(self, _log): 
        try:
@@ -52,11 +69,23 @@ class Relay:
    def setState(self, state):
          self._log.debug("in setState")
          self.state = state
+
+   def getState(self):
+         return self.state
          
    def setManual(self, state):
          self._log.debug("in setManual state = " + state)
          self.automatic = False
          self.setState(state)
+         self.startTime = None
+         self.stopTime = None   
+         
+   def setTimer(self, startTime, stopTime):
+         self._log.debug("in setTimer")
+         self.automatic = True
+         self.startTime = startTime
+         self.stopTime = stopTime
+         self.setState("Timer")
    
    def setAutomatic(self):
          self._log.debug("in setAutomatic")
