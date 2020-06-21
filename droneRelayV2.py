@@ -260,7 +260,10 @@ if (True):
                  _log.error("Except handle_event V7 Turning waste auto")
                  blynk.virtual_write(28, "Except handle_event V7 Turning waste auto")
 
-
+    @blynk.handle_event('write V8')
+    def write_handler(pin, value):
+        relay = 7
+        relays[relay].setTimer(int(value[0]), int(value[1]))
 
     @blynk.handle_event('write V25')
     def v25write_handler(pin, value):
