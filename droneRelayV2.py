@@ -258,73 +258,7 @@ if (True):
                  _log.error("Except handle_event V7 Turning waste auto")
                  blynk.virtual_write(28, "Except handle_event V7 Turning waste auto")
 
-                
-    def v8_CO2_write_handler(pin, CO2, CO2Target, startTime, stopTime):         
-        _log.debug("droneRelayWriteHandler on pin " + str(pin) + " startTime is " + str(startTime))
-        _log.debug("droneRelayWriteHandler on pin " + str(pin) + " stopTime is " + str(stopTime))            
-        
-        today = date.today()
-        seconds_since_midnight = int(time.time() - time.mktime(today.timetuple()))
-        
-        if( startTime < seconds_since_midnight and stopTime > seconds_since_midnight):
-            if all([CO2, CO2Target]):
-                blynk.virtual_write(98,"CO2Target : "+ str(CO2Target) + " and co2 level : " +str(CO2)+ '\n')    
-                if (CO2 <CO2Target):
-                    _log.info("CO2 is less than target")
-                    blynk.virtual_write(20,"CO2 On")
-                    blynk.virtual_write(98,"CO2 Relay is on"+ '\n')    
-                    iValue = "1"
-                else:
-                    _log.info("CO2 is above target")
-                    iValue = "0"
-                    blynk.virtual_write(20,"CO2 Off : Level")
-                    blynk.virtual_write(98,"Co2 Relay is off due to level"+ '\n')
-            else:
-                _log.info("Co2 Relay is on due to time and not being overwritten by current co2 reading " +str(CO2) + " with target " + str(CO2Target))
-                iValue = "1"
-                blynk.virtual_write(20,"CO2 On : Default")
-                blynk.virtual_write(98,"Co2 Relay is on due to time and not being overwritten by current co2 reading " +str(CO2) + " with target " + str(CO2Target) + '\n')
-                    
-        else:
-            iValue = "0"
-            blynk.virtual_write(20,"CO2 Off : Time")
-            blynk.virtual_write(98,"Co2 Relay is off due to time"+ '\n')    
-        now = datetime.now()
-        blynk.virtual_write(99, now.strftime("%d/%m/%Y %H:%M:%S"))
-       # drone.droneRelayWriteHandler(pin, iValue, blynk, relays)
-   
 
-    @blynk.handle_event('write V8')
-    def write_handler(pin, value):
-        global CO2Target
-        global CO2
-        global startTime 
-        global stopTime
-        startTime  =int(value[0])
-        stopTime = int(value[1])
-        v8_CO2_write_handler(8, CO2, CO2Target, startTime, stopTime)
-            
-    @blynk.handle_event('write V9')
-    def write_handler(pin, value):
-        global CO2Target
-        global CO2
-        global startTime 
-        global stopTime
-        CO2Target = value[0]        
-        blynk.virtual_write(98,"Current CO2Target :" + str(CO2Target) +'\n')
-        _log.info("CO2Target updated to :" + str(CO2Target))
-        v8_CO2_write_handler(8, CO2, CO2Target, startTime, stopTime)
-        
-    @blynk.handle_event('write V10')
-    def write_handler(pin, value):
-        global CO2Target
-        global CO2
-        global startTime 
-        global stopTime
-        CO2 = value[0]
-        blynk.virtual_write(98,"Current CO2 :" + str(CO2) +'\n')
-        _log.info("CO2 updated to :" + str(CO2))
-        v8_CO2_write_handler(8, CO2, CO2Target, startTime, stopTime)
 
     @blynk.handle_event('write V25')
     def v25write_handler(pin, value):
