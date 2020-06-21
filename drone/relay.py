@@ -75,7 +75,7 @@ class Relay:
       self.hasOffCycle = False
       self.offCycleReset = 0    
    
-   def cycleReset(self):
+   def cycleOnReset(self):
       self._log.debug("in cycleReset")
       self.cycle = 0 
    
