@@ -291,8 +291,10 @@ if (True):
            now = datetime.now()
            blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
         
+           blynk.virtual_write(20, relays[7].info())
            blynk.virtual_write(24, relays[0].info())
            blynk.virtual_write(23, relays[0].infoCounter())
+        
         
            for relay in relays:
                 _log.debug("Seeing if relay " + relay.name + " is automatic")
