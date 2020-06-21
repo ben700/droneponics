@@ -232,6 +232,7 @@ if (True):
                  relays[relay].turnOff(_log)
                  relays[relay].setManual("Off")
                  blynk.virtual_write(28, "Waste is Off")
+                 _log.debug("in v7write_handler and turning off relay completed")
             except:
                  _log.error("Except handle_event V7 Turning Off waste")
                  blynk.virtual_write(28, "Except handle_event V7 Turning Off waste")           
@@ -241,6 +242,7 @@ if (True):
                  relays[relay].turnOn(_log)
                  relays[relay].setManual("On")
                  blynk.virtual_write(28, "Waste is On")
+                 _log.debug("in v7write_handler and turning on relay completed")
             except:
                  _log.error("Except handle_event V7 Turning on waste")
                  blynk.virtual_write(28, "Except handle_event V7 Turning on waste")
