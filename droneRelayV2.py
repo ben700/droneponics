@@ -59,6 +59,12 @@ if (True):
     relays.append(drone.Relay(_log, 20, parser.get('droneRelay', 'Relay7')))
     relays.append(drone.Relay(_log, 21, parser.get('droneRelay', 'Relay8')))
  
+
+    relays[0].setInfoPin(24)
+    relays[6].setInfoPin(23)
+    relays[7].setInfoPin(20)
+        
+        
     # Initialize Blynk
     blynk = blynklib.Blynk(parser.get('blynk', 'BLYNK_AUTH'), log=_log.info) 
     timer = blynktimer.Timer()
@@ -126,9 +132,9 @@ if (True):
            blynk.virtual_write(250, "Auto")
            relays[relay].cycleOnReset()
            relays[relay].setOffCycleReset() 
-           blynk.virtual_write(24, relays[relay].info())
-           blynk.virtual_write(23, relays[relay].infoCounter())
-        
+           blynk.virtual_write(relays[relay].getInfoPin(), relays[relay].info())
+                 
+                
 
     @blynk.handle_event('write V2')
     def write_handler(pin, value):  
@@ -235,7 +241,7 @@ if (True):
                  _log.debug("waste turnOff() completed")
                  relays[relay].setManual("Off")
                  _log.debug("waste setManual() completed")
-                 blynk.virtual_write(28, "Waste is Off")
+                 blynk.virtual_write(relays[relay].getInfoPin(), relays[relay].info())
                  _log.debug("in v7write_handler and turning off relay completed")
             except:
                  _log.error("Except handle_event V7 Turning Off waste")
@@ -245,7 +251,7 @@ if (True):
                  _log.debug("in v7write_handler and turning on relay " + relays[relay].name + " on pin " + str(relays[relay].gpioPin))
                  relays[relay].turnOn(_log)
                  relays[relay].setManual("On")
-                 blynk.virtual_write(28, "Waste is On")
+                 blynk.virtual_write(relays[relay].getInfoPin(), relays[relay].info())
                  _log.debug("in v7write_handler and turning on relay completed")
             except:
                  _log.error("Except handle_event V7 Turning on waste")
@@ -253,7 +259,7 @@ if (True):
         else : 
             try:
                  _log.debug("in v7write_handler and turning relay " + relays[relay].name + " auto on pin " + str(relays[relay].gpioPin))
-                 blynk.virtual_write(28, "Waste is set to run for " + str(relays[relay].offCycleReset) + " mins.")
+                 blynk.virtual_write(relays[relay].getInfoPin(), relays[relay].info())
                  relays[relay].setAutomatic() 
                  _log.debug("waste setAutomatic()")
                  relays[relay].cycleOnReset()
@@ -272,29 +278,25 @@ if (True):
     @blynk.handle_event('write V25')
     def v25write_handler(pin, value):
         relays[0].cycleResetSet(value[0])
-        blynk.virtual_write(24, relays[0].info())
+        blynk.virtual_write(relays[0].getInfoPin(), relays[0].info())
         
     @blynk.handle_event('write V26')
     def v26write_handler(pin, value):
         relays[0].cycleOffResetSet(value[0])
-        blynk.virtual_write(24, relays[0].info())  
+        blynk.virtual_write(relays[0].getInfoPin(), relays[0].info())
          
     @blynk.handle_event('write V27')
     def v27write_handler(pin, value):
         relays[6].cycleResetSet(value[0])
         relays[6].cycleOffResetClear()
-        blynk.virtual_write(28, "Waste is set to run for " + str(relays[6].cycleReset) + " mins.")  
+        blynk.virtual_write(relays[0].getInfoPin(), relays[0].info())
         
     @timer.register(interval=60, run_once=False)
     def blynk_data(): 
            _log.info("Update Timer Run")
            now = datetime.now()
            blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
-        
-           blynk.virtual_write(20, relays[7].info())
-           blynk.virtual_write(24, relays[0].info())
-           blynk.virtual_write(23, relays[0].infoCounter())
-        
+
         
            for relay in relays:
                 _log.debug("Seeing if relay " + relay.name + " is automatic")
@@ -305,7 +307,9 @@ if (True):
                     else:
                         relay.turnOff(_log)
                     relay.incCycle()
-            
+           if(relay.hasInfoPin())
+                blynk.virtual_write(relay.getInfoPin(), relay.info())
+           
            _log.debug("The End")
      
     while True:
