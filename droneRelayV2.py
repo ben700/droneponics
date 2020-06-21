@@ -314,7 +314,7 @@ try:
                 blynk.virtual_write(relay.getInfoPin(), relay.info())
            else:
                 text = text + self.name + " is " + relay.whatCycle() + " "
-            blynk.virtual_write(28,text)
+           blynk.virtual_write(28,text)
            _log.debug("The End")
      
     while True:
