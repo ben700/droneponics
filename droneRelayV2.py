@@ -307,7 +307,7 @@ if (True):
                     else:
                         relay.turnOff(_log)
                     relay.incCycle()
-           if(relay.hasInfoPin())
+           if(relay.hasInfoPin()):
                 blynk.virtual_write(relay.getInfoPin(), relay.info())
            
            _log.debug("The End")
