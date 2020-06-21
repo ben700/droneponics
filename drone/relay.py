@@ -128,9 +128,9 @@ class Relay:
         return "Feed is on for " + str(self.cycleReset) + " mins and then off for " + str(self.offCycleReset) + " mins."
    
    def infoCounter(self):
-         if (self.feedState is "On"):
+         if (self.getState() is "On"):
              return "Currently in minute " + str(self.cycle) + " pump is set manually ON " 
-         elif(self.feedState is  "Off"):
+         elif(self.getState() is  "Off"):
              return "In minute " + str(self.cycle) + "  pump is set manually OFF"
          else:   
             if(self.cycle <= self.onCycle):
