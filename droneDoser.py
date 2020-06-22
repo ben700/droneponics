@@ -2,7 +2,6 @@
 
 LED = [10,11,12,13,14,15]
 VolumePin = [26,21,22,23,24,25] 
-
 import blynklib
 import blynktimer
 from configparser import ConfigParser
@@ -353,6 +352,8 @@ try:
               for i in range(0,9):
                    blynk.virtual_write(98, str(p.stdout.readline()) + '\n')
               bootup = False
+	      blynk.set_property(251, "label",drone.gethostname())
+              blynk.virtual_write(251, drone.get_ip())
               now = datetime.now()
               blynk.virtual_write(99, now.strftime("%d/%m/%Y %H:%M:%S"))
               for l in LED:
