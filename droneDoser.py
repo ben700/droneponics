@@ -42,7 +42,7 @@ systemLED=101
 
 
 parser = ConfigParser()
-parser.read("/home/pi/droneponics/config/configRelay_"+drone.gethostname()+".ini")
+parser.read("/home/pi/droneponics/config/configDoser_"+drone.gethostname()+".ini")
 
 
 try:
