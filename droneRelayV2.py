@@ -306,6 +306,7 @@ try:
         _log.debug("v96write_handler")
         blynk.virtual_write(97,"clr")
         blynk.virtual_write(96,0)
+        blynk.virtual_write(29,0)
         
     @timer.register(interval=60, run_once=False)
     def blynk_data(): 
