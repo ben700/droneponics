@@ -1,4 +1,0 @@
-[Desktop Entry]
-Type=Application
-Name=doser
-Exec=xterm -hold -e '/usr/bin/python3 /home/pi/droneponics/doser.py'
