@@ -38,7 +38,7 @@ import re
 import json
 
 parser = ConfigParser()
-parser.read('/home/pi/configAir.ini')
+parser.read("/home/pi/droneponics/config/configRelay_"+drone.gethostname()+".ini")
 
 bootup = True
 
@@ -54,6 +54,7 @@ _log.error("error")
 _log.warning("warning")
 _log.info("info")
 _log.debug("debug")
+_log.info("/home/pi/droneponics/config/configRelay_"+drone.gethostname()+".ini")
 
 try:
     # Initialize Blynk
