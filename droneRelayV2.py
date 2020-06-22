@@ -258,21 +258,22 @@ try:
                  _log.debug("in v7write_handler and turning on relay completed")
             except:
                  _log.error("Except handle_event V7 Turning on waste")
-                 blynk.virtual_write(28, "Except handle_event V7 Turning on waste")
+                 blynk.virtual_write(relays[relay].getInfoPin(), "Except handle_event V7 Turning on waste")
         else : 
             try:
                  _log.debug("in v7write_handler and turning relay " + relays[relay].name + " auto on pin " + str(relays[relay].gpioPin))
-                 blynk.virtual_write(relays[relay].getInfoPin(), relays[relay].info())
                  relays[relay].setAutomatic() 
                  _log.debug("waste setAutomatic()")
                  relays[relay].cycleOnReset()
                  _log.debug("waste cycleReset()")
                  relays[relay].cycleOffResetClear()
+                 blynk.virtual_write(relays[relay].getInfoPin(), relays[relay].info())
                  _log.debug("waste cycleOffResetClear()")
             except:
                  _log.error("Except handle_event V7 Turning waste auto")
-                 blynk.virtual_write(28, "Except handle_event V7 Turning waste auto")
-
+                 blynk.virtual_write(relays[relay].getInfoPin(), "Except handle_event V7 Turning waste auto")
+                 
+                
     @blynk.handle_event('write V8')
     def write_handler(pin, value):
         relay = 7
