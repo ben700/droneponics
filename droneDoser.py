@@ -7,8 +7,6 @@ import blynktimer
 from configparser import ConfigParser
 from datetime import datetime
 import time
-parser = ConfigParser()
-parser.read('/home/pi/configDoser.ini')
 import logging
 import sys
 import os
@@ -43,6 +41,10 @@ colours = {0: '#FF0000', 1: '#00FF00', '0': '#FF0000', '1': '#00FF00', 'OFFLINE'
 systemLED=101
 
 
+parser = ConfigParser()
+parser.read("/home/pi/droneponics/config/configRelay_"+drone.gethostname()+".ini")
+
+
 try:
 
     # tune console logging
@@ -52,6 +54,7 @@ try:
     consoleHandler.setFormatter(logFormatter)
     _log.addHandler(consoleHandler)
     _log.setLevel(parser.get('logging', 'logLevel', fallback=logging.DEBUG))
+    _log.info("/home/pi/droneponics/config/configRelay_"+drone.gethostname()+".ini")
 
     pH=0
     eC=9999	
