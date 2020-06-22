@@ -301,6 +301,10 @@ try:
         global rowIndex
         rowIndex = int(value[0])
           
+    @blynk.handle_event('write V96')
+    def v96write_handler(pin, value):
+        _log.debug("v96write_handler")
+        blynk.virtual_write(97,"clr")
         
     @timer.register(interval=60, run_once=False)
     def blynk_data(): 
