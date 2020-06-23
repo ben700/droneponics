@@ -41,6 +41,7 @@ parser = ConfigParser()
 parser.read("/home/pi/droneponics/config/configAir_"+drone.gethostname()+".ini")
 
 bootup = True
+rowIndex=1
 
 # tune console logging
 _log = logging.getLogger('BlynkLog')
@@ -146,8 +147,12 @@ except:
     bme680 = None
     bme280 = None
 
-    
-    
+@blynk.handle_event('write V29')
+    def v29write_handler(pin, value):
+        _log.debug("v29write_handler rowIndex =" + str(value[0]))
+        global rowIndex
+        rowIndex = int(value[0])
+                 
     
 @blynk.handle_event('write V255')
 def rebooter(pin, value):
@@ -161,7 +166,11 @@ def rebooter(pin, value):
 def connect_handler():
     _log.warning("Connected")
     blynk.virtual_write(250, "Connected")
-    
+    for pin in range(24,30):
+         _log.info('Syncing virtual buttons {}'.format(pin))
+         blynk.virtual_sync(pin)
+         blynk.read_response(timeout=0.5)
+        
 
 @blynk.handle_event("disconnect")
 def disconnect_handler():
@@ -281,6 +290,8 @@ for alarm in alarmList:
 _log.debug("Just about to get boot timestamp and change system LED")
 now = datetime.now()
 blynk.virtual_write(99, now.strftime("%d/%m/%Y %H:%M:%S"))
+blynk.virtual_write(97, "add", rowIndex, "Reboot", now.strftime("%d/%m/%Y %H:%M:%S"))
+blynk.virtual_write(29,rowIndex+1)          
 blynk.virtual_write(systemLED, 255)
 _log.debug("Main fx:- calling drone.setFormOnline to remove blue")
 drone.setFormOnlineColours(blynkObj=blynk, loggerObj=_log)
