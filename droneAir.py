@@ -56,18 +56,17 @@ _log.info("info")
 _log.debug("debug")
 _log.info("/home/pi/droneponics/config/configAir_"+drone.gethostname()+".ini")
 
-try:
-    # Initialize Blynk
-    _log.debug("Creating blynk object for BLYNK_AUTH " + parser.get('blynk', 'BLYNK_AUTH')) 
-    blynk = blynklib.Blynk(parser.get('blynk', 'BLYNK_AUTH'))
-    timer = blynktimer.Timer()
-    _log.debug("Created blynk object and timer for BLYNK_AUTH " + parser.get('blynk', 'BLYNK_AUTH')) 
-except:
-    _log.critical("Failed to create object for the blynk")
-    _log.critical("Set log level to CRITICAL to auto reboot")
-    if (parser.get('logging', 'logLevel', fallback=logging.DEBUG) =="CRITICAL"):
-        os.system('sh /home/pi/updateDroneponics.sh')
-        os.system('sudo reboot')
+# Initialize Blynk
+_log.debug("Creating blynk object for BLYNK_AUTH " + parser.get('blynk', 'BLYNK_AUTH')) 
+blynk = blynklib.Blynk(parser.get('blynk', 'BLYNK_AUTH'))
+timer = blynktimer.Timer()
+_log.debug("Created blynk object and timer for BLYNK_AUTH " + parser.get('blynk', 'BLYNK_AUTH')) 
+#except:
+#    _log.critical("Failed to create object for the blynk")
+#    _log.critical("Set log level to CRITICAL to auto reboot")
+#    if (parser.get('logging', 'logLevel', fallback=logging.DEBUG) =="CRITICAL"):
+#        os.system('sh /home/pi/updateDroneponics.sh')
+#        os.system('sudo reboot')
     
 try:    
     tslI2C = busio.I2C(board.SCL, board.SDA)
