@@ -194,6 +194,8 @@ def blynk_data():
     blynk.set_property(0, 'color', colours['ONLINE'])
     _log.debug("Going to get openweather")
     openWeather.blynkOpenWeather(blynk)
+    if(bme280 is  None and bme680 is None):            
+        drone.setBMEFormOfflineColours(blynkObj=blynk, loggerObj=_log)   
     if(bme680 is not None):            
         _log.debug("bme680 is not None so going to set pressure")
         bme680.sea_level_pressure = openWeather.getPressure()
@@ -230,8 +232,7 @@ def blynk_data():
         blynk.virtual_write(11, dew_point(temperature=t, humidity=bme280.humidity))
         _log.debug("set BME form display")
         drone.setBME280FormColours(bme280, blynkObj=blynk, loggerObj=_log)          
-    else:
-        drone.setBMEFormOfflineColours(blynkObj=blynk, loggerObj=_log)
+
 
     _log.debug("Now work on TSL2591 sensor")
     if (tsl is not None):
