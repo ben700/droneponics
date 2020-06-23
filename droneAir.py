@@ -38,7 +38,7 @@ import re
 import json
 
 parser = ConfigParser()
-parser.read("/home/pi/droneponics/config/configRelay_"+drone.gethostname()+".ini")
+parser.read("/home/pi/droneponics/config/configAir_"+drone.gethostname()+".ini")
 
 bootup = True
 
