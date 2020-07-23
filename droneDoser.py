@@ -42,7 +42,7 @@ systemLED=101
 
 
 parser = ConfigParser()
-parser.read("/home/pi/droneponics/config/configDoser_"+drone.gethostname()+".ini")
+parser.read("/home/pi/droneponics/config/configDoser/"+drone.gethostname()+".ini")
 
 
 try:
@@ -54,7 +54,7 @@ try:
     consoleHandler.setFormatter(logFormatter)
     _log.addHandler(consoleHandler)
     _log.setLevel(parser.get('logging', 'logLevel', fallback=logging.DEBUG))
-    _log.info("/home/pi/droneponics/config/configRelay_"+drone.gethostname()+".ini")
+    _log.info("/home/pi/droneponics/config/configRelay/"+drone.gethostname()+".ini")
 
     pH=0
     eC=9999	
