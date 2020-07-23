@@ -30,7 +30,7 @@ consoleHandler.setFormatter(logFormatter)
 _log.addHandler(consoleHandler)
 _log.setLevel(logging.DEBUG)
 
-_log.info("/home/pi/droneponics/config/configRelay_"+drone.gethostname()+".ini")
+_log.info("/home/pi/droneponics/config/configDoser_"+drone.gethostname()+".ini")
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
