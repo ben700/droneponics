@@ -19,7 +19,8 @@ import json
 import numbers
 
 parser = ConfigParser()
-parser.read("/home/pi/droneponics/config/configRelay_"+drone.gethostname()+".ini")
+#parser.read("/home/pi/droneponics/config/configRelay_"+drone.gethostname()+".ini")
+parser.read("/home/pi/droneponics/config/configDoser_"+drone.gethostname()+".ini")
 
 # tune console logging
 _log = logging.getLogger('BlynkLog')
