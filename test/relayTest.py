@@ -21,7 +21,7 @@ import numbers
 parser = ConfigParser()
 parser.read("/home/pi/droneponics/config/configRelay_"+drone.gethostname()+".ini")
 
-
+_log.info("/home/pi/droneponics/config/configRelay_"+drone.gethostname()+".ini")
 # tune console logging
 _log = logging.getLogger('BlynkLog')
 logFormatter = logging.Formatter("%(asctime)s [%(levelname)s]  %(message)s")
