@@ -7,12 +7,13 @@ def lightPin():
 def buildNutrientMix(nutrientMix, _log, scheduleWeek='Grow'):
  #weekGrow
 
-    nutrientMix.append( Dose(119, 1.00, LED[0], "pH", VolumePin[0], 1000))
-    nutrientMix.append( Dose(111, 6.00, LED[1], "Hydro Grow A", VolumePin[1], 3000))
-    nutrientMix.append( Dose(114, 10.00, LED[3], "Root Stimulant", VolumePin[3], 3000))
-    nutrientMix.append( Dose(115, 4.00, LED[4], "Enzyme", VolumePin[4], 3000))
-    nutrientMix.append( Dose(116, 1.00, LED[5], "Hydro-Silicon", VolumePin[5], 500)) 
-    nutrientMix.append( Dose(113, 6.00, LED[2], "Hydro Grow B", VolumePin[2], 3000)) 
+    nutrientMix.append( Dose(11, 1.00, LED[0], "pH", VolumePin[0], 1000))
+    nutrientMix.append( Dose(12, 6.00, LED[1], "Hydro Grow A", VolumePin[1], 3000))
+    nutrientMix.append( Dose(14, 10.00, LED[3], "Root Stimulant", VolumePin[3], 3000))
+    nutrientMix.append( Dose(15, 4.00, LED[4], "Enzyme", VolumePin[4], 3000))
+    nutrientMix.append( Dose(16, 1.00, LED[5], "Hydro-Silicon", VolumePin[5], 500)) 
+    nutrientMix.append( Dose(17, 1.00, LED[5], "Rox", VolumePin[5], 500)) 
+    nutrientMix.append( Dose(13, 6.00, LED[2], "Hydro Grow B", VolumePin[2], 3000)) 
  
     
     return nutrientMix
