@@ -50,11 +50,16 @@ relays.append(drone.Relay(_log, 20, parser.get('droneRelay', 'Relay3')))
 relays.append(drone.Relay(_log, 21, parser.get('droneRelay', 'Relay4')))
 i=0
 while i < 10 :
+    _log.info("Turn on relays")
     for relay in relays:
         relay.turnOn(_log)
  
     time.sleep(10)
-
+    
+    _log.info("Turn off relays")
     for relay in relays:
         relay.turnOff(_log)
+    
+
+    time.sleep(10)
     i = i + 1
