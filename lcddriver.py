@@ -1,3 +1,5 @@
+import sys
+
 import i2c_lib
 from time import *
 
@@ -81,6 +83,15 @@ class lcd:
    def lcd_write(self, cmd, mode=0):
       self.lcd_write_four_bits(mode | (cmd & 0xF0))
       self.lcd_write_four_bits(mode | ((cmd << 4) & 0xF0))
+      
+   #turn on/off the lcd backlight
+   def lcd_backlight(self, state):
+      if state in ("on","On","ON"):
+         self.lcd_device.write_cmd(LCD_BACKLIGHT)
+      elif state in ("off","Off","OFF"):
+         self.lcd_device.write_cmd(LCD_NOBACKLIGHT)
+      else:
+         print "Unknown State!"
 
    # put string function
    def lcd_display_string(self, string, line):
@@ -95,14 +106,7 @@ class lcd:
 
       for char in string:
          self.lcd_write(ord(char), Rs)
-         
-     # define backlight on/off (lcd.backlight(1); off= lcd.backlight(0)
-   def backlight(self, state): # for state, 1 = on, 0 = off
-      if state == 1:
-         self.lcd_device.write_cmd(LCD_BACKLIGHT)
-      elif state == 0:
-         self.lcd_device.write_cmd(LCD_NOBACKLIGHT)
-         
+
    # clear lcd and set to home
    def lcd_clear(self):
       self.lcd_write(LCD_CLEARDISPLAY)

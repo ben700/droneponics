@@ -1,8 +1,9 @@
+import sys
 import smbus
 from time import *
 
 class i2c_device:
-   def __init__(self, addr, port=0):
+   def __init__(self, addr, port=1):
       self.addr = addr
       self.bus = smbus.SMBus(port)
 
