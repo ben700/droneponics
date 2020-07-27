@@ -78,7 +78,7 @@ class WaterLevel():
    GPIO.setwarnings(False)
  
  
-   def __init__(self, _log, Name, gpioPin, blynkDisplayPin, lcdDisplayLine,  *args, **kwargs):
+   def __init__(self, _log, Name, gpioPin, blynkDisplayPin, blynkDisplayLEDPin,  lcdDisplayLine,  *args, **kwargs):
       _log.info("in WaterLevel constructor")
       self.gpioPin = gpioPin
       _log.info("WaterLevel constructor: going to do GPIO setup for pin " + str(gpioPin))
@@ -86,6 +86,7 @@ class WaterLevel():
       _log.info("WaterLevel constructor: done GPIO setup")
       self.name = Name
       self.blynkDisplayPin = blynkDisplayPin
+      self.blynkDisplayLEDPin =blynkDisplayLEDPin
       self.lcdDisplayLine = lcdDisplayLine
       _log.info("WaterLevel constructor : About to read input")
       self.value = GPIO.input(self.gpioPin)
@@ -100,10 +101,14 @@ class WaterLevel():
      if self.read():
           lcd.lcd_display_string(self.name + " is true", self.lcdDisplayLine)
           blynk.virtual_write(self.blynkDisplayPin, self.name + " is true")  
+          blynk.virtual_write(self.blynkDisplayLEDPin, 255)  
+          blynk.set_property(displayPin, 'color', colors["green"])
+        
      else:
           lcd.lcd_display_string(self.name + " is false", self.lcdDisplayLine)
           blynk.virtual_write(self.blynkDisplayPin,self.name + " is false")
-     
+          blynk.virtual_write(self.blynkDisplayLEDPin, 255)  
+          blynk.set_property(displayPin, 'color', colors["red"])
      
    def setBlynkLabel(self, blynk):
      blynk.set_property(self.blynkDisplayPin, "label", self.name)
