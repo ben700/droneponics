@@ -47,6 +47,7 @@ cols = 20
 rows = 4
 lcd = liquidcrystal_i2c.LiquidCrystal_I2C(0x27, 1, numlines=rows)
 
+
 _log.info("Done LCD")
     
 try:
@@ -56,8 +57,8 @@ try:
     waterLevels=[]
     _log.info("Start water levels")
     
-    waterLevels.append(drone.WaterLevel(_log, "Water Butt Empty", 21, 50,52, 4))
-    waterLevels.append(drone.WaterLevel(_log, "Water Butt Full", 20, 51,53, 3))
+    waterLevels.append(drone.WaterLevel(_log, "Water Butt Empty", 21, 50,52, 3))
+    waterLevels.append(drone.WaterLevel(_log, "Water Butt Full", 20, 51,53, 2))
     
     _log.info("Done water levels")
     
