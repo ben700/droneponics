@@ -120,6 +120,10 @@ try:
         if bootup :
           # blynk.virtual_write(98, "clr")
            _log.info("Start of boot sequence")
+           now = datetime.now()
+           blynk.virtual_write(99, now.strftime("%d/%m/%Y %H:%M:%S"))
+           lcd.printline(0,"Last update " + now.strftime("%d/%m/%Y %H:%M:%S"))
+         
            blynk.virtual_write(98, "Rebooted"+ '\n')
            blynk.virtual_write(250, "Start-up")
            blynk.set_property(251, "label",drone.gethostname())
@@ -128,12 +132,16 @@ try:
      
            for waterLevel in waterLevels:
                  waterLevel.setBlynkLabel(blynk)
+                 if(waterLevel.read()):
+                     lcd.printline(waterLevel.lcdDisplayLine, waterLevel.name + " is true")
+                 else:
+                     lcd.printline(waterLevel.lcdDisplayLine, waterLevel.name + " is false")
+                    
              #    waterLevel.display(blynk, lcd)
                 
            bootup = False
            _log.debug("Just about to complete Booting")
-           now = datetime.now()
-           blynk.virtual_write(99, now.strftime("%d/%m/%Y %H:%M:%S"))
+
            blynk.virtual_write(97, "add", rowIndex, "Reboot", now.strftime("%d/%m/%Y %H:%M:%S"))
            blynk.virtual_write(29,rowIndex+1)
            blynk.virtual_write(systemLED, 255)
