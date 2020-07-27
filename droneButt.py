@@ -125,7 +125,7 @@ try:
            blynk.virtual_write(250, "Start-up")
            blynk.set_property(251, "label",drone.gethostname())
            blynk.virtual_write(251, drone.get_ip())
-           #lcd.printline(1,drone.gethostname() + " IP is " + drone.get_ip())
+           lcd.printline(1,drone.gethostname() + " IP is " + drone.get_ip())
      
            for waterLevel in waterLevels:
                  waterLevel.setBlynkLabel(blynk)
