@@ -96,6 +96,10 @@ try:
     @blynk.handle_event("connect")
     def connect_handler():
         _log.warning("Connected")
+        for pin in range(28,30):
+           _log.info('Syncing virtual buttons {}'.format(pin))
+           blynk.virtual_sync(pin)
+           blynk.read_response(timeout=0.5)
         blynk.virtual_write(250, "Connected")
     
     @blynk.handle_event("disconnect")
@@ -103,7 +107,12 @@ try:
         _log.warning("Disconnected")
         blynk.virtual_write(250, "Disconnected")
         
-       
+    @blynk.handle_event('write V29')
+    def v29write_handler(pin, value):
+        _log.debug("v29write_handler rowIndex =" + str(value[0]))
+        global rowIndex
+        rowIndex = int(value[0])
+        
     @timer.register(interval=60, run_once=False)
     def blynk_data(): 
            _log.info("Update Timer Run")
