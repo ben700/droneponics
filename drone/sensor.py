@@ -78,18 +78,18 @@ class WaterLevel():
    GPIO.setwarnings(False)
  
  
-   def __init__(self, Name, gpioPin, blynkDisplayPin, lcdDisplayLine,  *args, **kwargs):
-      print("in WaterLevel constructor")
+   def __init__(self, _log, Name, gpioPin, blynkDisplayPin, lcdDisplayLine,  *args, **kwargs):
+      _log.info("in WaterLevel constructor")
       self.gpioPin = gpioPin
-      print("WaterLevel constructor: going to do GPIO setup for pin " + str(gpioPin))
+      _log.info("WaterLevel constructor: going to do GPIO setup for pin " + str(gpioPin))
       self.gpio = GPIO.setup(gpioPin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-      print("WaterLevel constructor: done GPIO setup")
+      _log.info("WaterLevel constructor: done GPIO setup")
       self.name = Name
       self.blynkDisplayPin = blynkDisplayPin
       self.lcdDisplayLine = lcdDisplayLine
-      print("WaterLevel constructor : About to read input")
+      _log.info("WaterLevel constructor : About to read input")
       self.value = GPIO.input(self.gpioPin)
-      print("Completed WaterLevel constructor")
+      _log.info("Completed WaterLevel constructor")
       
     
    def read(self):
