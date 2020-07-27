@@ -67,13 +67,17 @@ try:
     waterLevels=[]
     waterLevels.append(drone.WaterLevel(_log, "Water Butt Empty", 21, 50, 4))
     waterLevels.append(drone.WaterLevel(_log, "Water Butt Full", 20, 51, 3))
-   
+    
+    _log.info("Done water levels")
+    
         
     # Initialize Blynk
     _log.warning(parser.get('blynk', 'BLYNK_AUTH'))
     blynk = blynklib.Blynk(parser.get('blynk', 'BLYNK_AUTH'), log=_log.info) 
     timer = blynktimer.Timer()
    
+    _log.info("Done blynk")
+
     @blynk.handle_event('write V255')
     def rebooter(pin, value):
         blynk.virtual_write(98, "User update and reboot button v255"+ '\n')       
