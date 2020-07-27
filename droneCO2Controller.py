@@ -37,7 +37,8 @@ from time import *
 lcd = lcddriver.lcd()
 
 parser = ConfigParser()
-parser.read('/home/pi/configDroneRelayMicro.ini')
+parser.read("/home/pi/droneponics/config/controller/"+drone.gethostname()+".ini")
+
 
 bootup = True
 
@@ -53,11 +54,13 @@ _log.error("error")
 _log.warning("warning")
 _log.info("info")
 _log.debug("debug")
+_log.info("/home/pi/droneponics/config/configRelay/"+drone.gethostname()+".ini")
+
+
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
 
-relays=[0,18,23,24,25,12,16,20,21]
 Relay1 = 18 #heater
 GPIO.setup(Relay1,GPIO.OUT, initial=1)
     
