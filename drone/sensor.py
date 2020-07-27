@@ -81,7 +81,7 @@ class WaterLevel():
    def __init__(self, Name, gpioPin, blynkDisplayPin, lcdDisplayLine,  *args, **kwargs):
       print("in WaterLevel constructor")
       self.gpioPin = gpioPin
-      print("WaterLevel constructor: going to do GPIO setup")
+      print("WaterLevel constructor: going to do GPIO setup for pin " + str(gpioPin))
       self.gpio = GPIO.setup(gpioPin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
       print("WaterLevel constructor: done GPIO setup")
       self.name = Name
