@@ -22,7 +22,7 @@ import subprocess
 import re
 import json
 import numbers
-from RPLCD import i2c
+from RPLCD import i2c as i2cDisplay
 
 parser = ConfigParser()
 parser.read("/home/pi/droneponics/config/configButt/"+drone.gethostname()+".ini")
@@ -43,18 +43,18 @@ _log.info("/home/pi/droneponics/config/configButt/"+drone.gethostname()+".ini")
 _log.info("Done hostname")
 
 try:
-     cols = int(20)
-     rows = int(4)
+     cols = 20
+     rows = 4
      charmap = 'A00'
      i2c_expander = 'PCF8574'
-     address = int(0x27, 16)
-     port = int('1')
-     lcd = i2c.CharLCD(i2c_expander, address, port=port, charmap=charmap, cols=cols,
+     address = 0x27
+     port = 1
+     lcd = i2cDisplay.CharLCD(i2c_expander, address, port=port, charmap=charmap, cols=cols,
                               rows=rows, expander_params=options)
      lcd.backlight = True
-     lcd.display_enabled = True
-     lcd.clear()
-     lcd.cursor_mode = 'hide'
+     #lcd.display_enabled = True
+     #lcd.clear()
+     #lcd.cursor_mode = 'hide'
         
 except: 
     _log.error("Issue with LED")
