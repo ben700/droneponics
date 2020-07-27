@@ -98,17 +98,17 @@ class WaterLevel():
       self.value = GPIO.input(self.gpioPin)
       return self.value
      
-   def display(self, blynk, lcd):
+   def display(self, blynk, lcdObj):
      if self.read():
           
-          lcd.printline(self.lcdDisplayLine, self.name + " is true")
+          lcdObj.printline(self.lcdDisplayLine, self.name + " is true")
           blynk.virtual_write(self.blynkDisplayPin, self.name + " is true")  
           blynk.virtual_write(self.blynkDisplayLEDPin, 255)  
           blynk.set_property(self.blynkDisplayLEDPin, 'color', Color("green"))
         
      else:
       
-          lcd.printline(self.lcdDisplayLine, self.name + " is false")
+          lcdObj.printline(self.lcdDisplayLine, self.name + " is false")
           blynk.virtual_write(self.blynkDisplayPin,self.name + " is false")
           blynk.virtual_write(self.blynkDisplayLEDPin, 255)  
           blynk.set_property(self.blynkDisplayLEDPin, 'color', Color("red"))
