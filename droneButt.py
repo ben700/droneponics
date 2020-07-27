@@ -68,6 +68,7 @@ try:
    
         
     # Initialize Blynk
+    _log.warning(parser.get('blynk', 'BLYNK_AUTH'))
     blynk = blynklib.Blynk(parser.get('blynk', 'BLYNK_AUTH'), log=_log.info) 
     timer = blynktimer.Timer()
    
@@ -111,6 +112,7 @@ try:
         blynk.run()
         if bootup :
           # blynk.virtual_write(98, "clr")
+           _log.info("Start of boot sequence")
            blynk.virtual_write(98, "Rebooted"+ '\n')
            blynk.virtual_write(250, "Start-up")
            blynk.set_property(251, "label",drone.gethostname())
@@ -147,4 +149,4 @@ except:
    GPIO.cleanup()
 
    os.system('sh /home/pi/updateDroneponics.sh')
-   os.system('sudo reboot')
+  # os.system('sudo reboot')
