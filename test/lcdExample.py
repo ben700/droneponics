@@ -1,17 +1,11 @@
-# on importe le pilote
-import sys
-sys.path.append('/home/pi/droneponics')
-import lcddriver
-from time import *
+import liquidcrystal_i2c
 
-# on initialise le lcd
-lcd = lcddriver.lcd()
+cols = 20
+rows = 4
 
-# on reinitialise le lcd
-lcd.lcd_clear()
+lcd = liquidcrystal_i2c.LiquidCrystal_I2C(0x27, 1, numlines=rows)
 
-# on affiche des caracteres sur chaque ligne
-lcd.lcd_display_string("   Hello world !", 1)
-lcd.lcd_display_string("      Je suis", 2)
-lcd.lcd_display_string("        un", 3)
-lcd.lcd_display_string("   Raspberry Pi !", 4)
+lcd.printline(0, 'LCM2004 IIC V2'.center(cols))
+lcd.printline(1, 'and'.center(cols))
+lcd.printline(2, 'python-')
+lcd.printline(3, 'liquidcrystal_i2c'.rjust(cols))
