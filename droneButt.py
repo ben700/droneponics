@@ -22,7 +22,7 @@ import subprocess
 import re
 import json
 import numbers
-from RPLCD import i2c as i2cDisplay
+import liquidcrystal_i2c
 
 parser = ConfigParser()
 parser.read("/home/pi/droneponics/config/configButt/"+drone.gethostname()+".ini")
@@ -43,22 +43,9 @@ _log.info("/home/pi/droneponics/config/configButt/"+drone.gethostname()+".ini")
 _log.info("Done hostname")
 
 try:
-     cols = 20
-     rows = 4
-     charmap = 'A00'
-     i2c_expander = 'PCF8574'
-     address = 0x27
-     port = 1
-     
-     _log.info("Create Display")
-     lcd = i2cDisplay.CharLCD(i2c_expander, address, port=port, charmap=charmap, cols=cols,
-                              rows=rows, expander_params=options)
-     _log.info("Turn on Display backlight")
-     lcd.backlight = True
-     #lcd.display_enabled = True
-     #lcd.clear()
-     #lcd.cursor_mode = 'hide'
-        
+    cols = 20
+    rows = 4
+    lcd = liquidcrystal_i2c.LiquidCrystal_I2C(0x27, 1, numlines=rows)
 except: 
     _log.error("Issue with LED")
 
@@ -122,8 +109,7 @@ try:
            _log.info("Update Timer Run")
            now = datetime.now()
            blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
-           lcd.cursor_pos = (0, 0)
-           lcd.write_string("Last update " + now.strftime("%d/%m/%Y %H:%M:%S"))
+           lcd.printline(0,"Last update " + now.strftime("%d/%m/%Y %H:%M:%S"))
         
            for waterLevel in waterLevels:
                 waterLevel.display(blynk, lcd)
@@ -139,8 +125,7 @@ try:
            blynk.virtual_write(250, "Start-up")
            blynk.set_property(251, "label",drone.gethostname())
            blynk.virtual_write(251, drone.get_ip())
-           lcd.cursor_pos = (1, 0)
-           lcd.write_string(drone.gethostname() + " IP is " + drone.get_ip())
+           lcd.printline(1,drone.gethostname() + " IP is " + drone.get_ip())
      
            for waterLevel in waterLevels:
                  waterLevel.setBlynkLabel(blynk)
