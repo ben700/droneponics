@@ -115,7 +115,7 @@ try:
            
            if droneCounter.isItAnOnCycle(_log):
                 lcd.printline(1, drone.get_ip())
-           else
+           else:
                 lcd.printline(1, drone.gethostname())
            droneCounter.incCycle(_log)
         
