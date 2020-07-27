@@ -65,6 +65,8 @@ try:
     GPIO.setwarnings(False)
 
     waterLevels=[]
+    _log.info("Start water levels")
+    
     waterLevels.append(drone.WaterLevel(_log, "Water Butt Empty", 21, 50, 4))
     waterLevels.append(drone.WaterLevel(_log, "Water Butt Full", 20, 51, 3))
     
