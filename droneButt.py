@@ -41,6 +41,7 @@ consoleHandler.setFormatter(logFormatter)
 _log.addHandler(consoleHandler)
 _log.setLevel(parser.get('logging', 'logLevel', fallback=logging.DEBUG))
 _log.info("/home/pi/droneponics/config/configButt/"+drone.gethostname()+".ini")
+_log.info("Done hostname")
 
 try:
     # on initialise le lcd
@@ -57,6 +58,7 @@ try:
 except: 
     _log.error("Issue with LED")
 
+_log.info("Done LCD")
     
 try:
     GPIO.setmode(GPIO.BCM)
