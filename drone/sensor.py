@@ -80,6 +80,7 @@ class WaterLevel():
  
  
    def __init__(self, _log, Name, gpioPin, blynkDisplayPin, blynkDisplayLEDPin,  lcdDisplayLine,  *args, **kwargs):
+      self._log = _log
       _log.info("in WaterLevel constructor")
       self.gpioPin = gpioPin
       _log.info("WaterLevel constructor: going to do GPIO setup for pin " + str(gpioPin))
@@ -99,6 +100,9 @@ class WaterLevel():
       return self.value
      
    def display(self, blynk, lcdObj):
+    
+     self._log("self.lcdDisplayLine = " + str(self.lcdDisplayLine))
+     self._log(lcdObj)
      if self.read():
           
           lcdObj.printline(self.lcdDisplayLine, self.name + " is true")
