@@ -45,7 +45,7 @@ class PH(Sensor):
     self.high=6.3
     self.low=5.4
     self.target=5.5
- def read(cTemp):
+ def read(self, cTemp):
   return self.sensor.query("RT,"+cTemp).split(":")[1].strip().rstrip('\x00')
  
 class EC(Sensor):
@@ -54,16 +54,49 @@ class EC(Sensor):
       self.target=kwargs.get('Target')
       self.high=self.target+200
       self.low=self.target-200  
-   def read(cTemp):
+   def read(self, cTemp):
       return self.sensor.query("RT,"+cTemp).split(":")[1].strip().rstrip('\x00')
   
 class DO(Sensor):
    def __init__(self, *args, **kwargs):
       Sensor.__init__(self, 97, "Dissolved Oxygen", 30, Target=10, *args, **kwargs) 
-   def read(cTemp):
+   def read(self, cTemp):
       return self.sensor.query("RT,"+cTemp).split(":")[1].strip().rstrip('\x00')
   
 class TEMP(Sensor):  
    def __init__(self, *args, **kwargs):
       Sensor.__init__(self, 102, "Temprature", 30, Target=20, LowAlarm=10, HighAlarm=25, *args, **kwargs) 
     
+class WaterLevel():  
+   GPIO.setmode(GPIO.BCM)
+   GPIO.setwarnings(False)
+   self.gpioPin = None
+   self.gpio=None
+   self.name = None
+   self.displayPin = None
+   self.target = None
+   self.value = None
+ 
+   def __init__(self,Name, gpioPin, blynkDisplayPin, lcdDisplayLine,  *args, **kwargs):
+      self.gpioPin = gpioPin
+      self.gpio = GPIO.setup(gpioPin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+      self.name = Name
+      self.blynkDisplayPin = blynkDisplayPin
+      self.lcdDisplayLine = lcdDisplayLine
+      
+
+    
+   def read(self):
+      self.value = GPIO.input(self.gpioPin)
+      return self.value
+     
+   def display(self, blynk, lcd):
+     if self.read():
+          lcd.lcd_display_string(self.name + " is true", self.lcdDisplayLine)
+     else:
+          lcd.lcd_display_string(self.name + " is false", self.lcdDisplayLine)
+     
+     
+   def setBlynkLabel(self, blynk):
+     blynk.set_property(self.blynkDisplayPin, "label", self.name)
+     blynk.virtual_write(self.blynkDisplayPin, 255)
