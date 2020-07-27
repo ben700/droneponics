@@ -67,8 +67,8 @@ try:
     waterLevels=[]
     _log.info("Start water levels")
     
-    waterLevels.append(drone.WaterLevel(_log, "Water Butt Empty", 21, 50, 4))
-    waterLevels.append(drone.WaterLevel(_log, "Water Butt Full", 20, 51, 3))
+    waterLevels.append(drone.WaterLevel(_log, "Water Butt Empty", 21, 50,52, 4))
+    waterLevels.append(drone.WaterLevel(_log, "Water Butt Full", 20, 51,53, 3))
     
     _log.info("Done water levels")
     
