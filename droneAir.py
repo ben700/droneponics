@@ -38,7 +38,7 @@ import re
 import json
 
 parser = ConfigParser()
-parser.read("/home/pi/droneponics/config/configAir_"+drone.gethostname()+".ini")
+parser.read("/home/pi/droneponics/config/configAir/"+drone.gethostname()+".ini")
 
 bootup = True
 rowIndex=1
@@ -55,7 +55,7 @@ _log.error("error")
 _log.warning("warning")
 _log.info("info")
 _log.debug("debug")
-_log.info("/home/pi/droneponics/config/configAir_"+drone.gethostname()+".ini")
+_log.info("/home/pi/droneponics/config/configAir/"+drone.gethostname()+".ini")
 
 # Initialize Blynk
 _log.debug("Creating blynk object for BLYNK_AUTH " + parser.get('blynk', 'BLYNK_AUTH')) 
