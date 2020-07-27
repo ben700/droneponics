@@ -49,8 +49,11 @@ try:
      i2c_expander = 'PCF8574'
      address = 0x27
      port = 1
+     
+     _log.info("Create Display")
      lcd = i2cDisplay.CharLCD(i2c_expander, address, port=port, charmap=charmap, cols=cols,
                               rows=rows, expander_params=options)
+     _log.info("Turn on Display backlight")
      lcd.backlight = True
      #lcd.display_enabled = True
      #lcd.clear()
