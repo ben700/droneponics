@@ -22,6 +22,7 @@ import subprocess
 import re
 import json
 import numbers
+sys.path.append('/home/pi/droneponics')
 import lcddriver
 
 parser = ConfigParser()
@@ -46,6 +47,13 @@ try:
     lcd = lcddriver.lcd()
     # on reinitialise le lcd
     lcd.lcd_clear()
+    # on initialise le lcd
+    # on affiche des caracteres sur chaque ligne
+    lcd.lcd_display_string("   Hello world !", 1)
+    lcd.lcd_display_string("      Je suis", 2)
+    lcd.lcd_display_string("        un", 3)
+    lcd.lcd_display_string("   Raspberry Pi !", 4)
+
 except: 
     _log.error("Issue with LED")
 
