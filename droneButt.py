@@ -57,8 +57,8 @@ try:
     waterLevels=[]
     _log.info("Start water levels")
     
-    waterLevels.append(drone.WaterLevel(_log, "Water Butt Empty", 21, 50,52, 3))
-    waterLevels.append(drone.WaterLevel(_log, "Water Butt Full", 20, 51,53, 2))
+    waterLevels.append(drone.WaterLevel(_log, "Water Empty", 21, 50,52, 3))
+    waterLevels.append(drone.WaterLevel(_log, "Water Full", 20, 51,53, 2))
     
     _log.info("Done water levels")
     
@@ -108,13 +108,13 @@ try:
            _log.info("Update Timer Run")
            now = datetime.now()
            blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
-           lcd.printline(0,"Last update " + now.strftime("%d/%m/%Y %H:%M:%S"))
+           lcd.printline(0, now.strftime("%d/%m/%Y %H:%M:%S"))
         
            for waterLevel in waterLevels:
                  if(waterLevel.read()):
-                     lcd.printline(waterLevel.lcdDisplayLine, waterLevel.name + " is true")
+                     lcd.printline(waterLevel.lcdDisplayLine, waterLevel.name + ":true")
                  else:
-                     lcd.printline(waterLevel.lcdDisplayLine, waterLevel.name + " is false")
+                     lcd.printline(waterLevel.lcdDisplayLine, waterLevel.name + ":false")
             
            if (parser.get('blynkDoserBridge', 'BLYNK_AUTH', fallback=None) is not None):
                _log.warning("Send Water Level data via blynkBridge")
@@ -140,7 +140,7 @@ try:
            blynk.virtual_write(250, "Start-up")
            blynk.set_property(251, "label",drone.gethostname())
            blynk.virtual_write(251, drone.get_ip())
-           lcd.printline(1,drone.gethostname() + " IP is " + drone.get_ip())
+           lcd.printline(1, drone.get_ip())
      
            for waterLevel in waterLevels:
                  waterLevel.setBlynkLabel(blynk)
@@ -176,4 +176,4 @@ except:
    GPIO.cleanup()
 
    os.system('sh /home/pi/updateDroneponics.sh')
-  # os.system('sudo reboot')
+   os.system('sudo reboot')
