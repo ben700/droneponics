@@ -117,15 +117,14 @@ try:
                      lcd.printline(waterLevel.lcdDisplayLine, waterLevel.name + " is false")
             
            if (parser.get('blynkDoserBridge', 'BLYNK_AUTH', fallback=None) is not None):
-           _log.warning("Send Water Level data via blynkBridge")
-           blynkBridge = blynklib.Blynk(parser.get('blynkDoserBridge', 'BLYNK_AUTH'))
-           blynkBridge.run()
-           for waterLevel in waterLevels:
-               blynkBridge.virtual_write(waterLevel.blynkDisplayPin, waterLevel.read())
-               blynkBridge.virtual_sync(waterLevel.blynkDisplayPin)
-               blynkBridge.read_response(timeout=0.5)
-        
-           _log.info("blynkBridge Water Level data sent")  
+               _log.warning("Send Water Level data via blynkBridge")
+               blynkBridge = blynklib.Blynk(parser.get('blynkDoserBridge', 'BLYNK_AUTH'))
+               blynkBridge.run()
+               for waterLevel in waterLevels:
+                   blynkBridge.virtual_write(waterLevel.blynkDisplayPin, waterLevel.read())
+                   blynkBridge.virtual_sync(waterLevel.blynkDisplayPin)
+                   blynkBridge.read_response(timeout=0.5)
+               _log.info("blynkBridge Water Level data sent")  
            _log.debug("The End")
      
     while True:
