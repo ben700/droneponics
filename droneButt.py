@@ -109,7 +109,7 @@ try:
            _log.info("Update Timer Run")
            now = datetime.now()
            blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
-           lcd.printline(0,"Last update " + now.strftime("%d/%m/%Y %H:%M:%S"))
+          # lcd.printline(0,"Last update " + now.strftime("%d/%m/%Y %H:%M:%S"))
         
            for waterLevel in waterLevels:
                 waterLevel.display(blynk, lcd)
@@ -125,11 +125,11 @@ try:
            blynk.virtual_write(250, "Start-up")
            blynk.set_property(251, "label",drone.gethostname())
            blynk.virtual_write(251, drone.get_ip())
-           lcd.printline(1,drone.gethostname() + " IP is " + drone.get_ip())
+           #lcd.printline(1,drone.gethostname() + " IP is " + drone.get_ip())
      
            for waterLevel in waterLevels:
                  waterLevel.setBlynkLabel(blynk)
-                 waterLevel.display(blynk, lcd)
+               #  waterLevel.display(blynk, lcd)
                 
            bootup = False
            _log.debug("Just about to complete Booting")
