@@ -41,11 +41,15 @@ _log.addHandler(consoleHandler)
 _log.setLevel(parser.get('logging', 'logLevel', fallback=logging.DEBUG))
 _log.info("/home/pi/droneponics/config/configButt/"+drone.gethostname()+".ini")
 
-# on initialise le lcd
-lcd = lcddriver.lcd()
-# on reinitialise le lcd
-lcd.lcd_clear()
+try:
+    # on initialise le lcd
+    lcd = lcddriver.lcd()
+    # on reinitialise le lcd
+    lcd.lcd_clear()
+except: 
+    _log.error("Issue with LED")
 
+    
 try:
     GPIO.setmode(GPIO.BCM)
     GPIO.setwarnings(False)
