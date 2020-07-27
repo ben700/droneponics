@@ -29,9 +29,10 @@ class Sensor:
        self.lowAlarm = kwargs.get('LowAlarm', None)
        self.highAlarm = kwargs.get('HighAlarm', None)
 
-  def read():
-  return self.sensor.query("R").split(":")[1].strip().rstrip('\x00')
-  def display(blynk, VALUE):
+   def read():
+       return self.sensor.query("R").split(":")[1].strip().rstrip('\x00')
+   
+   def display(blynk, VALUE):
     red = Color("red")
     colors = list(red.range_to(Color("green"),10))
     self.value =VALUE
