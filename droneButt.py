@@ -110,8 +110,8 @@ try:
            blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
            lcd.printline(0,"Last update " + now.strftime("%d/%m/%Y %H:%M:%S"))
         
-           for waterLevel in waterLevels:
-                waterLevel.display(blynk, lcd)
+          # for waterLevel in waterLevels:
+          #      waterLevel.display(blynk, lcd)
                 
            _log.debug("The End")
      
@@ -128,7 +128,7 @@ try:
      
            for waterLevel in waterLevels:
                  waterLevel.setBlynkLabel(blynk)
-                 waterLevel.display(blynk, lcd)
+             #    waterLevel.display(blynk, lcd)
                 
            bootup = False
            _log.debug("Just about to complete Booting")
