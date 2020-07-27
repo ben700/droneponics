@@ -51,6 +51,10 @@ try:
      port = int('1')
      lcd = i2c.CharLCD(i2c_expander, address, port=port, charmap=charmap, cols=cols,
                               rows=rows, expander_params=options)
+     lcd.backlight = True
+     lcd.display_enabled = True
+     lcd.clear()
+     lcd.cursor_mode = 'hide'
         
 except: 
     _log.error("Issue with LED")
