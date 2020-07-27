@@ -91,7 +91,7 @@ class lcd:
       elif state in ("off","Off","OFF"):
          self.lcd_device.write_cmd(LCD_NOBACKLIGHT)
       else:
-         print "Unknown State!"
+         print ("Unknown State!")
 
    # put string function
    def lcd_display_string(self, string, line):
