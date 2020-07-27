@@ -41,6 +41,9 @@ _log.addHandler(consoleHandler)
 _log.setLevel(parser.get('logging', 'logLevel', fallback=logging.DEBUG))
 _log.info("/home/pi/droneponics/config/configButt/"+drone.gethostname()+".ini")
 _log.info("Done hostname")
+droneCounter.setOnCycle(_log,1)
+droneCounter.setOffCycle(_log,1)
+
 
 
 cols = 20
@@ -109,12 +112,18 @@ try:
            now = datetime.now()
            blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
            lcd.printline(0, now.strftime("%d/%m/%Y %H:%M:%S"))
+           
+           if droneCounter.isItAnOnCycle(_log):
+                lcd.printline(1, drone.get_ip())
+           else
+                lcd.printline(1, drone.gethostname())
+           droneCounter.incCycle(_log)
         
            for waterLevel in waterLevels:
                  if(waterLevel.read()):
-                     lcd.printline(waterLevel.lcdDisplayLine, waterLevel.name + ":true")
+                     lcd.printline(waterLevel.lcdDisplayLine, waterLevel.name + ":True")
                  else:
-                     lcd.printline(waterLevel.lcdDisplayLine, waterLevel.name + ":false")
+                     lcd.printline(waterLevel.lcdDisplayLine, waterLevel.name + ":False")
             
            if (parser.get('blynkDoserBridge', 'BLYNK_AUTH', fallback=None) is not None):
                _log.warning("Send Water Level data via blynkBridge")
@@ -122,6 +131,8 @@ try:
                blynkBridge.run()
                for waterLevel in waterLevels:
                    blynkBridge.virtual_write(waterLevel.blynkDisplayPin, waterLevel.read())
+                   blynk.set_property(waterLevel.blynkDisplayPin, "label",waterLevel.name)
+                   blynkBridge.virtual_write(98, "Got water levels from " + drone.gethostname())
                    blynkBridge.virtual_sync(waterLevel.blynkDisplayPin)
                    blynkBridge.read_response(timeout=0.5)
                _log.info("blynkBridge Water Level data sent")  
@@ -148,9 +159,7 @@ try:
                      lcd.printline(waterLevel.lcdDisplayLine, waterLevel.name + " is true")
                  else:
                      lcd.printline(waterLevel.lcdDisplayLine, waterLevel.name + " is false")
-                    
-             #    waterLevel.display(blynk, lcd)
-                
+ 
            bootup = False
            _log.debug("Just about to complete Booting")
 
