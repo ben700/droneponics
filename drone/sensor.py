@@ -46,8 +46,9 @@ class PH(Sensor):
     self.high=6.3
     self.low=5.4
     self.target=5.5
- def read(self, cTemp):
-  return self.sensor.query("RT,"+cTemp).split(":")[1].strip().rstrip('\x00')
+   
+   def read(self, cTemp):
+      return self.sensor.query("RT,"+cTemp).split(":")[1].strip().rstrip('\x00')
  
 class EC(Sensor):
    def __init__(self,  Target=600, *args, **kwargs):
