@@ -98,7 +98,7 @@ try:
     while True:
         blynk.run()
         if bootup :
-           blynk.virtual_write(98, "clr")
+          # blynk.virtual_write(98, "clr")
            blynk.virtual_write(98, "Rebooted"+ '\n')
            blynk.virtual_write(250, "Start-up")
            blynk.set_property(251, "label",drone.gethostname())
