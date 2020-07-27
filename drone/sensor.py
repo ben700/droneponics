@@ -105,4 +105,4 @@ class WaterLevel():
      
    def setBlynkLabel(self, blynk):
      blynk.set_property(self.blynkDisplayPin, "label", self.name)
-     blynk.virtual_write(self.blynkDisplayPin, 255)
+     blynk.virtual_write(self.blynkDisplayPin, self.read())
