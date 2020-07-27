@@ -24,7 +24,7 @@ import json
 import numbers
 
 parser = ConfigParser()
-parser.read("/home/pi/droneponics/config/configRelay_"+drone.gethostname()+".ini")
+parser.read("/home/pi/droneponics/config/configRelay/"+drone.gethostname()+".ini")
 
 bootup = True
 button_state=0
@@ -43,7 +43,7 @@ consoleHandler = logging.StreamHandler()
 consoleHandler.setFormatter(logFormatter)
 _log.addHandler(consoleHandler)
 _log.setLevel(parser.get('logging', 'logLevel', fallback=logging.DEBUG))
-_log.info("/home/pi/droneponics/config/configRelay_"+drone.gethostname()+".ini")
+_log.info("/home/pi/droneponics/config/configRelay/"+drone.gethostname()+".ini")
 
 try:
     GPIO.setmode(GPIO.BCM)
