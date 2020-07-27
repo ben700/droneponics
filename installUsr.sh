@@ -21,7 +21,8 @@ sudo pip3 install colour
 sudo pip3 install configparser
 sudo apt-get install lxde
 sudo apt-get install xterm -y
-
+sudo pip3 install RPLCD
+sudo pip3 install smbus2
 
 pip3 install adafruit-circuitpython-seesaw
 git submodule init
