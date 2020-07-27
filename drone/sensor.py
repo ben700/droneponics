@@ -17,7 +17,7 @@ def displaySensor(blynk, VP, VALUE, NAME , LOW, HIGH):
  return
 
 class Sensor:
-   def __init__(self, SensorId, name *args, **kwargs):
+   def __init__(self, SensorId, name, *args, **kwargs):
        self.sensor = AtlasI2C(SensorId)
        self.sensorId = SensorId
        self.name = Name
