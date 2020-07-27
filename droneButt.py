@@ -129,7 +129,7 @@ try:
      
            for waterLevel in waterLevels:
                  waterLevel.setBlynkLabel(blynk)
-               #  waterLevel.display(blynk, lcd)
+                 waterLevel.display(blynk, lcd)
                 
            bootup = False
            _log.debug("Just about to complete Booting")
