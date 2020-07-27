@@ -42,12 +42,10 @@ _log.setLevel(parser.get('logging', 'logLevel', fallback=logging.DEBUG))
 _log.info("/home/pi/droneponics/config/configButt/"+drone.gethostname()+".ini")
 _log.info("Done hostname")
 
-try:
-    cols = 20
-    rows = 4
-    lcd = liquidcrystal_i2c.LiquidCrystal_I2C(0x27, 1, numlines=rows)
-except: 
-    _log.error("Issue with LED")
+
+cols = 20
+rows = 4
+lcd = liquidcrystal_i2c.LiquidCrystal_I2C(0x27, 1, numlines=rows)
 
 _log.info("Done LCD")
     
