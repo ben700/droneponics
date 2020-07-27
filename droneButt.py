@@ -22,17 +22,13 @@ import subprocess
 import re
 import json
 import numbers
+import lcddriver
 
 parser = ConfigParser()
 parser.read("/home/pi/droneponics/config/configButt/"+drone.gethostname()+".ini")
 
 bootup = True
 button_state=0
-CO2=0
-CO2Target=0
-startTime =None
-stopTime=None
-waterTemp=99
 rowIndex=1
 droneCounter = drone.DroneCounter()
 
@@ -45,11 +41,19 @@ _log.addHandler(consoleHandler)
 _log.setLevel(parser.get('logging', 'logLevel', fallback=logging.DEBUG))
 _log.info("/home/pi/droneponics/config/configButt/"+drone.gethostname()+".ini")
 
+# on initialise le lcd
+lcd = lcddriver.lcd()
+# on reinitialise le lcd
+lcd.lcd_clear()
+
 try:
     GPIO.setmode(GPIO.BCM)
     GPIO.setwarnings(False)
 
-        
+    waterLevels=[]
+    waterLevels.append(drone.WaterLevel(_log, "Water Butt Empty", 21, 50, 4))
+    waterLevels.append(drone.WaterLevel(_log, "Water Butt Full", 20, 51, 3))
+   
         
     # Initialize Blynk
     blynk = blynklib.Blynk(parser.get('blynk', 'BLYNK_AUTH'), log=_log.info) 
@@ -71,17 +75,8 @@ try:
     @blynk.handle_event("connect")
     def connect_handler():
         _log.warning("Connected")
-        for pin in range(0,11):
-           _log.info('Syncing virtual buttons {}'.format(pin))
-           blynk.virtual_sync(pin)
-           blynk.read_response(timeout=0.5)
-        for pin in range(24,30):
-           _log.info('Syncing virtual buttons {}'.format(pin))
-           blynk.virtual_sync(pin)
-           blynk.read_response(timeout=0.5)
         blynk.virtual_write(250, "Connected")
     
-
     @blynk.handle_event("disconnect")
     def disconnect_handler():
         _log.warning("Disconnected")
@@ -91,25 +86,13 @@ try:
     @timer.register(interval=60, run_once=False)
     def blynk_data(): 
            _log.info("Update Timer Run")
-           text = ""
            now = datetime.now()
            blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
-
+           lcd.lcd_display_string("Last update " + now.strftime("%d/%m/%Y %H:%M:%S"), 1)
         
-           for relay in relays:
-                _log.debug("Seeing if relay " + relay.name + " is automatic")
-                if(relay.isAutomatic()):
-                    _log.debug("relay " + relay.name + " is automatic so test cycle")
-                    if(relay.whatCycle() == "On"):
-                        relay.turnOn(_log)
-                    else:
-                        relay.turnOff(_log)
-                    relay.incCycle()
-           if(relay.hasInfoPin()):
-                blynk.virtual_write(relay.getInfoPin(), relay.info())
-           else:
-                text = text + self.name + " is " + relay.whatCycle() + " "
-           blynk.virtual_write(28,text)
+           for waterLevel in waterLevels:
+                waterLevel.display(blynk, lcd)
+                
            _log.debug("The End")
      
     while True:
@@ -120,11 +103,12 @@ try:
            blynk.virtual_write(250, "Start-up")
            blynk.set_property(251, "label",drone.gethostname())
            blynk.virtual_write(251, drone.get_ip())
-           x = 1 
-           for relay in relays:
-                 relay.setBlynkLabel(blynk, x, 10+x)
-                 x = x +1 
-           
+           lcd.lcd_display_string(drone.gethostname() + " IP is " + drone.get_ip(), 2)
+     
+           for waterLevel in waterLevels:
+                 waterLevel.setBlynkLabel(blynk)
+                 waterLevel.display(blynk, lcd)
+                
            bootup = False
            _log.debug("Just about to complete Booting")
            now = datetime.now()
