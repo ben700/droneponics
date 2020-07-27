@@ -76,12 +76,7 @@ class TEMP(Sensor):
 class WaterLevel():  
    GPIO.setmode(GPIO.BCM)
    GPIO.setwarnings(False)
-   self.gpioPin = None
-   self.gpio=None
-   self.name = None
-   self.displayPin = None
-   self.target = None
-   self.value = None
+ 
  
    def __init__(self, Name, gpioPin, blynkDisplayPin, lcdDisplayLine,  *args, **kwargs):
       print("in WaterLevel constructor")
@@ -90,8 +85,8 @@ class WaterLevel():
       self.name = Name
       self.blynkDisplayPin = blynkDisplayPin
       self.lcdDisplayLine = lcdDisplayLine
-      
-
+      self.value = GPIO.input(self.gpioPin)
+ 
     
    def read(self):
       self.value = GPIO.input(self.gpioPin)
