@@ -4,6 +4,7 @@ import blynktimer
 import logging
 from configparser import ConfigParser
 import RPi.GPIO as GPIO   
+import liquidcrystal_i2c
 
 def displaySensor(blynk, VP, VALUE, NAME , LOW, HIGH):
  print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
