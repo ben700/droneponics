@@ -109,7 +109,7 @@ try:
            _log.info("Update Timer Run")
            now = datetime.now()
            blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
-          # lcd.printline(0,"Last update " + now.strftime("%d/%m/%Y %H:%M:%S"))
+           lcd.printline(0,"Last update " + now.strftime("%d/%m/%Y %H:%M:%S"))
         
            for waterLevel in waterLevels:
                 waterLevel.display(blynk, lcd)
