@@ -110,8 +110,12 @@ try:
            blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
            lcd.printline(0,"Last update " + now.strftime("%d/%m/%Y %H:%M:%S"))
         
-          # for waterLevel in waterLevels:
-          #      waterLevel.display(blynk, lcd)
+           for waterLevel in waterLevels:
+                 if(waterLevel.read()):
+                     lcd.printline(waterLevel.lcdDisplayLine, waterLevel.name + " is true")
+                 else:
+                     lcd.printline(waterLevel.lcdDisplayLine, waterLevel.name + " is false")
+                    
                 
            _log.debug("The End")
      
