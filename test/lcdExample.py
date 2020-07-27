@@ -1,5 +1,6 @@
 # on importe le pilote
 import sys
+sys.path.append('/home/pi/droneponics')
 import lcddriver
 from time import *
 
