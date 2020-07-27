@@ -99,10 +99,12 @@ class WaterLevel():
    def display(self, blynk, lcd):
      if self.read():
           lcd.lcd_display_string(self.name + " is true", self.lcdDisplayLine)
+          blynk.virtual_write(self.blynkDisplayPin, self.name + " is true")  
      else:
           lcd.lcd_display_string(self.name + " is false", self.lcdDisplayLine)
+          blynk.virtual_write(self.blynkDisplayPin,self.name + " is false")
      
      
    def setBlynkLabel(self, blynk):
      blynk.set_property(self.blynkDisplayPin, "label", self.name)
-     blynk.virtual_write(self.blynkDisplayPin, self.read())
+     
