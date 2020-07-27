@@ -22,8 +22,7 @@ import subprocess
 import re
 import json
 import numbers
-sys.path.append('/home/pi/droneponics')
-import lcddriver
+from RPLCD import i2c
 
 parser = ConfigParser()
 parser.read("/home/pi/droneponics/config/configButt/"+drone.gethostname()+".ini")
@@ -44,17 +43,15 @@ _log.info("/home/pi/droneponics/config/configButt/"+drone.gethostname()+".ini")
 _log.info("Done hostname")
 
 try:
-    # on initialise le lcd
-    lcd = lcddriver.lcd()
-    # on reinitialise le lcd
-    lcd.lcd_clear()
-    # on initialise le lcd
-    # on affiche des caracteres sur chaque ligne
-    lcd.lcd_display_string("   Hello world !", 1)
-    lcd.lcd_display_string("      Je suis", 2)
-    lcd.lcd_display_string("        un", 3)
-    lcd.lcd_display_string("   Raspberry Pi !", 4)
-
+     cols = int(20)
+     rows = int(4)
+     charmap = 'A00'
+     i2c_expander = 'PCF8574'
+     address = int(0x27, 16)
+     port = int('1')
+     lcd = i2c.CharLCD(i2c_expander, address, port=port, charmap=charmap, cols=cols,
+                              rows=rows, expander_params=options)
+        
 except: 
     _log.error("Issue with LED")
 
