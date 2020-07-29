@@ -42,7 +42,7 @@ try:
     print(str(disp.height))
     print(str(disp.width))
     
-    draw.rectangle([(270,310),(10,10)],fill = "RED")
+    draw.rectangle([(0,0),(320,240)],fill = "RED")
     
     print ("***draw text")
     draw.text((60,30), 'annabella', font = font30, fill = "WHITE")
