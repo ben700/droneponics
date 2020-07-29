@@ -14,7 +14,7 @@ from waveshare_2inch_LCD import ST7789
 from PIL import Image,ImageDraw,ImageFont
 
 logging.basicConfig(level=logging.INFO)
-logging.log(picdir)
+print(picdir)
 
 try:
     print ("2inch LCD Module")
