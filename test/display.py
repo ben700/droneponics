@@ -39,7 +39,9 @@ try:
     
     print ("***draw line")
     draw.line([(20,20),(300,20)], fill = "BLUE",width = 5)
-    draw.line([(20,40),(300,40)], fill = "BLUE",width = 5)
+    draw.line([(20,80),(300,80)], fill = "BLUE",width = 5)
+    draw.line([(20,20),(20,80)], fill = "BLUE",width = 5)
+    draw.line([(300,20),(300,80)], fill = "BLUE",width = 5)
 
     
     print ("***draw text")
