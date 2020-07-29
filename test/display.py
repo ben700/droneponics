@@ -3,8 +3,8 @@
 import time
 import sys
 import os
-picdir = os.path.join('/home/pi/droneponics', 'pic')
-libdir = os.path.join('/home/pi/droneponics', 'lib')
+picdir = '/home/pi/droneponics/pic'
+libdir = '/home/pi/droneponics/lib'
 if os.path.exists(libdir):
     sys.path.append(libdir)
 
