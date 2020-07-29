@@ -32,23 +32,23 @@ try:
 
     font30 = ImageFont.truetype(os.path.join(picdir, 'Font.ttc'), 30)
     font15 = ImageFont.truetype(os.path.join(picdir, 'Font.ttc'), 15)
+
+    
+    draw.rectangle([(0,0),(320,240)],fill = "WHITE")
+
+    
     print ("***draw line")
-    draw.line([(40,20),(200,20)], fill = "BLUE",width = 5)
-    draw.line([(40,20),(40,200)], fill = "BLUE",width = 5)
-    draw.line([(40,200),(200,200)], fill = "BLUE",width = 5)
-    draw.line([(200,20),(200,200)], fill = "BLUE",width = 5)
+    draw.line([(40,20),(200,20)], fill = "BLUE",width = 15)
+    draw.line([(40,20),(40,200)], fill = "BLUE",width = 15)
+    draw.line([(40,200),(200,200)], fill = "BLUE",width = 15)
+    draw.line([(200,20),(200,200)], fill = "BLUE",width = 15)
     
-    print ("***draw rectangle")
-    print(str(disp.height))
-    print(str(disp.width))
-    
-    draw.rectangle([(0,0),(320,240)],fill = "RED")
     
     print ("***draw text")
-    draw.text((60,30), 'annabella', font = font30, fill = "WHITE")
-    draw.text((50, 75), 'Ada', font = font15, fill = "BLUE")
-    draw.text((75, 110), 'Shepley ', font = font15, fill = "BLUE")
-    draw.text((72, 140), 'Test Program ', font = font15, fill = "BLUE")
+    draw.text((60,30), 'annabella', font = font30, fill = "BLACK")
+    draw.text((50, 75), 'Ada', font = font15, fill = "BLACK")
+    draw.text((75, 110), 'Shepley ', font = font15, fill = "BLACK")
+    draw.text((72, 140), 'Test Program ', font = font15, fill = "BLACK")
 
     image=image.rotate(180) 
     disp.ShowImage(image)
