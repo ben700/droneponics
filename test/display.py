@@ -38,10 +38,10 @@ try:
 
     
     print ("***draw line")
-    draw.line([(40,20),(200,20)], fill = "BLUE",width = 15)
-    draw.line([(40,20),(40,200)], fill = "BLUE",width = 15)
-    draw.line([(40,80),(200,80)], fill = "BLUE",width = 15)
-    draw.line([(80,20),(80,200)], fill = "BLUE",width = 15)
+    draw.line([(20,20),(20,300)], fill = "BLUE",width = 15)
+    draw.line([(40,20),(40,300)], fill = "BLUE",width = 15)
+    draw.line([(20,20),(40,20)], fill = "BLUE",width = 15)
+    draw.line([(40,20),(20,300)], fill = "BLUE",width = 15)
     
     
     print ("***draw text")
