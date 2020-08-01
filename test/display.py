@@ -35,13 +35,16 @@ try:
 
     
     draw.rectangle([(0,0),(320,240)],fill = "WHITE")
+    
+    draw.rectangle([(20,20),(300,80)], fill = "BLUE",width = 5)
+
 
     
     print ("***draw line")
-    draw.line([(20,20),(300,20)], fill = "BLUE",width = 5)
-    draw.line([(20,80),(300,80)], fill = "BLUE",width = 5)
-    draw.line([(20,20),(20,80)], fill = "BLUE",width = 5)
-    draw.line([(300,20),(300,80)], fill = "BLUE",width = 5)
+    #draw.line([(20,20),(300,20)], fill = "BLUE",width = 5)
+    #draw.line([(20,80),(300,80)], fill = "BLUE",width = 5)
+    #draw.line([(20,20),(20,80)], fill = "BLUE",width = 5)
+    #draw.line([(300,20),(300,80)], fill = "BLUE",width = 5)
 
     
     print ("***draw text")
@@ -52,7 +55,7 @@ try:
 
     image=image.rotate(180) 
     disp.ShowImage(image)
-    time.sleep(3)
+    time.sleep(10)
 
     # read bmp file 
     bmp = Image.open(os.path.join(picdir, 'LCD_2inch.bmp'))	
