@@ -86,5 +86,5 @@ def updateLCD (bR1, bR2, bR3, bR4, iPH, iEC, iTemp):
     disp.ShowImage(image)
 
 try:
-    updateLCD (True, True, False, False, 7.0, 400, 25):
+    updateLCD (True, True, False, False, 7.0, 400, 25)
 
