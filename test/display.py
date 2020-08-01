@@ -36,10 +36,10 @@ try:
     
     draw.rectangle([(0,0),(320,240)],fill = "WHITE")
     
-    draw.rectangle([(20,20),(90,80)], fill = "BLUE",width = 5)
-    draw.rectangle([(90,20),(160,80)], fill = "BLACK",width = 5)
-    draw.rectangle([(160,20),(230,80)], fill = "BLUE",width = 5)
-    draw.rectangle([(230,20),(300,80)], fill = "BLACK",width = 5)
+    draw.rectangle([(20,20),(90,80)], fill = "BLUE", outline="BLACK")
+    draw.rectangle([(90,20),(160,80)], fill = "RED", outline="BLACK")
+    draw.rectangle([(160,20),(230,80)], fill = "BLUE", outline="BLACK")
+    draw.rectangle([(230,20),(300,80)], fill = "RED", outline="BLACK")
 
 
     
