@@ -36,9 +36,9 @@ try:
     
     draw.rectangle([(0,0),(320,240)],fill = "WHITE")
     
-    draw.rectangle([(20,20),(90,80)], fill = "BLUE", outline="BLACK")
+    draw.rectangle([(20,20),(90,80)], fill = "GREEN", outline="BLACK")
     draw.rectangle([(90,20),(160,80)], fill = "RED", outline="BLACK")
-    draw.rectangle([(160,20),(230,80)], fill = "BLUE", outline="BLACK")
+    draw.rectangle([(160,20),(230,80)], fill = "GREEN", outline="BLACK")
     draw.rectangle([(230,20),(300,80)], fill = "RED", outline="BLACK")
 
 
@@ -51,7 +51,7 @@ try:
 
     
     print ("***draw text")
-    draw.text((50,50), 'R1', font = font30, fill = "BLACK")
+    draw.text((50,50), 'R1', font = font15, fill = "BLACK")
     draw.text((120, 50), 'R2', font = font15, fill = "BLACK")
     draw.text((190, 50), 'R3', font = font15, fill = "BLACK")
     draw.text((260, 50), 'R4', font = font15, fill = "BLACK")
