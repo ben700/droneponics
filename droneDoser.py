@@ -371,12 +371,12 @@ try:
            _log.info('Unexpected error')
            blynk.virtual_write(98, "System has main loop error" + '\n')
            for l in LED:
-                blynk.set_property(l, 'color', colours['OFFLINE'])
+                blynk.set_property(l, 'color', colours['OFFLIN'])
            blynk.set_property(systemLED, 'color', colours['OFFLINE'])
            os.system('sh /home/pi/updateDroneponics.sh')
     #       os.system('sudo reboot') 
   
-  
+   
 except KeyboardInterrupt:
    _log.info('Keyboard Interrupt')
    blynkErr = blynklib.Blynk(parser.get('droneDoser', 'BLYNK_AUTH'))
