@@ -51,10 +51,10 @@ try:
 
     
     print ("***draw text")
-    draw.text((60,30), 'annabella', font = font30, fill = "BLACK")
-    draw.text((50, 75), 'Ada', font = font15, fill = "BLACK")
-    draw.text((75, 110), 'Shepley ', font = font15, fill = "BLACK")
-    draw.text((72, 140), 'Test Program ', font = font15, fill = "BLACK")
+    draw.text((50,50), 'R1', font = font30, fill = "BLACK")
+    draw.text((120, 50), 'R2', font = font15, fill = "BLACK")
+    draw.text((190, 50), 'R3', font = font15, fill = "BLACK")
+    draw.text((260, 50), 'R4', font = font15, fill = "BLACK")
 
     image=image.rotate(180) 
     disp.ShowImage(image)
