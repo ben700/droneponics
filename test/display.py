@@ -36,14 +36,14 @@ try:
     
     draw.rectangle([(0,0),(320,240)],fill = "WHITE")
     
-    draw.rectangle([(20,20),(90,80)], fill = "GREEN", outline="BLACK")
-    draw.rectangle([(90,20),(160,80)], fill = "RED", outline="BLACK")
-    draw.rectangle([(160,20),(230,80)], fill = "GREEN", outline="BLACK")
-    draw.rectangle([(230,20),(300,80)], fill = "RED", outline="BLACK")
+    draw.rectangle([(20,10),(90,70)], fill = "GREEN", outline="BLACK")
+    draw.rectangle([(90,10),(160,70)], fill = "RED", outline="BLACK")
+    draw.rectangle([(160,10),(230,70)], fill = "GREEN", outline="BLACK")
+    draw.rectangle([(230,10),(300,70)], fill = "RED", outline="BLACK")
 
-    draw.rectangle([(20,80),(300,140)], fill = "WHITE", outline="BLACK")
-    draw.rectangle([(20,140),(300,200)], fill = "WHITE", outline="BLACK")
-    draw.rectangle([(20,200),(300,240)], fill = "WHITE", outline="BLACK")
+    draw.rectangle([(20,70),(300,130)], fill = "WHITE", outline="BLACK")
+    draw.rectangle([(20,130),(300,190)], fill = "WHITE", outline="BLACK")
+    draw.rectangle([(20,190),(300,230)], fill = "WHITE", outline="BLACK")
     
     
     print ("***draw line")
