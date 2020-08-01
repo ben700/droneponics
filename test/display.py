@@ -54,14 +54,14 @@ try:
 
     
     print ("***draw text")
-    draw.text((50,50), 'R1', font = font15, fill = "BLACK")
-    draw.text((120, 50), 'R2', font = font15, fill = "BLACK")
-    draw.text((190, 50), 'R3', font = font15, fill = "BLACK")
-    draw.text((260, 50), 'R4', font = font15, fill = "BLACK")
+    draw.text((50,40), 'R1', font = font15, fill = "BLACK")
+    draw.text((120, 40), 'R2', font = font15, fill = "BLACK")
+    draw.text((190, 40), 'R3', font = font15, fill = "BLACK")
+    draw.text((260, 40), 'R4', font = font15, fill = "BLACK")
 
-    draw.text((50, 100), 'ph', font = font30, fill = "BLACK")
-    draw.text((50, 160), 'EC', font = font30, fill = "BLACK")
-    draw.text((50, 200), 'Temp', font = font30, fill = "BLACK")
+    draw.text((50, 90), 'ph', font = font30, fill = "BLACK")
+    draw.text((50, 150), 'EC', font = font30, fill = "BLACK")
+    draw.text((50, 190), 'Temp', font = font30, fill = "BLACK")
 
     image=image.rotate(180) 
     disp.ShowImage(image)
