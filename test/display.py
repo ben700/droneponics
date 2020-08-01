@@ -41,7 +41,10 @@ try:
     draw.rectangle([(160,20),(230,80)], fill = "GREEN", outline="BLACK")
     draw.rectangle([(230,20),(300,80)], fill = "RED", outline="BLACK")
 
-
+    draw.rectangle([(20,80),(300,140)], fill = "WHITE", outline="BLACK")
+    draw.rectangle([(20,140),(300,200)], fill = "WHITE", outline="BLACK")
+    draw.rectangle([(20,200),(300,240)], fill = "WHITE", outline="BLACK")
+    
     
     print ("***draw line")
     #draw.line([(20,20),(300,20)], fill = "BLUE",width = 5)
