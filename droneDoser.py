@@ -66,6 +66,19 @@ try:
     sensors = drone.buildSensors(sensors, _log)
     _log.info("all senses created")
 
+    GPIO.setmode(GPIO.BCM)
+    GPIO.setwarnings(False)
+
+    relays=[]
+    relays.append(drone.Relay(_log, 18, parser.get('droneRelay', 'Relay1')))
+    relays.append(drone.Relay(_log, 23, parser.get('droneRelay', 'Relay2')))
+    relays.append(drone.Relay(_log, 24, parser.get('droneRelay', 'Relay3')))
+    relays.append(drone.Relay(_log, 25, parser.get('droneRelay', 'Relay4')))
+    
+
+    #relays[0].setInfoPin(24)
+        
+
     # Initialize Blynk
     blynk = blynklib.Blynk(parser.get('droneDoser', 'BLYNK_AUTH'))        
     timer = blynktimer.Timer()
