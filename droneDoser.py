@@ -176,6 +176,212 @@ try:
                         blynk.notify(dosage.name + " has pumped " + str(dosage.volume) + ", so may need topup")      
     
     @blynk.handle_event('write V1')
+    def write_handler(pin, value):
+        staus = value[0]
+        relay = 0       
+        if (staus is "1" ):
+           try:
+                 _log.debug("in v"+str(relay+1)+"write_handler turing off relay " + relays[relay].name)
+                 relays[relay].turnOff(_log)
+                 relays[relay].setManual("Off")
+                 _log.debug(relays[relay].name + " in now off : v1write_handler completed")
+           except:
+                 _log.error("Except handle_event V"+str(relay+1)+" Turning Off")
+                
+           blynk.virtual_write(250, "Stopped")
+        elif (staus is "2" ):
+           try:
+                 _log.debug("in v1write_handler turing on relay")
+                 relays[relay].turnOn(_log)
+                 relays[relay].setManual("On")
+                 _log.debug(relays[relay].name + " in now on : v1write_handler completed")
+                 
+           except:
+                 _log.error("Except handle_event V"+str(relay+1)+" Turning on")
+           blynk.virtual_write(250, "Feeding")
+        else:
+           try:
+                 _log.debug("in v1write_handler turing on relay")
+                 relays[relay].setAutomatic()
+           except:
+                 _log.error("Except handle_event V"+str(relay+1)+" Turning auto")
+           blynk.virtual_write(250, "Auto")
+           relays[relay].cycleOnReset()
+           relays[relay].setOffCycleReset() 
+        blynk.virtual_write(relays[relay].getInfoPin(), relays[relay].info())
+                 
+                
+
+    @blynk.handle_event('write V2')
+    def write_handler(pin, value):  
+        staus = value[0]
+        relay = 1
+        _log.debug("in v2write_handler and the staus = " + str(value[0]))
+        if (staus is "1" ):
+           try:
+                 _log.debug("in v"+str(relay+1)+"write_handler turing on relay " + relays[relay].name)
+                 relays[relay].turnOn(_log)
+           except:
+                 _log.error("Except handle_event V"+str(relay+1)+" Turning On")
+        else:
+           try:
+                 _log.debug("in v2write_handler turing off relay")
+                 relays[relay].turnOff(_log)
+           except:
+                 _log.error("Except handle_event V"+str(relay+1)+" Turning Off")
+                
+    @blynk.handle_event('write V3')
+    def write_handler(pin, value):  
+        staus = value[0]
+        relay = 2
+        _log.debug("in v2write_handler and the staus = " + str(value[0]))
+        if (staus is "1" ):
+           try:
+                 _log.debug("in v"+str(relay+1)+"write_handler turing on relay " + relays[relay].name)
+                 relays[relay].turnOn(_log)
+           except:
+                 _log.error("Except handle_event V"+str(relay+1)+" Turning On")
+        else:
+           try:
+                 _log.debug("in v2write_handler turing off relay")
+                 relays[relay].turnOff(_log)
+           except:
+                 _log.error("Except handle_event V"+str(relay+1)+" Turning Off")
+ 
+
+    @blynk.handle_event('write V4')
+    def write_handler(pin, value):  
+        staus = value[0]
+        relay = 3
+        _log.debug("in v2write_handler and the staus = " + str(value[0]))
+        if (staus is "1" ):
+           try:
+                 _log.debug("in v"+str(relay+1)+"write_handler turing on relay " + relays[relay].name)
+                 relays[relay].turnOn(_log)
+           except:
+                 _log.error("Except handle_event V"+str(relay+1)+" Turning On")
+        else:
+           try:
+                 _log.debug("in v2write_handler turing off relay")
+                 relays[relay].turnOff(_log)
+           except:
+                 _log.error("Except handle_event V"+str(relay+1)+" Turning Off")
+                
+ 
+    @blynk.handle_event('write V5')
+    def write_handler(pin, value):  
+        staus = value[0]
+        relay = 4
+        _log.debug("in v2write_handler and the staus = " + str(value[0]))
+        if (staus is "1" ):
+           try:
+                 _log.debug("in v"+str(relay+1)+"write_handler turing on relay " + relays[relay].name)
+                 relays[relay].turnOn(_log)
+           except:
+                 _log.error("Except handle_event V"+str(relay+1)+" Turning On")
+        else:
+           try:
+                 _log.debug("in v2write_handler turing off relay")
+                 relays[relay].turnOff(_log)
+           except:
+                 _log.error("Except handle_event V"+str(relay+1)+" Turning Off")
+                
+ 
+    @blynk.handle_event('write V6')
+    def write_handler(pin, value):  
+        staus = value[0]
+        relay = 5
+        _log.debug("in v2write_handler and the staus = " + str(value[0]))
+        if (staus is "1" ):
+           try:
+                 _log.debug("in v"+str(relay+1)+"write_handler turing on relay " + relays[relay].name)
+                 relays[relay].turnOn(_log)
+           except:
+                 _log.error("Except handle_event V"+str(relay+1)+" Turning On")
+        else:
+           try:
+                 _log.debug("in v2write_handler turing off relay")
+                 relays[relay].turnOff(_log)
+           except:
+                 _log.error("Except handle_event V"+str(relay+1)+" Turning Off")
+
+                
+    @blynk.handle_event('write V7')
+    def v7write_handler(pin, value):
+        staus = value[0]
+        relay = 6
+        if (staus is "1" ):
+            try:
+                 _log.debug("in v7write_handler and turning off relay " + relays[relay].name + " on pin " + str(relays[relay].gpioPin))
+                 relays[relay].turnOff(_log)
+                 _log.debug("waste turnOff() completed")
+                 relays[relay].setManual("Off")
+                 _log.debug("waste setManual() completed")
+                 blynk.virtual_write(relays[relay].getInfoPin(), relays[relay].info())
+                 _log.debug("in v7write_handler and turning off relay completed")
+            except:
+                 _log.error("Except handle_event V7 Turning Off waste")
+                 blynk.virtual_write(28, "Except handle_event V7 Turning Off waste")           
+        elif (staus is "2" ):
+            try:
+                 _log.debug("in v7write_handler and turning on relay " + relays[relay].name + " on pin " + str(relays[relay].gpioPin))
+                 relays[relay].turnOn(_log)
+                 relays[relay].setManual("On")
+                 blynk.virtual_write(relays[relay].getInfoPin(), relays[relay].info())
+                 _log.debug("in v7write_handler and turning on relay completed")
+            except:
+                 _log.error("Except handle_event V7 Turning on waste")
+                 blynk.virtual_write(relays[relay].getInfoPin(), "Except handle_event V7 Turning on waste")
+        else : 
+            try:
+                 _log.debug("in v7write_handler and turning relay " + relays[relay].name + " auto on pin " + str(relays[relay].gpioPin))
+                 relays[relay].setAutomatic() 
+                 _log.debug("waste setAutomatic()")
+                 relays[relay].cycleOnReset()
+                 _log.debug("waste cycleReset()")
+                 relays[relay].cycleOffResetClear()
+                 blynk.virtual_write(relays[relay].getInfoPin(), relays[relay].info())
+                 _log.debug("waste cycleOffResetClear()")
+            except:
+                 _log.error("Except handle_event V7 Turning waste auto")
+                 blynk.virtual_write(relays[relay].getInfoPin(), "Except handle_event V7 Turning waste auto")
+                 
+                
+    @blynk.handle_event('write V8')
+    def write_handler(pin, value):
+        relay = 7
+        relays[relay].setTimer(int(value[0]), int(value[1]))
+
+    @blynk.handle_event('write V25')
+    def v25write_handler(pin, value):
+        relays[0].cycleResetSet(value[0])
+        blynk.virtual_write(relays[0].getInfoPin(), relays[0].info())
+        
+    @blynk.handle_event('write V26')
+    def v26write_handler(pin, value):
+        relays[0].cycleOffResetSet(value[0])
+        blynk.virtual_write(relays[0].getInfoPin(), relays[0].info())
+         
+    @blynk.handle_event('write V27')
+    def v27write_handler(pin, value):
+        relays[6].cycleResetSet(value[0])
+        relays[6].cycleOffResetClear()
+        blynk.virtual_write(relays[0].getInfoPin(), relays[0].info())
+    
+    @blynk.handle_event('write V29')
+    def v29write_handler(pin, value):
+        _log.debug("v29write_handler rowIndex =" + str(value[0]))
+        global rowIndex
+        rowIndex = int(value[0])
+          
+    @blynk.handle_event('write V96')
+    def v96write_handler(pin, value):
+        _log.debug("v96write_handler")
+        blynk.virtual_write(97,"clr")
+        blynk.virtual_write(96,0)
+        blynk.virtual_write(29,0)
+      
+    @blynk.handle_event('write V111')
     def buttonV1Pressed(pin, value):
         doSingleDose()
         blynk.run()
