@@ -516,7 +516,19 @@ try:
         os.system('sh /home/pi/updateDroneponics.sh')
         blynk.virtual_write(98, "System updated and restarting " + '\n')
         os.system('sudo reboot')
-
+	
+    @blynk.handle_event("connect")
+    def connect_handler():
+        _log.warning("Connected")
+        for pin in range(0,11):
+           _log.info('Syncing virtual buttons {}'.format(pin))
+           blynk.virtual_sync(pin)
+           blynk.read_response(timeout=0.5)
+        for pin in range(24,30):
+           _log.info('Syncing virtual buttons {}'.format(pin))
+           blynk.virtual_sync(pin)
+           blynk.read_response(timeout=0.5)
+        blynk.virtual_write(250, "Connected")
 	
     @timer.register(interval=60, run_once=False)
     def blynk_data():
