@@ -39,7 +39,7 @@ alarmList.append(Alarm('temperature', "High", "highhigh", 30.0,Notify=True, Mess
 bootup = True
 colours = {0: '#FF0000', 1: '#00FF00', '0': '#FF0000', '1': '#00FF00', 'OFFLINE': '#0000FF', 'ONLINE': '#00FF00'}
 systemLED=101
-
+rowIndex=1
 
 parser = ConfigParser()
 parser.read("/home/pi/droneponics/config/configDoser/"+drone.gethostname()+".ini")
