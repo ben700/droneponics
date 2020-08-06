@@ -352,17 +352,17 @@ try:
         relay = 7
         relays[relay].setTimer(int(value[0]), int(value[1]))
 
-    @blynk.handle_event('write V25')
+    @blynk.handle_event('write V35')
     def v25write_handler(pin, value):
         relays[0].cycleResetSet(value[0])
         blynk.virtual_write(relays[0].getInfoPin(), relays[0].info())
         
-    @blynk.handle_event('write V26')
+    @blynk.handle_event('write V36')
     def v26write_handler(pin, value):
         relays[0].cycleOffResetSet(value[0])
         blynk.virtual_write(relays[0].getInfoPin(), relays[0].info())
          
-    @blynk.handle_event('write V27')
+    @blynk.handle_event('write V37')
     def v27write_handler(pin, value):
         relays[6].cycleResetSet(value[0])
         relays[6].cycleOffResetClear()
@@ -576,8 +576,14 @@ try:
               bootup = False
               blynk.set_property(251, "label",drone.gethostname())
               blynk.virtual_write(251, drone.get_ip())
+	      x = 1 
+              for relay in relays:
+                 relay.setBlynkLabel(blynk, x, 10+x)
+                 x = x +1 
               now = datetime.now()
               blynk.virtual_write(99, now.strftime("%d/%m/%Y %H:%M:%S"))
+              blynk.virtual_write(97, "add", rowIndex, "Reboot", now.strftime("%d/%m/%Y %H:%M:%S"))
+              blynk.virtual_write(29,rowIndex+1)
               for l in LED:
                   blynk.virtual_write(l, 255)
               blynk.virtual_write(systemLED, 255)
