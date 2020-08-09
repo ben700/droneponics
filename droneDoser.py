@@ -654,7 +654,7 @@ try:
               ecCal = sensors[2].sensor.query("Cal,?")
               _log.critical(ecCal)
               _log.critical(sensors[2].sensor.query("Slope,?"))
-              _log.critical(ecCal.split("CAL,")[1].strip())
+              _log.critical("[" + ecCal.split("CAL,")[1].strip() + "]")
               if(ecCal.split("CAL,")[1].strip() == "0"):		
                     _log.critical("Not CAL")
 	      
