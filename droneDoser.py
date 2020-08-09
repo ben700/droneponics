@@ -615,7 +615,7 @@ try:
               blynk.virtual_write(98, "System now updated and restarted " + '\n')
               blynk.virtual_write(255, 0)
               _log.info('Just Booted')
-	      text= ""
+              text= ""
               cTemp = sensors[0].sensor.query("R").split(":")[1].strip().rstrip('\x00')
               if (float(cTemp) < 0) :
                     _log.critical("NO TEMP PROBE")
