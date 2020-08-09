@@ -625,8 +625,14 @@ try:
                     _log.critical("TEMP PROBE FOUND")
               _log.info(sensors[0].sensor.query("I"))
               _log.info(sensors[0].sensor.query("Status"))
-              _log.critical(sensors[0].sensor.query("Cal,?"))
+              tempCal = sensors[0].sensor.query("Cal,?")
+              _log.info(tempCal)
               _log.info(sensors[0].sensor.query("S,?"))
+		
+		
+              tempCal = tempCal.split("CAL,")[1].strip()
+               _log.info("tempCal = [" + tempCal +"]")		
+		
 		
               sensors[0].value = cTemp #Temp 
               sensors[1].value = sensors[1].sensor.query("RT,"+cTemp).split(":")[1].strip().rstrip('\x00') #EC
