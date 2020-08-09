@@ -642,6 +642,7 @@ try:
               _log.critical(sensors[1].sensor.query("Status"))
              
               pHCal = sensors[1].sensor.query("Cal,?")
+              _log.critical(pHCal)
               _log.critical(sensors[1].sensor.query("K,?"))
 		
               if(float(sensors[2].value) <= 0):
