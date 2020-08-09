@@ -630,7 +630,9 @@ try:
               _log.info(tempCal)
               _log.info(sensors[0].sensor.query("S,?"))
               tempCal = tempCal.split("CAL,")[1].strip()
-              if(tempCal == '0'):		
+              tempCal = " " + tempCal + " "
+              tempCalPoints = tempCal[1]
+              if(tempCalPoints == "0"):		
                     _log.critical("TEMP Not CAL : " + tempCal)
                     text = text + "TEMP Not CAL. "
               
@@ -651,7 +653,10 @@ try:
               ecCal = sensors[1].sensor.query("Cal,?")
               _log.info(ecCal)		
               ecCal = ecCal.split("CAL,")[1].strip().rstrip('\x00')
-              if(ecCal == '0'):		
+              ecCal = " " + ecCal + " "	
+              ecCalPoints = ecCal[1] 
+             
+              if(ecCalPoints == "0"):		
                     _log.critical("EC Not CAL : " + ecCal)
                     text = text + "EC Not CAL. "
               
@@ -667,21 +672,8 @@ try:
               _log.info(pHCal)
               _log.info(sensors[2].sensor.query("Slope,?"))
               pHCal = pHCal.split("CAL,")[1].strip().rstrip('\x00')
-              _log.critical("pHCal  = ")
-              _log.critical(pHCal)
-	
               pHCal = " " + pHCal + " "	
               pHCalPoints = pHCal[1] 
-              print("[" + pHCal + "]")
-              print("[" + pHCal[1] + "]")
-	
-              print("[" + pHCalPoints + "]")
- 
-       
-	
-	
-		
-	
               if(pHCalPoints == "0"):		
                     _log.critical("pH Not CAL : " + pHCal)
                     text = text + "pH Not CAL. "
