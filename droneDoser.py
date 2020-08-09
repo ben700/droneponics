@@ -632,7 +632,7 @@ try:
                     sensors[1].value = sensors[1].sensor.query("RT,"+cTemp).split(":")[1].strip().rstrip('\x00') #EC
                     sensors[2].value = sensors[2].sensor.query("RT,"+sensors[0].value).split(":")[1].strip().rstrip('\x00')  #pH
                     if(float(sensors[1].value) <= 10):
-                         _log.critical("NO EC PROBE")
+                         _log.critical("NO EC PROBE :-" + sensors[1].value)
                     if(float(sensors[2].value) <= 0):
                          _log.critical("NO pH PROBE")
            timer.run()
