@@ -638,7 +638,7 @@ try:
               sensors[1].value = sensors[1].sensor.query("RT,"+cTemp).split(":")[1].strip().rstrip('\x00') #EC
               sensors[2].value = sensors[2].sensor.query("RT,"+sensors[0].value).split(":")[1].strip().rstrip('\x00')  #pH
 			    
-              if(float(sensors[1].value) <= 10):
+              if(float(sensors[1].value) <= 0):
                     _log.critical("NO EC PROBE")
                     text = text + "NO EC PROBE. "
               else:
@@ -646,20 +646,19 @@ try:
 				
               _log.info(sensors[1].sensor.query("I"))
               _log.info(sensors[1].sensor.query("Status"))
-             
-              ecCal = sensors[1].sensor.query("Cal,?")
-              _log.info(ecCal)
               _log.info(sensors[1].sensor.query("K,?"))
-		
-              if(float(sensors[2].value) <= 0):
-                    _log.critical("NO pH PROBE")
-                    text = text + "NO pH PROBE. "
-              else:
-                    _log.info("EC PROBE FOUND")
+              ecCal = sensors[1].sensor.query("Cal,?")
+              _log.info(ecCal)		
               ecCal = ecCal.split("CAL,")[1].strip()
               if(ecCal):		
                     _log.critical("EC Not CAL")
                     text = text + "EC Not CAL. "
+              
+	      if(float(sensors[2].value) <= 0):
+                    _log.critical("NO pH PROBE")
+                    text = text + "NO pH PROBE. "
+              else:
+                    _log.info("pH PROBE FOUND")
               
               _log.info(sensors[2].sensor.query("I"))
               _log.info(sensors[2].sensor.query("Status"))
