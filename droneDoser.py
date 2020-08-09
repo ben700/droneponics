@@ -667,7 +667,9 @@ try:
               _log.info(pHCal)
               _log.info(sensors[2].sensor.query("Slope,?"))
               pHCal = pHCal.split("CAL,")[1].strip()
-              if(int(pHCal)  == 0):		
+              _log.critical("pHCal  = ")
+              _log.critical(pHCal)
+              if(float(pHCal)  == 0):		
                     _log.critical("pH Not CAL : " + pHCal)
                     text = text + "pH Not CAL. "
               
