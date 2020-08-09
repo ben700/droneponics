@@ -544,7 +544,7 @@ try:
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
 
         cTemp = sensors[0].sensor.query("R").split(":")[1].strip().rstrip('\x00')
-        if (cTemp < 0) :
+        if (int(cTemp) < 0) :
              _log.critical("cTemp = " + str(cTemp))
         else :
              _log.critical("cTemp -ve = " + str(cTemp))
@@ -617,7 +617,7 @@ try:
               _log.info('Just Booted')
 	
               cTemp = sensors[0].sensor.query("R").split(":")[1].strip().rstrip('\x00')
-              if (cTemp < 0) :
+              if (int(cTemp) < 0) :
                     _log.critical("NO TEMP PROBE")
 	
            timer.run()
