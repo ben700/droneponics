@@ -655,7 +655,7 @@ try:
               _log.critical(ecCal)
               _log.critical(sensors[2].sensor.query("Slope,?"))
               _log.critical("[" + ecCal.split("CAL,")[1].strip() + "]")
-              if(ecCal.split("CAL,")[1].strip() == "0"):		
+              if(int(ecCal.split("CAL,")[1].strip()) < 1):		
                     _log.critical("Not CAL")
 	      
               blynk.virtual_write(240, text)
