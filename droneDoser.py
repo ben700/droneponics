@@ -670,6 +670,11 @@ try:
               _log.critical("pHCal  = ")
               _log.critical(pHCal)
               print("[" + pHCal + "]")
+	      print("[" + pHCal.isnumeric() + "]")
+	      print("[" + pHCal.isalpha() + "]")
+	
+	
+		
 	
               if(pHCal == "0"):		
                     _log.critical("pH Not CAL : " + pHCal)
