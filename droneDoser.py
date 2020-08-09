@@ -654,7 +654,7 @@ try:
                     _log.critical("EC Not CAL")
                     text = text + "EC Not CAL. "
               
-	      if(float(sensors[2].value) <= 0):
+              if(float(sensors[2].value) <= 0):
                     _log.critical("NO pH PROBE")
                     text = text + "NO pH PROBE. "
               else:
