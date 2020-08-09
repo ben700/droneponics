@@ -647,29 +647,29 @@ try:
               _log.info(sensors[1].sensor.query("I"))
               _log.info(sensors[1].sensor.query("Status"))
              
-              pHCal = sensors[1].sensor.query("Cal,?")
-              _log.critical(pHCal)
+              ecCal = sensors[1].sensor.query("Cal,?")
+              _log.info(ecCal)
               _log.info(sensors[1].sensor.query("K,?"))
 		
-              if(float(sensors[2].value) <= 0):
-                    _log.critical("NO pH PROBE")
-                    text = text + "NO pH PROBE. "
+              if(float(sensors[1].value) <= 0):
+                    _log.critical("NO EC PROBE")
+                    text = text + "NO EC PROBE. "
               else:
-                    _log.info("pH PROBE FOUND")
+                    _log.info("EC PROBE FOUND")
+              ecCal = ecCal.split("CAL,")[1].strip()
+              if(ecCal):		
+                    _log.critical("EC Not CAL")
+                    text = text + "EC Not CAL. "
+              
+              _log.info(sensors[2].sensor.query("I"))
+              _log.info(sensors[2].sensor.query("Status"))
+              pHCal = sensors[2].sensor.query("Cal,?")
+              _log.info(pHCal)
+              _log.info(sensors[2].sensor.query("Slope,?"))
               pHCal = pHCal.split("CAL,")[1].strip()
               if(pHCal):		
                     _log.critical("pH Not CAL")
                     text = text + "pH Not CAL. "
-              
-              _log.info(sensors[2].sensor.query("I"))
-              _log.info(sensors[2].sensor.query("Status"))
-              ecCal = sensors[2].sensor.query("Cal,?")
-              _log.critical(ecCal)
-              _log.info(sensors[2].sensor.query("Slope,?"))
-              ecCal = ecCal.split("CAL,")[1].strip()
-              if(ecCal):		
-                    _log.critical("Not CAL")
-                    text = text + "EC Not CAL. "
               
               blynk.virtual_write(240, text)
               if (text == ""):
