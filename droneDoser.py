@@ -670,7 +670,7 @@ try:
               _log.critical("pHCal  = ")
               _log.critical(pHCal)
 	
-              pHCal = "" + pHCal + ""	    
+              pHCal = " " + pHCal + " "	    
               print("[" + pHCal + "]")
               print("[" + len(pHCal) + "]")
               print("[" + pHCal[0] + "]")
