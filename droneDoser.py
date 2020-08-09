@@ -678,7 +678,7 @@ try:
               print("[" + hex(pHCal) + "]")
               print("[" + int(pHCal) + "]")
               print("[" + str(pHCal) + "]")
-	      print("[" + pHCal.isnumeric() + "]")
+              print("[" + pHCal.isnumeric() + "]")
               print("[" + pHCal.isalpha() + "]")
 	
 	
