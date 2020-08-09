@@ -639,18 +639,18 @@ try:
               
               _log.critical(sensors[0].sensor.query("I"))
               _log.critical(sensors[0].sensor.query("Status"))
-	      _log.critical(sensors[0].sensor.query("Cal,?"))
-	      _log.critical(sensors[0].sensor.query("S,?"))
+              _log.critical(sensors[0].sensor.query("Cal,?"))
+              _log.critical(sensors[0].sensor.query("S,?"))
 	
               _log.critical(sensors[1].sensor.query("I"))
               _log.critical(sensors[1].sensor.query("Status"))
-	      _log.critical(sensors[1].sensor.query("Cal,?"))
-	      _log.critical(sensors[1].sensor.query("K,?"))
+              _log.critical(sensors[1].sensor.query("Cal,?"))
+              _log.critical(sensors[1].sensor.query("K,?"))
 	
 	      _log.critical(sensors[2].sensor.query("I"))
               _log.critical(sensors[2].sensor.query("Status"))
-	      _log.critical(sensors[2].sensor.query("Cal,?"))
-	      _log.critical(sensors[2].sensor.query("Slope,?"))
+              _log.critical(sensors[2].sensor.query("Cal,?"))
+              _log.critical(sensors[2].sensor.query("Slope,?"))
 	
               timer.run()
         except:
