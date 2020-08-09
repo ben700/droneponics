@@ -671,15 +671,14 @@ try:
               _log.critical(pHCal)
 	
               pHCal = " " + pHCal + " "	
- 
+              pHCalPoints = pHCal[1] 
               print("[" + pHCal + "]")
               print("[" + pHCal[1] + "]")
 	
-              print("[" + hex(pHCal[1] ) + "]")
-              print("[" + int(pHCal[1] ) + "]")
-              print("[" + str(pHCal[1] ) + "]")
-              print("[" + pHCal.isnumeric() + "]")
-              print("[" + pHCal.isalpha() + "]")
+              print("[" + pHCalPoints + "]")
+              print("[" + int(pHCalPoints) + "]")
+              print("[" + str(pHCalPoints) + "]")
+       
 	
 	
 		
