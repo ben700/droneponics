@@ -623,9 +623,9 @@ try:
                     sensors[0].value = cTemp #Temp 
                     sensors[1].value = sensors[1].sensor.query("RT,"+cTemp).split(":")[1].strip().rstrip('\x00') #EC
                     sensors[2].value = sensors[2].sensor.query("RT,"+sensors[0].value).split(":")[1].strip().rstrip('\x00')  #pH
-		    _log.critical(sensors[0].sensor.query("I"))
-		    _log.critical(sensors[1].sensor.query("I"))
-		    _log.critical(sensors[2].sensor.query("I"))
+                    _log.critical(sensors[0].sensor.query("I"))
+                    _log.critical(sensors[1].sensor.query("I"))
+                    _log.critical(sensors[2].sensor.query("I"))
 		
 			    
                     if(float(sensors[1].value) <= 10):
