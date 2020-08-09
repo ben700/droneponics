@@ -626,6 +626,8 @@ try:
                     _log.critical(sensors[0].sensor.query("I"))
                     _log.critical(sensors[1].sensor.query("I"))
                     _log.critical(sensors[2].sensor.query("I"))
+                    _log.critical(sensors[2].sensor.query("Slope,?"))
+		
 		
 			    
                     if(float(sensors[1].value) <= 10):
