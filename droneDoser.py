@@ -619,7 +619,7 @@ try:
               cTemp = sensors[0].sensor.query("R").split(":")[1].strip().rstrip('\x00')
               if (float(cTemp) < 0) :
                     _log.critical("NO TEMP PROBE")
-		    text = text + "NO TEMP PROBE. "
+                    text = text + "NO TEMP PROBE. "
                     cTemp="20.00"
               else:
                     _log.critical("TEMP PROBE FOUND")
