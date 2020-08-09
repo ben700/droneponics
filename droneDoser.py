@@ -631,7 +631,7 @@ try:
 		
 		
               tempCal = tempCal.split("CAL,")[1].strip()
-               _log.info("tempCal = [" + tempCal +"]")		
+              _log.info("tempCal = [" + tempCal +"]")		
 		
 		
               sensors[0].value = cTemp #Temp 
