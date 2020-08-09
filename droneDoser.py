@@ -669,7 +669,9 @@ try:
               pHCal = pHCal.split("CAL,")[1].strip()
               _log.critical("pHCal  = ")
               _log.critical(pHCal)
-              if(float(pHCal)  == 0):		
+              print("[" + pHCal + "]")
+	
+              if(pHCal == "0"):		
                     _log.critical("pH Not CAL : " + pHCal)
                     text = text + "pH Not CAL. "
               
