@@ -639,7 +639,7 @@ try:
               sensors[1].value = sensors[1].sensor.query("RT,"+cTemp).split(":")[1].strip().rstrip('\x00') #EC
               sensors[2].value = sensors[2].sensor.query("RT,"+sensors[0].value).split(":")[1].strip().rstrip('\x00')  #pH
 			    
-              if(float(sensors[1].value) <= 0):
+              if(float(sensors[1].value) <= 2):
                     _log.critical("NO EC PROBE")
                     text = text + "NO EC PROBE. "
               else:
@@ -667,7 +667,7 @@ try:
               _log.info(pHCal)
               _log.info(sensors[2].sensor.query("Slope,?"))
               pHCal = pHCal.split("CAL,")[1].strip()
-              if(pHCal  == '0'):		
+              if(int(pHCal)  == 0):		
                     _log.critical("pH Not CAL : " + pHCal)
                     text = text + "pH Not CAL. "
               
