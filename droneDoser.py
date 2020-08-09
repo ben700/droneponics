@@ -643,7 +643,7 @@ try:
                     _log.critical("NO EC PROBE")
                     text = text + "NO EC PROBE. "
               else:
-                    _log.info("EC PROBE FOUND :-" + sensors[1].value)
+                    _log.critical("EC PROBE FOUND :-" + sensors[1].value)
 				
               _log.info(sensors[1].sensor.query("I"))
               _log.info(sensors[1].sensor.query("Status"))
@@ -659,7 +659,7 @@ try:
                     _log.critical("NO pH PROBE")
                     text = text + "NO pH PROBE. "
               else:
-                    _log.info("pH PROBE FOUND :-" + sensors[2].value)
+                    _log.critical("pH PROBE FOUND :-" + sensors[2].value)
               
               _log.info(sensors[2].sensor.query("I"))
               _log.info(sensors[2].sensor.query("Status"))
