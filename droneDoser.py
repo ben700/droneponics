@@ -617,12 +617,12 @@ try:
               _log.info('Just Booted')
               text= ""
               cTemp = sensors[0].sensor.query("R").split(":")[1].strip().rstrip('\x00')
-              if (float(cTemp) < 0) :
+              if (float(cTemp) <= 2) :
                     _log.critical("NO TEMP PROBE")
                     text = text + "NO TEMP PROBE. "
                     cTemp="20.00"
               else:
-                    _log.critical("TEMP PROBE FOUND :- " + sensors[1].value)
+                    _log.critical("TEMP PROBE FOUND : " + sensors[1].value)
 			
               _log.info(sensors[0].sensor.query("I"))
               _log.info(sensors[0].sensor.query("Status"))
@@ -631,7 +631,7 @@ try:
               _log.info(sensors[0].sensor.query("S,?"))
               tempCal = tempCal.split("CAL,")[1].strip()
               if(tempCal):		
-                    _log.critical("TEMP Not CAL :-" + tempCal)
+                    _log.critical("TEMP Not CAL : " + tempCal)
                     text = text + "TEMP Not CAL. "
               
 		
@@ -643,7 +643,7 @@ try:
                     _log.critical("NO EC PROBE")
                     text = text + "NO EC PROBE. "
               else:
-                    _log.critical("EC PROBE FOUND :-" + sensors[1].value)
+                    _log.critical("EC PROBE FOUND : " + sensors[1].value)
 				
               _log.info(sensors[1].sensor.query("I"))
               _log.info(sensors[1].sensor.query("Status"))
@@ -652,14 +652,14 @@ try:
               _log.info(ecCal)		
               ecCal = ecCal.split("CAL,")[1].strip()
               if(ecCal):		
-                    _log.critical("EC Not CAL :-" + ecCal)
+                    _log.critical("EC Not CAL : " + ecCal)
                     text = text + "EC Not CAL. "
               
               if(float(sensors[2].value) <= 0):
                     _log.critical("NO pH PROBE")
                     text = text + "NO pH PROBE. "
               else:
-                    _log.critical("pH PROBE FOUND :-" + sensors[2].value)
+                    _log.critical("pH PROBE FOUND : " + sensors[2].value)
               
               _log.info(sensors[2].sensor.query("I"))
               _log.info(sensors[2].sensor.query("Status"))
@@ -668,7 +668,7 @@ try:
               _log.info(sensors[2].sensor.query("Slope,?"))
               pHCal = pHCal.split("CAL,")[1].strip()
               if(pHCal):		
-                    _log.critical("pH Not CAL :-" + pHCal)
+                    _log.critical("pH Not CAL : " + pHCal)
                     text = text + "pH Not CAL. "
               
               blynk.virtual_write(240, text)
