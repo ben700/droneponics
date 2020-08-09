@@ -651,9 +651,9 @@ try:
               _log.info(ecCal)
               _log.info(sensors[1].sensor.query("K,?"))
 		
-              if(float(sensors[1].value) <= 0):
-                    _log.critical("NO EC PROBE")
-                    text = text + "NO EC PROBE. "
+              if(float(sensors[2].value) <= 0):
+                    _log.critical("NO pH PROBE")
+                    text = text + "NO pH PROBE. "
               else:
                     _log.info("EC PROBE FOUND")
               ecCal = ecCal.split("CAL,")[1].strip()
