@@ -623,10 +623,10 @@ try:
                     cTemp="20.00"
               else:
                     _log.critical("TEMP PROBE FOUND")
-              _log.critical(sensors[0].sensor.query("I"))
-              _log.critical(sensors[0].sensor.query("Status"))
+              _log.info(sensors[0].sensor.query("I"))
+              _log.info(sensors[0].sensor.query("Status"))
               _log.critical(sensors[0].sensor.query("Cal,?"))
-              _log.critical(sensors[0].sensor.query("S,?"))
+              _log.info(sensors[0].sensor.query("S,?"))
 		
               sensors[0].value = cTemp #Temp 
               sensors[1].value = sensors[1].sensor.query("RT,"+cTemp).split(":")[1].strip().rstrip('\x00') #EC
@@ -636,30 +636,30 @@ try:
                     _log.critical("NO EC PROBE")
                     text = text + "NO EC PROBE. "
               else:
-                    _log.critical("EC PROBE FOUND")
+                    _log.info("EC PROBE FOUND")
 				
-              _log.critical(sensors[1].sensor.query("I"))
-              _log.critical(sensors[1].sensor.query("Status"))
+              _log.info(sensors[1].sensor.query("I"))
+              _log.info(sensors[1].sensor.query("Status"))
              
               pHCal = sensors[1].sensor.query("Cal,?")
               _log.critical(pHCal)
-              _log.critical(sensors[1].sensor.query("K,?"))
+              _log.info(sensors[1].sensor.query("K,?"))
 		
               if(float(sensors[2].value) <= 0):
                     _log.critical("NO pH PROBE")
                     text = text + "NO pH PROBE. "
               else:
-                    _log.critical("pH PROBE FOUND")
+                    _log.info("pH PROBE FOUND")
               pHCal = pHCal.split("CAL,")[1].strip()
               if(pHCal):		
                     _log.critical("pH Not CAL")
                     text = text + "pH Not CAL. "
               
-              _log.critical(sensors[2].sensor.query("I"))
-              _log.critical(sensors[2].sensor.query("Status"))
+              _log.info(sensors[2].sensor.query("I"))
+              _log.info(sensors[2].sensor.query("Status"))
               ecCal = sensors[2].sensor.query("Cal,?")
               _log.critical(ecCal)
-              _log.critical(sensors[2].sensor.query("Slope,?"))
+              _log.info(sensors[2].sensor.query("Slope,?"))
               ecCal = ecCal.split("CAL,")[1].strip()
               if(ecCal):		
                     _log.critical("Not CAL")
