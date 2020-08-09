@@ -673,7 +673,7 @@ try:
               pHCal = " " + pHCal + " "	
  
               print("[" + pHCal + "]")
-              print("[" + len(pHCal) + "]")
+              print("[" + pHCal.len() + "]")
               print("[" + pHCal[0] + "]")
 	
               print("[" + hex(pHCal) + "]")
