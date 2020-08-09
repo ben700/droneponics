@@ -640,7 +640,8 @@ try:
 				
               _log.critical(sensors[1].sensor.query("I"))
               _log.critical(sensors[1].sensor.query("Status"))
-              _log.critical(sensors[1].sensor.query("Cal,?"))
+             
+              pHCal = sensors[1].sensor.query("Cal,?")
               _log.critical(sensors[1].sensor.query("K,?"))
 		
               if(float(sensors[2].value) <= 0):
@@ -648,19 +649,21 @@ try:
                     text = text + "NO pH PROBE. "
               else:
                     _log.critical("pH PROBE FOUND")
-            
+              pHCal = pHCal.split("CAL,")[1].strip()
+              if(pHCal):		
+                    _log.critical("pH Not CAL")
+                    text = text + "pH Not CAL. "
+              
               _log.critical(sensors[2].sensor.query("I"))
               _log.critical(sensors[2].sensor.query("Status"))
               ecCal = sensors[2].sensor.query("Cal,?")
               _log.critical(ecCal)
               _log.critical(sensors[2].sensor.query("Slope,?"))
               ecCal = ecCal.split("CAL,")[1].strip()
-              _log.critical("[" + ecCal + "]")
               if(ecCal):		
                     _log.critical("Not CAL")
-              if(ecCal < 1):		
-                    _log.critical("Not CAL")
-	      
+                    text = text + "EC Not CAL. "
+              
               blynk.virtual_write(240, text)
               if (text == ""):
                    blynk.set_property(240, 'color', colours['ONLINE'])
