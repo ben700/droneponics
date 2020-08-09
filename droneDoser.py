@@ -622,17 +622,18 @@ try:
                     text = text + "NO TEMP PROBE. "
                     cTemp="20.00"
               else:
-                    _log.critical("TEMP PROBE FOUND")
+                    _log.critical("TEMP PROBE FOUND :- " + sensors[1].value)
+			
               _log.info(sensors[0].sensor.query("I"))
               _log.info(sensors[0].sensor.query("Status"))
               tempCal = sensors[0].sensor.query("Cal,?")
               _log.info(tempCal)
               _log.info(sensors[0].sensor.query("S,?"))
-		
-		
               tempCal = tempCal.split("CAL,")[1].strip()
-              _log.info("tempCal = [" + tempCal +"]")		
-		
+              if(tempCal):		
+                    _log.critical("TEMP Not CAL :-" + tempCal)
+                    text = text + "TEMP Not CAL. "
+              
 		
               sensors[0].value = cTemp #Temp 
               sensors[1].value = sensors[1].sensor.query("RT,"+cTemp).split(":")[1].strip().rstrip('\x00') #EC
@@ -642,7 +643,7 @@ try:
                     _log.critical("NO EC PROBE")
                     text = text + "NO EC PROBE. "
               else:
-                    _log.info("EC PROBE FOUND")
+                    _log.info("EC PROBE FOUND :-" + sensors[1].value)
 				
               _log.info(sensors[1].sensor.query("I"))
               _log.info(sensors[1].sensor.query("Status"))
@@ -658,7 +659,7 @@ try:
                     _log.critical("NO pH PROBE")
                     text = text + "NO pH PROBE. "
               else:
-                    _log.info("pH PROBE FOUND")
+                    _log.info("pH PROBE FOUND :-" + sensors[2].value)
               
               _log.info(sensors[2].sensor.query("I"))
               _log.info(sensors[2].sensor.query("Status"))
