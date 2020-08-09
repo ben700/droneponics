@@ -652,7 +652,7 @@ try:
               _log.info(ecCal)		
               ecCal = ecCal.split("CAL,")[1].strip()
               if(ecCal):		
-                    _log.critical("EC Not CAL")
+                    _log.critical("EC Not CAL :-" + ecCal)
                     text = text + "EC Not CAL. "
               
               if(float(sensors[2].value) <= 0):
@@ -668,7 +668,7 @@ try:
               _log.info(sensors[2].sensor.query("Slope,?"))
               pHCal = pHCal.split("CAL,")[1].strip()
               if(pHCal):		
-                    _log.critical("pH Not CAL")
+                    _log.critical("pH Not CAL :-" + pHCal)
                     text = text + "pH Not CAL. "
               
               blynk.virtual_write(240, text)
