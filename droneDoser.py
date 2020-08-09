@@ -627,7 +627,7 @@ try:
               _log.critical(sensors[0].sensor.query("Cal,?"))
               _log.critical(sensors[0].sensor.query("S,?"))
 		
-	       sensors[0].value = cTemp #Temp 
+               sensors[0].value = cTemp #Temp 
                sensors[1].value = sensors[1].sensor.query("RT,"+cTemp).split(":")[1].strip().rstrip('\x00') #EC
                sensors[2].value = sensors[2].sensor.query("RT,"+sensors[0].value).split(":")[1].strip().rstrip('\x00')  #pH
 			    
