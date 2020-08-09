@@ -651,7 +651,7 @@ try:
               ecCal = sensors[1].sensor.query("Cal,?")
               _log.info(ecCal)		
               ecCal = ecCal.split("CAL,")[1].strip()
-              if(ecCal == "0"):		
+              if(ecCal == '0'):		
                     _log.critical("EC Not CAL : " + ecCal)
                     text = text + "EC Not CAL. "
               
@@ -667,7 +667,7 @@ try:
               _log.info(pHCal)
               _log.info(sensors[2].sensor.query("Slope,?"))
               pHCal = pHCal.split("CAL,")[1].strip()
-              if(pHCal == 0):		
+              if(pHCal  == '0'):		
                     _log.critical("pH Not CAL : " + pHCal)
                     text = text + "pH Not CAL. "
               
