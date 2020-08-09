@@ -676,14 +676,13 @@ try:
               print("[" + pHCal[1] + "]")
 	
               print("[" + pHCalPoints + "]")
-              print("[" + int(pHCalPoints) + "]")
-              print("[" + str(pHCalPoints) + "]")
+ 
        
 	
 	
 		
 	
-              if(pHCal == "0"):		
+              if(pHCalPoints == "0"):		
                     _log.critical("pH Not CAL : " + pHCal)
                     text = text + "pH Not CAL. "
               
