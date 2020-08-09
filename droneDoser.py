@@ -619,7 +619,14 @@ try:
               cTemp = sensors[0].sensor.query("R").split(":")[1].strip().rstrip('\x00')
               if (float(cTemp) < 0) :
                     _log.critical("NO TEMP PROBE")
-	
+              else:
+                    sensors[0].value = cTemp #Temp 
+                    sensors[1].value = sensors[1].sensor.query("RT,"+cTemp).split(":")[1].strip().rstrip('\x00') #EC
+                    sensors[2].value = sensors[2].sensor.query("RT,"+sensors[0].value).split(":")[1].strip().rstrip('\x00')  #pH
+		    if(sensors[2].value =<0):
+                         _log.critical("NO pH PROBE")
+			
+			
            timer.run()
         except:
            _log.info('Unexpected error')
