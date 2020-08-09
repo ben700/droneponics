@@ -54,6 +54,13 @@ try:
     consoleHandler.setFormatter(logFormatter)
     _log.addHandler(consoleHandler)
     _log.setLevel(parser.get('logging', 'logLevel', fallback=logging.DEBUG))
+
+    _log.critical("critical")
+    _log.error("error")
+    _log.warning("warning")
+    _log.info("info")
+    _log.debug("debug")
+
     _log.info("/home/pi/droneponics/config/configRelay/"+drone.gethostname()+".ini")
 
     pH=0
@@ -537,6 +544,8 @@ try:
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
 
         cTemp = sensors[0].sensor.query("R").split(":")[1].strip().rstrip('\x00')
+	_log.critical("cTemp = " + str(cTemp))
+    
         sensors[0].value = cTemp #Temp
         sensors[1].value = sensors[1].sensor.query("RT,"+cTemp).split(":")[1].strip().rstrip('\x00') #EC
         sensors[2].value = sensors[2].sensor.query("RT,"+sensors[0].value).split(":")[1].strip().rstrip('\x00')  #pH
