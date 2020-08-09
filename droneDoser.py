@@ -674,7 +674,7 @@ try:
               print("[" + len(pHCal) + "]")
               print("[" + pHCal[0] + "]")
 	
-	      print("[" + hex(pHCal) + "]")
+              print("[" + hex(pHCal) + "]")
               print("[" + int(pHCal) + "]")
               print("[" + str(pHCal) + "]")
 	
