@@ -615,10 +615,11 @@ try:
               blynk.virtual_write(98, "System now updated and restarted " + '\n')
               blynk.virtual_write(255, 0)
               _log.info('Just Booted')
-	
+	      text= ""
               cTemp = sensors[0].sensor.query("R").split(":")[1].strip().rstrip('\x00')
               if (float(cTemp) < 0) :
                     _log.critical("NO TEMP PROBE")
+		    text = text + "NO TEMP PROBE. "
                     cTemp="20.00"
               else:
                     _log.critical("TEMP PROBE FOUND")
@@ -633,6 +634,7 @@ try:
 			    
               if(float(sensors[1].value) <= 10):
                     _log.critical("NO EC PROBE")
+                    text = text + "NO EC PROBE. "
               else:
                     _log.critical("EC PROBE FOUND")
 				
@@ -643,6 +645,7 @@ try:
 		
               if(float(sensors[2].value) <= 0):
                     _log.critical("NO pH PROBE")
+                    text = text + "NO pH PROBE. "
               else:
                     _log.critical("pH PROBE FOUND")
             
@@ -650,7 +653,13 @@ try:
               _log.critical(sensors[2].sensor.query("Status"))
               _log.critical(sensors[2].sensor.query("Cal,?"))
               _log.critical(sensors[2].sensor.query("Slope,?"))
-	
+	      
+              blynk.virtual_write(240, text)
+              if (text == ""):
+                   blynk.set_property(240, , 'color', colours['ONLINE'])
+              else:
+                   blynk.set_property(240, , 'color', colours['OFFLINE'])
+
               timer.run()
         except:
            _log.info('Unexpected error')
