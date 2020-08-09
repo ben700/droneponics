@@ -627,11 +627,11 @@ try:
               _log.critical(sensors[0].sensor.query("Cal,?"))
               _log.critical(sensors[0].sensor.query("S,?"))
 		
-               sensors[0].value = cTemp #Temp 
-               sensors[1].value = sensors[1].sensor.query("RT,"+cTemp).split(":")[1].strip().rstrip('\x00') #EC
-               sensors[2].value = sensors[2].sensor.query("RT,"+sensors[0].value).split(":")[1].strip().rstrip('\x00')  #pH
+              sensors[0].value = cTemp #Temp 
+              sensors[1].value = sensors[1].sensor.query("RT,"+cTemp).split(":")[1].strip().rstrip('\x00') #EC
+              sensors[2].value = sensors[2].sensor.query("RT,"+sensors[0].value).split(":")[1].strip().rstrip('\x00')  #pH
 			    
-               if(float(sensors[1].value) <= 10):
+              if(float(sensors[1].value) <= 10):
                     _log.critical("NO EC PROBE")
               else:
                     _log.critical("EC PROBE FOUND")
@@ -641,7 +641,7 @@ try:
               _log.critical(sensors[1].sensor.query("Cal,?"))
               _log.critical(sensors[1].sensor.query("K,?"))
 		
-               if(float(sensors[2].value) <= 0):
+              if(float(sensors[2].value) <= 0):
                     _log.critical("NO pH PROBE")
               else:
                     _log.critical("pH PROBE FOUND")
