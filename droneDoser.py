@@ -656,9 +656,9 @@ try:
 	      
               blynk.virtual_write(240, text)
               if (text == ""):
-                   blynk.set_property(240, , 'color', colours['ONLINE'])
+                   blynk.set_property(240, 'color', colours['ONLINE'])
               else:
-                   blynk.set_property(240, , 'color', colours['OFFLINE'])
+                   blynk.set_property(240, 'color', colours['OFFLINE'])
 
               timer.run()
         except:
