@@ -670,8 +670,8 @@ try:
               _log.critical("pHCal  = ")
               _log.critical(pHCal)
               print("[" + pHCal + "]")
-	      print("[" + pHCal.isnumeric() + "]")
-	      print("[" + pHCal.isalpha() + "]")
+              print("[" + pHCal.isnumeric() + "]")
+              print("[" + pHCal.isalpha() + "]")
 	
 	
 		
