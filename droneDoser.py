@@ -544,10 +544,10 @@ try:
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
 
         cTemp = sensors[0].sensor.query("R").split(":")[1].strip().rstrip('\x00')
-	if (cTemp < 0) :
-	    _log.critical("cTemp = " + str(cTemp))
+        if (cTemp < 0) :
+             _log.critical("cTemp = " + str(cTemp))
         else :
-	    _log.critical("cTemp -ve = " + str(cTemp))
+             _log.critical("cTemp -ve = " + str(cTemp))
     
         sensors[0].value = cTemp #Temp
         sensors[1].value = sensors[1].sensor.query("RT,"+cTemp).split(":")[1].strip().rstrip('\x00') #EC
