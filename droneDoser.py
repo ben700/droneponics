@@ -620,7 +620,8 @@ try:
               if (float(cTemp) < 0) :
                     _log.critical("NO TEMP PROBE")
                     cTemp="20.00"
-
+              else:
+                    _log.critical("TEMP PROBE FOUND")
               _log.critical(sensors[0].sensor.query("I"))
               _log.critical(sensors[0].sensor.query("Status"))
               _log.critical(sensors[0].sensor.query("Cal,?"))
@@ -632,6 +633,8 @@ try:
 			    
                if(float(sensors[1].value) <= 10):
                     _log.critical("NO EC PROBE")
+              else:
+                    _log.critical("EC PROBE FOUND")
 				
               _log.critical(sensors[1].sensor.query("I"))
               _log.critical(sensors[1].sensor.query("Status"))
@@ -640,6 +643,8 @@ try:
 		
                if(float(sensors[2].value) <= 0):
                     _log.critical("NO pH PROBE")
+              else:
+                    _log.critical("pH PROBE FOUND")
             
               _log.critical(sensors[2].sensor.query("I"))
               _log.critical(sensors[2].sensor.query("Status"))
