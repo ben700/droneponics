@@ -5,16 +5,17 @@ import sys
 import os
 import logging
 import time
+
+picdir = '/home/pi/droneponics/pic/'
+libdir = '/home/pi/droneponics/lib/'
+if os.path.exists(libdir):
+     sys.path.append(libdir)
 from waveshare_2inch_LCD import ST7789
 from PIL import Image,ImageDraw,ImageFont
 
 class Display:
    
     def __init__(self, _log):
-        picdir = '/home/pi/droneponics/pic/'
-        libdir = '/home/pi/droneponics/lib/'
-        if os.path.exists(libdir):
-            sys.path.append(libdir)
         _log.info(picdir)
         _log.debug(" 2inch LCD Module")
         disp = ST7789.ST7789()
