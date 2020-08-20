@@ -696,7 +696,7 @@ try:
                     text = text + "pH Not CAL. "
               
               blynk.virtual_write(240, text)
-              lcdDisplay.updateLCDProbe (sPH, sEC, sTemp):
+              lcdDisplay.updateLCDProbe (sPH, sEC, sTemp)
               if (text == ""):
                    blynk.set_property(240, 'color', colours['ONLINE'])
               else:
