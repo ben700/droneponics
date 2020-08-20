@@ -72,7 +72,7 @@ try:
     _log.info("drone.buildSensors(sensors")
     sensors = drone.buildSensors(sensors, _log)
     _log.info("all senses created")
-    lcdDisplay=drone.Display()
+    lcdDisplay=drone.Display(_log)
     _log.info("all senses created")
 		
 
