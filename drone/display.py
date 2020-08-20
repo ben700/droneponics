@@ -47,7 +47,7 @@ class Display:
         self._log.debug("draw.rectangle 3")
         draw.rectangle([(20,190),(300,230)], fill = "WHITE", outline="BLACK")
 
-        self._log ("***draw text")
+        self._log.debug ("***draw text")
 
         draw.text((50, 90), 'pH = ' + str(sPH), font = font30, fill = "BLACK")
         draw.text((50, 150), 'EC = ' + str(sEC), font = font30, fill = "BLACK")
