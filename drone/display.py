@@ -40,9 +40,11 @@ class Display:
         self._log.debug("Fonts loaded")
 
         draw.rectangle([(0,0),(320,240)],fill = "WHITE")
-        self._log.debug("draw.rectangle")
+        self._log.debug("draw.rectangle 1")
         draw.rectangle([(20,70),(300,130)], fill = "WHITE", outline="BLACK")
+        self._log.debug("draw.rectangle 2")          
         draw.rectangle([(20,130),(300,190)], fill = "WHITE", outline="BLACK")
+        self._log.debug("draw.rectangle 3")
         draw.rectangle([(20,190),(300,230)], fill = "WHITE", outline="BLACK")
 
         self._log ("***draw text")
