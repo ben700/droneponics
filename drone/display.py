@@ -28,26 +28,21 @@ class Display:
      
         # Clear display.
         self.disp.clear()
+        self._log.debug("Clear Display")
+     
         image = Image.new('RGB', (self.disp.height,self.disp.width), (255,255,255)) 
 
         draw = ImageDraw.Draw(image)
+        self._log.debug("ImageDraw blank")
 
         font30 = ImageFont.truetype(os.path.join(picdir, 'Font.ttc'), 30)
         font15 = ImageFont.truetype(os.path.join(picdir, 'Font.ttc'), 15)
-
+        self._log.debug("Fonts loaded")
 
         draw.rectangle([(0,0),(320,240)],fill = "WHITE")
         draw.rectangle([(20,70),(300,130)], fill = "WHITE", outline="BLACK")
         draw.rectangle([(20,130),(300,190)], fill = "WHITE", outline="BLACK")
         draw.rectangle([(20,190),(300,230)], fill = "WHITE", outline="BLACK")
-
-
-        self._log ("***draw line")
-        #draw.line([(20,20),(300,20)], fill = "BLUE",width = 5)
-        #draw.line([(20,80),(300,80)], fill = "BLUE",width = 5)
-        #draw.line([(20,20),(20,80)], fill = "BLUE",width = 5)
-        #draw.line([(300,20),(300,80)], fill = "BLUE",width = 5)
-
 
         self._log ("***draw text")
 
