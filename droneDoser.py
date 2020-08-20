@@ -72,6 +72,9 @@ try:
     _log.info("drone.buildSensors(sensors")
     sensors = drone.buildSensors(sensors, _log)
     _log.info("all senses created")
+    lcdDisplay=drone.Display()
+    _log.info("all senses created")
+		
 
     GPIO.setmode(GPIO.BCM)
     GPIO.setwarnings(False)
@@ -616,13 +619,20 @@ try:
               blynk.virtual_write(255, 0)
               _log.info('Just Booted')
               text= ""
+              sPH= ""
+              sEC= ""
+              sTemp= ""
+		
               cTemp = sensors[0].sensor.query("R").split(":")[1].strip().rstrip('\x00')
+              sensors[0].value = cTemp #Temp 
               if (float(cTemp) <= 2) :
-                    _log.critical("NO TEMP PROBE")
-                    text = text + "NO TEMP PROBE. "
+                    sTemp= "NO TEMP PROBE. "
+                    _log.critical(sTemp)
+                    text = text + sTemp
                     cTemp="20.00"
               else:
-                    _log.critical("TEMP PROBE FOUND : " + sensors[1].value)
+                    sTemp= "TEMP PROBE FOUND : " + sensors[0].value
+                    _log.critical(sTemp)
 			
               _log.info(sensors[0].sensor.query("I"))
               _log.info(sensors[0].sensor.query("Status"))
@@ -632,20 +642,25 @@ try:
               tempCal = tempCal.split("CAL,")[1].strip()
               tempCal = " " + tempCal + " "
               tempCalPoints = tempCal[1]
-              if(tempCalPoints == "0"):		
-                    _log.critical("TEMP Not CAL : " + tempCal)
-                    text = text + "TEMP Not CAL. "
+              if(tempCalPoints == "0"):	
+                    cTemp= "TEMP Not CAL. "
+                    _log.critical(cTemp)
+                    text = text + cTemp
+              else:
+                    cTemp= "TEMP CAL to " + tempCalPoints +" points."
               
 		
-              sensors[0].value = cTemp #Temp 
+              
               sensors[1].value = sensors[1].sensor.query("RT,"+cTemp).split(":")[1].strip().rstrip('\x00') #EC
               sensors[2].value = sensors[2].sensor.query("RT,"+sensors[0].value).split(":")[1].strip().rstrip('\x00')  #pH
 			    
               if(float(sensors[1].value) <= 2):
-                    _log.critical("NO EC PROBE")
-                    text = text + "NO EC PROBE. "
+                    sEC= "NO EC PROBE. "
+                    _log.critical(sEC)
+                    text = text + sEC
               else:
-                    _log.critical("EC PROBE FOUND : " + sensors[1].value)
+                    sEC= "EC PROBE FOUND : " + sensors[1].value
+                    _log.critical(sEC)
 				
               _log.info(sensors[1].sensor.query("I"))
               _log.info(sensors[1].sensor.query("Status"))
@@ -661,10 +676,12 @@ try:
                     text = text + "EC Not CAL. "
               
               if(float(sensors[2].value) <= 0):
-                    _log.critical("NO pH PROBE")
-                    text = text + "NO pH PROBE. "
+                    sPH="NO pH PROBE. "
+                    _log.critical(sPH)
+                    text = text + sPH
               else:
-                    _log.critical("pH PROBE FOUND : " + sensors[2].value)
+                    sPH="pH PROBE FOUND : " + sensors[2].value
+                    _log.critical(sPH)
               
               _log.info(sensors[2].sensor.query("I"))
               _log.info(sensors[2].sensor.query("Status"))
@@ -679,6 +696,7 @@ try:
                     text = text + "pH Not CAL. "
               
               blynk.virtual_write(240, text)
+              lcdDisplay.updateLCDProbe (sPH, sEC, sTemp):
               if (text == ""):
                    blynk.set_property(240, 'color', colours['ONLINE'])
               else:
