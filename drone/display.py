@@ -16,17 +16,19 @@ from PIL import Image,ImageDraw,ImageFont
 class Display:
    
     def __init__(self, _log):
-        _log.info(picdir)
-        _log.debug(" 2inch LCD Module")
-        disp = ST7789.ST7789()
+        self._log = _log 
+        self._log.info(picdir)
+        self._log.debug(" 2inch LCD Module")
+        self.disp = ST7789.ST7789()
         # Initialize library.
-        disp.Init()
+        self.disp.Init()
 
     def updateLCDProbe (self, sPH, sEC, sTemp):
-
+        self._log.debug("updateLCDProbe")
+     
         # Clear display.
-        disp.clear()
-        image = Image.new('RGB', (disp.height,disp.width), (255,255,255)) 
+        self.disp.clear()
+        image = Image.new('RGB', (self.disp.height,self.disp.width), (255,255,255)) 
 
         draw = ImageDraw.Draw(image)
 
@@ -40,19 +42,22 @@ class Display:
         draw.rectangle([(20,190),(300,230)], fill = "WHITE", outline="BLACK")
 
 
-        print ("***draw line")
+        self._log ("***draw line")
         #draw.line([(20,20),(300,20)], fill = "BLUE",width = 5)
         #draw.line([(20,80),(300,80)], fill = "BLUE",width = 5)
         #draw.line([(20,20),(20,80)], fill = "BLUE",width = 5)
         #draw.line([(300,20),(300,80)], fill = "BLUE",width = 5)
 
 
-        print ("***draw text")
+        self._log ("***draw text")
 
         draw.text((50, 90), 'pH = ' + str(sPH), font = font30, fill = "BLACK")
         draw.text((50, 150), 'EC = ' + str(sEC), font = font30, fill = "BLACK")
         draw.text((50, 190), 'Temp = ' + str(sTemp), font = font30, fill = "BLACK")
 
+        image=image.rotate(180) 
+        self.disp.ShowImage(image)
+       
 
     def updateLCD (self, bR1, bR2, bR3, bR4, iPH, iEC, iTemp):
         print ("2inch LCD Module")
