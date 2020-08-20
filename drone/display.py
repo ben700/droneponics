@@ -25,11 +25,13 @@ class Display:
         self.font30 = ImageFont.truetype(os.path.join(picdir, 'Font.ttc'), 30)
         self.font15 = ImageFont.truetype(os.path.join(picdir, 'Font.ttc'), 15)
         self._log.debug("Fonts loaded")
+        self.image = Image.new('RGB', (self.disp.height,self.disp.width), (255,255,255)) 
+
         # read bmp file 
         bmp = Image.open(os.path.join(picdir, 'LCD_2inch.bmp'))	
-        image.paste(bmp, (0,0))  
-        image=image.rotate(180)
-        self.disp.ShowImage(image)
+        self.image.paste(bmp, (0,0))  
+        self.image=self.image.rotate(180)
+        self.disp.ShowImage(self.image)
         self._log.debug("Display default image")
         
     def updateLCDProbe (self, sPH, sEC, sTemp):
@@ -39,9 +41,7 @@ class Display:
         self.disp.clear()
         self._log.debug("Clear Display")
      
-        image = Image.new('RGB', (self.disp.height,self.disp.width), (255,255,255)) 
-
-        draw = ImageDraw.Draw(image)
+        draw = ImageDraw.Draw(self.image)
         self._log.debug("ImageDraw blank")
 
         draw.rectangle([(0,0),(320,240)],fill = "WHITE")
@@ -58,8 +58,8 @@ class Display:
         draw.text((50, 150), 'EC = ' + str(sEC), font = self.font15, fill = "BLACK")
         draw.text((50, 190), 'Temp = ' + str(sTemp), font = self.font15, fill = "BLACK")
 
-        image=image.rotate(180) 
-        self.disp.ShowImage(image)
+        self.image=self.image.rotate(180) 
+        self.disp.ShowImage(self.image)
        
 
     def updateLCD (self, bR1, bR2, bR3, bR4, iPH, iEC, iTemp):
