@@ -18,5 +18,7 @@ sudo apt autoclean -y
 #echo "---------------------------------------------"Update droneponics---------------------------------------------""
 #/home/pi/updateDroneponics.sh
 #moved to non root
+echo "---------------------------------------------"Update Code---------------------------------------------""
+/home/pi/updateDroneponics.sh
 echo "---------------------------------------------"reboot---------------------------------------------""
 sudo reboot
