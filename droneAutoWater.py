@@ -29,7 +29,7 @@ from board import SCL, SDA
 import busio
 
 from adafruit_seesaw.seesaw import Seesaw
-
+from colour import Color
 
 parser = ConfigParser()
 parser.read("/home/pi/droneponics/config/configAutoWater/"+drone.gethostname()+".ini")
@@ -50,9 +50,13 @@ _log.info("Done hostname")
 
 moistureMin=parser.getint('seesaw', 'min', fallback=350)
 moistureMax=parser.getint('seesaw', 'max', fallback=1000)
-    
+moistureRange = moistureMax - moistureMin     
 _log.info("moistureMin = " + str(moistureMin))
 _log.info("moistureMax = " + str(moistureMax))
+
+red = Color("red")
+moistureColors = list(red.range_to(Color("blue"),moistureRange))
+
 
 
     
@@ -74,7 +78,8 @@ def updateConfig(moistureMin, moistureMax):
     _log.warning("updateConfig")
     _log.info("moistureMin = " + str(moistureMin))
     _log.info("moistureMax = " + str(moistureMax))
-
+    red = Color("red")
+    moistureColors = list(red.range_to(Color("blue"),moistureRange))
     parser.set("seesaw","min",str(moistureMin))
     parser.set("seesaw","max",str(moistureMax))
     cfgfile = open("/home/pi/droneponics/config/configAutoWater/"+drone.gethostname()+".ini",'w')
@@ -214,7 +219,11 @@ try:
            blynk.set_property(251, "label",drone.gethostname())
            blynk.virtual_write(251, drone.get_ip())
            _log.info("Access seesaw in boot sequence")
-           blynk.virtual_write(10, ss.moisture_read())
+        
+           moistureRead = ss.moisture_read()
+           blynk.virtual_write(10, moistureRead)
+           blynk.set_property(10, 'color', moistureColors[moistureRead - moistureMin])
+             
            blynk.virtual_write(11, ss.get_temp())
        
            bootup = False
