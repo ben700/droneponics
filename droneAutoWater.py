@@ -48,7 +48,12 @@ _log.setLevel(parser.get('logging', 'logLevel', fallback=logging.DEBUG))
 _log.info("/home/pi/droneponics/config/configButt/"+drone.gethostname()+".ini")
 _log.info("Done hostname")
 
-
+moistureMin=parser.get('seesaw', 'min', fallback=350)
+moistureMax=parser.get('seesaw', 'max', fallback=1000)
+    
+_log.info("moistureMin = " + str(moistureMin))
+_log.info("moistureMax = " + str(moistureMax))
+    
     
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False) 
