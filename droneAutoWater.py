@@ -35,7 +35,7 @@ parser = ConfigParser()
 parser.read("/home/pi/droneponics/config/configAutoWater/"+drone.gethostname()+".ini")
 
 bootup = True
-button_state=0
+pump_state=0
 moistureTrigger=0
 
 # tune console logging
@@ -99,7 +99,8 @@ def write_handler(pin, value):
            try:
                  _log.debug("in v1 write_handler turing off pump ")
                  GPIO.output(17, 0)
-                 blynk.set_property(5, 'color', colours[0])   
+                 blynk.set_property(5, 'color', colours[0])  
+                 pump_state =0
                  _log.debug("Pump in now off : v1write_handler completed")
            except:
                  _log.error("Except handle_event V1 Turning Off")
@@ -108,7 +109,8 @@ def write_handler(pin, value):
         elif (staus is "2" ):
            try:
                  _log.debug("in v1write_handler turing on pump")
-                 GPIO.output(17, 0)
+                 GPIO.output(17, 1)
+                 pump_state =1   
                  blynk.set_property(5, 'color', colours[1])   
                  _log.debug("Pump in now on : v1write_handler completed")
                  
@@ -118,7 +120,15 @@ def write_handler(pin, value):
         else:
            try:
                  _log.debug("in v1write_handler turing Pump Auto")
-                 
+                 pump_state =2
+                 if (pump_state ==2):
+                    if(ss.moisture_read() <= moistureTrigger):
+                         GPIO.output(17, 1)
+                         blynk.set_property(5, 'color', colours[1])
+                    else:
+                         GPIO.output(17, 0)
+                         blynk.set_property(5, 'color', colours[0])
+                        
            except:
                  _log.error("Except handle_event V1 Turning auto")
            blynk.virtual_write(250, "Auto")
@@ -139,6 +149,14 @@ def blynk_data():
     blynk.virtual_write(10, ss.moisture_read())
     blynk.virtual_write(11, ss.get_temp())
 
+    if (pump_state ==2):
+        if(ss.moisture_read() <= moistureTrigger):
+            GPIO.output(17, 1)
+            blynk.set_property(5, 'color', colours[1])
+        else:
+            GPIO.output(17, 0)
+            blynk.set_property(5, 'color', colours[0])
+                        
     _log.debug("The End")
 
 try:     
