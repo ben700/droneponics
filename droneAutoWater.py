@@ -92,13 +92,12 @@ def disconnect_handler():
         blynk.virtual_write(250, "Disconnected")
         
         
- @blynk.handle_event('write V1')
+@blynk.handle_event('write V1')
 def write_handler(pin, value):
         staus = value[0]
-        relay = 0       
         if (staus is "1" ):
            try:
-                 _log.debug("in v"+str(relay+1)+"write_handler turing off pump ")
+                 _log.debug("in v1 write_handler turing off pump ")
                  GPIO.output(17, 0)
                  _log.debug("Pump in now off : v1write_handler completed")
            except:
