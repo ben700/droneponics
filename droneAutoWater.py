@@ -23,6 +23,13 @@ import re
 import json
 import numbers
 import liquidcrystal_i2c
+import time
+
+from board import SCL, SDA
+import busio
+
+from adafruit_seesaw.seesaw import Seesaw
+
 
 parser = ConfigParser()
 parser.read("/home/pi/droneponics/config/configAutoWater/"+drone.gethostname()+".ini")
@@ -30,7 +37,6 @@ parser.read("/home/pi/droneponics/config/configAutoWater/"+drone.gethostname()+"
 bootup = True
 button_state=0
 rowIndex=1
-droneCounter = drone.DroneCounter()
 
 # tune console logging
 _log = logging.getLogger('BlynkLog')
@@ -41,12 +47,12 @@ _log.addHandler(consoleHandler)
 _log.setLevel(parser.get('logging', 'logLevel', fallback=logging.DEBUG))
 _log.info("/home/pi/droneponics/config/configButt/"+drone.gethostname()+".ini")
 _log.info("Done hostname")
-droneCounter.setOnCycle(_log,1)
-droneCounter.setOffCycle(_log,1)
+
 
     
 GPIO.setmode(GPIO.BCM)
-GPIO.setwarnings(False)    
+GPIO.setwarnings(False) 
+GPIO.setup(17, GPIO.OUT)           # set GPIO17 as an output   
         
 # Initialize Blynk
 _log.warning(parser.get('blynk', 'BLYNK_AUTH'))
@@ -54,6 +60,9 @@ blynk = blynklib.Blynk(parser.get('blynk', 'BLYNK_AUTH'), log=_log.info)
 timer = blynktimer.Timer()
    
 _log.info("Done blynk")
+
+i2c_bus = busio.I2C(SCL, SDA)
+ss = Seesaw(i2c_bus, addr=0x39)
 
 @blynk.handle_event('write V255')
 def rebooter(pin, value):
@@ -94,6 +103,8 @@ def blynk_data():
     now = datetime.now()
     blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
 
+    blynk.virtual_write(1, ss.moisture_read())
+    blynk.virtual_write(2, ss.get_temp())
 
     _log.debug("The End")
 
@@ -111,8 +122,9 @@ try:
            blynk.virtual_write(250, "Start-up")
            blynk.set_property(251, "label",drone.gethostname())
            blynk.virtual_write(251, drone.get_ip())
-           lcd.printline(1, drone.get_ip())
-     
+        
+           blynk.virtual_write(1, ss.moisture_read())
+           blynk.virtual_write(2, ss.get_temp())
        
            bootup = False
            _log.debug("Just about to complete Booting")
