@@ -91,6 +91,38 @@ def disconnect_handler():
         _log.warning("Disconnected")
         blynk.virtual_write(250, "Disconnected")
         
+        
+ @blynk.handle_event('write V1')
+def write_handler(pin, value):
+        staus = value[0]
+        relay = 0       
+        if (staus is "1" ):
+           try:
+                 _log.debug("in v"+str(relay+1)+"write_handler turing off pump ")
+                 GPIO.output(17, 0)
+                 _log.debug("Pump in now off : v1write_handler completed")
+           except:
+                 _log.error("Except handle_event V1 Turning Off")
+                
+           blynk.virtual_write(250, "Stopped")
+        elif (staus is "2" ):
+           try:
+                 _log.debug("in v1write_handler turing on pump")
+                 GPIO.output(17, 0)
+                 _log.debug("Pump in now on : v1write_handler completed")
+                 
+           except:
+                 _log.error("Except handle_event V1 Turning on")
+           blynk.virtual_write(250, "Feeding")
+        else:
+           try:
+                 _log.debug("in v1write_handler turing Pump Auto")
+                 
+           except:
+                 _log.error("Except handle_event V1 Turning auto")
+           blynk.virtual_write(250, "Auto")
+                 
+        
 @blynk.handle_event('write V29')
 def v29write_handler(pin, value):
         _log.debug("v29write_handler rowIndex =" + str(value[0]))
