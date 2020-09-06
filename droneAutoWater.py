@@ -103,8 +103,8 @@ def blynk_data():
     now = datetime.now()
     blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
 
-    blynk.virtual_write(1, ss.moisture_read())
-    blynk.virtual_write(2, ss.get_temp())
+    blynk.virtual_write(10, ss.moisture_read())
+    blynk.virtual_write(11, ss.get_temp())
 
     _log.debug("The End")
 
@@ -123,8 +123,8 @@ try:
            blynk.set_property(251, "label",drone.gethostname())
            blynk.virtual_write(251, drone.get_ip())
            _log.info("Access seesaw in boot sequence")
-           blynk.virtual_write(1, ss.moisture_read())
-           blynk.virtual_write(2, ss.get_temp())
+           blynk.virtual_write(10, ss.moisture_read())
+           blynk.virtual_write(11, ss.get_temp())
        
            bootup = False
            _log.debug("Just about to complete Booting")
