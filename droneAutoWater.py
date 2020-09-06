@@ -55,6 +55,8 @@ _log.info("moistureMin = " + str(moistureMin))
 _log.info("moistureMax = " + str(moistureMax))
 
 parser.set('seesaw', 'max', "2000")
+parser.write("/home/pi/droneponics/config/configAutoWater/"+drone.gethostname()+".ini")
+
     
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False) 
