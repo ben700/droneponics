@@ -128,6 +128,7 @@ def write_handler(pin, value):
                  _log.debug("in v1 write_handler turing off pump ")
                  GPIO.output(17, 0)
                  blynk.virtual_write(3, "Pump Off")   
+                 blynk.virtual_write(4, 0)   
                  blynk.set_property(1, 'color', colours[0])     
                  blynk.set_property(5, 'color', colours[1])  
                  pump_state =0
@@ -141,7 +142,8 @@ def write_handler(pin, value):
                  _log.debug("in v1write_handler turing on pump")
                  GPIO.output(17, 1)
                  pump_state =1   
-                 blynk.virtual_write(3, "Pump On")   
+                 blynk.virtual_write(3, "Pump On")
+                 blynk.virtual_write(4, 1)
                  blynk.set_property(1, 'color', colours[1])     
                  blynk.set_property(5, 'color', colours[0])   
                  _log.debug("Pump in now on : v1write_handler completed")
@@ -157,10 +159,12 @@ def write_handler(pin, value):
                     blynk.set_property(1, 'color', colours[2])     
                     if(ss.moisture_read() <= moistureTrigger):
                          GPIO.output(17, 1)
+                         blynk.virtual_write(4, 1)
                          blynk.virtual_write(3, "Pump On")      
                          blynk.set_property(5, 'color', colours[0])
                     else:
                          GPIO.output(17, 0)
+                         blynk.virtual_write(4, 0)
                          blynk.virtual_write(3, "Pump Off")   
                          blynk.set_property(5, 'color', colours[1])
                         
@@ -215,10 +219,12 @@ def blynk_data():
     if (pump_state ==2):
         if(moistureRead < moistureTrigger):
             GPIO.output(17, 1)
+            blynk.virtual_write(4, 1)
             blynk.virtual_write(3, "Pump On")    
             blynk.set_property(5, 'color', colours[0])
         else:
             GPIO.output(17, 0)
+            blynk.virtual_write(4, 0)
             blynk.virtual_write(3, "Pump Off")   
             blynk.set_property(5, 'color', colours[1])
                         
@@ -256,8 +262,7 @@ try:
            bootup = False
            _log.debug("Just about to complete Booting")
 
-          ## blynk.virtual_write(97, "add", rowIndex, "Reboot", now.strftime("%d/%m/%Y %H:%M:%S"))
-           #blynk.virtual_write(29,rowIndex+1)
+
            blynk.virtual_write(systemLED, 255)
            blynk.virtual_write(255, 0)
            blynk.virtual_write(5, 255) 
