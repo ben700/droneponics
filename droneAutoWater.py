@@ -164,13 +164,20 @@ def blynk_data():
     now = datetime.now()
     blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
 
-    blynk.virtual_write(10, ss.moisture_read())
+    moistureRead = ss.moisture_read()
+    blynk.virtual_write(10, moistureRead)
     blynk.virtual_write(11, ss.get_temp())
+    
+    if (moistureRead<moistureMin):
+        updateConfig(moistureMin, moistureMax)
+    if (moistureRead>moistureMax):
+        updateConfig(moistureMin, moistureMax)
+        
 
     _log.info("Update Timer pump_state =" + str(pump_state) + " and moistureTrigger = " + str(moistureTrigger))
     
     if (pump_state ==2):
-        if(ss.moisture_read() > moistureTrigger):
+        if(moistureRead > moistureTrigger):
             GPIO.output(17, 1)
             blynk.set_property(5, 'color', colours[0])
         else:
