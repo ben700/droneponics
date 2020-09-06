@@ -127,6 +127,7 @@ def write_handler(pin, value):
            try:
                  _log.debug("in v1 write_handler turing off pump ")
                  GPIO.output(17, 0)
+                 blynk.set_property(1, 'color', colours[0])     
                  blynk.set_property(5, 'color', colours[1])  
                  pump_state =0
                  _log.debug("Pump in now off : v1write_handler completed")
@@ -139,6 +140,7 @@ def write_handler(pin, value):
                  _log.debug("in v1write_handler turing on pump")
                  GPIO.output(17, 1)
                  pump_state =1   
+                 blynk.set_property(1, 'color', colours[1])     
                  blynk.set_property(5, 'color', colours[0])   
                  _log.debug("Pump in now on : v1write_handler completed")
                  
@@ -150,6 +152,7 @@ def write_handler(pin, value):
                  _log.debug("in v1write_handler turing Pump Auto")
                  pump_state =2
                  if (pump_state ==2):
+                    blynk.set_property(1, 'color', colours[2])     
                     if(ss.moisture_read() <= moistureTrigger):
                          GPIO.output(17, 1)
                          blynk.set_property(5, 'color', colours[0])
