@@ -186,7 +186,7 @@ def blynk_data():
         blynk.set_property(11, 'color', tempColors[tempRead])
     elif (tempRead <= 0):
         blynk.set_property(11, 'color', tempColors[0])
-    else
+    else:
         blynk.set_property(11, 'color', tempColors[40])
         
     _log.info("moistureRead = " +str(moistureRead))
@@ -238,7 +238,7 @@ try:
                 blynk.set_property(11, 'color', tempColors[tempRead])
            elif (tempRead <= 0):
                 blynk.set_property(11, 'color', tempColors[0])
-           else
+           else:
                 blynk.set_property(11, 'color', tempColors[40])
         
        
