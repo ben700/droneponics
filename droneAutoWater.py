@@ -36,7 +36,7 @@ parser.read("/home/pi/droneponics/config/configAutoWater/"+drone.gethostname()+"
 
 bootup = True
 button_state=0
-rowIndex=1
+moistureTrigger=0
 
 # tune console logging
 _log = logging.getLogger('BlynkLog')
@@ -124,11 +124,11 @@ def write_handler(pin, value):
            blynk.virtual_write(250, "Auto")
                  
         
-@blynk.handle_event('write V29')
+@blynk.handle_event('write V2')
 def v29write_handler(pin, value):
-        _log.debug("v29write_handler rowIndex =" + str(value[0]))
-        global rowIndex
-        rowIndex = int(value[0])
+        _log.debug("v2write_handler Value  =" + str(value[0]))
+        global moistureTrigger
+        moistureTrigger = int(value[0])
         
 @timer.register(interval=60, run_once=False)
 def blynk_data(): 
