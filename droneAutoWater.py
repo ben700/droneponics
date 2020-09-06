@@ -115,9 +115,9 @@ try:
           # blynk.virtual_write(98, "clr")
            _log.info("Start of boot sequence")
            now = datetime.now()
+           _log.info("Update Blynk in boot sequence") 
            blynk.virtual_write(99, now.strftime("%d/%m/%Y %H:%M:%S"))
-           lcd.printline(0,"Last update " + now.strftime("%d/%m/%Y %H:%M:%S"))
-         
+          
            blynk.virtual_write(98, "Rebooted"+ '\n')
            blynk.virtual_write(250, "Start-up")
            blynk.set_property(251, "label",drone.gethostname())
