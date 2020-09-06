@@ -55,8 +55,10 @@ _log.info("moistureMin = " + str(moistureMin))
 _log.info("moistureMax = " + str(moistureMax))
 
 red = Color("red")
-moistureColors = list(red.range_to(Color("blue"),moistureRange))
-tempColors = list(red.range_to(Color("blue"),40))
+blue = Color("blue")
+
+moistureColors = list(red.range_to(blue,moistureRange))
+tempColors = list(blue.range_to(red,40))
 
 
 
