@@ -213,7 +213,7 @@ def blynk_data():
     _log.info("Update Timer pump_state =" + str(pump_state) + " and moistureTrigger = " + str(moistureTrigger))
     
     if (pump_state ==2):
-        if(moistureRead > moistureTrigger):
+        if(moistureRead < moistureTrigger):
             GPIO.output(17, 1)
             blynk.virtual_write(3, "Pump On")    
             blynk.set_property(5, 'color', colours[0])
