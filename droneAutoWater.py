@@ -55,7 +55,7 @@ _log.info("moistureMin = " + str(moistureMin))
 _log.info("moistureMax = " + str(moistureMax))
 moistureMax=2000
 
-write_config = configparser.ConfigParser()
+write_config = ConfigParser()
 write_config.add_section("blynk")
 write_config.set("blynk","BLYNK_AUTH",parser.get('blynk', 'BLYNK_AUTH'))
 write_config.add_section("seesaw")
