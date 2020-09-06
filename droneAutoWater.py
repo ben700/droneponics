@@ -95,6 +95,8 @@ def disconnect_handler():
 @blynk.handle_event('write V1')
 def write_handler(pin, value):
         staus = value[0]
+        global moistureTrigger
+        global pump_state
         if (staus is "1" ):
            try:
                  _log.debug("in v1 write_handler turing off pump ")
@@ -143,6 +145,8 @@ def v29write_handler(pin, value):
 @timer.register(interval=60, run_once=False)
 def blynk_data(): 
     _log.info("Update Timer Run")
+    global moistureTrigger
+    global pump_state
     now = datetime.now()
     blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
 
