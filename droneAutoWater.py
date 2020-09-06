@@ -138,7 +138,7 @@ def write_handler(pin, value):
 def v29write_handler(pin, value):
         _log.debug("v2write_handler Value  =" + str(value[0]))
         global moistureTrigger
-        moistureTrigger = int(value[0])
+        moistureTrigger = float(value[0])
         
 @timer.register(interval=60, run_once=False)
 def blynk_data(): 
