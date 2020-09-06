@@ -166,7 +166,7 @@ try:
            #blynk.virtual_write(29,rowIndex+1)
            blynk.virtual_write(systemLED, 255)
            blynk.virtual_write(255, 0)
-           blynk.virtual_write(5, 0) 
+           blynk.virtual_write(5, 255) 
            blynk.virtual_write(98, "Running"+ '\n')
            _log.info('Just Booted')
            blynk.virtual_write(250, "Running")
