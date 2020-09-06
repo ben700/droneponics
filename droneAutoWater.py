@@ -54,7 +54,7 @@ moistureMax=parser.get('seesaw', 'max', fallback=1000)
 _log.info("moistureMin = " + str(moistureMin))
 _log.info("moistureMax = " + str(moistureMax))
 
-parser.set('seesaw', 'max', 2000)
+parser.set('seesaw', 'max', "2000")
     
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False) 
