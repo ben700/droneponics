@@ -187,13 +187,13 @@ def blynk_data():
     
     tempRead = ss.get_temp()
     blynk.virtual_write(11, tempRead)
-    if(tempRead > 0 and tempRead < 40): 
-        blynk.set_property(11, 'color', tempColors[tempRead])
-    elif (tempRead <= 0):
+    if(int(tempRead) > 0 and int(tempRead) < 40): 
+        blynk.set_property(11, 'color', tempColors[int(tempRead)])
+    elif (int(tempRead) <= 0):
         blynk.set_property(11, 'color', tempColors[0])
     else:
         blynk.set_property(11, 'color', tempColors[40])
-        
+                
     _log.info("moistureRead = " +str(moistureRead))
     _log.info("moistureMin = " +str(moistureMin))
     _log.info("moistureMax = " +str(moistureMax))
@@ -239,12 +239,12 @@ try:
            blynk.set_property(10, 'color', moistureColors[moistureRead - moistureMin])
            tempRead = ss.get_temp()
            blynk.virtual_write(11, tempRead)
-          # if(tempRead > 0 and tempRead < 40): 
-           blynk.set_property(11, 'color', tempColors[int(tempRead)])
-          # elif (tempRead <= 0):
-          #      blynk.set_property(11, 'color', tempColors[0])
-          # else:
-          #      blynk.set_property(11, 'color', tempColors[40])
+           if(int(tempRead) > 0 and int(tempRead) < 40): 
+                 blynk.set_property(11, 'color', tempColors[int(tempRead)])
+           elif (int(tempRead) <= 0):
+                blynk.set_property(11, 'color', tempColors[0])
+           else:
+                blynk.set_property(11, 'color', tempColors[40])
         
        
            bootup = False
