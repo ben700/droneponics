@@ -99,6 +99,7 @@ def write_handler(pin, value):
            try:
                  _log.debug("in v1 write_handler turing off pump ")
                  GPIO.output(17, 0)
+                 blynk.set_property(5, 'color', colours[0])   
                  _log.debug("Pump in now off : v1write_handler completed")
            except:
                  _log.error("Except handle_event V1 Turning Off")
@@ -108,6 +109,7 @@ def write_handler(pin, value):
            try:
                  _log.debug("in v1write_handler turing on pump")
                  GPIO.output(17, 0)
+                 blynk.set_property(5, 'color', colours[1])   
                  _log.debug("Pump in now on : v1write_handler completed")
                  
            except:
