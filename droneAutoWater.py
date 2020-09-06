@@ -53,22 +53,7 @@ moistureMax=parser.get('seesaw', 'max', fallback=1000)
     
 _log.info("moistureMin = " + str(moistureMin))
 _log.info("moistureMax = " + str(moistureMax))
-moistureMax=3000
 
-#write_config = ConfigParser()
-#write_config.add_section("blynk")
-#write_config.set("blynk","BLYNK_AUTH",parser.get('blynk', 'BLYNK_AUTH'))
-#write_config.add_section("seesaw")
-#write_config.set("seesaw","min",str(moistureMin))
-#write_config.set("seesaw","max",str(moistureMax))
-parser.set("seesaw","max",str(moistureMax))
-
-#write_config.add_section("logging")
-#write_config.set("logging","logLevel",parser.get('logging', 'logLevel', fallback="DEBUG"))
-
-cfgfile = open("/home/pi/droneponics/config/configAutoWater/"+drone.gethostname()+".ini",'w')
-parser.write(cfgfile)
-cfgfile.close()
 
     
 GPIO.setmode(GPIO.BCM)
@@ -84,6 +69,14 @@ _log.info("Done blynk")
 
 i2c_bus = busio.I2C(SCL, SDA)
 ss = Seesaw(i2c_bus, addr=0x39)
+
+def updateConfig(moistureMin, moistureMax):
+    parser.set("seesaw","min",str(moistureMin))
+    parser.set("seesaw","max",str(moistureMax))
+    cfgfile = open("/home/pi/droneponics/config/configAutoWater/"+drone.gethostname()+".ini",'w')
+    parser.write(cfgfile)
+    cfgfile.close()
+    
 
 @blynk.handle_event('write V255')
 def rebooter(pin, value):
