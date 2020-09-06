@@ -180,8 +180,10 @@ def blynk_data():
     _log.info("moistureMax = " +str(moistureMax))
     
     if (moistureRead<moistureMin):
+        moistureMin = moistureRead
         updateConfig(moistureMin, moistureMax)
     if (moistureRead>moistureMax):
+        moistureMax = moistureRead
         updateConfig(moistureMin, moistureMax)
         
 
