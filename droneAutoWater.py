@@ -192,6 +192,8 @@ def blynk_data():
 
     moistureRead = ss.moisture_read()
     blynk.virtual_write(10, moistureRead)
+    blynk.set_property(10, 'color', moistureColors[int(moistureRead-moistureMin)])
+    
     
     tempRead = ss.get_temp()
     blynk.virtual_write(11, tempRead)
