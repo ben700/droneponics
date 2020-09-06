@@ -72,6 +72,9 @@ ss = Seesaw(i2c_bus, addr=0x39)
 
 def updateConfig(moistureMin, moistureMax):
     _log.warning("updateConfig")
+    _log.info("moistureMin = " + str(moistureMin))
+    _log.info("moistureMax = " + str(moistureMax))
+
     parser.set("seesaw","min",str(moistureMin))
     parser.set("seesaw","max",str(moistureMax))
     cfgfile = open("/home/pi/droneponics/config/configAutoWater/"+drone.gethostname()+".ini",'w')
