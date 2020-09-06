@@ -80,7 +80,7 @@ def rebooter(pin, value):
 @blynk.handle_event("connect")
 def connect_handler():
         _log.warning("Connected")
-        for pin in range(28,30):
+        for pin in range(0,6):
            _log.info('Syncing virtual buttons {}'.format(pin))
            blynk.virtual_sync(pin)
            blynk.read_response(timeout=0.5)
@@ -166,6 +166,7 @@ try:
            #blynk.virtual_write(29,rowIndex+1)
            blynk.virtual_write(systemLED, 255)
            blynk.virtual_write(255, 0)
+           blynk.virtual_write(5, 0) 
            blynk.virtual_write(98, "Running"+ '\n')
            _log.info('Just Booted')
            blynk.virtual_write(250, "Running")
