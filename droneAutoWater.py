@@ -48,8 +48,8 @@ _log.setLevel(parser.get('logging', 'logLevel', fallback=logging.DEBUG))
 _log.info("/home/pi/droneponics/config/configAutoWater/"+drone.gethostname()+".ini")
 _log.info("Done hostname")
 
-moistureMin=parser.get('seesaw', 'min', fallback=350)
-moistureMax=parser.get('seesaw', 'max', fallback=1000)
+moistureMin=parser.getint('seesaw', 'min', fallback=350)
+moistureMax=parser.getint('seesaw', 'max', fallback=1000)
     
 _log.info("moistureMin = " + str(moistureMin))
 _log.info("moistureMax = " + str(moistureMax))
@@ -170,6 +170,10 @@ def blynk_data():
     moistureRead = ss.moisture_read()
     blynk.virtual_write(10, moistureRead)
     blynk.virtual_write(11, ss.get_temp())
+    
+    _log.info("moistureRead = " +str(moistureRead))
+    _log.info("moistureMin = " +str(moistureMin))
+    _log.info("moistureMax = " +str(moistureMax))
     
     if (moistureRead<moistureMin):
         updateConfig(moistureMin, moistureMax)
