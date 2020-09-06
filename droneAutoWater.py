@@ -122,15 +122,15 @@ try:
            blynk.virtual_write(250, "Start-up")
            blynk.set_property(251, "label",drone.gethostname())
            blynk.virtual_write(251, drone.get_ip())
-        
+           _log.info("Access seesaw in boot sequence")
            blynk.virtual_write(1, ss.moisture_read())
            blynk.virtual_write(2, ss.get_temp())
        
            bootup = False
            _log.debug("Just about to complete Booting")
 
-           blynk.virtual_write(97, "add", rowIndex, "Reboot", now.strftime("%d/%m/%Y %H:%M:%S"))
-           blynk.virtual_write(29,rowIndex+1)
+          ## blynk.virtual_write(97, "add", rowIndex, "Reboot", now.strftime("%d/%m/%Y %H:%M:%S"))
+           #blynk.virtual_write(29,rowIndex+1)
            blynk.virtual_write(systemLED, 255)
            blynk.virtual_write(255, 0)
            blynk.virtual_write(98, "Running"+ '\n')
