@@ -149,6 +149,8 @@ def blynk_data():
     blynk.virtual_write(10, ss.moisture_read())
     blynk.virtual_write(11, ss.get_temp())
 
+    _log.info("Update Timer pump_state =" + str(pump_state) + " and moistureTrigger = " + str(moistureTrigger))
+    
     if (pump_state ==2):
         if(ss.moisture_read() <= moistureTrigger):
             GPIO.output(17, 1)
