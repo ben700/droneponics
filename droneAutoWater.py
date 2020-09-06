@@ -53,9 +53,19 @@ moistureMax=parser.get('seesaw', 'max', fallback=1000)
     
 _log.info("moistureMin = " + str(moistureMin))
 _log.info("moistureMax = " + str(moistureMax))
+moistureMax=2000
 
-parser.set('seesaw', 'max', "2000")
-parser.write("/home/pi/droneponics/config/configAutoWater/"+drone.gethostname()+".ini")
+write_config = configparser.ConfigParser()
+write_config.add_section("blynk")
+write_config.set("blynk","BLYNK_AUTH",parser.get('blynk', 'BLYNK_AUTH'))
+write_config.add_section("seesaw")
+write_config.set("seesaw","min",str(moistureMin))
+write_config.set("seesaw","max",str(moistureMax))
+write_config.add_section("logging")
+write_config.set("seesaw","min",parser.get('logging', 'logLevel', fallback=DEBUG))
+cfgfile = open("/home/pi/droneponics/config/configButt/"+drone.gethostname()+".ini",'w')
+write_config.write(cfgfile)
+cfgfile.close()
 
     
 GPIO.setmode(GPIO.BCM)
