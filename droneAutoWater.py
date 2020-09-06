@@ -161,6 +161,9 @@ def blynk_data():
     _log.info("Update Timer Run")
     global moistureTrigger
     global pump_state
+    global moistureMin
+    global moistureMax
+    
     now = datetime.now()
     blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
 
