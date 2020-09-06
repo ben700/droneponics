@@ -56,6 +56,7 @@ _log.info("moistureMax = " + str(moistureMax))
 
 red = Color("red")
 moistureColors = list(red.range_to(Color("blue"),moistureRange))
+tempColors = list(red.range_to(Color("blue"),40))
 
 
 
@@ -178,8 +179,16 @@ def blynk_data():
 
     moistureRead = ss.moisture_read()
     blynk.virtual_write(10, moistureRead)
-    blynk.virtual_write(11, ss.get_temp())
     
+    tempRead = ss.get_temp()
+    blynk.virtual_write(11, tempRead)
+    if(tempRead > 0 and tempRead < 40): 
+        blynk.set_property(11, 'color', tempColors[tempRead])
+    elif (tempRead <= 0):
+        blynk.set_property(11, 'color', tempColors[0])
+    else
+        blynk.set_property(11, 'color', tempColors[40])
+        
     _log.info("moistureRead = " +str(moistureRead))
     _log.info("moistureMin = " +str(moistureMin))
     _log.info("moistureMax = " +str(moistureMax))
@@ -223,8 +232,15 @@ try:
            moistureRead = ss.moisture_read()
            blynk.virtual_write(10, moistureRead)
            blynk.set_property(10, 'color', moistureColors[moistureRead - moistureMin])
-             
-           blynk.virtual_write(11, ss.get_temp())
+           tempRead = ss.get_temp()
+           blynk.virtual_write(11, tempRead)
+           if(tempRead > 0 and tempRead < 40): 
+                blynk.set_property(11, 'color', tempColors[tempRead])
+           elif (tempRead <= 0):
+                blynk.set_property(11, 'color', tempColors[0])
+           else
+                blynk.set_property(11, 'color', tempColors[40])
+        
        
            bootup = False
            _log.debug("Just about to complete Booting")
