@@ -22,7 +22,6 @@ import subprocess
 import re
 import json
 import numbers
-import liquidcrystal_i2c
 import time
 
 from board import SCL, SDA
