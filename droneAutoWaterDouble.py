@@ -25,10 +25,6 @@ import numbers
 import liquidcrystal_i2c
 import time
 
-from board import SCL, SDA
-import busio
-
-from adafruit_seesaw.seesaw import Seesaw
 from colour import Color
 
 parser = ConfigParser()
@@ -48,17 +44,22 @@ _log.setLevel(parser.get('logging', 'logLevel', fallback=logging.DEBUG))
 _log.info("/home/pi/droneponics/config/configAutoWater/"+drone.gethostname()+".ini")
 _log.info("Done hostname")
 
-moistureMin=parser.getint('seesaw', 'min', fallback=350)
-moistureMax=parser.getint('seesaw', 'max', fallback=1000)
+moistureMin=parser.getint('whiteboxes', 'min', fallback=350)
+moistureMax=parser.getint('whiteboxes', 'max', fallback=1000)
 moistureRange = moistureMax - moistureMin     
 _log.info("moistureMin = " + str(moistureMin))
 _log.info("moistureMax = " + str(moistureMax))
 
 red = Color("red")
 blue = Color("blue")
+black = Color("black")
+yellow = Color("yellow")
+
 
 moistureColors = list(red.range_to(blue,moistureRange))
 tempColors = list(blue.range_to(red,40))
+lightColors = list(yellow.range_to(black,65535))
+
 
 
 
@@ -82,8 +83,8 @@ def updateConfig(moistureMin, moistureMax):
     _log.info("moistureMax = " + str(moistureMax))
     red = Color("red")
     moistureColors = list(red.range_to(Color("blue"),moistureRange))
-    parser.set("seesaw","min",str(moistureMin))
-    parser.set("seesaw","max",str(moistureMax))
+    parser.set("whiteboxes","min",str(moistureMin))
+    parser.set("whiteboxes","max",str(moistureMax))
     cfgfile = open("/home/pi/droneponics/config/configAutoWater/"+drone.gethostname()+".ini",'w')
     parser.write(cfgfile)
     cfgfile.close()
@@ -205,6 +206,7 @@ def blynk_data():
         
     lightRead = chirp.light()
     blynk.virtual_write(12, lightRead)
+    blynk.set_property(12, 'color', lightColors[lightRead])
         
                 
     _log.info("moistureRead = " +str(moistureRead))
@@ -249,7 +251,7 @@ try:
            blynk.virtual_write(250, "Start-up")
            blynk.set_property(251, "label",drone.gethostname())
            blynk.virtual_write(251, drone.get_ip())
-           _log.info("Access seesaw in boot sequence")
+           _log.info("Access whiteboxes in boot sequence")
         
            moistureRead = chirp.moist()
            blynk.virtual_write(10, moistureRead)
@@ -266,7 +268,7 @@ try:
         
            lightRead = chirp.light()
            blynk.virtual_write(12, lightRead)
-           blynk.set_property(12, 'color', colors[0])
+           blynk.set_property(12, 'color', lightColors[lightRead])
         
            bootup = False
            _log.debug("Just about to complete Booting")
