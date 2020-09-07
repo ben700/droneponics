@@ -215,7 +215,7 @@ def blynk_data():
         moistureMax = moistureRead
         updateConfig(moistureMin, moistureMax)
     
-    if (GPIO.input(4)):
+    if (!GPIO.input(4)):
         blynk.virtual_write(7, 255) 
         blynk.set_property(7, 'color', colours[0])
         blynk.virtual_write(6, "Water Available") 
@@ -269,7 +269,7 @@ try:
            else:
                 blynk.set_property(11, 'color', tempColors[40])
         
-           if (GPIO.input(4)):
+           if (!GPIO.input(4)):
                 blynk.virtual_write(7, 255) 
                 blynk.set_property(7, 'color', colours[0])
                 blynk.virtual_write(6, "Water Available") 
