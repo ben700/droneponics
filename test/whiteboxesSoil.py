@@ -1,6 +1,6 @@
 #!/usr/bin/python
-import sys
-import os
+
+import os, time, sys
 sys.path.append('/home/pi/droneponics')
 import drone
 
