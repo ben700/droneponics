@@ -9,3 +9,5 @@ from drone.alarm import *
 from drone.DroneCounter import DroneCounter
 from drone.sensor import *
 from drone.display import *
+from drone.chirp import *
+
