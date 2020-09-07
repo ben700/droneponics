@@ -1,4 +1,4 @@
-from color import Color
+from colour import Color
 import blynklib
 import blynktimer
 import logging
