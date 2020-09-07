@@ -106,7 +106,7 @@ def rebooter(pin, value):
 @blynk.handle_event("connect")
 def connect_handler():
         _log.warning("Connected")
-        for pin in range(0,6):
+        for pin in range(0,12):
            _log.info('Syncing virtual buttons {}'.format(pin))
            blynk.virtual_sync(pin)
            blynk.read_response(timeout=0.5)
@@ -179,7 +179,7 @@ def v29write_handler(pin, value):
         global moistureTrigger
         moistureTrigger = float(value[0])
         
-@timer.register(interval=60, run_once=False)
+@timer.register(interval=30, run_once=False)
 def blynk_data(): 
     _log.info("Update Timer Run")
     global moistureTrigger
