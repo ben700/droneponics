@@ -217,12 +217,12 @@ def blynk_data():
     
     if (GPIO.input(4)):
         blynk.virtual_write(7, 255) 
-        blynk.set_property(7, 'color', colours[1])
-        blynk.virtual_write(6, "No Water") 
-    else:
-        blynk.virtual_write(7, 255)
         blynk.set_property(7, 'color', colours[0])
         blynk.virtual_write(6, "Water Available") 
+    else:
+        blynk.virtual_write(7, 255)
+        blynk.set_property(7, 'color', colours[1])
+        blynk.virtual_write(6, "No Water") 
         
 
     _log.info("Update Timer pump_state =" + str(pump_state) + " and moistureTrigger = " + str(moistureTrigger))
@@ -271,12 +271,12 @@ try:
         
            if (GPIO.input(4)):
                 blynk.virtual_write(7, 255) 
-                blynk.set_property(7, 'color', colours[1])
-                blynk.virtual_write(6, "No Water") 
-           else:
-                blynk.virtual_write(7, 255)
                 blynk.set_property(7, 'color', colours[0])
                 blynk.virtual_write(6, "Water Available") 
+           else:
+                blynk.virtual_write(7, 255)
+                blynk.set_property(7, 'color', colours[1])
+                blynk.virtual_write(6, "No Water") 
         
        
            bootup = False
