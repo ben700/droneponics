@@ -1,8 +1,7 @@
-#!/usr/bin/python
-# cannot use python3 because smbus not working there
-# Modified script from https://github.com/JasperWallace/chirp-graphite/blob/master/chirp.py
-# by DanielTamm
-
+#!/usr/bin/python3
+import sys
+import os
+sys.path.append('/home/pi/droneponics')
 import drone
 
 if __name__ == "__main__":
