@@ -16,5 +16,5 @@ if __name__ == "__main__":
 	print (chirp)
 	print ("Moisture\tTemperature\tBrightness")
 	while True:
-		print ("%d\t%d\t%d" % (chirp.moist(), chirp.temp(), chirp.light()))
+		print ("%d\t%d\t%d" % (chirp.moist(), chirp.temp()/10, chirp.light()))
 		time.sleep(1)
