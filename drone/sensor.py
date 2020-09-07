@@ -116,4 +116,4 @@ class WaterLevel():
      
    def setBlynkLabel(self, blynk):
      blynk.set_property(self.blynkDisplayPin, "label", self.name)
-     
+    
