@@ -195,7 +195,7 @@ def blynk_data():
     blynk.set_property(10, 'color', moistureColors[int(moistureRead-moistureMin)])
     
     
-    tempRead = chirp.temp()
+    tempRead = chirp.temp()/10
     blynk.virtual_write(11, tempRead)
     if(int(tempRead) > 0 and int(tempRead) < 40): 
         blynk.set_property(11, 'color', tempColors[int(tempRead)])
@@ -257,7 +257,7 @@ try:
            blynk.virtual_write(10, moistureRead)
            blynk.set_property(10, 'color', moistureColors[moistureRead - moistureMin])
             
-           tempRead = chirp.temp()
+           tempRead = chirp.temp()/10
            blynk.virtual_write(11, tempRead)
            if(int(tempRead) > 0 and int(tempRead) < 40): 
                  blynk.set_property(11, 'color', tempColors[int(tempRead)])
