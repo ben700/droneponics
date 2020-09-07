@@ -74,8 +74,7 @@ timer = blynktimer.Timer()
    
 _log.info("Done blynk")
 
-i2c_bus = busio.I2C(SCL, SDA)
-ss = Seesaw(i2c_bus, addr=0x39)
+chirp = drone.Chirp(1, 0x20)
 
 def updateConfig(moistureMin, moistureMax):
     _log.warning("updateConfig")
@@ -157,7 +156,7 @@ def write_handler(pin, value):
                  pump_state =2
                  if (pump_state ==2):
                     blynk.set_property(1, 'color', colours[2])     
-                    if(ss.moisture_read() <= moistureTrigger):
+                    if(chirp.moist() <= moistureTrigger):
                          GPIO.output(17, 1)
                          blynk.virtual_write(4, 1)
                          blynk.virtual_write(3, "Pump On")      
@@ -190,12 +189,12 @@ def blynk_data():
     now = datetime.now()
     blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
 
-    moistureRead = ss.moisture_read()
+    moistureRead = chirp.moist()
     blynk.virtual_write(10, moistureRead)
     blynk.set_property(10, 'color', moistureColors[int(moistureRead-moistureMin)])
     
     
-    tempRead = ss.get_temp()
+    tempRead = chirp.temp()
     blynk.virtual_write(11, tempRead)
     if(int(tempRead) > 0 and int(tempRead) < 40): 
         blynk.set_property(11, 'color', tempColors[int(tempRead)])
@@ -203,6 +202,10 @@ def blynk_data():
         blynk.set_property(11, 'color', tempColors[0])
     else:
         blynk.set_property(11, 'color', tempColors[40])
+        
+    lightRead = chirp.light()
+    blynk.virtual_write(12, lightRead)
+        
                 
     _log.info("moistureRead = " +str(moistureRead))
     _log.info("moistureMin = " +str(moistureMin))
@@ -248,10 +251,11 @@ try:
            blynk.virtual_write(251, drone.get_ip())
            _log.info("Access seesaw in boot sequence")
         
-           moistureRead = ss.moisture_read()
+           moistureRead = chirp.moist()
            blynk.virtual_write(10, moistureRead)
            blynk.set_property(10, 'color', moistureColors[moistureRead - moistureMin])
-           tempRead = ss.get_temp()
+            
+           tempRead = chirp.temp()
            blynk.virtual_write(11, tempRead)
            if(int(tempRead) > 0 and int(tempRead) < 40): 
                  blynk.set_property(11, 'color', tempColors[int(tempRead)])
@@ -260,7 +264,10 @@ try:
            else:
                 blynk.set_property(11, 'color', tempColors[40])
         
-       
+           lightRead = chirp.light()
+           blynk.virtual_write(12, lightRead)
+           blynk.set_property(12, 'color', colors[0])
+        
            bootup = False
            _log.debug("Just about to complete Booting")
 
