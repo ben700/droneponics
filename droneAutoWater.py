@@ -65,7 +65,8 @@ tempColors = list(blue.range_to(red,40))
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False) 
 GPIO.setup(17, GPIO.OUT)           # set GPIO17 as an output   
-        
+GPIO.setup(4, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)           # set GPIO4 as an input   
+          
 # Initialize Blynk
 _log.warning(parser.get('blynk', 'BLYNK_AUTH'))
 blynk = blynklib.Blynk(parser.get('blynk', 'BLYNK_AUTH'), log=_log.info) 
@@ -213,6 +214,15 @@ def blynk_data():
     if (moistureRead>moistureMax):
         moistureMax = moistureRead
         updateConfig(moistureMin, moistureMax)
+    
+    if (GPIO.input(4)):
+        blynk.virtual_write(7, 255) 
+        blynk.set_property(7, 'color', colours[0])
+        blynk.virtual_write(6, "Water Available") 
+    else:
+        blynk.virtual_write(7, 255)
+        blynk.set_property(7, 'color', colours[1])
+        blynk.virtual_write(6, "No Water") 
         
 
     _log.info("Update Timer pump_state =" + str(pump_state) + " and moistureTrigger = " + str(moistureTrigger))
@@ -258,6 +268,15 @@ try:
                 blynk.set_property(11, 'color', tempColors[0])
            else:
                 blynk.set_property(11, 'color', tempColors[40])
+        
+           if (GPIO.input(4)):
+                blynk.virtual_write(7, 255) 
+                blynk.set_property(7, 'color', colours[0])
+                blynk.virtual_write(6, "Water Available") 
+           else:
+                blynk.virtual_write(7, 255)
+                blynk.set_property(7, 'color', colours[1])
+                blynk.virtual_write(6, "No Water") 
         
        
            bootup = False
