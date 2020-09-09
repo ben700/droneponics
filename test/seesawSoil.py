@@ -1,6 +1,6 @@
 import time
 
-from board import SCL, SDA
+import board
 import busio
 
 from adafruit_seesaw.seesaw import Seesaw
