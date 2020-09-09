@@ -5,7 +5,8 @@ import busio
 
 from adafruit_seesaw.seesaw import Seesaw
 
-i2c_bus = busio.I2C(SCL, SDA)
+#i2c_bus = busio.I2C(SCL, SDA)
+i2c_bus = busio.I2C(board.D1, board.D0) 
 
 ss = Seesaw(i2c_bus, addr=0x39)
 
