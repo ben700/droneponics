@@ -61,7 +61,7 @@ _log.debug("Created blynk object and timer for BLYNK_AUTH " + parser.get('blynk'
 #        os.system('sudo reboot')
     
 try:    
-  	chirp = drone.Chirp(1, addr)
+  	chirp = drone.Chirp(1, 0x20)
 except:
     _log.critical("Can't find I2C1 device should be the soil sensor")
     chirp = None
