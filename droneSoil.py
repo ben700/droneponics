@@ -66,7 +66,7 @@ moistureColors = list(red.range_to(blue,moistureRange))
 ssMoistureColors = list(red.range_to(blue,ssMoistureRange))
 
 tempColors = list(blue.range_to(red,40))
-lightColors = list(yellow.range_to(black,65535))
+lightColors = list(yellow.range_to(black,66))
 
 
 
@@ -153,9 +153,9 @@ def blynk_data():
     blynk.virtual_write(2, tempRead) 
     lightRead = chirp.light()
     blynk.virtual_write(3, lightRead)
-    blynk.set_property(1, 'color', moistureColors[int(moistureRead-moistureMin)])
+  #  blynk.set_property(1, 'color', moistureColors[int(moistureRead-moistureMin)])
  #   blynk.set_property(2, 'color', tempColors[int(tempRead)])
-  #  blynk.set_property(3, 'color', lightColors[int(lightRead)])
+  #  blynk.set_property(3, 'color', lightColors[int(lightRead/1000)])
     
     ssMoistureRead = ss.moisture_read()
     blynk.virtual_write(5, ssMoistureRead) 
