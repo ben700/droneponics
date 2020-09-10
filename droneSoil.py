@@ -165,6 +165,11 @@ def blynk_data():
     #blynk.set_property(6, 'color', tempColors[int(ssTempRead)])
     _log.info("Finished reading Sensors")
     
+    _log.info("moistureMin =" + str(moistureMin))
+    _log.info("moistureMax =" + str(moistureMax))
+    _log.info("ssMoistureMin =" + str(ssMoistureMin))
+    _log.info("ssMoistureMax =" + str(ssMoistureMax))
+    
     if (moistureRead<moistureMin):
         moistureMin = moistureRead
   #      updateConfig(moistureMin, moistureMax, ssMoistureMin, ssMoistureMax)
