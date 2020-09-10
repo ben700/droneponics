@@ -126,13 +126,17 @@ def rebooter(pin, value):
 
 @blynk.handle_event("connect")
 def connect_handler():
+    global moistureMin
+    global moistureMax
+    global ssMoistureMin
+    global ssMoistureMax
     _log.warning("Connected")
     blynk.virtual_write(250, "Connected")
-    for pin in range(1):
-         _log.info('Syncing virtual buttons {}'.format(pin))
-         blynk.virtual_sync(pin)
-         blynk.read_response(timeout=0.5)
-        
+    blynk.set_property(1,"min", moistureMin)
+    blynk.set_property(1,"max", moistureMax)
+    blynk.set_property(5,"min", ssMoistureMin)
+    blynk.set_property(5,"max", ssMoistureMax)
+
 
 @blynk.handle_event("disconnect")
 def disconnect_handler():
