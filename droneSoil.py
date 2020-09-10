@@ -130,7 +130,7 @@ while True:
     try:
         blynk.run()
         timer.run()
-except: 
+    except: 
        _log.error("in main loop except")
        blynk.virtual_write(250, "Crashed")
        drone.setFormOfflineColours(blynkObj=blynk, loggerObj=_log)
