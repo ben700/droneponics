@@ -142,6 +142,11 @@ def disconnect_handler():
     
 @timer.register(interval=30, run_once=False)
 def blynk_data():
+    global moistureMin
+    global moistureMax
+    global ssMoistureMin
+    global ssMoistureMax
+    
     _log.info("Start of timer.register fx")
     now = datetime.now()
     blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
