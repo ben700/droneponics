@@ -212,11 +212,6 @@ blynk.virtual_write(99, now.strftime("%d/%m/%Y %H:%M:%S"))
 blynk.virtual_write(systemLED, 255)
 blynk.virtual_write(255, 0)
 
-blynk.set_property(1,"min", moistureMin)
-blynk.set_property(1,"max", moistureMax)
-blynk.set_property(5,"min", ssMoistureMin)
-blynk.set_property(5,"max", ssMoistureMax)
-
 
 _log.info("--------------------------Completed Boot--------------------------")
 
