@@ -27,6 +27,7 @@ import subprocess
 import re
 import json
 from adafruit_seesaw.seesaw import Seesaw
+from colour import Color
 
 parser = ConfigParser()
 parser.read("/home/pi/droneponics/config/configSoil/"+drone.gethostname()+".ini")
