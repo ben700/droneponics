@@ -99,10 +99,15 @@ except:
     
 def updateConfig(moistureMin, moistureMax, ssMoistureMin, ssMoistureMax):
     _log.warning("updateConfig")
-    _log.info("moistureMin = " + str(moistureMin))
-    _log.info("moistureMax = " + str(moistureMax))
+
     red = Color("red")
+    
+    moistureRange = moistureMax - moistureMin
+    ssMoistureRange = ssMoistureMax - ssMoistureMin
+
     moistureColors = list(red.range_to(Color("blue"),moistureRange))
+    ssMoistureColors = list(red.range_to(Color("blue"),ssMoistureRange))
+    
     parser.set("whiteboxes","min",str(moistureMin))
     parser.set("whiteboxes","max",str(moistureMax))
     parser.set("seesaw","min",str(ssMoistureMin))
@@ -149,15 +154,15 @@ def blynk_data():
     lightRead = chirp.light()
     blynk.virtual_write(3, lightRead)
     blynk.set_property(1, 'color', moistureColors[int(moistureRead-moistureMin)])
-    blynk.set_property(2, 'color', tempColors[int(tempRead)])
-    blynk.set_property(3, 'color', lightColors[int(lightRead)])
+ #   blynk.set_property(2, 'color', tempColors[int(tempRead)])
+  #  blynk.set_property(3, 'color', lightColors[int(lightRead)])
     
     ssMoistureRead = ss.moisture_read()
     blynk.virtual_write(5, ssMoistureRead) 
     ssTempRead = ss.get_temp()
     blynk.virtual_write(6, ssTempRead)
-    blynk.set_property(5, 'color', ssMoistureColors[int(ssMoistureRead-ssMoistureMin)])
-    blynk.set_property(6, 'color', tempColors[int(ssTempRead)])
+  #  blynk.set_property(5, 'color', ssMoistureColors[int(ssMoistureRead-ssMoistureMin)])
+  #  blynk.set_property(6, 'color', tempColors[int(ssTempRead)])
     
     if (moistureRead<moistureMin):
         moistureMin = moistureRead
