@@ -174,19 +174,24 @@ def blynk_data():
     _log.info("moistureMax =" + str(moistureMax))
     _log.info("ssMoistureMin =" + str(ssMoistureMin))
     _log.info("ssMoistureMax =" + str(ssMoistureMax))
-    
+
+
     if (moistureRead<moistureMin):
         moistureMin = moistureRead
+        blynk.set_property(1,"min", moistureMin)
         updateConfig(moistureMin, moistureMax, ssMoistureMin, ssMoistureMax)
     if (moistureRead>moistureMax):
         moistureMax = moistureRead
+        blynk.set_property(1,"max", moistureMax)
         updateConfig(moistureMin, moistureMax, ssMoistureMin, ssMoistureMax)
     
     if (ssMoistureRead<ssMoistureMin):
         ssMoistureMin = ssMoistureRead
+        blynk.set_property(5,"min", ssMoistureMin)
         updateConfig(moistureMin, moistureMax, ssMoistureMin, ssMoistureMax)
     if (ssMoistureRead>ssMoistureMax):
         ssMoistureMax = ssMoistureRead
+        blynk.set_property(5,"max", ssMoistureMax)
         updateConfig(moistureMin, moistureMax, ssMoistureMin, ssMoistureMax)
     
     _log.debug("End of timer.register fx")
@@ -202,6 +207,13 @@ now = datetime.now()
 blynk.virtual_write(99, now.strftime("%d/%m/%Y %H:%M:%S"))
 blynk.virtual_write(systemLED, 255)
 blynk.virtual_write(255, 0)
+
+blynk.set_property(1,"min", moistureMin)
+blynk.set_property(1,"max", moistureMax)
+blynk.set_property(5,"min", ssMoistureMin)
+blynk.set_property(5,"max", ssMoistureMax)
+
+
 _log.info("--------------------------Completed Boot--------------------------")
 
 while True:
