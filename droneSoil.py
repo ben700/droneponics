@@ -157,7 +157,7 @@ def blynk_data():
     tempRead = chirp.temp()/10
     blynk.virtual_write(2, tempRead) 
     lightRead = chirp.light()
-    blynk.virtual_write(3, lightRead)
+    blynk.virtual_write(3, lightRead/10)
     blynk.set_property(1, 'color', moistureColors[int(moistureRead-moistureMin)])
     blynk.set_property(2, 'color', tempColors[int(tempRead)])
     blynk.set_property(3, 'color', lightColors[int(lightRead/1000)])
