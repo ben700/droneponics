@@ -26,6 +26,7 @@ from configparser import ConfigParser
 import subprocess
 import re
 import json
+from adafruit_seesaw.seesaw import Seesaw
 
 parser = ConfigParser()
 parser.read("/home/pi/droneponics/config/configSoil/"+drone.gethostname()+".ini")
@@ -62,8 +63,15 @@ _log.debug("Created blynk object and timer for BLYNK_AUTH " + parser.get('blynk'
 try:    
   	chirp = drone.Chirp(1, addr)
 except:
-    _log.critical("Can't find I2C device should be the soil sensor")
-    tslI2C = None
+    _log.critical("Can't find I2C1 device should be the soil sensor")
+    chirp = None
+
+try:        
+    i2c_bus = busio.I2C(board.D1, board.D0) 
+    ss = Seesaw(i2c_bus, addr=0x38)
+except:
+    _log.critical("Can't find I2C0 device should be the soil sensor")
+    ss = None
     
 @blynk.handle_event('write V255')
 def rebooter(pin, value):
@@ -95,9 +103,14 @@ def blynk_data():
     now = datetime.now()
     blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
     blynk.set_property(0, 'color', colours['ONLINE'])
+    
     blynk.virtual_write(1, chirp.moist())
     blynk.virtual_write(2, chirp.temp()/10) 
     blynk.virtual_write(3, chirp.light())
+    
+    blynk.virtual_write(5, ss.moisture_read()) 
+    blynk.virtual_write(6, ss.get_temp())
+    
     _log.debug("End of timer.register fx")
         
 _log.info("Created all the objects. Now starting the drone")        
