@@ -48,6 +48,28 @@ _log.info("info")
 _log.debug("debug")
 _log.info("/home/pi/droneponics/config/configSoil/"+drone.gethostname()+".ini")
 
+
+moistureMin=parser.getint('whiteboxes', 'min', fallback=350)
+moistureMax=parser.getint('whiteboxes', 'max', fallback=1000)
+ssMoistureMin=parser.getint('seesaw', 'min', fallback=350)
+ssMoistureMax=parser.getint('seesaw', 'max', fallback=1000)
+moistureRange = moistureMax - moistureMin
+ssMoistureRange = ssMoistureMax - ssMoistureMin
+
+red = Color("red")
+blue = Color("blue")
+yellow = Color("yellow")
+black = Color("black")
+
+moistureColors = list(red.range_to(blue,moistureRange))
+ssMoistureColors = list(red.range_to(blue,ssMoistureRange))
+
+tempColors = list(blue.range_to(red,40))
+lightColors = list(yellow.range_to(black,65535))
+
+
+
+
 # Initialize Blynk
 _log.debug("Creating blynk object for BLYNK_AUTH " + parser.get('blynk', 'BLYNK_AUTH')) 
 blynk = blynklib.Blynk(parser.get('blynk', 'BLYNK_AUTH'))
@@ -72,6 +94,21 @@ try:
 except:
     _log.critical("Can't find I2C0 device should be the soil sensor")
     ss = None
+    
+    
+def updateConfig(moistureMin, moistureMax, ssMoistureMin, ssMoistureMax):
+    _log.warning("updateConfig")
+    _log.info("moistureMin = " + str(moistureMin))
+    _log.info("moistureMax = " + str(moistureMax))
+    red = Color("red")
+    moistureColors = list(red.range_to(Color("blue"),moistureRange))
+    parser.set("whiteboxes","min",str(moistureMin))
+    parser.set("whiteboxes","max",str(moistureMax))
+    parser.set("seesaw","min",str(ssMoistureMin))
+    parser.set("seesaw","max",str(ssMoistureMax))
+    cfgfile = open("/home/pi/droneponics/config/configSoil/"+drone.gethostname()+".ini",'w')
+    parser.write(cfgfile)
+    cfgfile.close()    
     
 @blynk.handle_event('write V255')
 def rebooter(pin, value):
@@ -104,12 +141,36 @@ def blynk_data():
     blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
     blynk.set_property(0, 'color', colours['ONLINE'])
     
-    blynk.virtual_write(1, chirp.moist())
-    blynk.virtual_write(2, chirp.temp()/10) 
-    blynk.virtual_write(3, chirp.light())
+    moistureRead=chirp.moist()
+    blynk.virtual_write(1, moistureRead)
+    tempRead = chirp.temp()/10
+    blynk.virtual_write(2, tempRead) 
+    lightRead = chirp.light()
+    blynk.virtual_write(3, lightRead)
+    blynk.set_property(1, 'color', moistureColors[int(moistureRead-moistureMin)])
+    blynk.set_property(2, 'color', tempColors[int(tempRead)])
+    blynk.set_property(3, 'color', lightColors[int(lightRead)])
     
-    blynk.virtual_write(5, ss.moisture_read()) 
-    blynk.virtual_write(6, ss.get_temp())
+    ssMoistureRead = ss.moisture_read()
+    blynk.virtual_write(5, ssMoistureRead) 
+    ssTempRead = ss.get_temp()
+    blynk.virtual_write(6, ssTempRead)
+    blynk.set_property(5, 'color', ssMoistureColors[int(ssMoistureRead-ssMoistureMin)])
+    blynk.set_property(6, 'color', tempColors[int(ssTempRead)])
+    
+    if (moistureRead<moistureMin):
+        moistureMin = moistureRead
+        updateConfig(moistureMin, moistureMax, ssMoistureMin, ssMoistureMax)
+    if (moistureRead>moistureMax):
+        moistureMax = moistureRead
+        updateConfig(moistureMin, moistureMax, ssMoistureMin, ssMoistureMax)
+    
+    if (ssMoistureRead<ssMoistureMin):
+        ssMoistureMin = ssMoistureRead
+        updateConfig(moistureMin, moistureMax, ssMoistureMin, ssMoistureMax)
+    if (ssMoistureRead>ssMoistureMax):
+        ssMoistureMax = ssMoistureRead
+        updateConfig(moistureMin, moistureMax, ssMoistureMin, ssMoistureMax)
     
     _log.debug("End of timer.register fx")
         
