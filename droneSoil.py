@@ -153,6 +153,7 @@ def blynk_data():
     global chirp
     
     blynk.virtual_write(250, "Running")
+    blynk.set_property(250, 'color', colours['ONLINE'])
     _log.info("Start of timer.register fx")
     now = datetime.now()
     blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
@@ -181,6 +182,7 @@ def blynk_data():
     
     if(chirp is None):
         blynk.virtual_write(250, "Sensor 1 Error")
+        blynk.set_property(250, 'color', Color("red"))
         _log.error("Updated Blynk with error")
         blynk.set_property(1, 'color', colours['OFFLINE'])
         blynk.set_property(2, 'color', colours['OFFLINE'])
@@ -223,6 +225,7 @@ def blynk_data():
     
     if(ss is None):
         blynk.virtual_write(250, "Sensor 2 Error")
+        blynk.set_property(250, 'color', Color("red"))
         blynk.set_property(5, 'color', colours['OFFLINE'])
         blynk.set_property(6, 'color', colours['OFFLINE'])
     else:
