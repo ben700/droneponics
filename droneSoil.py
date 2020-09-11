@@ -62,7 +62,7 @@ blue = Color("blue")
 yellow = Color("yellow")
 black = Color("black")
 
-moistureColors = list(Color("red").range_to(Color("blue"),100))
+moistureColors = list(Color("red").range_to(Color("blue"),101))
 tempColors = list(Color("blue").range_to(Color("red"),40))
 lightColors = list(Color("yellow").range_to(Color("black"),66))
 
