@@ -150,7 +150,7 @@ def blynk_data():
     global moistureMax
     global ssMoistureMin
     global ssMoistureMax
-    
+    blynk.virtual_write(250, "Running")
     _log.info("Start of timer.register fx")
     now = datetime.now()
     blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
@@ -173,7 +173,7 @@ def blynk_data():
     
     ssMoistureRead = ss.moisture_read()
     blynk.virtual_write(5, ssMoistureRead) 
-    ssTempRead = ss.get_temp()
+    ssTempRead = round(ss.get_temp(),1)
     blynk.virtual_write(6, ssTempRead)
     blynk.set_property(5, 'color', ssMoistureColors[int(ssMoistureRead-ssMoistureMin)])
     blynk.set_property(6, 'color', tempColors[int(ssTempRead)])
