@@ -204,6 +204,17 @@ def blynk_data():
     if (ssMoistureRead>ssMoistureMax):
         ssMoistureMax = ssMoistureRead
         updateConfig(moistureMin, moistureMax, ssMoistureMin, ssMoistureMax)
+        
+    
+    blynk.virtual_write(11, moistureRead)
+    blynk.virtual_write(12, moistureMin)
+    blynk.virtual_write(13, moistureMax)
+     
+    blynk.virtual_write(15, ssMoistureRead)
+    blynk.virtual_write(16, ssMoistureMin)
+    blynk.virtual_write(17, ssMoistureMax)
+     
+        
     
     _log.debug("End of timer.register fx")
         
