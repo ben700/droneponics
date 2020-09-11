@@ -222,7 +222,12 @@ def blynk_data():
     blynk.set_property(16, 'color', moistureColors[0])
     blynk.set_property(17, 'color', moistureColors[100]) 
         
+    _log.info("moistureColors[0] = " + str(moistureColors[0]))
+    _log.info("moistureColors[100] = " + str(moistureColors[100]))
+    _log.info("moistureColors["+str(int(moistureReadPer))+"] = " + str(moistureColors[int(moistureReadPer)]))
+    _log.info("moistureColors["+str(int(ssMoistureReadPer))+"] = " + str(moistureColors[int(ssMoistureReadPer)]))
     
+        
     _log.debug("End of timer.register fx")
         
 _log.info("Created all the objects. Now starting the drone")        
