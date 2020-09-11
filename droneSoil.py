@@ -50,10 +50,10 @@ _log.debug("debug")
 _log.info("/home/pi/droneponics/config/configSoil/"+drone.gethostname()+".ini")
 
 
-moistureMin=parser.getint('whiteboxes', 'min', fallback=160)
-moistureMax=parser.getint('whiteboxes', 'max', fallback=640)
-ssMoistureMin=parser.getint('seesaw', 'min', fallback=240)
-ssMoistureMax=parser.getint('seesaw', 'max', fallback=340)
+moistureMin=parser.getint('whiteboxes', 'min', fallback=150)
+moistureMax=parser.getint('whiteboxes', 'max', fallback=650)
+ssMoistureMin=parser.getint('seesaw', 'min', fallback=260)
+ssMoistureMax=parser.getint('seesaw', 'max', fallback=360)
 moistureRange = moistureMax - moistureMin
 ssMoistureRange = ssMoistureMax - ssMoistureMin
 
@@ -62,9 +62,9 @@ blue = Color("blue")
 yellow = Color("yellow")
 black = Color("black")
 
-moistureColors = list(red.range_to(blue,100))
-tempColors = list(blue.range_to(red,40))
-lightColors = list(yellow.range_to(black,66))
+moistureColors = list(Color("red").range_to(Color("blue"),100))
+tempColors = list(Color("blue").range_to(Color("red"),40))
+lightColors = list(Color("yellow").range_to(Color("black"),66))
 
 
 
@@ -170,7 +170,8 @@ def blynk_data():
     blynk.virtual_write(2, tempRead) 
     lightRead = chirp.light()
     blynk.virtual_write(3, int(lightRead/10))
-    blynk.set_property(1, 'color', moistureColors[int(moistureReadPer)])
+    #blynk.set_property(1, 'color', moistureColors[int(moistureReadPer)])
+    blynk.set_property(1, 'color', moistureColors[100])
     blynk.set_property(2, 'color', tempColors[int(tempRead)])
     blynk.set_property(3, 'color', lightColors[int(lightRead/1000)])
     
@@ -181,7 +182,9 @@ def blynk_data():
     blynk.virtual_write(5, ssMoistureReadPer) 
     ssTempRead = round(ss.get_temp(),1)
     blynk.virtual_write(6, ssTempRead)
-    blynk.set_property(5, 'color', moistureColors[int(ssMoistureReadPer)])
+   # blynk.set_property(5, 'color', moistureColors[int(ssMoistureReadPer)])
+    blynk.set_property(5, 'color', moistureColors[0])
+    
     blynk.set_property(6, 'color', tempColors[int(ssTempRead)])
     _log.info("Finished reading Sensors")
     
