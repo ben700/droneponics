@@ -150,6 +150,7 @@ def blynk_data():
     global moistureMax
     global ssMoistureMin
     global ssMoistureMax
+    global moistureRange
     blynk.virtual_write(250, "Running")
     _log.info("Start of timer.register fx")
     now = datetime.now()
@@ -159,7 +160,9 @@ def blynk_data():
     _log.info("timer.register fx Update Time")
 
     moistureRead=int(chirp.moist())
-    blynk.virtual_write(1, moistureRead)
+    moistureReadPer = int(((moistureRead-moistureMin)/moistureRange)*100) 
+    
+    blynk.virtual_write(1, moistureReadPer)
     
     _log.info("timer.register fx Update moisture")
     
