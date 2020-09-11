@@ -98,14 +98,12 @@ except:
 def updateConfig(moistureMin, moistureMax, ssMoistureMin, ssMoistureMax):
     _log.warning("updateConfig")
 
-    red = Color("red")
+    global moistureRange
+    global ssMoistureRange
     
     moistureRange = moistureMax - moistureMin
     ssMoistureRange = ssMoistureMax - ssMoistureMin
 
-    moistureColors = list(red.range_to(Color("blue"),moistureRange))
-    ssMoistureColors = list(red.range_to(Color("blue"),ssMoistureRange))
-    
     parser.set("whiteboxes","min",str(moistureMin))
     parser.set("whiteboxes","max",str(moistureMax))
     parser.set("seesaw","min",str(ssMoistureMin))
@@ -160,7 +158,9 @@ def blynk_data():
     _log.info("timer.register fx Update Time")
 
     moistureRead=int(chirp.moist())
+    _log.info("timer.register fx read moisture")
     moistureReadPer = int(((moistureRead-moistureMin)/moistureRange)*100) 
+    _log.info("timer.register fx moisture to per")
     
     blynk.virtual_write(1, moistureReadPer)
     
