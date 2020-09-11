@@ -170,8 +170,7 @@ def blynk_data():
     blynk.virtual_write(2, tempRead) 
     lightRead = chirp.light()
     blynk.virtual_write(3, int(lightRead/10))
-    #blynk.set_property(1, 'color', moistureColors[int(moistureReadPer)])
-    blynk.set_property(1, 'color', moistureColors[100])
+    blynk.set_property(1, 'color', moistureColors[int(moistureReadPer)])
     blynk.set_property(2, 'color', tempColors[int(tempRead)])
     blynk.set_property(3, 'color', lightColors[int(lightRead/1000)])
     
@@ -182,8 +181,7 @@ def blynk_data():
     blynk.virtual_write(5, ssMoistureReadPer) 
     ssTempRead = round(ss.get_temp(),1)
     blynk.virtual_write(6, ssTempRead)
-   # blynk.set_property(5, 'color', moistureColors[int(ssMoistureReadPer)])
-    blynk.set_property(5, 'color', moistureColors[0])
+    blynk.set_property(5, 'color', moistureColors[int(ssMoistureReadPer)])
     
     blynk.set_property(6, 'color', tempColors[int(ssTempRead)])
     _log.info("Finished reading Sensors")
@@ -212,11 +210,17 @@ def blynk_data():
     blynk.virtual_write(11, moistureRead)
     blynk.virtual_write(12, moistureMin)
     blynk.virtual_write(13, moistureMax)
+    blynk.set_property(11, 'color', moistureColors[int(moistureReadPer)])
+    blynk.set_property(12, 'color', moistureColors[0])
+    blynk.set_property(13, 'color', moistureColors[100])
+   
      
     blynk.virtual_write(15, ssMoistureRead)
     blynk.virtual_write(16, ssMoistureMin)
     blynk.virtual_write(17, ssMoistureMax)
-     
+    blynk.set_property(15, 'color', moistureColors[int(ssMoistureReadPer)])
+    blynk.set_property(16, 'color', moistureColors[0])
+    blynk.set_property(17, 'color', moistureColors[100]) 
         
     
     _log.debug("End of timer.register fx")
