@@ -194,16 +194,18 @@ def blynk_data():
         blynk.set_property(5, 'color', colours['OFFLINE'])
         blynk.set_property(6, 'color', colours['OFFLINE'])
     else:
-        ssMoistureRead = int(ss.moisture_read())
+        _log.info("Read second sensor")
+        ssMoistureRead = ss.moisture_read()
+        _log.info("Second sensor read")
         if (ssMoistureRead<ssMoistureMin):
             ssMoistureMin = ssMoistureRead
             updateConfig(moistureMin, moistureMax, ssMoistureMin, ssMoistureMax)
         if (ssMoistureRead>ssMoistureMax):
             ssMoistureMax = ssMoistureRead
             updateConfig(moistureMin, moistureMax, ssMoistureMin, ssMoistureMax)
+        ssMoistureReadPer = int(((ssMoistureRead-ssMoistureMin)/ssMoistureRange)*100) 
         blynk.virtual_write(15, ssMoistureRead)
         blynk.set_property(15, 'color', moistureColors[int(ssMoistureReadPer)])
-        ssMoistureReadPer = int(((ssMoistureRead-ssMoistureMin)/ssMoistureRange)*100) 
         blynk.virtual_write(5, ssMoistureReadPer) 
         ssTempRead = round(ss.get_temp(),1)
         blynk.virtual_write(6, ssTempRead)
