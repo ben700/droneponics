@@ -159,15 +159,33 @@ def blynk_data():
     blynk.set_property(0, 'color', colours['ONLINE'])
 
     _log.info("timer.register fx Update Time")
+    
+    if(chirp is not None):
+        try:
+            moistureRead=chirp.moist()
+            tempRead = chirp.temp()/10
+            lightRead = chirp.light()
+        except:
+            _log.critical("Can't find I2C1 device should be the soil sensor")
+            chirp = None
+    else:
+        try:    
+            chirp = drone.Chirp(1, 0x20)
+            moistureRead=chirp.moist()
+            tempRead = chirp.temp()/10
+            lightRead = chirp.light()
+        except:
+            _log.critical("Can't find I2C1 device should be the soil sensor")
+            chirp = None
+    
+    
     if(chirp is None):
-        _log.error("No Soil Sensor 1")
         blynk.virtual_write(250, "Sensor 1 Error")
         _log.error("Updated Blynk with error")
         blynk.set_property(1, 'color', colours['OFFLINE'])
         blynk.set_property(2, 'color', colours['OFFLINE'])
         blynk.set_property(3, 'color', colours['OFFLINE'])    
     else:
-        moistureRead=chirp.moist()
         if (moistureRead<moistureMin):
             moistureMin = moistureRead
             updateConfig(moistureMin, moistureMax, ssMoistureMin, ssMoistureMax)
@@ -176,9 +194,7 @@ def blynk_data():
             updateConfig(moistureMin, moistureMax, ssMoistureMin, ssMoistureMax)
         moistureReadPer = int(((moistureRead-moistureMin)/moistureRange)*100) 
         blynk.virtual_write(1, moistureReadPer)
-        tempRead = chirp.temp()/10
         blynk.virtual_write(2, tempRead) 
-        lightRead = chirp.light()
         blynk.virtual_write(3, int(lightRead/10))
         blynk.set_property(1, 'color', moistureColors[int(moistureReadPer)])
         blynk.set_property(2, 'color', tempColors[int(tempRead)])
@@ -188,14 +204,29 @@ def blynk_data():
     
     _log.info("Now work on second sensor")
     
+    if(chirp is not None):
+        try:
+            ssMoistureRead = ss.moisture_read()
+            ssTempRead = round(ss.get_temp(),1)
+        except:
+            _log.critical("Can't find I2C0 device should be the soil sensor")
+            ss = None
+    else:
+        try:
+            i2c_bus = busio.I2C(board.D1, board.D0) 
+            ss = Seesaw(i2c_bus, addr=0x38)
+            ssMoistureRead = ss.moisture_read()
+            ssTempRead = round(ss.get_temp(),1)
+        except:
+            _log.critical("Can't find I2C0 device should be the soil sensor")
+            ss = None
+    
     if(ss is None):
-        _log.error("No Soil Sensor 2")
         blynk.virtual_write(250, "Sensor 2 Error")
         blynk.set_property(5, 'color', colours['OFFLINE'])
         blynk.set_property(6, 'color', colours['OFFLINE'])
     else:
         _log.info("Read second sensor")
-        ssMoistureRead = ss.moisture_read()
         _log.info("Second sensor read")
         if (ssMoistureRead<ssMoistureMin):
             ssMoistureMin = ssMoistureRead
@@ -207,7 +238,6 @@ def blynk_data():
         blynk.virtual_write(15, ssMoistureRead)
         blynk.set_property(15, 'color', moistureColors[int(ssMoistureReadPer)])
         blynk.virtual_write(5, ssMoistureReadPer) 
-        ssTempRead = round(ss.get_temp(),1)
         blynk.virtual_write(6, ssTempRead)
         blynk.set_property(5, 'color', moistureColors[int(ssMoistureReadPer)])
         blynk.set_property(6, 'color', tempColors[int(ssTempRead)])
