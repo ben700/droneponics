@@ -156,7 +156,7 @@ def blynk_data():
     blynk.set_property(0, 'color', colours['ONLINE'])
 
     _log.info("timer.register fx Update Time")
-     moistureRead=400
+    moistureRead=400
   #  moistureRead=chirp.moist()
     _log.info("timer.register fx read moisture")
     moistureReadPer = int(((moistureRead-moistureMin)/moistureRange)*100) 
