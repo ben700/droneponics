@@ -83,6 +83,7 @@ _log.debug("Created blynk object and timer for BLYNK_AUTH " + parser.get('blynk'
     
 try:    
   	chirp = drone.Chirp(1, 0x20)
+    moistureRead=chirp.moist()
 except:
     _log.critical("Can't find I2C1 device should be the soil sensor")
     chirp = None
@@ -90,6 +91,7 @@ except:
 try:        
     i2c_bus = busio.I2C(board.D1, board.D0) 
     ss = Seesaw(i2c_bus, addr=0x38)
+    ssMoistureRead = int(ss.moisture_read())
 except:
     _log.critical("Can't find I2C0 device should be the soil sensor")
     ss = None
@@ -158,78 +160,68 @@ def blynk_data():
 
     _log.info("timer.register fx Update Time")
     if(chirp is None):
-        _log.error("No Soil Sensor")
+        _log.error("No Soil Sensor 1")
+        blynk.virtual_write(250, "Sensor 1 Error")
+        blynk.set_property(1, 'color', colours['OFFLINE'])
+        blynk.set_property(2, 'color', colours['OFFLINE'])
+        blynk.set_property(3, 'color', colours['OFFLINE'])    
+    else:
+        moistureRead=chirp.moist()
+        if (moistureRead<moistureMin):
+            moistureMin = moistureRead
+            updateConfig(moistureMin, moistureMax, ssMoistureMin, ssMoistureMax)
+        if (moistureRead>moistureMax):
+            moistureMax = moistureRead
+            updateConfig(moistureMin, moistureMax, ssMoistureMin, ssMoistureMax)
+        moistureReadPer = int(((moistureRead-moistureMin)/moistureRange)*100) 
+        blynk.virtual_write(1, moistureReadPer)
+        tempRead = chirp.temp()/10
+        blynk.virtual_write(2, tempRead) 
+        lightRead = chirp.light()
+        blynk.virtual_write(3, int(lightRead/10))
+        blynk.set_property(1, 'color', moistureColors[int(moistureReadPer)])
+        blynk.set_property(2, 'color', tempColors[int(tempRead)])
+        blynk.set_property(3, 'color', lightColors[int(lightRead/1000)])
+        blynk.virtual_write(11, moistureRead)
+        blynk.set_property(11, 'color', moistureColors[int(moistureReadPer)])
     
-    moistureRead=chirp.moist()
-    _log.info("timer.register fx read moisture")
-    moistureReadPer = int(((moistureRead-moistureMin)/moistureRange)*100) 
-    _log.info("timer.register fx moisture to per")
     
-    blynk.virtual_write(1, moistureReadPer)
-    
-    _log.info("timer.register fx Update moisture")
-    
-    tempRead = chirp.temp()/10
-    blynk.virtual_write(2, tempRead) 
-    lightRead = chirp.light()
-    blynk.virtual_write(3, int(lightRead/10))
-    blynk.set_property(1, 'color', moistureColors[int(moistureReadPer)])
-    blynk.set_property(2, 'color', tempColors[int(tempRead)])
-    blynk.set_property(3, 'color', lightColors[int(lightRead/1000)])
-    
-    ssMoistureRead = int(ss.moisture_read())
-    ssMoistureReadPer = int(((ssMoistureRead-ssMoistureMin)/ssMoistureRange)*100) 
-    
-    
-    blynk.virtual_write(5, ssMoistureReadPer) 
-    ssTempRead = round(ss.get_temp(),1)
-    blynk.virtual_write(6, ssTempRead)
-    blynk.set_property(5, 'color', moistureColors[int(ssMoistureReadPer)])
-    
-    blynk.set_property(6, 'color', tempColors[int(ssTempRead)])
+    if(ss is None):
+        _log.error("No Soil Sensor 2")
+        blynk.virtual_write(250, "Sensor 2 Error")
+        blynk.set_property(5, 'color', colours['OFFLINE'])
+        blynk.set_property(6, 'color', colours['OFFLINE'])
+    else:
+        ssMoistureRead = int(ss.moisture_read())
+        if (ssMoistureRead<ssMoistureMin):
+            ssMoistureMin = ssMoistureRead
+            updateConfig(moistureMin, moistureMax, ssMoistureMin, ssMoistureMax)
+        if (ssMoistureRead>ssMoistureMax):
+            ssMoistureMax = ssMoistureRead
+            updateConfig(moistureMin, moistureMax, ssMoistureMin, ssMoistureMax)
+        blynk.virtual_write(15, ssMoistureRead)
+        blynk.set_property(15, 'color', moistureColors[int(ssMoistureReadPer)])
+        ssMoistureReadPer = int(((ssMoistureRead-ssMoistureMin)/ssMoistureRange)*100) 
+        blynk.virtual_write(5, ssMoistureReadPer) 
+        ssTempRead = round(ss.get_temp(),1)
+        blynk.virtual_write(6, ssTempRead)
+        blynk.set_property(5, 'color', moistureColors[int(ssMoistureReadPer)])
+        blynk.set_property(6, 'color', tempColors[int(ssTempRead)])
+            
     _log.info("Finished reading Sensors")
     
-    _log.info("moistureMin =" + str(moistureMin))
-    _log.info("moistureMax =" + str(moistureMax))
-    _log.info("ssMoistureMin =" + str(ssMoistureMin))
-    _log.info("ssMoistureMax =" + str(ssMoistureMax))
 
-
-    if (moistureRead<moistureMin):
-        moistureMin = moistureRead
-        updateConfig(moistureMin, moistureMax, ssMoistureMin, ssMoistureMax)
-    if (moistureRead>moistureMax):
-        moistureMax = moistureRead
-        updateConfig(moistureMin, moistureMax, ssMoistureMin, ssMoistureMax)
-    
-    if (ssMoistureRead<ssMoistureMin):
-        ssMoistureMin = ssMoistureRead
-        updateConfig(moistureMin, moistureMax, ssMoistureMin, ssMoistureMax)
-    if (ssMoistureRead>ssMoistureMax):
-        ssMoistureMax = ssMoistureRead
-        updateConfig(moistureMin, moistureMax, ssMoistureMin, ssMoistureMax)
-        
-    
-    blynk.virtual_write(11, moistureRead)
     blynk.virtual_write(12, moistureMin)
     blynk.virtual_write(13, moistureMax)
-    blynk.set_property(11, 'color', moistureColors[int(moistureReadPer)])
     blynk.set_property(12, 'color', moistureColors[1])
     blynk.set_property(13, 'color', moistureColors[99])
    
      
-    blynk.virtual_write(15, ssMoistureRead)
     blynk.virtual_write(16, ssMoistureMin)
     blynk.virtual_write(17, ssMoistureMax)
-    blynk.set_property(15, 'color', moistureColors[int(ssMoistureReadPer)])
     blynk.set_property(16, 'color', moistureColors[1])
     blynk.set_property(17, 'color', moistureColors[99]) 
         
-    _log.info("moistureColors[1] = " + str(moistureColors[1]))
-    _log.info("moistureColors[99] = " + str(moistureColors[99]))
-    _log.info("moistureColors["+str(int(moistureReadPer))+"] = " + str(moistureColors[int(moistureReadPer)]))
-    _log.info("moistureColors["+str(int(ssMoistureReadPer))+"] = " + str(moistureColors[int(ssMoistureReadPer)]))
-    
         
     _log.debug("End of timer.register fx")
         
