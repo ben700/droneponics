@@ -211,19 +211,19 @@ def blynk_data():
     blynk.virtual_write(12, moistureMin)
     blynk.virtual_write(13, moistureMax)
     blynk.set_property(11, 'color', moistureColors[int(moistureReadPer)])
-    blynk.set_property(12, 'color', moistureColors[0])
-    blynk.set_property(13, 'color', moistureColors[100])
+    blynk.set_property(12, 'color', moistureColors[1])
+    blynk.set_property(13, 'color', moistureColors[99])
    
      
     blynk.virtual_write(15, ssMoistureRead)
     blynk.virtual_write(16, ssMoistureMin)
     blynk.virtual_write(17, ssMoistureMax)
     blynk.set_property(15, 'color', moistureColors[int(ssMoistureReadPer)])
-    blynk.set_property(16, 'color', moistureColors[0])
-    blynk.set_property(17, 'color', moistureColors[100]) 
+    blynk.set_property(16, 'color', moistureColors[1])
+    blynk.set_property(17, 'color', moistureColors[99]) 
         
-    _log.info("moistureColors[0] = " + str(moistureColors[0]))
-    _log.info("moistureColors[100] = " + str(moistureColors[100]))
+    _log.info("moistureColors[1] = " + str(moistureColors[1]))
+    _log.info("moistureColors[99] = " + str(moistureColors[99]))
     _log.info("moistureColors["+str(int(moistureReadPer))+"] = " + str(moistureColors[int(moistureReadPer)]))
     _log.info("moistureColors["+str(int(ssMoistureReadPer))+"] = " + str(moistureColors[int(ssMoistureReadPer)]))
     
@@ -256,4 +256,6 @@ while True:
        blynk.set_property(systemLED, 'color', colours['OFFLINE'])
        blynk.notify("non-Production blynk crashed and is not-restarting; hostname " +  drone.gethostname() + " at: " + now.strftime("%d/%m/%Y %H:%M:%S"))
        _log.critical("Main Loop exception :- Set log evel to CRITICAL to auto reboot")
+       os.system('sh /home/pi/updateDroneponics.sh')
+      # os.system('sudo reboot')
         
