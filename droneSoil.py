@@ -66,7 +66,7 @@ moistureColors = list(Color("red").range_to(Color("blue"),101))
 tempColors = list(Color("blue").range_to(Color("red"),40))
 lightColors = list(Color("yellow").range_to(Color("black"),66))
 
-
+chirp = None
 
 
 # Initialize Blynk
@@ -148,6 +148,7 @@ def blynk_data():
     global ssMoistureMax
     global moistureRange
     global ssMoistureRange
+    global chirp
     
     blynk.virtual_write(250, "Running")
     _log.info("Start of timer.register fx")
@@ -156,8 +157,10 @@ def blynk_data():
     blynk.set_property(0, 'color', colours['ONLINE'])
 
     _log.info("timer.register fx Update Time")
-    moistureRead=400
-  #  moistureRead=chirp.moist()
+    if(chirp is None):
+        _log.error("No Soil Sensor")
+    
+    moistureRead=chirp.moist()
     _log.info("timer.register fx read moisture")
     moistureReadPer = int(((moistureRead-moistureMin)/moistureRange)*100) 
     _log.info("timer.register fx moisture to per")
