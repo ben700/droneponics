@@ -289,5 +289,5 @@ while True:
        blynk.notify("non-Production blynk crashed and is not-restarting; hostname " +  drone.gethostname() + " at: " + now.strftime("%d/%m/%Y %H:%M:%S"))
        _log.critical("Main Loop exception :- Set log evel to CRITICAL to auto reboot")
        os.system('sh /home/pi/updateDroneponics.sh')
-      # os.system('sudo reboot')
+       os.system('sudo reboot')
         
