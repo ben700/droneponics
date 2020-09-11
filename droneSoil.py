@@ -155,9 +155,14 @@ def blynk_data():
     now = datetime.now()
     blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
     blynk.set_property(0, 'color', colours['ONLINE'])
-    
+
+    _log.info("timer.register fx Update Time")
+
     moistureRead=chirp.moist()
     blynk.virtual_write(1, moistureRead)
+    
+    _log.info("timer.register fx Update moisture")
+    
     tempRead = chirp.temp()/10
     blynk.virtual_write(2, tempRead) 
     lightRead = chirp.light()
