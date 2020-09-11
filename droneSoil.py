@@ -162,6 +162,7 @@ def blynk_data():
     if(chirp is None):
         _log.error("No Soil Sensor 1")
         blynk.virtual_write(250, "Sensor 1 Error")
+        _log.error("Updated Blynk with error")
         blynk.set_property(1, 'color', colours['OFFLINE'])
         blynk.set_property(2, 'color', colours['OFFLINE'])
         blynk.set_property(3, 'color', colours['OFFLINE'])    
@@ -185,6 +186,7 @@ def blynk_data():
         blynk.virtual_write(11, moistureRead)
         blynk.set_property(11, 'color', moistureColors[int(moistureReadPer)])
     
+    _log.info("Now work on second sensor")
     
     if(ss is None):
         _log.error("No Soil Sensor 2")
