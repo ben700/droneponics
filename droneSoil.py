@@ -50,10 +50,10 @@ _log.debug("debug")
 _log.info("/home/pi/droneponics/config/configSoil/"+drone.gethostname()+".ini")
 
 
-moistureMin=parser.getint('whiteboxes', 'min', fallback=350)
-moistureMax=parser.getint('whiteboxes', 'max', fallback=1000)
-ssMoistureMin=parser.getint('seesaw', 'min', fallback=350)
-ssMoistureMax=parser.getint('seesaw', 'max', fallback=1000)
+moistureMin=parser.getint('whiteboxes', 'min', fallback=160)
+moistureMax=parser.getint('whiteboxes', 'max', fallback=640)
+ssMoistureMin=parser.getint('seesaw', 'min', fallback=240)
+ssMoistureMax=parser.getint('seesaw', 'max', fallback=340)
 moistureRange = moistureMax - moistureMin
 ssMoistureRange = ssMoistureMax - ssMoistureMin
 
@@ -158,7 +158,7 @@ def blynk_data():
 
     _log.info("timer.register fx Update Time")
 
-    moistureRead=chirp.moist()
+    moistureRead=int(chirp.moist())
     blynk.virtual_write(1, moistureRead)
     
     _log.info("timer.register fx Update moisture")
@@ -166,12 +166,12 @@ def blynk_data():
     tempRead = chirp.temp()/10
     blynk.virtual_write(2, tempRead) 
     lightRead = chirp.light()
-    blynk.virtual_write(3, lightRead/10)
+    blynk.virtual_write(3, int(lightRead/10))
     blynk.set_property(1, 'color', moistureColors[int(moistureRead-moistureMin)])
     blynk.set_property(2, 'color', tempColors[int(tempRead)])
     blynk.set_property(3, 'color', lightColors[int(lightRead/1000)])
     
-    ssMoistureRead = ss.moisture_read()
+    ssMoistureRead = int(ss.moisture_read())
     blynk.virtual_write(5, ssMoistureRead) 
     ssTempRead = round(ss.get_temp(),1)
     blynk.virtual_write(6, ssTempRead)
