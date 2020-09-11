@@ -62,9 +62,7 @@ blue = Color("blue")
 yellow = Color("yellow")
 black = Color("black")
 
-moistureColors = list(red.range_to(blue,moistureRange))
-ssMoistureColors = list(red.range_to(blue,ssMoistureRange))
-
+moistureColors = list(red.range_to(blue,100))
 tempColors = list(blue.range_to(red,40))
 lightColors = list(yellow.range_to(black,66))
 
@@ -151,6 +149,8 @@ def blynk_data():
     global ssMoistureMin
     global ssMoistureMax
     global moistureRange
+    global ssMoistureRange
+    
     blynk.virtual_write(250, "Running")
     _log.info("Start of timer.register fx")
     now = datetime.now()
@@ -170,15 +170,18 @@ def blynk_data():
     blynk.virtual_write(2, tempRead) 
     lightRead = chirp.light()
     blynk.virtual_write(3, int(lightRead/10))
-    blynk.set_property(1, 'color', moistureColors[int(moistureRead-moistureMin)])
+    blynk.set_property(1, 'color', moistureColors[int(moistureReadPer)])
     blynk.set_property(2, 'color', tempColors[int(tempRead)])
     blynk.set_property(3, 'color', lightColors[int(lightRead/1000)])
     
     ssMoistureRead = int(ss.moisture_read())
-    blynk.virtual_write(5, ssMoistureRead) 
+    ssMoistureReadPer = int(((ssMoistureRead-ssMoistureMin)/ssMoistureRange)*100) 
+    
+    
+    blynk.virtual_write(5, ssMoistureReadPer) 
     ssTempRead = round(ss.get_temp(),1)
     blynk.virtual_write(6, ssTempRead)
-    blynk.set_property(5, 'color', ssMoistureColors[int(ssMoistureRead-ssMoistureMin)])
+    blynk.set_property(5, 'color', moistureColors[int(ssMoistureReadPer)])
     blynk.set_property(6, 'color', tempColors[int(ssTempRead)])
     _log.info("Finished reading Sensors")
     
@@ -214,6 +217,7 @@ _log.debug("Just about to get boot timestamp and change system LED")
 now = datetime.now()
 blynk.virtual_write(99, now.strftime("%d/%m/%Y %H:%M:%S"))
 blynk.virtual_write(systemLED, 255)
+blynk.set_property(systemLED, 'color', colours['ONLINE'])
 blynk.virtual_write(255, 0)
 
 
@@ -226,6 +230,7 @@ while True:
     except: 
        _log.error("in main loop except")
        blynk.virtual_write(250, "Crashed")
+       blynk.set_property(systemLED, 'color', colours['OFFLINE'])
        blynk.notify("non-Production blynk crashed and is not-restarting; hostname " +  drone.gethostname() + " at: " + now.strftime("%d/%m/%Y %H:%M:%S"))
        _log.critical("Main Loop exception :- Set log evel to CRITICAL to auto reboot")
         
