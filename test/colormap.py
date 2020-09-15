@@ -46,7 +46,7 @@ mycmap = matplotlib.colors.LinearSegmentedColormap('my_colormap', cdict, 256)
 norm = matplotlib.colors.LogNorm(vmin, vmax)
 colors = {}
 count = 0
-step_size = 0.001
+step_size = 0.1
 for value in np.arange(vmin, vmax+step_size, step_size):
     count += 1
     print("%d/%d %f%%" % (count, vmax*(1./step_size), 100.*count/(vmax*(1./step_size))))
