@@ -2,7 +2,7 @@
 import matplotlib
 import numpy as np 
 
-vmin = 0.1
+vmin = 0
 vmax = 1000
 
 norm = matplotlib.colors.Normalize(np.log10(vmin), np.log10(vmax))
@@ -55,10 +55,13 @@ for value in np.arange(vmin, vmax+step_size, step_size):
     color = (rgba[0], rgba[1], rgba[2])
     colors[value] = color
 
+def colormap(value):    
+    print("value = " + str(value))
+    return colors[value]
+
+
+
 print ("value, red, green, blue")
 for value in range(1, 1000):
-#for value in sorted(colors.keys()):
-    print("value = " + str(value))
-    rgb = colors[value+0.1]
+    rgb = colormap(value)
     print("%s, %s, %s, %s" % (round(value,1), rgb[0], rgb[1], rgb[2]))
-  
