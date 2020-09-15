@@ -53,8 +53,7 @@ for value in np.arange(vmin, vmax+step_size, step_size):
     print("value = " + str(value))
     rgba = mycmap(norm(value), bytes=True)
     color = (rgba[0], rgba[1], rgba[2])
-    if color not in colors.values():
-        colors[value] = color
+    colors[value] = color
 
 print ("value, red, green, blue")
 #for value in range(1, 100):
