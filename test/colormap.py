@@ -57,7 +57,7 @@ for value in np.arange(vmin, vmax+step_size, step_size):
 
 def colormap(value):    
     print("value = " + str(value))
-    return colors[value-vmin]
+    return colors[value+vmin]
 
 
 
