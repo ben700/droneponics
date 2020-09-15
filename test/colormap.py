@@ -43,7 +43,7 @@ cdict = {
 }
 
 
-mycmap = matplotlib.colors.LinearSegmentedColormap('my_colormap', cdict, 256)   
+mycmap = matplotlib.colors.LinearSegmentedColormap('my_colormap', cdict, 1)   
 norm = matplotlib.colors.LogNorm(vmin, vmax)
 colors = {}
 count = 0
