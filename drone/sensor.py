@@ -37,9 +37,7 @@ class Sensor:
    def read():
        return self.sensor.query("R").split(":")[1].strip().rstrip('\x00')
    
-   def display(blynk, VALUE, COLOR):
-    self.value =VALUE
-    self.color=COLOR
+   def display(blynk):
     blynk.set_property(displayPin, "label", self.name)
     blynk.set_property(displayPin, 'color', self.color)
     return blynk.virtual_write(displayPin, self.value)
