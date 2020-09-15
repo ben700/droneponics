@@ -3,10 +3,10 @@ import matplotlib
 import numpy as np 
 
 vmin = 0.1
-vmax = 100
+vmax = 1000
 
 norm = matplotlib.colors.Normalize(np.log10(vmin), np.log10(vmax))
-lognum = norm(np.log10([.05, .2, 1, 4, 15,100]))
+lognum = norm(np.log10([.5, 2., 10, 40, 150,1000]))
 
 cdict = {
     'red':
@@ -46,7 +46,7 @@ mycmap = matplotlib.colors.LinearSegmentedColormap('my_colormap', cdict, 256)
 norm = matplotlib.colors.LogNorm(vmin, vmax)
 colors = {}
 count = 0
-step_size = 1
+step_size = 10
 for value in np.arange(vmin, vmax+step_size, step_size):
     count += 1
     print("%d/%d %f%%" % (count, vmax*(1./step_size), 100.*count/(vmax*(1./step_size))))
