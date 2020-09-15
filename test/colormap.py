@@ -53,12 +53,12 @@ for value in np.arange(vmin, vmax+step_size, step_size):
     print("value = " + str(value))
     rgba = mycmap(norm(value), bytes=True)
     color = (rgba[0], rgba[1], rgba[2])
-    colors[value-vmin] = color
+    colors[value] = color
 
 print ("value, red, green, blue")
 for value in range(1, 1000):
 #for value in sorted(colors.keys()):
     print("value = " + str(value))
-    rgb = colors[value]
+    rgb = colors[value+0.1]
     print("%s, %s, %s, %s" % (round(value,1), rgb[0], rgb[1], rgb[2]))
   
