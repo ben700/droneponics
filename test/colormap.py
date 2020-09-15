@@ -2,7 +2,7 @@
 import matplotlib
 import numpy as np 
 
-vmin = 0.00000001
+vmin = 0.1
 vmax = 1000
 
 norm = matplotlib.colors.Normalize(np.log10(vmin), np.log10(vmax))
