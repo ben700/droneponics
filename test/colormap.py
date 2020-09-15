@@ -10,7 +10,7 @@ norm = matplotlib.colors.Normalize(vmin=0, vmax=400)
 rgba_color = cm.coolwarm(norm(100),bytes=True) 
 print("rgba_color =" + str(rgba_color))
 
-c = Color(rgba_color[0]/255,rgba_color[1]/255,rgba_color[2]/255)
+c = Color(rgb=(rgba_color[0]/255,rgba_color[1]/255,rgba_color[2]/255))
 print("color =" + str(c))
 
 
