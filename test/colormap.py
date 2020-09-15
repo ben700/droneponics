@@ -1,4 +1,5 @@
 #import colormap
+import matplotlib
 from colour import Color
 from matplotlib import cm
 
