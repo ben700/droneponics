@@ -25,5 +25,5 @@ def pixel(x, width=100, map=[], spread=1):
     return min(1.0, r), min(1.0, g), min(1.0, b)
 
 for x in range (10): 
-     r, g, b = pixel(x, width=100, map=heatmap)
-     print("r = " + (r) + " g = " + str(g) + " b = " + str(b))
+     r, g, b = pixel(x/10, width=100, map=heatmap)
+     print("r = " + str(r) + " g = " + str(g) + " b = " + str(b))
