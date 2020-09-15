@@ -24,9 +24,6 @@ def pixel(x, width=100, map=[], spread=1):
     b = sum([gaussian(x, p[1][2], p[0] * width, width/(spread*len(map))) for p in map])
     return min(1.0, r), min(1.0, g), min(1.0, b)
 
-x = 10
-r, g, b = pixel(x, width=100, map=heatmap)
-
-print("r = " + str(r))
-print("g = " + str(g))
-print("b = " + str(b))
+for x in range (10): 
+     r, g, b = pixel(x, width=100, map=heatmap)
+     print("r = " + str(r) + " g = " + str(g) + " b = " + str(b))
