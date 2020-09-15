@@ -32,16 +32,16 @@ class Sensor:
        self.value = None
        self.lowAlarm = kwargs.get('LowAlarm', None)
        self.highAlarm = kwargs.get('HighAlarm', None)
+       self.color = None
 
    def read():
        return self.sensor.query("R").split(":")[1].strip().rstrip('\x00')
    
-   def display(blynk, VALUE):
-    red = Color("red")
-    colors = list(red.range_to(Color("green"),10))
+   def display(blynk, VALUE, COLOR):
     self.value =VALUE
+    self.color=COLOR
     blynk.set_property(displayPin, "label", self.name)
-    blynk.set_property(displayPin, 'color', colors[round((self.high-self.low)/10,0)])
+    blynk.set_property(displayPin, 'color', self.color)
     return blynk.virtual_write(displayPin, self.value)
     
 class PH(Sensor):  
