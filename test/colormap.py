@@ -58,4 +58,4 @@ for value in np.arange(vmin, vmax+step_size, step_size):
 print ("value, red, green, blue")
 for value in sorted(colors.keys()):
     rgb = colors[value]
-    print("%s, %s, %s, %s" % (value, rgb[0], rgb[1], rgb[2]))
+    print("%s, %s, %s, %s" % (round(value,1), rgb[0], rgb[1], rgb[2]))
