@@ -26,4 +26,4 @@ def pixel(x, width=100, map=[], spread=1):
 
 for x in range (10): 
      r, g, b = pixel(x, width=100, map=heatmap)
-     print("r = " + str(r) + " g = " + str(g) + " b = " + str(b))
+     print("r = " + (r) + " g = " + str(g) + " b = " + str(b))
