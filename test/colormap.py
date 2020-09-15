@@ -56,7 +56,7 @@ for value in np.arange(vmin, vmax+step_size, step_size):
         colors[value] = color
 
 print ("value, red, green, blue")
-for value in range(vmax)):
+for value in range(vmax):
     rgb = colors[value]
     print("%s, %s, %s, %s" % (round(value,1), rgb[0], rgb[1], rgb[2]))
     value = value +10
