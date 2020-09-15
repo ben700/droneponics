@@ -1,5 +1,6 @@
 #! /usr/bin/env python3
 import matplotlib
+from colour import Color
 import numpy as np 
 
 vmin = 0.1
