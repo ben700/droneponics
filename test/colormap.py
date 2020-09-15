@@ -64,4 +64,6 @@ def colormap(value):
 print ("value, red, green, blue")
 for value in range(1, vmax+1):
     rgb = colormap(value)
+    c = Color(rgb=(rgb[0], rgb[1], rgb[2]))
     print("%s, %s, %s, %s" % (round(value,1), rgb[0], rgb[1], rgb[2]))
+    print("Color = " + str(c))
