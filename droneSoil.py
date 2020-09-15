@@ -198,11 +198,11 @@ def blynk_data():
         blynk.virtual_write(1, moistureReadPer)
         blynk.virtual_write(2, tempRead) 
         blynk.virtual_write(3, int(lightRead/10))
-        blynk.set_property(1, 'color', moistureColors[int(moistureReadPer)])
-        blynk.set_property(2, 'color', tempColors[int(tempRead)])
+        blynk.set_property(1, 'color', drone.getMoistColour(moistureReadPer))
+        blynk.set_property(2, 'color', drone.getTempColour(tempRead))
         blynk.set_property(3, 'color', lightColors[int(lightRead/1000)])
         blynk.virtual_write(11, moistureRead)
-        blynk.set_property(11, 'color', moistureColors[int(moistureReadPer)])
+        blynk.set_property(11, 'color', drone.getMoistColour(moistureReadPer))
     
     _log.info("Now work on second sensor")
     
@@ -239,11 +239,11 @@ def blynk_data():
             updateConfig(moistureMin, moistureMax, ssMoistureMin, ssMoistureMax)
         ssMoistureReadPer = int(((ssMoistureRead-ssMoistureMin)/ssMoistureRange)*100) 
         blynk.virtual_write(15, ssMoistureRead)
-        blynk.set_property(15, 'color', moistureColors[int(ssMoistureReadPer)])
+        blynk.set_property(15, 'color', drone.getMoistColour(ssMoistureReadPer))
         blynk.virtual_write(5, ssMoistureReadPer) 
         blynk.virtual_write(6, ssTempRead)
-        blynk.set_property(5, 'color', moistureColors[int(ssMoistureReadPer)])
-        blynk.set_property(6, 'color', tempColors[int(ssTempRead)])
+        blynk.set_property(5, 'color', drone.getMoistColour(ssMsoistureReadPer))
+        blynk.set_property(6, 'color', drone.getTempColour(ssTempRead))
             
     _log.info("Finished reading Sensors")
     
