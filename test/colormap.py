@@ -3,10 +3,10 @@ import matplotlib
 import numpy as np 
 
 vmin = 0.1
-vmax = 1000
+vmax = 100
 
 norm = matplotlib.colors.Normalize(np.log10(vmin), np.log10(vmax))
-lognum = norm(np.log10([.5, 2., 10, 40, 150,1000]))
+lognum = norm(np.log10([.05, .2, 1, 4, 15,100]))
 
 cdict = {
     'red':
