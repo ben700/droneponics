@@ -2,8 +2,8 @@
 import matplotlib
 import numpy as np 
 
-vmin = 0
-vmax = 1000
+vmin = 1
+vmax = 1001
 
 norm = matplotlib.colors.Normalize(np.log10(vmin), np.log10(vmax))
 lognum = norm(np.log10([.5, 2., 10, 40, 150,1000]))
