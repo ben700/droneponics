@@ -4,7 +4,9 @@ import blynktimer
 import logging
 from configparser import ConfigParser
 import RPi.GPIO as GPIO   
-
+from AtlasI2C import (
+   AtlasI2C
+)
 #def displaySensor(blynk, VP, VALUE, NAME , LOW, HIGH):
 # print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
 # red = Color("red")
