@@ -274,14 +274,14 @@ def blynk_data():
 
     blynk.virtual_write(12, moistureMin)
     blynk.virtual_write(13, moistureMax)
-    blynk.set_property(12, 'color', drone.getMoistColour(_log, int(1))
-    blynk.set_property(13, 'color', drone.getMoistColour(_log, int(99]))
+    blynk.set_property(12, 'color', drone.getMoistColour(_log, int(1)))
+    blynk.set_property(13, 'color', drone.getMoistColour(_log, int(99)))
    
      
     blynk.virtual_write(16, ssMoistureMin)
     blynk.virtual_write(17, ssMoistureMax)
-    blynk.set_property(16, 'color', drone.getMoistColour(_log, int(1))
-    blynk.set_property(17, 'color', drone.getMoistColour(_log, int(99)) 
+    blynk.set_property(16, 'color', drone.getMoistColour(_log, int(1)))
+    blynk.set_property(17, 'color', drone.getMoistColour(_log, int(99))) 
         
         
     blynk.virtual_write(98, "End of timer.register fx" + '/n')
