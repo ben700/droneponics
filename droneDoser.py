@@ -570,7 +570,7 @@ try:
            blynk.virtual_sync(pin)
            blynk.read_response(timeout=0.5)
         blynk.virtual_write(250, "Connected")
-	
+
     @timer.register(interval=60, run_once=False)
     def blynk_data():
         _log.info("Update Timer Run")
