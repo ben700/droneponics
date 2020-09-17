@@ -3,7 +3,7 @@ import matplotlib
 from colour import Color
 from matplotlib import cm
 
-def getTempColour(Temp):
+def getTempColour(_log, Temp):
      try:
           #normalize item number values to colormap
           norm = matplotlib.colors.Normalize(vmin=0, vmax=400)
@@ -12,26 +12,40 @@ def getTempColour(Temp):
           #rgba_color = cm.coolwarm(norm(Temp),bytes=True) 
           rgba_color = cm.RdBu(norm(Temp),bytes=True) 
      
-          #print("rgba_color =" + str(rgba_color))
+          _log.info("rgba_color =" + str(rgba_color))
 
           c = Color(rgb=(rgba_color[0]/255,rgba_color[1]/255,rgba_color[2]/255))
-          #print("color =" + str(c))
+          _log.info("color =" + str(c))
      except:
+          _log.error("Error in Fx getTempColour")
           c = '#0000FF'
      return c
 
 
-def getMoistColour(MoistPer):
-     print("getMoistColour(MoistPer) =" + str(MoistPer))
+def getMoistColour(_log, MoistPer):
+     _log.info("getMoistColour(MoistPer) =" + str(MoistPer))
      #normalize item number values to colormap
      norm = matplotlib.colors.Normalize(vmin=0, vmax=100)
 
      #colormap possible values = viridis, jet, spectral
      rgba_color = cm.RdBu(norm(MoistPer),bytes=True) 
-     print("rgba_color =" + str(rgba_color))
+     _log.info("rgba_color =" + str(rgba_color))
 
      c = Color(rgb=(rgba_color[0]/255,rgba_color[1]/255,rgba_color[2]/255))
-     print("color =" + str(c))
+     _log.info("color =" + str(c))
+     return c
+
+def getLightColors(_log, LightPer):
+     _log.info("lightColors(LightPer) =" + str(LightPer))
+     #normalize item number values to colormap
+     norm = matplotlib.colors.Normalize(vmin=0, vmax=100)
+
+     #colormap possible values = viridis, jet, spectral
+     rgba_color = cm.RdBu(norm(LightPer),bytes=True) 
+     _log.info("rgba_color =" + str(rgba_color))
+
+     c = Color(rgb=(rgba_color[0]/255,rgba_color[1]/255,rgba_color[2]/255))
+     _log.info("color =" + str(c))
      return c
 
 
