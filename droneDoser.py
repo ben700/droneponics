@@ -613,8 +613,8 @@ try:
         _log.info("sensors[2].target = " + str(sensors[2].target))
         blynk.virtual_write(98,"sensors[1].target = " + str(sensors[1].target)+ '\n')
         blynk.virtual_write(98,"sensors[2].target = " + str(sensors[2].target)+ '\n')
-        blynk.virtual_write(98,"sensors[1].mode = " + str(sensors[1].target)+ '\n')
-        blynk.virtual_write(98,"sensors[2].mode = " + str(sensors[2].target)+ '\n')
+        blynk.virtual_write(98,"sensors[1].mode = " + str(sensors[1].mode)+ '\n')
+        blynk.virtual_write(98,"sensors[2].mode = " + str(sensors[2].mode)+ '\n')
        
         if (float(sensors[1].target) > float(sensors[1].value)): #EC
              if (sensors[1].mode == 3):
