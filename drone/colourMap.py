@@ -10,7 +10,7 @@ def getTempColour(Temp):
 
           #colormap possible values = viridis, jet, spectral
           #rgba_color = cm.coolwarm(norm(Temp),bytes=True) 
-          rgba_color = cm.RdBu(norm(MoistPer),bytes=True) 
+          rgba_color = cm.RdBu(norm(Temp),bytes=True) 
      
           #print("rgba_color =" + str(rgba_color))
 
