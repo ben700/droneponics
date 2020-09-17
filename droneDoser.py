@@ -599,13 +599,13 @@ try:
     @blynk.handle_event("connect")
     def connect_handler():
         _log.warning("Connected")
+        blynk.virtual_write(250, "Connected")
         pins = [1, 29,30,31,32,35,36,38,39,48,49, 60, 61, 62, 63, 64, 65, 66]
         for pin in pins:
            _log.info('Syncing virtual buttons {}'.format(pin))
            blynk.virtual_sync(pin)
            blynk.read_response(timeout=0.5)
-        blynk.virtual_write(250, "Connected")
-
+        
     @timer.register(interval=60, run_once=False)
     def blynk_data():
         _log.info("Update Timer Run")
