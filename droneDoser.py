@@ -720,7 +720,7 @@ try:
                    blynk.set_property(240, 'color', colours['ONLINE'])
               else:
                    blynk.set_property(240, 'color', colours['OFFLINE'])
-
+              _log.info("Boot Completed")
               timer.run()
         except:
            _log.info('Unexpected error')
