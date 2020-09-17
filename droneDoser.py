@@ -220,7 +220,7 @@ try:
                 relays[0].cycleResetSet(1)
                 blynk.virtual_write(35,1)
            try:
-                 _log.debug("in v1write_handler turing on relay")
+                 _log.debug("in v1write_handler turing relay auto")
                  relays[relay].setAutomatic()
            except:
                  _log.error("Except handle_event V"+str(relay+1)+" Turning auto")
