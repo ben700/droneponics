@@ -543,7 +543,43 @@ try:
             _log.info("Pump for " +nutrientMix[x].name +" = " + nutrientMix[x].pump.query("D,*") + '\n') 
             blynk.virtual_write(98, now.strftime("%d/%m/%Y %H:%M:%S") + " :- Pump for " + nutrientMix[x].name + ":- STARTED" + '\n') 
 				
-  
+		
+    @blynk.handle_event('write V60')
+    def v60write_handler(pin, value):
+        nutrientMix[0].dose = value[0]
+        blynk.virtual_write(98, nutrientMix[0].name + " dose volume set to " + str(nutrientMix[0].dose)+ '\n')
+ 	 	
+    @blynk.handle_event('write V61')
+    def v61write_handler(pin, value):
+        nutrientMix[1].dose = value[0]
+        blynk.virtual_write(98, nutrientMix[1].name + " dose volume set to " + str(nutrientMix[1].dose)+ '\n')
+    
+    @blynk.handle_event('write V62')
+    def v62write_handler(pin, value):
+        nutrientMix[2].dose = value[0]
+        blynk.virtual_write(98, nutrientMix[2].name + " dose volume set to " + str(nutrientMix[2].dose)+ '\n')
+    
+    @blynk.handle_event('write V63')
+    def v63write_handler(pin, value):
+        nutrientMix[3].dose = value[0]
+        blynk.virtual_write(98, nutrientMix[3].name + " dose volume set to " + str(nutrientMix[3].dose)+ '\n')
+    
+    @blynk.handle_event('write V64')
+    def v64write_handler(pin, value):
+        nutrientMix[4].dose = value[0]
+        blynk.virtual_write(98, nutrientMix[4].name + " dose volume set to " + str(nutrientMix[4].dose)+ '\n')
+
+    @blynk.handle_event('write V65')
+    def v65write_handler(pin, value):
+        nutrientMix[5].dose = value[0]
+        blynk.virtual_write(98, nutrientMix[5].name + " dose volume set to " + str(nutrientMix[5].dose)+ '\n')
+
+    @blynk.handle_event('write V66')
+    def v66write_handler(pin, value):
+        nutrientMix[6].dose = value[0]
+        blynk.virtual_write(98, nutrientMix[6].name + " dose volume set to " + str(nutrientMix[6].dose)+ '\n')
+
+			
     @blynk.handle_event('write V255')
     def rebooter(pin, value):
         _log.info( "User reboot")
@@ -558,7 +594,7 @@ try:
     @blynk.handle_event("connect")
     def connect_handler():
         _log.warning("Connected")
-        pins = [29,30,31,32,38,39,48,49]
+        pins = [29,30,31,32,38,39,48,49, 60, 61, 62, 63, 64, 65, 66]
         for pin in pins:
            _log.info('Syncing virtual buttons {}'.format(pin))
            blynk.virtual_sync(pin)
