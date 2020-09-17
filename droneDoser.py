@@ -210,7 +210,7 @@ try:
            except:
                  _log.error("Except handle_event V"+str(relay+1)+" Turning on")
 #        else:
-         elif (staus is "3" ):
+        elif (staus is "3" ):
            if (relays[0].cycleReset < 1):
                 relays[0].cycleResetSet(1)
                 blynk.virtual_write(35,1)
