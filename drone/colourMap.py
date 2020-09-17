@@ -3,6 +3,8 @@ import matplotlib
 from colour import Color
 from matplotlib import cm
 
+colours = {1: '#FF0000', 0: '#00FF00', 'OFFLINE': '#0000FF', 'ONLINE': '#00FF00'}
+
 def getTempColour(_log, Temp):
      try:
           _log.info("getTempColour Temp =" + str(Temp))
