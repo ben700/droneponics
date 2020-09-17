@@ -204,7 +204,7 @@ try:
            except:
                  _log.error("Except handle_event V"+str(relay+1)+" Turning Off")
                 
-           blynk.virtual_write(250, "Stopped")
+           blynk.virtual_write(40, "Manual Stopped")
         elif (staus is "2" ):
            try:
                  _log.debug("in v1write_handler turing on relay")
@@ -214,17 +214,17 @@ try:
                  
            except:
                  _log.error("Except handle_event V"+str(relay+1)+" Turning on")
-           blynk.virtual_write(250, "Feeding")
+           blynk.virtual_write(40, "Manual On")
         else:
            try:
                  _log.debug("in v1write_handler turing on relay")
                  relays[relay].setAutomatic()
            except:
                  _log.error("Except handle_event V"+str(relay+1)+" Turning auto")
-           blynk.virtual_write(250, "Auto")
+           blynk.virtual_write(40, "Auto")
            relays[relay].cycleOnReset()
            relays[relay].setOffCycleReset() 
-        blynk.virtual_write(relays[relay].getInfoPin(), relays[relay].info())
+        blynk.virtual_write(34, relays[relay].info())
                  
                 
 
@@ -369,12 +369,12 @@ try:
         _log.debug("in v8write_handler and turning off relay " + relays[relay].name + " on pin " + str(relays[relay].gpioPin))
         relays[relay].setTimer(int(value[0]), int(value[1]))
 
-    @blynk.handle_event('write V35')
+    @blynk.handle_event('write V35') #relay 1 on time
     def v25write_handler(pin, value):
         relays[0].cycleResetSet(value[0])
         blynk.virtual_write(relays[0].getInfoPin(), relays[0].info())
         
-    @blynk.handle_event('write V36')
+    @blynk.handle_event('write V36')#relay 1 off time
     def v26write_handler(pin, value):
         relays[0].cycleOffResetSet(value[0])
         blynk.virtual_write(relays[0].getInfoPin(), relays[0].info())
@@ -594,7 +594,7 @@ try:
     @blynk.handle_event("connect")
     def connect_handler():
         _log.warning("Connected")
-        pins = [29,30,31,32,38,39,48,49, 60, 61, 62, 63, 64, 65, 66]
+        pins = [1, 29,30,31,32,35,36,38,39,48,49, 60, 61, 62, 63, 64, 65, 66]
         for pin in pins:
            _log.info('Syncing virtual buttons {}'.format(pin))
            blynk.virtual_sync(pin)
