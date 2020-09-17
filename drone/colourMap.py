@@ -8,7 +8,9 @@ def getTempColour(Temp):
      norm = matplotlib.colors.Normalize(vmin=0, vmax=400)
 
      #colormap possible values = viridis, jet, spectral
-     rgba_color = cm.coolwarm(norm(Temp),bytes=True) 
+     #rgba_color = cm.coolwarm(norm(Temp),bytes=True) 
+     rgba_color = cm.RdBu(norm(MoistPer),bytes=True) 
+     
      print("rgba_color =" + str(rgba_color))
 
      c = Color(rgb=(rgba_color[0]/255,rgba_color[1]/255,rgba_color[2]/255))
