@@ -45,7 +45,7 @@ class Sensor:
        print("__init__")
        self.sensor = AtlasI2C(SensorId)
        self.sensorId = SensorId
-       self.name = Name
+       self.name = name
        self.high =26
        self.low =15
        self.displayPin = kwargs.get('DisplayPin', None)
