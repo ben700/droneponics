@@ -603,7 +603,7 @@ try:
         for sensor in sensors:
              if sensor is not None:
                   _log.info("Going to update " + str(sensor.name) + " using pin " + str(sensor.displayPin) + " with value " + str(sensor.value))                  
-                  blynk.virtual_write(98,"Going to update " + str(sensor.name) + " using pin " + str(sensor.displayPin) + " with value " + str(sensor.value))
+                  blynk.virtual_write(98,"Going to update " + str(sensor.name) + " using pin " + str(sensor.displayPin) + " with value " + str(sensor.value) +'\n')
                   _log.info("going to update pin = " + str(sensor.displayPin))
                   blynk.set_property(sensor.displayPin, "label", sensor.name)
                   _log.info("updated label =" + sensor.name)
