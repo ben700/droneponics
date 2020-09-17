@@ -570,9 +570,9 @@ try:
                   _log.info("Going to update " + str(sensor.name) + "using pin " + str(sensor.displayPin) + " with value " + str(sensor.value))                  
                   blynk.virtual_write(98,"Going to update " + str(sensor.name) + "using pin " + str(sensor.displayPin) + " with value " + str(sensor.value))
                   try:
-                       sensors[0].color = drone.getTempColour(round(sensors[0].value*10,0))
-                       sensors[1].color = drone.getECColour(round(sensors[1].value,0))
-                       sensors[2].color = drone.getPHColour(round(sensors[2].value*10,0))
+                       sensors[0].color = drone.getTempColour(_log, round(sensors[0].value*10,0))
+                       sensors[1].color = drone.getECColour(_log, round(sensors[1].value,0))
+                       sensors[2].color = drone.getPHColour(_log, round(sensors[2].value*10,0))
                   except:
                        _log.critical("Working out sensor colour crashed")	
                  # blynk.virtual_write(sensor.displayPin, sensor.value)
@@ -718,12 +718,12 @@ try:
 			
               for sensor in sensors:
                     if sensor is not None:
-                         _log.info("Going to update " + str(sensor.name) + "using pin " + str(sensor.displayPin) + " with value " + str(sensor.value))                  
+                         _log.info("Going to update " + str(sensor.name) + " using pin " + str(sensor.displayPin) + " with value " + str(sensor.value))                  
                          blynk.virtual_write(98,"Going to update " + str(sensor.name) + "using pin " + str(sensor.displayPin) + " with value " + str(sensor.value))
                          try:
-                              sensors[0].color = drone.getTempColour(round(sensors[0].value*10,0))
-                              sensors[1].color = drone.getECColour(round(sensors[1].value,0))
-                              sensors[2].color = drone.getPHColour(round(sensors[2].value*10,0))
+                              sensors[0].color = drone.getTempColour(_log, round(sensors[0].value*10,0))
+                              sensors[1].color = drone.getECColour(_log, round(sensors[1].value,0))
+                              sensors[2].color = drone.getPHColour(_log, round(sensors[2].value*10,0))
                          except:
                               _log.critical("Working out sensor colour crashed")	
                          sensor.display(blynk)
