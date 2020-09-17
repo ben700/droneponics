@@ -2,7 +2,7 @@ import logging
 import socket
 import blynklib
 from configparser import ConfigParser
-from drone.droneObj import colours
+from drone import *
 
 def gethostname():
     return socket.gethostname()
