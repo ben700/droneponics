@@ -366,6 +366,7 @@ try:
     @blynk.handle_event('write V8')
     def write_handler(pin, value):
         relay = 7
+	_log.debug("in v8write_handler and turning off relay " + relays[relay].name + " on pin " + str(relays[relay].gpioPin))
         relays[relay].setTimer(int(value[0]), int(value[1]))
 
     @blynk.handle_event('write V35')
