@@ -234,6 +234,10 @@ def blynk_data():
             _log.critical("Can't find I2C0 device should be the soil sensor")
             ss = None
     
+    blynk.virtual_write(98, "ss Readings" + '\n')
+    blynk.virtual_write(98, "ss ssMoistureRead = " + str(ssMoistureRead) + '\n')
+    blynk.virtual_write(98, "ss ssTempRead = " + str(ssTempRead) + '\n')
+    
     if(ss is None):
         
         blynk.virtual_write(98, "ss is None" + '\n')
@@ -251,8 +255,11 @@ def blynk_data():
         if (ssMoistureRead>ssMoistureMax):
             ssMoistureMax = ssMoistureRead
             updateConfig(moistureMin, moistureMax, ssMoistureMin, ssMoistureMax)
-        ssMoistureReadPer = int(((ssMoistureRead-ssMoistureMin)/ssMoistureRange)*100) 
+        blynk.virtual_write(98, "ss Done Max Min" + '\n')
+        ssMoistureReadPer = int(((ssMoistureRead-ssMoistureMin)/ssMoistureRange)*100)
+        blynk.virtual_write(98, "ss Done ssMoistureReadPer = " + str(ssMoistureReadPer) + '\n')
         blynk.virtual_write(15, ssMoistureRead)
+        blynk.virtual_write(98, "ss do colour" + '\n')
         blynk.set_property(15, 'color', drone.getMoistColour(ssMoistureReadPer))
         blynk.virtual_write(5, ssMoistureReadPer) 
         blynk.virtual_write(6, ssTempRead)
