@@ -66,7 +66,7 @@ def setBME680FormColours(bme680, *args, **kwargs):
     #blynk.run()
     _log.debug("setBME680FormColours : int(bme680.temperature*10) = " + str(int(bme680.temperature*10)))
     
-    _log.debug("setBME680FormColours : drone.getTempColour(_log,int(10)) = " + str(drone.getTempColour(_log,100))
+    _log.debug("setBME680FormColours : drone.getTempColour(_log,int(10)) = " + str(drone.getTempColour(_log,100)))
     _log.debug("setBME680FormColours : drone.getTempColour(_log,int(bme680.temperature*10)) = " + str(drone.getTempColour(_log,int(bme680.temperature*10))))
     
     
