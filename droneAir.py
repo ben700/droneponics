@@ -151,7 +151,8 @@ except:
 def v29write_handler(pin, value):
     _log.debug("v29write_handler rowIndex =" + str(value[0]))
     global rowIndex
-    rowIndex = int(value[0])
+    rowIndex = 0
+    blynk.virtual_write(97, "clr")
                  
     
 @blynk.handle_event('write V255')
