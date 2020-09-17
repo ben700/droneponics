@@ -367,9 +367,9 @@ try:
     def write_handler(pin, value):
         relay = 7
         _log.debug("in v8write_handler and turning off relay " + relays[relay].name + " on pin " + str(relays[relay].gpioPin))
-	_log.debug("in v8write_handler" + str(value[0])
-	_log.debug("in v8write_handler" + str(value[1])
-	_log.debug("in v8write_handler" + str(value[2])
+        _log.debug("in v8write_handler" + str(value[0]))
+        _log.debug("in v8write_handler" + str(value[1]))
+        _log.debug("in v8write_handler" + str(value[2]))
 		   
         relays[relay].setTimer(int(value[0]), int(value[1]))
 
