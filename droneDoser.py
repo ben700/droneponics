@@ -723,7 +723,7 @@ try:
                          try:
                               _log.info("Round Temp")
                               _log.info("Temp unround =" + str(sensors[0].value))
-                              _log.info("Temp =" + str(round(sensors[0].value,1)))
+                              _log.info("Temp =" + str(round(float(sensors[0].value),1)))
 				
                               sensors[0].color = drone.getTempColour(_log, round(sensors[0].value*10,0))
                               sensors[1].color = drone.getECColour(_log, round(sensors[1].value,0))
