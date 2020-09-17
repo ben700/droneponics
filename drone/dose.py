@@ -24,7 +24,7 @@ class Dose:
        blynk.virtual_write(self.volumePin, self.volume )
       
  
-class Sensor:
+class SensorOld:
    def __init__(self, SensorId, Name, DisplayPin, *args, **kwargs):
        self.sensor = None
        self.sensorId = SensorId
