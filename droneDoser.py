@@ -678,6 +678,10 @@ try:
               blynk.virtual_write(98, "System now updated and restarted " + '\n')
               blynk.virtual_write(255, 0)
               _log.info('Just Booted')
+	      y = 70
+              for dose in nutrientMix:
+                   blynk.virtual_write(y, dose.name)
+                   y = y + 1		       
               text= ""
               sPH= ""
               sEC= ""
