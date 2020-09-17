@@ -198,12 +198,11 @@ def blynk_data():
     _log.debug("Going to get openweather")
     openWeather.blynkOpenWeather(blynk, _log)
     _log.debug("Completed openweather")
-    if(bme280 is  None and bme680 is None):            
-        drone.setBMEFormOfflineColours(blynkObj=blynk, loggerObj=_log)   
-     
+    if(bme280 is None and bme680 is None):            
+        #drone.setBMEFormOfflineColours(blynkObj=blynk, loggerObj=_log)   
+        _log.debug("----------------------bme680 = " + str(bme680))
+        _log.debug("----------------------bme280 = " + str(bme280))
     
-    _log.debug("bme680 = " + str(bme680))
-    _log.debug("bme280 = " + str(bme280))      
     if(bme680 is not None):            
         _log.debug("bme680 is not None so going to set pressure")
         bme680.sea_level_pressure = openWeather.getPressure()
