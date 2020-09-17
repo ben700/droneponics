@@ -5,6 +5,7 @@ from matplotlib import cm
 
 def getTempColour(_log, Temp):
      try:
+          _log.info("getTempColour Temp =" + str(Temp))
           #normalize item number values to colormap
           norm = matplotlib.colors.Normalize(vmin=0, vmax=400)
 
