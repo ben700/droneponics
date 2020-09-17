@@ -5,20 +5,20 @@ import logging
 from configparser import ConfigParser
 import RPi.GPIO as GPIO   
 
-def displaySensor(blynk, VP, VALUE, NAME , LOW, HIGH):
- print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
- red = Color("red")
- print("loaded color class")
- colors = list(red.range_to(Color("green"),10))
- print("done colour list")
- print(colors)
- print("Going to update blynk")
- blynk.virtual_write(VP,VALUE)
- blynk.set_property(VP, "label", NAME)
- print("Going to update blynk colors")
- blynk.set_property(VP, "color", colors[round((HIGH-LOW)/10,0)])
- print("####################################################")
- return
+#def displaySensor(blynk, VP, VALUE, NAME , LOW, HIGH):
+# print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+# red = Color("red")
+# print("loaded color class")
+# colors = list(red.range_to(Color("green"),10))
+# print("done colour list")
+# print(colors)
+# print("Going to update blynk")
+# blynk.virtual_write(VP,VALUE)
+# blynk.set_property(VP, "label", NAME)
+# print("Going to update blynk colors")
+# blynk.set_property(VP, "color", colors[round((HIGH-LOW)/10,0)])
+# print("####################################################")
+# return
 
 class Sensor:
    def __init__(self, SensorId, name, *args, **kwargs):
@@ -38,9 +38,10 @@ class Sensor:
        return self.sensor.query("R").split(":")[1].strip().rstrip('\x00')
    
    def display(blynk):
-    blynk.set_property(displayPin, "label", self.name)
-    blynk.set_property(displayPin, 'color', self.color)
-    return blynk.virtual_write(displayPin, self.value)
+    print("display(blynk)")
+    blynk.set_property(self.displayPin, "label", self.name)
+    blynk.set_property(self.displayPin, 'color', self.color)
+    blynk.virtual_write(self.displayPin, self.value)
     
 class PH(Sensor):  
    def __init__(self, *args, **kwargs):
