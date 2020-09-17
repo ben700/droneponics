@@ -611,6 +611,11 @@ try:
                   	
                   
         _log.info( "Sensors displays updated")  
+	_log.info("sensors[1].target = " + str(sensors[1].target))
+	_log.info("sensors[2].target = " + str(sensors[2].target))
+	blynk.virtual_write(98,"sensors[1].target = " + str(sensors[1].target)+ '\n')
+        blynk.virtual_write(98,"sensors[2].target = " + str(sensors[2].target)+ '\n')
+       
         if (sensors[1].target > float(sensors[1].value)): #EC
              _log.info("Do a dose")     
              doSingleDose()     
