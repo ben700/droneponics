@@ -46,7 +46,7 @@ def setFormOnlineColours(*args, **kwargs):
    blynk, _log = setFormBlynkLogObjects (blynkObj=kwargs.get('blynkObj', None), loggerObj=kwargs.get('loggerObj', None))  
    _log.debug("setFormOnlineColours :- Going to set from colour Online e.g.("+drone.colours['ONLINE']+") for everything")
   
-   pins = [0, 250]
+   pins = [0]
    for i in pins: 
       _log.debug("setFormOnlineColours :- Going to set from colour Online e.g.("+drone.colours['ONLINE']+") for vPin " + str(i))  
       blynk.set_property(i, 'color', drone.colours['ONLINE']) 
@@ -55,7 +55,7 @@ def setFormOnlineColours(*args, **kwargs):
 def setFormOfflineColours(*args, **kwargs):
    blynk, _log = setFormBlynkLogObjects (blynkObj=kwargs.get('blynkObj', None), loggerObj=kwargs.get('loggerObj', None))  
    _log.debug("setFormOfflineColours :- Going to set from colour Online e.g.("+drone.colours['ONLINE']+") for everything")
-   pins = [0, 250]
+   pins = [0]
    for i in pins: 
       _log.debug("setFormOfflineColours :- Going to set from colour Offline e.g.("+drone.colours['OFFLINE']+") for vPin " + str(i))  
       blynk.set_property(i, 'color', drone.colours['OFFLINE']) 
