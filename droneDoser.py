@@ -774,7 +774,9 @@ try:
                          #sensor.display(blynk)
                          _log.info("Updated display for " +  str(sensor.name))
 			 
-			
+              blynk.virtual_write(41,"EC Settings")
+              blynk.virtual_write(42,"pH Settings")
+				  
               _log.info("Boot Completed")
 
         except:
