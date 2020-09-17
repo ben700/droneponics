@@ -151,6 +151,7 @@ def blynk_data():
     global moistureRange
     global ssMoistureRange
     global chirp
+    global ss
     
     blynk.virtual_write(250, "Running")
     blynk.set_property(250, 'color', colours['ONLINE'])
@@ -207,6 +208,8 @@ def blynk_data():
     
     _log.info("Now work on second sensor")
     blynk.virtual_write(98, "Now work on second sensor" + '\n')
+    blynk.virtual_write(98, "Second sensor ss = " + str(ss) + '\n')
+    
     
     if(ss is not None):
         blynk.virtual_write(98, "ss is not None" + '\n')
@@ -286,7 +289,7 @@ blynk.virtual_write(systemLED, 255)
 blynk.set_property(systemLED, 'color', colours['ONLINE'])
 blynk.virtual_write(255, 0)
 
-blynk.virtual_write(98, "Completed Boot" + '/n')
+blynk.virtual_write(98, "Completed Boot" + '\n')
 _log.info("--------------------------Completed Boot--------------------------")
 
 while True:
