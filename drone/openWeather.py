@@ -26,7 +26,9 @@ class OpenWeather:
       return self.openWeather["current"]["pressure"]
    
    
-   def blynkOpenWeather(self, blynk):
+   def blynkOpenWeather(self, blynk, _log):
+        _log.info("Starting blynkOpenWeather")
+      
         if (self.useByTime < datetime.now()):
            self.refresh()   
         
@@ -64,5 +66,6 @@ class OpenWeather:
         local_time = time.gmtime(self.openWeather["current"]["dt"])
         blynk.set_property(208, "label", "Web Time")
         blynk.virtual_write(208, time.strftime("%H:%M:%S", local_time))
-        blynk.set_property(208, "color", colours['ONLINE'])        
+        blynk.set_property(208, "color", colours['ONLINE'])   
+        _log.info("Completed blynkOpenWeather")
         return
