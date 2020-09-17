@@ -563,6 +563,11 @@ try:
         sensors[1].value = sensors[1].sensor.query("RT,"+cTemp).split(":")[1].strip().rstrip('\x00') #EC
         sensors[2].value = sensors[2].sensor.query("RT,"+sensors[0].value).split(":")[1].strip().rstrip('\x00')  #pH
 	
+	
+	for sensor in sensors:
+             _log.info(sensor.name + " = " + str(sensor.value))
+             blynk.virtual_write(98, sensor.name + " = " + str(sensor.value) + '\n')
+	
         try:
              sensors[0].color = drone.getTempColour(round(sensors[0].value*10,0))
              sensors[1].color = drone.getECColour(round(sensors[1].value,0))
