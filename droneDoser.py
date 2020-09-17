@@ -390,7 +390,17 @@ try:
         _log.debug("v29write_handler rowIndex =" + str(value[0]))
         global rowIndex
         rowIndex = int(value[0])
-          
+    
+    @blynk.handle_event('write V38')
+    def v38write_handler(pin, value): 
+        sensors[1].target = value[0]
+		
+    @blynk.handle_event('write V39')
+    def v39write_handler(pin, value):
+        sensors[2].mode = value[0]
+	 		
+
+
     @blynk.handle_event('write V96')
     def v96write_handler(pin, value):
         _log.debug("v96write_handler")
@@ -542,6 +552,10 @@ try:
            blynk.virtual_sync(pin)
            blynk.read_response(timeout=0.5)
         for pin in range(24,30):
+           _log.info('Syncing virtual buttons {}'.format(pin))
+           blynk.virtual_sync(pin)
+           blynk.read_response(timeout=0.5)
+	for pin in range(38,40):
            _log.info('Syncing virtual buttons {}'.format(pin))
            blynk.virtual_sync(pin)
            blynk.read_response(timeout=0.5)
