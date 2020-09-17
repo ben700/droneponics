@@ -603,6 +603,7 @@ try:
     while True:
         try:
            blynk.run()
+           timer.run()
            if bootup :
               p = subprocess.Popen(['i2cdetect', '-y','1'],stdout=subprocess.PIPE,)
               #cmdout = str(p.communicate())
@@ -742,7 +743,7 @@ try:
 			 
 			
               _log.info("Boot Completed")
-              timer.run()
+
         except:
            _log.info('Unexpected error')
            blynk.virtual_write(98, "System has main loop error" + '\n')
