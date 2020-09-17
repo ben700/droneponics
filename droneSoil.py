@@ -283,7 +283,7 @@ blynk.virtual_write(systemLED, 255)
 blynk.set_property(systemLED, 'color', colours['ONLINE'])
 blynk.virtual_write(255, 0)
 
-
+blynk.virtual_write(98, "Completed Boot" + '/n')
 _log.info("--------------------------Completed Boot--------------------------")
 
 while True:
