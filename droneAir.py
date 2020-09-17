@@ -240,7 +240,6 @@ def blynk_data():
         _log.debug("set BME form display")
         drone.setBME280FormColours(bme280, blynkObj=blynk, loggerObj=_log)          
 
-
     _log.debug("Now work on TSL2591 sensor")
     if (tsl is not None):
         _log.debug('Total light: {0:.2f}lux'.format(tsl.lux))
