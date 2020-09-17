@@ -63,7 +63,10 @@ def setFormOfflineColours(*args, **kwargs):
 def setBME680FormColours(bme680, *args, **kwargs):
     blynk, _log = setFormBlynkLogObjects (blynkObj=kwargs.get('blynkObj', None), loggerObj=kwargs.get('loggerObj', None))  
     _log.debug("setBME680FormColours : start fx")
-    blynk.run()
+    #blynk.run()
+    _log.debug("setBME680FormColours : int(bme680.temperature*10) = " + str(int(bme680.temperature*10)))
+    _log.debug("setBME680FormColours : drone.getTempColour(_log,int(bme680.temperature*10)) = " + str(drone.getTempColour(_log,int(bme680.temperature*10))))
+    
     
     blynk.set_property(1, 'color', drone.getTempColour(_log,int(bme680.temperature*10))) 
     blynk.set_property(2, 'color', colours['ONLINE']) 
