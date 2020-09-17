@@ -72,7 +72,13 @@ try:
     _log.info("drone.buildSensors(sensors")
     sensors = drone.buildSensors(sensors, _log)
     _log.info("all senses created")
-    lcdDisplay=drone.Display(_log)
+	
+	
+    try:
+        lcdDisplay=drone.Display(_log)
+    except:
+	lcdDisplay=None
+	
     _log.info("all senses created")
 		
 
@@ -707,7 +713,8 @@ try:
               _log.info("sPH =" + sPH)
               _log.info("sEC = " + sEC)
               _log.info("sTemp = " + sTemp)
-              lcdDisplay.updateLCDProbe (sPH, sEC, sTemp)
+              if lcdDisplay not None: 
+                   lcdDisplay.updateLCDProbe (sPH, sEC, sTemp)
               if (text == ""):
                    blynk.set_property(240, 'color', colours['ONLINE'])
               else:
