@@ -264,7 +264,7 @@ def blynk_data():
         blynk.virtual_write(5, ssMoistureReadPer) 
         blynk.virtual_write(6, ssTempRead)
         blynk.virtual_write(98, "ss do getMoistColour" + '\n')
-        blynk.set_property(5, 'color', drone.getMoistColour(ssMsoistureReadPer))
+        blynk.set_property(5, 'color', drone.getMoistColour(int(ssMsoistureReadPer)))
         blynk.virtual_write(98, "ss do getTempColour" + '\n')
         blynk.set_property(6, 'color', drone.getTempColour(int(ssTempRead*10)))
             
