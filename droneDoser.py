@@ -209,8 +209,7 @@ try:
                  relays[relay].setManual("On")           
            except:
                  _log.error("Except handle_event V"+str(relay+1)+" Turning on")
-#        else:
-        elif (staus is "3" ):
+        else:
            if (relays[0].cycleReset < 1):
                 relays[0].cycleResetSet(1)
                 blynk.virtual_write(35,1)
@@ -223,7 +222,7 @@ try:
                  blynk.virtual_write(40, relays[relay].state)
                  blynk.virtual_write(34, relays[relay].info())
                  blynk.virtual_write(33, relays[relay].getState())
-        _log.info("completed v1write_handler")
+                 _log.info("completed v1write_handler")
            except:
                  _log.error("Except handle_event V"+str(relay+1)+" Turning auto")
  
@@ -846,7 +845,13 @@ try:
               blynk.set_property(48, "label", "pH Trigger Level")
               blynk.set_property(39, "label", "EC Mode")
               blynk.set_property(49, "label", "pH Mode")
-		
+
+              pins = [1, 29,30,31,32,35,36,38,39,48,49, 60, 61, 62, 63, 64, 65, 66]
+              for pin in pins:
+                   _log.info('Syncing virtual buttons {}'.format(pin))
+                   blynk.virtual_sync(pin)
+                   blynk.read_response(timeout=0.5)
+	
               _log.info("Boot Completed")
 
         except:
