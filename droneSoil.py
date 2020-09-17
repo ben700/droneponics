@@ -160,6 +160,7 @@ def blynk_data():
     blynk.set_property(0, 'color', colours['ONLINE'])
 
     _log.info("timer.register fx Update Time")
+    blynk.virtual_write(98, "timer.register fx Update Time" + '/n')
     
     if(chirp is not None):
         try:
@@ -205,6 +206,7 @@ def blynk_data():
         blynk.set_property(11, 'color', drone.getMoistColour(moistureReadPer))
     
     _log.info("Now work on second sensor")
+    blynk.virtual_write(98, "Now work on second sensor" + '/n')
     
     if(ss is not None):
         try:
@@ -246,6 +248,7 @@ def blynk_data():
         blynk.set_property(6, 'color', drone.getTempColour(ssTempRead))
             
     _log.info("Finished reading Sensors")
+    blynk.virtual_write(98, "Finished reading Sensors" + '/n')
     
 
     blynk.virtual_write(12, moistureMin)
@@ -260,6 +263,7 @@ def blynk_data():
     blynk.set_property(17, 'color', moistureColors[99]) 
         
         
+    blynk.virtual_write(98, "End of timer.register fx" + '/n')
     _log.debug("End of timer.register fx")
         
 _log.info("Created all the objects. Now starting the drone")        
