@@ -573,10 +573,17 @@ try:
 		    
         for sensor in sensors:
              if sensor is not None:
-                  _log.info("Going to update " + str(sensor.name) + "using pin " + str(sensor.displayPin) + " with value " + str(sensor.value))                  
-                  blynk.virtual_write(98,"Going to update " + str(sensor.name) + "using pin " + str(sensor.displayPin) + " with value " + str(sensor.value))
-                  sensor.display(blynk)
-                  _log.info("Updated display for " + str(sensor.name))
+                  _log.info("Going to update " + str(sensor.name) + " using pin " + str(sensor.displayPin) + " with value " + str(sensor.value))                  
+                  blynk.virtual_write(98,"Going to update " + str(sensor.name) + " using pin " + str(sensor.displayPin) + " with value " + str(sensor.value))
+                  _log.info("going to update pin = " + str(sensor.displayPin))
+                  blynk.set_property(sensor.displayPin, "label", sensor.name)
+                  _log.info("updated label =" + sensor.name)
+                  blynk.set_property(sensor.displayPin, 'color', sensor.color)
+                  _log.info("updated color =" + str(sensor.color))
+                  blynk.virtual_write(sensor.displayPin, sensor.value)
+                  _log.info("updated value =" + str(sensor.value))
+                  	
+                  
         _log.info( "Sensors displays updated")  
         if (sensors[1].target > float(sensors[1].value)): #EC
              _log.info("Do a dose")     
