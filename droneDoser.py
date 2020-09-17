@@ -393,23 +393,23 @@ try:
     
     @blynk.handle_event('write V38')
     def v38write_handler(pin, value): 
-        sensors[1].target = value[0]
-        blynk.virtual_write(98, "EC Trigger Level set to " + str(sensors[1].target)) 
+        sensors[1].target = float(value[0])
+        blynk.virtual_write(98, "EC Trigger Level set to " + str(sensors[1].target)+ '\n') 
 			    
     @blynk.handle_event('write V39')
     def v39write_handler(pin, value):
         sensors[1].mode = value[0]
-        blynk.virtual_write(98, "EC Mode set to " + str(sensors[1].mode))
+        blynk.virtual_write(98, "EC Mode set to " + str(sensors[1].mode)+ '\n')
     
     @blynk.handle_event('write V48')
     def v48write_handler(pin, value): 
-        sensors[2].target = value[0]
-        blynk.virtual_write(98, "pH Trigger Level set to " + str(sensors[2].target)) 
+        sensors[2].target = float(value[0])
+        blynk.virtual_write(98, "pH Trigger Level set to " + str(sensors[2].target) + '\n') 
 		
     @blynk.handle_event('write V49')
     def v49write_handler(pin, value):
         sensors[2].mode = value[0]
-        blynk.virtual_write(98, "pH Mode set to " + str(sensors[2].mode))
+        blynk.virtual_write(98, "pH Mode set to " + str(sensors[2].mode)+ '\n')
  	 	
 
     @blynk.handle_event('write V96')
@@ -766,7 +766,7 @@ try:
               for sensor in sensors:
                     if sensor is not None:
                          _log.info("Going to update " + str(sensor.name) + " using pin " + str(sensor.displayPin) + " with value " + str(sensor.value))                  
-                         blynk.virtual_write(98,"Going to update " + str(sensor.name) + " using pin " + str(sensor.displayPin) + " with value " + str(sensor.value))
+                         blynk.virtual_write(98,"Going to update " + str(sensor.name) + " using pin " + str(sensor.displayPin) + " with value " + str(sensor.value)+ '\n')
                          _log.info("going to update pin = " + str(sensor.displayPin))
                          blynk.set_property(sensor.displayPin, "label", sensor.name)
                          _log.info("updated label =" + sensor.name)
