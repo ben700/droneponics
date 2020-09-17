@@ -30,7 +30,7 @@ class Sensor:
        self.low =15
        self.displayPin = kwargs.get('DisplayPin', None)
        self.target = kwargs.get('Target', None)
-       self.mode = 0       
+       self.mode = 1  # 1 = off 2 = on 3 = auto       
        self.value = None
        self.lowAlarm = kwargs.get('LowAlarm', None)
        self.highAlarm = kwargs.get('HighAlarm', None)
