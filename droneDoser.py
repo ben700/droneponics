@@ -776,7 +776,11 @@ try:
 			 
               blynk.virtual_write(41,"EC Settings")
               blynk.virtual_write(42,"pH Settings")
-				  
+              blynk.set_property(38, "label", "EC Trigger Level")
+              blynk.set_property(48, "label", "pH Trigger Level")
+              blynk.set_property(39, "label", "EC Mode")
+              blynk.set_property(49, "label", "pH Mode")
+		
               _log.info("Boot Completed")
 
         except:
