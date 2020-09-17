@@ -315,7 +315,8 @@ _log.debug("Main fx:- calling drone.setFormOnline to remove blue")
 drone.setFormOnlineColours(blynkObj=blynk, loggerObj=_log)
 blynk.virtual_write(255, 0)
 _log.info("--------------------------Completed Boot--------------------------")
-
+_log.debug("droneAir : drone.getTempColour(_log,int(10)) = " + str(drone.getTempColour(_log,100)))
+    
 while True:
     try:
         blynk.run()
