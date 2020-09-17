@@ -733,7 +733,7 @@ try:
                          blynk.virtual_write(98,"Going to update " + str(sensor.name) + "using pin " + str(sensor.displayPin) + " with value " + str(sensor.value))
                          sensor.display(blynk)
                          _log.info("Updated display for " +  + str(sensor.name))
-			
+			 
 			
               _log.info("Boot Completed")
               timer.run()
