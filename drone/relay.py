@@ -82,7 +82,7 @@ class Relay:
      
    
    def setState(self, state):
-         self._log.debug("in setState")
+         self._log.debug("in setState State = " + state)
          self.state = state
 
    def getState(self):
