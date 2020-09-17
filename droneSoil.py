@@ -164,6 +164,7 @@ def blynk_data():
     blynk.virtual_write(98, "timer.register fx Update Time" + '\n')
     
     if(chirp is not None):
+        blynk.virtual_write(98, "chirp is not None" + '\n')
         try:
             moistureRead=chirp.moist()
             tempRead = chirp.temp()/10
@@ -172,6 +173,7 @@ def blynk_data():
             _log.critical("Can't find I2C1 device should be the soil sensor")
             chirp = None
     else:
+        blynk.virtual_write(98, "chirp is None" + '\n')
         try:    
             chirp = drone.Chirp(1, 0x20)
             moistureRead=chirp.moist()
