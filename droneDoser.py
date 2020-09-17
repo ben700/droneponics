@@ -563,21 +563,20 @@ try:
         sensors[1].value = sensors[1].sensor.query("RT,"+cTemp).split(":")[1].strip().rstrip('\x00') #EC
         sensors[2].value = sensors[2].sensor.query("RT,"+sensors[0].value).split(":")[1].strip().rstrip('\x00')  #pH
 	
-	
+        try:
+             sensors[0].color = drone.getTempColour(_log, round(float(sensors[0].value)*10,0))
+             sensors[1].color = drone.getECColour(_log, round(float(sensors[1].value),0))
+             sensors[2].color = drone.getPHColour(_log, round(float(sensors[2].value)*10,0))
+        except:
+             _log.critical("Working out sensor colour crashed")
+		
 		    
         for sensor in sensors:
              if sensor is not None:
                   _log.info("Going to update " + str(sensor.name) + "using pin " + str(sensor.displayPin) + " with value " + str(sensor.value))                  
                   blynk.virtual_write(98,"Going to update " + str(sensor.name) + "using pin " + str(sensor.displayPin) + " with value " + str(sensor.value))
-                  try:
-                       sensors[0].color = drone.getTempColour(_log, round(float(sensors[0].value)*10,0))
-                       sensors[1].color = drone.getECColour(_log, round(float(sensors[1].value),0))
-                       sensors[2].color = drone.getPHColour(_log, round(float(sensors[2].value)*10,0))
-                  except:
-                       _log.critical("Working out sensor colour crashed")	
-                 # blynk.virtual_write(sensor.displayPin, sensor.value)
-                  sensor.display(blynk)
-                  _log.info("Updated display for " +  + str(sensor.name))
+	          sensor.display(blynk)
+                  _log.info("Updated display for " + str(sensor.name))
         _log.info( "Sensors displays updated")  
         if (sensors[1].target > float(sensors[1].value)): #EC
              _log.info("Do a dose")     
