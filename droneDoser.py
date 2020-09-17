@@ -394,20 +394,23 @@ try:
     @blynk.handle_event('write V38')
     def v38write_handler(pin, value): 
         sensors[1].target = value[0]
-		
+	blynk.virtual_write(98, "EC Trigger Level set to " + sensors[1].target) 
+			    
     @blynk.handle_event('write V39')
     def v39write_handler(pin, value):
         sensors[1].mode = value[0]
-	 		
+        blynk.virtual_write(98, "EC Mode set to " + sensors[1].mode)
     
     @blynk.handle_event('write V48')
     def v48write_handler(pin, value): 
         sensors[2].target = value[0]
+	blynk.virtual_write(98, "pH Trigger Level set to " + sensors[2].target) 
 		
     @blynk.handle_event('write V49')
     def v49write_handler(pin, value):
         sensors[2].mode = value[0]
-	 	
+       blynk.virtual_write(98, "pH Mode set to " + sensors[2].mode)
+ 	 	
 
     @blynk.handle_event('write V96')
     def v96write_handler(pin, value):
