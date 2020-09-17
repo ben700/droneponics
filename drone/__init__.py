@@ -7,7 +7,7 @@ from drone.droneponicsRelay import *
 from drone.openWeather import *
 from drone.alarm import Alarm
 from drone.DroneCounter import DroneCounter
-from drone.sensor import Sensor
+from drone.sensor import *
 from drone.display import *
 from drone.chirp import *
 from drone.solenoid import *
