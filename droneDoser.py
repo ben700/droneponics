@@ -192,7 +192,7 @@ try:
                         blynk.notify(dosage.name + " has pumped " + str(dosage.volume) + ", so may need topup")      
     
     @blynk.handle_event('write V1')
-    def write_handler(pin, value):
+    def v1write_handler(pin, value):
         staus = value[0]
         relay = 0       
         if (staus is "1" ):
@@ -204,7 +204,7 @@ try:
            except:
                  _log.error("Except handle_event V"+str(relay+1)+" Turning Off")
                 
-           blynk.virtual_write(40, "Manual Stopped")
+           #blynk.virtual_write(40, "Manual Stopped")
         elif (staus is "2" ):
            try:
                  _log.debug("in v1write_handler turing on relay")
@@ -214,7 +214,7 @@ try:
                  
            except:
                  _log.error("Except handle_event V"+str(relay+1)+" Turning on")
-           blynk.virtual_write(40, "Manual On")
+           #blynk.virtual_write(40, "Manual On")
         else:
            if (relays[0].cycleReset < 1):
                 relays[0].cycleResetSet(1)
@@ -224,12 +224,14 @@ try:
                  relays[relay].setAutomatic()
            except:
                  _log.error("Except handle_event V"+str(relay+1)+" Turning auto")
-           blynk.virtual_write(40, "Auto")
+           #blynk.virtual_write(40, "Auto")
            relays[relay].cycleOnReset()
            relays[relay].setOffCycleReset() 
+
+	blynk.virtual_write(40, relays[relay].state)
         blynk.virtual_write(34, relays[relay].info())
-        blynk.virtual_write(33, relays[relay].getState() + " but state is " + relays[relay].state)
-        _log.info("relays[relay].getState() = " + relays[relay].getState())
+        blynk.virtual_write(33, relays[relay].getState())
+        _log.info("completed v1write_handler")
                  
                 
 
