@@ -216,6 +216,9 @@ try:
                  _log.error("Except handle_event V"+str(relay+1)+" Turning on")
            blynk.virtual_write(40, "Manual On")
         else:
+           if (relays[0].cycleReset < 1):
+                relays[0].cycleResetSet(1)
+                blynk.virtual_write(35,1)
            try:
                  _log.debug("in v1write_handler turing on relay")
                  relays[relay].setAutomatic()
@@ -370,17 +373,17 @@ try:
         relays[relay].setTimer(int(value[0]), int(value[1]))
 
     @blynk.handle_event('write V35') #relay 1 on time
-    def v25write_handler(pin, value):
+    def v35write_handler(pin, value):
         relays[0].cycleResetSet(value[0])
         blynk.virtual_write(relays[0].getInfoPin(), relays[0].info())
         
     @blynk.handle_event('write V36')#relay 1 off time
-    def v26write_handler(pin, value):
+    def v36write_handler(pin, value):
         relays[0].cycleOffResetSet(value[0])
         blynk.virtual_write(relays[0].getInfoPin(), relays[0].info())
          
     @blynk.handle_event('write V37')
-    def v27write_handler(pin, value):
+    def v37write_handler(pin, value):
         relays[6].cycleResetSet(value[0])
         relays[6].cycleOffResetClear()
         blynk.virtual_write(relays[0].getInfoPin(), relays[0].info())
