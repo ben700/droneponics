@@ -206,7 +206,7 @@ def blynk_data():
     
     _log.info("Now work on second sensor")
     
-    if(chirp is not None):
+    if(ss is not None):
         try:
             ssMoistureRead = ss.moisture_read()
             ssTempRead = round(ss.get_temp(),1)
