@@ -69,6 +69,7 @@ def getPHColour(_log, PH):
 
 
 def getECColour(_log, EC):
+     _log.info("getECColour(_log, EC) EC = " + str(EC))
      #normalize item number values to colormap
      norm = matplotlib.colors.Normalize(vmin=0, vmax=2000)
 
