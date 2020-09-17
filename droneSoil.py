@@ -217,12 +217,15 @@ def blynk_data():
             _log.critical("Can't find I2C0 device should be the soil sensor")
             ss = None
     else:
+        blynk.virtual_write(98, "ss is None" + '\n')
         try:
+            blynk.virtual_write(98, "Try to create new object" + '\n')
             i2c_bus = busio.I2C(board.D1, board.D0) 
             ss = Seesaw(i2c_bus, addr=0x38)
             ssMoistureRead = ss.moisture_read()
             ssTempRead = round(ss.get_temp(),1)
         except:
+            blynk.virtual_write(98, "Try to create new object except" + '\n')
             _log.critical("Can't find I2C0 device should be the soil sensor")
             ss = None
     
