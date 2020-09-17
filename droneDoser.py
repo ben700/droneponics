@@ -200,21 +200,15 @@ try:
                  _log.debug("in v"+str(relay+1)+"write_handler turing off relay " + relays[relay].name)
                  relays[relay].turnOff(_log)
                  relays[relay].setManual("Off")
-                 _log.debug(relays[relay].name + " in now off : v1write_handler completed")
            except:
                  _log.error("Except handle_event V"+str(relay+1)+" Turning Off")
-                
-           #blynk.virtual_write(40, "Manual Stopped")
         elif (staus is "2" ):
            try:
                  _log.debug("in v1write_handler turing on relay")
                  relays[relay].turnOn(_log)
-                 relays[relay].setManual("On")
-                 _log.debug(relays[relay].name + " in now on : v1write_handler completed")
-                 
+                 relays[relay].setManual("On")           
            except:
                  _log.error("Except handle_event V"+str(relay+1)+" Turning on")
-           #blynk.virtual_write(40, "Manual On")
         else:
            if (relays[0].cycleReset < 1):
                 relays[0].cycleResetSet(1)
@@ -222,12 +216,11 @@ try:
            try:
                  _log.debug("in v1write_handler turing relay auto")
                  relays[relay].setAutomatic()
+                 relays[relay].cycleOnReset()
+                 relays[relay].setOffCycleReset() 
            except:
                  _log.error("Except handle_event V"+str(relay+1)+" Turning auto")
-           #blynk.virtual_write(40, "Auto")
-           relays[relay].cycleOnReset()
-           relays[relay].setOffCycleReset() 
-
+ 
         blynk.virtual_write(40, relays[relay].state)
         blynk.virtual_write(34, relays[relay].info())
         blynk.virtual_write(33, relays[relay].getState())
