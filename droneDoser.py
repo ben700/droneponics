@@ -739,7 +739,7 @@ try:
                          blynk.virtual_write(sensor.displayPin, sensor.value)
                          _log.info("updated value =" + str(sensor.value))
                          #sensor.display(blynk)
-                         _log.info("Updated display for " +  + str(sensor.name))
+                         _log.info("Updated display for " +  str(sensor.name))
 			 
 			
               _log.info("Boot Completed")
