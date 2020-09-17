@@ -617,13 +617,28 @@ try:
         blynk.virtual_write(98,"sensors[2].target = " + str(sensors[2].target)+ '\n')
        
         if (sensors[1].target > float(sensors[1].value)): #EC
+             if (sensors[1].mode == 3):
+                  _log.info("Do a dose")     
+                  doSingleDose()     
+                  blynk.virtual_write(98,"Automatic dose nutrient "+ '\n') 
+        elif (sensors[2].target < float(sensors[2].value)): #ph
+             if (sensors[2].mode == 3):                  
+                  _log.info("Do a ph dose") 
+                  doSinglePHDose()
+                  blynk.virtual_write(98,"Automatic dose Ph"+ '\n')
+			
+        if (sensors[1].mode == 2):
              _log.info("Do a dose")     
              doSingleDose()     
-             blynk.virtual_write(98,"Automatic dose nutrient "+ '\n') 
-        elif (sensors[2].target < float(sensors[2].value)): #ph
+             blynk.virtual_write(98,"Manual dose nutrient "+ '\n')
+             blynk.virtual_write(39,2)
+	
+        if (sensors[2].mode == 2):                  
              _log.info("Do a ph dose") 
              doSinglePHDose()
-             blynk.virtual_write(98,"Automatic dose Ph"+ '\n')
+             blynk.virtual_write(98,"Manual dose Ph"+ '\n')
+             blynk.virtual_write(49,2)
+			
        
         if (parser.get('blynkBridge', 'BLYNK_AUTH', fallback=None) is not None):
             _log.warning("Send Temp data via blynkBridge")
