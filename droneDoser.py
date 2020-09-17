@@ -564,32 +564,21 @@ try:
         sensors[2].value = sensors[2].sensor.query("RT,"+sensors[0].value).split(":")[1].strip().rstrip('\x00')  #pH
 	
 	
-        for sensor in sensors:
-             _log.info(sensor.name + " = " + str(sensor.value))
-             blynk.virtual_write(98, sensor.name + " = " + str(sensor.value) + '\n')
-	
-        try:
-             sensors[0].color = drone.getTempColour(round(sensors[0].value*10,0))
-             sensors[1].color = drone.getECColour(round(sensors[1].value,0))
-             sensors[2].color = drone.getPHColour(round(sensors[2].value*10,0))
-        except:
-             _log.critical("Working out sensor colour crashed")			    
-     #   if sensors[3] is not None and sensors[3].sensor is not None:
-     #       sensors[3].value = sensors[3].sensor.query("R").split(":")[1].strip().rstrip('\x00') #colour
-     #       blynk.virtual_write(34, sensors[3].value.split(",")[0])
-     #       blynk.virtual_write(35, sensors[3].value.split(",")[1])
-     #       blynk.virtual_write(36, sensors[3].value.split(",")[2])
+		    
         for sensor in sensors:
              if sensor is not None:
                   _log.info("Going to update " + str(sensor.name) + "using pin " + str(sensor.displayPin) + " with value " + str(sensor.value))                  
-                  #unhash to continue
-                  #sensor.blynk()
-                  blynk.virtual_write(98, "Current " + str(sensor.name) + " reading =[" + str(sensor.value) + "]" + '\n')
-                 # _log.info("Updated log")#
-                  sensor.display(blynk)	
+                  blynk.virtual_write(98,"Going to update " + str(sensor.name) + "using pin " + str(sensor.displayPin) + " with value " + str(sensor.value))
+                  try:
+                       sensors[0].color = drone.getTempColour(round(sensors[0].value*10,0))
+                       sensors[1].color = drone.getECColour(round(sensors[1].value,0))
+                       sensors[2].color = drone.getPHColour(round(sensors[2].value*10,0))
+                  except:
+                       _log.critical("Working out sensor colour crashed")	
                  # blynk.virtual_write(sensor.displayPin, sensor.value)
-                 # _log.info("Updated display")
-        #_log.info( "Sensors displays updated")  
+                  sensor.display(blynk)
+                  _log.info("Updated display for " +  + str(sensor.name))
+        _log.info( "Sensors displays updated")  
         if (sensors[1].target > float(sensors[1].value)): #EC
              _log.info("Do a dose")     
              doSingleDose()     
@@ -726,6 +715,8 @@ try:
                    blynk.set_property(240, 'color', colours['ONLINE'])
               else:
                    blynk.set_property(240, 'color', colours['OFFLINE'])
+			
+			
               _log.info("Boot Completed")
               timer.run()
         except:
