@@ -45,8 +45,8 @@ def setFormBlynkLogObjects(*args, **kwargs):
 def setFormOnlineColours(*args, **kwargs):
    blynk, _log = setFormBlynkLogObjects (blynkObj=kwargs.get('blynkObj', None), loggerObj=kwargs.get('loggerObj', None))  
    _log.debug("setFormOnlineColours :- Going to set from colour Online e.g.("+colours['ONLINE']+") for everything")
-   blynk.run()
-   for i in range(11): 
+   pins = [6,7,8,9]
+   for i in pins: 
       _log.debug("setFormOnlineColours :- Going to set from colour Online e.g.("+colours['ONLINE']+") for vPin " + str(i))  
       blynk.set_property(i, 'color', colours['ONLINE']) 
    _log.debug("setFormOnlineColours :- end of fx setFormOnline")
@@ -54,8 +54,8 @@ def setFormOnlineColours(*args, **kwargs):
 def setFormOfflineColours(*args, **kwargs):
    blynk, _log = setFormBlynkLogObjects (blynkObj=kwargs.get('blynkObj', None), loggerObj=kwargs.get('loggerObj', None))  
    _log.debug("setFormOfflineColours :- Going to set from colour Online e.g.("+colours['ONLINE']+") for everything")
-   blynk.run()
-   for i in range(11): 
+   pins = [6,7,8,9]
+   for i in pins: 
       _log.debug("setFormOfflineColours :- Going to set from colour Offline e.g.("+colours['OFFLINE']+") for vPin " + str(i))  
       blynk.set_property(i, 'color', colours['OFFLINE']) 
    _log.debug("setFormOfflineColours :- end of fx setFormOnline")
