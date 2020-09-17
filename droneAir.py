@@ -196,7 +196,8 @@ def blynk_data():
     blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
     blynk.set_property(0, 'color', colours['ONLINE'])
     _log.debug("Going to get openweather")
-    openWeather.blynkOpenWeather(blynk)
+    openWeather.blynkOpenWeather(blynk, _log)
+    _log.debug("Completed openweather")
     if(bme280 is  None and bme680 is None):            
         drone.setBMEFormOfflineColours(blynkObj=blynk, loggerObj=_log)   
      
