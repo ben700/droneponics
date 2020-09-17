@@ -621,7 +621,7 @@ try:
               blynk.virtual_write(251, drone.get_ip())
               x = 1 
               for relay in relays:
-                 relay.setBlynkLabel(blynk, x, 10+x)
+                 relay.setBlynkLabel(blynk, x, 20+x)
                  x = x +1 
               now = datetime.now()
               blynk.virtual_write(99, now.strftime("%d/%m/%Y %H:%M:%S"))
