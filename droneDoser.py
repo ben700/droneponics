@@ -547,7 +547,8 @@ try:
     @blynk.handle_event('write V255')
     def rebooter(pin, value):
         _log.info( "User reboot")
-	blynk.virtual_write(250, "Reboot")
+        blynk.virtual_write(250, "Reboot")
+        blynk.set_property(250, 'color', colours['OFFLINE'])	
         blynk.virtual_write(98, "User Reboot " + '\n')
         blynk.set_property(systemLED, 'color', colours['OFFLINE'])	
         os.system('sh /home/pi/updateDroneponics.sh')
@@ -654,6 +655,7 @@ try:
            timer.run()
            if bootup :
               blynk.virtual_write(250, "Boot")
+              blynk.set_property(250, 'color', colours['ONLINE'])	
               p = subprocess.Popen(['i2cdetect', '-y','1'],stdout=subprocess.PIPE,)
               #cmdout = str(p.communicate())
               for i in range(0,9):
