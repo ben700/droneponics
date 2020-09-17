@@ -556,15 +556,7 @@ try:
     @blynk.handle_event("connect")
     def connect_handler():
         _log.warning("Connected")
-        pins = [38,39,48,49]
-        for pin in range(0,11):
-           _log.info('Syncing virtual buttons {}'.format(pin))
-           blynk.virtual_sync(pin)
-           blynk.read_response(timeout=0.5)
-        for pin in range(24,30):
-           _log.info('Syncing virtual buttons {}'.format(pin))
-           blynk.virtual_sync(pin)
-           blynk.read_response(timeout=0.5)
+        pins = [29,30,31,32,38,39,48,49]
         for pin in pins:
            _log.info('Syncing virtual buttons {}'.format(pin))
            blynk.virtual_sync(pin)
