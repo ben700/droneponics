@@ -2,7 +2,7 @@ import logging
 import socket
 import blynklib
 from configparser import ConfigParser
-from drone import *
+import drone
 
 def gethostname():
     return socket.gethostname()
@@ -45,7 +45,7 @@ def setFormBlynkLogObjects(*args, **kwargs):
 def setFormOnlineColours(*args, **kwargs):
    blynk, _log = setFormBlynkLogObjects (blynkObj=kwargs.get('blynkObj', None), loggerObj=kwargs.get('loggerObj', None))  
    _log.debug("setFormOnlineColours :- Going to set from colour Online e.g.("+colours['ONLINE']+") for everything")
-   pins = [6,7,8,9]
+   pins = [0, 250]
    for i in pins: 
       _log.debug("setFormOnlineColours :- Going to set from colour Online e.g.("+colours['ONLINE']+") for vPin " + str(i))  
       blynk.set_property(i, 'color', colours['ONLINE']) 
@@ -54,7 +54,7 @@ def setFormOnlineColours(*args, **kwargs):
 def setFormOfflineColours(*args, **kwargs):
    blynk, _log = setFormBlynkLogObjects (blynkObj=kwargs.get('blynkObj', None), loggerObj=kwargs.get('loggerObj', None))  
    _log.debug("setFormOfflineColours :- Going to set from colour Online e.g.("+colours['ONLINE']+") for everything")
-   pins = [6,7,8,9]
+   pins = [0, 250]
    for i in pins: 
       _log.debug("setFormOfflineColours :- Going to set from colour Offline e.g.("+colours['OFFLINE']+") for vPin " + str(i))  
       blynk.set_property(i, 'color', colours['OFFLINE']) 
@@ -65,7 +65,7 @@ def setBME680FormColours(bme680, *args, **kwargs):
     _log.debug("setBME680FormColours : start fx")
     #blynk.run()
     _log.debug("setBME680FormColours : int(bme680.temperature*10) = " + str(int(bme680.temperature*10)))
-    
+
     _log.debug("setBME680FormColours : drone.getTempColour(_log,int(10)) = " + str(drone.getTempColour(_log,100)))
     _log.debug("setBME680FormColours : drone.getTempColour(_log,int(bme680.temperature*10)) = " + str(drone.getTempColour(_log,int(bme680.temperature*10))))
     
