@@ -228,7 +228,7 @@ try:
            relays[relay].cycleOnReset()
            relays[relay].setOffCycleReset() 
         blynk.virtual_write(34, relays[relay].info())
-        blynk.virtual_write(33, relays[relay].getState())
+        blynk.virtual_write(33, relays[relay].getState() + " but state is " + relays[relay].state)
         _log.info("relays[relay].getState() = " + relays[relay].getState())
                  
                 
