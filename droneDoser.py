@@ -546,7 +546,8 @@ try:
   
     @blynk.handle_event('write V255')
     def rebooter(pin, value):
-        _log.info( "User reboot")	
+        _log.info( "User reboot")
+	blynk.virtual_write(250, "Reboot")
         blynk.virtual_write(98, "User Reboot " + '\n')
         blynk.set_property(systemLED, 'color', colours['OFFLINE'])	
         os.system('sh /home/pi/updateDroneponics.sh')
@@ -566,6 +567,7 @@ try:
     @timer.register(interval=60, run_once=False)
     def blynk_data():
         _log.info("Update Timer Run")
+	blynk.virtual_write(250, "Running")
         now = datetime.now()
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
 
@@ -650,6 +652,7 @@ try:
            blynk.run()
            timer.run()
            if bootup :
+              blynk.virtual_write(250, "Boot")
               p = subprocess.Popen(['i2cdetect', '-y','1'],stdout=subprocess.PIPE,)
               #cmdout = str(p.communicate())
               for i in range(0,9):
@@ -797,6 +800,7 @@ try:
 
         except:
            _log.info('Unexpected error')
+           blynk.virtual_write(250, "Crash")
            blynk.virtual_write(98, "System has main loop error" + '\n')
            for l in LED:
                 blynk.set_property(l, 'color', colours['OFFLINE'])
@@ -807,6 +811,7 @@ try:
    
 except KeyboardInterrupt:
    _log.info('Keyboard Interrupt')
+   blynk.virtual_write(250, "Keyboard Interrupt")
    blynkErr = blynklib.Blynk(parser.get('droneDoser', 'BLYNK_AUTH'))
    for l in LED:
         blynkErr.set_property(l, 'color', colours['OFFLINE'])
@@ -816,6 +821,7 @@ except KeyboardInterrupt:
 
 except:
    _log.info('Unexpected error')
+   blynk.virtual_write(250, "Crash")
    blynkErr = blynklib.Blynk(parser.get('droneDoser', 'BLYNK_AUTH'))
    for l in LED:
         blynkErr.set_property(l, 'color', colours['OFFLINE'])
