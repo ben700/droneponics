@@ -217,7 +217,7 @@ try:
                  _log.debug("in v1write_handler turing relay auto")
                  relays[relay].setAutomatic()
                  relays[relay].cycleOnReset()
-                 relays[relay].setOffCycleReset() 
+          #       relays[relay].setOffCycleReset() 
            except:
                  _log.error("Except handle_event V"+str(relay+1)+" Turning auto")
  
