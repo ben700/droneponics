@@ -574,7 +574,7 @@ try:
                   #sensor.blynk()
                   blynk.virtual_write(98, "Current " + str(sensor.name) + " reading =[" + str(sensor.value) + "]" + '\n')
                  # _log.info("Updated log")#
-		  sensor.display(blynk):	
+                  sensor.display(blynk):	
                  # blynk.virtual_write(sensor.displayPin, sensor.value)
                  # _log.info("Updated display")
         #_log.info( "Sensors displays updated")  
