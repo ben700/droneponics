@@ -22,6 +22,7 @@ import RPi.GPIO as GPIO
 
 class Sensor:
    def __init__(self, SensorId, name, *args, **kwargs):
+       print("__init__")
        self.sensor = AtlasI2C(SensorId)
        self.sensorId = SensorId
        self.name = Name
@@ -34,7 +35,8 @@ class Sensor:
        self.highAlarm = kwargs.get('HighAlarm', None)
        self.color = None
 
-   def read():
+   def read(self):
+       print("read(self)")
        return self.sensor.query("R").split(":")[1].strip().rstrip('\x00')
    
    def display(self, blynk):
