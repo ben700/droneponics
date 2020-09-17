@@ -77,7 +77,7 @@ try:
     try:
         lcdDisplay=drone.Display(_log)
     except:
-	lcdDisplay=None
+        lcdDisplay=None
 	
     _log.info("all senses created")
 		
