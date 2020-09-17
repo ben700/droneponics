@@ -153,6 +153,8 @@ def v29write_handler(pin, value):
     global rowIndex
     rowIndex = 0
     blynk.virtual_write(97, "clr")
+    blynk.virtual_write(29, 0)
+    
                  
     
 @blynk.handle_event('write V255')
