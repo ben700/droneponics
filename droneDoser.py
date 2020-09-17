@@ -626,13 +626,14 @@ try:
              doSingleDose()     
              blynk.virtual_write(98,"Manual dose nutrient "+ '\n')
              blynk.virtual_write(39,1)
+             sensors[1].mode = 1
 	
         if (int(sensors[2].mode) == 2):                  
              _log.info("Do a ph dose") 
              doSinglePHDose()
              blynk.virtual_write(98,"Manual dose Ph"+ '\n')
              blynk.virtual_write(49,1)
-			
+             sensors[2].mode = 1
        
         if (parser.get('blynkBridge', 'BLYNK_AUTH', fallback=None) is not None):
             _log.warning("Send Temp data via blynkBridge")
