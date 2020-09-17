@@ -222,9 +222,8 @@ try:
            except:
                  _log.error("Except handle_event V"+str(relay+1)+" Turning auto")
  
-        blynk.virtual_write(40, relays[relay].state)
-        blynk.virtual_write(34, relays[relay].info())
-        blynk.virtual_write(33, relays[relay].getState())
+        blynk.virtual_write(40, relays[relay].info())
+        blynk.set_property(40, "label", relays[relay].name +" Status")
         _log.info("completed v1write_handler")
                  
                 
