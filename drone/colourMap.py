@@ -17,6 +17,7 @@ def getTempColour(Temp):
 
 
 def getMoistColour(MoistPer):
+     print("getMoistColour(MoistPer) =" + str(MoistPer))
      #normalize item number values to colormap
      norm = matplotlib.colors.Normalize(vmin=0, vmax=100)
 
