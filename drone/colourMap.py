@@ -14,9 +14,9 @@ def getTempColour(Temp):
      
           #print("rgba_color =" + str(rgba_color))
 
-          #c = Color(rgb=(rgba_color[0]/255,rgba_color[1]/255,rgba_color[2]/255))
+          c = Color(rgb=(rgba_color[0]/255,rgba_color[1]/255,rgba_color[2]/255))
           #print("color =" + str(c))
-       except:
+     except:
           c = '#0000FF'
      return c
 
