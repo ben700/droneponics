@@ -564,7 +564,7 @@ try:
         sensors[2].value = sensors[2].sensor.query("RT,"+sensors[0].value).split(":")[1].strip().rstrip('\x00')  #pH
 	
 	
-	for sensor in sensors:
+        for sensor in sensors:
              _log.info(sensor.name + " = " + str(sensor.value))
              blynk.virtual_write(98, sensor.name + " = " + str(sensor.value) + '\n')
 	
