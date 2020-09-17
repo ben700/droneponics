@@ -9,8 +9,8 @@ def getTempColour(_log, Temp):
           norm = matplotlib.colors.Normalize(vmin=0, vmax=400)
 
           #colormap possible values = viridis, jet, spectral
-          #rgba_color = cm.coolwarm(norm(Temp),bytes=True) 
-          rgba_color = cm.RdBu(norm(Temp),bytes=True) 
+          rgba_color = cm.coolwarm(norm(Temp),bytes=True) 
+          #rgba_color = cm.RdBu(norm(Temp),bytes=True) 
      
           _log.info("rgba_color =" + str(rgba_color))
 
@@ -28,7 +28,8 @@ def getMoistColour(_log, MoistPer):
      norm = matplotlib.colors.Normalize(vmin=0, vmax=100)
 
      #colormap possible values = viridis, jet, spectral
-     rgba_color = cm.RdBu(norm(MoistPer),bytes=True) 
+     rgba_color = cm.coolwarm(norm(MoistPer),bytes=True) 
+     #rgba_color = cm.RdBu(norm(MoistPer),bytes=True) 
      _log.info("rgba_color =" + str(rgba_color))
 
      c = Color(rgb=(rgba_color[0]/255,rgba_color[1]/255,rgba_color[2]/255))
@@ -41,7 +42,9 @@ def getLightColors(_log, LightPer):
      norm = matplotlib.colors.Normalize(vmin=0, vmax=100)
 
      #colormap possible values = viridis, jet, spectral
-     rgba_color = cm.RdBu(norm(LightPer),bytes=True) 
+     #rgba_color = cm.RdBu(norm(LightPer),bytes=True) 
+     rgba_color = cm.autumn(norm(LightPer),bytes=True) 
+     
      _log.info("rgba_color =" + str(rgba_color))
 
      c = Color(rgb=(rgba_color[0]/255,rgba_color[1]/255,rgba_color[2]/255))
