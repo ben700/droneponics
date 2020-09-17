@@ -713,7 +713,7 @@ try:
               _log.info("sPH =" + sPH)
               _log.info("sEC = " + sEC)
               _log.info("sTemp = " + sTemp)
-              if lcdDisplay not None: 
+              if lcdDisplay is not None: 
                    lcdDisplay.updateLCDProbe (sPH, sEC, sTemp)
               if (text == ""):
                    blynk.set_property(240, 'color', colours['ONLINE'])
