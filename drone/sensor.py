@@ -40,7 +40,7 @@ class Sensor:
        return self.sensor.query("R").split(":")[1].strip().rstrip('\x00')
    
    def display(self, blynk):
-    print("display(blynk)")
+    print("base:display(blynk)")
     blynk.set_property(self.displayPin, "label", self.name)
     blynk.set_property(self.displayPin, 'color', self.color)
     blynk.virtual_write(self.displayPin, self.value)
@@ -55,15 +55,28 @@ class PH(Sensor):
    def read(self, cTemp):
       return self.sensor.query("RT,"+cTemp).split(":")[1].strip().rstrip('\x00')
  
+   def display(self, blynk):
+    print("PH:display(blynk)")
+    blynk.set_property(self.displayPin, "label", self.name)
+    blynk.set_property(self.displayPin, 'color', self.color)
+    blynk.virtual_write(self.displayPin, self.value)
+
 class EC(Sensor):
    def __init__(self,  Target=600, *args, **kwargs):
       Sensor.__init__(self, 100, "EC",  31 , Target=600,  *args, **kwargs) 
       self.target=kwargs.get('Target')
       self.high=self.target+200
       self.low=self.target-200  
+      
    def read(self, cTemp):
       return self.sensor.query("RT,"+cTemp).split(":")[1].strip().rstrip('\x00')
   
+   def display(self, blynk):
+    print("EC:display(blynk)")
+    blynk.set_property(self.displayPin, "label", self.name)
+    blynk.set_property(self.displayPin, 'color', self.color)
+    blynk.virtual_write(self.displayPin, self.value)
+      
 class DO(Sensor):
    def __init__(self, *args, **kwargs):
       Sensor.__init__(self, 97, "Dissolved Oxygen", 30, Target=10, *args, **kwargs) 
@@ -73,7 +86,13 @@ class DO(Sensor):
 class TEMP(Sensor):  
    def __init__(self, *args, **kwargs):
       Sensor.__init__(self, 102, "Temprature", 30, Target=20, LowAlarm=10, HighAlarm=25, *args, **kwargs) 
-    
+   
+   def display(self, blynk):
+      print("TEMP:display(blynk)")
+      blynk.set_property(self.displayPin, "label", self.name)
+      blynk.set_property(self.displayPin, 'color', self.color)
+      blynk.virtual_write(self.displayPin, self.value)
+   
 class WaterLevel():  
    GPIO.setmode(GPIO.BCM)
    GPIO.setwarnings(False)
