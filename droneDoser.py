@@ -681,6 +681,7 @@ try:
 	      y = 70
               for dose in nutrientMix:
                    blynk.virtual_write(y, dose.name)
+                   blynk.virtual_write(y-10, dose.dose)			
                    y = y + 1		       
               text= ""
               sPH= ""
