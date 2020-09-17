@@ -220,7 +220,7 @@ try:
                  relays[relay].setOffCycleReset()
                  _log.debug("in v1write_handler turing relay auto completed try")	
                  blynk.virtual_write(40, relays[relay].state)
-                # blynk.virtual_write(34, relays[relay].info())
+                 blynk.virtual_write(34, relays[relay].info())
                  blynk.virtual_write(33, relays[relay].getState())
                  _log.info("completed v1write_handler")
            except:
