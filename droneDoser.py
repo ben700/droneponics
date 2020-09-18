@@ -619,6 +619,10 @@ try:
         else :
              _log.critical("cTemp -ve = " + str(cTemp))
     
+        sensors[0].oldValue = sensors[0].value
+        sensors[1].oldValue = sensors[1].value
+        sensors[2].oldValue = sensors[2].value
+
         sensors[0].value = cTemp #Temp
         sensors[1].value = sensors[1].sensor.query("RT,"+cTemp).split(":")[1].strip().rstrip('\x00') #EC
         sensors[2].value = sensors[2].sensor.query("RT,"+sensors[0].value).split(":")[1].strip().rstrip('\x00')  #pH
