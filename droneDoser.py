@@ -370,6 +370,8 @@ try:
         _log.debug("in v8write_handler" + str(value[0]))
         _log.debug("in v8write_handler" + str(value[1]))
         _log.debug("in v8write_handler" + str(value[2]))
+        _log.debug("in v8write_handler" + str(value[3]))
+        _log.debug("in v8write_handler" + str(value[4]))
 		   
         relays[relay].setTimer(int(value[0]), int(value[1]))
 
