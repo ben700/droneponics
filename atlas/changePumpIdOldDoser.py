@@ -39,7 +39,7 @@ if True:
        pump = AtlasI2C(0x11)
        _log.info(pump.query("I2C,12"))
        
-        pump = AtlasI2C(0x12)
+       pump = AtlasI2C(0x12)
        _log.info(pump.query("I2C,13"))
        
        pump = AtlasI2C(0x13)
