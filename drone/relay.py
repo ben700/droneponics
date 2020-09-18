@@ -25,6 +25,7 @@ class Relay:
        self.state = "Off"
        self.startTime = None
        self.stopTime = None
+       self.days = None
        self.infoPin = None
        
    def setInfoPin(self, infoPin): 
@@ -95,11 +96,12 @@ class Relay:
          self.startTime = None
          self.stopTime = None   
          
-   def setTimer(self, startTime, stopTime):
+   def setTimer(self, startTime, stopTime, days):
          self._log.debug("in setTimer")
          self.automatic = True
          self.startTime = startTime
          self.stopTime = stopTime
+         self.days = days         
          self.setState("Timer")
    
    def setAutomatic(self):
