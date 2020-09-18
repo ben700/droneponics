@@ -52,12 +52,14 @@ class Sensor:
        self.target = kwargs.get('Target', None)
        self.mode = 1  # 1 = off 2 = on 3 = auto       
        self.value = None
+       self.oldValue = None
        self.lowAlarm = kwargs.get('LowAlarm', None)
        self.highAlarm = kwargs.get('HighAlarm', None)
        self.color = None
 
    def read(self):
        print("read(self)")
+       self.oldValue = self.value  
        return self.sensor.query("R").split(":")[1].strip().rstrip('\x00')
    
    def display(self, blynk):
@@ -65,6 +67,8 @@ class Sensor:
     blynk.set_property(self.displayPin, "label", self.name)
     blynk.set_property(self.displayPin, 'color', self.color)
     blynk.virtual_write(self.displayPin, self.value)
+      
+      
     
 class PH(Sensor):  
    def __init__(self, *args, **kwargs):
@@ -74,6 +78,7 @@ class PH(Sensor):
     self.target=5.5
    
    def read(self, cTemp):
+      self.oldValue = self.value  
       return self.sensor.query("RT,"+cTemp).split(":")[1].strip().rstrip('\x00')
  
    def display(self, blynk):
@@ -90,6 +95,7 @@ class EC(Sensor):
       self.low=self.target-200  
       
    def read(self, cTemp):
+      self.oldValue = self.value  
       return self.sensor.query("RT,"+cTemp).split(":")[1].strip().rstrip('\x00')
   
    def display(self, blynk):
