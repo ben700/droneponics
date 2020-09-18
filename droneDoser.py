@@ -610,7 +610,7 @@ try:
         _log.info("Update Timer Run")
         blynk.virtual_write(250, "Running")
         now = datetime.now()
-        weekDay = now.weekday()
+        weekDay = now.get_weekday()
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
         blynk.virtual_write(98, "The weekday is " + weekDay)
 
