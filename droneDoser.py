@@ -845,7 +845,10 @@ try:
               blynk.set_property(48, "label", "pH Trigger Level")
               blynk.set_property(39, "label", "EC Mode")
               blynk.set_property(49, "label", "pH Mode")
-
+              u=41
+              for dosage in nutrientMix:
+                   blynk.set_property(u, "label", dosage.name + " Fill")
+                   u = u+1	
               pins = [1, 2, 3, 4, 8, 29,30,31,32,35,36,38,39,48,49, 60, 61, 62, 63, 64, 65, 66]
               for pin in pins:
                    _log.info('Syncing virtual buttons {}'.format(pin))
