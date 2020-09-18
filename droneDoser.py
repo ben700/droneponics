@@ -610,9 +610,9 @@ try:
         _log.info("Update Timer Run")
         blynk.virtual_write(250, "Running")
         now = datetime.now()
-        weekDay = now.get_weekday()
+      #  weekDay = now.get_weekday()
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
-        blynk.virtual_write(98, "The weekday is " + weekDay)
+      #  blynk.virtual_write(98, "The weekday is " + weekDay)
 
         cTemp = sensors[0].sensor.query("R").split(":")[1].strip().rstrip('\x00')
         if (float(cTemp) < 0) :
