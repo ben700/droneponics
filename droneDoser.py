@@ -365,13 +365,13 @@ try:
                 
     @blynk.handle_event('write V8')
     def write_handler(pin, value):
-        relay = 7
+        relay = 3
      #   _log.debug("in v8write_handler and turning off relay " + relays[relay].name + " on pin " + str(relays[relay].gpioPin))
         _log.debug("in v8write_handler on at " + str(value[0]))
-        _log.debug("in v8write_handler off at" + str(value[1]))
+        _log.debug("in v8write_handler off at " + str(value[1]))
         _log.debug("in v8write_handler days are " + str(value[3]))
    		   
-        relays[relay].setTimer(int(value[0]), int(value[1]))
+        relays[relay].setTimer(int(value[0]), int(value[1]),value[3])
 
     @blynk.handle_event('write V35') #relay 1 on time
     def v35write_handler(pin, value):
@@ -845,7 +845,7 @@ try:
               blynk.set_property(39, "label", "EC Mode")
               blynk.set_property(49, "label", "pH Mode")
 
-              pins = [1, 29,30,31,32,35,36,38,39,48,49, 60, 61, 62, 63, 64, 65, 66]
+              pins = [1, 2, 3, 4, 8, 29,30,31,32,35,36,38,39,48,49, 60, 61, 62, 63, 64, 65, 66]
               for pin in pins:
                    _log.info('Syncing virtual buttons {}'.format(pin))
                    blynk.virtual_sync(pin)
