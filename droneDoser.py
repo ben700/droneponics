@@ -838,9 +838,9 @@ try:
                          #sensor.display(blynk)
                          _log.info("Updated display for " +  str(sensor.name))
 			 
-              blynk.virtual_write(41,"EC Settings")
-              blynk.virtual_write(42,"pH Settings")
-              blynk.virtual_write(43,"Relay Settings")		
+              blynk.virtual_write(51,"EC Settings")
+              blynk.virtual_write(52,"pH Settings")
+              blynk.virtual_write(53,"Relay Settings")		
               blynk.set_property(38, "label", "EC Trigger Level")
               blynk.set_property(48, "label", "pH Trigger Level")
               blynk.set_property(39, "label", "EC Mode")
