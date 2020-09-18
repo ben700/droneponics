@@ -33,23 +33,26 @@ if True:
     # Initialize the sensor.
     try:
        # Create the I2C bus
-       pump = AtlasI2C(111)
+       pump = AtlasI2C(0x10)
        _log.info(pump.query("I2C,11"))
        
-       pump = AtlasI2C(112)
+       pump = AtlasI2C(0x11)
        _log.info(pump.query("I2C,12"))
        
-        pump = AtlasI2C(114)
+        pump = AtlasI2C(0x12)
        _log.info(pump.query("I2C,13"))
        
-       pump = AtlasI2C(115)
+       pump = AtlasI2C(0x13)
        _log.info(pump.query("I2C,14"))
        
-       pump = AtlasI2C(116)
+       pump = AtlasI2C(0x14)
        _log.info(pump.query("I2C,15"))
        
-       pump = AtlasI2C(119)
+       pump = AtlasI2C(0x15)
        _log.info(pump.query("I2C,16"))
+	
+       pump = AtlasI2C(0x16)
+       _log.info(pump.query("I2C,17"))
     except:
         _log.info("Unexpected error: Atlas")
     
