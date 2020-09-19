@@ -272,12 +272,15 @@ def blynk_data():
     blynk.virtual_write(13, moistureMax)
     blynk.set_property(12, 'color', drone.getMoistColour(_log, int(1)))
     blynk.set_property(13, 'color', drone.getMoistColour(_log, int(99)))
-   
+    blynk.set_property(12, 'label', "Min Sensor 1")
+    blynk.set_property(13, 'label', "Max Sensor 1")
      
     blynk.virtual_write(16, ssMoistureMin)
     blynk.virtual_write(17, ssMoistureMax)
     blynk.set_property(16, 'color', drone.getMoistColour(_log, int(1)))
     blynk.set_property(17, 'color', drone.getMoistColour(_log, int(99))) 
+    blynk.set_property(16, 'label', "Min Sensor 2")
+    blynk.set_property(17, 'label', "Max Sensor 2")
     
     _log.info("Check to see if we need to reboot")    
     if(ss is None):
@@ -306,8 +309,11 @@ def blynk_data():
 _log.info("Created all the objects. Now starting the drone")        
 blynk.run() #need to call here so you can update app outside main while loop    
 blynk.virtual_write(250, "Start-up")
+blynk.set_property(250, 'label', "Status")
 blynk.virtual_write(251, drone.gethostname())
-blynk.virtual_write(252, drone.get_ip())        
+blynk.set_property(251, 'label', "hostname")
+blynk.virtual_write(252, drone.get_ip())
+blynk.set_property(251, 'label', "IP Address")
 blynk.virtual_write(98, "clr")
 
 
