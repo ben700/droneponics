@@ -383,21 +383,27 @@ try:
     @blynk.handle_event('write V35') #relay 1 on time
     def v35write_handler(pin, value):
         if (value[0] > 0):	
+            _log.debug("Update Relay 1 On time ")
             relays[0].cycleResetSet(value[0])
             blynk.virtual_write(relays[0].getInfoPin(), relays[0].info())
         else:
+            _log.debug("Update On time for Relay 1")
             blynk.virtual_write(35,1)
             relays[0].cycleResetSet(1)
+        _log.debug("Now update info pin")
         blynk.virtual_write(relays[0].getInfoPin(), relays[0].info())
 		
     @blynk.handle_event('write V36')#relay 1 off time
     def v36write_handler(pin, value):
         if (value[0] > 0):	
+            _log.debug("Update Relay 1 Off time ")
             relays[0].cycleOffResetSet(value[0])
             blynk.virtual_write(relays[0].getInfoPin(), relays[0].info())
         else:
+            _log.debug("Update Off time for Relay 1")
             blynk.virtual_write(36,1)
             relays[0].cycleOffResetSet(1)
+        _log.debug("Now update info pin")
         blynk.virtual_write(relays[0].getInfoPin(), relays[0].info())
 		
     @blynk.handle_event('write V37')
