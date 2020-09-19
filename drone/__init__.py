@@ -1,4 +1,3 @@
-from drone.droneObj import *
 from drone.dose import *
 from drone.relay import Relay
 from drone.nutrientSchedule import *
