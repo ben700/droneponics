@@ -1,5 +1,4 @@
 ##!/usr/bin/env python3 
-BLYNK_AUTH = 'SHraFqInf27JKowTcFZapu0rHH2QGtuO' #atlasMonitor
 
 if True:
     import datetime
@@ -27,12 +26,7 @@ if True:
     _log.addHandler(consoleHandler)
     _log.setLevel(logging.DEBUG)
 
-    answer = input("Are you sure you want to calibrate ORP? (y/n)")
-    if answer is None or answer != 'y':
-        _log.info("User Exit")
-        quit()
-  
-    # Initialize the sensor.
+      # Initialize the sensor.
     try:
         orp = AtlasI2C(98)
         _log.info("sensor created")
