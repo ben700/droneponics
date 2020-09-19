@@ -218,6 +218,9 @@ def blynk_data():
         try:
             ssMoistureRead = ss.moisture_read()
             ssTempRead = round(ss.get_temp(),1)
+            blynk.virtual_write(98, "ss Readings org Obj" + '\n')
+            blynk.virtual_write(98, "ss ssMoistureRead = " + str(ssMoistureRead) + '\n')
+            blynk.virtual_write(98, "ss ssTempRead = " + str(ssTempRead) + '\n')
         except:
             _log.critical("Can't find I2C0 device should be the soil sensor")
             ss = None
@@ -229,15 +232,16 @@ def blynk_data():
             ss = Seesaw(i2c_bus, addr=0x38)
             ssMoistureRead = ss.moisture_read()
             ssTempRead = round(ss.get_temp(),1)
+            blynk.virtual_write(98, "ss Readings" + '\n')
+            blynk.virtual_write(98, "ss ssMoistureRead = " + str(ssMoistureRead) + '\n')
+            blynk.virtual_write(98, "ss ssTempRead = " + str(ssTempRead) + '\n')
+    
         except:
             blynk.virtual_write(98, "Try to create new object except" + '\n')
             _log.critical("Can't find I2C0 device should be the soil sensor")
             ss = None
     
-    blynk.virtual_write(98, "ss Readings" + '\n')
-    blynk.virtual_write(98, "ss ssMoistureRead = " + str(ssMoistureRead) + '\n')
-    blynk.virtual_write(98, "ss ssTempRead = " + str(ssTempRead) + '\n')
-    
+
     if(ss is None):
         
         blynk.virtual_write(98, "ss is None" + '\n')
@@ -249,6 +253,7 @@ def blynk_data():
         blynk.virtual_write(98, "ss Read second sensor" + '\n')
         _log.info("Read second sensor")
         _log.info("Second sensor read")
+        
         if (ssMoistureRead<ssMoistureMin):
             ssMoistureMin = ssMoistureRead
             updateConfig(moistureMin, moistureMax, ssMoistureMin, ssMoistureMax)
