@@ -244,18 +244,19 @@ try:
         if (staus is "1" ):
            try:
                  _log.debug("in v"+str(relay+1)+"write_handler turing on relay " + relays[relay].name)
+                 relays[relay].setManual("On")  			
                  relays[relay].turnOn(_log)
-                 relays[relay].setManual("On")  
            except:
                  _log.error("Except handle_event V"+str(relay+1)+" Turning On")
         else:
            try:
                  _log.debug("in v2write_handler turing off relay")
-                 relays[relay].turnOff(_log)
                  relays[relay].setManual("Off")  
+                 relays[relay].turnOff(_log)
            except:
                  _log.error("Except handle_event V"+str(relay+1)+" Turning Off")
-        blynk.virtual_write(98, relays[relay].info())
+        blynk.virtual_write(relays[relay].getInfoPin(), relays[relay].info())
+        blynk.virtual_write(98, relays[relay].info() + '\n')
         _log.info("completed v2write_handler")
                  
 		
