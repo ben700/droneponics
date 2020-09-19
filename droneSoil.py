@@ -204,7 +204,7 @@ def blynk_data():
         blynk.set_property(1, 'color', drone.getMoistColour(_log, int(moistureReadPer)))
         blynk.set_property(2, 'color', drone.getTempColour(_log, tempRead))
         _log.debug("About to get light colour for lightRead = " + str(lightRead))
-        blynk.set_property(3, 'color', lightColors(_log, int(lightRead/100)))
+        blynk.set_property(3, 'color', lightColors(_log, int(lightRead/656))) # change to per max = 65535
         blynk.virtual_write(11, moistureRead)
         blynk.set_property(11, 'color', drone.getMoistColour(_log, int(moistureReadPer)))
     
