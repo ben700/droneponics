@@ -18,7 +18,7 @@ class Relay:
        self.name = Name
        self.gpio = GPIO.setup(gpioPin, GPIO.OUT)
        self.automatic = False
-       self.cycle=0
+       self.cycle=1
        self.cycleReset=0
        self.hasOffCycle=False
        self.offCycle=0
@@ -150,11 +150,11 @@ class Relay:
    def cycleOnReset(self):
       self._log.debug("in cycleReset")
       if(self.hasOffCycle):
-          self.cycle = 0 
+          self.cycle = 1 
    
    def setOffCycleReset(self):
       self._log.debug("in setOffCycleReset")
-      self.offCycle = 0 
+      self.offCycle = 1 
       
    def incCycle(self):
       if(self.automatic):
@@ -166,9 +166,9 @@ class Relay:
    def info(self):   
          if (self.getState() is "Auto"):
             if(self.hasOffCycle):
-                  return self.name + " is "+str(self.whatCycle())+"; Now minute " + str(self.cycle) + " of " + str(self.cycleReset) + " mins."
-            else:
                   return self.name + " is "+str(self.whatCycle())+"; Now minute " + str(self.cycle) + ". Cycle is On " + str(self.cycleReset) + " mins then off for "+ str(self.offCycleReset) + " mins."
+            else:
+                  return self.name + " is "+str(self.whatCycle())+"; Now minute " + str(self.cycle) + " of " + str(self.cycleReset) + " mins."
          elif(self.getState() is  "Timer"):
             return self.name + " is on Timer mode and is " + str(self.whatCycle()) + "."
          elif(self.getState() is  "On"):
