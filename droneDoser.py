@@ -197,9 +197,10 @@ try:
                         blynk.notify(dosage.name + " has pumped " + str(dosage.volume) + ", so may need topup")      
     
     @blynk.handle_event('write V1')
-    def v1write_handler(pin, value):
+    def write_handler(pin, value): 
         staus = value[0]
-        relay = 0       
+        relay = 0  
+        _log.debug("in v1write_handler and the staus = " + str(value[0]))
         if (staus is "1" ):
            try:
                  _log.debug("in v"+str(relay+1)+"write_handler turing off relay " + relays[relay].name)
