@@ -292,14 +292,17 @@ def blynk_data():
     blynk.set_property(17, 'color', drone.getMoistColour(_log, int(99))) 
     
     _log.info("Check to see if we need to reboot")    
-    if(chirp is None and ss is None):
-        _log.critial("No sensors found reboot")
-        blynk.virtual_write(98, "No sensors found reboot" + '\n')
-        blynk.set_property(systemLED, 'color', colours['OFFLINE'])
-        blynk.virtual_write(98, "Update Code"+ '\n')
-        os.system('sh /home/pi/updateDroneponics.sh')
-        blynk.virtual_write(98, "Now do the Reboot"+ '\n')
-        os.system('sudo reboot')
+    if(chirp is None):
+        _log.error("Sensors 1 not found check Sensor 2")
+        blynk.virtual_write(98, "Sensors 1 not found check Sensor 2" + '\n')
+        if(ss is None):
+            _log.critial("No sensors found reboot")
+            blynk.virtual_write(98, "No sensors found reboot" + '\n')
+            blynk.set_property(systemLED, 'color', colours['OFFLINE'])
+            blynk.virtual_write(98, "Update Code"+ '\n')
+            os.system('sh /home/pi/updateDroneponics.sh')
+            blynk.virtual_write(98, "Now do the Reboot"+ '\n')
+            os.system('sudo reboot')
     
     blynk.virtual_write(98, "End of timer.register fx" + '\n')
     _log.debug("End of timer.register fx")
