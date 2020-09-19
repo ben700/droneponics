@@ -1,5 +1,4 @@
 ##!/usr/bin/env python3 
-BLYNK_AUTH = 'SHraFqInf27JKowTcFZapu0rHH2QGtuO' #atlasMonitor
 
 if True:
     import datetime
@@ -20,12 +19,6 @@ if True:
     import re
     import drone
 
-    class Counter:
-        cycle = 0
-
-    bootup = True
-    colours = {1: '#FF0000', 0: '#00FF00', 'OFFLINE': '#0000FF'}
-
 
     # tune console logging
     _log = logging.getLogger('BlynkLog')
@@ -35,14 +28,7 @@ if True:
     _log.addHandler(consoleHandler)
     _log.setLevel(logging.DEBUG)
 
-    nutrientMix = []
-    nutrientMix = drone.buildNutrientMix(nutrientMix, _log)
-	
 
-    answer = input("Are you sure you want to calibrate Temp, EC or pH? (y/n)")
-    if answer is None or answer != 'y':
-        _log.info("User Exit")
-        quit()
   
     # Initialize the sensor.
     try:
