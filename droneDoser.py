@@ -108,6 +108,10 @@ try:
     blynk.set_property(systemLED, 'color', colours['ONLINE'])
     _log.info("Blynk created")
     
+    #set blynk in relat obj 
+    for relay in relays: 
+        relay.setBlynk(blynk)
+    
     # Initialize the sensor.
     try:
        # Create the I2C bus
