@@ -248,7 +248,10 @@ def blynk_data():
     if(ss is None):
         
         blynk.virtual_write(98, "ss is None" + '\n')
-        blynk.virtual_write(250, "Sensor 2 Error")
+        if(chirp is None):
+            blynk.virtual_write(250, "Both Sensor Error")
+        else
+            blynk.virtual_write(250, "Sensor 2 Error")
         blynk.set_property(250, 'color', Color("red"))
         blynk.set_property(5, 'color', colours['OFFLINE'])
         blynk.set_property(6, 'color', colours['OFFLINE'])
@@ -296,9 +299,11 @@ def blynk_data():
         _log.error("Sensors 2 not found check Sensor 1")
         blynk.virtual_write(98, "Sensors 2 not found check Sensor 1" + '\n')
         if(chirp is None):
+            blynk.virtual_write(250, "Auto Reboot")
             _log.critical("No sensors found reboot")
             blynk.virtual_write(98, "No sensors found reboot" + '\n')
             blynk.set_property(systemLED, 'color', colours['OFFLINE'])
+            blynk.set_property(250, 'color', Color("red"))
             blynk.virtual_write(98, "Update Code"+ '\n')
             os.system('sh /home/pi/updateDroneponics.sh')
             blynk.virtual_write(98, "Now do the Reboot"+ '\n')
