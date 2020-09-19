@@ -95,10 +95,10 @@ try:
     relays[2].setInfoPin(82)
     relays[3].setInfoPin(83)
 
-    relays[0].setLEDPin(21)
-    relays[1].setLEDPin(22)
-    relays[2].setLEDPin(23)
-    relays[3].setLEDPin(24)        
+    relays[0].setLEDPin(85)
+    relays[1].setLEDPin(86)
+    relays[2].setLEDPin(87)
+    relays[3].setLEDPin(88)        
 
     # Initialize Blynk
     blynk = blynklib.Blynk(parser.get('droneDoser', 'BLYNK_AUTH'))        
