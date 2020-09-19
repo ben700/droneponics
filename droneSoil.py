@@ -283,6 +283,7 @@ def blynk_data():
             _log.critical("No sensors found reboot")
             blynk.virtual_write(98, "No sensors found reboot" + '\n')
             blynk.set_property(systemLED, 'color', colours['OFFLINE'])
+            _log.debug("Set the Status colour to " + str(red))
             blynk.set_property(250, 'color', red)
             blynk.virtual_write(98, "Update Code"+ '\n')
             os.system('sh /home/pi/updateDroneponics.sh')
