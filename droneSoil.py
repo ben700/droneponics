@@ -115,7 +115,7 @@ def updateConfig(moistureMin, moistureMax, ssMoistureMin, ssMoistureMax):
     cfgfile.close()    
     
 @blynk.handle_event('write V254')
-def reboots(pin, value):
+def rebootsCounter(pin, value):
     global reboots
     reboots = int(value[0])
     
