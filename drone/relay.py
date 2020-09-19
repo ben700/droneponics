@@ -29,8 +29,11 @@ class Relay:
        self.days = None
        self.infoPin = None
        self.ledPin = None
-      
+       self.blynk = None
 
+   def setBlynk(self, BLYNK): 
+        self.blynk = BLYNK
+         
    def setLEDPin(self, LEDPin): 
         self.ledPin = LEDPin
          
@@ -74,7 +77,8 @@ class Relay:
           GPIO.output(self.gpioPin,GPIO.LOW) 
           _log.info("Turned on relay " + self.name + " on pin " + str(self.gpioPin))
           if(self.ledPin is not None):
-              blynk.set_property(self.ledPin, 'color', '#FF0000')     
+              if(self.blynk is not None):
+                  self.blynk.set_property(self.ledPin, 'color', '#FF0000')     
        except:
           _log.error("Except relayClass: Turning on relay " + self.name)
       
@@ -84,7 +88,8 @@ class Relay:
            GPIO.output(self.gpioPin,GPIO.HIGH) 
            _log.info("Turned off relay " + self.name + " on pin " + str(self.gpioPin))
            if(self.ledPin is not None):
-              blynk.set_property(self.ledPin, 'color', '#00FF00')
+              if(self.blynk is not None):
+                  self.blynk.set_property(self.ledPin, 'color', '#00FF00')
        except:
            _log.error("Except relayClass: Turning off relay " + self.name)
          
