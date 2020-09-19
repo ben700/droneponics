@@ -716,8 +716,8 @@ try:
               sPH= ""
               sEC= ""
               sTemp= ""
-		
               cTemp = sensors[0].sensor.query("R").split(":")[1].strip().rstrip('\x00')
+              _log.info("cTemp = " + str(cTemp))
               sensors[0].value = cTemp #Temp 
               if (float(cTemp) <= 2) :
                     sTemp= "NO TEMP PROBE. "
