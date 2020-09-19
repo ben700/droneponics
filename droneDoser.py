@@ -245,12 +245,14 @@ try:
            try:
                  _log.debug("in v"+str(relay+1)+"write_handler turing on relay " + relays[relay].name)
                  relays[relay].turnOn(_log)
+                 relays[relay].setManual("On")  
            except:
                  _log.error("Except handle_event V"+str(relay+1)+" Turning On")
         else:
            try:
                  _log.debug("in v2write_handler turing off relay")
                  relays[relay].turnOff(_log)
+                 relays[relay].setManual("Off")  
            except:
                  _log.error("Except handle_event V"+str(relay+1)+" Turning Off")
         blynk.virtual_write(98, relays[relay].info())
