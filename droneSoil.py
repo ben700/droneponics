@@ -292,11 +292,11 @@ def blynk_data():
     blynk.set_property(17, 'color', drone.getMoistColour(_log, int(99))) 
     
     _log.info("Check to see if we need to reboot")    
-    if(chirp is None):
-        _log.error("Sensors 1 not found check Sensor 2")
-        blynk.virtual_write(98, "Sensors 1 not found check Sensor 2" + '\n')
-        if(ss is None):
-            _log.critial("No sensors found reboot")
+    if(ss is None):
+        _log.error("Sensors 2 not found check Sensor 1")
+        blynk.virtual_write(98, "Sensors 2 not found check Sensor 1" + '\n')
+        if(chirp is None):
+            _log.critical("No sensors found reboot")
             blynk.virtual_write(98, "No sensors found reboot" + '\n')
             blynk.set_property(systemLED, 'color', colours['OFFLINE'])
             blynk.virtual_write(98, "Update Code"+ '\n')
