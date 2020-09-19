@@ -44,6 +44,8 @@ class Relay:
           
    def setInfoPin(self, infoPin): 
         self.infoPin = infoPin
+        self.blynk.set_property(infoPin, "label", self.name +" Status")
+         
          
    def getInfoPin(self): 
         return self.infoPin      
