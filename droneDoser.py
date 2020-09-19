@@ -106,7 +106,7 @@ try:
         relay.setBlynk(blynk)
         relay.setInfoPin(p)
         relay.setLEDPin(p+5)
-	p=p+1
+        p = p + 1
 	
     # Initialize the sensor.
     try:
