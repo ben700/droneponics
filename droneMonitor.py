@@ -72,7 +72,7 @@ try:
 		
      
     # Initialize Blynk
-    blynk = blynklib.Blynk(parser.get('droneDoser', 'BLYNK_AUTH'))        
+    blynk = blynklib.Blynk(parser.get('droneMonitor', 'BLYNK_AUTH'))        
     timer = blynktimer.Timer()
     blynk.run()
     #blynk.virtual_write(98, "clr")
