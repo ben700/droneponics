@@ -382,6 +382,7 @@ try:
 
     @blynk.handle_event('write V35') #relay 1 on time
     def v35write_handler(pin, value):
+	_log.debug("v35write_handler")	
         if (value[0] > 0):	
             _log.debug("Update Relay 1 On time ")
             relays[0].cycleResetSet(value[0])
@@ -395,6 +396,7 @@ try:
 		
     @blynk.handle_event('write V36')#relay 1 off time
     def v36write_handler(pin, value):
+	_log.debug("v36write_handler")
         if (value[0] > 0):	
             _log.debug("Update Relay 1 Off time ")
             relays[0].cycleOffResetSet(value[0])
