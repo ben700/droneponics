@@ -91,14 +91,6 @@ try:
     relays.append(drone.Relay(_log, 24, parser.get('droneRelay', 'Relay3')))
     relays.append(drone.Relay(_log, 25, parser.get('droneRelay', 'Relay4')))
     
-    relays[0].setInfoPin(80)
-    relays[2].setInfoPin(82)
-    relays[3].setInfoPin(83)
-
-    relays[0].setLEDPin(85)
-    relays[1].setLEDPin(86)
-    relays[2].setLEDPin(87)
-    relays[3].setLEDPin(88)        
 
     # Initialize Blynk
     blynk = blynklib.Blynk(parser.get('droneDoser', 'BLYNK_AUTH'))        
@@ -108,10 +100,14 @@ try:
     blynk.set_property(systemLED, 'color', colours['ONLINE'])
     _log.info("Blynk created")
     
-    #set blynk in relat obj 
+    #set blynk in relat obj
+    p=80
     for relay in relays: 
         relay.setBlynk(blynk)
-    
+        relay.setInfoPin(p)
+        relay.setLEDPin(p+5)
+	p=p+1
+	
     # Initialize the sensor.
     try:
        # Create the I2C bus
