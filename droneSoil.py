@@ -118,8 +118,11 @@ def updateConfig(moistureMin, moistureMax, ssMoistureMin, ssMoistureMax):
 def rebooter(pin, value):
     _log.info("User Reboot")
     blynk.virtual_write(250, "User Reboot")
+    blynk.virtual_write(98, "User Reboot")
     blynk.set_property(systemLED, 'color', colours['OFFLINE'])
+    blynk.virtual_write(98, "Update Code")
     os.system('sh /home/pi/updateDroneponics.sh')
+    blynk.virtual_write(98, "Now do the Reboot")
     os.system('sudo reboot')
 
 @blynk.handle_event("connect")
