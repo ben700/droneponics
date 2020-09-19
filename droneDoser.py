@@ -627,7 +627,7 @@ try:
     def connect_handler():
         _log.warning("Connected")
         blynk.virtual_write(250, "Connected")
-        pins = [1, 2, 3, 4, 8, 29,30,31,32,35,36,38,39,41,42,43,44,45,46,47,48,49, 60, 61, 62, 63, 64, 65, 66]
+        pins = [1, 2, 3, 4, 8, 29,30,31,32,35,36,38,39,41,42,43,44,45,46,47,48,49, 60, 61, 62, 63, 64, 65, 66, 1]
         for pin in pins:
            _log.info('Syncing virtual buttons {}'.format(pin))
            blynk.virtual_sync(pin)
@@ -894,7 +894,7 @@ try:
               for dosage in nutrientMix:
                    blynk.set_property(u, "label", dosage.name + " Fill")
                    u = u+1	
-              pins = [1, 2, 3, 4, 8, 29,30,31,32,35,36,38,39,41,42,43,44,45,46,47,48,49, 60, 61, 62, 63, 64, 65, 66]
+              pins = [1, 2, 3, 4, 8, 29,30,31,32,35,36,38,39,41,42,43,44,45,46,47,48,49, 60, 61, 62, 63, 64, 65, 66, 1]
               for pin in pins:
                    _log.info('Syncing virtual buttons {}'.format(pin))
                    blynk.virtual_sync(pin)
