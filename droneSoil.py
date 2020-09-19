@@ -295,7 +295,11 @@ def blynk_data():
             os.system('sh /home/pi/updateDroneponics.sh')
             blynk.virtual_write(98, "Now do the Reboot"+ '\n')
             os.system('sudo reboot')
-    
+        else:
+            blynk.virtual_write(253, now.strftime("%d/%m/%Y %H:%M:%S"))
+   else:
+       blynk.virtual_write(253, now.strftime("%d/%m/%Y %H:%M:%S"))
+   
     blynk.virtual_write(98, "End of timer.register fx" + '\n')
     _log.debug("End of timer.register fx")
         
