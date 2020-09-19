@@ -33,7 +33,7 @@ parser = ConfigParser()
 parser.read("/home/pi/droneponics/config/configSoil/"+drone.gethostname()+".ini")
 
 bootup = True
-
+reboots = 0
 
 # tune console logging
 _log = logging.getLogger('BlynkLog')
@@ -113,6 +113,11 @@ def updateConfig(moistureMin, moistureMax, ssMoistureMin, ssMoistureMax):
     cfgfile = open("/home/pi/droneponics/config/configSoil/"+drone.gethostname()+".ini",'w')
     parser.write(cfgfile)
     cfgfile.close()    
+    
+@blynk.handle_event('write V254')
+def reboots(pin, value):
+    global reboots
+    reboots = int(value[0])
     
 @blynk.handle_event('write V255')
 def rebooter(pin, value):
@@ -322,6 +327,9 @@ blynk.set_property(systemLED, 'color', colours['ONLINE'])
 blynk.set_property(0, 'color', colours['ONLINE'])
 blynk.set_property(250, 'color', colours['ONLINE'])
 blynk.virtual_write(255, 0)
+blynk.virtual_sync(254)                  
+reboots = reboots + 1
+blynk.virtual_write(254, reboots)
 
 blynk.virtual_write(98, "Completed Boot" + '\n')
 _log.info("--------------------------Completed Boot--------------------------")
