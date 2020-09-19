@@ -124,26 +124,6 @@ def rebooter(pin, value):
     os.system('sh /home/pi/updateDroneponics.sh')
     blynk.virtual_write(98, "Now do the Reboot"+ '\n')
     os.system('sudo reboot')
-
-@blynk.handle_event("connect")
-def connect_handler():
-    global moistureMin
-    global moistureMax
-    global ssMoistureMin
-    global ssMoistureMax
-    _log.warning("Connected")
-    blynk.virtual_write(250, "Connected")
-   # blynk.set_property(1,"min", moistureMin)
-   # blynk.set_property(1,"max", moistureMax)
-   # blynk.set_property(5,"min", ssMoistureMin)
-   # blynk.set_property(5,"max", ssMoistureMax)
-
-
-@blynk.handle_event("disconnect")
-def disconnect_handler():
-    _log.warning("Disconnected")
-    blynk.virtual_write(250, "Disconnected")
-  
     
 @timer.register(interval=30, run_once=False)
 def blynk_data():
