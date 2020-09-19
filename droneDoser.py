@@ -386,7 +386,7 @@ try:
             relays[0].cycleResetSet(value[0])
             blynk.virtual_write(relays[0].getInfoPin(), relays[0].info())
         else:
-	    blynk.virtual_write(35,1)
+            blynk.virtual_write(35,1)
             relays[0].cycleResetSet(1)
         blynk.virtual_write(relays[0].getInfoPin(), relays[0].info())
 		
