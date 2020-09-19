@@ -40,18 +40,21 @@ def getMoistColour(_log, MoistPer):
      return c
 
 def getLightColors(_log, LightPer):
-     _log.info("lightColors(LightPer) =" + str(LightPer))
-     #normalize item number values to colormap
-     norm = matplotlib.colors.Normalize(vmin=0, vmax=100)
+     try:
+          _log.info("lightColors(LightPer) =" + str(LightPer))
+          #normalize item number values to colormap
+          norm = matplotlib.colors.Normalize(vmin=0, vmax=100)
 
-     #colormap possible values = viridis, jet, spectral
-     #rgba_color = cm.RdBu(norm(LightPer),bytes=True) 
-     rgba_color = cm.autumn(norm(LightPer),bytes=True) 
+          #colormap possible values = viridis, jet, spectral
+          #rgba_color = cm.RdBu(norm(LightPer),bytes=True) 
+          rgba_color = cm.autumn(norm(LightPer),bytes=True) 
      
-     _log.info("rgba_color =" + str(rgba_color))
+          _log.info("rgba_color =" + str(rgba_color))
 
-     c = Color(rgb=(rgba_color[0]/255,rgba_color[1]/255,rgba_color[2]/255))
-     _log.info("getLightColors =" + str(c))
+              c = Color(rgb=(rgba_color[0]/255,rgba_color[1]/255,rgba_color[2]/255))
+          _log.info("getLightColors =" + str(c))
+     except:
+          c= '#00FF00'
      return c
 
 
