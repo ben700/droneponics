@@ -253,7 +253,7 @@ try:
                  relays[relay].turnOff(_log)
            except:
                  _log.error("Except handle_event V"+str(relay+1)+" Turning Off")
-        blynk.virtual_write(relays[relay].getInfoPin(), relays[relay].info())
+        blynk.virtual_write(98, relays[relay].info())
         _log.info("completed v2write_handler")
                  
 		
