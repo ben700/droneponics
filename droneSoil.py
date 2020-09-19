@@ -129,7 +129,18 @@ def rebooter(pin, value):
     os.system('sh /home/pi/updateDroneponics.sh')
     blynk.virtual_write(98, "Now do the Reboot"+ '\n')
     os.system('sudo reboot')
+
     
+@blynk.handle_event("connect")
+def connect_handler():
+    _log.info("Connected")
+    pins = [254]
+    for pin in pins:
+        _log.info('Syncing virtual buttons {}'.format(pin))
+        blynk.virtual_sync(pin)
+        blynk.read_response(timeout=0.5)
+        
+        
 @timer.register(interval=30, run_once=False)
 def blynk_data():
     global moistureMin
@@ -337,7 +348,8 @@ blynk.set_property(systemLED, 'color', colours['ONLINE'])
 blynk.set_property(0, 'color', colours['ONLINE'])
 blynk.set_property(250, 'color', colours['ONLINE'])
 blynk.virtual_write(255, 0)
-blynk.virtual_sync(254)                  
+blynk.virtual_sync(254)
+blynk.read_response(timeout=0.5)
 reboots = reboots + 1
 blynk.virtual_write(254, reboots)
 
