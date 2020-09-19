@@ -740,8 +740,8 @@ try:
            blynk.run()
            timer.run()
            if bootup :
-              blynk.virtual_write(250, "Boot")
-              blynk.set_property(250, 'color', colours['ONLINE'])	
+              blynk.virtual_write(250, "Initializing")
+              blynk.set_property(250, 'color', '#ff00dd')	
               p = subprocess.Popen(['i2cdetect', '-y','1'],stdout=subprocess.PIPE,)
               #cmdout = str(p.communicate())
               for i in range(0,9):
@@ -901,6 +901,9 @@ try:
                    blynk.read_response(timeout=0.5)
 	
               _log.info("Boot Completed")
+              blynk.virtual_write(250, "Started")
+              blynk.set_property(250, 'color', colours['ONLINE'])
+              
 
         except:
            _log.info('Unexpected error')
