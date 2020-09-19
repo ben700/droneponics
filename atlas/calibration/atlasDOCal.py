@@ -26,10 +26,6 @@ if True:
     _log.addHandler(consoleHandler)
     _log.setLevel(logging.DEBUG)
 
-    answer = input("Are you sure you want to calibrate DO? (y/n)")
-    if answer is None or answer != 'y':
-        _log.info("User Exit")
-        quit()
   
     # Initialize the sensor.
     try:
