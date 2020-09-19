@@ -293,6 +293,16 @@ def blynk_data():
         
         
     blynk.virtual_write(98, "End of timer.register fx" + '/n')
+    
+    if(chirp is None and ss is None):
+         _log.critial("No sensors found reboot")
+         blynk.virtual_write(98, "No sensors found reboot" + '/n')
+         blynk.set_property(systemLED, 'color', colours['OFFLINE'])
+         blynk.virtual_write(98, "Update Code")
+         os.system('sh /home/pi/updateDroneponics.sh')
+         blynk.virtual_write(98, "Now do the Reboot")
+         os.system('sudo reboot')
+    
     _log.debug("End of timer.register fx")
         
 _log.info("Created all the objects. Now starting the drone")        
