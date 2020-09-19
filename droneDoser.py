@@ -330,7 +330,16 @@ try:
                  blynk.virtual_write(98, "Except handle_event V4 Turning waste auto")
         blynk.virtual_write(relays[relay].getInfoPin(), relays[relay].info())
                  
-                
+    @blynk.handle_event('write V5')
+    def write_handler(pin, value):
+        relay = 2
+        relays[relay].setTimer(int(value[0]), int(value[1]))
+	
+    @blynk.handle_event('write V7')
+    def write_handler(pin, value):
+        relay = 3
+        relays[relay].setTimer(int(value[0]), int(value[1]))
+	
  #   @blynk.handle_event('write V8')
  #   def write_handler(pin, value):
  #       relay = 3
