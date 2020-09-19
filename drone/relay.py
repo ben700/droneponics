@@ -27,7 +27,15 @@ class Relay:
        self.stopTime = None
        self.days = None
        self.infoPin = None
-       
+       self.ledPin = None
+      
+
+   def setLEDPin(self, LEDPin): 
+        self.ledPin = LEDPin
+         
+   def getLEDPin(self): 
+        return self.ledPin      
+          
    def setInfoPin(self, infoPin): 
         self.infoPin = infoPin
          
