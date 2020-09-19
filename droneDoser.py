@@ -892,8 +892,8 @@ try:
    
 except KeyboardInterrupt:
    _log.info('Keyboard Interrupt')
-   blynk.virtual_write(250, "Keyboard Interrupt")
    blynkErr = blynklib.Blynk(parser.get('droneDoser', 'BLYNK_AUTH'))
+   blynkErr.virtual_write(250, "Keyboard Interrupt")
    for l in LED:
         blynkErr.set_property(l, 'color', colours['OFFLINE'])
    blynkErr.virtual_write(98, "System has error" + '\n')
@@ -902,8 +902,8 @@ except KeyboardInterrupt:
 
 except:
    _log.info('Unexpected error')
-   blynk.virtual_write(250, "Crash")
    blynkErr = blynklib.Blynk(parser.get('droneDoser', 'BLYNK_AUTH'))
+   blynkErr.virtual_write(250, "Crash")
    for l in LED:
         blynkErr.set_property(l, 'color', colours['OFFLINE'])
    blynkErr.virtual_write(98, "System has error" + '\n')
