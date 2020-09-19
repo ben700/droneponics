@@ -35,7 +35,9 @@ class Relay:
         self.blynk = BLYNK
          
    def setLEDPin(self, LEDPin): 
+        self.blynk.virtual_write(LEDPin, 255)  
         self.ledPin = LEDPin
+        self.blynk.set_property(self.ledPin, 'color', '#0000FF')     
          
    def getLEDPin(self): 
         return self.ledPin      
