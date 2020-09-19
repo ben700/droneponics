@@ -297,8 +297,8 @@ def blynk_data():
             os.system('sudo reboot')
         else:
             blynk.virtual_write(253, now.strftime("%d/%m/%Y %H:%M:%S"))
-   else:
-       blynk.virtual_write(253, now.strftime("%d/%m/%Y %H:%M:%S"))
+    else:
+        blynk.virtual_write(253, now.strftime("%d/%m/%Y %H:%M:%S"))
    
     blynk.virtual_write(98, "End of timer.register fx" + '\n')
     _log.debug("End of timer.register fx")
