@@ -91,9 +91,14 @@ try:
     relays.append(drone.Relay(_log, 24, parser.get('droneRelay', 'Relay3')))
     relays.append(drone.Relay(_log, 25, parser.get('droneRelay', 'Relay4')))
     
+    relays[0].setInfoPin(80)
+    relays[2].setInfoPin(82)
+    relays[3].setInfoPin(83)
 
-    #relays[0].setInfoPin(24)
-        
+    relays[0].setLEDPin(21)
+    relays[1].setLEDPin(22)
+    relays[2].setLEDPin(23)
+    relays[3].setLEDPin(24)        
 
     # Initialize Blynk
     blynk = blynklib.Blynk(parser.get('droneDoser', 'BLYNK_AUTH'))        
