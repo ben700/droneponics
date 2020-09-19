@@ -166,7 +166,7 @@ class Relay:
    def info(self):   
          if (self.getState() is "Auto"):
             if(self.hasOffCycle):
-                  return self.name + " is "+str(self.whatCycle())+"; Now min " + str(self.cycle) + ": On " + str(self.cycleReset) + " Off "+ str(self.offCycleReset) + " mins."
+                  return self.name + " is "+str(self.whatCycle())+"; Now min " + str(self.cycle) + ": On for " + str(self.cycleReset) + " Off "+ str(self.offCycleReset) + " mins."
             else:
                   return self.name + " is "+str(self.whatCycle())+"; Now minute " + str(self.cycle) + " of " + str(self.cycleReset) + " mins."
          elif(self.getState() is  "Timer"):
