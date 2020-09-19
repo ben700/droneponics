@@ -50,7 +50,7 @@ def getLightColors(_log, LightPer):
      
           _log.info("rgba_color =" + str(rgba_color))
 
-              c = Color(rgb=(rgba_color[0]/255,rgba_color[1]/255,rgba_color[2]/255))
+           c = Color(rgb=(rgba_color[0]/255,rgba_color[1]/255,rgba_color[2]/255))
           _log.info("getLightColors =" + str(c))
      except:
           c= '#00FF00'
