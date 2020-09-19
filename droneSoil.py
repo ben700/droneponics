@@ -290,19 +290,18 @@ def blynk_data():
     blynk.virtual_write(17, ssMoistureMax)
     blynk.set_property(16, 'color', drone.getMoistColour(_log, int(1)))
     blynk.set_property(17, 'color', drone.getMoistColour(_log, int(99))) 
-        
-        
-    blynk.virtual_write(98, "End of timer.register fx" + '\n')
     
+    _log.info("Check to see if we need to reboot")    
     if(chirp is None and ss is None):
-         _log.critial("No sensors found reboot")
-         blynk.virtual_write(98, "No sensors found reboot" + '\n')
-         blynk.set_property(systemLED, 'color', colours['OFFLINE'])
-         blynk.virtual_write(98, "Update Code"+ '\n')
-         os.system('sh /home/pi/updateDroneponics.sh')
-         blynk.virtual_write(98, "Now do the Reboot"+ '\n')
-         os.system('sudo reboot')
+        _log.critial("No sensors found reboot")
+        blynk.virtual_write(98, "No sensors found reboot" + '\n')
+        blynk.set_property(systemLED, 'color', colours['OFFLINE'])
+        blynk.virtual_write(98, "Update Code"+ '\n')
+        os.system('sh /home/pi/updateDroneponics.sh')
+        blynk.virtual_write(98, "Now do the Reboot"+ '\n')
+        os.system('sudo reboot')
     
+    blynk.virtual_write(98, "End of timer.register fx" + '\n')
     _log.debug("End of timer.register fx")
         
 _log.info("Created all the objects. Now starting the drone")        
@@ -340,11 +339,10 @@ while True:
         blynk.run()
         timer.run()
     except: 
-       _log.error("in main loop except")
+       _log.critical("Main Loop exception :- Auto reboot")
        blynk.virtual_write(250, "Crashed")
        blynk.set_property(systemLED, 'color', colours['OFFLINE'])
-       blynk.notify("non-Production blynk crashed and is not-restarting; hostname " +  drone.gethostname() + " at: " + now.strftime("%d/%m/%Y %H:%M:%S"))
-       _log.critical("Main Loop exception :- Set log evel to CRITICAL to auto reboot")
+       blynk.notify("Moisture Sensors have crashed and are restarting; hostname " +  drone.gethostname() + " at: " + now.strftime("%d/%m/%Y %H:%M:%S"))
        os.system('sh /home/pi/updateDroneponics.sh')
        os.system('sudo reboot')
         
