@@ -78,6 +78,7 @@ class Relay:
           _log.info("Turned on relay " + self.name + " on pin " + str(self.gpioPin))
           if(self.ledPin is not None):
               if(self.blynk is not None):
+                  _log.info("Set LED on for " + self.name + " on pin " + str(self.ledPin))
                   self.blynk.set_property(self.ledPin, 'color', '#FF0000')     
        except:
           _log.error("Except relayClass: Turning on relay " + self.name)
@@ -89,6 +90,7 @@ class Relay:
            _log.info("Turned off relay " + self.name + " on pin " + str(self.gpioPin))
            if(self.ledPin is not None):
               if(self.blynk is not None):
+                  _log.info("Set LED off for " + self.name + " on pin " + str(self.ledPin))
                   self.blynk.set_property(self.ledPin, 'color', '#00FF00')
        except:
            _log.error("Except relayClass: Turning off relay " + self.name)
