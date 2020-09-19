@@ -118,11 +118,11 @@ def updateConfig(moistureMin, moistureMax, ssMoistureMin, ssMoistureMax):
 def rebooter(pin, value):
     _log.info("User Reboot")
     blynk.virtual_write(250, "User Reboot")
-    blynk.virtual_write(98, "User Reboot")
+    blynk.virtual_write(98, "User Reboot"+ '\n')
     blynk.set_property(systemLED, 'color', colours['OFFLINE'])
-    blynk.virtual_write(98, "Update Code")
+    blynk.virtual_write(98, "Update Code"+ '\n')
     os.system('sh /home/pi/updateDroneponics.sh')
-    blynk.virtual_write(98, "Now do the Reboot")
+    blynk.virtual_write(98, "Now do the Reboot"+ '\n')
     os.system('sudo reboot')
 
 @blynk.handle_event("connect")
@@ -292,15 +292,15 @@ def blynk_data():
     blynk.set_property(17, 'color', drone.getMoistColour(_log, int(99))) 
         
         
-    blynk.virtual_write(98, "End of timer.register fx" + '/n')
+    blynk.virtual_write(98, "End of timer.register fx" + '\n')
     
     if(chirp is None and ss is None):
          _log.critial("No sensors found reboot")
-         blynk.virtual_write(98, "No sensors found reboot" + '/n')
+         blynk.virtual_write(98, "No sensors found reboot" + '\n')
          blynk.set_property(systemLED, 'color', colours['OFFLINE'])
-         blynk.virtual_write(98, "Update Code")
+         blynk.virtual_write(98, "Update Code"+ '\n')
          os.system('sh /home/pi/updateDroneponics.sh')
-         blynk.virtual_write(98, "Now do the Reboot")
+         blynk.virtual_write(98, "Now do the Reboot"+ '\n')
          os.system('sudo reboot')
     
     _log.debug("End of timer.register fx")
