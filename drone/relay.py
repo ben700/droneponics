@@ -74,7 +74,7 @@ class Relay:
           GPIO.output(self.gpioPin,GPIO.LOW) 
           _log.info("Turned on relay " + self.name + " on pin " + str(self.gpioPin))
           if(self.ledPin is not None):
-              blynk.set_property(getLEDPin(), 'color', drone.colours[1])     
+              blynk.set_property(self.getLEDPin(), 'color', drone.colours[1])     
        except:
           _log.error("Except relayClass: Turning on relay " + self.name)
       
@@ -84,7 +84,7 @@ class Relay:
            GPIO.output(self.gpioPin,GPIO.HIGH) 
            _log.info("Turned off relay " + self.name + " on pin " + str(self.gpioPin))
            if(self.ledPin is not None):
-              blynk.set_property(getLEDPin(), 'color', drone.colours[1])
+              blynk.set_property(self.getLEDPin(), 'color', drone.colours[1])
        except:
            _log.error("Except relayClass: Turning off relay " + self.name)
          
