@@ -164,16 +164,16 @@ class Relay:
    def info(self):   
          if (self.getState() is "Auto"):
             if(self.hasOffCycle):
-                  return self.name + " is "+str(self.whatCycle())+" In minute " + str(self.cycle) + " for " + str(self.cycleReset) + " mins."
+                  return self.name + " is "+str(self.whatCycle())+"; Now minute " + str(self.cycle) + " of " + str(self.cycleReset) + " mins."
             else:
-                  return self.name + " is "+str(self.whatCycle())+" In minute " + str(self.cycle) + " On " + str(self.cycleReset) + " off for "+ str(self.offCycleReset) + " mins."
+                  return self.name + " is "+str(self.whatCycle())+"; Now minute " + str(self.cycle) + ". Cycle is On " + str(self.cycleReset) + " mins then off for "+ str(self.offCycleReset) + " mins."
          elif(self.getState() is  "Timer"):
             return self.name + " is on Timer mode and is " + str(self.whatCycle()) + "."
          elif(self.getState() is  "On"):
             return self.name + " set manually ON " 
          elif(self.getState() is  "Off"):   
             return self.name + " set manually OFF"
-         
+          
    def setBlynkLabel(self, blynk, button, LED):
            blynk.set_property(button, "label", self.name)
            blynk.set_property(LED, "label", self.name)
