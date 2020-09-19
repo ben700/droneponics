@@ -104,12 +104,16 @@ class EC(Sensor):
     blynk.set_property(self.displayPin, 'color', self.color)
     blynk.virtual_write(self.displayPin, self.value)
       
+class ORP(Sensor):
+   def __init__(self, *args, **kwargs):
+      Sensor.__init__(self, 98, "Oxidation Reduction Potential", 34, Target=300, *args, **kwargs) 
+   
 class DO(Sensor):
    def __init__(self, *args, **kwargs):
       Sensor.__init__(self, 97, "Dissolved Oxygen", 30, Target=10, *args, **kwargs) 
    def read(self, cTemp):
       return self.sensor.query("RT,"+cTemp).split(":")[1].strip().rstrip('\x00')
-  
+    
 class TEMP(Sensor):  
    def __init__(self, *args, **kwargs):
       Sensor.__init__(self, 102, "Temprature", 30, Target=20, LowAlarm=10, HighAlarm=25, *args, **kwargs) 
