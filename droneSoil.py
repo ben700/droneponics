@@ -250,7 +250,7 @@ def blynk_data():
         blynk.virtual_write(98, "ss is None" + '\n')
         if(chirp is None):
             blynk.virtual_write(250, "Both Sensor Error")
-        else
+        else:
             blynk.virtual_write(250, "Sensor 2 Error")
         blynk.set_property(250, 'color', Color("red"))
         blynk.set_property(5, 'color', colours['OFFLINE'])
