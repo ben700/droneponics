@@ -747,7 +747,10 @@ try:
               
               sensors[1].value = sensors[1].sensor.query("RT,"+cTemp).split(":")[1].strip().rstrip('\x00') #EC
               sensors[2].value = sensors[2].sensor.query("RT,"+sensors[0].value).split(":")[1].strip().rstrip('\x00')  #pH
-			    
+
+              _log.info("sensors[1].value = " + str(sensors[1].value))
+              _log.info("sensors[2].value = " + str(sensors[2].value))
+
               if(float(sensors[1].value) <= 1):
                     _log.critical("No EC PROBE FOUND : " + sensors[1].value)
                     sEC= "NO EC PROBE. "
