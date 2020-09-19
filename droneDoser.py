@@ -238,7 +238,6 @@ try:
         staus = value[0]
         relay = 1
         _log.debug("in v2write_handler and the staus = " + str(value[0]))
-	blynk.set_property(22, 'color', drone.colour[value[0]])
         if (staus is "1" ):
            try:
                  _log.debug("in v"+str(relay+1)+"write_handler turing on relay " + relays[relay].name)
