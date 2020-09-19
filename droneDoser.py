@@ -686,6 +686,19 @@ try:
              blynk.virtual_write(98,"Manual dose Ph"+ '\n')
              blynk.virtual_write(49,1)
              sensors[2].mode = 1
+		
+        for relay in relays:
+             _log.debug("Seeing if relay " + relay.name + " is automatic")
+             if(relay.isAutomatic()):
+                   _log.debug("relay " + relay.name + " is automatic so test cycle")
+                   if(relay.whatCycle() == "On"):
+                        relay.turnOn(_log)
+                   else:
+                        relay.turnOff(_log)
+                   relay.incCycle()
+             if(relay.hasInfoPin()):
+                   blynk.virtual_write(relay.getInfoPin(), relay.info())
+		
        
         if (parser.get('blynkBridge', 'BLYNK_AUTH', fallback=None) is not None):
             _log.warning("Send Temp data via blynkBridge")
