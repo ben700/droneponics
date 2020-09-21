@@ -598,6 +598,13 @@ try:
         sensors[1].value = sensors[1].sensor.query("RT,"+cTemp).split(":")[1].strip().rstrip('\x00') #EC
         sensors[2].value = sensors[2].sensor.query("RT,"+sensors[0].value).split(":")[1].strip().rstrip('\x00')  #pH
 	
+	_log.info("-------------------------")
+	_log.info(sensors[1].sensor.query("RT,"+cTemp).split(":")[1].strip().rstrip('\x00'))
+	_log.info(sensors[1].sensor.query("RT,"+sensors[0].value).split(":")[1].strip().rstrip('\x00'))
+	_log.info(sensors[1].sensor.query("R").split(":")[1].strip().rstrip('\x00'))
+	
+	
+	
         try:
              sensors[0].color = drone.getTempColour(_log, round(float(sensors[0].value)*10,0))
              sensors[1].color = drone.getECColour(_log, round(float(sensors[1].value),0))
