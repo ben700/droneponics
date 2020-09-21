@@ -598,10 +598,10 @@ try:
         sensors[1].value = sensors[1].sensor.query("RT,"+cTemp).split(":")[1].strip().rstrip('\x00') #EC
         sensors[2].value = sensors[2].sensor.query("RT,"+sensors[0].value).split(":")[1].strip().rstrip('\x00')  #pH
 	
-	_log.info("-------------------------")
-	_log.info(sensors[1].sensor.query("RT,"+cTemp).split(":")[1].strip().rstrip('\x00'))
-	_log.info(sensors[1].sensor.query("RT,"+sensors[0].value).split(":")[1].strip().rstrip('\x00'))
-	_log.info(sensors[1].sensor.query("R").split(":")[1].strip().rstrip('\x00'))
+        _log.info("-------------------------")
+        _log.info(sensors[1].sensor.query("RT,"+cTemp).split(":")[1].strip().rstrip('\x00'))
+        _log.info(sensors[1].sensor.query("RT,"+sensors[0].value).split(":")[1].strip().rstrip('\x00'))
+        _log.info(sensors[1].sensor.query("R").split(":")[1].strip().rstrip('\x00'))
 	
 	
 	
