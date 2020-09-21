@@ -595,8 +595,10 @@ try:
         sensors[2].oldValue = sensors[2].value
 
         sensors[0].value = cTemp #Temp
-        sensors[1].value = sensors[1].sensor.query("RT,"+sensors[0].value).split(":")[1].strip().rstrip('\x00') #EC
-        sensors[2].value = sensors[2].sensor.query("RT,"+sensors[0].value).split(":")[1].strip().rstrip('\x00')  #pH
+#        sensors[1].value = sensors[1].sensor.query("RT,"+sensors[0].value).split(":")[1].strip().rstrip('\x00') #EC
+ #       sensors[2].value = sensors[2].sensor.query("RT,"+sensors[0].value).split(":")[1].strip().rstrip('\x00')  #pH
+        sensors[1].value = sensors[1].sensor.query("R").split(":")[1].strip().rstrip('\x00') #EC
+        sensors[2].value = sensors[2].sensor.query("R").split(":")[1].strip().rstrip('\x00')  #pH
 
 	
         try:
@@ -746,8 +748,10 @@ try:
               
               _log.info("----------------------")
               _log.info(sensors[1].sensor.query("R"))
-              sensors[1].value = sensors[1].sensor.query("RT,"+sensors[0].value).split(":")[1].strip().rstrip('\x00') #EC
-              sensors[2].value = sensors[2].sensor.query("RT,"+sensors[0].value).split(":")[1].strip().rstrip('\x00')  #pH
+             # sensors[1].value = sensors[1].sensor.query("RT,"+sensors[0].value).split(":")[1].strip().rstrip('\x00') #EC
+             # sensors[2].value = sensors[2].sensor.query("RT,"+sensors[0].value).split(":")[1].strip().rstrip('\x00')  #pH
+              sensors[1].value = sensors[1].sensor.query("R").split(":")[1].strip().rstrip('\x00') #EC
+              sensors[2].value = sensors[2].sensor.query("R").split(":")[1].strip().rstrip('\x00')  #pH
 
               _log.info("sensors[1].value = " + str(sensors[1].value))
               _log.info("sensors[2].value = " + str(sensors[2].value))
