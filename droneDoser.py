@@ -86,9 +86,9 @@ try:
     GPIO.setwarnings(False)
 
     relays=[]
-    relays.append(drone.Relay(_log, 12, parser.get('droneRelay', 'Relay1')))
+    relays.append(drone.Relay(_log, 20, parser.get('droneRelay', 'Relay1')))
     relays.append(drone.Relay(_log, 16, parser.get('droneRelay', 'Relay2')))
-    relays.append(drone.Relay(_log, 20, parser.get('droneRelay', 'Relay3')))
+    relays.append(drone.Relay(_log, 12, parser.get('droneRelay', 'Relay3')))
     relays.append(drone.Relay(_log, 21, parser.get('droneRelay', 'Relay4')))
     
 
