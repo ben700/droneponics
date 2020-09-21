@@ -41,14 +41,14 @@ def buildExperimentalSensors(sensors, _log):
     return sensors
 
 class Sensor:
-   def __init__(self, SensorId, name, *args, **kwargs):
+   def __init__(self, SensorId, name, DisplayPin, *args, **kwargs):
        print("__init__")
        self.sensor = AtlasI2C(SensorId)
        self.sensorId = SensorId
        self.name = name
        self.high =26
        self.low =15
-       self.displayPin = kwargs.get('DisplayPin', None)
+       self.displayPin = DisplayPin
        self.target = kwargs.get('Target', None)
        self.mode = 1  # 1 = off 2 = on 3 = auto       
        self.value = None
