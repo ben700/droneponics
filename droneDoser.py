@@ -623,8 +623,9 @@ try:
                   	
                   
         _log.info( "Sensors displays updated")  
-        _log.info("sensors[1].target = " + str(sensors[1].target))
-        _log.info("sensors[2].target = " + str(sensors[2].target))
+	
+        blynk.virtual_write(98,"sensors[1].value = " + str(sensors[1].value)+ '\n')
+        blynk.virtual_write(98,"sensors[2].value = " + str(sensors[2].value)+ '\n')
         blynk.virtual_write(98,"sensors[1].target = " + str(sensors[1].target)+ '\n')
         blynk.virtual_write(98,"sensors[2].target = " + str(sensors[2].target)+ '\n')
         blynk.virtual_write(98,"sensors[1].mode = " + str(sensors[1].mode)+ '\n')
@@ -667,7 +668,9 @@ try:
              if(relay.hasInfoPin()):
                    blynk.virtual_write(relay.getInfoPin(), relay.info())
 		
-       
+        if lcdDisplay is not None: 
+            lcdDisplay.updateLCDProbe (sensors[2].value, sensors[1].value, sensors[0].value)
+		
         if (parser.get('blynkBridge', 'BLYNK_AUTH', fallback=None) is not None):
             _log.warning("Send Temp data via blynkBridge")
             blynkBridge = blynklib.Blynk(parser.get('blynkBridge', 'BLYNK_AUTH'))
