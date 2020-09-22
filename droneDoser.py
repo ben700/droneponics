@@ -340,15 +340,6 @@ try:
         relay = 3
         relays[relay].setTimer(int(value[0]), int(value[1]))
 	
- #   @blynk.handle_event('write V8')
- #   def write_handler(pin, value):
- #       relay = 3
-     #   _log.debug("in v8write_handler and turning off relay " + relays[relay].name + " on pin " + str(relays[relay].gpioPin))
- #       _log.debug("in v8write_handler on at " + str(value[0]))
- #       _log.debug("in v8write_handler off at " + str(value[1]))
- #       _log.debug("in v8write_handler days are " + str(value[3]))
-   		   
- #       relays[relay].setTimer(int(value[0]), int(value[1]),value[3])
 
     @blynk.handle_event('write V35') #relay 1 on time
     def v35write_handler(pin, value):
@@ -584,22 +575,14 @@ try:
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
        # blynk.virtual_write(98, "The weekday is " + str(now.strftime("%w")+1))
 
-        cTemp = sensors[0].sensor.query("R").split(":")[1].strip().rstrip('\x00')
-        if (float(cTemp) < 0) :
-             _log.critical("cTemp = " + str(cTemp))
-        else :
-             _log.critical("cTemp -ve = " + str(cTemp))
-    
-        sensors[0].oldValue = sensors[0].value
-        sensors[1].oldValue = sensors[1].value
-        sensors[2].oldValue = sensors[2].value
 
-        sensors[0].value = sensors[0].sensor.query("R").split(":")[1].strip().rstrip('\x00') #Temp
+#        sensors[0].value = sensors[0].sensor.query("R").split(":")[1].strip().rstrip('\x00') #Temp
 #        sensors[1].value = sensors[1].sensor.query("RT,"+sensors[0].value).split(":")[1].strip().rstrip('\x00') #EC
- #       sensors[2].value = sensors[2].sensor.query("RT,"+sensors[0].value).split(":")[1].strip().rstrip('\x00')  #pH
-        sensors[1].value = sensors[1].sensor.query("R").split(":")[1].strip().rstrip('\x00') #EC
-        sensors[2].value = sensors[2].sensor.query("R").split(":")[1].strip().rstrip('\x00')  #pH
+#       sensors[2].value = sensors[2].sensor.query("RT,"+sensors[0].value).split(":")[1].strip().rstrip('\x00')  #pH
 
+        for sensor in sensors:
+             if sensor is not None:
+                  sensor.read()
 	
         try:
              sensors[0].color = drone.getTempColour(_log, round(float(sensors[0].value)*10,0))
@@ -607,30 +590,16 @@ try:
              sensors[2].color = drone.getPHColour(_log, round(float(sensors[2].value)*10,0))
         except:
              _log.critical("Working out sensor colour crashed")
-		
 		    
         for sensor in sensors:
              if sensor is not None:
-                  _log.info("Going to update " + str(sensor.name) + " using pin " + str(sensor.displayPin) + " with value " + str(sensor.value))                  
-                  blynk.virtual_write(98,"Going to update " + str(sensor.name) + " using pin " + str(sensor.displayPin) + " with value " + str(sensor.value) +'\n')
-                  _log.info("going to update pin = " + str(sensor.displayPin))
-                  blynk.set_property(sensor.displayPin, "label", sensor.name)
-                  _log.info("updated label =" + sensor.name)
-                  blynk.set_property(sensor.displayPin, 'color', sensor.color)
-                  _log.info("updated color =" + str(sensor.color))
-                  blynk.virtual_write(sensor.displayPin, sensor.value)
-                  _log.info("updated value =" + str(sensor.value))
+                  sensor.display(blynk)
                   	
+        if lcdDisplay is not None: 
+            lcdDisplay.updateLCDProbe (sensors[2].value, sensors[1].value, sensors[0].value)
                   
         _log.info( "Sensors displays updated")  
-	
-        blynk.virtual_write(98,"sensors[1].value = " + str(sensors[1].value)+ '\n')
-        blynk.virtual_write(98,"sensors[2].value = " + str(sensors[2].value)+ '\n')
-        blynk.virtual_write(98,"sensors[1].target = " + str(sensors[1].target)+ '\n')
-        blynk.virtual_write(98,"sensors[2].target = " + str(sensors[2].target)+ '\n')
-        blynk.virtual_write(98,"sensors[1].mode = " + str(sensors[1].mode)+ '\n')
-        blynk.virtual_write(98,"sensors[2].mode = " + str(sensors[2].mode)+ '\n')
-       
+	       
         if (float(sensors[1].target) > float(sensors[1].value)): #EC
              if (sensors[1].mode == 3):
                   _log.info("Do a dose")     
@@ -668,8 +637,6 @@ try:
              if(relay.hasInfoPin()):
                    blynk.virtual_write(relay.getInfoPin(), relay.info())
 		
-        if lcdDisplay is not None: 
-            lcdDisplay.updateLCDProbe (sensors[2].value, sensors[1].value, sensors[0].value)
 		
         if (parser.get('blynkBridge', 'BLYNK_AUTH', fallback=None) is not None):
             _log.warning("Send Temp data via blynkBridge")
@@ -719,38 +686,26 @@ try:
                    blynk.virtual_write(y-10, dose.dose)			
                    y = y + 1		       
 
-              sensors[0].value = sensors[0].sensor.query("R").split(":")[1].strip().rstrip('\x00') #Temp 
-              sensors[1].value = sensors[1].sensor.query("R").split(":")[1].strip().rstrip('\x00') #EC
-              sensors[2].value = sensors[2].sensor.query("R").split(":")[1].strip().rstrip('\x00')  #pH
+             for sensor in sensors:
+                  if sensor is not None:
+                    sensor.read()
 
               blynk.virtual_write(98,"Temp Cal " + sensors[0].sensor.query("Cal,?"))
               blynk.virtual_write(98,"EC Cal " + sensors[1].sensor.query("Cal,?"))
               blynk.virtual_write(98,"Temp Cal " + sensors[2].sensor.query("Cal,?"))
-              
-		
-              if lcdDisplay is not None: 
-                   lcdDisplay.updateLCDProbe (sensors[2].value, sensors[1].value, sensors[0].value)
-              	
+                            	
               try:		
                     sensors[0].color = drone.getTempColour(_log, int(round(float(sensors[0].value)*10,0)))
                     sensors[1].color = drone.getECColour(_log, round(float(sensors[1].value),0))
                     sensors[2].color = drone.getPHColour(_log, round(float(sensors[2].value)*10,0))
               except:
                     _log.critical("Working out sensor colour crashed")	
-			
+
               for sensor in sensors:
                     if sensor is not None:
-                         _log.info("Going to update " + str(sensor.name) + " using pin " + str(sensor.displayPin) + " with value " + str(sensor.value))                  
-                         blynk.virtual_write(98,"Going to update " + str(sensor.name) + " using pin " + str(sensor.displayPin) + " with value " + str(sensor.value)+ '\n')
-                         _log.info("going to update pin = " + str(sensor.displayPin))
-                         blynk.set_property(sensor.displayPin, "label", sensor.name)
-                         _log.info("updated label =" + sensor.name)
-                         blynk.set_property(sensor.displayPin, 'color', sensor.color)
-                         _log.info("updated color =" + str(sensor.color))
-                         blynk.virtual_write(sensor.displayPin, sensor.value)
-                         _log.info("updated value =" + str(sensor.value))
-                         #sensor.display(blynk)
-                         _log.info("Updated display for " +  str(sensor.name))
+                         sensor.display(blynk)
+              if lcdDisplay is not None: 
+                   lcdDisplay.updateLCDProbe (sensors[2].value, sensors[1].value, sensors[0].value)
 			 
               blynk.virtual_write(51,"EC Settings")
               blynk.virtual_write(52,"pH Settings")
