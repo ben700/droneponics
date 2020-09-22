@@ -605,7 +605,9 @@ try:
                   _log.info("Do a dose")     
                   doSingleDose()     
                   blynk.virtual_write(98,"Automatic dose nutrient "+ '\n') 
+			
         elif (float(sensors[2].target) < float(sensors[2].value)): #ph
+             _log.info("Would do ph dose; mode is " +sensors[2].mode)
              if (sensors[2].mode == 3):                  
                   _log.info("Do a ph dose") 
                   doSinglePHDose()
