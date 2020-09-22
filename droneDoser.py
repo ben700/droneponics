@@ -606,17 +606,20 @@ try:
 
         _log.info( "Going to start dosing process")  
 
+        dosed = False
         if (float(sensors[1].target) > float(sensors[1].value)): #EC
              if (sensors[1].mode == 3):
                   _log.info("Do a dose")     
-                  doSingleDose()     
+                  doSingleDose()
+                  dosed = True
                   blynk.virtual_write(98,"Automatic dose nutrient "+ '\n') 
-			
-        elif (float(sensors[2].target) < float(sensors[2].value)): #ph
+
+        if (float(sensors[2].target) < float(sensors[2].value)): #ph
              _log.info("Would do ph dose; mode is " + str(sensors[2].mode))
              if (sensors[2].mode == 3):                  
                   _log.info("Do a ph dose") 
                   doSinglePHDose()
+                  dosed = True
                   blynk.virtual_write(98,"Automatic dose Ph"+ '\n')
 			
         if (int(sensors[1].mode) == 2):
