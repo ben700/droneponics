@@ -198,6 +198,28 @@ try:
                    if (int(float(dosage.volume)) >= int(float(dosage.bottleSize))):
                         blynk.notify(dosage.name + " has pumped " + str(dosage.volume) + ", so may need topup")      
     
+    def processSensors():   
+        for sensor in sensors:
+           if sensor is not None:
+              sensor.read()
+                            	
+           try:		
+              sensors[0].color = drone.getTempColour(_log, int(round(float(sensors[0].value)*10,0)))
+              sensors[1].color = drone.getECColour(_log, round(float(sensors[1].value),0))
+              sensors[2].color = drone.getPHColour(_log, round(float(sensors[2].value)*10,0))
+           except:
+              _log.critical("Working out sensor colour crashed")	
+
+           for sensor in sensors:
+              if sensor is not None:
+                 sensor.display(blynk)
+           try:			
+              if lcdDisplay is not None: 
+                 lcdDisplay.updateLCDProbe (sensors[2].value, sensors[1].value, sensors[0].value)
+           except:
+              _log.critical("updating LCD crashed")	
+
+
     @blynk.handle_event('write V1')
     def write_handler(pin, value): 
         staus = value[0]
@@ -575,37 +597,9 @@ try:
         blynk.virtual_write(250, "Running")
         now = datetime.now()
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
-       # blynk.virtual_write(98, "The weekday is " + str(now.strftime("%w")+1))
-
-
-#        sensors[0].value = sensors[0].sensor.query("R").split(":")[1].strip().rstrip('\x00') #Temp
-#        sensors[1].value = sensors[1].sensor.query("RT,"+sensors[0].value).split(":")[1].strip().rstrip('\x00') #EC
-#       sensors[2].value = sensors[2].sensor.query("RT,"+sensors[0].value).split(":")[1].strip().rstrip('\x00')  #pH
-
-        for sensor in sensors:
-             if sensor is not None:
-                  sensor.read()
 	
-        try:
-             sensors[0].color = drone.getTempColour(_log, round(float(sensors[0].value)*10,0))
-             sensors[1].color = drone.getECColour(_log, round(float(sensors[1].value),0))
-             sensors[2].color = drone.getPHColour(_log, round(float(sensors[2].value)*10,0))
-        except:
-             _log.critical("Working out sensor colour crashed")
-		    
-        for sensor in sensors:
-             if sensor is not None:
-                  sensor.display(blynk)
-                  	
-
-        try:			
-             if lcdDisplay is not None: 
-                  lcdDisplay.updateLCDProbe (sensors[2].value, sensors[1].value, sensors[0].value)
-        except:
-             _log.critical("updating LCD crashed")	
-			              
-        _log.info( "Sensors displays updated")  
-
+	processSensors()
+	
         _log.info( "Going to start dosing process")  
 
         if (float(sensors[1].target) > float(sensors[1].value)): #EC
@@ -695,31 +689,13 @@ try:
                    blynk.virtual_write(y, dose.name)
                    blynk.virtual_write(y-10, dose.dose)			
                    y = y + 1		       
-
-              for sensor in sensors:
-                  if sensor is not None:
-                    sensor.read()
-
+			
               blynk.virtual_write(98,"Temp Cal " + sensors[0].sensor.query("Cal,?")+ '\n')
               blynk.virtual_write(98,"EC Cal " + sensors[1].sensor.query("Cal,?")+ '\n')
               blynk.virtual_write(98,"Temp Cal " + sensors[2].sensor.query("Cal,?")+ '\n')
-                            	
-              try:		
-                    sensors[0].color = drone.getTempColour(_log, int(round(float(sensors[0].value)*10,0)))
-                    sensors[1].color = drone.getECColour(_log, round(float(sensors[1].value),0))
-                    sensors[2].color = drone.getPHColour(_log, round(float(sensors[2].value)*10,0))
-              except:
-                    _log.critical("Working out sensor colour crashed")	
 
-              for sensor in sensors:
-                    if sensor is not None:
-                         sensor.display(blynk)
-              try:			
-                   if lcdDisplay is not None: 
-                        lcdDisplay.updateLCDProbe (sensors[2].value, sensors[1].value, sensors[0].value)
-              except:
-                    _log.critical("updating LCD crashed")	
-			 
+              processSensors()
+		
               blynk.virtual_write(51,"EC Settings")
               blynk.virtual_write(52,"pH Settings")
               blynk.virtual_write(53,"Relay Settings")		
