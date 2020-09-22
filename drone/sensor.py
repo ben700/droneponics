@@ -77,7 +77,7 @@ class PH(Sensor):
     blynk.virtual_write(self.displayPin, self.value)
 
 class EC(Sensor):
-   def __init__(self,  Target=600, _log, *args, **kwargs):
+   def __init__(self,  _log, Target=600,  *args, **kwargs):
       Sensor.__init__(self, 100, "EC",  31 , _log, Target=600,  *args, **kwargs) 
       self.target=kwargs.get('Target')
       self.high=self.target+200
