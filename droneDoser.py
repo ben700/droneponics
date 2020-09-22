@@ -224,17 +224,17 @@ try:
     def write_handler(pin, value): 
         staus = value[0]
         relay = 0  
-        _log.debug("in v1write_handler and the staus = " + str(value[0]))
+        blynk.virtual_write(98, "In write_handler for " + relays[relay].name + " and the staus is = " + str(staus)+'\n')
         if (staus is "1" ):
            try:
-                 _log.debug("in v"+str(relay+1)+"write_handler turing off relay " + relays[relay].name)
+                 blynk.virtual_write(98, "Turing off relay for "+ relays[relay].name +'\n')
                  relays[relay].turnOff(_log)
                  relays[relay].setManual("Off")
            except:
                  _log.error("Except handle_event V"+str(relay+1)+" Turning Off")
         elif (staus is "2" ):
            try:
-                 _log.debug("in v1write_handler turing on relay")
+                 blynk.virtual_write(98, "Turing on relay for "+ relays[relay].name +'\n')
                  relays[relay].turnOn(_log)
                  relays[relay].setManual("On")           
            except:
@@ -247,16 +247,16 @@ try:
                 relays[0].cycleOffResetSet(1)
                 blynk.virtual_write(36,1)	
            try:
-                 _log.debug("in v1write_handler turing relay auto")
+                 blynk.virtual_write(98, "Turing relay for " + relays[relay].name + " to auto "+'\n')
                  relays[relay].setAutomatic()
                  relays[relay].cycleOnReset()
                  relays[relay].setOffCycleReset()
-                 _log.debug("in v1write_handler turing relay auto completed try")	
+                 blynk.virtual_write(98, "Turing relay for " + relays[relay].name + " to auto completed"+'\n')	
            except:
                  _log.error("Except handle_event V"+str(relay+1)+" Turning auto")
  
         blynk.virtual_write(relays[relay].getInfoPin(), relays[relay].info())
-        _log.info("completed v1write_handler")
+        blynk.virtual_write(98, "completed handler for " + relays[relay].name +'\n')
                  
                 
 
@@ -630,9 +630,9 @@ try:
              sensors[2].mode = 1
 		
         for relay in relays:
-             _log.debug("Seeing if relay " + relay.name + " is automatic")
+             blynk.virtual_write(98, "Seeing if relay " + relay.name + " is automatic" + '\n')
              if(relay.isAutomatic()):
-                   _log.debug("relay " + relay.name + " is automatic so test cycle")
+                   blynk.virtual_write(98, "relay " + relay.name + " is automatic so test cycle" + '\n')
                    if(relay.whatCycle() == "On"):
                         relay.turnOn(_log)
                    else:
