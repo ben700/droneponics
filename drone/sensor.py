@@ -7,42 +7,29 @@ import RPi.GPIO as GPIO
 from AtlasI2C import (
    AtlasI2C
 )
-#def displaySensor(blynk, VP, VALUE, NAME , LOW, HIGH):
-# print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
-# red = Color("red")
-# print("loaded color class")
-# colors = list(red.range_to(Color("green"),10))
-# print("done colour list")
-# print(colors)
-# print("Going to update blynk")
-# blynk.virtual_write(VP,VALUE)
-# blynk.set_property(VP, "label", NAME)
-# print("Going to update blynk colors")
-# blynk.set_property(VP, "color", colors[round((HIGH-LOW)/10,0)])
-# print("####################################################")
-# return
 
 def buildSensors(sensors, _log):
     _log.debug("in built sensors function")
-    sensors.append( Sensor(102, "Temprature", 30, Target=20, LowAlarm=10, HighAlarm=25))
+    sensors.append( Sensor(102, "Temprature", 30, _log, Target=20, LowAlarm=10, HighAlarm=25))
     _log.debug("built temperature sensor")
-    sensors.append( Sensor(100, "EC", 31 , Target=100, LowAlarm=50, HighAlarm=1500))
+    sensors.append( Sensor(100, "EC", 31 , _log, Target=100, LowAlarm=50, HighAlarm=1500))
     _log.debug("built ec sensor")
-    sensors.append( Sensor(99, "pH", 32, Target=5.5, LowAlarm=5.3, HighAlarm=6.5))
+    sensors.append( Sensor(99, "pH", 32, _log, Target=5.5, LowAlarm=5.3, HighAlarm=6.5))
     _log.debug("built ph sensor")
     return sensors
 
 def buildOxySensors(sensors, _log):
-    sensors.append( Sensor(97, "Dissolved Oxygen", 30, Target=10))
+    sensors.append( Sensor(97, "Dissolved Oxygen", 30, _log, Target=10))
     return sensors
 
 def buildExperimentalSensors(sensors, _log):
-    sensors.append( Sensor(97, "Dissolved Oxygen", 30, Target=10))
+    sensors.append( Sensor(97, "Dissolved Oxygen", 30, _log, Target=10))
     return sensors
 
 class Sensor:
-   def __init__(self, SensorId, name, DisplayPin, *args, **kwargs):
-       print("__init__")
+   def __init__(self, SensorId, name, DisplayPin, _log, *args, **kwargs):
+       _log.info("__init__ for "  + name )
+       self._log = _log
        self.sensor = AtlasI2C(SensorId)
        self.sensorId = SensorId
        self.name = name
@@ -56,14 +43,14 @@ class Sensor:
        self.lowAlarm = kwargs.get('LowAlarm', None)
        self.highAlarm = kwargs.get('HighAlarm', None)
        self.color = None
-
+       
    def read(self):
-       print("read(self)")
+       self._log.info("read(self)")
        self.oldValue = self.value  
        return self.sensor.query("R").split(":")[1].strip().rstrip('\x00')
    
    def display(self, blynk):
-    print("base:display(blynk)")
+    self._log.info("base:display(blynk)")
     blynk.set_property(self.displayPin, "label", self.name)
     blynk.set_property(self.displayPin, 'color', self.color)
     blynk.virtual_write(self.displayPin, self.value)
@@ -71,8 +58,8 @@ class Sensor:
       
     
 class PH(Sensor):  
-   def __init__(self, *args, **kwargs):
-    Sensor.__init__(self, 99, "pH", 32, *args, **kwargs)
+   def __init__(self, _log, *args, **kwargs):
+    Sensor.__init__(self, 99, "pH", 32, _log, *args, **kwargs)
     self.high=6.3
     self.low=5.4
     self.target=5.5
@@ -88,8 +75,8 @@ class PH(Sensor):
     blynk.virtual_write(self.displayPin, self.value)
 
 class EC(Sensor):
-   def __init__(self,  Target=600, *args, **kwargs):
-      Sensor.__init__(self, 100, "EC",  31 , Target=600,  *args, **kwargs) 
+   def __init__(self,  Target=600, _log, *args, **kwargs):
+      Sensor.__init__(self, 100, "EC",  31 , _log, Target=600,  *args, **kwargs) 
       self.target=kwargs.get('Target')
       self.high=self.target+200
       self.low=self.target-200  
@@ -105,18 +92,18 @@ class EC(Sensor):
     blynk.virtual_write(self.displayPin, self.value)
       
 class ORP(Sensor):
-   def __init__(self, *args, **kwargs):
-      Sensor.__init__(self, 98, "Oxidation Reduction Potential", 34, Target=300, *args, **kwargs) 
+   def __init__(self, _log, *args, **kwargs):
+      Sensor.__init__(self, 98, "Oxidation Reduction Potential", 34, _log, Target=300, *args, **kwargs) 
    
 class DO(Sensor):
-   def __init__(self, *args, **kwargs):
-      Sensor.__init__(self, 97, "Dissolved Oxygen", 30, Target=10, *args, **kwargs) 
+   def __init__(self, _log, *args, **kwargs):
+      Sensor.__init__(self, 97, "Dissolved Oxygen", 30, _log, Target=10, *args, **kwargs) 
    def read(self, cTemp):
       return self.sensor.query("RT,"+cTemp).split(":")[1].strip().rstrip('\x00')
     
 class TEMP(Sensor):  
-   def __init__(self, *args, **kwargs):
-      Sensor.__init__(self, 102, "Temprature", 30, Target=20, LowAlarm=10, HighAlarm=25, *args, **kwargs) 
+   def __init__(self, _log, *args, **kwargs):
+      Sensor.__init__(self, 102, "Temprature", 30, _log, Target=20, LowAlarm=10, HighAlarm=25, *args, **kwargs) 
    
    def display(self, blynk):
       print("TEMP:display(blynk)")
