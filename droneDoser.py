@@ -595,9 +595,13 @@ try:
              if sensor is not None:
                   sensor.display(blynk)
                   	
-        if lcdDisplay is not None: 
-            lcdDisplay.updateLCDProbe (sensors[2].value, sensors[1].value, sensors[0].value)
-                  
+
+        try:			
+             if lcdDisplay is not None: 
+                  lcdDisplay.updateLCDProbe (sensors[2].value, sensors[1].value, sensors[0].value)
+        except:
+             _log.critical("updating LCD crashed")	
+			              
         _log.info( "Sensors displays updated")  
 	       
         if (float(sensors[1].target) > float(sensors[1].value)): #EC
@@ -706,8 +710,11 @@ try:
               for sensor in sensors:
                     if sensor is not None:
                          sensor.display(blynk)
-              if lcdDisplay is not None: 
-                   lcdDisplay.updateLCDProbe (sensors[2].value, sensors[1].value, sensors[0].value)
+              try:			
+                   if lcdDisplay is not None: 
+                        lcdDisplay.updateLCDProbe (sensors[2].value, sensors[1].value, sensors[0].value)
+              except:
+                    _log.critical("updating LCD crashed")	
 			 
               blynk.virtual_write(51,"EC Settings")
               blynk.virtual_write(52,"pH Settings")
