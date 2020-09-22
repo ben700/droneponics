@@ -696,9 +696,9 @@ try:
                   if sensor is not None:
                     sensor.read()
 
-              blynk.virtual_write(98,"Temp Cal " + sensors[0].sensor.query("Cal,?"))
-              blynk.virtual_write(98,"EC Cal " + sensors[1].sensor.query("Cal,?"))
-              blynk.virtual_write(98,"Temp Cal " + sensors[2].sensor.query("Cal,?"))
+              blynk.virtual_write(98,"Temp Cal " + sensors[0].sensor.query("Cal,?")+ '\n')
+              blynk.virtual_write(98,"EC Cal " + sensors[1].sensor.query("Cal,?")+ '\n')
+              blynk.virtual_write(98,"Temp Cal " + sensors[2].sensor.query("Cal,?")+ '\n')
                             	
               try:		
                     sensors[0].color = drone.getTempColour(_log, int(round(float(sensors[0].value)*10,0)))
