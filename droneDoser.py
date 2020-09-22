@@ -688,7 +688,7 @@ try:
                    blynk.virtual_write(y-10, dose.dose)			
                    y = y + 1		       
 
-             for sensor in sensors:
+              for sensor in sensors:
                   if sensor is not None:
                     sensor.read()
 
