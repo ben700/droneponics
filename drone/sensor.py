@@ -45,12 +45,14 @@ class Sensor:
        self.color = None
        
    def read(self):
-       self._log.info("read(self)")
-       self.oldValue = self.value  
+       self._log.info("read(self) for sensor " + self.name)
+      # self.oldValue = self.value  
        return self.sensor.query("R").split(":")[1].strip().rstrip('\x00')
    
    def display(self, blynk):
     self._log.info("base:display(blynk)")
+    self._log.info("Going to update " + str(self.name) + " using pin " + str(self.displayPin) + " with value " + str(self.value))                  
+   # blynk.virtual_write(98,"Going to update " + str(self.name) + " using pin " + str(self.displayPin) + " with value " + str(self.value) +'\n')
     blynk.set_property(self.displayPin, "label", self.name)
     blynk.set_property(self.displayPin, 'color', self.color)
     blynk.virtual_write(self.displayPin, self.value)
