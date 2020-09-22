@@ -603,7 +603,9 @@ try:
              _log.critical("updating LCD crashed")	
 			              
         _log.info( "Sensors displays updated")  
-	       
+
+        _log.info( "Going to start dosing process")  
+
         if (float(sensors[1].target) > float(sensors[1].value)): #EC
              if (sensors[1].mode == 3):
                   _log.info("Do a dose")     
