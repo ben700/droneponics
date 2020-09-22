@@ -47,7 +47,8 @@ class Sensor:
    def read(self):
        self._log.info("read(self) for sensor " + self.name)
       # self.oldValue = self.value  
-       return self.sensor.query("R").split(":")[1].strip().rstrip('\x00')
+       self.value = self.sensor.query("R").split(":")[1].strip().rstrip('\x00')
+       return self.value
    
    def display(self, blynk):
     self._log.info("base:display(blynk)")
