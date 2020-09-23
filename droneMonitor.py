@@ -124,7 +124,25 @@ try:
         now = datetime.now()
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
        # blynk.virtual_write(98, "The weekday is " + str(now.strftime("%w")+1))
+        for sensor in sensors:
+           if sensor is not None:
+              sensor.read()
+                            	
+           try:		
+              sensors[0].color = drone.getTempColour(_log, int(round(float(sensors[0].value)*10,0)))
+              sensors[1].color = drone.getECColour(_log, round(float(sensors[1].value),0))
+              sensors[2].color = drone.getPHColour(_log, round(float(sensors[2].value)*10,0))
+           except:
+              _log.critical("Working out sensor colour crashed")	
 
+           for sensor in sensors:
+              if sensor is not None:
+                 sensor.display(blynk)
+           try:			
+              if lcdDisplay is not None: 
+                 lcdDisplay.updateLCDProbe (sensors[2].value, sensors[1].value, sensors[0].value)
+           except:
+              _log.critical("updating LCD crashed")	
        
         _log.info("Completed Timer Function") 
 
