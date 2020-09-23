@@ -1,0 +1,6 @@
+
+ 
+[Desktop Entry]
+Type=Application
+Name=Droneponics Monitor
+Exec=xterm -hold -e '/usr/bin/python3 /home/pi/droneponics/droneMonitor.py'
