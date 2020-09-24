@@ -120,6 +120,7 @@ try:
            relays[relay].cycleOnReset()
            relays[relay].setOffCycleReset() 
         blynk.virtual_write(relays[relay].getInfoPin(), relays[relay].info())   
+        blynk.set_property(relay+1, 'color', colours[staus])
         try:			
            if lcdDisplay is not None: 
                  lcdDisplay.updateLCD (relays[0].state, relays[1].state, relays[2].state, relays[3].state)
@@ -160,6 +161,7 @@ try:
            relays[relay].cycleOnReset()
            relays[relay].setOffCycleReset() 
         blynk.virtual_write(relays[relay].getInfoPin(), relays[relay].info())
+        blynk.set_property(relay+1, 'color', colours[staus])
         try:			
            if lcdDisplay is not None: 
                  lcdDisplay.updateLCD (relays[0].state, relays[1].state, relays[2].state, relays[3].state)
@@ -201,6 +203,7 @@ try:
            relays[relay].cycleOnReset()
            relays[relay].setOffCycleReset() 
         blynk.virtual_write(relays[relay].getInfoPin(), relays[relay].info())       
+        blynk.set_property(relay+1, 'color', colours[staus])
         try:			
            if lcdDisplay is not None: 
                  lcdDisplay.updateLCD (relays[0].state, relays[1].state, relays[2].state, relays[3].state)
@@ -242,6 +245,7 @@ try:
            relays[relay].cycleOnReset()
            relays[relay].setOffCycleReset() 
         blynk.virtual_write(relays[relay].getInfoPin(), relays[relay].info())
+        blynk.set_property(relay+1, 'color', colours[staus])
         try:			
            if lcdDisplay is not None: 
                  lcdDisplay.updateLCD (relays[0].state, relays[1].state, relays[2].state, relays[3].state)
@@ -353,6 +357,8 @@ try:
            _log.info('Just Booted')
            blynk.virtual_write(250, "Running")
            blynk.set_property(systemLED, 'color', colours[0])
+           blynk.set_property(0, 'color', colours[0])
+            
             
            pins = [1, 2, 3, 4, 11, 12, 13, 14, 15, 16, 17, 18]
            for pin in pins:
