@@ -60,6 +60,11 @@ try:
     relays.append(drone.Relay(_log, 20, parser.get('droneFeed', 'Relay3')))
     relays.append(drone.Relay(_log, 21, parser.get('droneFeed', 'Relay4')))
  
+    relays[0].setBlynk(blynk) 
+    relays[1].setBlynk(blynk)
+    relays[2].setBlynk(blynk) 
+    relays[3].setBlynk(blynk) 
+    
     _log.info("Set info pins")
     relays[0].setInfoPin(21)
     relays[1].setInfoPin(22)
