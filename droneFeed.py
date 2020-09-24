@@ -322,10 +322,10 @@ try:
                     else:
                         relay.turnOff(_log)
                     relay.incCycle()
-           if(relay.hasInfoPin()):
-                blynk.virtual_write(relay.getInfoPin(), relay.info())
-           else:
-                text = text + self.name + " is " + relay.whatCycle() + " "
+      #     if(relay.hasInfoPin()):
+      #          blynk.virtual_write(relay.getInfoPin(), relay.info())
+      #     else:
+      #          text = text + self.name + " is " + relay.whatCycle() + " "
            
            try:			
                 if lcdDisplay is not None: 
