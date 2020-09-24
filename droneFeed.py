@@ -70,6 +70,11 @@ try:
     relays[1].setInfoPin(22)
     relays[2].setInfoPin(23)
     relays[3].setInfoPin(24)
+    
+    relays[0].setLEDPin(85)
+    relays[1].setLEDPin(86)
+    relays[2].setLEDPin(87)
+    relays[3].setLEDPin(88)
            
 
     @blynk.handle_event('write V255')
