@@ -257,7 +257,18 @@ try:
         relays[3].cycleOffResetSet(value[1])
         blynk.virtual_write(relays[3].getInfoPin(), relays[3].info())
         
+     
+    @blynk.handle_event("connect")
+    def connect_handler():
+        _log.warning("Connected")
+        blynk.virtual_write(250, "Connected")
+        pins = [1, 2, 3, 4, 11, 12, 13, 14, 15, 16, 17, 18]
+        for pin in pins:
+           _log.info('Syncing virtual buttons {}'.format(pin))
+           blynk.virtual_sync(pin)
+           blynk.read_response(timeout=0.5)
         
+    
     @timer.register(interval=60, run_once=False)
     def blynk_data(): 
            _log.info("Update Timer Run")
