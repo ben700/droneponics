@@ -114,7 +114,12 @@ try:
            blynk.virtual_write(250, "Auto")
            relays[relay].cycleOnReset()
            relays[relay].setOffCycleReset() 
-        blynk.virtual_write(relays[relay].getInfoPin(), relays[relay].info())       
+        blynk.virtual_write(relays[relay].getInfoPin(), relays[relay].info())   
+        try:			
+           if lcdDisplay is not None: 
+                 lcdDisplay.updateLCD (relays[0].state, relays[1].state, relays[2].state, relays[3].state)
+        except:
+           _log.critical("updating LCD crashed")
        
           
     @blynk.handle_event('write V2')
@@ -136,8 +141,7 @@ try:
                  _log.debug("in v1write_handler turing on relay")
                  relays[relay].turnOn(_log)
                  relays[relay].setManual("On")
-                 _log.debug(relays[relay].name + " in now on : v1write_handler completed")
-                 
+                 _log.debug(relays[relay].name + " in now on : v1write_handler completed")                    
            except:
                  _log.error("Except handle_event V"+str(relay+1)+" Turning on")
            blynk.virtual_write(250, "Feeding")
@@ -151,7 +155,13 @@ try:
            relays[relay].cycleOnReset()
            relays[relay].setOffCycleReset() 
         blynk.virtual_write(relays[relay].getInfoPin(), relays[relay].info())
+        try:			
+           if lcdDisplay is not None: 
+                 lcdDisplay.updateLCD (relays[0].state, relays[1].state, relays[2].state, relays[3].state)
+        except:
+           _log.critical("updating LCD crashed")
   
+
     @blynk.handle_event('write V3')
     def write_handler(pin, value):
         staus = value[0]
@@ -186,6 +196,11 @@ try:
            relays[relay].cycleOnReset()
            relays[relay].setOffCycleReset() 
         blynk.virtual_write(relays[relay].getInfoPin(), relays[relay].info())       
+        try:			
+           if lcdDisplay is not None: 
+                 lcdDisplay.updateLCD (relays[0].state, relays[1].state, relays[2].state, relays[3].state)
+        except:
+           _log.critical("updating LCD crashed")
        
           
     @blynk.handle_event('write V4')
@@ -222,6 +237,11 @@ try:
            relays[relay].cycleOnReset()
            relays[relay].setOffCycleReset() 
         blynk.virtual_write(relays[relay].getInfoPin(), relays[relay].info())
+        try:			
+           if lcdDisplay is not None: 
+                 lcdDisplay.updateLCD (relays[0].state, relays[1].state, relays[2].state, relays[3].state)
+        except:
+           _log.critical("updating LCD crashed")
   
   
     @blynk.handle_event('write V11')
@@ -328,6 +348,13 @@ try:
            _log.info('Just Booted')
            blynk.virtual_write(250, "Running")
            blynk.set_property(systemLED, 'color', colours[0])
+            
+           pins = [1, 2, 3, 4, 11, 12, 13, 14, 15, 16, 17, 18]
+           for pin in pins:
+                _log.info('Syncing virtual buttons {}'.format(pin))
+                blynk.virtual_sync(pin)
+                blynk.read_response(timeout=0.5)
+         _log.debug("Completed Booting")
         timer.run()
 except: 
    blynk = blynklib.Blynk(parser.get('blynk', 'BLYNK_AUTH'))
