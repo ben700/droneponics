@@ -261,7 +261,7 @@ try:
         
     @blynk.handle_event('write V14')
     def v14write_handler(pin, value):
-        relays[1].cycleOffResetSet(value[1])
+        relays[1].cycleOffResetSet(value[0])
         blynk.virtual_write(relays[1].getInfoPin(), relays[1].info())
         
   
@@ -282,7 +282,7 @@ try:
         
     @blynk.handle_event('write V18')
     def v18write_handler(pin, value):
-        relays[3].cycleOffResetSet(value[1])
+        relays[3].cycleOffResetSet(value[0])
         blynk.virtual_write(relays[3].getInfoPin(), relays[3].info())
         
      
