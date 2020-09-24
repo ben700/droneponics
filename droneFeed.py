@@ -358,6 +358,14 @@ try:
            blynk.virtual_write(250, "Running")
            blynk.set_property(systemLED, 'color', colours[0])
            blynk.set_property(0, 'color', colours[0])
+           blynk.set_property(11, 'color', colours[0])
+           blynk.set_property(12, 'color', colours[0])
+           blynk.set_property(13, 'color', colours[0])
+           blynk.set_property(14, 'color', colours[0])
+           blynk.set_property(15, 'color', colours[0])
+           blynk.set_property(16, 'color', colours[0])
+           blynk.set_property(17, 'color', colours[0])
+           blynk.set_property(18, 'color', colours[0])
             
             
            pins = [1, 2, 3, 4, 11, 12, 13, 14, 15, 16, 17, 18, 1]
