@@ -35,7 +35,12 @@ consoleHandler.setFormatter(logFormatter)
 _log.addHandler(consoleHandler)
 _log.setLevel(parser.get('logging', 'logLevel', fallback=logging.DEBUG))
 _log.info("/home/pi/droneponics/config/configFeed/"+drone.gethostname()+".ini")
-
+lcdDisplay= None
+try:
+    lcdDisplay=drone.LCD(_log)
+except:
+    lcdDisplay=None
+        
 try:
     GPIO.setmode(GPIO.BCM)
     GPIO.setwarnings(False)
@@ -273,7 +278,14 @@ try:
                 blynk.virtual_write(relay.getInfoPin(), relay.info())
            else:
                 text = text + self.name + " is " + relay.whatCycle() + " "
-           blynk.virtual_write(28,text)
+           
+           try:			
+                if lcdDisplay is not None: 
+                    lcdDisplay.updateLCD (relays[0].value, relays[1].value, relays[2].value, relays[3].value)
+           except:
+              _log.critical("updating LCD crashed")
+                
+                
            _log.debug("The End")
      
     while True:
