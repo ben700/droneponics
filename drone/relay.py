@@ -85,7 +85,7 @@ class Relay:
               if(self.ledPin is not None):
                   _log.info("Set LED on for " + self.name + " on pin " + str(self.ledPin))
                   self.blynk.set_property(self.ledPin, 'color', '#FF0000')   
-              _log.info("set infoPin " + str(self.getInfoPin()))   
+              _log.info("set infoPin " + str(self.getInfoPin()) + " state = " + str(self.getState()))    
               if(self.infoPin is not None):
                   self.blynk.virtual_write(self.getInfoPin(), self.info())
        
@@ -102,7 +102,7 @@ class Relay:
               if(self.ledPin is not None):
                   _log.info("Set LED off for " + self.name + " on pin " + str(self.ledPin))
                   self.blynk.set_property(self.ledPin, 'color', '#00FF00')
-              _log.info("set infoPin " + str(self.getInfoPin()))    
+              _log.info("set infoPin " + str(self.getInfoPin()) + " state = " + str(self.getState()))    
               if(self.infoPin is not None):
                   self.blynk.virtual_write(self.getInfoPin(), self.info())
        except:
