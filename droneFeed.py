@@ -354,7 +354,7 @@ try:
                 _log.info('Syncing virtual buttons {}'.format(pin))
                 blynk.virtual_sync(pin)
                 blynk.read_response(timeout=0.5)
-         _log.debug("Completed Booting")
+        _log.debug("Completed Booting")
         timer.run()
 except: 
    blynk = blynklib.Blynk(parser.get('blynk', 'BLYNK_AUTH'))
