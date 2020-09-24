@@ -35,6 +35,7 @@ consoleHandler.setFormatter(logFormatter)
 _log.addHandler(consoleHandler)
 _log.setLevel(parser.get('logging', 'logLevel', fallback=logging.DEBUG))
 _log.info("/home/pi/droneponics/config/configFeed/"+drone.gethostname()+".ini")
+
 lcdDisplay= None
 try:
     lcdDisplay=drone.LCD(_log)
@@ -302,6 +303,7 @@ try:
     while True:
         blynk.run()
         if bootup :
+           _log.debug("The Start of boot")
            blynk.virtual_write(98, "clr")
            blynk.virtual_write(98, "Rebooted"+ '\n')
            blynk.virtual_write(250, "Start-up")
