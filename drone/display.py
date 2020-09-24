@@ -123,7 +123,7 @@ class LCD:
         self.lcd = liquidcrystal_i2c.LiquidCrystal_I2C(0x27, 1, numlines=4)
 
 
-       def updateLCD (self, r1, r2, r3, r4):
+    def updateLCD (self, r1, r2, r3, r4):
         self._log.debug  ("updateLCD")
         self.lcd.printline(0, "Pump 1 status = " + str(r1))
         self.lcd.printline(1, "Pump 2 status = " + str(r2))
