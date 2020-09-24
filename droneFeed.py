@@ -43,6 +43,14 @@ except:
     lcdDisplay=None
         
 try:
+    # Initialize Blynk
+    blynk = blynklib.Blynk(parser.get('blynk', 'BLYNK_AUTH'), log=_log.info) 
+    timer = blynktimer.Timer()
+    _log.debug("start blynk")
+    blynk.run()
+    _log.info("Blynk Created")  
+    
+    
     GPIO.setmode(GPIO.BCM)
     GPIO.setwarnings(False)
 
@@ -58,11 +66,7 @@ try:
     relays[2].setInfoPin(23)
     relays[3].setInfoPin(24)
            
-    # Initialize Blynk
-    blynk = blynklib.Blynk(parser.get('blynk', 'BLYNK_AUTH'), log=_log.info) 
-    timer = blynktimer.Timer()
-    _log.info("Blynk Created")  
-    
+
     @blynk.handle_event('write V255')
     def rebooter(pin, value):
         blynk.virtual_write(98, "User update and reboot button v255"+ '\n')       
@@ -299,7 +303,6 @@ try:
            _log.debug("The End")
      
     while True:
-        _log.debug("start blynk")
         blynk.run()
         if bootup :
            _log.debug("The Start of boot")
