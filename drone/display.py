@@ -125,6 +125,7 @@ class LCD:
 
     def updateLCD (self, r1, r2, r3, r4):
         self._log.debug  ("updateLCD")
+        self.lcd.clear()  
         self.lcd.printline(0, "Pump 1 status = " + str(r1))
         self.lcd.printline(1, "Pump 2 status = " + str(r2))
         self.lcd.printline(2, "Pump 3 status = " + str(r3))
