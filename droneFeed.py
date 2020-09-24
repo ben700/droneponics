@@ -311,7 +311,7 @@ try:
            _log.info("Update Timer Run")
            text = ""
            now = datetime.now()
-           blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
+           blynk.virtual_write(0, now.strftime("%H:%M:%S"))
 
            for relay in relays:
                 _log.debug("Seeing if relay " + relay.name + " is automatic")
