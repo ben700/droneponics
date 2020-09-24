@@ -6,6 +6,9 @@ import os
 import logging
 import time
 
+import liquidcrystal_i2c
+
+
 picdir = '/home/pi/droneponics/pic/'
 libdir = '/home/pi/droneponics/lib/'
 if os.path.exists(libdir):
@@ -113,4 +116,17 @@ class Display:
         self.disp.ShowImage(image)
 
 
+class LCD:
+   
+    def __init__(self, _log):
+        self._log = _log 
+        self.lcd = liquidcrystal_i2c.LiquidCrystal_I2C(0x27, 1, numlines=4)
 
+
+       def updateLCD (self, r1, r2, r3, r4):
+        self._log.debug  ("updateLCD")
+        self.lcd.printline(0, "Pump 1 status = " + str(r1))
+        self.lcd.printline(1, "Pump 2 status = " + str(r2))
+        self.lcd.printline(2, "Pump 3 status = " + str(r3))
+        self.lcd.printline(3, "Pump 4 status = " + str(r4))
+  
