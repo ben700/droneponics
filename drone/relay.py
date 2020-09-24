@@ -81,9 +81,11 @@ class Relay:
           GPIO.output(self.gpioPin,GPIO.LOW) 
           _log.info("Turned on relay " + self.name + " on pin " + str(self.gpioPin))
           if(self.blynk is not None):
+              _log.info("set ledPin " + str(self.ledPin))     
               if(self.ledPin is not None):
                   _log.info("Set LED on for " + self.name + " on pin " + str(self.ledPin))
                   self.blynk.set_property(self.ledPin, 'color', '#FF0000')   
+              _log.info("set infoPin " + str(self.getInfoPin())    
               if(self.infoPin is not None):
                   self.blynk.virtual_write(self.getInfoPin(), self.info())
        
@@ -96,9 +98,11 @@ class Relay:
            GPIO.output(self.gpioPin,GPIO.HIGH) 
            _log.info("Turned off relay " + self.name + " on pin " + str(self.gpioPin))
            if(self.blynk is not None):
+              _log.info("set ledPin " + str(self.ledPin))     
               if(self.ledPin is not None):
                   _log.info("Set LED off for " + self.name + " on pin " + str(self.ledPin))
                   self.blynk.set_property(self.ledPin, 'color', '#00FF00')
+              _log.info("set infoPin " + str(self.getInfoPin())    
               if(self.infoPin is not None):
                   self.blynk.virtual_write(self.getInfoPin(), self.info())
        except:
