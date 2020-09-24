@@ -34,20 +34,23 @@ consoleHandler = logging.StreamHandler()
 consoleHandler.setFormatter(logFormatter)
 _log.addHandler(consoleHandler)
 _log.setLevel(parser.get('logging', 'logLevel', fallback=logging.DEBUG))
-_log.info("/home/pi/droneponics/config/configRelay/"+drone.gethostname()+".ini")
+_log.info("/home/pi/droneponics/config/configFeed/"+drone.gethostname()+".ini")
 
 try:
     GPIO.setmode(GPIO.BCM)
     GPIO.setwarnings(False)
 
     relays=[]
-    relays.append(drone.Relay(_log, 20, parser.get('droneFeed', 'Relay1')))
-    relays.append(drone.Relay(_log, 21, parser.get('droneFeed', 'Relay=2')))
+    relays.append(drone.Relay(_log, 12, parser.get('droneFeed', 'Relay1')))
+    relays.append(drone.Relay(_log, 16, parser.get('droneFeed', 'Relay2')))
+    relays.append(drone.Relay(_log, 20, parser.get('droneFeed', 'Relay3')))
+    relays.append(drone.Relay(_log, 21, parser.get('droneFeed', 'Relay4')))
  
 
     relays[0].setInfoPin(21)
     relays[1].setInfoPin(22)
-    
+    relays[2].setInfoPin(23)
+    relays[3].setInfoPin(24)
            
     # Initialize Blynk
     blynk = blynklib.Blynk(parser.get('blynk', 'BLYNK_AUTH'), log=_log.info) 
@@ -136,26 +139,118 @@ try:
            relays[relay].setOffCycleReset() 
         blynk.virtual_write(relays[relay].getInfoPin(), relays[relay].info())
   
+    @blynk.handle_event('write V3')
+    def write_handler(pin, value):
+        staus = value[0]
+        relay = 2
+        if (staus is "1" ):
+           try:
+                 _log.debug("in v"+str(relay+1)+"write_handler turing off relay " + relays[relay].name)
+                 relays[relay].turnOff(_log)
+                 relays[relay].setManual("Off")
+                 _log.debug(relays[relay].name + " in now off : v3write_handler completed")
+           except:
+                 _log.error("Except handle_event V"+str(relay+1)+" Turning Off")
+                
+           blynk.virtual_write(250, "Stopped")
+        elif (staus is "2" ):
+           try:
+                 _log.debug("in v3write_handler turing on relay")
+                 relays[relay].turnOn(_log)
+                 relays[relay].setManual("On")
+                 _log.debug(relays[relay].name + " in now on : v3write_handler completed")
+                 
+           except:
+                 _log.error("Except handle_event V"+str(relay+1)+" Turning on")
+           blynk.virtual_write(250, "Feeding")
+        else:
+           try:
+                 _log.debug("in v3write_handler turing on relay")
+                 relays[relay].setAutomatic()
+           except:
+                 _log.error("Except handle_event V"+str(relay+1)+" Turning auto")
+           blynk.virtual_write(250, "Auto")
+           relays[relay].cycleOnReset()
+           relays[relay].setOffCycleReset() 
+        blynk.virtual_write(relays[relay].getInfoPin(), relays[relay].info())       
+       
+          
+    @blynk.handle_event('write V4')
+    def write_handler(pin, value):
+        staus = value[0]
+        relay = 3      
+        if (staus is "1" ):
+           try:
+                 _log.debug("in v"+str(relay+1)+"write_handler turing off relay " + relays[relay].name)
+                 relays[relay].turnOff(_log)
+                 relays[relay].setManual("Off")
+                 _log.debug(relays[relay].name + " in now off : v4write_handler completed")
+           except:
+                 _log.error("Except handle_event V"+str(relay+1)+" Turning Off")
+                
+           blynk.virtual_write(250, "Stopped")
+        elif (staus is "2" ):
+           try:
+                 _log.debug("in v4write_handler turing on relay")
+                 relays[relay].turnOn(_log)
+                 relays[relay].setManual("On")
+                 _log.debug(relays[relay].name + " in now on : v4write_handler completed")
+                 
+           except:
+                 _log.error("Except handle_event V"+str(relay+1)+" Turning on")
+           blynk.virtual_write(250, "Feeding")
+        else:
+           try:
+                 _log.debug("in v4write_handler turing on relay")
+                 relays[relay].setAutomatic()
+           except:
+                 _log.error("Except handle_event V"+str(relay+1)+" Turning auto")
+           blynk.virtual_write(250, "Auto")
+           relays[relay].cycleOnReset()
+           relays[relay].setOffCycleReset() 
+        blynk.virtual_write(relays[relay].getInfoPin(), relays[relay].info())
+  
   
     @blynk.handle_event('write V11')
-    def v25write_handler(pin, value):
+    def v11write_handler(pin, value):
         relays[0].cycleResetSet(value[0])
         blynk.virtual_write(relays[0].getInfoPin(), relays[0].info())
         
     @blynk.handle_event('write V12')
-    def v26write_handler(pin, value):
+    def v12write_handler(pin, value):
         relays[0].cycleOffResetSet(value[0])
         blynk.virtual_write(relays[0].getInfoPin(), relays[0].info())
         
     @blynk.handle_event('write V13')
-    def v25write_handler(pin, value):
+    def v13write_handler(pin, value):
         relays[1].cycleResetSet(value[0])
         blynk.virtual_write(relays[1].getInfoPin(), relays[1].info())
         
     @blynk.handle_event('write V14')
-    def v26write_handler(pin, value):
+    def v14write_handler(pin, value):
         relays[1].cycleOffResetSet(value[1])
         blynk.virtual_write(relays[1].getInfoPin(), relays[1].info())
+        
+  
+    @blynk.handle_event('write V15')
+    def v15write_handler(pin, value):
+        relays[2].cycleResetSet(value[0])
+        blynk.virtual_write(relays[2].getInfoPin(), relays[2].info())
+        
+    @blynk.handle_event('write V16')
+    def v16write_handler(pin, value):
+        relays[2].cycleOffResetSet(value[0])
+        blynk.virtual_write(relays[2].getInfoPin(), relays[2].info())
+        
+    @blynk.handle_event('write V17')
+    def v17write_handler(pin, value):
+        relays[3].cycleResetSet(value[0])
+        blynk.virtual_write(relays[3].getInfoPin(), relays[3].info())
+        
+    @blynk.handle_event('write V18')
+    def v18write_handler(pin, value):
+        relays[3].cycleOffResetSet(value[1])
+        blynk.virtual_write(relays[3].getInfoPin(), relays[3].info())
         
         
     @timer.register(interval=60, run_once=False)
