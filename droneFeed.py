@@ -52,7 +52,7 @@ try:
     relays.append(drone.Relay(_log, 20, parser.get('droneFeed', 'Relay3')))
     relays.append(drone.Relay(_log, 21, parser.get('droneFeed', 'Relay4')))
  
-
+    _log.info("Set info pins")
     relays[0].setInfoPin(21)
     relays[1].setInfoPin(22)
     relays[2].setInfoPin(23)
@@ -61,7 +61,8 @@ try:
     # Initialize Blynk
     blynk = blynklib.Blynk(parser.get('blynk', 'BLYNK_AUTH'), log=_log.info) 
     timer = blynktimer.Timer()
-   
+    _log.info("Blynk Created")  
+    
     @blynk.handle_event('write V255')
     def rebooter(pin, value):
         blynk.virtual_write(98, "User update and reboot button v255"+ '\n')       
@@ -70,10 +71,7 @@ try:
         os.system('sh /home/pi/updateDroneponics.sh')
         blynk.virtual_write(98, "Updated and now restarting drone")
         os.system('sudo reboot')
-        
-        
-       
-          
+              
     @blynk.handle_event('write V1')
     def write_handler(pin, value):
         staus = value[0]
@@ -301,6 +299,7 @@ try:
            _log.debug("The End")
      
     while True:
+        _log.debug("start blynk")
         blynk.run()
         if bootup :
            _log.debug("The Start of boot")
