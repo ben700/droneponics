@@ -300,7 +300,7 @@ try:
            
            try:			
                 if lcdDisplay is not None: 
-                    lcdDisplay.updateLCD (relays[0].value, relays[1].value, relays[2].value, relays[3].value)
+                    lcdDisplay.updateLCD (relays[0].state, relays[1].state, relays[2].state, relays[3].state)
            except:
               _log.critical("updating LCD crashed")
                 
