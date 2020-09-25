@@ -60,27 +60,27 @@ try:
     try:
         temp = drone.TEMP(_log, blynk)
         sensors.append(temp)
-    except
+    except:
         _log,info("No Temp")
     
     try:
         sensors.append(PH())
-    except
+    except:
         _log,info("No PH")
 	
     try:
         sensors.append(EC())
-    except
+    except:
         _log,info("No EC")
 	
     try:
         sensors.append(DO())
-    except
+    except:
         _log,info("No DO")
     
     try:
         sensors.append(ORP())
-    except
+    except:
         _log,info("No ORP")
     
     _log.info("all senses created")
