@@ -694,7 +694,7 @@ try:
               
               _log.info('Check cal for sensors')
               _log.info(sensors[0].sensor)
-	      _log.info(sensors[0].sensor.query("Cal,?"))
+              _log.info(sensors[0].sensor.query("Cal,?"))
 			
 		
               blynk.virtual_write(98,"Temp Cal " + sensors[0].sensor.query("Cal,?")+ '\n')
