@@ -686,8 +686,9 @@ try:
               _log.info('Just Booted')
               y = 70
               for dose in nutrientMix:
-		   _log.debug(dose.name)
+                   _log.debug("dose.name" + dose.name)
                    blynk.virtual_write(y, dose.name)
+                   _log.debug("dose.name" + (dose.dose))
                    blynk.virtual_write(y-10, dose.dose)			
                    y = y + 1		       
 			
