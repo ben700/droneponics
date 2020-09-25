@@ -688,10 +688,11 @@ try:
               for dose in nutrientMix:
                    _log.debug("dose.name" + dose.name)
                    blynk.virtual_write(y, dose.name)
-                   _log.debug("dose.name" + (dose.dose))
+                   _log.debug("dose.name" + str(dose.dose))
                    blynk.virtual_write(y-10, dose.dose)			
                    y = y + 1		       
-			
+              
+              _log.info('Check cal for sensors')			
               blynk.virtual_write(98,"Temp Cal " + sensors[0].sensor.query("Cal,?")+ '\n')
               blynk.virtual_write(98,"EC Cal " + sensors[1].sensor.query("Cal,?")+ '\n')
               blynk.virtual_write(98,"Temp Cal " + sensors[2].sensor.query("Cal,?")+ '\n')
