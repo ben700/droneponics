@@ -105,7 +105,7 @@ class DO(Sensor):
       return self.sensor.query("RT,"+cTemp).split(":")[1].strip().rstrip('\x00')
     
 class TEMP(Sensor):  
-   def __init__(self, _log, *args, **kwargs):
+   def __init__(self, _log, BLYNK, *args, **kwargs):
       Sensor.__init__(self, 102, "Temprature", 30, _log, Target=20, LowAlarm=10, HighAlarm=25, *args, **kwargs) 
    
    def display(self, blynk):
