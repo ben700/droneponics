@@ -229,7 +229,7 @@ def blynk_data():
         blynk.virtual_write(98, "ss is None" + '\n')
         try:
             blynk.virtual_write(98, "Try to create new object" + '\n')
-            i2c_bus = busio.I2C(board.D1, board.D0) 
+            i2c_bus = busio.I2C(board.SCL, board.SDA) 
             ss = Seesaw(i2c_bus, addr=0x38)
             ssMoistureRead = ss.moisture_read()
             ssTempRead = round(ss.get_temp(),1)
