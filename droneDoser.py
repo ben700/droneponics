@@ -201,7 +201,7 @@ try:
     def processSensors():   
         for sensor in sensors:
            if sensor is not None:
-              sensor.read()
+              sensor.read(blynk)
                             	
            try:		
               sensors[0].color = drone.getTempColour(_log, int(round(float(sensors[0].value)*10,0)))
@@ -686,20 +686,13 @@ try:
               _log.info('Just Booted')
               y = 70
               for dose in nutrientMix:
-                   _log.debug("dose.name" + dose.name)
                    blynk.virtual_write(y, dose.name)
-                   _log.debug("dose.name" + str(dose.dose))
                    blynk.virtual_write(y-10, dose.dose)			
                    y = y + 1		       
-              
-              _log.info('Check cal for sensors')
-              _log.info(sensors[0].sensor)
-              _log.info(sensors[0].sensor.query("Cal,?"))
-			
-		
-        #      blynk.virtual_write(98,"Temp Cal " + sensors[0].sensor.query("Cal,?")+ '\n')
-        #      blynk.virtual_write(98,"EC Cal " + sensors[1].sensor.query("Cal,?")+ '\n')
-        #      blynk.virtual_write(98,"Temp Cal " + sensors[2].sensor.query("Cal,?")+ '\n')
+  
+              blynk.virtual_write(98,"Temp Cal " + sensors[0].sensor.query("Cal,?")+ '\n')
+              blynk.virtual_write(98,"EC Cal " + sensors[1].sensor.query("Cal,?")+ '\n')
+              blynk.virtual_write(98,"Temp Cal " + sensors[2].sensor.query("Cal,?")+ '\n')
 
               _log.info('processSensors')
               processSensors()
