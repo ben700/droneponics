@@ -41,7 +41,7 @@ class OpenWeather:
       
         blynk.set_property(210, "label", "Current Temp")
         blynk.set_property(210, "color", colours['ONLINE'])
-        blynk.virtual_write(210,self.openWeather["current"]["Temp"])
+        blynk.virtual_write(210,self.openWeather["current"]["temp"])
       
         blynk.virtual_write(202,self.openWeather["current"]["dew_point"])
         blynk.set_property(202, "label", "Outside Dew Point")
