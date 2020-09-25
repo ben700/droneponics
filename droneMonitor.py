@@ -44,12 +44,22 @@ try:
 
     _log.info("/home/pi/droneponics/config/configMonitor/"+drone.gethostname()+".ini")
 
+    # Initialize Blynk
+    blynk = blynklib.Blynk(parser.get('droneMonitor', 'BLYNK_AUTH'))        
+    timer = blynktimer.Timer()
+    blynk.run()
+    #blynk.virtual_write(98, "clr")
+    blynk.set_property(systemLED, 'color', colours['ONLINE'])
+    _log.info("Blynk created")
+	
+	
     sensors = []
 	
-    _log.info("drone.buildSensors(sensors")
+    _log.info("drone.buildSensors")
     
     try:
-        sensors.append(TEMP())
+	temp = drone.TEMP(_log, blynk)
+        sensors.append(temp)
     except
         _log,info("No Temp")
     
@@ -84,24 +94,18 @@ try:
     _log.info("all senses created")
 		
      
-    # Initialize Blynk
-    blynk = blynklib.Blynk(parser.get('droneMonitor', 'BLYNK_AUTH'))        
-    timer = blynktimer.Timer()
-    blynk.run()
-    #blynk.virtual_write(98, "clr")
-    blynk.set_property(systemLED, 'color', colours['ONLINE'])
-    _log.info("Blynk created")
+
     
     # Initialize the sensor.
-    try:
-       for sensor in sensors:
-           sensor.sensor = AtlasI2C(sensor.sensorId)
-           blynk.set_property(sensor.displayPin, 'color', colours['ONLINE'])
-           blynk.set_property(sensor.displayPin, 'label', sensor.name)
-       blynk.virtual_write(98, "Sensors created" + '\n') 
-    except:
-        blynk.virtual_write(98, "Unexpected error: atlas on sensotr " + sensor.name + '\n') 
-        _log.info("Unexpected error: Atlas")
+ #   try:
+ #      for sensor in sensors:
+ #          sensor.sensor = AtlasI2C(sensor.sensorId)
+ #          blynk.set_property(sensor.displayPin, 'color', colours['ONLINE'])
+ #          blynk.set_property(sensor.displayPin, 'label', sensor.name)
+ #      blynk.virtual_write(98, "Sensors created" + '\n') 
+ #   except:
+ #       blynk.virtual_write(98, "Unexpected error: atlas on sensotr " + sensor.name + '\n') 
+ #       _log.info("Unexpected error: Atlas")
     
    
 			
