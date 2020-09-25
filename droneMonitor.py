@@ -186,7 +186,7 @@ try:
 except KeyboardInterrupt:
    _log.info('Keyboard Interrupt')
    blynk.virtual_write(250, "Keyboard Interrupt")
-   blynkErr = blynklib.Blynk(parser.get('droneDoser', 'BLYNK_AUTH'))
+   blynkErr = blynklib.Blynk(parser.get('droneMonitor', 'BLYNK_AUTH'))
    blynkErr.virtual_write(98, "System has error" + '\n')
    os.system('sh /home/pi/updateDroneponics.sh')
 #   os.system('sudo reboot')
@@ -194,7 +194,7 @@ except KeyboardInterrupt:
 except:
    _log.info('Unexpected error')
    blynk.virtual_write(250, "Crash")
-   blynkErr = blynklib.Blynk(parser.get('droneDoser', 'BLYNK_AUTH'))
+   blynkErr = blynklib.Blynk(parser.get('droneMonitor', 'BLYNK_AUTH'))
    blynkErr.virtual_write(98, "System has error" + '\n')
    os.system('sh /home/pi/updateDroneponics.sh')
  #  os.system('sudo reboot')
