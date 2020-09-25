@@ -89,7 +89,7 @@ except:
     chirp = None
 
 try:        
-    i2c_bus = busio.I2C(board.D1, board.D0) 
+    i2c_bus = busio.I2C(board.SCL, board.SDA) 
     ss = Seesaw(i2c_bus, addr=0x38)
     ssMoistureRead = int(ss.moisture_read())
 except:
