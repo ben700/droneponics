@@ -22,9 +22,9 @@ def buildMonitorSensors(sensors, _log):
     _log.debug("in built sensors function")
     sensors.append( Sensor(102, "Temprature", 30, _log))
     _log.debug("built temperature sensor")
-    sensors.append( Sensor(97, "Dissolved Oxygen", 31 , _log))
+    sensors.append( Sensor(97, "Dissolved Oxygen", 33 , _log))
     _log.debug("built DO sensor")
-    sensors.append( Sensor(99, "Oxidation Reduction Potential", 32, _log))
+    sensors.append( Sensor(99, "Oxidation Reduction Potential", 34, _log))
     _log.debug("built ORP sensor")
     return sensors
 
