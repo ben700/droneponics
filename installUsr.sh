@@ -23,6 +23,8 @@ sudo apt-get install lxde
 sudo apt-get install xterm -y
 sudo pip3 install RPLCD
 sudo pip3 install smbus2
+pip3 install https://github.com/pl31/python-liquidcrystal_i2c/archive/master.zip
+sudo pip3 install https://github.com/pl31/python-liquidcrystal_i2c/archive/master.zip
 
 pip3 install adafruit-circuitpython-seesaw
 git submodule init
