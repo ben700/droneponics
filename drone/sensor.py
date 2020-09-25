@@ -111,7 +111,7 @@ class TEMP(Sensor):
          self.blynk = BLYNK
          self.blynk.set_property(sensor.displayPin, 'color', drone.colours['ONLINE'])
          self.blynk.set_property(sensor.displayPin, 'label', sensor.name)
-       except:
+      except:
          self.blynk.virtual_write(98, "Unexpected error: atlas on sensor " + sensor.name + '\n') 
          _log.info("Unexpected error: Atlas temp class")
     
