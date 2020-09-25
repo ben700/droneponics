@@ -90,7 +90,7 @@ except:
 
 try:        
     i2c_bus = busio.I2C(board.SCL, board.SDA) 
-    ss = Seesaw(i2c_bus, addr=0x36)
+    ss = Seesaw(i2c_bus, addr=0x38)
     ssMoistureRead = int(ss.moisture_read())
 except:
     _log.critical("Can't find I2C0 device should be the soil sensor")
