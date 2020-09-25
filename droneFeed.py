@@ -372,7 +372,7 @@ except:
    os.system('sh /home/pi/updateDroneponics.sh')
    os.system('sudo reboot')
 finally:
-blynk = blynklib.Blynk(parser.get('blynk', 'BLYNK_AUTH'))
+   blynk = blynklib.Blynk(parser.get('blynk', 'BLYNK_AUTH'))
    blynk.run()
    blynk.virtual_write(250, "Shutdown")
    blynk.set_property(85, 'color', colours['OFFLINE'])
