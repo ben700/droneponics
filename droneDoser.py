@@ -156,6 +156,8 @@ try:
         now = datetime.now()
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
         blynk.virtual_write(98, now.strftime("%d/%m/%Y %H:%M:%S") + " Going to Dose nutrients" + '\n')
+	blynk.virtual_write(97, "add", rowIndex, "Nutrients", now.strftime("%d/%m/%Y %H:%M:%S"))
+	blynk.virtual_write(29,rowIndex+1)  
         for dosage in nutrientMix:
            if(dosage.pump is not None and dosage.name != "pH"):
                    blynk.virtual_write(98,now.strftime("%d/%m/%Y %H:%M:%S") + " Going to Dose " +str (dosage.name)+ '\n')
@@ -180,6 +182,8 @@ try:
     def doSinglePHDose():   
         now = datetime.now()
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
+        blynk.virtual_write(97, "add", rowIndex, "pH", now.strftime("%d/%m/%Y %H:%M:%S"))
+	blynk.virtual_write(29,rowIndex+1)
         for dosage in nutrientMix:		
            if(dosage.pump is not None and dosage.name == "pH"):
                    blynk.virtual_write(98, now.strftime("%d/%m/%Y %H:%M:%S") + " Going to Dose pH" + '\n')
@@ -218,6 +222,14 @@ try:
                  lcdDisplay.updateLCDProbe (sensors[2].value, sensors[1].value, sensors[0].value)
            except:
               _log.critical("updating LCD crashed")	
+
+    @blynk.handle_event('write V29')
+    def v29write_handler(pin, value):
+        _log.debug("v29write_handler rowIndex =" + str(value[0]))
+        global rowIndex
+        rowIndex = 0
+        blynk.virtual_write(97, "clr")
+        blynk.virtual_write(29, 0)
 
 
     @blynk.handle_event('write V1')
