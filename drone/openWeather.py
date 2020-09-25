@@ -64,7 +64,7 @@ class OpenWeather:
         blynk.set_property(211, "color", colours['ONLINE'])
 
         blynk.virtual_write(213,self.openWeather["current"]["wind_deg"])
-        blynk.set_property(213, "label", "Wind Deg")
+        blynk.set_property(213, "label", "Wind Direction")
         blynk.set_property(213, "color", colours['ONLINE'])
 
         blynk.virtual_write(212,self.openWeather["current"]["wind_gust"])
