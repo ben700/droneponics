@@ -156,7 +156,7 @@ try:
            timer.run()
            if bootup :
               blynk.virtual_write(250, "Boot")
-              blynk.set_property(250, 'color', colours['ONLINE'])	
+              blynk.set_property(250, 'color', drone.colours['ONLINE'])	
               p = subprocess.Popen(['i2cdetect', '-y','1'],stdout=subprocess.PIPE,)
               #cmdout = str(p.communicate())
               for i in range(0,9):
@@ -178,7 +178,7 @@ try:
            _log.info('Unexpected error')
            blynk.virtual_write(250, "Crash")
            blynk.virtual_write(98, "System has main loop error" + '\n')
-           blynk.set_property(systemLED, 'color', colours['OFFLINE'])
+           blynk.set_property(systemLED, 'color', drone.colours['OFFLINE'])
            os.system('sh /home/pi/updateDroneponics.sh')
     #       os.system('sudo reboot') 
   
