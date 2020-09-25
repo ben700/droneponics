@@ -49,7 +49,7 @@ try:
     timer = blynktimer.Timer()
     blynk.run()
     #blynk.virtual_write(98, "clr")
-    blynk.set_property(systemLED, 'color', colours['ONLINE'])
+    blynk.set_property(systemLED, 'color', drone.colours['ONLINE'])
     _log.info("Blynk created")
 	
 	
