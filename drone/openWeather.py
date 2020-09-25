@@ -58,6 +58,20 @@ class OpenWeather:
         blynk.virtual_write(205,self.openWeather["current"]["feels_like"])
         blynk.set_property(205, "label", "Feels Like")
         blynk.set_property(205, "color", colours['ONLINE'])
+         
+        blynk.virtual_write(211,self.openWeather["current"]["wind_speed"])
+        blynk.set_property(211, "label", "Wind Speed")
+        blynk.set_property(211, "color", colours['ONLINE'])
+
+        blynk.virtual_write(213,self.openWeather["current"]["wind_deg"])
+        blynk.set_property(213, "label", "Wind Deg")
+        blynk.set_property(213, "color", colours['ONLINE'])
+
+        blynk.virtual_write(212,self.openWeather["current"]["wind_gust"])
+        blynk.set_property(212, "label", "Wind Gust")
+        blynk.set_property(212, "color", colours['ONLINE'])
+
+         
       
         local_time = time.gmtime(self.openWeather["current"]["sunrise"])
         blynk.set_property(206, "label", "Sunrise")
