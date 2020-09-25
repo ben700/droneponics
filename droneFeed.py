@@ -99,7 +99,6 @@ try:
            except:
                  _log.error("Except handle_event V"+str(relay+1)+" Turning Off")
                 
-           blynk.virtual_write(250, "Stopped")
         elif (staus is "2" ):
            try:
                  _log.debug("in v1write_handler turing on relay")
@@ -109,14 +108,12 @@ try:
                  
            except:
                  _log.error("Except handle_event V"+str(relay+1)+" Turning on")
-           blynk.virtual_write(250, "Feeding")
         else:
            try:
                  _log.debug("in v1write_handler turing on relay")
                  relays[relay].setAutomatic()
            except:
                  _log.error("Except handle_event V"+str(relay+1)+" Turning auto")
-           blynk.virtual_write(250, "Auto")
            relays[relay].cycleOnReset()
            relays[relay].setOffCycleReset() 
         blynk.virtual_write(relays[relay].getInfoPin(), relays[relay].info())   
@@ -141,7 +138,6 @@ try:
            except:
                  _log.error("Except handle_event V"+str(relay+1)+" Turning Off")
                 
-           blynk.virtual_write(250, "Stopped")
         elif (staus is "2" ):
            try:
                  _log.debug("in v1write_handler turing on relay")
@@ -150,14 +146,12 @@ try:
                  _log.debug(relays[relay].name + " in now on : v2write_handler completed")                    
            except:
                  _log.error("Except handle_event V"+str(relay+1)+" Turning on")
-           blynk.virtual_write(250, "Feeding")
         else:
            try:
                  _log.debug("in v1write_handler turing on relay")
                  relays[relay].setAutomatic()
            except:
                  _log.error("Except handle_event V"+str(relay+1)+" Turning auto")
-           blynk.virtual_write(250, "Auto")
            relays[relay].cycleOnReset()
            relays[relay].setOffCycleReset() 
         blynk.virtual_write(relays[relay].getInfoPin(), relays[relay].info())
@@ -181,8 +175,6 @@ try:
                  _log.debug(relays[relay].name + " in now off : v3write_handler completed")
            except:
                  _log.error("Except handle_event V"+str(relay+1)+" Turning Off")
-                
-           blynk.virtual_write(250, "Stopped")
         elif (staus is "2" ):
            try:
                  _log.debug("in v3write_handler turing on relay")
@@ -192,14 +184,12 @@ try:
                  
            except:
                  _log.error("Except handle_event V"+str(relay+1)+" Turning on")
-           blynk.virtual_write(250, "Feeding")
         else:
            try:
                  _log.debug("in v3write_handler turing on relay")
                  relays[relay].setAutomatic()
            except:
                  _log.error("Except handle_event V"+str(relay+1)+" Turning auto")
-           blynk.virtual_write(250, "Auto")
            relays[relay].cycleOnReset()
            relays[relay].setOffCycleReset() 
         blynk.virtual_write(relays[relay].getInfoPin(), relays[relay].info())       
@@ -223,8 +213,6 @@ try:
                  _log.debug(relays[relay].name + " in now off : v4write_handler completed")
            except:
                  _log.error("Except handle_event V"+str(relay+1)+" Turning Off")
-                
-           blynk.virtual_write(250, "Stopped")
         elif (staus is "2" ):
            try:
                  _log.debug("in v4write_handler turing on relay")
@@ -234,14 +222,12 @@ try:
                  
            except:
                  _log.error("Except handle_event V"+str(relay+1)+" Turning on")
-           blynk.virtual_write(250, "Feeding")
         else:
            try:
                  _log.debug("in v4write_handler turing on relay")
                  relays[relay].setAutomatic()
            except:
                  _log.error("Except handle_event V"+str(relay+1)+" Turning auto")
-           blynk.virtual_write(250, "Auto")
            relays[relay].cycleOnReset()
            relays[relay].setOffCycleReset() 
         blynk.virtual_write(relays[relay].getInfoPin(), relays[relay].info())
