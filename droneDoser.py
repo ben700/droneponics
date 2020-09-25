@@ -694,6 +694,7 @@ try:
               blynk.virtual_write(98,"EC Cal " + sensors[1].sensor.query("Cal,?")+ '\n')
               blynk.virtual_write(98,"Temp Cal " + sensors[2].sensor.query("Cal,?")+ '\n')
 
+              _log.info('processSensors')
               processSensors()
 		
               blynk.virtual_write(51,"EC Settings")
