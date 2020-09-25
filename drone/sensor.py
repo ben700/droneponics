@@ -106,13 +106,20 @@ class DO(Sensor):
     
 class TEMP(Sensor):  
    def __init__(self, _log, BLYNK, *args, **kwargs):
-      Sensor.__init__(self, 102, "Temprature", 30, _log, Target=20, LowAlarm=10, HighAlarm=25, *args, **kwargs) 
-   
-   def display(self, blynk):
+      try:
+         Sensor.__init__(self, 102, "Temprature", 30, _log, Target=20, LowAlarm=10, HighAlarm=25, *args, **kwargs) 
+         self.blynk = BLYNK
+         self.blynk.set_property(sensor.displayPin, 'color', drone.colours['ONLINE'])
+         self.blynk.set_property(sensor.displayPin, 'label', sensor.name)
+       except:
+         self.blynk.virtual_write(98, "Unexpected error: atlas on sensor " + sensor.name + '\n') 
+         _log.info("Unexpected error: Atlas temp class")
+    
+   def display(self):
       print("TEMP:display(blynk)")
-      blynk.set_property(self.displayPin, "label", self.name)
-      blynk.set_property(self.displayPin, 'color', self.color)
-      blynk.virtual_write(self.displayPin, self.value)
+      self.blynk.set_property(self.displayPin, "label", self.name)
+      self.blynk.set_property(self.displayPin, 'color', self.color)
+      self.blynk.virtual_write(self.displayPin, self.value)
    
 class WaterLevel():  
    GPIO.setmode(GPIO.BCM)
