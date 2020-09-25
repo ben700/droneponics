@@ -14,7 +14,17 @@ def buildSensors(sensors, _log):
     _log.debug("built temperature sensor")
     sensors.append( Sensor(100, "EC", 31 , _log, Target=100, LowAlarm=50, HighAlarm=1500))
     _log.debug("built ec sensor")
-    sensors.append( Sensor(99, "pH", 32, _log, Target=5.5, LowAlarm=5.3, HighAlarm=6.5))
+    sensors.append( Sensor(98, "pH", 32, _log, Target=5.5, LowAlarm=5.3, HighAlarm=6.5))
+    _log.debug("built ph sensor")
+    return sensors
+
+def buildMonitorSensors(sensors, _log):
+    _log.debug("in built sensors function")
+    sensors.append( Sensor(102, "Temprature", 30, _log))
+    _log.debug("built temperature sensor")
+    sensors.append( Sensor(97, "Dissolved Oxygen", 31 , _log))
+    _log.debug("built ec sensor")
+    sensors.append( Sensor(99, "Oxidation Reduction Potential", 32))
     _log.debug("built ph sensor")
     return sensors
 
