@@ -630,9 +630,9 @@ try:
              sensors[2].mode = 1
 		
         for relay in relays:
-             blynk.virtual_write(98, "Seeing if relay " + relay.name + " is automatic" + '\n')
+             _log.info("Seeing if relay " + relay.name + " is automatic")
              if(relay.isAutomatic()):
-                   blynk.virtual_write(98, "relay " + relay.name + " is automatic so test cycle" + '\n')
+                   _log.info("relay " + relay.name + " is automatic so test cycle")
                    if(relay.whatCycle() == "On"):
                         relay.turnOn(_log)
                    else:
