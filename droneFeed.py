@@ -366,11 +366,18 @@ except:
    blynk.run()
    blynk.virtual_write(98,"in main loop except"+ '\n')
    blynk.virtual_write(250, "Crashed")
-   now = datetime.now()
- 
    drone.turnLEDsOffline(blynk)
    drone.turnButtonsOffline(blynk)
    GPIO.cleanup()
-
    os.system('sh /home/pi/updateDroneponics.sh')
-#   os.system('sudo reboot')
+   os.system('sudo reboot')
+finally:
+blynk = blynklib.Blynk(parser.get('blynk', 'BLYNK_AUTH'))
+   blynk.run()
+   blynk.virtual_write(250, "Shutdown")
+   blynk.set_property(85, 'color', colours['OFFLINE'])
+   blynk.set_property(86, 'color', colours['OFFLINE'])
+   blynk.set_property(87, 'color', colours['OFFLINE'])
+   blynk.set_property(88, 'color', colours['OFFLINE'])
+          
+   
