@@ -54,35 +54,8 @@ try:
 	
 	
     sensors = []
-	
-    _log.info("drone.buildSensors")
-    
-    try:
-        temp = drone.TEMP(_log, blynk)
-        sensors.append(temp)
-    except:
-        _log.info("No Temp")
-    
-    try:
-        sensors.append(PH())
-    except:
-        _log.info("No PH")
-	
-    try:
-        sensors.append(EC())
-    except:
-        _log.info("No EC")
-	
-    try:
-        sensors.append(DO())
-    except:
-        _log.info("No DO")
-    
-    try:
-        sensors.append(ORP())
-    except:
-        _log.info("No ORP")
-    
+    _log.info("drone.buildSensors(sensors")
+    sensors = drone.buildMonitorSensors(sensors, _log)
     _log.info("all senses created")
 	
 	
@@ -106,9 +79,20 @@ try:
  #   except:
  #       blynk.virtual_write(98, "Unexpected error: atlas on sensotr " + sensor.name + '\n') 
  #       _log.info("Unexpected error: Atlas")
-    
-   
-			
+    def processSensors():   
+        for sensor in sensors:
+           if sensor is not None:
+              sensor.read()
+                            	
+           try:		
+              sensors[0].color = drone.getTempColour(_log, int(round(float(sensors[0].value)*10,0)))
+           except:
+              _log.critical("Working out sensor colour crashed")	
+
+           for sensor in sensors:
+              if sensor is not None:
+                 sensor.display(blynk)
+      		
     @blynk.handle_event('write V255')
     def rebooter(pin, value):
         _log.info( "User reboot")
@@ -128,26 +112,8 @@ try:
         now = datetime.now()
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
        # blynk.virtual_write(98, "The weekday is " + str(now.strftime("%w")+1))
-        for sensor in sensors:
-           if sensor is not None:
-              sensor.read()
-                            	
-           try:		
-              sensors[0].color = drone.getTempColour(_log, int(round(float(sensors[0].value)*10,0)))
-              sensors[1].color = drone.getECColour(_log, round(float(sensors[1].value),0))
-              sensors[2].color = drone.getPHColour(_log, round(float(sensors[2].value)*10,0))
-           except:
-              _log.critical("Working out sensor colour crashed")	
-
-           for sensor in sensors:
-              if sensor is not None:
-                 sensor.display(blynk)
-           try:			
-              if lcdDisplay is not None: 
-                 lcdDisplay.updateLCDProbe (sensors[2].value, sensors[1].value, sensors[0].value)
-           except:
-              _log.critical("updating LCD crashed")	
-       
+        processSensors()
+   
         _log.info("Completed Timer Function") 
 
     while True:
