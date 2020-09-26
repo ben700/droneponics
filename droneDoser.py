@@ -453,8 +453,14 @@ try:
             volumeThisTime = nutrientMix[x].pump.query("TV,?").split("TV,")[1]
             _log.info("Just dosed " + str(dosed) + " so total now " + str(volumeThisTime))
             _log.info("Add that to before " + str(nutrientMix[x].volume))
+            _log.info("nutrientMix[x].volume " + str(float(nutrientMix[x].volume)))
+            _log.info("float(dosed) " + str(float(dosed)))
+            try:
+                nutrientMix[x].volume = float(nutrientMix[x].volume) + float(dosed)
+            except:
+		_log.error("nutrientMix[x].volume = float(volumeThisTime)")
+                nutrientMix[x].volume = float(volumeThisTime)
 		
-            nutrientMix[x].volume = float(nutrientMix[x].volume) + float(volumeThisTime)
             _log.info("overall total now " + str(nutrientMix[x].volume))
         
             blynk.virtual_write(nutrientMix[x].volumePin, nutrientMix[x].volume )
