@@ -707,7 +707,7 @@ try:
 	
     @blynk.handle_event('write V255')
     def rebooter(pin, value):
-        _log.info( "User reboot")
+        _log.critical( "User reboot")
         blynk.virtual_write(250, "Reboot")
         blynk.set_property(250, 'color', colours['OFFLINE'])	
         blynk.virtual_write(98, "User Reboot " + '\n')
@@ -850,13 +850,13 @@ try:
                    blynk.virtual_sync(pin)
                    blynk.read_response(timeout=0.5)
 	
-              _log.info("Boot Completed")
+              _log.critical("Boot Completed")
               blynk.virtual_write(250, "Started")
               blynk.set_property(250, 'color', colours['ONLINE'])
               blynk.set_property(systemLED, 'color', colours['ONLINE'])
 
         except:
-           _log.info('Unexpected error')
+           _log.critical('Unexpected error')
            blynk.virtual_write(250, "Crash")
            blynk.virtual_write(98, "System has main loop error" + '\n')
            for l in LED:
@@ -867,7 +867,7 @@ try:
   
    
 except KeyboardInterrupt:
-   _log.info('Keyboard Interrupt')
+   _log.critical('Keyboard Interrupt')
    blynkErr = blynklib.Blynk(parser.get('droneDoser', 'BLYNK_AUTH'))
    blynkErr.run()
    blynkErr.virtual_write(250, "Keyboard Interrupt")
@@ -878,7 +878,7 @@ except KeyboardInterrupt:
 #   os.system('sudo reboot')
 
 except:
-   _log.info('Unexpected error')
+   _log.critical('Unexpected error')
    blynkErr = blynklib.Blynk(parser.get('droneDoser', 'BLYNK_AUTH'))
    blynkErr.run()
    blynkErr.virtual_write(250, "Crash")
