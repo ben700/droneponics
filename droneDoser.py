@@ -449,10 +449,12 @@ try:
         if(value[0] == '1'):
             _log.info("Pump for " +nutrientMix[x].name +" = " + nutrientMix[x].pump.query("X") + '\n')
             dosed = nutrientMix[x].pump.query("R").split(":")[1].strip().rstrip('\x00')
-            nutrientMix[x].volume = nutrientMix[x].pump.query("TV,?").split("TV,")[1]
+            nutrientMix[x].volume = nutrientMix[x].volume + float(nutrientMix[x].pump.query("TV,?").split("TV,")[1])
             blynk.virtual_write(nutrientMix[x].volumePin, nutrientMix[x].volume )
             blynk.virtual_write(98, now.strftime("%d/%m/%Y %H:%M:%S") + " :- Had used " + lVolume + " ml| Now Dosed :"+ str(nutrientMix[x].volume) + "ml" + '\n') 
             blynk.virtual_write(98, now.strftime("%d/%m/%Y %H:%M:%S") + " :- Pump for " + nutrientMix[x].name + ":- STOPPED"  + " Dosed :"+ str(dosed) + "ml" + '\n') 
+            blynk.virtual_write(28, "add", rowIndex, nutrientMix[x].name + " dosed " + dosed, now.strftime("%d/%m/%Y %H:%M:%S"))
+            blynk.virtual_write(29,rowIndex+1)        
         else:
             _log.info("Pump for " +nutrientMix[x].name +" = " + nutrientMix[x].pump.query("D,*") + '\n') 
             blynk.virtual_write(98, now.strftime("%d/%m/%Y %H:%M:%S") + " :- Pump for " + nutrientMix[x].name + ":- STARTED" + '\n') 
@@ -468,10 +470,12 @@ try:
         if(value[0] == '1'):
             _log.info("stop Pump for " +nutrientMix[x].name +" = " + nutrientMix[x].pump.query("X") + '\n')
             dosed = nutrientMix[x].pump.query("R").split(":")[1].strip().rstrip('\x00')
-            nutrientMix[x].volume = nutrientMix[x].pump.query("TV,?").split("TV,")[1]
+            nutrientMix[x].volume = nutrientMix[x].volume + float(nutrientMix[x].pump.query("TV,?").split("TV,")[1])
             blynk.virtual_write(nutrientMix[x].volumePin, nutrientMix[x].volume )
             blynk.virtual_write(98, now.strftime("%d/%m/%Y %H:%M:%S") + " :- Had used " + lVolume + " ml| Now Dosed :"+ str(nutrientMix[x].volume) + "ml" + '\n') 
             blynk.virtual_write(98, now.strftime("%d/%m/%Y %H:%M:%S") + " :- Pump for " + nutrientMix[x].name + ":- STOPPED"  + " Dosed :"+ str(dosed) + "ml" + '\n') 
+            blynk.virtual_write(28, "add", rowIndex, nutrientMix[x].name + " dosed " + dosed, now.strftime("%d/%m/%Y %H:%M:%S"))
+            blynk.virtual_write(29,rowIndex+1)        
         else:
             _log.info("start Pump for " +nutrientMix[x].name +" = " + nutrientMix[x].pump.query("D,*") + '\n') 
             blynk.virtual_write(98, now.strftime("%d/%m/%Y %H:%M:%S") + " :- Pump for " + nutrientMix[x].name + ":- STARTED" + '\n') 
@@ -487,10 +491,12 @@ try:
         if(value[0] == '1'):
             _log.info("Pump for " +nutrientMix[x].name +" = " + nutrientMix[x].pump.query("X") + '\n')
             dosed = nutrientMix[x].pump.query("R").split(":")[1].strip().rstrip('\x00')
-            nutrientMix[x].volume = nutrientMix[x].pump.query("TV,?").split("TV,")[1]
+            nutrientMix[x].volume = nutrientMix[x].volume + float(nutrientMix[x].pump.query("TV,?").split("TV,")[1])
             blynk.virtual_write(nutrientMix[x].volumePin, nutrientMix[x].volume )
             blynk.virtual_write(98, now.strftime("%d/%m/%Y %H:%M:%S") + " :- Had used " + lVolume + " ml| Now Dosed :"+ str(nutrientMix[x].volume) + "ml" + '\n') 
             blynk.virtual_write(98, now.strftime("%d/%m/%Y %H:%M:%S") + " :- Pump for " + nutrientMix[x].name + ":- STOPPED"  + " Dosed :"+ str(dosed) + "ml" + '\n') 
+            blynk.virtual_write(28, "add", rowIndex, nutrientMix[x].name + " dosed " + dosed, now.strftime("%d/%m/%Y %H:%M:%S"))
+            blynk.virtual_write(29,rowIndex+1)        
         else:
             _log.info("Pump for " +nutrientMix[x].name +" = " + nutrientMix[x].pump.query("D,*") + '\n') 
             blynk.virtual_write(98, now.strftime("%d/%m/%Y %H:%M:%S") + " :- Pump for " + nutrientMix[x].name + ":- STARTED" + '\n') 
@@ -506,10 +512,12 @@ try:
         if(value[0] == '1'):
             _log.info("Pump for " +nutrientMix[x].name +" = " + nutrientMix[x].pump.query("X") + '\n')
             dosed = nutrientMix[x].pump.query("R").split(":")[1].strip().rstrip('\x00')
-            nutrientMix[x].volume = nutrientMix[x].pump.query("TV,?").split("TV,")[1]
+            nutrientMix[x].volume = nutrientMix[x].volume + float(nutrientMix[x].pump.query("TV,?").split("TV,")[1])
             blynk.virtual_write(nutrientMix[x].volumePin, nutrientMix[x].volume )
             blynk.virtual_write(98, now.strftime("%d/%m/%Y %H:%M:%S") + " :- Had used " + lVolume + " ml| Now Dosed :"+ str(nutrientMix[x].volume) + "ml" + '\n') 
             blynk.virtual_write(98, now.strftime("%d/%m/%Y %H:%M:%S") + " :- Pump for " + nutrientMix[x].name + ":- STOPPED"  + " Dosed :"+ str(dosed) + "ml" + '\n') 
+            blynk.virtual_write(28, "add", rowIndex, nutrientMix[x].name + " dosed " + dosed, now.strftime("%d/%m/%Y %H:%M:%S"))
+            blynk.virtual_write(29,rowIndex+1)        
         else:
             _log.info("Pump for " +nutrientMix[x].name +" = " + nutrientMix[x].pump.query("D,*") + '\n') 
             blynk.virtual_write(98, now.strftime("%d/%m/%Y %H:%M:%S") + " :- Pump for " + nutrientMix[x].name + ":- STARTED" + '\n') 
@@ -525,10 +533,12 @@ try:
         if(value[0] == '1'):
             _log.info("Pump for " +nutrientMix[x].name +" = " + nutrientMix[x].pump.query("X") + '\n')
             dosed = nutrientMix[x].pump.query("R").split(":")[1].strip().rstrip('\x00')
-            nutrientMix[x].volume = nutrientMix[x].pump.query("TV,?").split("TV,")[1]
+            nutrientMix[x].volume = nutrientMix[x].volume + float(nutrientMix[x].pump.query("TV,?").split("TV,")[1])
             blynk.virtual_write(nutrientMix[x].volumePin, nutrientMix[x].volume )
             blynk.virtual_write(98, now.strftime("%d/%m/%Y %H:%M:%S") + " :- Had used " + lVolume + " ml| Now Dosed :"+ str(nutrientMix[x].volume) + "ml" + '\n') 
             blynk.virtual_write(98, now.strftime("%d/%m/%Y %H:%M:%S") + " :- Pump for " + nutrientMix[x].name + ":- STOPPED"  + " Dosed :"+ str(dosed) + "ml" + '\n') 
+            blynk.virtual_write(28, "add", rowIndex, nutrientMix[x].name + " dosed " + dosed, now.strftime("%d/%m/%Y %H:%M:%S"))
+            blynk.virtual_write(29,rowIndex+1)        
         else:
             _log.info("Pump for " +nutrientMix[x].name +" = " + nutrientMix[x].pump.query("D,*") + '\n') 
             blynk.virtual_write(98, now.strftime("%d/%m/%Y %H:%M:%S") + " :- Pump for " + nutrientMix[x].name + ":- STARTED" + '\n') 
@@ -544,10 +554,12 @@ try:
         if(value[0] == '1'):
             _log.info("Pump for " +nutrientMix[x].name +" = " + nutrientMix[x].pump.query("X") + '\n')
             dosed = nutrientMix[x].pump.query("R").split(":")[1].strip().rstrip('\x00')
-            nutrientMix[x].volume = nutrientMix[x].pump.query("TV,?").split("TV,")[1]
+            nutrientMix[x].volume = nutrientMix[x].volume + float(nutrientMix[x].pump.query("TV,?").split("TV,")[1])
             blynk.virtual_write(nutrientMix[x].volumePin, nutrientMix[x].volume )
             blynk.virtual_write(98, now.strftime("%d/%m/%Y %H:%M:%S") + " :- Had used " + lVolume + " ml| Now Dosed :"+ str(nutrientMix[x].volume) + "ml" + '\n') 
             blynk.virtual_write(98, now.strftime("%d/%m/%Y %H:%M:%S") + " :- Pump for " + nutrientMix[x].name + ":- STOPPED"  + " Dosed :"+ str(dosed) + "ml" + '\n') 
+            blynk.virtual_write(28, "add", rowIndex, nutrientMix[x].name + " dosed " + dosed, now.strftime("%d/%m/%Y %H:%M:%S"))
+            blynk.virtual_write(29,rowIndex+1)        
         else:
             _log.info("Pump for " +nutrientMix[x].name +" = " + nutrientMix[x].pump.query("D,*") + '\n') 
             blynk.virtual_write(98, now.strftime("%d/%m/%Y %H:%M:%S") + " :- Pump for " + nutrientMix[x].name + ":- STARTED" + '\n') 
@@ -564,10 +576,12 @@ try:
         if(value[0] == '1'):
             _log.info("Pump for " +nutrientMix[x].name +" = " + nutrientMix[x].pump.query("X") + '\n')
             dosed = nutrientMix[x].pump.query("R").split(":")[1].strip().rstrip('\x00')
-            nutrientMix[x].volume = nutrientMix[x].pump.query("TV,?").split("TV,")[1]
+            nutrientMix[x].volume = nutrientMix[x].volume + float(nutrientMix[x].pump.query("TV,?").split("TV,")[1])
             blynk.virtual_write(nutrientMix[x].volumePin, nutrientMix[x].volume )
             blynk.virtual_write(98, now.strftime("%d/%m/%Y %H:%M:%S") + " :- Had used " + lVolume + " ml| Now Dosed :"+ str(nutrientMix[x].volume) + "ml" + '\n') 
             blynk.virtual_write(98, now.strftime("%d/%m/%Y %H:%M:%S") + " :- Pump for " + nutrientMix[x].name + ":- STOPPED"  + " Dosed :"+ str(dosed) + "ml" + '\n') 
+            blynk.virtual_write(28, "add", rowIndex, nutrientMix[x].name + " dosed " + dosed, now.strftime("%d/%m/%Y %H:%M:%S"))
+            blynk.virtual_write(29,rowIndex+1)        
         else:
             _log.info("Pump for " +nutrientMix[x].name +" = " + nutrientMix[x].pump.query("D,*") + '\n') 
             blynk.virtual_write(98, now.strftime("%d/%m/%Y %H:%M:%S") + " :- Pump for " + nutrientMix[x].name + ":- STARTED" + '\n') 
