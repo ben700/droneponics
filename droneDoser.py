@@ -228,7 +228,7 @@ try:
         global rowIndex
         rowIndex = 0
         blynk.virtual_write(29, rowIndex)
-	blynk.virtual_write(28, "clr")
+        blynk.virtual_write(28, "clr")
         blynk.virtual_write(27, 0)
 	
     @blynk.handle_event('write V29')
