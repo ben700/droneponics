@@ -136,7 +136,7 @@ try:
                    blynk.set_property(dosage.LED, 'label', dosage.name)
                    blynk.set_property(dosage.volumePin, 'label', dosage.name + "-TVP")
                    #dosage.volume = dosage.pump.query("ATV,?").split("TV,")[1].strip().rstrip('\x00')
-                   dosage.volume = dosage.pump.query("ATV,?").split("TV,")[1].split(".")[0].strip().rstrip('\x00')
+                   #dosage.volume = dosage.pump.query("ATV,?").split("TV,")[1].split(".")[0].strip().rstrip('\x00')
                    blynk.virtual_write(dosage.volumePin, dosage.volume )
                   # blynk.virtual_write(98, dosage.name + " " + dosage.pump.query("O,V,1").strip().rstrip('\x00') + '\n')
                   # blynk.virtual_write(98, dosage.name + " " + dosage.pump.query("O,TV,0").strip().rstrip('\x00') + '\n')
