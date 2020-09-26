@@ -170,7 +170,7 @@ try:
                             break	
                    blynk.set_property(dosage.LED, 'color', colours[1])
                   # dosage.volume = dosage.pump.query("TV,?").split("TV,")[1].strip().rstrip('\x00')
-                   dosage.volume = dosage.pump.query("TV,?").split("TV,")[1].split(".")[0].strip().rstrip('\x00')
+                   dosage.volume = dosage.volume + float(dosage.pump.query("TV,?").split("TV,")[1].split(".")[0].strip().rstrip('\x00'))
                    blynk.virtual_write(dosage.volumePin, dosage.volume )
                    blynk.virtual_write(98, "Dose " + dosage.name + " with " + dosage.dose + "ml total volume now " + dosage.volume + "ml" + '\n')
                    blynk.virtual_write(28, "add", rowIndex, dosage.name + " dosed " + dosage.dose, now.strftime("%d/%m/%Y %H:%M:%S"))
@@ -196,7 +196,7 @@ try:
                             break	
                    blynk.set_property(dosage.LED, 'color', colours[1])
                   # dosage.volume = dosage.pump.query("TV,?").split("TV,")[1].strip().rstrip('\x00')
-                   dosage.volume = dosage.pump.query("TV,?").split("TV,")[1].split(".")[0].strip().rstrip('\x00')
+                   dosage.volume = dosage.volume + float(dosage.pump.query("TV,?").split("TV,")[1].split(".")[0].strip().rstrip('\x00'))
                    blynk.virtual_write(98, "Dose pH with " + dosage.dose + "ml total volume now " + dosage.volume + "ml" + '\n')
                    blynk.virtual_write(28, "add", rowIndex, dosage.name + " dosed " + dosage.dose, now.strftime("%d/%m/%Y %H:%M:%S"))
                    blynk.virtual_write(29,rowIndex+1)  
@@ -609,7 +609,10 @@ try:
 
     @blynk.handle_event('write V90')
     def v90write_handler(pin, value):
-        nutrientMix[0].volume = int(value[0])
+        _log.debug("v90write_handler value[0] =" + str(value[0]))
+	_log.debug("v90write_handler nutrientMix[0].volume =" + str(nutrientMix[0].volume))
+	
+        nutrientMix[0].volume = float(value[0])
 
     @blynk.handle_event('write V91')
     def v91write_handler(pin, value):
