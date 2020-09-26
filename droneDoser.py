@@ -454,6 +454,9 @@ try:
             _log.info("Pump for " +nutrientMix[x].name +" = " + nutrientMix[x].pump.query("X") + '\n')
             dosed = nutrientMix[x].pump.query("R").split(":")[1].strip().rstrip('\x00')
         #    volumeThisTime = nutrientMix[x].pump.query("TV,?").split("TV,")[1]
+            _log.debug("float(nutrientMix[x].volume) = " + str(float(nutrientMix[x].volume)))
+            _log.debug("float(dosed) = " + str(float(dosed)))
+		
             nutrientMix[x].volume = float(nutrientMix[x].volume) + float(dosed)
             blynk.virtual_write(nutrientMix[x].volumePin, nutrientMix[x].volume )
             blynk.virtual_write(98, now.strftime("%d/%m/%Y %H:%M:%S") + " :- Had used " + lVolume + " ml| Now Dosed :"+ str(nutrientMix[x].volume) + "ml" + '\n') 
