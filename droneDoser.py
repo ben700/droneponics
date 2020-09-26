@@ -214,6 +214,12 @@ try:
               sensors[2].color = drone.getPHColour(_log, round(float(sensors[2].value)*10,0))
            except:
               _log.critical("Working out sensor colour crashed")	
+              _log.critical("sensors[0].value = " + str(sensors[0].value))
+              _log.critical("sensors[1].value = " + str(sensors[1].value))
+              _log.critical("sensors[2].value = " + str(sensors[2].value))
+              _log.critical("sensors[0].colour = " + str(drone.getTempColour(_log, int(round(float(sensors[0].value)*10,0)))))
+              _log.critical("sensors[1].colour = " + str(drone.getECColour(_log, round(float(sensors[1].value),0))))
+              _log.critical("sensors[2].colour = " + str(drone.getPHColour(_log, round(float(sensors[2].value)*10,0))))
 
            for sensor in sensors:
               if sensor is not None:
@@ -223,12 +229,6 @@ try:
                  lcdDisplay.updateLCDProbe (sensors[2].value, sensors[1].value, sensors[0].value)
            except:
               _log.critical("updating LCD crashed")
-              _log.critical("sensors[0].value = " + str(sensors[0].value))
-              _log.critical("sensors[1].value = " + str(sensors[1].value))
-              _log.critical("sensors[2].value = " + str(sensors[2].value))
-              _log.critical("sensors[0].colour = " + str(drone.getTempColour(_log, int(round(float(sensors[0].value)*10,0)))))
-              _log.critical("sensors[1].colour = " + str(drone.getECColour(_log, round(float(sensors[1].value),0))))
-              _log.critical("sensors[2].colour = " + str(drone.getPHColour(_log, round(float(sensors[2].value)*10,0))))
 		
 	
 
