@@ -20,8 +20,8 @@ class Dose:
        blynk.set_property(self.LED, 'color', colours['ONLINE'])
        blynk.set_property(self.LED, 'label', self.name)
        blynk.set_property(self.volumePin, 'label', self.name + "-TVP")
-       self.volume = self.pump.query("TV,?").split("TV,")[1].strip().rstrip('\x00')
-       blynk.virtual_write(self.volumePin, self.volume )
+    #   self.volume = self.pump.query("TV,?").split("TV,")[1].strip().rstrip('\x00')
+    #   blynk.virtual_write(self.volumePin, self.volume )
       
  
 class SensorOld:
