@@ -813,6 +813,7 @@ try:
               for l in LED:
                   blynk.virtual_write(l, 255)
               blynk.virtual_write(systemLED, 255)
+	
               #blynk.virtual_write(98, "clr")
               blynk.virtual_write(98, "System now updated and restarted " + '\n')
               blynk.virtual_write(255, 0)
@@ -852,7 +853,7 @@ try:
               _log.info("Boot Completed")
               blynk.virtual_write(250, "Started")
               blynk.set_property(250, 'color', colours['ONLINE'])
-              
+              blynk.set_property(systemLED, 'color', colours['ONLINE'])
 
         except:
            _log.info('Unexpected error')
