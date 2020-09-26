@@ -451,7 +451,9 @@ try:
             _log.info("Pump for " +nutrientMix[x].name +" = " + nutrientMix[x].pump.query("X") + '\n')
             dosed = nutrientMix[x].pump.query("R").split(":")[1].strip().rstrip('\x00')
             volumeThisTime = nutrientMix[x].pump.query("TV,?").split("TV,")[1]
-            _log.info("Just dosed " + str(dosed) + "so total now " + str(volumeThisTime))
+            _log.info("Just dosed " + str(dosed) + " so total now " + str(volumeThisTime))
+            _log.info("Add that to before " + str(nutrientMix[x].volume))
+		
             nutrientMix[x].volume = float(nutrientMix[x].volume) + float(volumeThisTime)
             _log.info("overall total now " + str(nutrientMix[x].volume))
         
