@@ -610,33 +610,33 @@ try:
     @blynk.handle_event('write V90')
     def v90write_handler(pin, value):
         _log.debug("v90write_handler value[0] =" + str(value[0]))
-	_log.debug("v90write_handler nutrientMix[0].volume =" + str(nutrientMix[0].volume))
+        _log.debug("v90write_handler nutrientMix[0].volume =" + str(nutrientMix[0].volume))
 	
         nutrientMix[0].volume = float(value[0])
 
     @blynk.handle_event('write V91')
     def v91write_handler(pin, value):
-        nutrientMix[1].volume = int(value[0])
+        nutrientMix[1].volume = float(value[0])
 	
     @blynk.handle_event('write V92')
     def v92write_handler(pin, value):
-        nutrientMix[2].volume = int(value[0])
+        nutrientMix[2].volume = float(value[0])
 	
     @blynk.handle_event('write V93')
     def v93write_handler(pin, value):
-        nutrientMix[3].volume = int(value[0])
+        nutrientMix[3].volume = float(value[0])
 	
     @blynk.handle_event('write V94')
     def v94write_handler(pin, value):
-        nutrientMix[4].volume = int(value[0])
+        nutrientMix[4].volume = float(value[0])
 	
     @blynk.handle_event('write V95')
     def v95write_handler(pin, value):
-        nutrientMix[5].volume = int(value[0])
+        nutrientMix[5].volume = float(value[0])
 	
     @blynk.handle_event('write V96')
     def v96write_handler(pin, value):
-        nutrientMix[6].volume = int(value[0])
+        nutrientMix[6].volume = float(value[0])
 
 	
     @blynk.handle_event('write V255')
