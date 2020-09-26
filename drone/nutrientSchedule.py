@@ -1,7 +1,8 @@
 from drone import *         
  
 LED =[10,11,12,13,14,15,16]
-VolumePin =[20,21,22,23,24,25,26]
+VolumePin =[90,91,92,93,94,95,96]
+TVPVolume =[0,0,0,0,0,0,0]
 
 def lightPin(): 
     return 26
