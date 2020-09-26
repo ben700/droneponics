@@ -581,9 +581,14 @@ try:
                  blynk.virtual_write(98, now.strftime("%d/%m/%Y %H:%M:%S") + " :- Pump for " + nutrientMix[x].name + ":- STOPPED"  + " Dosed :"+ str(dosed) + "ml" + '\n') 
                  _log.info("Add row to table" + nutrientMix[x].name + " dosed " + str(dosed))
 
+		 _log.info("Add row to table rowIndex = " + str(rowIndex))
+
                  blynk.virtual_write(28, "add", rowIndex, nutrientMix[x].name + " dosed " + str(dosed), now.strftime("%d/%m/%Y %H:%M:%S"))
                  rowIndex = rowIndex+1
                  blynk.virtual_write(29,rowIndex)  
+                  
+                 _log.info("Add row to table rowIndex = " + str(rowIndex))
+		
             blynk.virtual_write(nutrientMix[x].volumePin, nutrientMix[x].volume )
         else:
             _log.info("Pump for " +nutrientMix[x].name +" = " + nutrientMix[x].pump.query("D,*") + '\n') 
