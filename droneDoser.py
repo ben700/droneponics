@@ -173,6 +173,8 @@ try:
                    dosage.volume = dosage.pump.query("TV,?").split("TV,")[1].split(".")[0].strip().rstrip('\x00')
                    blynk.virtual_write(dosage.volumePin, dosage.volume )
                    blynk.virtual_write(98, "Dose " + dosage.name + " with " + dosage.dose + "ml total volume now " + dosage.volume + "ml" + '\n')
+                   blynk.virtual_write(28, "add", rowIndex, dosage.name + " dosed " + dosage.dose, now.strftime("%d/%m/%Y %H:%M:%S"))
+                   blynk.virtual_write(29,rowIndex+1)  
                    blynk.virtual_write(98,"Check to see if user needs notify" + '\n')
                    if (int(float(dosage.volume)) >= int(float(dosage.bottleSize))):
                         if not dosage.notify :
@@ -182,8 +184,6 @@ try:
     def doSinglePHDose():   
         now = datetime.now()
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
-        blynk.virtual_write(28, "add", rowIndex, "pH", now.strftime("%d/%m/%Y %H:%M:%S"))
-        blynk.virtual_write(29,rowIndex+1)
         for dosage in nutrientMix:		
            if(dosage.pump is not None and dosage.name == "pH"):
                    blynk.virtual_write(98, now.strftime("%d/%m/%Y %H:%M:%S") + " Going to Dose pH" + '\n')
@@ -198,6 +198,8 @@ try:
                   # dosage.volume = dosage.pump.query("TV,?").split("TV,")[1].strip().rstrip('\x00')
                    dosage.volume = dosage.pump.query("TV,?").split("TV,")[1].split(".")[0].strip().rstrip('\x00')
                    blynk.virtual_write(98, "Dose pH with " + dosage.dose + "ml total volume now " + dosage.volume + "ml" + '\n')
+                   blynk.virtual_write(28, "add", rowIndex, dosage.name + " dosed " + dosage.dose, now.strftime("%d/%m/%Y %H:%M:%S"))
+                   blynk.virtual_write(29,rowIndex+1)  
                    blynk.virtual_write(dosage.volumePin, dosage.volume )
                    if (int(float(dosage.volume)) >= int(float(dosage.bottleSize))):
                         blynk.notify(dosage.name + " has pumped " + str(dosage.volume) + ", so may need topup")      
@@ -720,9 +722,6 @@ try:
               blynk.set_property(39, "label", "EC Mode")
               blynk.set_property(49, "label", "pH Mode")
 	
-              blynk.virtual_write(28, "add", rowIndex, "Bootup", now.strftime("%d/%m/%Y %H:%M:%S"))
-              blynk.virtual_write(29,rowIndex+1)  
-     
 	
               u=41
               for dosage in nutrientMix:
