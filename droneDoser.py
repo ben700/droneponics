@@ -248,7 +248,7 @@ try:
     def write_handler(pin, value): 
         staus = value[0]
         relay = 0  
-        blynk.virtual_write(98, "In write_handler for " + relays[relay].name + " and the staus is = " + str(staus)+'\n')
+        _log.debug("In write_handler for " + relays[relay].name + " and the staus is = " + str(staus))
         if (staus is "1" ):
            try:
                  blynk.virtual_write(98, "Turing off relay for "+ relays[relay].name +'\n')
@@ -280,7 +280,7 @@ try:
                  _log.error("Except handle_event V"+str(relay+1)+" Turning auto")
  
         blynk.virtual_write(relays[relay].getInfoPin(), relays[relay].info())
-        blynk.virtual_write(98, "completed handler for " + relays[relay].name +'\n')
+        _log.debug( "completed handler for " + relays[relay].name +'\n')
                  
                 
 
