@@ -470,6 +470,7 @@ try:
 
     @blynk.handle_event('write V42')
     def fillLinePump2(pin, value):
+        global rowIndex
         x=1
         _log.info( "Fill Line 2 " + str(value[0]) + '\n')
         lVolume= nutrientMix[x].volume
@@ -493,6 +494,7 @@ try:
 
     @blynk.handle_event('write V43')
     def fillLinePump3(pin, value):
+        global rowIndex
         x=2
         _log.info( "Fill Line 3 " + str(value[0]) + '\n')
         lVolume= nutrientMix[x].volume
@@ -516,6 +518,7 @@ try:
 
     @blynk.handle_event('write V44')
     def fillLinePump4(pin, value):
+        global rowIndex
         x=3
         _log.info( "Fill Line 4 " + str(value[0]) + '\n')
         lVolume= nutrientMix[x].volume
@@ -539,6 +542,7 @@ try:
 
     @blynk.handle_event('write V45')
     def fillLinePump5(pin, value):
+        global rowIndex
         x=4
         _log.info( "Fill Line 5 " + str(value[0]) + '\n')
         lVolume= nutrientMix[x].volume
@@ -562,6 +566,7 @@ try:
             
     @blynk.handle_event('write V46')
     def fillLinePump6(pin, value):
+        global rowIndex
         x=5
         _log.info( "Fill Line 6 " + str(value[0]) + '\n')
         lVolume= nutrientMix[x].volume
@@ -579,7 +584,7 @@ try:
                  _log.info("updated nutrientMix[x].volume  = " + str(float(nutrientMix[x].volume)))
                  blynk.virtual_write(98, now.strftime("%d/%m/%Y %H:%M:%S") + " :- Had used " + str(lVolume) + " ml| Now Dosed :"+ str(nutrientMix[x].volume) + "ml" + '\n') 
                  blynk.virtual_write(98, now.strftime("%d/%m/%Y %H:%M:%S") + " :- Pump for " + nutrientMix[x].name + ":- STOPPED"  + " Dosed :"+ str(dosed) + "ml" + '\n') 
-                 _log.info("Add row to table" + nutrientMix[x].name + " dosed " + str(dosed))
+                 _log.info("Add row to table " + nutrientMix[x].name + " dosed " + str(dosed))
 
                  _log.info("Add row to table rowIndex = " + str(rowIndex))
 
@@ -597,6 +602,7 @@ try:
 		
     @blynk.handle_event('write V47')
     def fillLinePump7(pin, value):
+        global rowIndex
         x=6
         _log.info( "Fill Line 7 " + str(value[0]) + '\n')
         lVolume= nutrientMix[x].volume
