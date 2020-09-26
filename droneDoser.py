@@ -692,7 +692,7 @@ try:
                  x = x +1 
               now = datetime.now()
               blynk.virtual_write(99, now.strftime("%d/%m/%Y %H:%M:%S"))
-               for l in LED:
+              for l in LED:
                   blynk.virtual_write(l, 255)
               blynk.virtual_write(systemLED, 255)
               #blynk.virtual_write(98, "clr")
