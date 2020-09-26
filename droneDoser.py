@@ -450,26 +450,11 @@ try:
         if(value[0] == '1'):
             _log.info("Pump for " +nutrientMix[x].name +" = " + nutrientMix[x].pump.query("X") + '\n')
             dosed = nutrientMix[x].pump.query("R").split(":")[1].strip().rstrip('\x00')
-            volumeThisTime = nutrientMix[x].pump.query("TV,?").split("TV,")[1]
-            _log.info("Just dosed " + str(dosed) + " so total now " + str(volumeThisTime))
-            _log.info("Add that to before " + str(nutrientMix[x].volume))
-            _log.info("nutrientMix[x].volume " + str(float(nutrientMix[x].volume)))
-            _log.info("float(dosed) " + str(float(dosed)))
-            try:
-                nutrientMix[x].volume = float(nutrientMix[x].volume) + float(dosed)
-            except:
-                _log.error("nutrientMix[x].volume = float(volumeThisTime)")
-                nutrientMix[x].volume = float(volumeThisTime)
-		
-            _log.info("overall total now " + str(nutrientMix[x].volume))
-        
+        #    volumeThisTime = nutrientMix[x].pump.query("TV,?").split("TV,")[1]
+            nutrientMix[x].volume = float(nutrientMix[x].volume) + float(dosed)
             blynk.virtual_write(nutrientMix[x].volumePin, nutrientMix[x].volume )
             blynk.virtual_write(98, now.strftime("%d/%m/%Y %H:%M:%S") + " :- Had used " + lVolume + " ml| Now Dosed :"+ str(nutrientMix[x].volume) + "ml" + '\n') 
             blynk.virtual_write(98, now.strftime("%d/%m/%Y %H:%M:%S") + " :- Pump for " + nutrientMix[x].name + ":- STOPPED"  + " Dosed :"+ str(dosed) + "ml" + '\n') 
-            _log.debug(nutrientMix[x].name + " dosed " + str(dosed))
-            _log.debug(nutrientMix[x].name + " rowIndex = " + str(rowIndex))
-            _log.debug(nutrientMix[x].name + " time = " + now.strftime("%d/%m/%Y %H:%M:%S"))
-	
             blynk.virtual_write(28, "add", rowIndex, nutrientMix[x].name + " dosed " + str(dosed), now.strftime("%d/%m/%Y %H:%M:%S"))
             blynk.virtual_write(29,rowIndex+1)        
         else:
@@ -487,7 +472,7 @@ try:
         if(value[0] == '1'):
             _log.info("stop Pump for " +nutrientMix[x].name +" = " + nutrientMix[x].pump.query("X") + '\n')
             dosed = nutrientMix[x].pump.query("R").split(":")[1].strip().rstrip('\x00')
-            nutrientMix[x].volume = nutrientMix[x].volume + float(nutrientMix[x].pump.query("TV,?").split("TV,")[1])
+            nutrientMix[x].volume = float(nutrientMix[x].volume) + float(dosed)
             blynk.virtual_write(nutrientMix[x].volumePin, nutrientMix[x].volume )
             blynk.virtual_write(98, now.strftime("%d/%m/%Y %H:%M:%S") + " :- Had used " + lVolume + " ml| Now Dosed :"+ str(nutrientMix[x].volume) + "ml" + '\n') 
             blynk.virtual_write(98, now.strftime("%d/%m/%Y %H:%M:%S") + " :- Pump for " + nutrientMix[x].name + ":- STOPPED"  + " Dosed :"+ str(dosed) + "ml" + '\n') 
