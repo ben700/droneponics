@@ -10,7 +10,7 @@ from AtlasI2C import (
 
 def buildSensors(sensors, _log):
     _log.debug("in built sensors function")
-    sensors.append( Sensor(102, "Temprature", 30, _log, Target=20, LowAlarm=10, HighAlarm=25))
+    sensors.append( Sensor(102, "Temperature", 30, _log, Target=20, LowAlarm=10, HighAlarm=25))
     _log.debug("built temperature sensor")
     sensors.append( Sensor(100, "EC", 31 , _log, Target=100, LowAlarm=50, HighAlarm=1500))
     _log.debug("built ec sensor")
@@ -20,7 +20,7 @@ def buildSensors(sensors, _log):
 
 def buildMonitorSensors(sensors, _log):
     _log.debug("in built sensors function")
-    sensors.append( Sensor(102, "Temprature", 30, _log))
+    sensors.append( Sensor(102, "Temperature", 30, _log))
     _log.debug("built temperature sensor")
     sensors.append( Sensor(97, "Dissolved Oxygen", 33 , _log))
     _log.debug("built DO sensor")
@@ -67,69 +67,7 @@ class Sensor:
     blynk.set_property(self.displayPin, 'color', self.color)
     blynk.virtual_write(self.displayPin, self.value)
       
-      
-    
-class PH(Sensor):  
-   def __init__(self, _log, *args, **kwargs):
-    Sensor.__init__(self, 99, "pH", 32, _log, *args, **kwargs)
-    self.high=6.3
-    self.low=5.4
-    self.target=5.5
-   
-   def read(self, cTemp):
-      self.oldValue = self.value  
-      return self.sensor.query("RT,"+cTemp).split(":")[1].strip().rstrip('\x00')
- 
-   def display(self, blynk):
-    print("PH:display(blynk)")
-    blynk.set_property(self.displayPin, "label", self.name)
-    blynk.set_property(self.displayPin, 'color', self.color)
-    blynk.virtual_write(self.displayPin, self.value)
 
-class EC(Sensor):
-   def __init__(self,  _log, Target=600,  *args, **kwargs):
-      Sensor.__init__(self, 100, "EC",  31 , _log, Target=600,  *args, **kwargs) 
-      self.target=kwargs.get('Target')
-      self.high=self.target+200
-      self.low=self.target-200  
-      
-   def read(self, cTemp):
-      self.oldValue = self.value  
-      return self.sensor.query("RT,"+cTemp).split(":")[1].strip().rstrip('\x00')
-  
-   def display(self, blynk):
-    print("EC:display(blynk)")
-    blynk.set_property(self.displayPin, "label", self.name)
-    blynk.set_property(self.displayPin, 'color', self.color)
-    blynk.virtual_write(self.displayPin, self.value)
-      
-class ORP(Sensor):
-   def __init__(self, _log, *args, **kwargs):
-      Sensor.__init__(self, 98, "Oxidation Reduction Potential", 34, _log, Target=300, *args, **kwargs) 
-   
-class DO(Sensor):
-   def __init__(self, _log, *args, **kwargs):
-      Sensor.__init__(self, 97, "Dissolved Oxygen", 30, _log, Target=10, *args, **kwargs) 
-   def read(self, cTemp):
-      return self.sensor.query("RT,"+cTemp).split(":")[1].strip().rstrip('\x00')
-    
-class TEMP(Sensor):  
-   def __init__(self, _log, BLYNK, *args, **kwargs):
-      try:
-         Sensor.__init__(self, 102, "Temprature", 30, _log, Target=20, LowAlarm=10, HighAlarm=25, *args, **kwargs) 
-         self.blynk = BLYNK
-         self.blynk.set_property(sensor.displayPin, 'color', drone.colours['ONLINE'])
-         self.blynk.set_property(sensor.displayPin, 'label', sensor.name)
-      except:
-         self.blynk.virtual_write(98, "Unexpected error: atlas on sensor " + sensor.name + '\n') 
-         _log.info("Unexpected error: Atlas temp class")
-    
-   def display(self):
-      print("TEMP:display(blynk)")
-      self.blynk.set_property(self.displayPin, "label", self.name)
-      self.blynk.set_property(self.displayPin, 'color', self.color)
-      self.blynk.virtual_write(self.displayPin, self.value)
-   
 class WaterLevel():  
    GPIO.setmode(GPIO.BCM)
    GPIO.setwarnings(False)
