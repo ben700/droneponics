@@ -572,9 +572,15 @@ try:
             _log.info("Pump for " +nutrientMix[x].name +" = " + nutrientMix[x].pump.query("X") + '\n')
             dosed = nutrientMix[x].pump.query("R").split(":")[1].strip().rstrip('\x00')
             if (float(dosed) > 0) :
+                 _log.info("dosed more than 0 = " + str(float(dosed)))
+                 _log.info("nutrientMix[x].volume  = " + str(float(nutrientMix[x].volume)))
+			
                  nutrientMix[x].volume = float(nutrientMix[x].volume) + float(dosed)
+                 _log.info("updated nutrientMix[x].volume  = " + str(float(nutrientMix[x].volume)))
                  blynk.virtual_write(98, now.strftime("%d/%m/%Y %H:%M:%S") + " :- Had used " + str(lVolume) + " ml| Now Dosed :"+ str(nutrientMix[x].volume) + "ml" + '\n') 
                  blynk.virtual_write(98, now.strftime("%d/%m/%Y %H:%M:%S") + " :- Pump for " + nutrientMix[x].name + ":- STOPPED"  + " Dosed :"+ str(dosed) + "ml" + '\n') 
+                 _log.info("Add row to table" + nutrientMix[x].name + " dosed " + str(dosed))
+
                  blynk.virtual_write(28, "add", rowIndex, nutrientMix[x].name + " dosed " + str(dosed), now.strftime("%d/%m/%Y %H:%M:%S"))
                  rowIndex = rowIndex+1
                  blynk.virtual_write(29,rowIndex)  
