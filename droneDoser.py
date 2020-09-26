@@ -152,6 +152,7 @@ try:
             
 	
     def doSingleDose():        
+        global rowIndex
         now = datetime.now()
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
         _log.info(now.strftime("%d/%m/%Y %H:%M:%S") + " Going to Dose nutrients")
@@ -180,6 +181,7 @@ try:
                              dosage.notify = True
     
     def doSinglePHDose():   
+        global rowIndex
         now = datetime.now()
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
         for dosage in nutrientMix:		
