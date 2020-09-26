@@ -719,6 +719,11 @@ try:
               blynk.set_property(48, "label", "pH Trigger Level")
               blynk.set_property(39, "label", "EC Mode")
               blynk.set_property(49, "label", "pH Mode")
+	
+              blynk.virtual_write(28, "add", rowIndex, "Bootup", now.strftime("%d/%m/%Y %H:%M:%S"))
+              blynk.virtual_write(29,rowIndex+1)  
+     
+	
               u=41
               for dosage in nutrientMix:
                    blynk.set_property(u, "label", dosage.name + " Fill")
