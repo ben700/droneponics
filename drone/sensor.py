@@ -55,14 +55,8 @@ class Sensor:
        self.color = None
        
    def read(self):
-       self._log.info("read(self) for sensor " + self.name)
-       self._log.info("read(self) for self.sensor " + str(self.sensor))
-      # self.oldValue = self.value  
-       self._log.info(self.sensor.query("R"))
-      # self._log.info(self.sensor.query("R").split(":")[1].strip().rstrip('\x00'))
-         
-      
        self.value = self.sensor.query("R").split(":")[1].strip().rstrip('\x00')
+       self._log.info("Read for sensor " + self.name + " was " + str(self.value))      
        return self.value
    
    def display(self, blynk):
