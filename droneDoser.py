@@ -230,6 +230,7 @@ try:
         for dosage in nutrientMix:
              dosage.volume =0
              blynk.virtual_write(dosage.volumePin, dosage.volume )
+             _log.info("reset TVP for " + dosage.name + " to " + str(dosage.volume) + " using pin " + str(dosage.volumePin))
         blynk.virtual_write(29, rowIndex)
         blynk.virtual_write(28, "clr")
         blynk.virtual_write(27, 0)
