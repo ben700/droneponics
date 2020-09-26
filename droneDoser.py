@@ -1,6 +1,6 @@
 ##!/usr/bin/env python3 
 
-LED = [10,11,12,13,14,15]
+LED = [10,11,12,13,14,15,16]
 
 import blynklib
 import blynktimer
