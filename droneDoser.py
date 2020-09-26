@@ -737,19 +737,22 @@ try:
         processSensors()
 	
         _log.info( "Going to start dosing process")  
-
+        doneDose = False
+	
         if (float(sensors[1].target) > float(sensors[1].value)): #EC
              if (int(sensors[1].mode) == 3):
                   _log.info("Do a dose")     
-                  doSingleDose()
+                  doneDose = True
                   blynk.virtual_write(98,"Automatic dose nutrient "+ '\n') 
-
-        if (float(sensors[2].target) < float(sensors[2].value)): #ph
-             _log.info("Would do ph dose; mode is " + str(sensors[2].mode))
-             if (int(sensors[2].mode) == 3):                  
-                  _log.info("Do a ph dose") 
-                  doSinglePHDose()
-                  blynk.virtual_write(98,"Automatic dose Ph"+ '\n')
+                  doSingleDose()
+		
+        if (doneDose is False): #don't auto dose ph same time as food
+             if (float(sensors[2].target) < float(sensors[2].value)): #ph
+                  _log.info("Would do ph dose; mode is " + str(sensors[2].mode))
+                       if (int(sensors[2].mode) == 3):                  
+                       _log.info("Do a ph dose") 
+                       blynk.virtual_write(98,"Automatic dose Ph"+ '\n')
+                       doSinglePHDose()
 			
         if (int(sensors[1].mode) == 2):
              _log.info("Do a dose")     
