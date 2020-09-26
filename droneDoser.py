@@ -230,6 +230,7 @@ try:
         rowIndex = 0
         for dosage in nutrientMix:
              dosage.volume =0
+	     dosage.pump.query("clear")
              blynk.virtual_write(dosage.volumePin, dosage.volume )
              _log.info("reset TVP for " + dosage.name + " to " + str(dosage.volume) + " using pin " + str(dosage.volumePin))
         blynk.virtual_write(29, rowIndex)
