@@ -628,9 +628,6 @@ try:
 
     @blynk.handle_event('write V90')
     def v90write_handler(pin, value):
-        _log.debug("v90write_handler value[0] =" + str(value[0]))
-        _log.debug("v90write_handler nutrientMix[0].volume =" + str(nutrientMix[0].volume))
-	
         nutrientMix[0].volume = float(value[0])
 
     @blynk.handle_event('write V91')
