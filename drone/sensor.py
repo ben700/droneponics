@@ -56,7 +56,7 @@ class Sensor:
        
    def read(self):
        self.value = self.sensor.query("R").split(":")[1].strip().rstrip('\x00')
-       self._log.critical("Read for sensor " + self.name +" sensorId = " + str(self.sensorId) + " was " + str(self.value))      
+       self._log.info("Read for sensor " + self.name +" sensorId = " + str(self.sensorId) + " was " + str(self.value))      
        return self.value
    
    def display(self, blynk):
