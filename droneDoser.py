@@ -156,7 +156,7 @@ try:
         now = datetime.now()
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
         blynk.virtual_write(98, now.strftime("%d/%m/%Y %H:%M:%S") + " Going to Dose nutrients" + '\n')
-        blynk.virtual_write(97, "add", rowIndex, "Nutrients", now.strftime("%d/%m/%Y %H:%M:%S"))
+        blynk.virtual_write(28, "add", rowIndex, "Nutrients", now.strftime("%d/%m/%Y %H:%M:%S"))
         blynk.virtual_write(29,rowIndex+1)  
         for dosage in nutrientMix:
            if(dosage.pump is not None and dosage.name != "pH"):
@@ -182,7 +182,7 @@ try:
     def doSinglePHDose():   
         now = datetime.now()
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
-        blynk.virtual_write(97, "add", rowIndex, "pH", now.strftime("%d/%m/%Y %H:%M:%S"))
+        blynk.virtual_write(28, "add", rowIndex, "pH", now.strftime("%d/%m/%Y %H:%M:%S"))
         blynk.virtual_write(29,rowIndex+1)
         for dosage in nutrientMix:		
            if(dosage.pump is not None and dosage.name == "pH"):
@@ -223,14 +223,19 @@ try:
            except:
               _log.critical("updating LCD crashed")	
 
-    @blynk.handle_event('write V29')
-    def v29write_handler(pin, value):
-        _log.debug("v29write_handler rowIndex =" + str(value[0]))
+    @blynk.handle_event('write V27')
+    def v27write_handler(pin, value):
         global rowIndex
         rowIndex = 0
-        blynk.virtual_write(97, "clr")
-        blynk.virtual_write(29, 0)
-
+        blynk.virtual_write(29, rowIndex)
+	blynk.virtual_write(28, "clr")
+        blynk.virtual_write(27, 0)
+	
+    @blynk.handle_event('write V29')
+    def v29write_handler(pin, value):
+        global rowIndex
+        rowIndex = int(value[0])
+        
 
     @blynk.handle_event('write V1')
     def write_handler(pin, value): 
@@ -597,7 +602,7 @@ try:
     def connect_handler():
         _log.warning("Connected")
         blynk.virtual_write(250, "Connected")
-        pins = [ 35, 36, 1, 2, 3, 4, 8, 29,30,31,32,35,36,38,39,41,42,43,44,45,46,47,48,49, 60, 61, 62, 63, 64, 65, 66, 1]
+        pins = [ 35, 36, 1, 2, 3, 4, 8, 28, 29,30,31,32,35,36,38,39,41,42,43,44,45,46,47,48,49, 60, 61, 62, 63, 64, 65, 66, 1]
         for pin in pins:
            _log.info('Syncing virtual buttons {}'.format(pin))
            blynk.virtual_sync(pin)
@@ -720,7 +725,7 @@ try:
               for dosage in nutrientMix:
                    blynk.set_property(u, "label", dosage.name + " Fill")
                    u = u+1	
-              pins = [ 35, 36, 1, 2, 3, 4, 8, 29,30,31,32,35,36,38,39,41,42,43,44,45,46,47,48,49, 60, 61, 62, 63, 64, 65, 66]
+              pins = [ 35, 36, 1, 2, 3, 4, 8, 28, 29,30,31,32,35,36,38,39,41,42,43,44,45,46,47,48,49, 60, 61, 62, 63, 64, 65, 66]
               for pin in pins:
                    _log.info('Syncing virtual buttons {}'.format(pin))
                    blynk.virtual_sync(pin)
