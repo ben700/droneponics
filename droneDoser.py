@@ -229,9 +229,14 @@ try:
     def v27write_handler(pin, value):
         global rowIndex
         rowIndex = 0
+        for dosage in nutrientMix:
+             dosage.volume =0
+             blynk.virtual_write(dosage.volumePin, dosage.volume )
         blynk.virtual_write(29, rowIndex)
         blynk.virtual_write(28, "clr")
         blynk.virtual_write(27, 0)
+        blynk.virtual_write(98, "Reset the pump volume counters"+'\n')
+      
 	
     @blynk.handle_event('write V29')
     def v29write_handler(pin, value):
