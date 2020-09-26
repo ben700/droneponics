@@ -778,15 +778,15 @@ try:
                    blynk.virtual_write(relay.getInfoPin(), relay.info())
 		
 		
-        if (parser.get('blynkBridge', 'BLYNK_AUTH', fallback=None) is not None):
-            _log.warning("Send Temp data via blynkBridge")
-            blynkBridge = blynklib.Blynk(parser.get('blynkBridge', 'BLYNK_AUTH'))
-            blynkBridge.run()
-            TEMP_VPIN = parser.get('blynkBridge', 'TEMP_VPIN', fallback=30)
-            blynkBridge.virtual_write(TEMP_VPIN, cTemp)
-            blynkBridge.set_property(TEMP_VPIN, 'label', "from " + drone.gethostname())
-            blynkBridge.virtual_sync(30)
-            _log.info("blynkBridge Temp data sent")
+        #if (parser.get('blynkBridge', 'BLYNK_AUTH', fallback=None) is not None):
+        #    _log.warning("Send Temp data via blynkBridge")
+        #    blynkBridge = blynklib.Blynk(parser.get('blynkBridge', 'BLYNK_AUTH'))
+        #    blynkBridge.run()
+        #    TEMP_VPIN = parser.get('blynkBridge', 'TEMP_VPIN', fallback=30)
+        #    blynkBridge.virtual_write(TEMP_VPIN, cTemp)
+        #    blynkBridge.set_property(TEMP_VPIN, 'label', "from " + drone.gethostname())
+        #    blynkBridge.virtual_sync(30)
+        #    _log.info("blynkBridge Temp data sent")
 
 
         _log.info("Completed Timer Function") 
