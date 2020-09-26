@@ -84,14 +84,14 @@ try:
            if sensor is not None:
               sensor.read()
                             	
-           try:		
-              sensors[0].color = drone.getTempColour(_log, int(round(float(sensors[0].value)*10,0)))
-           except:
-              _log.critical("Working out sensor colour crashed")	
+        try:		
+           sensors[0].color = drone.getTempColour(_log, int(round(float(sensors[0].value)*10,0)))
+        except:
+           _log.critical("Working out sensor colour crashed")	
 
-           for sensor in sensors:
-              if sensor is not None:
-                 sensor.display(blynk)
+        for sensor in sensors:
+           if sensor is not None:
+           sensor.display(blynk)
       		
     @blynk.handle_event('write V255')
     def rebooter(pin, value):
@@ -146,7 +146,7 @@ try:
            blynk.virtual_write(98, "System has main loop error" + '\n')
            blynk.set_property(systemLED, 'color', drone.colours['OFFLINE'])
            os.system('sh /home/pi/updateDroneponics.sh')
-    #       os.system('sudo reboot') 
+           os.system('sudo reboot') 
   
    
 except KeyboardInterrupt:
@@ -155,7 +155,7 @@ except KeyboardInterrupt:
    blynkErr = blynklib.Blynk(parser.get('droneMonitor', 'BLYNK_AUTH'))
    blynkErr.virtual_write(98, "System has error" + '\n')
    os.system('sh /home/pi/updateDroneponics.sh')
-#   os.system('sudo reboot')
+   os.system('sudo reboot')
 
 except:
    _log.info('Unexpected error')
@@ -163,4 +163,4 @@ except:
    blynkErr = blynklib.Blynk(parser.get('droneMonitor', 'BLYNK_AUTH'))
    blynkErr.virtual_write(98, "System has error" + '\n')
    os.system('sh /home/pi/updateDroneponics.sh')
- #  os.system('sudo reboot')
+   os.system('sudo reboot')
