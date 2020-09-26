@@ -607,7 +607,35 @@ try:
         nutrientMix[6].dose = value[0]
         blynk.virtual_write(98, nutrientMix[6].name + " dose volume set to " + str(nutrientMix[6].dose)+ '\n')
 
-			
+    @blynk.handle_event('write V90')
+    def v90write_handler(pin, value):
+        nutrientMix[0].volume = int(value[0])
+
+    @blynk.handle_event('write V91')
+    def v91write_handler(pin, value):
+        nutrientMix[1].volume = int(value[0])
+	
+    @blynk.handle_event('write V92')
+    def v92write_handler(pin, value):
+        nutrientMix[2].volume = int(value[0])
+	
+    @blynk.handle_event('write V93')
+    def v93write_handler(pin, value):
+        nutrientMix[3].volume = int(value[0])
+	
+    @blynk.handle_event('write V94')
+    def v94write_handler(pin, value):
+        nutrientMix[4].volume = int(value[0])
+	
+    @blynk.handle_event('write V95')
+    def v95write_handler(pin, value):
+        nutrientMix[5].volume = int(value[0])
+	
+    @blynk.handle_event('write V96')
+    def v96write_handler(pin, value):
+        nutrientMix[6].volume = int(value[0])
+
+	
     @blynk.handle_event('write V255')
     def rebooter(pin, value):
         _log.info( "User reboot")
@@ -623,7 +651,7 @@ try:
     def connect_handler():
         _log.warning("Connected")
         blynk.virtual_write(250, "Connected")
-        pins = [ 35, 36, 1, 2, 3, 4, 8, 28, 29,30,31,32,35,36,38,39,41,42,43,44,45,46,47,48,49, 60, 61, 62, 63, 64, 65, 66, 1]
+        pins = [ 35, 36, 1, 2, 3, 4, 8, 28, 29,30,31,32,35,36,38,39,41,42,43,44,45,46,47,48,49, 60, 61, 62, 63, 64, 65, 66, 90, 91, 92, 93, 94, 95, 96, 1]
         for pin in pins:
            _log.info('Syncing virtual buttons {}'.format(pin))
            blynk.virtual_sync(pin)
@@ -746,7 +774,7 @@ try:
               for dosage in nutrientMix:
                    blynk.set_property(u, "label", dosage.name + " Fill")
                    u = u+1	
-              pins = [ 35, 36, 1, 2, 3, 4, 8, 28, 29,30,31,32,35,36,38,39,41,42,43,44,45,46,47,48,49, 60, 61, 62, 63, 64, 65, 66]
+              pins = [ 35, 36, 1, 2, 3, 4, 8, 28, 29,30,31,32,35,36,38,39,41,42,43,44,45,46,47,48,49, 60, 61, 62, 63, 64, 65, 66, 90, 91, 92, 93, 94, 95, 96]
               for pin in pins:
                    _log.info('Syncing virtual buttons {}'.format(pin))
                    blynk.virtual_sync(pin)
