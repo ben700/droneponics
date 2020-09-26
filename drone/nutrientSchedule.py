@@ -16,7 +16,7 @@ def buildNutrientMix(nutrientMix, _log, scheduleWeek='Grow'):
     nutrientMix.append( Dose(14, 10.00, LED[3], "Rhizotonic", VolumePin[3], 1000))
     nutrientMix.append( Dose(15, 4.00, LED[4], "Cannazym", VolumePin[4], 1000))
     nutrientMix.append( Dose(16, 1.00, LED[5], "PK 13-14", VolumePin[5], 500)) 
-    nutrientMix.append( Dose(17, 1.00, LED[6], "Boost", VolumePin[56], 1000)) 
+    nutrientMix.append( Dose(17, 1.00, LED[6], "Boost", VolumePin[6], 1000)) 
  
     
     return nutrientMix
