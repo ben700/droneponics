@@ -260,14 +260,14 @@ try:
         _log.debug("In write_handler for " + relays[relay].name + " and the staus is = " + str(staus))
         if (staus is "1" ):
            try:
-                 blynk.virtual_write(98, "Turing off relay for "+ relays[relay].name +'\n')
+                 _log.info( "Turing off relay for "+ relays[relay].name +'\n')
                  relays[relay].turnOff(_log)
                  relays[relay].setManual("Off")
            except:
                  _log.error("Except handle_event V"+str(relay+1)+" Turning Off")
         elif (staus is "2" ):
            try:
-                 blynk.virtual_write(98, "Turing on relay for "+ relays[relay].name +'\n')
+                 _log.info( "Turing on relay for "+ relays[relay].name +'\n')
                  relays[relay].turnOn(_log)
                  relays[relay].setManual("On")           
            except:
@@ -280,11 +280,11 @@ try:
                 relays[0].cycleOffResetSet(1)
                 blynk.virtual_write(36,1)	
            try:
-                 blynk.virtual_write(98, "Turing relay for " + relays[relay].name + " to auto "+'\n')
+                 _log.info( "Turing relay for " + relays[relay].name + " to auto "+'\n')
                  relays[relay].setAutomatic()
                  relays[relay].cycleOnReset()
                  relays[relay].setOffCycleReset()
-                 blynk.virtual_write(98, "Turing relay for " + relays[relay].name + " to auto completed"+'\n')	
+                 _log.info( "Turing relay for " + relays[relay].name + " to auto completed"+'\n')	
            except:
                  _log.error("Except handle_event V"+str(relay+1)+" Turning auto")
  
@@ -313,7 +313,6 @@ try:
            except:
                  _log.error("Except handle_event V"+str(relay+1)+" Turning Off")
         blynk.virtual_write(relays[relay].getInfoPin(), relays[relay].info())
-        blynk.virtual_write(98, relays[relay].info() + '\n')
         _log.info("completed v2write_handler")
                  
 		
@@ -329,7 +328,6 @@ try:
                  _log.debug("in v3write_handler and turning off relay completed")
             except:
                  _log.error("Except handle_event V3 Turning Off co2")
-                 blynk.virtual_write(98, "Except handle_event V3 Turning Off co2")           
         elif (staus is "2" ):
             try:
                  _log.debug("in v3write_handler and turning on relay " + relays[relay].name + " on pin " + str(relays[relay].gpioPin))
@@ -338,7 +336,6 @@ try:
                  _log.debug("in v3write_handler and turning on relay completed")
             except:
                  _log.error("Except handle_event V3 Turning on co2")
-                 blynk.virtual_write(98, "Except handle_event V3 Turning on co2")
         else : 
             try:
                  _log.debug("in v3write_handler and turning relay " + relays[relay].name + " auto on pin " + str(relays[relay].gpioPin))
@@ -348,7 +345,6 @@ try:
                  _log.debug("waste cycleOffResetClear()")
             except:
                  _log.error("Except handle_event V3 Turning co2 auto")
-                 blynk.virtual_write(98, "Except handle_event V3 Turning co2 auto")
         blynk.virtual_write(relays[relay].getInfoPin(), relays[relay].info())
                  
  
