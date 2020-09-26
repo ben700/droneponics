@@ -460,10 +460,8 @@ try:
             _log.debug("float(d) = " + str(float(d)))
             n = float(nutrientMix[x].volume)
             _log.debug("float(n) = " + str(float(n)))
-            v = d+n
-            _log.debug("float(v) = " + str(float(v)))
-	
-            nutrientMix[x].volume = float(nutrientMix[x].volume) + float(dosed)
+            nutrientMix[x].volume = d+n
+            _log.debug("float(nutrientMix[x].volume) = " + str(float(nutrientMix[x].volume)))
             blynk.virtual_write(nutrientMix[x].volumePin, nutrientMix[x].volume )
             blynk.virtual_write(98, now.strftime("%d/%m/%Y %H:%M:%S") + " :- Had used " + lVolume + " ml| Now Dosed :"+ str(nutrientMix[x].volume) + "ml" + '\n') 
             blynk.virtual_write(98, now.strftime("%d/%m/%Y %H:%M:%S") + " :- Pump for " + nutrientMix[x].name + ":- STOPPED"  + " Dosed :"+ str(dosed) + "ml" + '\n') 
