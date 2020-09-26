@@ -155,13 +155,11 @@ try:
     def doSingleDose():        
         now = datetime.now()
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
-        blynk.virtual_write(98, now.strftime("%d/%m/%Y %H:%M:%S") + " Going to Dose nutrients" + '\n')
-        blynk.virtual_write(28, "add", rowIndex, "Nutrients", now.strftime("%d/%m/%Y %H:%M:%S"))
-        blynk.virtual_write(29,rowIndex+1)  
+        _log.info(now.strftime("%d/%m/%Y %H:%M:%S") + " Going to Dose nutrients")
         for dosage in nutrientMix:
            if(dosage.pump is not None and dosage.name != "pH"):
                    blynk.virtual_write(98,now.strftime("%d/%m/%Y %H:%M:%S") + " Going to Dose " +str (dosage.name)+ '\n')
-                   dosage.volume = dosage.pump.query("TV,?").split("TV,")[1].strip().rstrip('\x00')
+                   #dosage.volume = dosage.pump.query("TV,?").split("TV,")[1].strip().rstrip('\x00')
                    blynk.set_property(dosage.LED, 'color', colours[0])
                    dosage.pump.query("D,"+str(dosage.dose))
                    while (True):
@@ -170,12 +168,12 @@ try:
                             break	
                    blynk.set_property(dosage.LED, 'color', colours[1])
                   # dosage.volume = dosage.pump.query("TV,?").split("TV,")[1].strip().rstrip('\x00')
-                   dosage.volume = dosage.volume + float(dosage.pump.query("TV,?").split("TV,")[1].split(".")[0].strip().rstrip('\x00'))
+                   dosage.volume = float(dosage.volume) + float(dosed)
                    blynk.virtual_write(dosage.volumePin, dosage.volume )
                    blynk.virtual_write(98, "Dose " + dosage.name + " with " + dosage.dose + "ml total volume now " + dosage.volume + "ml" + '\n')
                    blynk.virtual_write(28, "add", rowIndex, dosage.name + " dosed " + str(dosage.dose), now.strftime("%d/%m/%Y %H:%M:%S"))
                    blynk.virtual_write(29,rowIndex+1)  
-                   blynk.virtual_write(98,"Check to see if user needs notify" + '\n')
+                   _log.debug("Check to see if user needs notify")
                    if (int(float(dosage.volume)) >= int(float(dosage.bottleSize))):
                         if not dosage.notify :
                              blynk.notify(dosage.name + " has pumped " + str(dosage.volume) + ", so may need topup")	
@@ -186,8 +184,8 @@ try:
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
         for dosage in nutrientMix:		
            if(dosage.pump is not None and dosage.name == "pH"):
-                   blynk.virtual_write(98, now.strftime("%d/%m/%Y %H:%M:%S") + " Going to Dose pH" + '\n')
-                   dosage.volume = dosage.pump.query("TV,?").split("TV,")[1].strip().rstrip('\x00')
+                   _log.info(now.strftime("%d/%m/%Y %H:%M:%S") + " Going to Dose pH")
+                 #  dosage.volume = dosage.pump.query("TV,?").split("TV,")[1].strip().rstrip('\x00')
                    blynk.set_property(dosage.LED, 'color', colours[0])
                    dosage.pump.query("D,"+str(dosage.dose))
                    while (True):
@@ -196,7 +194,7 @@ try:
                             break	
                    blynk.set_property(dosage.LED, 'color', colours[1])
                   # dosage.volume = dosage.pump.query("TV,?").split("TV,")[1].strip().rstrip('\x00')
-                   dosage.volume = dosage.volume + float(dosage.pump.query("TV,?").split("TV,")[1].split(".")[0].strip().rstrip('\x00'))
+                   dosage.volume = float(dosage.volume) + float(dosed)
                    blynk.virtual_write(98, "Dose pH with " + dosage.dose + "ml total volume now " + dosage.volume + "ml" + '\n')
                    blynk.virtual_write(28, "add", rowIndex, dosage.name + " dosed " + str(dosage.dose), now.strftime("%d/%m/%Y %H:%M:%S"))
                    blynk.virtual_write(29,rowIndex+1)  
