@@ -91,7 +91,7 @@ try:
 
         for sensor in sensors:
            if sensor is not None:
-           sensor.display(blynk)
+              sensor.display(blynk)
       		
     @blynk.handle_event('write V255')
     def rebooter(pin, value):
