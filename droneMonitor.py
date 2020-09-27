@@ -54,9 +54,8 @@ try:
 	
 	
     sensors = []
-    _log.info("drone.buildSensors(sensors")
     sensors = drone.buildMonitorSensors(sensors, _log)
-    _log.info("all senses created")
+    _log.info("All Monitor Sensors created")
 	
 	
     try:
@@ -105,7 +104,7 @@ try:
         os.system('sudo reboot')
 
         
-    @timer.register(interval=60, run_once=False)
+    @timer.register(interval=30, run_once=False)
     def blynk_data():
         _log.info("Update Timer Run")
         blynk.virtual_write(250, "Running")
