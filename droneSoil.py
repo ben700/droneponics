@@ -146,13 +146,13 @@ def blynk_data():
     try:
         chirp1 = drone.Chirp(1, 0x20)
         moistureRead=chirp1.moist()
-        tempRead = chirp1.temp()/10
+        tempRead = chirp1.temp()
         lightRead = chirp1.light()
             
         moistureReadPer = int(((moistureRead-moistureMin)/moistureRange)*100) 
         blynk.virtual_write(1, moistureReadPer)
         blynk.virtual_write(2, tempRead) 
-        blynk.virtual_write(3, int(lightRead/10))
+        blynk.virtual_write(3, lightRead)
         blynk.set_property(1, 'color', drone.getMoistColour(_log, int(moistureReadPer)))
         blynk.set_property(2, 'color', drone.getTempColour(_log, tempRead))
         blynk.set_property(3, 'color', colours['ONLINE']) # change to per max = 65535
