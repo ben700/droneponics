@@ -11,7 +11,7 @@ try:
     lcd.printline(0, 'LCM2004 IIC V2'.center(cols))
     lcd.printline(1, 'host-' + drone.gethostname())
     lcd.printline(2, 'ip-' + drone.get_ip())
-    lcd.printline(3, 'liquidcrystal_i2c on bus 0')
+    lcd.printline(3, 'liquidcrystal_i2c 1')
 except:
     print("no lcd on bus 1")
     
@@ -20,6 +20,6 @@ try:
     lcd.printline(0, 'LCM2004 IIC V2'.center(cols))
     lcd.printline(1, 'host-' + drone.gethostname())
     lcd.printline(2, 'ip-' + drone.get_ip())
-    lcd.printline(3, 'liquidcrystal_i2c on bus 0')
+    lcd.printline(3, 'liquidcrystal_i2c 0')
 except:
     print("no lcd on bus 0")
