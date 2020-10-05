@@ -66,8 +66,6 @@ moistureColors = list(Color("red").range_to(Color("blue"),101))
 tempColors = list(Color("blue").range_to(Color("red"),40))
 lightColors = list(Color("yellow").range_to(Color("black"),66))
 
-chirp = None
-
 
 # Initialize Blynk
 _log.debug("Creating blynk object for BLYNK_AUTH " + parser.get('blynk', 'BLYNK_AUTH')) 
@@ -80,21 +78,7 @@ _log.debug("Created blynk object and timer for BLYNK_AUTH " + parser.get('blynk'
 #    if (parser.get('logging', 'logLevel', fallback=logging.DEBUG) =="CRITICAL"):
 #        os.system('sh /home/pi/updateDroneponics.sh')
 #        os.system('sudo reboot')
-    
-try:    
-    chirp = drone.Chirp(1, 0x20)
-    moistureRead=chirp.moist()
-except:
-    _log.critical("Can't find I2C1 device should be the soil sensor")
-    chirp = None
 
-try:        
-    i2c_bus = busio.I2C(board.SCL, board.SDA) 
-    ss = Seesaw(i2c_bus, addr=0x38)
-    ssMoistureRead = int(ss.moisture_read())
-except:
-    _log.critical("Can't find I2C0 device should be the soil sensor")
-    ss = None
     
     
 def updateConfig(moistureMin, moistureMax, ssMoistureMin, ssMoistureMax):
@@ -149,8 +133,7 @@ def blynk_data():
     global ssMoistureMax
     global moistureRange
     global ssMoistureRange
-    global chirp
-    global ss
+
     
     blynk.virtual_write(250, "Running")
     blynk.set_property(250, 'color', colours['ONLINE'])
@@ -160,163 +143,171 @@ def blynk_data():
     blynk.set_property(0, 'color', colours['ONLINE'])
 
     _log.info("timer.register fx Update Time")
-    blynk.virtual_write(98, "timer.register fx Update Time" + '\n')
-    
-    if(chirp is not None):
-        blynk.virtual_write(98, "chirp is not None" + '\n')
-        try:
-            moistureRead=chirp.moist()
-            tempRead = chirp.temp()/10
-            lightRead = chirp.light()
-        except:
-            _log.critical("Can't find I2C1 device should be the soil sensor")
-            chirp = None
-    else:
-        blynk.virtual_write(98, "chirp is None" + '\n')
-        try:    
-            chirp = drone.Chirp(1, 0x20)
-            moistureRead=chirp.moist()
-            tempRead = chirp.temp()/10
-            lightRead = chirp.light()
-        except:
-            _log.critical("Can't find I2C1 device should be the soil sensor")
-            chirp = None
-    
-    
-    if(chirp is None):
-        blynk.virtual_write(250, "Sensor 1 Error")
-        blynk.set_property(250, 'color', '#ff0000')
-        _log.error("Updated Blynk with error")
-        blynk.set_property(1, 'color', colours['OFFLINE'])
-        blynk.set_property(2, 'color', colours['OFFLINE'])
-        blynk.set_property(3, 'color', colours['OFFLINE'])    
-    else:
-        if (moistureRead<moistureMin):
-            moistureMin = moistureRead
-            updateConfig(moistureMin, moistureMax, ssMoistureMin, ssMoistureMax)
-        if (moistureRead>moistureMax):
-            moistureMax = moistureRead
-            updateConfig(moistureMin, moistureMax, ssMoistureMin, ssMoistureMax)
+    try:
+        chirp1 = drone.Chirp(1, 0x20)
+        moistureRead=chirp1.moist()
+        tempRead = chirp1.temp()/10
+        lightRead = chirp1.light()
+            
         moistureReadPer = int(((moistureRead-moistureMin)/moistureRange)*100) 
         blynk.virtual_write(1, moistureReadPer)
         blynk.virtual_write(2, tempRead) 
         blynk.virtual_write(3, int(lightRead/10))
         blynk.set_property(1, 'color', drone.getMoistColour(_log, int(moistureReadPer)))
         blynk.set_property(2, 'color', drone.getTempColour(_log, tempRead))
-        _log.debug("About to get light colour for lightRead = " + str(lightRead))
-      #  blynk.set_property(3, 'color', lightColors(_log, int(lightRead/656))) # change to per max = 65535
         blynk.set_property(3, 'color', colours['ONLINE']) # change to per max = 65535
-        blynk.virtual_write(11, moistureRead)
-        blynk.set_property(11, 'color', drone.getMoistColour(_log, int(moistureReadPer)))
-    
-    _log.info("Now work on second sensor")
-    blynk.virtual_write(98, "Now work on second sensor" + '\n')
-    blynk.virtual_write(98, "Second sensor ss = " + str(ss) + '\n')
-    
-    
-    if(ss is not None):
-        blynk.virtual_write(98, "ss is not None" + '\n')
-        try:
-            ssMoistureRead = ss.moisture_read()
-            ssTempRead = round(ss.get_temp(),1)
-            blynk.virtual_write(98, "ss Readings org Obj" + '\n')
-            blynk.virtual_write(98, "ss ssMoistureRead = " + str(ssMoistureRead) + '\n')
-            blynk.virtual_write(98, "ss ssTempRead = " + str(ssTempRead) + '\n')
-        except:
-            _log.critical("Can't find I2C0 device should be the soil sensor")
-            ss = None
-    else:
-        blynk.virtual_write(98, "ss is None" + '\n')
-        try:
-            blynk.virtual_write(98, "Try to create new object" + '\n')
-            i2c_bus = busio.I2C(board.SCL, board.SDA) 
-            ss = Seesaw(i2c_bus, addr=0x38)
-            ssMoistureRead = ss.moisture_read()
-            ssTempRead = round(ss.get_temp(),1)
-            blynk.virtual_write(98, "ss Readings" + '\n')
-            blynk.virtual_write(98, "ss ssMoistureRead = " + str(ssMoistureRead) + '\n')
-            blynk.virtual_write(98, "ss ssTempRead = " + str(ssTempRead) + '\n')
-    
-        except:
-            blynk.virtual_write(98, "Try to create new object except" + '\n')
-            _log.critical("Can't find I2C0 device should be the soil sensor")
-            ss = None
-    
-
-    if(ss is None):
-        
-        blynk.virtual_write(98, "ss is None" + '\n')
-        if(chirp is None):
-            blynk.virtual_write(250, "Both Sensor Error")
-        else:
-            blynk.virtual_write(250, "Sensor 2 Error")
+        blynk.virtual_write(4, moistureRead)
+        blynk.set_property(4, 'color', drone.getMoistColour(_log, int(moistureReadPer)))    
+    except:
+        _log.critical("Can't find I2C1 chirp device should be a soil sensor")
+        blynk.virtual_write(250, "Sensor 1 Error")
         blynk.set_property(250, 'color', '#ff0000')
+        blynk.virtual_write(1, -1)
+        blynk.virtual_write(2, -1) 
+        blynk.virtual_write(3, -1)
+        blynk.virtual_write(4, -1)
+        blynk.set_property(1, 'color', colours['OFFLINE'])
+        blynk.set_property(2, 'color', colours['OFFLINE'])
+        blynk.set_property(3, 'color', colours['OFFLINE'])
+        blynk.set_property(4, 'color', colours['OFFLINE'])  
+        
+        
+    try:
+        chirp0 = drone.Chirp(0, 0x20)
+        moistureRead=chirp0.moist()
+        tempRead = chirp0.temp()/10
+        lightRead = chirp0.light()
+            
+        moistureReadPer = int(((moistureRead-moistureMin)/moistureRange)*100) 
+        blynk.virtual_write(5, moistureReadPer)
+        blynk.virtual_write(6, tempRead) 
+        blynk.virtual_write(7, int(lightRead/10))
+        blynk.set_property(5, 'color', drone.getMoistColour(_log, int(moistureReadPer)))
+        blynk.set_property(6, 'color', drone.getTempColour(_log, tempRead))
+        blynk.set_property(7, 'color', colours['ONLINE']) # change to per max = 65535
+        blynk.virtual_write(8, moistureRead)
+        blynk.set_property(8, 'color', drone.getMoistColour(_log, int(moistureReadPer)))    
+    except:
+        _log.critical("Can't find I2C0 chirp device should be a soil sensor")
+        blynk.virtual_write(250, "Sensor 0 Error")
+        blynk.set_property(250, 'color', '#ff0000')
+        blynk.virtual_write(5, -1)
+        blynk.virtual_write(6, -1) 
+        blynk.virtual_write(7, -1)
+        blynk.virtual_write(8, -1)
         blynk.set_property(5, 'color', colours['OFFLINE'])
         blynk.set_property(6, 'color', colours['OFFLINE'])
-    else:
-        blynk.virtual_write(98, "ss Read second sensor" + '\n')
-        _log.info("Read second sensor")
-        _log.info("Second sensor read")
+        blynk.set_property(7, 'color', colours['OFFLINE'])
+        blynk.set_property(8, 'color', colours['OFFLINE'])  
         
-        if (ssMoistureRead<ssMoistureMin):
-            ssMoistureMin = ssMoistureRead
-            updateConfig(moistureMin, moistureMax, ssMoistureMin, ssMoistureMax)
-        if (ssMoistureRead>ssMoistureMax):
-            ssMoistureMax = ssMoistureRead
-            updateConfig(moistureMin, moistureMax, ssMoistureMin, ssMoistureMax)
-        blynk.virtual_write(98, "ss Done Max Min" + '\n')
-        ssMoistureReadPer = int(((ssMoistureRead-ssMoistureMin)/ssMoistureRange)*100)
-        blynk.virtual_write(98, "ss Done ssMoistureReadPer = " + str(ssMoistureReadPer) + '\n')
-        blynk.virtual_write(15, ssMoistureRead)
-        blynk.virtual_write(98, "ss do colour" + '\n')
-        blynk.set_property(15, 'color', drone.getMoistColour(_log, int(ssMoistureReadPer)))
-        blynk.virtual_write(5, ssMoistureReadPer) 
-        blynk.virtual_write(6, ssTempRead)
-        blynk.virtual_write(98, "ss do getMoistColour" + '\n')
-        blynk.set_property(5, 'color', drone.getMoistColour(_log, int(ssMoistureReadPer)))
-        blynk.virtual_write(98, "ss do getTempColour" + '\n')
-        blynk.set_property(6, 'color', drone.getTempColour(_log, int(ssTempRead*10)))
-            
-    _log.info("Finished reading Sensors")
-    blynk.virtual_write(98, "Finished reading Sensors" + '\n')
-    
+        
+       
 
-    blynk.virtual_write(12, moistureMin)
-    blynk.virtual_write(13, moistureMax)
-    blynk.set_property(12, 'color', drone.getMoistColour(_log, int(1)))
-    blynk.set_property(13, 'color', drone.getMoistColour(_log, int(99)))
-    blynk.set_property(12, 'label', "Min Sensor 1")
-    blynk.set_property(13, 'label', "Max Sensor 1")
-     
-    blynk.virtual_write(16, ssMoistureMin)
-    blynk.virtual_write(17, ssMoistureMax)
-    blynk.set_property(16, 'color', drone.getMoistColour(_log, int(1)))
-    blynk.set_property(17, 'color', drone.getMoistColour(_log, int(99))) 
-    blynk.set_property(16, 'label', "Min Sensor 2")
-    blynk.set_property(17, 'label', "Max Sensor 2")
+#        if (moistureRead<moistureMin):
+#            moistureMin = moistureRead
+#            updateConfig(moistureMin, moistureMax, ssMoistureMin, ssMoistureMax)
+#        if (moistureRead>moistureMax):
+#            moistureMax = moistureRead
+#            updateConfig(moistureMin, moistureMax, ssMoistureMin, ssMoistureMax)
+
+#        if (ssMoistureRead<ssMoistureMin):
+#            ssMoistureMin = ssMoistureRead
+#            updateConfig(moistureMin, moistureMax, ssMoistureMin, ssMoistureMax)
+#        if (ssMoistureRead>ssMoistureMax):
+#            ssMoistureMax = ssMoistureRead
+#            updateConfig(moistureMin, moistureMax, ssMoistureMin, ssMoistureMax)
+
+    _log.info("Now work on second sensor")
+
+    try:
+        i2c_bus = busio.I2C(board.SCL, board.SDA) 
+        ss = Seesaw(i2c_bus, addr=0x36)
+        ssMoistureRead = ss.moisture_read()
+        ssTempRead = round(ss.get_temp(),1)
+        ssMoistureReadPer = int(((ssMoistureRead-ssMoistureMin)/ssMoistureRange)*100)
+        blynk.virtual_write(10, ssMoistureReadPer) 
+        blynk.virtual_write(11, ssTempRead)
+        blynk.virtual_write(12, ssMoistureRead)
+        blynk.set_property(10, 'color', drone.getMoistColour(_log, int(ssMoistureReadPer)))
+        blynk.set_property(11, 'color', drone.getTempColour(_log, int(ssTempRead*10)))
+        blynk.set_property(12, 'color', drone.getMoistColour(_log, int(ssMoistureReadPer)))
+            
+    except:
+        _log.critical("Can't find I2C1 device 36 a soil sensor")
+        blynk.virtual_write(250, "Sensor 2 Error")
+        blynk.set_property(250, 'color', '#ff0000')
+        blynk.set_property(10, 'color', colours['OFFLINE'])
+        blynk.set_property(11, 'color', colours['OFFLINE'])
+        blynk.set_property(12, 'color', colours['OFFLINE'])
+
+        
+    try:
+        i2c_bus = busio.I2C(board.SCL, board.SDA) 
+        ss = Seesaw(i2c_bus, addr=0x37)
+        ssMoistureRead = ss.moisture_read()
+        ssTempRead = round(ss.get_temp(),1)
+        ssMoistureReadPer = int(((ssMoistureRead-ssMoistureMin)/ssMoistureRange)*100)
+        blynk.virtual_write(13, ssMoistureReadPer) 
+        blynk.virtual_write(14, ssTempRead)
+        blynk.virtual_write(15, ssMoistureRead)
+        blynk.set_property(13, 'color', drone.getMoistColour(_log, int(ssMoistureReadPer)))
+        blynk.set_property(14, 'color', drone.getTempColour(_log, int(ssTempRead*10)))
+        blynk.set_property(15, 'color', drone.getMoistColour(_log, int(ssMoistureReadPer)))
+            
+    except:
+        _log.critical("Can't find I2C1 device 37 a soil sensor")
+        blynk.virtual_write(250, "Sensor 3 Error")
+        blynk.set_property(250, 'color', '#ff0000')
+        blynk.set_property(13, 'color', colours['OFFLINE'])
+        blynk.set_property(14, 'color', colours['OFFLINE'])
+        blynk.set_property(15, 'color', colours['OFFLINE'])
+        
+    try:
+        i2c_bus = busio.I2C(board.D1, board.D0) 
+        ss = Seesaw(i2c_bus, addr=0x36)
+        ssMoistureRead = ss.moisture_read()
+        ssTempRead = round(ss.get_temp(),1)
+        ssMoistureReadPer = int(((ssMoistureRead-ssMoistureMin)/ssMoistureRange)*100)
+        blynk.virtual_write(16, ssMoistureReadPer) 
+        blynk.virtual_write(17, ssTempRead)
+        blynk.virtual_write(18, ssMoistureRead)
+        blynk.set_property(16, 'color', drone.getMoistColour(_log, int(ssMoistureReadPer)))
+        blynk.set_property(17, 'color', drone.getTempColour(_log, int(ssTempRead*10)))
+        blynk.set_property(18, 'color', drone.getMoistColour(_log, int(ssMoistureReadPer)))
+            
+    except:
+        _log.critical("Can't find I2C0 device 36 a soil sensor")
+        blynk.virtual_write(250, "Sensor 4 Error")
+        blynk.set_property(250, 'color', '#ff0000')
+        blynk.set_property(16, 'color', colours['OFFLINE'])
+        blynk.set_property(17, 'color', colours['OFFLINE'])
+        blynk.set_property(18, 'color', colours['OFFLINE'])
+        
+        
+    try:
+        i2c_bus = busio.I2C(board.D1, board.D0) 
+        ss = Seesaw(i2c_bus, addr=0x38)
+        ssMoistureRead = ss.moisture_read()
+        ssTempRead = round(ss.get_temp(),1)
+        ssMoistureReadPer = int(((ssMoistureRead-ssMoistureMin)/ssMoistureRange)*100)
+        blynk.virtual_write(19, ssMoistureReadPer) 
+        blynk.virtual_write(20, ssTempRead)
+        blynk.virtual_write(21, ssMoistureRead)
+        blynk.set_property(19, 'color', drone.getMoistColour(_log, int(ssMoistureReadPer)))
+        blynk.set_property(20, 'color', drone.getTempColour(_log, int(ssTempRead*10)))
+        blynk.set_property(21, 'color', drone.getMoistColour(_log, int(ssMoistureReadPer)))
+            
+    except:
+        _log.critical("Can't find I2C0 device 38 a soil sensor")
+        blynk.virtual_write(250, "Sensor 5 Error")
+        blynk.set_property(250, 'color', '#ff0000')
+        blynk.set_property(19, 'color', colours['OFFLINE'])
+        blynk.set_property(20, 'color', colours['OFFLINE'])
+        blynk.set_property(21, 'color', colours['OFFLINE'])
+        
+        
+    _log.info("Finished reading Sensors")
     
-    _log.info("Check to see if we need to reboot")    
-    if(ss is None):
-        _log.error("Sensors 2 not found check Sensor 1")
-        blynk.virtual_write(98, "Sensors 2 not found check Sensor 1" + '\n')
-        if(chirp is None):
-            blynk.virtual_write(250, "Auto Reboot")
-            _log.critical("No sensors found reboot")
-            blynk.virtual_write(98, "No sensors found reboot" + '\n')
-            blynk.set_property(systemLED, 'color', colours['OFFLINE'])
-            _log.debug("Set the Status colour to " + str(Color("red")))
-            blynk.set_property(250, 'color', '#ff0000')
-            blynk.set_property(0, 'color', colours['OFFLINE'])
-            blynk.virtual_write(98, "Update Code"+ '\n')
-            os.system('sh /home/pi/updateDroneponics.sh')
-            blynk.virtual_write(98, "Now do the Reboot"+ '\n')
-            os.system('sudo reboot')
-        else:
-            blynk.virtual_write(253, now.strftime("%d/%m/%Y %H:%M:%S"))
-    else:
-        blynk.virtual_write(253, now.strftime("%d/%m/%Y %H:%M:%S"))
-   
-    blynk.virtual_write(98, "End of timer.register fx" + '\n')
     _log.debug("End of timer.register fx")
         
 _log.info("Created all the objects. Now starting the drone")        
