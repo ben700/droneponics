@@ -753,8 +753,8 @@ try:
                   if (int(sensors[2].mode) == 3):                  
                       _log.info("Do a ph dose") 
                       blynk.virtual_write(98,"Automatic dose Ph"+ '\n')
-                      #doSinglePHDose()
-                      blynk.notify("Ben has stopped ph pump. Is adding ph now correct!")      
+                      doSinglePHDose()
+                      #blynk.notify("Ben has stopped ph pump. Is adding ph now correct!")      
 			
         if (int(sensors[1].mode) == 2):
              _log.info("Do a dose")     
