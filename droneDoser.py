@@ -745,7 +745,8 @@ try:
                   doneDose = True
                   blynk.virtual_write(98,"Automatic dose nutrient "+ '\n') 
                   doSingleDose()
-	_log.debug("float(sensors[2].target) < float(sensors[2].value) = " + str(float(sensors[2].target)) + " < " + str(float(sensors[2].value)))	
+		
+        _log.debug("float(sensors[2].target) < float(sensors[2].value) = " + str(float(sensors[2].target)) + " < " + str(float(sensors[2].value)))	
         if (doneDose is False): #don't auto dose ph same time as food
              if (float(sensors[2].target) < float(sensors[2].value)): #ph
                   _log.info("Would do ph dose; mode is " + str(sensors[2].mode))
