@@ -45,7 +45,7 @@ try:
     _log.info("/home/pi/droneponics/config/configResMonitor/"+drone.gethostname()+".ini")
 
     # Initialize Blynk
-    blynk = blynklib.Blynk(parser.get('droneMonitor', 'BLYNK_AUTH'))        
+    blynk = blynklib.Blynk(parser.get('droneResMonitor', 'BLYNK_AUTH'))        
     timer = blynktimer.Timer()
     blynk.run()
     #blynk.virtual_write(98, "clr")
