@@ -130,3 +130,8 @@ class LCD:
         self.lcd.printline(2, "Pump 3 status = " + str(r3) + " ")
         self.lcd.printline(3, "Pump 4 status = " + str(r4) + " ")
   
+    def displayOn (self):
+        self.lcd.display()
+     
+    def displayOff (self):
+        self.lcd.noDisplay()
