@@ -283,8 +283,10 @@ try:
     @blynk.handle_event('write V50')
     def v50write_handler(pin, value):
         if(value[0] == '1'):
+            _log.debug("Turn ON LCD display")
             lcdDisplay.displayOn()            
         else:
+            _log.debug("Turn OFF LCD display")
             lcdDisplay.displayOff()            
      
     @blynk.handle_event("connect")
