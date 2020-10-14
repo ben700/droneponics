@@ -131,8 +131,9 @@ class LCD:
         self.lcd.printline(3, "Pump 4 status = " + str(r4) + " ")
   
     def displayOn (self):
-        self.lcd.display()
-     
+        self.lcd.backlight()
+        self._log.debug  ("Turned ON display backlight")
+          
     def displayOff (self):
-        self.lcd.noDisplay()
-        self._log.debug  ("Turned OFF display")
+        self.lcd.noBacklight()
+        self._log.debug  ("Turned OFF display backlight")
