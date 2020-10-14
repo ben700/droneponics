@@ -135,3 +135,4 @@ class LCD:
      
     def displayOff (self):
         self.lcd.noDisplay()
+        self._log.debug  ("Turned OFF display")
