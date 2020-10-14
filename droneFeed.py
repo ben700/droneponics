@@ -291,7 +291,7 @@ try:
     def connect_handler():
         _log.warning("Connected")
         blynk.virtual_write(250, "Connected")
-        pins = [1, 2, 3, 4, 11, 12, 13, 14, 15, 16, 17, 18, 1]
+        pins = [1, 2, 3, 4, 11, 12, 13, 14, 15, 16, 17, 18, 50, 1]
         for pin in pins:
            _log.info('Syncing virtual buttons {}'.format(pin))
            blynk.virtual_sync(pin)
@@ -360,7 +360,7 @@ try:
            blynk.set_property(18, 'color', colours['ONLINE'])
             
             
-           pins = [1, 2, 3, 4, 11, 12, 13, 14, 15, 16, 17, 18, 1]
+           pins = [1, 2, 3, 4, 11, 12, 13, 14, 15, 16, 17, 18, 50, 1]
            for pin in pins:
                 _log.info('Syncing virtual buttons {}'.format(pin))
                 blynk.virtual_sync(pin)
