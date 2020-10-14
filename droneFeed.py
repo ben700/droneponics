@@ -279,7 +279,13 @@ try:
     def v18write_handler(pin, value):
         relays[3].cycleOffResetSet(value[0])
         blynk.virtual_write(relays[3].getInfoPin(), relays[3].info())
-        
+                
+    @blynk.handle_event('write V50')
+    def v50write_handler(pin, value):
+        if(value[0] == '1'):
+            lcdDisplay.displayOn()            
+        else:
+            lcdDisplay.displayOff()            
      
     @blynk.handle_event("connect")
     def connect_handler():
