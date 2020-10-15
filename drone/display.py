@@ -31,7 +31,7 @@ class Display:
         self.image = Image.new('RGB', (self.disp.height,self.disp.width), (255,255,255)) 
 
         # read bmp file 
-        bmp = Image.open(os.path.join(picdir, 'LCD_2inch.bmp'))	
+        bmp = Image.open(os.path.join(picdir, 'dronePonics_Logo.bmp'))	
         self.image.paste(bmp, (0,0))  
         self.image=self.image.rotate(180)
         self.disp.ShowImage(self.image)
