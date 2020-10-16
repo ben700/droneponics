@@ -74,6 +74,7 @@ except:
 
 
 def displaySensorData():
+     _log.debug("-----------displaySensorData")	
      for sensor in sensors:
          _log.debug("Look as Sonsor" + str(sensor.name))
          if sensor is not None:
