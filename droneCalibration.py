@@ -89,5 +89,6 @@ def main():
     for sensor in sensors:
         if sensor is not None:
             sensor.read()
-            sensor.display(blynk)                   	
+            sensor.display(blynk)
+            sensor.displayCurrenCalibration(blynk)                 	
         
