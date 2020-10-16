@@ -86,8 +86,11 @@ def write_handler(pin, value):
 
 def main():
     blynk.run()
+    _log.debug("Look as Sonsors")
     for sensor in sensors:
+        _log.debug("Look as Sonsor" + str(sensor.name) )
         if sensor is not None:
+            _log.debug("Sonsor" + str(sensor.name) +  " was not null" )
             sensor.read()
             sensor.display(blynk)
             sensor.displayCurrenCalibration(blynk)                 	
