@@ -84,15 +84,7 @@ def displaySensorData():
              sensor.displayCurrenCalibration(blynk)   
 	 
 	
-@blynk.handle_event('write V1')
-def write_handler(pin, value): 
-      staus = value[0]
-      BLYNK_LOG("Button is pressed");
-      Blynk.notify("D0 is pressed");
-      answer = input("Are you sure you want to calibrate PH (y/n)")
-      if (answer == 'y'):
-         answer = input("Going to calibrate ph to mid 7.00. Enter y when you are ready(y/n)")
-		
+
 @blynk.handle_event('write V60')
 def v60write_handler(pin, value):
       _log.debug("v60write_handler and value[0] = " + str(value[0]))
@@ -125,7 +117,6 @@ def blynk_data():
     _log.info("Update Timer Run")
     now = datetime.now()
     blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
- 
     displaySensorData()
 		
 while True:
