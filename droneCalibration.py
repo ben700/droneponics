@@ -66,6 +66,6 @@ except:
 def write_handler(pin, value): 
       staus = value[0]
       answer = input("Are you sure you want to calibrate PH (y/n)")
-         if answer == 'y':
+         if (answer == 'y'):
             answer = input("Going to calibrate ph to mid 7.00. Enter y when you are ready(y/n)")
         
