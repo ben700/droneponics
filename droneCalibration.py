@@ -94,12 +94,12 @@ def v60write_handler(pin, value):
 @blynk.handle_event('write V61')
 def v60write_handler(pin, value): 
       if (value[0] == '1'):
-	   sensors[2].query("Cal,clear")
+	sensors[2].query("Cal,clear")
 
 @blynk.handle_event('write V63')
 def v60write_handler(pin, value): 
-      if (value[0] == '1'):
-	   sensors[3].query("Cal,clear")
+      if (value[0] == '1'):          
+	sensors[3].query("Cal,clear")
            
 	  
 	  
