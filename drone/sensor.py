@@ -73,6 +73,11 @@ class Sensor:
        self._log.info("Read Calibration for sensor " + self.name +" sensorId = " + str(self.sensorId) + " was " + str(self.Cal))      
        return self.Cal
       
+   def displayCurrenCalibration(self, blynk):
+       self.Cal = self.currenCalibration()
+       blynk.virtual_write(self.displayPin + 10, self.Cal)
+       return self.Cal
+   
 class WaterLevel():  
    GPIO.setmode(GPIO.BCM)
    GPIO.setwarnings(False)
