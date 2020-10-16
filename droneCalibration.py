@@ -111,6 +111,7 @@ def blynk_data():
     displaySensorData()
 		
 while True:
+	_log.debug("in main function")
         try:
            blynk.run()
            timer.run()
