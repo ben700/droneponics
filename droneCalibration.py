@@ -88,7 +88,7 @@ def v60write_handler(pin, value):
       if (value[0] == '1'):
            _log.debug("Clear Caibration")
            sensors[1].query("Cal,clear")
-           sensors[1]].displayCurrenCalibration(blynk)  
+           sensors[1].displayCurrenCalibration(blynk)  
 
 
 @blynk.handle_event('write V61')
