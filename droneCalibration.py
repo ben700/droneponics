@@ -113,7 +113,7 @@ def reBooter(pin, value):
 while True:
     try:
         blynk.run()
-        timer.run()
+       # timer.run()
         if bootup :
            blynk.virtual_write(250, "Initializing")
            blynk.set_property(250, 'color', '#ff00dd')	
