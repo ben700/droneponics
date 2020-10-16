@@ -73,11 +73,15 @@ except:
     _log.info("Blynk created")
 
 
-def displayState():
+def displaySensorData():
      for sensor in sensors:
-          if sensor is not None:
-                sensor.currenCalibration()
-		
+         _log.debug("Look as Sonsor" + str(sensor.name))
+         if sensor is not None:
+             _log.debug("Sonsor" + str(sensor.name) +  " was not null" )
+             sensor.read()
+             sensor.display(blynk)
+             sensor.displayCurrenCalibration(blynk)   
+	 
 	
 @blynk.handle_event('write V1')
 def write_handler(pin, value): 
@@ -93,8 +97,9 @@ def v60write_handler(pin, value):
       _log.debug("v60write_handler and value[0] = " + str(value[0]))
       if (value[0] == '1'):
            _log.debug("Clear Caibration")
-           displaySensorData[1].query("Cal,clear")
-           displayState()  
+           sensors[1].query("Cal,clear")
+
+      displaySensorData()
       blynk.virtual_write(60,0)
 
 @blynk.handle_event('write V61')
@@ -104,7 +109,7 @@ def v61write_handler(pin, value):
            _log.debug("Clear Caibration")
            sensors[2].query("Cal,clear")
            sensors[3].query("Cal,clear")
-           displaySensorData()             
+      displaySensorData()             
       blynk.virtual_write(61,0)
 	  
 	  
@@ -120,18 +125,6 @@ def blynk_data():
     now = datetime.now()
     blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
  
-def displaySensorData():
-     for sensor in sensors:
-         _log.debug("Look as Sonsor" + str(sensor.name))
-         if sensor is not None:
-             _log.debug("Sonsor" + str(sensor.name) +  " was not null" )
-             sensor.read()
-             sensor.display(blynk)
-             sensor.displayCurrenCalibration(blynk)   
-	 
-    
-for sensor in sensors:
-    _log.debug("Look as Sonsor" + str(sensor.name) )
     displaySensorData()
 		
 while True:
