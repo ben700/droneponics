@@ -70,7 +70,7 @@ _log.info("Blynk created")
     
 
 
-def displaySensorData():
+def displaySensorData(blynk):
      _log.debug("-----------displaySensorData")	
      for sensor in sensors:
          _log.debug("Look as Sensor" + str(sensor.name))
@@ -78,6 +78,7 @@ def displaySensorData():
              _log.debug("Sonsor" + str(sensor.name) +  " was not null" )
             # sensor.read()
             # sensor.display(blynk)
+	     _log.debug("sensor.displayCurrenCalibration(blynk)")
              sensor.displayCurrenCalibration(blynk)   
 	 
 	
@@ -99,7 +100,8 @@ def v61write_handler(pin, value):
            _log.debug("Clear Caibration EC + Temp")
            sensors[2].sensor.query("Cal,clear")
            sensors[3].sensor.query("Cal,clear")
-      displaySensorData()             
+      sensors[2].displayCurrenCalibration(blynk)
+      sensors[3].displayCurrenCalibration(blynk)
       blynk.virtual_write(61,0)
 	  
 	  
