@@ -138,6 +138,20 @@ while True:
         try:
            blynk.run()
            timer.run()
+           if bootup :
+              blynk.virtual_write(250, "Initializing")
+              blynk.set_property(250, 'color', '#ff00dd')	
+              p = subprocess.Popen(['i2cdetect', '-y','1'],stdout=subprocess.PIPE,)
+              #cmdout = str(p.communicate())
+              for i in range(0,9):
+                   blynk.virtual_write(98, str(p.stdout.readline()) + '\n')
+              bootup = False
+              blynk.set_property(251, "label",drone.gethostname())
+              blynk.virtual_write(251, drone.get_ip())
+              now = datetime.now()
+              blynk.virtual_write(99, now.strftime("%d/%m/%Y %H:%M:%S"))
+              blynk.virtual_write(systemLED, 255)
+	
         
         except:
            _log.critical('Unexpected error')
