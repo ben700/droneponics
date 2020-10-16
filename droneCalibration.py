@@ -77,14 +77,17 @@ except:
 @blynk.handle_event('write V1')
 def write_handler(pin, value): 
       staus = value[0]
+      BLYNK_LOG("Button is pressed");
+      Blynk.notify("D0 is pressed");
       answer = input("Are you sure you want to calibrate PH (y/n)")
       if (answer == 'y'):
          answer = input("Going to calibrate ph to mid 7.00. Enter y when you are ready(y/n)")
         
 
-blynk.run()
-for sensor in sensors:
-    if sensor is not None:
-        sensor.read()
-        sensor.display(blynk)                   	
+void loop() {
+    blynk.run()
+    for sensor in sensors:
+        if sensor is not None:
+            sensor.read()
+            sensor.display(blynk)                   	
         
