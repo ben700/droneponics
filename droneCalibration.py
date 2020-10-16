@@ -118,10 +118,10 @@ def blynk_data():
     _log.info("Update Timer Run")
     now = datetime.now()
     blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
-
+ 
 def displaySensorData():
      for sensor in sensors:
-         _log.debug("Look as Sonsor" + str(sensor.name) )
+         _log.debug("Look as Sonsor" + str(sensor.name))
          if sensor is not None:
              _log.debug("Sonsor" + str(sensor.name) +  " was not null" )
              sensor.read()
