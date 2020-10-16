@@ -3,13 +3,18 @@ from configparser import ConfigParser
 from datetime import datetime
 import time
 import logging
-import sys
-import os
 import blynklib
 import blynktimer
+from configparser import ConfigParser
+from datetime import datetime
+import time
+import logging
+import sys
+import os
+
 sys.path.append('/home/pi/droneponics')
 from AtlasI2C import (
-    AtlasI2C
+   AtlasI2C
 )
 import math  
 import subprocess
@@ -40,14 +45,7 @@ _log.info("info")
 _log.debug("debug")
 
 _log.info("/home/pi/droneponics/config/configCalibration/"+drone.gethostname()+".ini")
-    
-# Initialize Blynk
-blynk = blynklib.Blynk(parser.get('configCalibration', 'BLYNK_AUTH'))        
-timer = blynktimer.Timer()
-#blynk.run()
-#blynk.virtual_write(98, "clr")
-_log.info("Blynk created")
-    
+  
 
 sensors = []
 nutrientMix = []
@@ -61,6 +59,15 @@ try:
     _log.info("all senses created")
 except:
     _log.eror("Error createing atals sensor or pumps ")
+
+	
+# Initialize Blynk
+blynk = blynklib.Blynk(parser.get('configCalibration', 'BLYNK_AUTH'))        
+timer = blynktimer.Timer()
+blynk.run()
+#blynk.virtual_write(98, "clr")
+_log.info("Blynk created")
+    
 
 
 def displaySensorData():
