@@ -88,8 +88,9 @@ def v60write_handler(pin, value):
       _log.debug("v60write_handler and value[0] = " + str(value[0]))
       if (value[0] == '1'):
            _log.debug("Clear Caibration pH")
-           sensors[1].sensor.query("Cal,clear")
-
+           _log.debug(sensors[1].sensor.query("Cal,clear"))
+           _log.debug("Cleared Caibration pH")
+           
       sensors[1].displayCurrenCalibration(blynk)
       blynk.virtual_write(60,0)
 
