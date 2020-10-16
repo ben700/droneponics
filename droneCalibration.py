@@ -78,7 +78,7 @@ def displaySensorData(blynk):
              _log.debug("Sonsor" + str(sensor.name) +  " was not null" )
             # sensor.read()
             # sensor.display(blynk)
-	     _log.debug("sensor.displayCurrenCalibration(blynk)")
+             _log.debug("sensor.displayCurrenCalibration(blynk)")
              sensor.displayCurrenCalibration(blynk)   
 	 
 	
