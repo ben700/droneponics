@@ -85,7 +85,7 @@ def write_handler(pin, value):
 		
 @blynk.handle_event('write V60')
 def v60write_handler(pin, value): 
-      if (value[0] == '1);
+      if (value[0] == '1):
 	   _log.debug("Clear Caibration)"
            sensors[1].query("Cal,clear")
            sensors[1]].displayCurrenCalibration(blynk)  
@@ -93,12 +93,12 @@ def v60write_handler(pin, value):
 
 @blynk.handle_event('write V61')
 def v60write_handler(pin, value): 
-      if (value[0] == '1);
+      if (value[0] == '1):
 	   sensors[2].query("Cal,clear")
 
 @blynk.handle_event('write V63')
 def v60write_handler(pin, value): 
-      if (value[0] == '1);
+      if (value[0] == '1):
 	   sensors[3].query("Cal,clear")
            
 	  
@@ -114,7 +114,7 @@ def blynk_data():
     _log.info("Update Timer Run")
     now = datetime.now()
     blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
-	
+	 
     
 for sensor in sensors:
     _log.debug("Look as Sonsor" + str(sensor.name) )
