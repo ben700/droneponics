@@ -128,7 +128,8 @@ for sensor in sensors:
          sensor.displayCurrenCalibration(blynk)   
             
 def main():
-    blynk.run()
-    timer.run()
+    while True:
+        blynk.run()
+        timer.run()
               	
         
