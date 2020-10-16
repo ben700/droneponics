@@ -77,9 +77,9 @@ class Sensor:
    def displayCurrenCalibration(self, blynk):
        self._log.info ("displayCurrenCalibration")
        currenCalibration(self)
-       blynk.virtual_write(self.displayPin + 9, self.Cal)
+       blynk.virtual_write(self.displayPin + 10, self.Cal)
        self._log.info ("finished displayCurrenCalibration") 
-       self._log.info ("self.displayPin + 9 = " + str(self.displayPin + 9)) 
+       self._log.info ("self.displayPin + 10 = " + str(self.displayPin + 9)) 
        self._log.info ("self.Cal=" + str(self.Cal) ) 
       
        
