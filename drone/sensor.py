@@ -72,11 +72,11 @@ class Sensor:
        self._log.info ("currenCalibration")
        self.Cal = self.sensor.query("Cal,?").split(":")[1].strip().rstrip('\x00')
        self._log.info("Read Calibration for sensor " + self.name +" sensorId = " + str(self.sensorId) + " was " + str(self.Cal))      
-       return self.Cal
+       
       
    def displayCurrenCalibration(self, blynk):
        self._log.info ("displayCurrenCalibration")
-       self.Cal = self.sensor.query("Cal,?").split(":")[1].strip().rstrip('\x00')
+       currenCalibration(self)
        blynk.virtual_write(self.displayPin + 9, self.Cal)
        self._log.info ("finished displayCurrenCalibration") 
        self._log.info ("self.displayPin + 9 = " + str(self.displayPin + 9)) 
