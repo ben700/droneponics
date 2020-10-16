@@ -86,17 +86,17 @@ def displaySensorData():
 def v60write_handler(pin, value):
       _log.debug("v60write_handler and value[0] = " + str(value[0]))
       if (value[0] == '1'):
-           _log.debug("Clear Caibration")
+           _log.debug("Clear Caibration pH")
            sensors[1].sensor.query("Cal,clear")
 
-      displaySensorData()
+      sensors[1].displayCurrenCalibration(blynk)
       blynk.virtual_write(60,0)
 
 @blynk.handle_event('write V61')
 def v61write_handler(pin, value): 
       _log.critial("v60write_handler and value[0] = " + str(value[0]))
       if (value[0] == '1'):
-           _log.debug("Clear Caibration")
+           _log.debug("Clear Caibration EC + Temp")
            sensors[2].sensor.query("Cal,clear")
            sensors[3].sensor.query("Cal,clear")
       displaySensorData()             
