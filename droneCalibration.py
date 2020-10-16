@@ -84,7 +84,7 @@ def write_handler(pin, value):
          answer = input("Going to calibrate ph to mid 7.00. Enter y when you are ready(y/n)")
         
 
-void mianLoop(): 
+def main():
     blynk.run()
     for sensor in sensors:
         if sensor is not None:
