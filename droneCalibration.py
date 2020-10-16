@@ -5,6 +5,8 @@ import time
 import logging
 import sys
 import os
+import blynklib
+import blynktimer
 sys.path.append('/home/pi/droneponics')
 from AtlasI2C import (
     AtlasI2C
