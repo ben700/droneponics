@@ -64,8 +64,6 @@ except:
     _log.eror("Error createing atals sensor or pumps ")
 
 
-
-
     # Initialize Blynk
     blynk = blynklib.Blynk(parser.get('configCalibration', 'BLYNK_AUTH'))        
     timer = blynktimer.Timer()
@@ -74,6 +72,13 @@ except:
     blynk.set_property(systemLED, 'color', drone.colours['ONLINE'])
     _log.info("Blynk created")
 
+
+def displayState():
+     for sensor in sensors:
+          if sensor is not None:
+                sensor.currenCalibration()
+		
+	
 @blynk.handle_event('write V1')
 def write_handler(pin, value): 
       staus = value[0]
@@ -88,19 +93,16 @@ def v60write_handler(pin, value):
       if (value[0] == '1'):
            _log.debug("Clear Caibration")
            sensors[1].query("Cal,clear")
-           sensors[1].displayCurrenCalibration(blynk)  
-
+           displayState()             
 
 @blynk.handle_event('write V61')
-def v60write_handler(pin, value): 
+def v61write_handler(pin, value): 
       if (value[0] == '1'):
+           _log.debug("Clear Caibration")
            sensors[2].query("Cal,clear")
-
-@blynk.handle_event('write V63')
-def v60write_handler(pin, value): 
-      if (value[0] == '1'):          
            sensors[3].query("Cal,clear")
-           
+           displayState()             
+      
 	  
 	  
 @blynk.handle_event('write V255')
