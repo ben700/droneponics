@@ -82,7 +82,27 @@ def write_handler(pin, value):
       answer = input("Are you sure you want to calibrate PH (y/n)")
       if (answer == 'y'):
          answer = input("Going to calibrate ph to mid 7.00. Enter y when you are ready(y/n)")
+		
+@blynk.handle_event('write V60')
+def v60write_handler(pin, value): 
+      if (value[0] == '1);
+	   _log.debug("Clear Caibration)"
+           sensors[1].query("Cal,clear")
+           sensors[1]].displayCurrenCalibration(blynk)  
 
+
+@blynk.handle_event('write V61')
+def v60write_handler(pin, value): 
+      if (value[0] == '1);
+	   sensors[2].query("Cal,clear")
+
+@blynk.handle_event('write V63')
+def v60write_handler(pin, value): 
+      if (value[0] == '1);
+	   sensors[3].query("Cal,clear")
+           
+	  
+	  
 @blynk.handle_event('write V255')
 def reBooter(pin, value):
     _log.critical( "User reboot")        
