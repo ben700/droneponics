@@ -111,17 +111,16 @@ def reBooter(pin, value):
     
 		
 while True:
-    _log.debug("in main function")
     try:
         blynk.run()
-    #    timer.run()
+        timer.run()
         if bootup :
            blynk.virtual_write(250, "Initializing")
            blynk.set_property(250, 'color', '#ff00dd')	
-       #    p = subprocess.Popen(['i2cdetect', '-y','1'],stdout=subprocess.PIPE,)
+           p = subprocess.Popen(['i2cdetect', '-y','1'],stdout=subprocess.PIPE,)
            #cmdout = str(p.communicate())
-       #    for i in range(0,9):
-       #       blynk.virtual_write(98, str(p.stdout.readline()) + '\n')
+           for i in range(0,9):
+              blynk.virtual_write(98, str(p.stdout.readline()) + '\n')
            bootup = False
            blynk.set_property(251, "label",drone.gethostname())
            blynk.virtual_write(251, drone.get_ip())
