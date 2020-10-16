@@ -81,3 +81,10 @@ def write_handler(pin, value):
       if (answer == 'y'):
          answer = input("Going to calibrate ph to mid 7.00. Enter y when you are ready(y/n)")
         
+
+blynk.run()
+for sensor in sensors:
+    if sensor is not None:
+        sensor.read()
+        sensor.display(blynk)                   	
+        
