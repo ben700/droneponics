@@ -127,9 +127,16 @@ for sensor in sensors:
          sensor.display(blynk)
          sensor.displayCurrenCalibration(blynk)   
             
-def main():
-    while True:
-        blynk.run()
-        timer.run()
-              	
+while True:
+        try:
+           blynk.run()
+           timer.run()
         
+except:
+   _log.critical('Unexpected error')
+   blynkErr = blynklib.Blynk(parser.get('configCalibration', 'BLYNK_AUTH'))
+   blynkErr.run()
+   blynkErr.virtual_write(250, "Crash")
+   blynkErr.virtual_write(98, "System has error" + '\n')
+   os.system('sh /home/pi/updateDroneponics.sh')
+   os.system('sudo reboot')
