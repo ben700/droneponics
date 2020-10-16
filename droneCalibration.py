@@ -87,7 +87,7 @@ def v60write_handler(pin, value):
       _log.debug("v60write_handler and value[0] = " + str(value[0]))
       if (value[0] == '1'):
            _log.debug("Clear Caibration")
-           _log.critical(sensors[1].query("Cal,clear"))
+           sensors[1].sensor.query("Cal,clear"))
 
       displaySensorData()
       blynk.virtual_write(60,0)
@@ -97,8 +97,8 @@ def v61write_handler(pin, value):
       _log.critial("v60write_handler and value[0] = " + str(value[0]))
       if (value[0] == '1'):
            _log.debug("Clear Caibration")
-           sensors[2].query("Cal,clear")
-           sensors[3].query("Cal,clear")
+           sensors[2].sensor.query("Cal,clear")
+           sensors[3].sensor.query("Cal,clear")
       displaySensorData()             
       blynk.virtual_write(61,0)
 	  
