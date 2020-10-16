@@ -99,6 +99,7 @@ def v60write_handler(pin, value):
 
 @blynk.handle_event('write V61')
 def v61write_handler(pin, value): 
+      _log.critial("v60write_handler and value[0] = " + str(value[0]))
       if (value[0] == '1'):
            _log.debug("Clear Caibration")
            sensors[2].query("Cal,clear")
