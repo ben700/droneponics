@@ -82,8 +82,12 @@ def write_handler(pin, value):
       answer = input("Are you sure you want to calibrate PH (y/n)")
       if (answer == 'y'):
          answer = input("Going to calibrate ph to mid 7.00. Enter y when you are ready(y/n)")
-        
 
+@blynk.handle_event('write V255')
+def reBooter(pin, value):
+        _log.critical( "User reboot")        
+        drone.rebooter(pin, value, blynk)
+        
 def main():
     blynk.run()
     _log.debug("Look as Sonsors")
