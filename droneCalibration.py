@@ -89,7 +89,8 @@ def write_handler(pin, value):
          answer = input("Going to calibrate ph to mid 7.00. Enter y when you are ready(y/n)")
 		
 @blynk.handle_event('write V60')
-def v60write_handler(pin, value): 
+def v60write_handler(pin, value):
+      _log.debug("v60write_handler and value[0] = " + str(value[0]))
       if (value[0] == '1'):
            _log.debug("Clear Caibration")
            sensors[1].query("Cal,clear")
