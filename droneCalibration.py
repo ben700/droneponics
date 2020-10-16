@@ -44,7 +44,7 @@ _log.info("/home/pi/droneponics/config/configCalibration/"+drone.gethostname()+"
 # Initialize Blynk
 blynk = blynklib.Blynk(parser.get('configCalibration', 'BLYNK_AUTH'))        
 timer = blynktimer.Timer()
-blynk.run()
+#blynk.run()
 #blynk.virtual_write(98, "clr")
 blynk.set_property(drone.systemLED, 'color', drone.colours['ONLINE'])
 _log.info("Blynk created")
@@ -103,18 +103,12 @@ def reBooter(pin, value):
     drone.rebooter(pin, value, blynk)
     _log.debug("Look as Sonsors")
     
-@timer.register(interval=10, run_once=False)
-def blynk_data():
-    _log.info("Update Timer Run")
-    now = datetime.now()
-    blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
-    displaySensorData()
 		
 while True:
     _log.debug("in main function")
     try:
         blynk.run()
-        timer.run()
+    #    timer.run()
         if bootup :
            blynk.virtual_write(250, "Initializing")
            blynk.set_property(250, 'color', '#ff00dd')	
