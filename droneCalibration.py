@@ -85,10 +85,9 @@ def write_handler(pin, value):
 
 @blynk.handle_event('write V255')
 def reBooter(pin, value):
-        _log.critical( "User reboot")        
-        drone.rebooter(pin, value, blynk)
-
-            _log.debug("Look as Sonsors")
+    _log.critical( "User reboot")        
+    drone.rebooter(pin, value, blynk)
+    _log.debug("Look as Sonsors")
     
 @timer.register(interval=10, run_once=False)
 def blynk_data():
