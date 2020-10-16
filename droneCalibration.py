@@ -90,7 +90,7 @@ def v60write_handler(pin, value):
            _log.debug("clear temp")
            sensors[1].sensor.query("Cal,clear")
            _log.debug("clear ec")
-	   sensors[2].sensor.query("Cal,clear")
+           sensors[2].sensor.query("Cal,clear")
            _log.debug("clear ph")
            sensors[3].sensor.query("Cal,clear")
       sensors[2].displayCurrenCalibration(blynk)
