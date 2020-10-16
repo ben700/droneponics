@@ -76,9 +76,10 @@ class Sensor:
       
    def displayCurrenCalibration(self, blynk):
        self._log.info ("displayCurrenCalibration")
-       self.Cal = currenCalibration(self)
+       self.Cal = self.sensor.query("Cal,?").split(":")[1].strip().rstrip('\x00')
        blynk.virtual_write(self.displayPin + 10, self.Cal)
-       return self.Cal
+       self._log.info ("finished displayCurrenCalibration")         
+       
    
 class WaterLevel():  
    GPIO.setmode(GPIO.BCM)
