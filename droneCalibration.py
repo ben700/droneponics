@@ -64,15 +64,6 @@ except:
     _log.eror("Error createing atals sensor or pumps ")
 
 
-    # Initialize Blynk
-    blynk = blynklib.Blynk(parser.get('configCalibration', 'BLYNK_AUTH'))        
-    timer = blynktimer.Timer()
-    blynk.run()
-    #blynk.virtual_write(98, "clr")
-    blynk.set_property(systemLED, 'color', drone.colours['ONLINE'])
-    _log.info("Blynk created")
-
-
 def displaySensorData():
      _log.debug("-----------displaySensorData")	
      for sensor in sensors:
