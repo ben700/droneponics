@@ -87,15 +87,26 @@ def write_handler(pin, value):
 def reBooter(pin, value):
         _log.critical( "User reboot")        
         drone.rebooter(pin, value, blynk)
-        
+
+            _log.debug("Look as Sonsors")
+    
+@timer.register(interval=10, run_once=False)
+def blynk_data():
+    _log.info("Update Timer Run")
+    now = datetime.now()
+    blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
+	
+    
+for sensor in sensors:
+    _log.debug("Look as Sonsor" + str(sensor.name) )
+    if sensor is not None:
+         _log.debug("Sonsor" + str(sensor.name) +  " was not null" )
+         sensor.read()
+         sensor.display(blynk)
+         sensor.displayCurrenCalibration(blynk)   
+            
 def main():
     blynk.run()
-    _log.debug("Look as Sonsors")
-    for sensor in sensors:
-        _log.debug("Look as Sonsor" + str(sensor.name) )
-        if sensor is not None:
-            _log.debug("Sonsor" + str(sensor.name) +  " was not null" )
-            sensor.read()
-            sensor.display(blynk)
-            sensor.displayCurrenCalibration(blynk)                 	
+    timer.run()
+              	
         
