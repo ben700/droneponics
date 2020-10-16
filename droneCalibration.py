@@ -92,8 +92,9 @@ def v60write_handler(pin, value):
       sensors[1].displayCurrenCalibration(blynk)
       blynk.virtual_write(60,0)
 
+
 @blynk.handle_event('write V61')
-def v61write_handler(pin, value): 
+def v61write_handler(pin, value):
       _log.critial("v61write_handler and value[0] = " + str(value[0]))
       if (value[0] == '1'):
            _log.debug("Clear Caibration EC + Temp")
