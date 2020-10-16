@@ -87,8 +87,11 @@ def displaySensorData(blynk):
 def v60write_handler(pin, value):
       _log.debug("v60write_handler and value[0] = " + str(value[0]))
       if (value[0] == '1'):
+           _log.debug("clear temp")
            sensors[1].sensor.query("Cal,clear")
-           sensors[2].sensor.query("Cal,clear")
+           _log.debug("clear ec")
+	   sensors[2].sensor.query("Cal,clear")
+           _log.debug("clear ph")
            sensors[3].sensor.query("Cal,clear")
       sensors[2].displayCurrenCalibration(blynk)
       sensors[3].displayCurrenCalibration(blynk)
