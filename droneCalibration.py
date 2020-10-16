@@ -130,7 +130,7 @@ while True:
            blynk.virtual_write(systemLED, 255)
 	
         
-   except:
+    except:
       _log.critical('Unexpected error')
       blynkErr = blynklib.Blynk(parser.get('configCalibration', 'BLYNK_AUTH'))  
       blynkErr.run()
