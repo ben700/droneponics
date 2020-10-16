@@ -46,7 +46,7 @@ blynk = blynklib.Blynk(parser.get('configCalibration', 'BLYNK_AUTH'))
 timer = blynktimer.Timer()
 blynk.run()
 #blynk.virtual_write(98, "clr")
-blynk.set_property(drone.systemLED, 'color', colours['ONLINE'])
+blynk.set_property(drone.systemLED, 'color', drone.colours['ONLINE'])
 _log.info("Blynk created")
     
 
@@ -71,7 +71,7 @@ except:
     timer = blynktimer.Timer()
     blynk.run()
     #blynk.virtual_write(98, "clr")
-    blynk.set_property(systemLED, 'color', colours['ONLINE'])
+    blynk.set_property(systemLED, 'color', drone.colours['ONLINE'])
     _log.info("Blynk created")
 
 @blynk.handle_event('write V1')
