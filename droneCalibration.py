@@ -1,14 +1,24 @@
 ##!/usr/bin/env python3 
+from configparser import ConfigParser
+from datetime import datetime
+import time
+import logging
+import sys
+import os
+sys.path.append('/home/pi/droneponics')
+from AtlasI2C import (
+    AtlasI2C
+)
+import math  
+import subprocess
+import re
 import drone
-
-
-
 
 bootup = True
 rowIndex=1
 
 parser = ConfigParser()
-parser.read("/home/pi/droneponics/config/configConfig/"+drone.gethostname()+".ini")
+parser.read("/home/pi/droneponics/config/configCalibration/"+drone.gethostname()+".ini")
 
 
 # tune console logging
@@ -27,10 +37,10 @@ _log.warning("warning")
 _log.info("info")
 _log.debug("debug")
 
-_log.info("/home/pi/droneponics/config/configConfig/"+drone.gethostname()+".ini")
+_log.info("/home/pi/droneponics/config/configCalibration/"+drone.gethostname()+".ini")
     
 # Initialize Blynk
-blynk = blynklib.Blynk(parser.get('droneCal', 'BLYNK_AUTH'))        
+blynk = blynklib.Blynk(parser.get('configCalibration', 'BLYNK_AUTH'))        
 timer = blynktimer.Timer()
 blynk.run()
 #blynk.virtual_write(98, "clr")
@@ -55,7 +65,7 @@ except:
 
 
     # Initialize Blynk
-    blynk = blynklib.Blynk(parser.get('droneDoser', 'BLYNK_AUTH'))        
+    blynk = blynklib.Blynk(parser.get('configCalibration', 'BLYNK_AUTH'))        
     timer = blynktimer.Timer()
     blynk.run()
     #blynk.virtual_write(98, "clr")
