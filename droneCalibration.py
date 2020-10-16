@@ -80,13 +80,18 @@ def displaySensorData(blynk):
             # sensor.display(blynk)
              _log.debug("sensor.displayCurrenCalibration(blynk)")
              sensor.displayCurrenCalibration(blynk)   
-	 
+
+@blynk.handle_event('write V58')
+def v59write_handler(pin, value):
+      _log.debug("v59write_handler and value[0] = " + str(value[0]))
+      if (value[0] == '1'):
+           sensors[1].displayCurrenCalibration(blynk)
+      blynk.virtual_write(58,0)
 	
 @blynk.handle_event('write V59')
 def v59write_handler(pin, value):
       _log.debug("v59write_handler and value[0] = " + str(value[0]))
       if (value[0] == '1'):
-           _log.debug("clear ec")
            sensors[2].displayCurrenCalibration(blynk)
       blynk.virtual_write(59,0)
 
@@ -94,20 +99,10 @@ def v59write_handler(pin, value):
 def v60write_handler(pin, value):
       _log.debug("v60write_handler and value[0] = " + str(value[0]))
       if (value[0] == '1'):
-           _log.debug("clear temp")
-           sensors[1].displayCurrenCalibration(blynk)
+           sensors[3].displayCurrenCalibration(blynk)
       blynk.virtual_write(60,0)
 
 
-@blynk.handle_event('write V61')
-def v61write_handler(pin, value):
-      _log.critial("v61write_handler and value[0] = " + str(value[0]))
-      if (value[0] == '1'):
-           _log.debug("clear ph")
-           sensors[3].displayCurrenCalibration(blynk)
-      blynk.virtual_write(61,0)
-	  
-	  
 @blynk.handle_event('write V255')
 def reBooter(pin, value):
     _log.critical( "User reboot")        
