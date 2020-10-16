@@ -53,6 +53,7 @@ class Sensor:
        self.lowAlarm = kwargs.get('LowAlarm', None)
        self.highAlarm = kwargs.get('HighAlarm', None)
        self.color = None
+       selfCal= None
        
    def read(self):
        self.value = self.sensor.query("R").split(":")[1].strip().rstrip('\x00')
@@ -67,7 +68,11 @@ class Sensor:
     blynk.set_property(self.displayPin, 'color', self.color)
     blynk.virtual_write(self.displayPin, self.value)
       
-
+   def currenCalibration(self):
+       self.Cal = self.sensor.query("Cal,?").split(":")[1].strip().rstrip('\x00')
+       self._log.info("Read Calibration for sensor " + self.name +" sensorId = " + str(self.sensorId) + " was " + str(self.Cal))      
+       return self.Cal
+      
 class WaterLevel():  
    GPIO.setmode(GPIO.BCM)
    GPIO.setwarnings(False)
