@@ -102,6 +102,38 @@ def v60write_handler(pin, value):
            sensors[3].displayCurrenCalibration(blynk)
       blynk.virtual_write(60,0)
 
+@blynk.handle_event('write V61')
+def v60write_handler(pin, value):
+      sensors[1].CalPoint = str(value[0])
+      blynk.virtual_write(61,sensors[1].CalPoint)
+
+@blynk.handle_event('write V62')
+def v60write_handler(pin, value):
+      sensors[2].LowCalPoint = str(value[0])
+      sensors[2].CalPoint = str(value[0])
+      blynk.virtual_write(62,sensors[2].CalPoint)
+
+@blynk.handle_event('write V63')
+def v60write_handler(pin, value):
+      sensors[2].HighCalPoint = str(value[0])
+      blynk.virtual_write(63,sensors[2].CalPoint)
+
+@blynk.handle_event('write V64')
+def v60write_handler(pin, value):
+      sensors[3].MidCalPoint = str(value[0])
+      blynk.virtual_write(64,sensors[3].MidCalPoint)
+
+@blynk.handle_event('write V65')
+def v60write_handler(pin, value):
+      sensors[3].LowCalPoint = str(value[0])
+      blynk.virtual_write(65,sensors[3].LowCalPoint)
+
+
+@blynk.handle_event('write V66')
+def v60write_handler(pin, value):
+      sensors[3].HighCalPoint = str(value[0])
+      blynk.virtual_write(66,sensors[3].HighCalPoint)
+
 
 @blynk.handle_event('write V255')
 def reBooter(pin, value):
