@@ -54,6 +54,11 @@ class Sensor:
        self.highAlarm = kwargs.get('HighAlarm', None)
        self.color = None
        self.Cal= None
+       self.CalPoint= None
+       self.HighCalPoint= None
+       self.MidCalPoint= None
+       self.LowCalPoint= None
+      
        
    def read(self):
        self.value = self.sensor.query("R").split(":")[1].strip().rstrip('\x00')
