@@ -146,6 +146,12 @@ class Relay:
    def isAutomatic(self):
         return self.automatic
       
+   def isManual(self):
+        if (self.automatic):
+            return "Manual"
+         else:
+            return "Auto"
+            
    def cycleResetSet(self, cycleReset):
       self.cycleReset = int(cycleReset) 
          
