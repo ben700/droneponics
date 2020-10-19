@@ -34,9 +34,9 @@ def updateLCD ():
     image=image.rotate(180)
     
     draw = ImageDraw.Draw(image)
-    draw.text((50, 90), 'pH = ' + str(iPH), font = font30, fill = "BLACK")
-    draw.text((50, 150), 'EC = ' + str(iEC), font = font30, fill = "BLACK")
-    draw.text((50, 190), 'Temp = ' + str(iTemp), font = font30, fill = "BLACK")
+    draw.text((50, 90), 'pH = ' + str(7), font = font30, fill = "BLACK")
+    draw.text((50, 150), 'EC = ' + str(7), font = font30, fill = "BLACK")
+    draw.text((50, 190), 'Temp = ' + str(7), font = font30, fill = "BLACK")
 
     
     disp.ShowImage(image)
