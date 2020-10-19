@@ -31,8 +31,7 @@ def updateLCD ():
     # read bmp file 
     bmp = Image.open(os.path.join(picdir, 'background.bmp'))	
     image.paste(bmp, (0,0))  
-    image=image.rotate(180)
-    
+  
     draw = ImageDraw.Draw(image)
     draw.text((50, 90), 'pH = ' + str(7), font = font30, fill = "BLACK")
     draw.text((50, 150), 'EC = ' + str(7), font = font30, fill = "BLACK")
