@@ -80,7 +80,7 @@ def updateLCD (bR1, bR2, bR3, bR4, iPH, iEC, iTemp):
     time.sleep(10)
 
     # read bmp file 
-    bmp = Image.open(os.path.join(picdir, 'LCD_2inch.bmp'))	
+    bmp = Image.open(os.path.join(picdir, 'background.bmp'))	
     image.paste(bmp, (0,0))  
     image=image.rotate(180)
     disp.ShowImage(image)
