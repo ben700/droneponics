@@ -33,7 +33,7 @@ def updateLCD ():
 
     # read bmp file 
     bmp = Image.open(os.path.join(picdir, 'droneponics_logo.bmp'))	
-    image.paste(bmp, (0,0))  
+    image.paste(bmp, (10,10))  
     image=image.rotate(180)
     disp.ShowImage(image)
 
