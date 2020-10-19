@@ -33,9 +33,9 @@ def updateLCD ():
     image.paste(bmp, (0,0))  
   
     draw = ImageDraw.Draw(image)
-    draw.text((50, 50), 'Pump 1 = On', font = font30, fill = "BLACK")
+    draw.text((50, 40), 'Pump 1 = On', font = font30, fill = "BLACK")
     draw.text((50, 90), 'Pump 2 = On', font = font30, fill = "BLACK")
-    draw.text((50, 150), 'Pump 3 = On', font = font30, fill = "BLACK")
+    draw.text((50, 140), 'Pump 3 = On', font = font30, fill = "BLACK")
     draw.text((50, 190), 'Pump 4 = On', font = font30, fill = "BLACK")
     
     
