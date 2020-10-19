@@ -33,10 +33,10 @@ def updateLCD ():
     image.paste(bmp, (0,0))  
   
     draw = ImageDraw.Draw(image)
-    draw.text((50, 50), 'Pump 1: Mode = Auto Status = On', font = font30, fill = "BLACK")
-    draw.text((50, 95), 'Pump 2: Auto : On', font = font30, fill = "BLACK")
-    draw.text((50, 140), 'Pump 3: Mode = Auto Status = On', font = font15, fill = "BLACK")
-    draw.text((50, 185), 'Pump 4: Auto : On', font = font15, fill = "BLACK")
+    draw.text((10, 50), 'Pump 1: Mode = Auto Status = On', font = font30, fill = "BLACK")
+    draw.text((10, 95), 'Pump 2: Auto : On', font = font30, fill = "BLACK")
+    draw.text((20, 140), 'Pump 3: Mode = Auto Status = On', font = font15, fill = "BLACK")
+    draw.text((30, 185), 'Pump 4: Auto : On', font = font15, fill = "BLACK")
     
     
     disp.ShowImage(image)
