@@ -28,13 +28,17 @@ def updateLCD ():
 
     font30 = ImageFont.truetype(os.path.join(picdir, 'Font.ttc'), 30)
     font15 = ImageFont.truetype(os.path.join(picdir, 'Font.ttc'), 15)
-
-    
-
     # read bmp file 
     bmp = Image.open(os.path.join(picdir, 'background.bmp'))	
     image.paste(bmp, (0,0))  
     image=image.rotate(180)
+    
+    draw = ImageDraw.Draw(image)
+    draw.text((50, 90), 'pH = ' + str(iPH), font = font30, fill = "BLACK")
+    draw.text((50, 150), 'EC = ' + str(iEC), font = font30, fill = "BLACK")
+    draw.text((50, 190), 'Temp = ' + str(iTemp), font = font30, fill = "BLACK")
+
+    
     disp.ShowImage(image)
 
 updateLCD ()
