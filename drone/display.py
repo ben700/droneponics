@@ -31,11 +31,27 @@ class Display:
         self.image = Image.new('RGB', (self.disp.height,self.disp.width), (255,255,255)) 
 
         # read bmp file 
-        bmp = Image.open(os.path.join(picdir, 'dronePonics_Logo.bmp'))	
-        self.image.paste(bmp, (0,0))  
+        bmp = Image.open(os.path.join(picdir, 'droneponics_logo.bmp'))	
+        self.image.paste(bmp, (10,10))  
         self.image=self.image.rotate(180)
         self.disp.ShowImage(self.image)
         self._log.debug("Display default image")
+          
+    def updateLCDPumps (self, p1Mode, p2Mode, p3Mode, p4Mode, p1Status, p2Status, p3Status, p4Status):
+        # Clear display.
+        self.disp.clear()
+    
+         read bmp file 
+        bmp = Image.open(os.path.join(picdir, 'background.bmp'))	
+        image.paste(bmp, (0,0))  
+  
+        draw = ImageDraw.Draw(image)
+        draw.text((10, 50), 'Pump 1: "+p1Mode+" : "+p1Status+"', font = font30, fill = "BLACK")
+        draw.text((10, 95), 'Pump 2: "+p2Mode+" : "+p2Status+"', font = font30, fill = "BLACK")
+        draw.text((10, 140), 'Pump 3: "+p3Mode+" : "+p3Status+"', font = font30, fill = "BLACK")
+        draw.text((10, 185), 'Pump 4: "+p4Mode+" : "+p4Status+"', font = font30, fill = "BLACK")
+        self.disp.ShowImage(image)
+          
         
     def updateLCDProbe (self, sPH, sEC, sTemp):
         self._log.debug("updateLCDProbe")
