@@ -33,7 +33,7 @@ def updateLCD ():
 
     # read bmp file 
     bmp = Image.open(os.path.join(picdir, 'background.bmp'))	
-    image.paste(bmp, (0,10))  
+    image.paste(bmp, (0,0))  
     image=image.rotate(180)
     disp.ShowImage(image)
 
