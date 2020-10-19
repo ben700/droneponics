@@ -41,7 +41,7 @@ class Display:
         # Clear display.
         self.disp.clear()
     
-         read bmp file 
+        #read bmp file 
         bmp = Image.open(os.path.join(picdir, 'background.bmp'))	
         image.paste(bmp, (0,0))  
   
