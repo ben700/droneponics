@@ -1,4 +1,0 @@
-[Desktop Entry]
-Type=Application
-Name=Droneponics Res Monitor
-Exec=xterm -hold -e '/usr/bin/python3 /home/pi/droneponics/droneResMonitor.py'
