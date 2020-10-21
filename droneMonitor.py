@@ -23,7 +23,7 @@ bootup = True
 systemLED=101
 
 parser = ConfigParser()
-parser.read("/home/pi/droneponics/config/configResMonitor/"+drone.gethostname()+".ini")
+parser.read("/home/pi/droneponics/config/configMonitor/"+drone.gethostname()+".ini")
 
 
 try:
@@ -42,10 +42,10 @@ try:
     _log.info("info")
     _log.debug("debug")
 
-    _log.info("/home/pi/droneponics/config/configResMonitor/"+drone.gethostname()+".ini")
+    _log.info("/home/pi/droneponics/config/configMonitor/"+drone.gethostname()+".ini")
 
     # Initialize Blynk
-    blynk = blynklib.Blynk(parser.get('droneResMonitor', 'BLYNK_AUTH'))        
+    blynk = blynklib.Blynk(parser.get('droneMonitor', 'BLYNK_AUTH'))        
     timer = blynktimer.Timer()
     blynk.run()
     #blynk.virtual_write(98, "clr")
@@ -142,16 +142,16 @@ try:
    
 except KeyboardInterrupt:
    _log.info('Keyboard Interrupt')
-   blynk.virtual_write(250, "Keyboard Interrupt")
-   blynkErr = blynklib.Blynk(parser.get('droneResMonitor', 'BLYNK_AUTH'))
+   blynkErr = blynklib.Blynk(parser.get('droneMonitor', 'BLYNK_AUTH'))
    blynkErr.virtual_write(98, "System has error" + '\n')
+   blynkErr.virtual_write(250, "Keyboard Interrupt")
    os.system('sh /home/pi/updateDroneponics.sh')
    os.system('sudo reboot')
 
 except:
    _log.info('Unexpected error')
-   blynk.virtual_write(250, "Crash")
-   blynkErr = blynklib.Blynk(parser.get('droneResMonitor', 'BLYNK_AUTH'))
+   blynkErr = blynklib.Blynk(parser.get('droneMonitor', 'BLYNK_AUTH'))
+   blynkErr.virtual_write(250, "Crash")
    blynkErr.virtual_write(98, "System has error" + '\n')
    os.system('sh /home/pi/updateDroneponics.sh')
    os.system('sudo reboot')
