@@ -1,5 +1,0 @@
- 
-[Desktop Entry]
-Type=Application
-Name=atlas
-Exec=xterm -hold -e 'sudo /usr/bin/python3 /home/pi/droneponics/atlas.py'
