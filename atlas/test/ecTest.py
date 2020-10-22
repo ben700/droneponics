@@ -1,5 +1,4 @@
 ##!/usr/bin/env python3 
-BLYNK_AUTH = 'SHraFqInf27JKowTcFZapu0rHH2QGtuO' #atlasMonitor
 
 if True:
     import datetime
@@ -31,7 +30,7 @@ if True:
     else:
         try:	
              while True:
-                 reading =ec.sensor.query("R") 
+                 reading =ec.query("R") 
                  doseLogic = reading.split(":")[1].strip().rstrip('\x00')
                  print("reading")
                  print(reading)
