@@ -49,6 +49,7 @@ class Sensor:
        self.target = kwargs.get('Target', None)
        self.mode = 1  # 1 = off 2 = on 3 = auto       
        self.value = None
+       self.value2 = None
        self.oldValue = None
        self.lowAlarm = kwargs.get('LowAlarm', None)
        self.highAlarm = kwargs.get('HighAlarm', None)
@@ -61,7 +62,21 @@ class Sensor:
       
        
    def read(self):
-       self.value = self.sensor.query("R").split(":")[1].strip().rstrip('\x00')
+       try:
+           reading = self.sensor.query("R")
+       except:
+           self._log.critial("Error Reading Sensor")
+  
+       try:
+           self.value = reading.split(":")[1].split(",")[0].strip().rstrip('\x00')
+       except:
+           self._log.critial("Error2 Reading Sensor")
+                 
+       try:	
+           self.value2 = reading.split(":")[1].split(",")[1].strip().rstrip('\x00')
+       except:
+           self.value2 = None
+                     
        self._log.info("Read for sensor " + self.name +" sensorId = " + str(self.sensorId) + " was " + str(self.value))      
        return self.value
    
