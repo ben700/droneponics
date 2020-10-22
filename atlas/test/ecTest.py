@@ -33,7 +33,10 @@ if True:
                  reading =ec.query("R") 
                  doseLogic = reading.split(":")[1].strip().rstrip('\x00')
                  newLogic = reading.split(":")[1].split(",")[0].strip().rstrip('\x00')
-                 newLogicppm = reading.split(":")[1].split(",")[1].strip().rstrip('\x00')
+                 try:	
+                       newLogicppm = reading.split(":")[1].split(",")[1].strip().rstrip('\x00')
+                 except:
+                       newLogicppm = "None"
                  print("reading")
                  print(reading)
                  print("doseLogic")
