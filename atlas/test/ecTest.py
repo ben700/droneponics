@@ -31,9 +31,14 @@ if True:
     else:
         try:	
              while True:
-                 cEC = ec.sensor.query("R").split(":")[1].strip().rstrip('\x00')
-                 _log.info("Waiting for EC to be stable. It's now :" + str(cEC) + '\n')
-                 time.sleep(1)
+                 reading =ec.sensor.query("R") 
+                 doseLogic = reading.split(":")[1].strip().rstrip('\x00')
+                print("reading")
+		print(reading)
+		print("doseLogic")
+		print(doseLogic)
+		
+		time.sleep(1)
                            
         except:
             _log.info("Expected error: Use Atlas EC Error")
