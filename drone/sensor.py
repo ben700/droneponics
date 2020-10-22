@@ -12,7 +12,7 @@ def buildSensors(sensors, _log):
     _log.debug("in built sensors function")
     sensors.append( Sensor(102, "Temperature", 30, _log, Target=20, LowAlarm=10, HighAlarm=25))
     _log.debug("built temperature sensor")
-    sensors.append( Sensor(100, "EC", 31 , _log, value2DisplayPin=33, DisplayPin2Label="TDS", Target=100, LowAlarm=50, HighAlarm=1500))
+    sensors.append( Sensor(100, "EC", 31 , _log, value2DisplayPin=33, DisplayPin2Label="TDS", value3DisplayPin=34, DisplayPin3Label="Salinity", value4DisplayPin=37, DisplayPin4Label="Specific Gravity", Target=100, LowAlarm=50, HighAlarm=1500))
     _log.debug("built ec sensor")
     sensors.append( Sensor(99, "pH", 32, _log, Target=5.5, LowAlarm=5.3, HighAlarm=6.5))
     _log.debug("built ph sensor")
@@ -50,12 +50,15 @@ class Sensor:
        self.displayPin2 = kwargs.get('value2DisplayPin', None)
        self.DisplayPin2Label = kwargs.get('DisplayPin2Label', None)
        self.displayPin3 = kwargs.get('value3DisplayPin', None)
-       self.DisplayPin3Label = kwargs.get('DisplayPin3Label', None)      
+       self.DisplayPin3Label = kwargs.get('DisplayPin3Label', None)  
+       self.displayPin4 = kwargs.get('value4DisplayPin', None)
+       self.DisplayPin4Label = kwargs.get('DisplayPin4Label', None)  
        self.target = kwargs.get('Target', None)
        self.mode = 1  # 1 = off 2 = on 3 = auto       
        self.value = None
        self.value2 = None
-       self.value3 = None      
+       self.value3 = None
+       self.value4 = None
        self.oldValue = None
        self.lowAlarm = kwargs.get('LowAlarm', None)
        self.highAlarm = kwargs.get('HighAlarm', None)
@@ -80,13 +83,19 @@ class Sensor:
                  
        try:	
            self.value2 = reading.split(":")[1].split(",")[1].strip().rstrip('\x00')
+           self._log.debug("Second value from " + self.name + " is " + str(self.value2))
        except:
-           self._log.debug("no second value from sensor " + self.name)
            self.value2 = None
        
        try:	
-           self._log.debug("no third value from sensor " + self.name)
            self.value3 = reading.split(":")[1].split(",")[2].strip().rstrip('\x00')
+           self._log.debug("3rd value from " + self.name + " is " + str(self.value3))
+       except:
+           self.value3 = None
+        
+       try:	
+           self.value4 = reading.split(":")[1].split(",")[3].strip().rstrip('\x00')
+           self._log.debug("4th value from " + self.name + " is " + str(self.value4))
        except:
            self.value3 = None
             
@@ -116,7 +125,41 @@ class Sensor:
                 blynk.virtual_write(self.displayPin2, self.value2)
     except:
         self._log.info("Error updating value 2 on " + self.name)                  
-      
+  
+    try:
+        self._log.info("going to process displayPin3 for " + self.name)      
+        if(self.displayPin3 is not None):
+            self._log.info("displayPin3 is " + str(self.displayPin3))
+            if(self.DisplayPin3Label is not None):
+                self._log.info("Going to update " + str(self.DisplayPin3Label) + " using pin " + str(self.displayPin3) + " with value " + str(self.value3))                  
+                blynk.set_property(self.displayPin3, "label", self.DisplayPin3Label)
+            else:
+                blynk.set_property(self.displayPin3, "label", self.name)
+            blynk.set_property(self.displayPin3, 'color', self.color)
+            if (self.value3 is not None):
+                blynk.virtual_write(self.displayPin3, self.value3)
+    except:
+        self._log.info("Error updating value 3 on " + self.name)  
+         
+         
+    try:
+        self._log.info("going to process displayPin4 for " + self.name)      
+        if(self.displayPin4 is not None):
+            self._log.info("displayPin4 is " + str(self.displayPin4))
+            if(self.DisplayPin4Label is not None):
+                self._log.info("Going to update " + str(self.DisplayPin4Label) + " using pin " + str(self.displayPin4) + " with value " + str(self.value4))                  
+                blynk.set_property(self.displayPin4, "label", self.DisplayPin2Label)
+            else:
+                blynk.set_property(self.displayPin4, "label", self.name)
+            blynk.set_property(self.displayPin4, 'color', self.color)
+            if (self.value4 is not None):
+                blynk.virtual_write(self.displayPin4, self.value4)
+    except:
+        self._log.info("Error updating value 4 on " + self.name)           
+         
+
+
+
    def currenCalibration(self):
        self._log.info ("currenCalibration")
        self.Cal = self.sensor.query("Cal,?").split(":")[1].strip().rstrip('\x00')
