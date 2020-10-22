@@ -12,7 +12,7 @@ def buildSensors(sensors, _log):
     _log.debug("in built sensors function")
     sensors.append( Sensor(102, "Temperature", 30, _log, Target=20, LowAlarm=10, HighAlarm=25))
     _log.debug("built temperature sensor")
-    sensors.append( Sensor(100, "EC", 31 , _log, value2DisplayPin=33, Target=100, LowAlarm=50, HighAlarm=1500))
+    sensors.append( Sensor(100, "EC", 31 , _log, value2DisplayPin=33, DisplayPin2Label="TDS" Target=100, LowAlarm=50, HighAlarm=1500))
     _log.debug("built ec sensor")
     sensors.append( Sensor(99, "pH", 32, _log, Target=5.5, LowAlarm=5.3, HighAlarm=6.5))
     _log.debug("built ph sensor")
@@ -47,6 +47,7 @@ class Sensor:
        self.low =15
        self.displayPin = DisplayPin
        self.displayPin2 = kwargs.get('value2DisplayPin', None)
+       self.DisplayPin2Label = kwargs.get('DisplayPin2Label', None)
        self.target = kwargs.get('Target', None)
        self.mode = 1  # 1 = off 2 = on 3 = auto       
        self.value = None
@@ -89,7 +90,10 @@ class Sensor:
     blynk.set_property(self.displayPin, 'color', self.color)
     blynk.virtual_write(self.displayPin, self.value)
     if(self.displayPin2 is not None):
-        blynk.set_property(self.displayPin2, "label", self.name)
+        if(DisplayPin2Label is not None):
+            blynk.set_property(self.displayPin2, "label", self.DisplayPin2Label)
+        else:
+            blynk.set_property(self.displayPin2, "label", self.name)
         blynk.set_property(self.displayPin2, 'color', self.color)
         if (self.value2 is not None):
             blynk.virtual_write(self.displayPin2, self.value2)
