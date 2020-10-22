@@ -148,7 +148,7 @@ class Sensor:
             self._log.info("displayPin4 is " + str(self.displayPin4))
             if(self.DisplayPin4Label is not None):
                 self._log.info("Going to update " + str(self.DisplayPin4Label) + " using pin " + str(self.displayPin4) + " with value " + str(self.value4))                  
-                blynk.set_property(self.displayPin4, "label", self.DisplayPin2Label)
+                blynk.set_property(self.displayPin4, "label", self.DisplayPin4Label)
             else:
                 blynk.set_property(self.displayPin4, "label", self.name)
             blynk.set_property(self.displayPin4, 'color', self.color)
