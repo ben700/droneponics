@@ -95,19 +95,25 @@ class Sensor:
    
    def display(self, blynk):
     self._log.info("base:display(blynk)")
-    self._log.info("Going to update " + str(self.name) + " using pin " + str(self.displayPin) + " with value " + str(self.value))                  
-    blynk.set_property(self.displayPin, "label", self.name)
-    blynk.set_property(self.displayPin, 'color', self.color)
-    blynk.virtual_write(self.displayPin, self.value)
-    if(self.displayPin2 is not None):
-        if(DisplayPin2Label is not None):
-            self._log.info("Going to update " + str(self.DisplayPin2Label) + " using pin " + str(self.displayPin2) + " with value " + str(self.value2))                  
-            blynk.set_property(self.displayPin2, "label", self.DisplayPin2Label)
-        else:
-            blynk.set_property(self.displayPin2, "label", self.name)
-        blynk.set_property(self.displayPin2, 'color', self.color)
-        if (self.value2 is not None):
-            blynk.virtual_write(self.displayPin2, self.value2)
+    self._log.info("Going to update " + str(self.name) + " using pin " + str(self.displayPin) + " with value " + str(self.value))
+    try:      
+        blynk.set_property(self.displayPin, "label", self.name)
+        blynk.set_property(self.displayPin, 'color', self.color)
+        blynk.virtual_write(self.displayPin, self.value)
+    except:
+        self._log.info("Error updating value 1 on " + self.name)                  
+    try:
+        if(self.displayPin2 is not None):
+            if(DisplayPin2Label is not None):
+                self._log.info("Going to update " + str(self.DisplayPin2Label) + " using pin " + str(self.displayPin2) + " with value " + str(self.value2))                  
+                blynk.set_property(self.displayPin2, "label", self.DisplayPin2Label)
+            else:
+                blynk.set_property(self.displayPin2, "label", self.name)
+            blynk.set_property(self.displayPin2, 'color', self.color)
+            if (self.value2 is not None):
+                blynk.virtual_write(self.displayPin2, self.value2)
+    except:
+        self._log.info("Error updating value 2 on " + self.name)                  
       
    def currenCalibration(self):
        self._log.info ("currenCalibration")
