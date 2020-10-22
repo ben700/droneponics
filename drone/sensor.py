@@ -78,7 +78,12 @@ class Sensor:
            self.value2 = reading.split(":")[1].split(",")[1].strip().rstrip('\x00')
        except:
            self.value2 = None
-                     
+       
+       try:	
+           self.value3 = reading.split(":")[1].split(",")[2].strip().rstrip('\x00')
+       except:
+           self.value3 = None
+            
        self._log.info("Read for sensor " + self.name +" sensorId = " + str(self.sensorId) + " was " + str(self.value))      
        return self.value
    
