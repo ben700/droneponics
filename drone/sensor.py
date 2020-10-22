@@ -88,11 +88,11 @@ class Sensor:
     blynk.set_property(self.displayPin, "label", self.name)
     blynk.set_property(self.displayPin, 'color', self.color)
     blynk.virtual_write(self.displayPin, self.value)
-        if(self.displayPin2 is not None):
-            blynk.set_property(self.displayPin2, "label", self.name)
-            blynk.set_property(self.displayPin2, 'color', self.color)
-            if (self.value2 is not None):
-                blynk.virtual_write(self.displayPin2, self.value2)
+    if(self.displayPin2 is not None):
+        blynk.set_property(self.displayPin2, "label", self.name)
+        blynk.set_property(self.displayPin2, 'color', self.color)
+        if (self.value2 is not None):
+            blynk.virtual_write(self.displayPin2, self.value2)
       
    def currenCalibration(self):
        self._log.info ("currenCalibration")
