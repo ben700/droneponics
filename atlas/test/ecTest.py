@@ -38,7 +38,7 @@ if True:
                  print(reading)
                  print("doseLogic")
                  print(doseLogic)
-		 print("NewLogic")
+                 print("NewLogic")
                  print(newLogic)
                  print(newLogicppm)
 		
