@@ -103,9 +103,10 @@ class Sensor:
     except:
         self._log.info("Error updating value 1 on " + self.name)                  
     try:
+        self._log.info("going to process displayPin2 for " + self.name)      
         if(self.displayPin2 is not None):
-            self._log.info("displayPin2 is " + str(displayPin2))
-            if(DisplayPin2Label is not None):
+            self._log.info("displayPin2 is " + str(self.displayPin2))
+            if(self.DisplayPin2Label is not None):
                 self._log.info("Going to update " + str(self.DisplayPin2Label) + " using pin " + str(self.displayPin2) + " with value " + str(self.value2))                  
                 blynk.set_property(self.displayPin2, "label", self.DisplayPin2Label)
             else:
