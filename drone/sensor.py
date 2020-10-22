@@ -71,19 +71,21 @@ class Sensor:
        try:
            reading = self.sensor.query("R")
        except:
-           self._log.critial("Error Reading Sensor")
+           self._log.critial("Error reading raw data from sensor " + self.name)
   
        try:
            self.value = reading.split(":")[1].split(",")[0].strip().rstrip('\x00')
        except:
-           self._log.critial("Error2 Reading Sensor")
+           self._log.critial("Error Processing value of Sensor " + self.name)
                  
        try:	
            self.value2 = reading.split(":")[1].split(",")[1].strip().rstrip('\x00')
        except:
+           self._log.debug("no second value from sensor " + self.name)
            self.value2 = None
        
        try:	
+           self._log.debug("no third value from sensor " + self.name)
            self.value3 = reading.split(":")[1].split(",")[2].strip().rstrip('\x00')
        except:
            self.value3 = None
