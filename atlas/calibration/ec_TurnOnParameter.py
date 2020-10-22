@@ -35,7 +35,10 @@ if True:
         _log.info("Unexpected error: Atlas")
     else:
         try:	
+             print (ec.query("O,EC,1"))
              print (ec.query("O,TDS,1"))
+             print (ec.query("O,S,1"))
+             print (ec.query("O,SG,1"))
              
                       
                       
