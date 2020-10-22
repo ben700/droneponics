@@ -35,7 +35,7 @@ if True:
         _log.info("Unexpected error: Atlas")
     else:
         try:	
-             print = ec.query("O,?")
+             print (ec.query("O,?"))
              
                       
                       
