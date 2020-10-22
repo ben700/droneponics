@@ -31,8 +31,8 @@ if True:
     else:
         try:	
              while True:
-                 reading =ec.sensor.query("R") 
-                 doseLogic = reading.split(":")[1].strip().rstrip('\x00')
+		reading =ec.sensor.query("R") 
+		doseLogic = reading.split(":")[1].strip().rstrip('\x00')
                 print("reading")
 		print(reading)
 		print("doseLogic")
