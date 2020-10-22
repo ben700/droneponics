@@ -22,8 +22,8 @@ def buildMonitorSensors(sensors, _log):
     _log.debug("in built sensors function")
     sensors.append( Sensor(102, "Temperature", 30, _log))
     _log.debug("built temperature sensor")
-   # sensors.append( Sensor(97, "Dissolved Oxygen", 33 , _log, value2DisplayPin=35, DisplayPin2Label="Saturation"))
-    sensors.append( Sensor(97, "Dissolved Oxygen", 33 , _log))
+    sensors.append( Sensor(97, "Dissolved Oxygen", 33 , _log, value2DisplayPin=35, DisplayPin2Label="Saturation"))
+   # sensors.append( Sensor(97, "Dissolved Oxygen", 33 , _log))
     _log.debug("built DO sensor")
     sensors.append( Sensor(98, "Oxidation Reduction Potential", 34, _log))
     _log.debug("built ORP sensor")
@@ -96,7 +96,6 @@ class Sensor:
    def display(self, blynk):
     self._log.info("base:display(blynk)")
     self._log.info("Going to update " + str(self.name) + " using pin " + str(self.displayPin) + " with value " + str(self.value))                  
-   # blynk.virtual_write(98,"Going to update " + str(self.name) + " using pin " + str(self.displayPin) + " with value " + str(self.value) +'\n')
     blynk.set_property(self.displayPin, "label", self.name)
     blynk.set_property(self.displayPin, 'color', self.color)
     blynk.virtual_write(self.displayPin, self.value)
