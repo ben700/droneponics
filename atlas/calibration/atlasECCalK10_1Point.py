@@ -37,15 +37,15 @@ if True:
         _log.info("Unexpected error: Atlas")
     else:
         try:	
-             oEC = ec.query("R").split(":")[1]
+             oEC = ec.query("R").split(":")[1].split(",")[0].strip().rstrip('\x00')
              answer = input("Are you sure you want to calibrate EC (y/n)")
              if answer == 'y':
                  answer = input("Going to calibrate ec DRY. Enter y when you are ready(y/n)")
                  if answer == 'y':
-                      cEC = ec.query("R").split(":")[1]
+                      cEC = ec.query("R").split(":")[1].split(",")[0].strip().rstrip('\x00')
                       while ( cEC != oEC):
                            oEC = cEC 
-                           cEC = ec.query("R").split(":")[1]
+                           cEC = ec.query("R").split(":")[1].split(",")[0].strip().rstrip('\x00')
                            _log.info("Waiting for EC to be stable. It's now :" + str(cEC) + '\n')
                            
                       ec.query("Cal,clear")
@@ -56,12 +56,12 @@ if True:
              if answer == 'y':
                  answer = input("Going to calibrate EC to 2.73mS. Enter y when you are ready(y/n)")
                  if answer == 'y':
-                      cEC = ec.query("R").split(":")[1]
+                      cEC = ec.query("R").split(":")[1].split(",")[0].strip().rstrip('\x00')
                       while ( cEC != oEC):
                            oEC = cEC 
-                           cEC = ec.query("R").split(":")[1]
+                           cEC = ec.query("R").split(":")[1].split(",")[0].strip().rstrip('\x00')
                            _log.info("Waiting for EC to be stable. It's now :" + str(cEC) + '\n')
-                      ec.query("Cal,2730")
+                      ec.query("Cal,2760")
                       
 
                       
