@@ -32,8 +32,8 @@ if True:
              while True:
                  reading =ec.query("R") 
                  doseLogic = reading.split(":")[1].strip().rstrip('\x00')
-                 newLogic = reading.split(":")split(",")[0].strip().rstrip('\x00')
-                 newLogicppm = reading.split(":")split(",")[1].strip().rstrip('\x00')
+                 newLogic = reading.split(":").split(",")[0].strip().rstrip('\x00')
+                 newLogicppm = reading.split(":").split(",")[1].strip().rstrip('\x00')
                  print("reading")
                  print(reading)
                  print("doseLogic")
