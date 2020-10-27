@@ -54,10 +54,10 @@ class Display:
         self._log.info("--------------------------read bmp file ")
   
         draw = ImageDraw.Draw(self.image)
-        draw.text((10, 50), 'Pump 1: "+p1Mode+" : "+p1Status+"', font = font30, fill = "BLACK")
-        draw.text((10, 95), 'Pump 2: "+p2Mode+" : "+p2Status+"', font = font30, fill = "BLACK")
-        draw.text((10, 140), 'Pump 3: "+p3Mode+" : "+p3Status+"', font = font30, fill = "BLACK")
-        draw.text((10, 185), 'Pump 4: "+p4Mode+" : "+p4Status+"', font = font30, fill = "BLACK")
+        draw.text((10, 50), 'Pump 1: "+p1Mode+" : "+p1Status+"', font = self.font30, fill = "BLACK")
+        draw.text((10, 95), 'Pump 2: "+p2Mode+" : "+p2Status+"', font = self.font30, fill = "BLACK")
+        draw.text((10, 140), 'Pump 3: "+p3Mode+" : "+p3Status+"', font = self.font30, fill = "BLACK")
+        draw.text((10, 185), 'Pump 4: "+p4Mode+" : "+p4Status+"', font = self.font30, fill = "BLACK")
         self._log.info("--------------------------complete updateLCDPumps ")
   
         self.disp.ShowImage(self.image)
