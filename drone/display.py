@@ -134,25 +134,8 @@ class Display:
         image=image.rotate(180) 
         self.disp.ShowImage(image)
 
-
-class LCD:
-   
-    def __init__(self, _log):
-        self._log = _log 
-        self.lcd = liquidcrystal_i2c.LiquidCrystal_I2C(0x27, 1, numlines=4)
-
-
-    def updateLCD (self, r1, r2, r3, r4):
-        self._log.debug  ("updateLCD")
-        self.lcd.printline(0, "Pump 1 status = " + str(r1) + " ")
-        self.lcd.printline(1, "Pump 2 status = " + str(r2) + " ")
-        self.lcd.printline(2, "Pump 3 status = " + str(r3) + " ")
-        self.lcd.printline(3, "Pump 4 status = " + str(r4) + " ")
-  
     def displayOn (self):
-        self.lcd.backlight()
         self._log.debug  ("Turned ON display backlight")
           
     def displayOff (self):
-        self.lcd.noBacklight()
         self._log.debug  ("Turned OFF display backlight")
