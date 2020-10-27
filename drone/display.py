@@ -41,25 +41,18 @@ class Display:
         self._log.debug("Display default image")
           
     def updateLCDPumps (self, p1Mode, p2Mode, p3Mode, p4Mode, p1Status, p2Status, p3Status, p4Status):
-        self._log.info("--------------------------updateLCDPumps")
-        
+ 
         # Clear display.
         self.disp.clear()
-        self._log.info("--------------------------self.disp.clear()")
-     
+ 
         #read bmp file 
         bmp = Image.open(os.path.join(picdir, 'background.bmp'))	
         self.image.paste(bmp, (0,0))  
-
-        self._log.info("--------------------------read bmp file ")
-  
         draw = ImageDraw.Draw(self.image)
         draw.text((10, 50), 'Pump 1: "+p1Mode+" : "+p1Status+"', font = self.font30, fill = "BLACK")
         draw.text((10, 95), 'Pump 2: "+p2Mode+" : "+p2Status+"', font = self.font30, fill = "BLACK")
         draw.text((10, 140), 'Pump 3: "+p3Mode+" : "+p3Status+"', font = self.font30, fill = "BLACK")
         draw.text((10, 185), 'Pump 4: "+p4Mode+" : "+p4Status+"', font = self.font30, fill = "BLACK")
-        self._log.info("--------------------------complete updateLCDPumps ")
-  
         self.disp.ShowImage(self.image)
           
         
