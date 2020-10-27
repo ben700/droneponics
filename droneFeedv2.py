@@ -53,10 +53,10 @@ try:
     
 
     relays=[]
-    relays.append(drone.RelayI2C(_log, 1, parser.get('droneFeed', 'Relay1')))
-    relays.append(drone.RelayI2C(_log, 2, parser.get('droneFeed', 'Relay2')))
-    relays.append(drone.RelayI2C(_log, 3, parser.get('droneFeed', 'Relay3')))
-    relays.append(drone.RelayI2C(_log, 4, parser.get('droneFeed', 'Relay4')))
+    relays.append(drone.RelayI2C(_log, 5, parser.get('droneFeed', 'Relay1')))
+    relays.append(drone.RelayI2C(_log, 6, parser.get('droneFeed', 'Relay2')))
+    relays.append(drone.RelayI2C(_log, 7, parser.get('droneFeed', 'Relay3')))
+    relays.append(drone.RelayI2C(_log, 8, parser.get('droneFeed', 'Relay4')))
  
     relays[0].setBlynk(blynk) 
     relays[1].setBlynk(blynk)
