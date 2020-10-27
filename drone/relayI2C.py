@@ -9,12 +9,13 @@ import drone
 
 class RelayI2C:
 
-   I2C_BUS = 1
-   I2C_ADDR = 0x27
+
 
 
    def __init__(self, _log, relayNum, Name, *args, **kwargs):
        _log.info("Building Relay object for Relay " + Name)
+       I2C_BUS = 1
+       I2C_ADDR = 0x27
        self._log = _log
        self.relayNum = relayNum
        self.name = Name
