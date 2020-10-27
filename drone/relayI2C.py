@@ -33,7 +33,8 @@ class RelayI2C:
        self.infoPin = None
        self.ledPin = None
        self.blynk = None
-
+       _log.info("Completed building Relay object for Relay " + Name)
+      
    def setBlynk(self, BLYNK): 
         self.blynk = BLYNK
          
