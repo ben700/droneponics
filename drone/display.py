@@ -56,9 +56,9 @@ class Display:
         self.disp.ShowImage(self.image)
           
     def displayOn (self):
-        self.disp.backlight()
+       # self.disp.backlight()
         self._log.debug  ("Turned ON display backlight")
           
     def displayOff (self):
-        self.disp.noBacklight()
+       # self.disp.noBacklight()
         self._log.debug  ("Turned OFF display backlight")
