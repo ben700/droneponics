@@ -19,15 +19,7 @@ class RelayI2C:
        self._log = _log
        self.relayNum = relayNum
        self.name = Name
-      
-       _log.info("Building Relay object for I2C_BUS " + str(I2C_BUS))
-       _log.info("Building Relay object for I2C_ADDR " + str(I2C_ADDR))
-      
-       _log.info("Building Relay object for r1 ")         
-       r1 = I2CRelayBoard(I2C_BUS, I2C_ADDR)
-       _log.info("Completed building Relay object for r1 ")         
-       
-       self.i2CRelayBoard = r1 
+       self.i2CRelayBoard = I2CRelayBoard(I2C_BUS, I2C_ADDR) 
        self.automatic = False
        self.cycle=1
        self.cycleReset=0
