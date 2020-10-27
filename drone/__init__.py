@@ -1,5 +1,6 @@
 from drone.dose import *
 from drone.relay import Relay
+from drone.relayI2C import RelayI2C
 from drone.nutrientSchedule import *
 from drone.droneponicsAir import *
 from drone.droneponicsRelay import *
