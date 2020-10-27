@@ -13,6 +13,9 @@ picdir = '/home/pi/droneponics/pic/'
 libdir = '/home/pi/droneponics/lib/'
 if os.path.exists(libdir):
      sys.path.append(libdir)
+if os.path.exists(picdir):
+     sys.path.append(picdir)
+     
 from waveshare_2inch_LCD import ST7789
 from PIL import Image,ImageDraw,ImageFont
 
@@ -38,6 +41,8 @@ class Display:
         self._log.debug("Display default image")
           
     def updateLCDPumps (self, p1Mode, p2Mode, p3Mode, p4Mode, p1Status, p2Status, p3Status, p4Status):
+        self._log.info("--------------------------updateLCDPumps")
+        
         # Clear display.
         self.disp.clear()
     
