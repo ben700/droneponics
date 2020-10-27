@@ -158,6 +158,16 @@ try:
            if lcdDisplay is not None: 
                  lcdDisplay.updateLCDPumps (relays[0].state, relays[1].state, relays[2].state, relays[3].state, relays[0].isManual(), relays[1].isManual(), relays[2].isManual(), relays[3].isManual() )
         except:
+           _log.critical("relays[0].state = " + str(relays[0].state))
+           _log.critical("relays[1].state = " + str(relays[1].state))
+           _log.critical("relays[2].state = " + str(relays[2].state))
+           _log.critical("relays[3].state = " + str(relays[3].state))
+
+           _log.critical("relays[0].isManual() = " + str(relays[0].isManual()))
+           _log.critical("relays[1].isManual() = " + str(relays[1].isManual()))
+           _log.critical("relays[2].isManual() = " + str(relays[2].isManual()))
+           _log.critical("relays[3].isManual() = " + str(relays[3].isManual()))
+		
            _log.critical("updating LCD crashed v2")
   
 
