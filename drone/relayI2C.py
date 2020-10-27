@@ -100,7 +100,7 @@ class RelayI2C:
            _log.info("Turning off relay " + self.name)
            
            self.i2CRelayBoard.switch_off(self.relayNum)
-           _log.info("Turned off relay " + self.name + " on pin " + str(self.relayNum)
+           _log.info("Turned off relay " + self.name + " on pin " + str(self.relayNum))
  
            if(self.blynk is not None):
               _log.info("set ledPin " + str(self.ledPin))     
