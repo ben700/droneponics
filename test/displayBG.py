@@ -35,12 +35,6 @@ def updateLCD ():
     bmp = Image.open(os.path.join(picdir, 'droneponics_logo.bmp'))	
     image.paste(bmp, (0,0))  
   
-    draw = ImageDraw.Draw(image)
-    draw.text((10, 50), 'Pump 1: Auto : On', font = font30, fill = "BLACK")
-    draw.text((10, 95), 'Pump 2: Auto : On', font = font30, fill = "BLACK")
-    draw.text((10, 140), 'Pump 3: Auto : On', font = font30, fill = "BLACK")
-    draw.text((10, 185), 'Pump 4: Auto : Off', font = font30, fill = "BLACK")
-    
     
     disp.ShowImage(image)
 
