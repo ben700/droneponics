@@ -18,7 +18,7 @@ time.sleep(1.0)
 r1.switch_all_off()
 time.sleep(1.0)
 
-for relay in range(1, 5):
+for relay in range(5, 9):
     print("Switching relay {}".format(relay))
     r1.switch_on(relay)
     time.sleep(0.5)
