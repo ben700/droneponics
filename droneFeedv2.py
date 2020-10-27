@@ -120,7 +120,7 @@ try:
            if lcdDisplay is not None: 
                  lcdDisplay.updateLCDPumps (relays[0].state, relays[1].state, relays[2].state, relays[3].state, relays[0].isManual(), relays[1].isManual(), relays[2].isManual(), relays[3].isManual() )
         except:
-           _log.critical("updating LCD crashed")
+           _log.critical("updating LCD crashed v1")
        
           
     @blynk.handle_event('write V2')
@@ -158,7 +158,7 @@ try:
            if lcdDisplay is not None: 
                  lcdDisplay.updateLCDPumps (relays[0].state, relays[1].state, relays[2].state, relays[3].state, relays[0].isManual(), relays[1].isManual(), relays[2].isManual(), relays[3].isManual() )
         except:
-           _log.critical("updating LCD crashed")
+           _log.critical("updating LCD crashed v2")
   
 
     @blynk.handle_event('write V3')
@@ -196,7 +196,7 @@ try:
            if lcdDisplay is not None: 
                  lcdDisplay.updateLCDPumps (relays[0].state, relays[1].state, relays[2].state, relays[3].state, relays[0].isManual(), relays[1].isManual(), relays[2].isManual(), relays[3].isManual() )
         except:
-           _log.critical("updating LCD crashed")
+           _log.critical("updating LCD crashed v3")
        
           
     @blynk.handle_event('write V4')
@@ -234,7 +234,7 @@ try:
            if lcdDisplay is not None: 
                  lcdDisplay.updateLCDPumps (relays[0].state, relays[1].state, relays[2].state, relays[3].state, relays[0].isManual(), relays[1].isManual(), relays[2].isManual(), relays[3].isManual() )
         except:
-           _log.critical("updating LCD crashed")
+           _log.critical("updating LCD crashed v4")
   
   
     @blynk.handle_event('write V11')
@@ -323,7 +323,7 @@ try:
                 if lcdDisplay is not None: 
                     lcdDisplay.updateLCDPumps (relays[0].state, relays[1].state, relays[2].state, relays[3].state, relays[0].isManual(), relays[1].isManual(), relays[2].isManual(), relays[3].isManual() )
            except:
-              _log.critical("updating LCD crashed")
+              _log.critical("updating LCD crashed loop")
                 
                 
            _log.debug("The End")
