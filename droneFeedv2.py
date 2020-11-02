@@ -38,7 +38,7 @@ _log.info("/home/pi/droneponics/config/configFeed/"+drone.gethostname()+".ini")
 
 lcdDisplay= None
 try:
-    lcdDisplay=drone.Display(_log)
+    lcdDisplay=drone.LCD(_log)
 except:
     lcdDisplay=None
 	
