@@ -38,7 +38,7 @@ fscreen = 1
 stretch = 0
 print(dir_name)
 #find .jpg files in directory
-pic_list = glob.glob(dir_name + '*.bmp') + glob.glob(dir_name + '*.bmp')
+pic_list = glob.glob(dir_name + '*.jpg') 
 num_pics =len(pic_list)
 
 
