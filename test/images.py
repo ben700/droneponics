@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 import pygame
 import sys
@@ -29,7 +29,7 @@ display = 20
 pic_rand = 1
 
 # Directory name
-dir_name ="../images"
+dir_name ="../pic"
 
 # Normal or Fullscreen, 0 = normal, 1 = fullscreen
 fscreen = 1
