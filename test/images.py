@@ -36,7 +36,7 @@ fscreen = 1
 
 # Stretch small images to MAXIMUM display size, 0 = NO, 1 = YES
 stretch = 0
-
+print(dir_name)
 #find .jpg files in directory
 pic_list = glob.glob(dir_name + '*.bmp') + glob.glob(dir_name + '*.bmp')
 num_pics =len(pic_list)
