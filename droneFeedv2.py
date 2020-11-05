@@ -386,7 +386,7 @@ except:
    drone.turnButtonsOffline(blynk)
    GPIO.cleanup()
    os.system('sh /home/pi/updateDroneponics.sh')
-   os.system('sudo reboot')
+ #  os.system('sudo reboot')
 finally:
    blynk = blynklib.Blynk(parser.get('blynk', 'BLYNK_AUTH'))
    blynk.run()
