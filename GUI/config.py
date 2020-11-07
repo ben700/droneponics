@@ -3,12 +3,17 @@ import sys
 import os
 sys.path.append('/home/pi/droneponics')
 from AtlasI2C import (AtlasI2C)
+import drone
 
 from tkinter import * 			# imports the Tkinter lib
 root = Tk()				# create the root object
 root.wm_title("GUI")			# sets title of the window
 root.configure(bg="#99B898")		# change the background color 
 root.attributes("-fullscreen", True) 	# set to fullscreen
+
+sensors = []
+sensors = drone.buildSensors(sensors, _log)
+_log.info("All Monitor Sensors created")
 
 
 def tempCalClicked():	
@@ -143,8 +148,24 @@ ecCalButton.grid(row = 4 ,column = 2)
 readProbeButton.grid(row = 5 ,column = 0)
 probeRead_label.grid(row = 5 ,column = 1)
 calProbeButton.grid(row = 5 ,column = 2)
-readProbeButton.forget()
-calProbeButton.forget()
 
+
+if(sensors[0].isProbeConnected()):
+	tempCalButton["text"]= "Cal Temp (Connected)"
+else:
+	tempCalButton["text"]= "Cal Temp (Not Connected)"
+	
+
+if(sensors[1].isProbeConnected()):
+	phCalButton["text"]= "Cal PH (Connected)"
+else:
+	phCalButton["text"]= "Cal PH (Not Connected)"
+	
+
+if(sensors[2].isProbeConnected()):
+	ecCalButton["text"]= "Cal EC (Connected)"
+else:
+	ecCalButton["text"]= "Cal EC (Not Connected)"
+	
 root.bind("<Escape>", end_fullscreen)
 root.mainloop()				# starts the GUI loop
