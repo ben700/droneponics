@@ -109,7 +109,7 @@ def end_fullscreen(event):
 
 label_1 = Label(root, text="Droneponics Calibration Interface", font="Verdana 26 bold",
 			fg="Black",
-			bg="White",
+			bg="#99B898",
 			pady = 1,
 			padx = 1)
 
