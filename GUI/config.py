@@ -29,7 +29,7 @@ render = ImageTk.PhotoImage(load)
 img = Label(root, image=render)
 img.image = render
 img.place(x=0, y=0)
-root.configure(bg="White")		# change the background color 
+root.configure(bg="#99B898")		# change the background color 
 root.attributes("-fullscreen", True) 	# set to fullscreen
 
 sensors = []
