@@ -162,9 +162,9 @@ orpCalButton= Button(root, text="Cal DO",background = "Light Blue",
 
 
 label_1.grid(row=0, column=1, columnspan=4)
-label_info.grid(row=1, column=1, columnspan=2)
-label_cal.grid(row=2, column=1, columnspan=2)
-label_status.grid(row=3, column=1, columnspan=2)
+label_info.grid(row=1, column=1, columnspan=3)
+label_cal.grid(row=2, column=1, columnspan=3)
+label_status.grid(row=3, column=1, columnspan=3)
 exitButton.grid(row = 1,column = 0, rowspan=3)
 tempCalButton.grid(row = 4 ,column = 0)
 phCalButton.grid(row = 4 ,column = 1)
