@@ -48,7 +48,7 @@ ecCalButton = Button(root, text="Cal EC",background = "#C06C84",
       command=btnClicked, height=10, width=20, font = "Arial 16 bold")
 
 
-label_1.grid(row=0, column=0)
+label_1.grid(row=0, column=0, columnspan=3)
 exitButton.grid(row = 1 ,column = 0)
 tempCalButton.grid(row = 2 ,column = 0)
 phCalButton.grid(row = 2 ,column = 1)
