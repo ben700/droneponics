@@ -29,6 +29,8 @@ def tempCalClicked():
     label_info["text"]= probe.query("i").strip().rstrip('\x00')
     label_cal["text"]= probe.query("cal,?").strip().rstrip('\x00')
     label_status["text"]= probe.query("Status").strip().rstrip('\x00')
+    calReadButton.pack()
+    calTempButton.pack()
 
 def phCalClicked():
     label_1["text"]="pH Calibration"
@@ -73,6 +75,9 @@ label_status = Label(root, text="", font="Verdana 26 bold",
 			bg="#99B898",
 			pady = 1,
 			padx = 1)
+calTempButton = Button(root, text="Calibrate Temp", background = "#C06C84",
+      command=btnExit, height=10, width=20, font = "Arial 16 bold")
+	
 
 exitButton = Button(root, text="Exit", background = "#C06C84",
       command=btnExit, height=10, width=20, font = "Arial 16 bold")
@@ -101,6 +106,9 @@ exitButton.grid(row = 1 ,column = 0, rowspan=3)
 tempCalButton.grid(row = 4 ,column = 0)
 phCalButton.grid(row = 4 ,column = 1)
 ecCalButton.grid(row = 4 ,column = 2)
-
+calReadButton.grid(row = 5 ,column = 0)
+calTempButton.grid(row = 5 ,column = 2)
+calReadButton.pack_forget()
+calTempButton.pack_forget()
 root.bind("<Escape>", end_fullscreen)
 root.mainloop()				# starts the GUI loop
