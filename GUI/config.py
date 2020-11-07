@@ -28,7 +28,7 @@ load = Image.open("/home/pi/droneponics/pic/store_logo.png")
 render = ImageTk.PhotoImage(load)
 img = Label(root, image=render)
 img.image = render
-img.place(x=0, y=0)
+img.place(x=0, y=0, sticky =SE)
 
 root.configure(bg="#99B898")		# change the background color 
 root.attributes("-fullscreen", True) 	# set to fullscreen
