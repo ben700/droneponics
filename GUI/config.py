@@ -24,7 +24,7 @@ root.configure(bg="#99B898")		# change the background color
 root.attributes("-fullscreen", True) 	# set to fullscreen
 
 sensors = []
-sensors = drone.buildSensors(sensors, _log)
+sensors = drone.buildAllSensors(sensors, _log)
 _log.info("All Monitor Sensors created")
 
 
@@ -149,6 +149,10 @@ ecCalButton = Button(root, text="Cal EC",background = "Green",
       command=ecCalClicked, height=5, width=20, font = "Arial 16 bold")
 
 
+
+doCalButton = Button(root, text="Cal DO",background = "Yellow", 
+      command=ecCalClicked, height=5, width=20, font = "Arial 16 bold")
+
 label_1.grid(row=0, column=0, columnspan=3)
 label_info.grid(row=1, column=1, columnspan=2)
 label_cal.grid(row=2, column=1, columnspan=2)
@@ -157,6 +161,8 @@ exitButton.grid(row = 1 ,column = 0, rowspan=3)
 tempCalButton.grid(row = 4 ,column = 0)
 phCalButton.grid(row = 4 ,column = 1)
 ecCalButton.grid(row = 4 ,column = 2)
+doCalButton.grid(row = 5 ,column = 2)
+
 readProbeButton.grid(row = 5 ,column = 0)
 probeRead_label.grid(row = 5 ,column = 1)
 calProbeButton.grid(row = 5 ,column = 2)
@@ -168,16 +174,21 @@ else:
 	tempCalButton["text"]= "Cal Temp (Not Connected)"
 	
 
-if(sensors[1].isProbeConnected()):
+if(sensors[2].isProbeConnected()):
 	phCalButton["text"]= "Cal PH (Connected)"
 else:
 	phCalButton["text"]= "Cal PH (Not Connected)"
 	
 
-if(sensors[2].isProbeConnected()):
+if(sensors[1].isProbeConnected()):
 	ecCalButton["text"]= "Cal EC (Connected)"
 else:
 	ecCalButton["text"]= "Cal EC (Not Connected)"
-	
+
+if(sensors[3].isProbeConnected()):
+	doCalButton["text"]= "Cal DO (Connected)"
+else:
+	doCalButton["text"]= "DO Not Connected"
+		
 root.bind("<Escape>", end_fullscreen)
 root.mainloop()				# starts the GUI loop
