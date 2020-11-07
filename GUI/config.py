@@ -8,7 +8,7 @@ ledB= False
 
 
 def btnClicked():
-  if(ledB==True)
+  if(ledB):
     ledButton["text"]="LED OFF"
     ledB= False
   else:
