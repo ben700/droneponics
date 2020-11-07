@@ -15,7 +15,7 @@ logFormatter = logging.Formatter("%(asctime)s [%(levelname)s]  %(message)s")
 consoleHandler = logging.StreamHandler()
 consoleHandler.setFormatter(logFormatter)
 _log.addHandler(consoleHandler)
-_log.setLevel(DEBUG)
+_log.setLevel(logging.DEBUG)
 
 
 root = Tk()				# create the root object
