@@ -70,7 +70,10 @@ def readPHClicked():
 
 def readECClicked():	
     probe = AtlasI2C(100)
-    probeRead_label["text"]= probe.query("R").strip().rstrip('\x00')
+    rawReading = probe.query("R").strip().rstrip('\x00')
+    v1 = rawReading.split(":")[1].split(",")[0].strip().rstrip('\x00')
+    v2 = rawReading.split(":")[1].split(",")[1].strip().rstrip('\x00')
+    probeRead_label["text"]= "V1 = " + str(v1) + "V2 = " + str(v2)
 
 def clearReading():	
     probeRead_label["text"]= ""
