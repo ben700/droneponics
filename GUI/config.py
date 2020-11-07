@@ -124,11 +124,11 @@ probeRead_label = Button(root, text="",background = "#C06C84",
       command=tempCalClicked, height=5, width=20, font = "Arial 16 bold")
 
 
-phCalButton = Button(root, text="Cal pH",background = "#C06C84", 
+phCalButton = Button(root, text="Cal pH",background = "Red", 
       command=phCalClicked, height=5, width=20, font = "Arial 16 bold")
 
 
-ecCalButton = Button(root, text="Cal EC",background = "#C06C84", 
+ecCalButton = Button(root, text="Cal EC",background = "Green", 
       command=ecCalClicked, height=5, width=20, font = "Arial 16 bold")
 
 
