@@ -29,8 +29,10 @@ def tempCalClicked():
     label_info["text"]= probe.query("i").strip().rstrip('\x00')
     label_cal["text"]= probe.query("cal,?").strip().rstrip('\x00')
     label_status["text"]= probe.query("Status").strip().rstrip('\x00')
-    readTempButton["text"]= "Read Temp"
-    readTempButton["command"]= readTempClicked
+    readProbeButton["text"]= "Read Temp"
+    readProbeButton["command"]= readTempClicked
+    calProbeButton["text"]= "Cal Temp"
+    calProbeButton["command"]= calTempClicked
 
 def phCalClicked():
     label_1["text"]="pH Calibration"
@@ -38,8 +40,10 @@ def phCalClicked():
     label_info["text"]= probe.query("i").strip().rstrip('\x00')	
     label_cal["text"]= probe.query("cal,?").strip().rstrip('\x00')
     label_status["text"]= probe.query("Status").strip().rstrip('\x00')
-    readTempButton["text"]= "Read pH"
-    readTempButton["command"]= readPHClicked
+    readProbeButton["text"]= "Read pH"
+    readProbeButton["command"]= readPHClicked
+    calProbeButton["text"]= "Cal PH"
+    calProbeButton["command"]= calPHClicked
 
 
 def ecCalClicked():
@@ -48,20 +52,30 @@ def ecCalClicked():
     label_info["text"]= probe.query("i").strip().rstrip('\x00')	
     label_cal["text"]= probe.query("cal,?").strip().rstrip('\x00')
     label_status["text"]= probe.query("Status").strip().rstrip('\x00')
-
+    readProbeButton["text"]= "Read EC"
+    readProbeButton["command"]= readECClicked
+    calProbeButton["text"]= "Cal EC"
+    calProbeButton["command"]= calECClicked
 
 def readTempClicked():	
     probe = AtlasI2C(102)
-    tempRead_label["text"]= probe.query("R").strip().rstrip('\x00')
+    probeRead_label["text"]= probe.query("R").strip().rstrip('\x00')
 
 def readPHClicked():	
     probe = AtlasI2C(99)
-    tempRead_label["text"]= probe.query("R").strip().rstrip('\x00')
+    probeRead_label["text"]= probe.query("R").strip().rstrip('\x00')
 
 def readECClicked():	
     probe = AtlasI2C(100)
-    tempRead_label["text"]= probe.query("R").strip().rstrip('\x00')
+    probeRead_label["text"]= probe.query("R").strip().rstrip('\x00')
 
+	
+def calTempClicked():	
+    probeRead_label["text"]= "calTempClicked"
+def calPHClicked():	
+    probeRead_label["text"]= "calPHClicked"
+def calECClicked():	
+    probeRead_label["text"]= "calECClicked"
 
 def btnExit():
   	root.destroy()
@@ -93,10 +107,10 @@ label_status = Label(root, text="", font="Verdana 26 bold",
 			pady = 1,
 			padx = 1)
 
-calTempButton = Button(root, text="Calibrate Temp", background = "#C06C84",
+calProbeButton = Button(root, text="Calibrate Probe", background = "#C06C84",
       command=btnExit, height=10, width=20, font = "Arial 16 bold")
 
-readTempButton = Button(root, text="Read Temp", background = "#C06C84",
+readProbeButton = Button(root, text="Read Probe", background = "#C06C84",
       command=readTempClicked, height=10, width=20, font = "Arial 16 bold")
 		
 
@@ -110,7 +124,7 @@ ledButton = Button(root, text="LED OFF",background = "#C06C84",
 tempCalButton = Button(root, text="Cal Temp",background = "#C06C84", 
       command=tempCalClicked, height=10, width=20, font = "Arial 16 bold")
 
-tempRead_label = Button(root, text="",background = "#C06C84", 
+probeRead_label = Button(root, text="",background = "#C06C84", 
       command=tempCalClicked, height=10, width=20, font = "Arial 16 bold")
 
 
@@ -130,11 +144,11 @@ exitButton.grid(row = 1 ,column = 0, rowspan=3)
 tempCalButton.grid(row = 4 ,column = 0)
 phCalButton.grid(row = 4 ,column = 1)
 ecCalButton.grid(row = 4 ,column = 2)
-readTempButton.grid(row = 5 ,column = 0)
-tempRead_label.grid(row = 5 ,column = 1)
-calTempButton.grid(row = 5 ,column = 2)
-readTempButton.forget()
-calTempButton.forget()
+readProbeButton.grid(row = 5 ,column = 0)
+probeRead_label.grid(row = 5 ,column = 1)
+calProbeButton.grid(row = 5 ,column = 2)
+readProbeButton.forget()
+calProbeButton.forget()
 
 root.bind("<Escape>", end_fullscreen)
 root.mainloop()				# starts the GUI loop
