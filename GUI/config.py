@@ -4,8 +4,20 @@ import os
 sys.path.append('/home/pi/droneponics')
 from AtlasI2C import (AtlasI2C)
 import drone
+import logging
 
 from tkinter import * 			# imports the Tkinter lib
+
+
+    # tune console logging
+_log = logging.getLogger('BlynkLog')
+logFormatter = logging.Formatter("%(asctime)s [%(levelname)s]  %(message)s")
+consoleHandler = logging.StreamHandler()
+consoleHandler.setFormatter(logFormatter)
+_log.addHandler(consoleHandler)
+_log.setLevel(DEBUG)
+
+
 root = Tk()				# create the root object
 root.wm_title("GUI")			# sets title of the window
 root.configure(bg="#99B898")		# change the background color 
