@@ -24,7 +24,7 @@ root = Tk()				# create the root object
 root.wm_title("GUI")			# sets title of the window
 
 filename = PhotoImage(file = "/home/pi/droneponics/pic/droneponics_logo.bmp")
-background_label = Label(top, image=filename)
+background_label = Label(root, image=filename)
 background_label.place(x=0, y=0, relwidth=1, relheight=1)
 
 root.configure(bg="#99B898")		# change the background color 
