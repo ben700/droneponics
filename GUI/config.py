@@ -38,6 +38,7 @@ def phCalClicked():
     label_info["text"]= probe.query("i").strip().rstrip('\x00')	
     label_cal["text"]= probe.query("cal,?").strip().rstrip('\x00')
     label_status["text"]= probe.query("Status").strip().rstrip('\x00')
+    readTempClicked()
 
 def ecCalClicked():
     label_1["text"]="EC Calibration"
@@ -45,7 +46,13 @@ def ecCalClicked():
     label_info["text"]= probe.query("i").strip().rstrip('\x00')	
     label_cal["text"]= probe.query("cal,?").strip().rstrip('\x00')
     label_status["text"]= probe.query("Status").strip().rstrip('\x00')
-	
+
+
+def readTempClicked():	
+    probe = AtlasI2C(102)
+    tempRead_label["text"]= probe.query("R").strip().rstrip('\x00')
+
+
 def btnExit():
   	root.destroy()
 
@@ -80,7 +87,7 @@ calTempButton = Button(root, text="Calibrate Temp", background = "#C06C84",
       command=btnExit, height=10, width=20, font = "Arial 16 bold")
 
 readTempButton = Button(root, text="Read Temp", background = "#C06C84",
-      command=btnExit, height=10, width=20, font = "Arial 16 bold")
+      command=readTempClicked, height=10, width=20, font = "Arial 16 bold")
 		
 
 exitButton = Button(root, text="Exit", background = "#C06C84",
@@ -91,6 +98,9 @@ ledButton = Button(root, text="LED OFF",background = "#C06C84",
       command=btnClicked, height=10, width=20, font = "Arial 16 bold")
 
 tempCalButton = Button(root, text="Cal Temp",background = "#C06C84", 
+      command=tempCalClicked, height=10, width=20, font = "Arial 16 bold")
+
+tempRead_label = Button(root, text="",background = "#C06C84", 
       command=tempCalClicked, height=10, width=20, font = "Arial 16 bold")
 
 
@@ -111,8 +121,10 @@ tempCalButton.grid(row = 4 ,column = 0)
 phCalButton.grid(row = 4 ,column = 1)
 ecCalButton.grid(row = 4 ,column = 2)
 readTempButton.grid(row = 5 ,column = 0)
+tempRead_label.grid(row = 5 ,column = 1)
 calTempButton.grid(row = 5 ,column = 2)
 readTempButton.pack_forget()
 calTempButton.pack_forget()
+
 root.bind("<Escape>", end_fullscreen)
 root.mainloop()				# starts the GUI loop
