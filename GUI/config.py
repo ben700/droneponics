@@ -161,7 +161,7 @@ orpCalButton= Button(root, text="Cal DO",background = "Light Blue",
       command=ecCalClicked, height=5, width=15, font = "Arial 16 bold")
 
 
-label_1.grid(row=0, column=0, columnspan=5)
+label_1.grid(row=1, column=0, columnspan=4)
 label_info.grid(row=1, column=1, columnspan=2)
 label_cal.grid(row=2, column=1, columnspan=2)
 label_status.grid(row=3, column=1, columnspan=2)
