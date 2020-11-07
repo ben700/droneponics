@@ -38,7 +38,7 @@ ledButton = Button(root, text="LED OFF",background = "#C06C84",
 
 label_1.grid(row=0, column=0)
 exitButton.grid(row = 1 ,column = 0)
-ledButton.grid(row = 1 ,column = 1)
+ledButton.grid(row = 2 ,column = 0)
 
 
 root.bind("<Escape>", end_fullscreen)
