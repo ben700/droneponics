@@ -27,7 +27,7 @@ def end_fullscreen(event):
 label_1 = Label(root, text="Raspberry Pi Graphical User Interface", font="Verdana 26 bold",
 			fg="#000",
 			bg="#99B898",
-			pady = 60,
+			pady = 10,
 			padx = 10)
 exitButton = Button(root, text="Exit", background = "#C06C84",
       command=btnExit, height=10, width=20, font = "Arial 16 bold")
