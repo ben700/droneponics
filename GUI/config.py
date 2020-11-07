@@ -124,35 +124,35 @@ label_status = Label(root, text="", font="Verdana 26 bold",
 			padx = 1)
 
 calProbeButton = Button(root, text="Calibrate Probe", background = "#C06C84",
-      command=btnExit, height=5, width=20, font = "Arial 16 bold")
+      command=btnExit, height=5, width=10, font = "Arial 16 bold")
 
 readProbeButton = Button(root, text="Read Probe", background = "#C06C84",
-      command=readTempClicked, height=5, width=20, font = "Arial 16 bold")
+      command=readTempClicked, height=5, width=10, font = "Arial 16 bold")
 		
 
 exitButton = Button(root, text="Exit", background = "#C06C84",
-      command=btnExit, height=5, width=20, font = "Arial 16 bold")
+      command=btnExit, height=5, width=10, font = "Arial 16 bold")
 	
 
 tempCalButton = Button(root, text="Cal Temp",background = "Black", fg = "White",
-      command=tempCalClicked, height=5, width=20, font = "Arial 16 bold")
+      command=tempCalClicked, height=5, width=10, font = "Arial 16 bold")
 
 probeRead_label = Button(root, text="",background = "#C06C84", 
-      command=tempCalClicked, height=5, width=20, font = "Arial 16 bold")
+      command=tempCalClicked, height=5, width=10, font = "Arial 16 bold")
 
 
 phCalButton = Button(root, text="Cal pH",background = "Red", 
-      command=phCalClicked, height=5, width=20, font = "Arial 16 bold")
+      command=phCalClicked, height=5, width=10, font = "Arial 16 bold")
 
 
 ecCalButton = Button(root, text="Cal EC",background = "Green", 
-      command=ecCalClicked, height=5, width=20, font = "Arial 16 bold")
+      command=ecCalClicked, height=5, width=10, font = "Arial 16 bold")
 
 doCalButton = Button(root, text="Cal DO",background = "Yellow", 
-      command=ecCalClicked, height=5, width=20, font = "Arial 16 bold")
+      command=ecCalClicked, height=5, width=10, font = "Arial 16 bold")
 
 orpCalButton= Button(root, text="Cal DO",background = "Light Blue", 
-      command=ecCalClicked, height=5, width=20, font = "Arial 16 bold")
+      command=ecCalClicked, height=5, width=10, font = "Arial 16 bold")
 
 
 label_1.grid(row=0, column=0, columnspan=3)
