@@ -175,7 +175,13 @@ class Sensor:
        self._log.info ("self.displayPin + 10 = " + str(self.displayPin + 9)) 
        self._log.info ("self.Cal=" + str(self.Cal) ) 
       
-       
+   def isProbeConnected(self):
+       try:
+           info = self.sensor.query("I")
+           return True
+       except:
+           return False
+      
    
 class WaterLevel():  
    GPIO.setmode(GPIO.BCM)
