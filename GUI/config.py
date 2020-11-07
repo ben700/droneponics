@@ -4,13 +4,16 @@ root = Tk()				# create the root object
 root.wm_title("GUI")			# sets title of the window
 root.configure(bg="#99B898")		# change the background color 
 root.attributes("-fullscreen", True) 	# set to fullscreen
+ledB= False
 
 
 def btnClicked():
-  if(ledButton["text"]=="LED ON")
+  if(ledB==True)
     ledButton["text"]="LED OFF"
+    ledB= False
   else:
     ledButton["text"]="LED ON"
+    ledB= True
 
 def btnExit():
   	root.destroy()
@@ -26,11 +29,11 @@ label_1 = Label(root, text="Raspberry Pi Graphical User Interface", font="Verdan
 			pady = 60,
 			padx = 100)
 exitButton = Button(root, text="Exit", background = "#C06C84",
-      command=btnExit, height=10, width=40, font = "Arial 16 bold")
+      command=btnExit, height=10, width=20, font = "Arial 16 bold")
 	
 
 ledButton = Button(root, text="LED OFF",background = "#C06C84", 
-      command=btnClicked, height=10, width=40, font = "Arial 16 bold")
+      command=btnClicked, height=10, width=20, font = "Arial 16 bold")
 
 
 label_1.grid(row=0, column=0)
