@@ -155,7 +155,7 @@ orpCalButton= Button(root, text="Cal DO",background = "Light Blue",
       command=ecCalClicked, height=5, width=15, font = "Arial 16 bold")
 
 
-label_1.grid(row=0, column=0, columnspan=3)
+label_1.grid(row=0, column=0, columnspan=5)
 label_info.grid(row=1, column=1, columnspan=2)
 label_cal.grid(row=2, column=1, columnspan=2)
 label_status.grid(row=3, column=1, columnspan=2)
@@ -172,29 +172,29 @@ calProbeButton.grid(row = 5 ,column = 2)
 
 
 if(sensors[0].isProbeConnected()):
-	tempCalButton["text"]= "Cal Temp \n(Connected)"
+	tempCalButton["text"]= "Cal Temp \nConnected"
 else:
-	tempCalButton["text"]= "Cal Temp \n(Not Connected)"
+	tempCalButton["text"]= "Cal Temp \nNot Connected"
 	
 
 if(sensors[2].isProbeConnected()):
-	phCalButton["text"]= "Cal PH \n(Connected)"
+	phCalButton["text"]= "Cal PH \nConnected"
 else:
-	phCalButton["text"]= "Cal PH \n(Not Connected)"
+	phCalButton["text"]= "Cal PH \nNot Connected"
 	
 
 if(sensors[1].isProbeConnected()):
-	ecCalButton["text"]= "Cal EC "+'\n'+"(Connected)"
+	ecCalButton["text"]= "Cal EC "+'\n'+"Connected"
 else:
-	ecCalButton["text"]= "Cal EC "+'\n'+"(Not Connected)"
+	ecCalButton["text"]= "Cal EC "+'\n'+"Not Connected"
 
 if(sensors[3].isProbeConnected()):
-	doCalButton["text"]= "Cal DO "+'\n'+"(Connected)"
+	doCalButton["text"]= "Cal DO "+'\n'+"Connected"
 else:
 	doCalButton["text"]= "DO "+'\n'+"Not Connected"
 
 if(sensors[4].isProbeConnected()):
-	orpCalButton["text"]= "Cal ORP "+'\n'+"(Connected)"
+	orpCalButton["text"]= "Cal ORP "+'\n'+"Connected"
 else:
 	orpCalButton["text"]= "ORP "+'\n'+"Not Connected"
 root.bind("<Escape>", end_fullscreen)
