@@ -123,8 +123,8 @@ ecCalButton.grid(row = 4 ,column = 2)
 readTempButton.grid(row = 5 ,column = 0)
 tempRead_label.grid(row = 5 ,column = 1)
 calTempButton.grid(row = 5 ,column = 2)
-readTempButton.pack_forget()
-calTempButton.pack_forget()
+readTempButton.pack()
+calTempButton.pack()
 
 root.bind("<Escape>", end_fullscreen)
 root.mainloop()				# starts the GUI loop
