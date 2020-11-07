@@ -29,8 +29,9 @@ def tempCalClicked():
     label_info["text"]= probe.query("i").strip().rstrip('\x00')
     label_cal["text"]= probe.query("cal,?").strip().rstrip('\x00')
     label_status["text"]= probe.query("Status").strip().rstrip('\x00')
-    readTempButton.pack()
-    calTempButton.pack()
+    readTempButton.forget()
+    calTempButton.forget()
+    readTempClicked()
 
 def phCalClicked():
     label_1["text"]="pH Calibration"
@@ -38,7 +39,7 @@ def phCalClicked():
     label_info["text"]= probe.query("i").strip().rstrip('\x00')	
     label_cal["text"]= probe.query("cal,?").strip().rstrip('\x00')
     label_status["text"]= probe.query("Status").strip().rstrip('\x00')
-    readTempClicked()
+
 
 def ecCalClicked():
     label_1["text"]="EC Calibration"
