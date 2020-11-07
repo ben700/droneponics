@@ -26,7 +26,7 @@ root.wm_title("GUI")			# sets title of the window
 
 load = Image.open("/home/pi/droneponics/pic/droneponics_logo.bmp")
 render = ImageTk.PhotoImage(load)
-img = Label(self, image=render)
+img = Label(root, image=render)
 img.image = render
 img.place(x=0, y=0)
 
