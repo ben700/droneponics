@@ -148,10 +148,12 @@ phCalButton = Button(root, text="Cal pH",background = "Red",
 ecCalButton = Button(root, text="Cal EC",background = "Green", 
       command=ecCalClicked, height=5, width=20, font = "Arial 16 bold")
 
-
-
 doCalButton = Button(root, text="Cal DO",background = "Yellow", 
       command=ecCalClicked, height=5, width=20, font = "Arial 16 bold")
+
+orpCalButton= Button(root, text="Cal DO",background = "Light Blue", 
+      command=ecCalClicked, height=5, width=20, font = "Arial 16 bold")
+
 
 label_1.grid(row=0, column=0, columnspan=3)
 label_info.grid(row=1, column=1, columnspan=2)
@@ -161,7 +163,8 @@ exitButton.grid(row = 1 ,column = 0, rowspan=3)
 tempCalButton.grid(row = 4 ,column = 0)
 phCalButton.grid(row = 4 ,column = 1)
 ecCalButton.grid(row = 4 ,column = 2)
-doCalButton.grid(row = 5 ,column = 2)
+doCalButton.grid(row = 4 ,column = 3)
+orpCalButton.grid(row = 4 ,column = 4)
 
 readProbeButton.grid(row = 5 ,column = 0)
 probeRead_label.grid(row = 5 ,column = 1)
@@ -189,6 +192,10 @@ if(sensors[3].isProbeConnected()):
 	doCalButton["text"]= "Cal DO (Connected)"
 else:
 	doCalButton["text"]= "DO Not Connected"
-		
+
+if(sensors[4].isProbeConnected()):
+	orpCalButton["text"]= "Cal ORP (Connected)"
+else:
+	orpCalButton["text"]= "ORP Not Connected"
 root.bind("<Escape>", end_fullscreen)
 root.mainloop()				# starts the GUI loop
