@@ -117,7 +117,7 @@ exitButton = Button(root, text="Exit", background = "#C06C84",
       command=btnExit, height=5, width=20, font = "Arial 16 bold")
 	
 
-tempCalButton = Button(root, text="Cal Temp",background = "#C06C84", 
+tempCalButton = Button(root, text="Cal Temp",background = "Black", fg = "White" 
       command=tempCalClicked, height=5, width=20, font = "Arial 16 bold")
 
 probeRead_label = Button(root, text="",background = "#C06C84", 
