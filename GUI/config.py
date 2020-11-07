@@ -172,30 +172,30 @@ calProbeButton.grid(row = 5 ,column = 2)
 
 
 if(sensors[0].isProbeConnected()):
-	tempCalButton["text"]= "Cal Temp (Connected)"
+	tempCalButton["text"]= "Cal Temp \n(Connected)"
 else:
-	tempCalButton["text"]= "Cal Temp (Not Connected)"
+	tempCalButton["text"]= "Cal Temp \n(Not Connected)"
 	
 
 if(sensors[2].isProbeConnected()):
-	phCalButton["text"]= "Cal PH (Connected)"
+	phCalButton["text"]= "Cal PH \n(Connected)"
 else:
-	phCalButton["text"]= "Cal PH (Not Connected)"
+	phCalButton["text"]= "Cal PH \n(Not Connected)"
 	
 
 if(sensors[1].isProbeConnected()):
-	ecCalButton["text"]= "Cal EC (Connected)"
+	ecCalButton["text"]= "Cal EC "+'\n'+"(Connected)"
 else:
-	ecCalButton["text"]= "Cal EC (Not Connected)"
+	ecCalButton["text"]= "Cal EC "+'\n'+"(Not Connected)"
 
 if(sensors[3].isProbeConnected()):
-	doCalButton["text"]= "Cal DO (Connected)"
+	doCalButton["text"]= "Cal DO "+'\n'+"(Connected)"
 else:
-	doCalButton["text"]= "DO Not Connected"
+	doCalButton["text"]= "DO "+'\n'+"Not Connected"
 
 if(sensors[4].isProbeConnected()):
-	orpCalButton["text"]= "Cal ORP (Connected)"
+	orpCalButton["text"]= "Cal ORP "+'\n'+"(Connected)"
 else:
-	orpCalButton["text"]= "ORP Not Connected"
+	orpCalButton["text"]= "ORP "+'\n'+"Not Connected"
 root.bind("<Escape>", end_fullscreen)
 root.mainloop()				# starts the GUI loop
