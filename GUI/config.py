@@ -172,23 +172,31 @@ if(sensors[0].isProbeConnected()):
 	tempCalButton["text"]= "Cal Temp \nConnected"
 else:
 	tempCalButton["text"]= "Cal Temp \nNot Connected"
+	tempCalButton["state"] = DISABLED
+	
 	
 
 if(sensors[2].isProbeConnected()):
 	phCalButton["text"]= "Cal PH \nConnected"
 else:
 	phCalButton["text"]= "Cal PH \nNot Connected"
+	phCalButton["state"] = DISABLED
+	
 	
 
 if(sensors[1].isProbeConnected()):
 	ecCalButton["text"]= "Cal EC "+'\n'+"Connected"
 else:
 	ecCalButton["text"]= "Cal EC "+'\n'+"Not Connected"
+	ecCalButton["state"] = DISABLED
+	
 
 if(sensors[3].isProbeConnected()):
 	doCalButton["text"]= "Cal DO "+'\n'+"Connected"
 else:
 	doCalButton["text"]= "DO "+'\n'+"Not Connected"
+	doCalButton["state"] = DISABLED
+	
 
 if(sensors[4].isProbeConnected()):
 	orpCalButton["text"]= "Cal ORP "+'\n'+"Connected"
