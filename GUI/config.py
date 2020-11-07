@@ -29,9 +29,11 @@ def tempCalClicked():
     label_info["text"]= probe.query("i").strip().rstrip('\x00')
     label_cal["text"]= probe.query("cal,?").strip().rstrip('\x00')
     label_status["text"]= probe.query("Status").strip().rstrip('\x00')
+    readTempButton["text"]= "Read Temp"
+    readTempButton["command"]= readTempClicked
     readTempButton.forget()
     calTempButton.forget()
-    readTempClicked()
+   # readTempClicked()
 
 def phCalClicked():
     label_1["text"]="pH Calibration"
