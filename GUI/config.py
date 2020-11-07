@@ -33,7 +33,8 @@ def tempCalClicked():
     readProbeButton["command"]= readTempClicked
     calProbeButton["text"]= "Cal Temp"
     calProbeButton["command"]= calTempClicked
-
+    clearReading()
+	
 def phCalClicked():
     label_1["text"]="pH Calibration"
     probe = AtlasI2C(99)
@@ -44,6 +45,7 @@ def phCalClicked():
     readProbeButton["command"]= readPHClicked
     calProbeButton["text"]= "Cal PH"
     calProbeButton["command"]= calPHClicked
+    clearReading()
 
 
 def ecCalClicked():
@@ -56,6 +58,7 @@ def ecCalClicked():
     readProbeButton["command"]= readECClicked
     calProbeButton["text"]= "Cal EC"
     calProbeButton["command"]= calECClicked
+    clearReading()
 
 def readTempClicked():	
     probe = AtlasI2C(102)
@@ -68,6 +71,9 @@ def readPHClicked():
 def readECClicked():	
     probe = AtlasI2C(100)
     probeRead_label["text"]= probe.query("R").strip().rstrip('\x00')
+
+def clearReading():	
+    probeRead_label["text"]= ""
 
 	
 def calTempClicked():	
