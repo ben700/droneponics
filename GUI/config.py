@@ -27,7 +27,7 @@ label_1 = Label(root, text="Raspberry Pi Graphical User Interface", font="Verdan
 			fg="#000",
 			bg="#99B898",
 			pady = 60,
-			padx = 100)
+			padx = 10)
 exitButton = Button(root, text="Exit", background = "#C06C84",
       command=btnExit, height=10, width=20, font = "Arial 16 bold")
 	
