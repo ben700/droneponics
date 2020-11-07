@@ -16,6 +16,19 @@ def btnClicked():
     ledButton["text"]="LED ON"
     ledB= True
 
+
+
+def tempCalClicked():	
+    label_1["text"]="Temp Calibration"
+
+def phCalClicked():
+    label_1["text"]="pH Calibration"
+	
+
+def ecCalClicked():
+    label_1["text"]="EC Calibration"
+	
+	
 def btnExit():
   	root.destroy()
 
@@ -37,15 +50,15 @@ ledButton = Button(root, text="LED OFF",background = "#C06C84",
       command=btnClicked, height=10, width=20, font = "Arial 16 bold")
 
 tempCalButton = Button(root, text="Cal Temp",background = "#C06C84", 
-      command=btnClicked, height=10, width=20, font = "Arial 16 bold")
+      command=tempCalClicked, height=10, width=20, font = "Arial 16 bold")
 
 
 phCalButton = Button(root, text="Cal pH",background = "#C06C84", 
-      command=btnClicked, height=10, width=20, font = "Arial 16 bold")
+      command=phCalClicked, height=10, width=20, font = "Arial 16 bold")
 
 
 ecCalButton = Button(root, text="Cal EC",background = "#C06C84", 
-      command=btnClicked, height=10, width=20, font = "Arial 16 bold")
+      command=ecCalClicked, height=10, width=20, font = "Arial 16 bold")
 
 
 label_1.grid(row=0, column=0, columnspan=3)
