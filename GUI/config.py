@@ -1,4 +1,7 @@
-#!/usr/bin/python	
+#!/usr/bin/python3
+sys.path.append('/home/pi/droneponics')
+from AtlasI2C import (AtlasI2C)
+
 from tkinter import * 			# imports the Tkinter lib
 root = Tk()				# create the root object
 root.wm_title("GUI")			# sets title of the window
@@ -20,14 +23,19 @@ def btnClicked():
 
 def tempCalClicked():	
     label_1["text"]="Temp Calibration"
+    probe = AtlasI2C(102)
+    label_info["text"]= probe.query("i")
+        
 
 def phCalClicked():
     label_1["text"]="pH Calibration"
-	
+    probe = AtlasI2C(99)
+    label_info["text"]= probe.query("i")	
 
 def ecCalClicked():
     label_1["text"]="EC Calibration"
-	
+    probe = AtlasI2C(100)
+    label_info["text"]= probe.query("i")	
 	
 def btnExit():
   	root.destroy()
@@ -42,6 +50,13 @@ label_1 = Label(root, text="Raspberry Pi Graphical User Interface", font="Verdan
 			bg="#99B898",
 			pady = 1,
 			padx = 1)
+
+label_info = Label(root, text="", font="Verdana 26 bold",
+			fg="#000",
+			bg="#99B898",
+			pady = 1,
+			padx = 1)
+
 exitButton = Button(root, text="Exit", background = "#C06C84",
       command=btnExit, height=10, width=20, font = "Arial 16 bold")
 	
@@ -62,6 +77,7 @@ ecCalButton = Button(root, text="Cal EC",background = "#C06C84",
 
 
 label_1.grid(row=0, column=0, columnspan=3)
+label_info.grid(row=1, column=1, columnspan=2)
 exitButton.grid(row = 1 ,column = 0)
 tempCalButton.grid(row = 2 ,column = 0)
 phCalButton.grid(row = 2 ,column = 1)
