@@ -29,7 +29,6 @@ _log.info("All Monitor Sensors created")
 
 
 def tempCalClicked():	
-    label_1["text"]="Temp Calibration"
     probe = AtlasI2C(102)
     label_info["text"]= probe.query("i").strip().rstrip('\x00')
     label_cal["text"]= probe.query("cal,?").strip().rstrip('\x00')
@@ -41,7 +40,6 @@ def tempCalClicked():
     clearReading()
 	
 def phCalClicked():
-    label_1["text"]="pH Calibration"
     probe = AtlasI2C(99)
     label_info["text"]= probe.query("i").strip().rstrip('\x00')	
     label_cal["text"]= probe.query("cal,?").strip().rstrip('\x00')
@@ -54,7 +52,6 @@ def phCalClicked():
 
 
 def ecCalClicked():
-    label_1["text"]="EC Calibration"
     probe = AtlasI2C(100)
     label_info["text"]= probe.query("i").strip().rstrip('\x00')	
     label_cal["text"]= probe.query("cal,?").strip().rstrip('\x00')
