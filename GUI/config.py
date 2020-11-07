@@ -24,7 +24,7 @@ _log.setLevel(logging.DEBUG)
 root = Tk()				# create the root object
 root.wm_title("GUI")			# sets title of the window
 
-load = Image.open("/home/pi/droneponics/pic/droneponics_logo.bmp")
+load = Image.open("/home/pi/droneponics/pic/store_logo.png")
 render = ImageTk.PhotoImage(load)
 img = Label(root, image=render)
 img.image = render
