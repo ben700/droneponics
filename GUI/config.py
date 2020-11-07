@@ -194,7 +194,7 @@ if(sensors[4].isProbeConnected()):
 	orpCalButton["text"]= "Cal ORP "+'\n'+"Connected"
 else:
 	orpCalButton["text"]= "ORP "+'\n'+"Not Connected"
-	orpCalButton["state"] = "DISABLED"
+	orpCalButton["state"] = DISABLED
 	
 root.bind("<Escape>", end_fullscreen)
 root.mainloop()				# starts the GUI loop
