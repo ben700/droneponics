@@ -26,18 +26,18 @@ def btnClicked():
 def tempCalClicked():	
     label_1["text"]="Temp Calibration"
     probe = AtlasI2C(102)
-    label_info["text"]= probe.query("i")
+    label_info["text"]= probe.query("i").strip().rstrip('\x00')
         
 
 def phCalClicked():
     label_1["text"]="pH Calibration"
     probe = AtlasI2C(99)
-    label_info["text"]= probe.query("i")	
+    label_info["text"]= probe.query("i").strip().rstrip('\x00')	
 
 def ecCalClicked():
     label_1["text"]="EC Calibration"
     probe = AtlasI2C(100)
-    label_info["text"]= probe.query("i")	
+    label_info["text"]= probe.query("i").strip().rstrip('\x00')	
 	
 def btnExit():
   	root.destroy()
