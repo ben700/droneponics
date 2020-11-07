@@ -73,7 +73,9 @@ def readECClicked():
     rawReading = probe.query("R").strip().rstrip('\x00')
     v1 = rawReading.split(":")[1].split(",")[0].strip().rstrip('\x00')
     v2 = rawReading.split(":")[1].split(",")[1].strip().rstrip('\x00')
-    probeRead_label["text"]= "V1 = " + str(v1) + '\n' + "V2 = " + str(v2)
+    v3 = rawReading.split(":")[1].split(",")[2].strip().rstrip('\x00')
+    v4 = rawReading.split(":")[1].split(",")[3].strip().rstrip('\x00')	
+    probeRead_label["text"]= "V1 = " + str(v1) + '\n' + "V2 = " + str(v2)+ '\n' + "V3 = " + str(v3)+ '\n' + "V4 = " + str(v4)
 
 def clearReading():	
     probeRead_label["text"]= ""
