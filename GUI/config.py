@@ -28,9 +28,8 @@ load = Image.open("/home/pi/droneponics/pic/store_logo.png")
 render = ImageTk.PhotoImage(load)
 img = Label(root, image=render)
 img.image = render
-#img.place(x=0, y=0)
-
-root.configure(bg="#99B898")		# change the background color 
+img.place(x=0, y=0)
+root.configure(bg="White")		# change the background color 
 root.attributes("-fullscreen", True) 	# set to fullscreen
 
 sensors = []
@@ -166,7 +165,7 @@ label_1.grid(row=0, column=0, columnspan=5)
 label_info.grid(row=1, column=1, columnspan=2)
 label_cal.grid(row=2, column=1, columnspan=2)
 label_status.grid(row=3, column=1, columnspan=2)
-exitButton.grid(row = 1 ,column = 0, rowspan=3)
+exitButton.grid(row = 0,column = 0, rowspan=3, sticky =SE)
 tempCalButton.grid(row = 4 ,column = 0)
 phCalButton.grid(row = 4 ,column = 1)
 ecCalButton.grid(row = 4 ,column = 2)
@@ -176,8 +175,6 @@ orpCalButton.grid(row = 4 ,column = 4)
 readProbeButton.grid(row = 5 ,column = 0)
 probeRead_label.grid(row = 5 ,column = 1)
 calProbeButton.grid(row = 5 ,column = 2)
-
-img.grid(row=0, column=0, sticky =SE)
 
 if(sensors[0].isProbeConnected()):
 	tempCalButton["text"]= "Cal Temp \nConnected"
