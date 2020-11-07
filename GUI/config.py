@@ -23,9 +23,14 @@ _log.setLevel(logging.DEBUG)
 root = Tk()				# create the root object
 root.wm_title("GUI")			# sets title of the window
 
-filename = PhotoImage(file = "/home/pi/droneponics/pic/droneponics_logo.bmp")
-background_label = Label(root, image=filename)
-background_label.place(x=0, y=0, relwidth=1, relheight=1)
+#filename = PhotoImage(file = "/home/pi/droneponics/pic/droneponics_logo.bmp")
+image = Image.open("/home/pi/droneponics/pic/droneponics_logo.bmp")
+tkpi = ImageTk.PhotoImage(image)
+label_image = Tkinter.Label(root, image=tkpi)
+label_image.place(x=0,y=0)
+
+#background_label = Label(root, image=filename)
+#background_label.place(x=0, y=0, relwidth=1, relheight=1)
 
 root.configure(bg="#99B898")		# change the background color 
 root.attributes("-fullscreen", True) 	# set to fullscreen
