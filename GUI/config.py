@@ -164,6 +164,64 @@ def ecCalClicked():
     clearReading()
 
 
+def doCalClicked():
+    clearCalButtons()
+    probe = AtlasI2C(97)
+    deviceInfo = probe.query("i")
+    label_info["text"]= "Device : " +deviceInfo.split(":")[1].split(",")[1].strip().rstrip('\x00') + '\nFirmware : ' + deviceInfo.split(":")[1].split(",")[2].strip().rstrip('\x00')
+    calInfo = probe.query("cal,?")
+    label_cal["text"]= "Device Calibrated to " + calInfo.split(":")[1].split(",")[1].strip().rstrip('\x00') + " point(s)"
+    statusInfo=probe.query("Status")
+    label_status["text"]= "Reason for restart : " + restartCode[statusInfo.split(":")[1].split(",")[1].strip().rstrip('\x00')] + "\nVoltage : " +  statusInfo.split(":")[1].split(",")[2].strip().rstrip('\x00')
+    calResult_label["text"]= probe.query("Cal,?").strip().rstrip('\x00')
+    readProbeButton["text"]= "Read DO"
+    readProbeButton["command"]= readDOClicked
+    readProbeButton["state"] = NORMAL
+    calButton1["text"]= "Cal"
+    calButton1["command"]= doCalButton1Clicked
+    calButton1["state"] = NORMAL
+    calButton2["text"]= "Cal,n"
+    calButton2["command"]= doCalButton2Clicked
+    calButton2["state"] = NORMAL
+    calButton3["text"]= "Cal,clear"
+    calButton3["command"]= doCalButton3Clicked
+    calButton3["state"] = NORMAL
+    calButton4["text"]= "Cal,?"
+    calButton4["command"]= doCalButton4Clicked
+    calButton4["state"] = NORMAL
+    calButton1["background"] = "Yellow"
+    calButton2["background"] = "Yellow"
+    calButton3["background"] = "Yellow"
+    calButton4["background"] = "Yellow"
+    clearReading()
+
+def orpCalClicked():
+    clearCalButtons()
+    probe = AtlasI2C(98)
+    deviceInfo = probe.query("i")
+    label_info["text"]= "Device : " +deviceInfo.split(":")[1].split(",")[1].strip().rstrip('\x00') + '\nFirmware : ' + deviceInfo.split(":")[1].split(",")[2].strip().rstrip('\x00')
+    calInfo = probe.query("cal,?")
+    label_cal["text"]= "Device Calibrated to " + calInfo.split(":")[1].split(",")[1].strip().rstrip('\x00') + " point(s)"
+    statusInfo=probe.query("Status")
+    label_status["text"]= "Reason for restart : " + restartCode[statusInfo.split(":")[1].split(",")[1].strip().rstrip('\x00')] + "\nVoltage : " +  statusInfo.split(":")[1].split(",")[2].strip().rstrip('\x00')
+    calResult_label["text"]= probe.query("Cal,?").strip().rstrip('\x00')
+    readProbeButton["text"]= "Read ORP"
+    readProbeButton["command"]= readORPClicked
+    readProbeButton["state"] = NORMAL
+    calButton1["text"]= "Cal,n"
+    calButton1["command"]= orpCalButton2Clicked
+    calButton1["state"] = NORMAL
+    calButton2["text"]= "Cal,clear"
+    calButton2["command"]= orpCalButton3Clicked
+    calButton2["state"] = NORMAL
+    calButton3["text"]= "Cal,?"
+    calButton3["command"]= orpCalButton4Clicked
+    calButton3["state"] = NORMAL
+    calButton1["background"] = "Light Blue"
+    calButton2["background"] = "Light Blue"
+    calButton3["background"] = "Light Blue"
+    clearReading()
+
 def readTempClicked():	
     probe = AtlasI2C(102)
     try:
@@ -174,6 +232,22 @@ def readTempClicked():
 
 def readPHClicked():	
     probe = AtlasI2C(99)
+    try:
+        probeOldRead_label["text"] =probeRead_label["text"].split(":")[1].split(",")[0].strip().rstrip('\x00')
+    except:
+        probeOldRead_label["text"] =""
+    probeRead_label["text"]= probe.query("R").strip().rstrip('\x00')
+
+def readDOClicked():	
+    probe = AtlasI2C(97)
+    try:
+        probeOldRead_label["text"] =probeRead_label["text"].split(":")[1].split(",")[0].strip().rstrip('\x00')
+    except:
+        probeOldRead_label["text"] =""
+    probeRead_label["text"]= probe.query("R").strip().rstrip('\x00')
+
+def readORPClicked():	
+    probe = AtlasI2C(98)
     try:
         probeOldRead_label["text"] =probeRead_label["text"].split(":")[1].split(",")[0].strip().rstrip('\x00')
     except:
@@ -227,6 +301,25 @@ def ecCalButton4Clicked():
     calResult_label["text"]= "Cal,high,n Completed"
 def ecCalButton5Clicked():	
     calResult_label["text"]= "Cal,clear Completed"
+def doCalButton1Clicked():	
+    calResult_label["text"]= "Cal Completed"
+def doCalButton2Clicked():	
+    calResult_label["text"]= "Cal,0 Completed"
+def doCalButton3Clicked():	
+    calResult_label["text"]= "Cal,clear Completed"
+def doCalButton4Clicked():	
+    probe = AtlasI2C(97)
+    deviceCalibrated = probe.query("Cal,?").strip().rstrip('\x00')
+    calResult_label["text"]= deviceCalibrated
+def orpCalButton1Clicked():	
+    calResult_label["text"]= "Cal,n"
+def orpCalButton2Clicked():	
+    calResult_label["text"]= "Cal,clear Completed"
+def orpCalButton3Clicked():	
+    probe = AtlasI2C(98)
+    deviceCalibrated = probe.query("Cal,?").strip().rstrip('\x00')
+    calResult_label["text"]= deviceCalibrated
+
 
 def btnExit():
   	root.destroy()
