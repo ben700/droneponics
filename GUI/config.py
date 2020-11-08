@@ -40,7 +40,7 @@ _log.info("All Monitor Sensors created")
 def tempCalClicked():	
     probe = AtlasI2C(102)
     deviceInfo = probe.query("i")
-    label_info["text"]= "Device " +deviceInfo.split(":")[1].split(",")[1].strip().rstrip('\x00') + '\nFirmware ' + deviceInfo.split(":")[1].split(",")[2].strip().rstrip('\x00')
+    label_info["text"]= "Device :" +deviceInfo.split(":")[1].split(",")[1].strip().rstrip('\x00') + '\nFirmware :' + deviceInfo.split(":")[1].split(",")[2].strip().rstrip('\x00')
     calInfo = probe.query("cal,?")
     label_cal["text"]= "Device Calibrated to " + calInfo.split(":")[1].split(",")[1].strip().rstrip('\x00') + " point(s)"
     statusInfo=probe.query("Status")
@@ -54,7 +54,7 @@ def tempCalClicked():
 def phCalClicked():
     probe = AtlasI2C(99)
     deviceInfo = probe.query("i")
-    label_info["text"]= "Device " +deviceInfo.split(":")[1].split(",")[1].strip().rstrip('\x00') + '\nFirmware ' + deviceInfo.split(":")[1].split(",")[2].strip().rstrip('\x00')
+    label_info["text"]= "Device :" +deviceInfo.split(":")[1].split(",")[1].strip().rstrip('\x00') + '\nFirmware :' + deviceInfo.split(":")[1].split(",")[2].strip().rstrip('\x00')
     calInfo = probe.query("cal,?")
     label_cal["text"]= "Device Calibrated to " + calInfo.split(":")[1].split(",")[1].strip().rstrip('\x00') + " point(s)"
     statusInfo=probe.query("Status")
@@ -69,7 +69,7 @@ def phCalClicked():
 def ecCalClicked():
     probe = AtlasI2C(100)
     deviceInfo = probe.query("i")
-    label_info["text"]= "Device " +deviceInfo.split(":")[1].split(",")[1].strip().rstrip('\x00') + '\nFirmware ' + deviceInfo.split(":")[1].split(",")[2].strip().rstrip('\x00')
+    label_info["text"]= "Device :" +deviceInfo.split(":")[1].split(",")[1].strip().rstrip('\x00') + '\nFirmware :' + deviceInfo.split(":")[1].split(",")[2].strip().rstrip('\x00')
     calInfo = probe.query("cal,?")
     label_cal["text"]= "Device Calibrated to " + calInfo.split(":")[1].split(",")[1].strip().rstrip('\x00') + " point(s)"
     statusInfo=probe.query("Status")
