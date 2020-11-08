@@ -177,7 +177,7 @@ doCalButton = Button(root, text="Cal DO",background = "Yellow",
 orpCalButton= Button(root, text="Cal DO",background = "Light Blue", 
       command=ecCalClicked, height=5, width=15, font = "Arial 16 bold")
 
-calEntryBox= Entry(root, height=5, width=15, font = "Arial 16 bold")
+calEntryBox= Entry(root)
 
 
 
