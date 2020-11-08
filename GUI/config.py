@@ -182,13 +182,13 @@ probeRead_label = Label(root, text="", font="Verdana 26 bold",
 calEntryBox= Entry(root)
 
 
-calButton1 = Button(root, text="Cal Temp",background = "Black", fg = "White",
+calButton1 = Button(root, text="calButton1",background = "Black", fg = "White",
        height=5, width=15, font = "Arial 16 bold")
 
-calButton2 = Button(root, text="Cal Temp",background = "Black", fg = "White",
+calButton2 = Button(root, text="calButton2",background = "Black", fg = "White",
        height=5, width=15, font = "Arial 16 bold")
 
-calButton3 = Button(root, text="Cal Temp",background = "Black", fg = "White",
+calButton3 = Button(root, text="calButton3",background = "Black", fg = "White",
        height=5, width=15, font = "Arial 16 bold")
 
 
@@ -208,8 +208,8 @@ readProbeButton.grid(row = 5 ,column = 0)
 probeRead_label.grid(row = 5 ,column = 1, columnspan=3)
 
 calButton1.grid(row = 6 ,column = 0)
-calButton2.grid(row = 6 ,column = 0)
-calButton3.grid(row = 6 ,column = 0)
+calButton2.grid(row = 6 ,column = 1)
+calButton3.grid(row = 6 ,column = 2)
 
 readProbeButton["state"] = DISABLED
 calButton1["state"] = DISABLED
