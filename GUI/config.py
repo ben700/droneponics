@@ -51,7 +51,7 @@ def tempCalClicked():
     calProbeButton["text"]= "Cal Temp"
     calProbeButton["command"]= calTempClicked
     calProbeButton["state"] = NORMAL
-    calEntryBox["state"] = DISABLED
+    calEntryBox["state"] = NORMAL
 	
     clearReading()
 	
@@ -103,7 +103,7 @@ def readECClicked():
     v2 = rawReading.split(":")[1].split(",")[1].strip().rstrip('\x00')
     v3 = rawReading.split(":")[1].split(",")[2].strip().rstrip('\x00')
     v4 = rawReading.split(":")[1].split(",")[3].strip().rstrip('\x00')	
-    probeRead_label["text"]= "V1 = " + str(v1) + '\n' + "V2 = " + str(v2)+ '\n' + "V3 = " + str(v3)+ '\n' + "V4 = " + str(v4)
+    probeRead_label["text"]= "Conductivity = " + str(v1) + '\n' + "Total Dissolved Solids = " + str(v2)+ '\n' + "Salinity = " + str(v3)+ '\n' + "Specific Gravity = " + str(v4)
 
 def clearReading():	
     probeRead_label["text"]= ""
@@ -193,7 +193,7 @@ doCalButton.grid(row = 4 ,column = 3)
 orpCalButton.grid(row = 4 ,column = 4)
 
 readProbeButton.grid(row = 5 ,column = 0)
-probeRead_label.grid(row = 5 ,column = 1)
+probeRead_label.grid(row = 5 ,column = 1, rowspan=3)
 calProbeButton.grid(row = 6 ,column = 0)
 calEntryBox.grid(row = 6 ,column = 1)
 
