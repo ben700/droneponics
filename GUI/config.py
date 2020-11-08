@@ -182,13 +182,13 @@ probeRead_label = Label(root, text="", font="Verdana 26 bold",
 calEntryBox= Entry(root)
 
 
-calButton1 = Button(root, text="calButton1",background = "Black", fg = "White",
+calButton1 = Button(root, text="calButton1",background = "#C06C84", 
        height=5, width=15, font = "Arial 16 bold")
 
-calButton2 = Button(root, text="calButton2",background = "Black", fg = "White",
+calButton2 = Button(root, text="calButton2",background = "#C06C84", 
        height=5, width=15, font = "Arial 16 bold")
 
-calButton3 = Button(root, text="calButton3",background = "Black", fg = "White",
+calButton3 = Button(root, text="calButton3",background = "#C06C84",
        height=5, width=15, font = "Arial 16 bold")
 
 
