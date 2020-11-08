@@ -68,6 +68,7 @@ def tempCalClicked():
     label_cal["text"]= "Device Calibrated to " + calInfo.split(":")[1].split(",")[1].strip().rstrip('\x00') + " point(s)"
     statusInfo=probe.query("Status")
     label_status["text"]= "Reason for restart : " + restartCode[statusInfo.split(":")[1].split(",")[1].strip().rstrip('\x00')] + "\nVoltage : " +  statusInfo.split(":")[1].split(",")[2].strip().rstrip('\x00')
+    calResult_label["text"]= probe.query("Cal,?").strip().rstrip('\x00')
     readProbeButton["text"]= "Read Temp"
     readProbeButton["command"]= readTempClicked        
     readProbeButton["state"] = NORMAL
@@ -97,6 +98,7 @@ def phCalClicked():
     label_cal["text"]= "Device Calibrated to " + calInfo.split(":")[1].split(",")[1].strip().rstrip('\x00') + " point(s)"
     statusInfo=probe.query("Status")
     label_status["text"]= "Reason for restart : " + restartCode[statusInfo.split(":")[1].split(",")[1].strip().rstrip('\x00')] + "\nVoltage : " +  statusInfo.split(":")[1].split(",")[2].strip().rstrip('\x00')
+    calResult_label["text"]= probe.query("Cal,?").strip().rstrip('\x00')
     readProbeButton["text"]= "Read pH"
     readProbeButton["command"]= readPHClicked
     readProbeButton["state"] = NORMAL
@@ -133,6 +135,7 @@ def ecCalClicked():
     label_cal["text"]= "Device Calibrated to " + calInfo.split(":")[1].split(",")[1].strip().rstrip('\x00') + " point(s)"
     statusInfo=probe.query("Status")
     label_status["text"]= "Reason for restart : " + restartCode[statusInfo.split(":")[1].split(",")[1].strip().rstrip('\x00')] + "\nVoltage : " +  statusInfo.split(":")[1].split(",")[2].strip().rstrip('\x00')
+    calResult_label["text"]= probe.query("Cal,?").strip().rstrip('\x00')
     readProbeButton["text"]= "Read EC"
     readProbeButton["command"]= readECClicked
     readProbeButton["state"] = NORMAL
@@ -157,6 +160,7 @@ def ecCalClicked():
     calButton4["background"] = "Green"
     calButton5["background"] = "Green"
     clearReading()
+
 
 def readTempClicked():	
     probe = AtlasI2C(102)
@@ -188,7 +192,7 @@ def tempCalButton2Clicked():
     calResult_label["text"]= "Cal,clear Completed"
 def tempCalButton3Clicked():	
     probe = AtlasI2C(102)
-    deviceCalibrated = probe.query("Cal,?")
+    deviceCalibrated = probe.query("Cal,?").strip().rstrip('\x00')
     calResult_label["text"]= deviceCalibrated
 def phCalButton1Clicked():	
     calResult_label["text"]= "Cal,mid,n Completed"
@@ -200,7 +204,7 @@ def phCalButton4Clicked():
     calResult_label["text"]= "Cal,clear Completed"
 def phCalButton5Clicked():	
     probe = AtlasI2C(99)
-    deviceCalibrated = probe.query("Cal,?")
+    deviceCalibrated = probe.query("Cal,?").strip().rstrip('\x00')
     calResult_label["text"]= deviceCalibrated
 def ecCalButton1Clicked():	
     calResult_label["text"]= "Cal,dry Completed"
