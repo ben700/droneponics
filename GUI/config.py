@@ -53,7 +53,12 @@ def clearCalButtons():
     calButton3["background"] = "#C06C84"
     calButton4["background"] = "#C06C84"
     calButton5["background"] = "#C06C84"
-	
+    calButton1["fg"] = "Black"
+    calButton2["fg"] = "Black"
+    calButton3["fg"] = "Black"
+    calButton4["fg"] = "Black"
+    calButton5["fg"] = "Black"
+
 def tempCalClicked():	
     clearCalButtons()
     probe = AtlasI2C(102)
@@ -77,7 +82,11 @@ def tempCalClicked():
     calButton3["background"] = "Black"
     calButton4["background"] = "Black"
     calButton5["background"] = "Black"
-
+    calButton1["fg"] = "White"
+    calButton2["fg"] = "White"
+    calButton3["fg"] = "White"
+    calButton4["fg"] = "White"
+    calButton5["fg"] = "White"
     clearReading()
 	
 def phCalClicked():
