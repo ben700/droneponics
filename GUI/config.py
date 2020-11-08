@@ -40,11 +40,11 @@ _log.info("All Monitor Sensors created")
 def tempCalClicked():	
     probe = AtlasI2C(102)
     deviceInfo = probe.query("i")
-    label_info["text"]= "Device :" +deviceInfo.split(":")[1].split(",")[1].strip().rstrip('\x00') + '\nFirmware :' + deviceInfo.split(":")[1].split(",")[2].strip().rstrip('\x00')
+    label_info["text"]= "Device : " +deviceInfo.split(":")[1].split(",")[1].strip().rstrip('\x00') + '\nFirmware : ' + deviceInfo.split(":")[1].split(",")[2].strip().rstrip('\x00')
     calInfo = probe.query("cal,?")
     label_cal["text"]= "Device Calibrated to " + calInfo.split(":")[1].split(",")[1].strip().rstrip('\x00') + " point(s)"
     statusInfo=probe.query("Status")
-    label_status["text"]= "Reason for restart :" + restartCode[statusInfo.split(":")[1].split(",")[1].strip().rstrip('\x00')] + "\nVoltage " +  statusInfo.split(":")[1].split(",")[2].strip().rstrip('\x00')
+    label_status["text"]= "Reason for restart : " + restartCode[statusInfo.split(":")[1].split(",")[1].strip().rstrip('\x00')] + "\nVoltage : " +  statusInfo.split(":")[1].split(",")[2].strip().rstrip('\x00')
     readProbeButton["text"]= "Read Temp"
     readProbeButton["command"]= readTempClicked
     calProbeButton["text"]= "Cal Temp"
@@ -54,11 +54,11 @@ def tempCalClicked():
 def phCalClicked():
     probe = AtlasI2C(99)
     deviceInfo = probe.query("i")
-    label_info["text"]= "Device :" +deviceInfo.split(":")[1].split(",")[1].strip().rstrip('\x00') + '\nFirmware :' + deviceInfo.split(":")[1].split(",")[2].strip().rstrip('\x00')
+    label_info["text"]= "Device : " +deviceInfo.split(":")[1].split(",")[1].strip().rstrip('\x00') + '\nFirmware : ' + deviceInfo.split(":")[1].split(",")[2].strip().rstrip('\x00')
     calInfo = probe.query("cal,?")
     label_cal["text"]= "Device Calibrated to " + calInfo.split(":")[1].split(",")[1].strip().rstrip('\x00') + " point(s)"
     statusInfo=probe.query("Status")
-    label_status["text"]= "Reason for restart :" + restartCode[statusInfo.split(":")[1].split(",")[1].strip().rstrip('\x00')] + "\nVoltage " +  statusInfo.split(":")[1].split(",")[2].strip().rstrip('\x00')
+    label_status["text"]= "Reason for restart : " + restartCode[statusInfo.split(":")[1].split(",")[1].strip().rstrip('\x00')] + "\nVoltage : " +  statusInfo.split(":")[1].split(",")[2].strip().rstrip('\x00')
     readProbeButton["text"]= "Read pH"
     readProbeButton["command"]= readPHClicked
     calProbeButton["text"]= "Cal PH"
@@ -69,11 +69,11 @@ def phCalClicked():
 def ecCalClicked():
     probe = AtlasI2C(100)
     deviceInfo = probe.query("i")
-    label_info["text"]= "Device :" +deviceInfo.split(":")[1].split(",")[1].strip().rstrip('\x00') + '\nFirmware :' + deviceInfo.split(":")[1].split(",")[2].strip().rstrip('\x00')
+    label_info["text"]= "Device : " +deviceInfo.split(":")[1].split(",")[1].strip().rstrip('\x00') + '\nFirmware : ' + deviceInfo.split(":")[1].split(",")[2].strip().rstrip('\x00')
     calInfo = probe.query("cal,?")
     label_cal["text"]= "Device Calibrated to " + calInfo.split(":")[1].split(",")[1].strip().rstrip('\x00') + " point(s)"
     statusInfo=probe.query("Status")
-    label_status["text"]= "Reason for restart :" + restartCode[statusInfo.split(":")[1].split(",")[1].strip().rstrip('\x00')] + "\nVoltage " +  statusInfo.split(":")[1].split(",")[2].strip().rstrip('\x00')
+    label_status["text"]= "Reason for restart : " + restartCode[statusInfo.split(":")[1].split(",")[1].strip().rstrip('\x00')] + "\nVoltage : " +  statusInfo.split(":")[1].split(",")[2].strip().rstrip('\x00')
     readProbeButton["text"]= "Read EC"
     readProbeButton["command"]= readECClicked
     calProbeButton["text"]= "Cal EC"
