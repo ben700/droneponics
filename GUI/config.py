@@ -18,7 +18,7 @@ consoleHandler.setFormatter(logFormatter)
 _log.addHandler(consoleHandler)
 _log.setLevel(logging.DEBUG)
 
-
+restartCode = = {'P': "powered off", 'S':"software reset",'B':"brown out",'W':"watchdog",'U':"unknown"}
 
 
 root = Tk()				# create the root object
@@ -58,15 +58,7 @@ def phCalClicked():
     calInfo = probe.query("cal,?")
     label_cal["text"]= "Device Calibrated to " + calInfo.split(":")[1].split(",")[1].strip().rstrip('\x00') + " point(s)"
     statusInfo=probe.query("Status")
-    restartCodes = statusInfo.split(":")[1].split(",")[1].strip().rstrip('\x00')
-    switch (restartCodes) {
-            case P:  restartString = "powered off";
-                     break;
-            default: restartString = "Invalid Restart Codes";
-                     break;
-        }
-
-    label_status["text"]= "Reason for restart " + restartString + "\nVoltage " +  statusInfo.split(":")[1].split(",")[2].strip().rstrip('\x00')
+    label_status["text"]= "Reason for restart " + restartCode[statusInfo.split(":")[1].split(",")[1].strip().rstrip('\x00')] + "\nVoltage " +  statusInfo.split(":")[1].split(",")[2].strip().rstrip('\x00')
     readProbeButton["text"]= "Read pH"
     readProbeButton["command"]= readPHClicked
     calProbeButton["text"]= "Cal PH"
