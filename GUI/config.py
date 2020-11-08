@@ -158,6 +158,8 @@ exitButton = Button(root, text="Exit", background = "#C06C84",
 phCalButton = Button(root, text="Cal pH",background = "Red", 
       command=phCalClicked, height=5, width=15, font = "Arial 16 bold")
 
+tempCalButton = Button(root, text="Cal EC",background = "Black", fg="White", 
+      command=ecCalClicked, height=5, width=15, font = "Arial 16 bold")
 
 ecCalButton = Button(root, text="Cal EC",background = "Green", 
       command=ecCalClicked, height=5, width=15, font = "Arial 16 bold")
