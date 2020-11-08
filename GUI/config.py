@@ -36,8 +36,18 @@ sensors = []
 sensors = drone.buildAllSensors(sensors, _log)
 _log.info("All Monitor Sensors created")
 
+def clearCalButtons():
+    calButton1["text"]= ""
+    calButton1["state"] = DISABLED
+    calButton2["text"]= ""
+    calButton2["state"] = DISABLED
+    calButton3["text"]= ""
+    calButton3["state"] = DISABLED
+    calButton4["text"]= ""
+    calButton4["state"] = DISABLED
 
 def tempCalClicked():	
+    clearCalButtons()
     probe = AtlasI2C(102)
     deviceInfo = probe.query("i")
     label_info["text"]= "Device : " +deviceInfo.split(":")[1].split(",")[1].strip().rstrip('\x00') + '\nFirmware : ' + deviceInfo.split(":")[1].split(",")[2].strip().rstrip('\x00')
@@ -58,6 +68,7 @@ def tempCalClicked():
     clearReading()
 	
 def phCalClicked():
+    clearCalButtons()
     probe = AtlasI2C(99)
     deviceInfo = probe.query("i")
     label_info["text"]= "Device : " +deviceInfo.split(":")[1].split(",")[1].strip().rstrip('\x00') + '\nFirmware : ' + deviceInfo.split(":")[1].split(",")[2].strip().rstrip('\x00')
@@ -84,6 +95,7 @@ def phCalClicked():
 
 
 def ecCalClicked():
+    clearCalButtons()
     probe = AtlasI2C(100)
     deviceInfo = probe.query("i")
     label_info["text"]= "Device : " +deviceInfo.split(":")[1].split(",")[1].strip().rstrip('\x00') + '\nFirmware : ' + deviceInfo.split(":")[1].split(",")[2].strip().rstrip('\x00')
