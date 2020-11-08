@@ -193,6 +193,11 @@ readProbeButton.grid(row = 5 ,column = 0)
 probeRead_label.grid(row = 5 ,column = 1)
 calProbeButton.grid(row = 5 ,column = 2)
 
+readProbeButton["state"] = DISABLED
+probeRead_label["state"] = DISABLED
+calProbeButton["state"] = DISABLED
+	
+
 if(sensors[0].isProbeConnected()):
 	tempCalButton["text"]= "Cal Temp \nConnected"
 else:
