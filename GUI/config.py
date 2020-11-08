@@ -45,7 +45,9 @@ def clearCalButtons():
     calButton3["state"] = DISABLED
     calButton4["text"]= ""
     calButton4["state"] = DISABLED
-
+    calButton5["text"]= ""
+    calButton5["state"] = DISABLED
+	
 def tempCalClicked():	
     clearCalButtons()
     probe = AtlasI2C(102)
@@ -112,9 +114,15 @@ def ecCalClicked():
     calButton2["text"]= "Cal,n"
     calButton2["command"]= ecCalButton2Clicked
     calButton2["state"] = NORMAL
-    calButton3["text"]= "Cal,clear"
+    calButton3["text"]= "Cal,low,n"
     calButton3["command"]= ecCalButton3Clicked
     calButton3["state"] = NORMAL
+    calButton4["text"]= "Cal,high,n"
+    calButton4["command"]= ecCalButton3Clicked
+    calButton4["state"] = NORMAL
+    calButton5["text"]= "Cal,clear"
+    calButton5["command"]= ecCalButton3Clicked
+    calButton5["state"] = NORMAL
     clearReading()
 
 def readTempClicked():	
@@ -142,19 +150,23 @@ def tempCalButton1Clicked():
 def tempCalButton2Clicked():	
     calResult_label["text"]= "calButton2TempClicked Completed"
 def phCalButton1Clicked():	
-    calResult_label["text"]= "Completed"
+    calResult_label["text"]= "phCalButton1Clicked Completed"
 def phCalButton2Clicked():	
-    calResult_label["text"]= "Completed"
+    calResult_label["text"]= "phCalButton2Clicked Completed"
 def phCalButton3Clicked():	
-    calResult_label["text"]= "Completed"
+    calResult_label["text"]= "phCalButton3Clicked Completed"
 def phCalButton4Clicked():	
-    calResult_label["text"]= "Completed"
+    calResult_label["text"]= "phCalButton4Clicked Completed"
 def ecCalButton1Clicked():	
     calResult_label["text"]= "ecButton1TempClicked Completed"
 def ecCalButton2Clicked():	
     calResult_label["text"]= "ecButton2TempClicked Completed"
 def ecCalButton3Clicked():	
     calResult_label["text"]= "ecButton3TempClicked Completed"
+def ecCalButton4Clicked():	
+    calResult_label["text"]= "ecButton4TempClicked Completed"
+def ecCalButton5Clicked():	
+    calResult_label["text"]= "ecButton5TempClicked Completed"
 
 def btnExit():
   	root.destroy()
@@ -229,16 +241,19 @@ calResult_label = Label(root, text="", font="Verdana 26 bold",
 			padx = 1)
 
 
-calButton1 = Button(root, text="calButton1",background = "#C06C84", 
+calButton1 = Button(root, background = "#C06C84", 
        height=5, width=15, font = "Arial 16 bold")
 
-calButton2 = Button(root, text="calButton2",background = "#C06C84", 
+calButton2 = Button(root, background = "#C06C84", 
        height=5, width=15, font = "Arial 16 bold")
 
-calButton3 = Button(root, text="calButton3",background = "#C06C84",
+calButton3 = Button(root, background = "#C06C84",
        height=5, width=15, font = "Arial 16 bold")
 
-calButton4 = Button(root, text="calButton4",background = "#C06C84",
+calButton4 = Button(root, background = "#C06C84",
+       height=5, width=15, font = "Arial 16 bold")
+
+calButton5 = Button(root, background = "#C06C84",
        height=5, width=15, font = "Arial 16 bold")
 
 
@@ -260,6 +275,7 @@ calButton1.grid(row = 6 ,column = 0)
 calButton2.grid(row = 6 ,column = 1)
 calButton3.grid(row = 6 ,column = 2)
 calButton4.grid(row = 6 ,column = 3)
+calButton5.grid(row = 6 ,column = 4)
 
 calResult_label.grid(row = 7 ,column = 0, columnspan=5)
 
@@ -268,6 +284,7 @@ calButton1["state"] = DISABLED
 calButton2["state"] = DISABLED
 calButton3["state"] = DISABLED
 calButton4["state"] = DISABLED
+calButton5["state"] = DISABLED
 
 if(sensors[0].isProbeConnected()):
 	tempCalButton["text"]= "Cal Temp \nConnected"
