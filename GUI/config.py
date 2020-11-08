@@ -91,7 +91,7 @@ def phCalClicked():
     calButton3["command"]= phCalButton3Clicked
     calButton3["state"] = NORMAL
     calButton4["text"]= "Cal,clear"
-    calButton4["command"]= phCalButton3Clicked
+    calButton4["command"]= phCalButton4Clicked
     calButton4["state"] = NORMAL
     clearReading()
 
