@@ -84,9 +84,6 @@ def tempCalClicked():
     calButton5["background"] = "Black"
     calButton1["fg"] = "White"
     calButton2["fg"] = "White"
-    calButton3["fg"] = "White"
-    calButton4["fg"] = "White"
-    calButton5["fg"] = "White"
     clearReading()
 	
 def phCalClicked():
