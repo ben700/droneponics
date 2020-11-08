@@ -48,6 +48,8 @@ def clearCalButtons():
     calButton5["text"]= ""
     calButton5["state"] = DISABLED
     calResult_label["text"]=""
+    probeRead_label["text"] =""
+    probeOldRead_label["text"] =""
     calButton1["background"] = "#C06C84"
     calButton2["background"] = "#C06C84"
     calButton3["background"] = "#C06C84"
