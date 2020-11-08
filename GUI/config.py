@@ -131,9 +131,11 @@ def tempCalButton2Clicked():
     calResult_label["text"]= "calButton2TempClicked Completed"
 def phCalButton1Clicked():	
     calResult_label["text"]= "Completed"
-def phCalButton1Clicked():	
+def phCalButton2Clicked():	
     calResult_label["text"]= "Completed"
-def phCalButton1Clicked():	
+def phCalButton3Clicked():	
+    calResult_label["text"]= "Completed"
+def phCalButton4Clicked():	
     calResult_label["text"]= "Completed"
 def ecCalButton1Clicked():	
     calResult_label["text"]= "ecButton1TempClicked Completed"
