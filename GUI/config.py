@@ -68,15 +68,18 @@ def phCalClicked():
     readProbeButton["text"]= "Read pH"
     readProbeButton["command"]= readPHClicked
     readProbeButton["state"] = NORMAL
-    calButton1["text"]= "Cal,dry"
+    calButton1["text"]= "Cal,mid,n"
     calButton1["command"]= phCalButton1Clicked
     calButton1["state"] = NORMAL
-    calButton2["text"]= "Cal,n"
+    calButton2["text"]= "Cal,low,n"
     calButton2["command"]= phCalButton2Clicked
     calButton2["state"] = NORMAL
-    calButton3["text"]= "Cal,clear"
+    calButton3["text"]= "Cal,high,n"
     calButton3["command"]= phCalButton3Clicked
     calButton3["state"] = NORMAL
+    calButton4["text"]= "Cal,clear"
+    calButton4["command"]= phCalButton3Clicked
+    calButton4["state"] = NORMAL
     clearReading()
 
 
@@ -221,6 +224,8 @@ calButton2 = Button(root, text="calButton2",background = "#C06C84",
 calButton3 = Button(root, text="calButton3",background = "#C06C84",
        height=5, width=15, font = "Arial 16 bold")
 
+calButton4 = Button(root, text="calButton4",background = "#C06C84",
+       height=5, width=15, font = "Arial 16 bold")
 
 
 label_1.grid(row=0, column=1, columnspan=4)
@@ -240,6 +245,7 @@ probeRead_label.grid(row = 5 ,column = 1, columnspan=3)
 calButton1.grid(row = 6 ,column = 0)
 calButton2.grid(row = 6 ,column = 1)
 calButton3.grid(row = 6 ,column = 2)
+calButton4.grid(row = 6 ,column = 3)
 
 calResult_label.grid(row = 7 ,column = 0)
 
@@ -247,7 +253,7 @@ readProbeButton["state"] = DISABLED
 calButton1["state"] = DISABLED
 calButton2["state"] = DISABLED
 calButton3["state"] = DISABLED
-
+calButton4["state"] = DISABLED
 
 if(sensors[0].isProbeConnected()):
 	tempCalButton["text"]= "Cal Temp \nConnected"
