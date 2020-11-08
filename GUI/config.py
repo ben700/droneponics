@@ -110,6 +110,10 @@ def phCalClicked():
     calButton4["text"]= "Cal,clear"
     calButton4["command"]= phCalButton4Clicked
     calButton4["state"] = NORMAL
+    calButton5["text"]= "Cal,?"
+    calButton5["command"]= phCalButton5Clicked
+    calButton5["state"] = NORMAL
+
     calButton1["background"] = "Red"
     calButton2["background"] = "Red"
     calButton3["background"] = "Red"
@@ -188,6 +192,10 @@ def phCalButton3Clicked():
     calResult_label["text"]= "Cal,high,n Completed"
 def phCalButton4Clicked():	
     calResult_label["text"]= "Cal,clear Completed"
+def phCalButton5Clicked():	
+    probe = AtlasI2C(99)
+    deviceCalibrated = probe.query("Cal,?")
+    calResult_label["text"]= deviceCalibrated
 def ecCalButton1Clicked():	
     calResult_label["text"]= "Cal,dry Completed"
 def ecCalButton2Clicked():	
