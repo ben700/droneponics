@@ -48,9 +48,12 @@ def tempCalClicked():
     readProbeButton["text"]= "Read Temp"
     readProbeButton["command"]= readTempClicked        
     readProbeButton["state"] = NORMAL
-    calButton1["text"]= "Cal Temp"
-    calButton1["command"]= calTempClicked
+    calButton1["text"]= "Cal,t"
+    calButton1["command"]= calButton1TempClicked
     calButton1["state"] = NORMAL
+    calButton2["text"]= "Cal,clear"
+    calButton2["command"]= calButton2TempClicked
+    calButton2["state"] = NORMAL
 
     clearReading()
 	
@@ -108,8 +111,8 @@ def clearReading():
     probeRead_label["text"]= ""
  
 	
-def calTempClicked():	
-    probeRead_label["text"]= "calTempClicked"
+def calButton2TempClicked():	
+    calResult_label["text"]= "Completed"
 def calPHClicked():	
     probeRead_label["text"]= "calPHClicked"
 def calECClicked():	
@@ -159,7 +162,7 @@ phCalButton = Button(root, text="Cal pH",background = "Red",
       command=phCalClicked, height=5, width=15, font = "Arial 16 bold")
 
 tempCalButton = Button(root, text="Cal EC",background = "Black", fg="White", 
-      command=ecCalClicked, height=5, width=15, font = "Arial 16 bold")
+      command=tempCalClicked, height=5, width=15, font = "Arial 16 bold")
 
 ecCalButton = Button(root, text="Cal EC",background = "Green", 
       command=ecCalClicked, height=5, width=15, font = "Arial 16 bold")
@@ -180,6 +183,12 @@ probeRead_label = Label(root, text="", font="Verdana 26 bold",
 			padx = 1)
 
 calEntryBox= Entry(root)
+
+calResult_label = Label(root, text="", font="Verdana 26 bold",
+			fg="#000",
+			bg="#99B898",
+			pady = 1,
+			padx = 1)
 
 
 calButton1 = Button(root, text="calButton1",background = "#C06C84", 
@@ -210,6 +219,8 @@ probeRead_label.grid(row = 5 ,column = 1, columnspan=3)
 calButton1.grid(row = 6 ,column = 0)
 calButton2.grid(row = 6 ,column = 1)
 calButton3.grid(row = 6 ,column = 2)
+
+calResult_label.grid(row = 7 ,column = 0)
 
 readProbeButton["state"] = DISABLED
 calButton1["state"] = DISABLED
