@@ -47,6 +47,7 @@ def clearCalButtons():
     calButton4["state"] = DISABLED
     calButton5["text"]= ""
     calButton5["state"] = DISABLED
+    calResult_label["text"]=""
 	
 def tempCalClicked():	
     clearCalButtons()
