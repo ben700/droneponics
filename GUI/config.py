@@ -48,9 +48,9 @@ def tempCalClicked():
     readProbeButton["text"]= "Read Temp"
     readProbeButton["command"]= readTempClicked        
     readProbeButton["state"] = NORMAL
-    calProbeButton["text"]= "Cal Temp"
-    calProbeButton["command"]= calTempClicked
-    calProbeButton["state"] = NORMAL
+    calButton1["text"]= "Cal Temp"
+    calButton1["command"]= calTempClicked
+    calButton1["state"] = NORMAL
 
     clearReading()
 	
@@ -65,9 +65,9 @@ def phCalClicked():
     readProbeButton["text"]= "Read pH"
     readProbeButton["command"]= readPHClicked
     readProbeButton["state"] = NORMAL
-    calProbeButton["text"]= "Cal PH"
-    calProbeButton["command"]= calPHClicked
-    calProbeButton["state"] = NORMAL
+    calButton1["text"]= "Cal PH"
+    calButton1["command"]= calPHClicked
+    calButton1["state"] = NORMAL
     clearReading()
 
 
@@ -82,9 +82,9 @@ def ecCalClicked():
     readProbeButton["text"]= "Read EC"
     readProbeButton["command"]= readECClicked
     readProbeButton["state"] = NORMAL
-    calProbeButton["text"]= "Cal EC"
-    calProbeButton["command"]= calECClicked
-    calProbeButton["state"] = NORMAL
+    calButton1["text"]= "Cal EC"
+    calButton1["command"]= calECClicked
+    calButton1["state"] = NORMAL
     clearReading()
 
 def readTempClicked():	
@@ -148,22 +148,11 @@ label_status = Label(root, text="", font="Verdana 26 bold",
 calProbeButton = Button(root, text="Calibrate Probe", background = "#C06C84",
       command=btnExit, height=5, width=15, font = "Arial 16 bold")
 
-readProbeButton = Button(root, text="Read Probe", background = "#C06C84",
-      command=readTempClicked, height=5, width=15, font = "Arial 16 bold")
 		
 
 exitButton = Button(root, text="Exit", background = "#C06C84",
       command=btnExit, height=5, width=15, font = "Arial 16 bold")
 	
-
-tempCalButton = Button(root, text="Cal Temp",background = "Black", fg = "White",
-      command=tempCalClicked, height=5, width=15, font = "Arial 16 bold")
-
-probeRead_label = Label(root, text="", font="Verdana 26 bold",
-			fg="#000",
-			bg="#99B898",
-			pady = 1,
-			padx = 1)
 
 
 phCalButton = Button(root, text="Cal pH",background = "Red", 
@@ -179,7 +168,26 @@ doCalButton = Button(root, text="Cal DO",background = "Yellow",
 orpCalButton= Button(root, text="Cal DO",background = "Light Blue", 
       command=ecCalClicked, height=5, width=15, font = "Arial 16 bold")
 
+readProbeButton = Button(root, text="Read Probe", background = "#C06C84",
+      command=readTempClicked, height=5, width=15, font = "Arial 16 bold")
+
+probeRead_label = Label(root, text="", font="Verdana 26 bold",
+			fg="#000",
+			bg="#99B898",
+			pady = 1,
+			padx = 1)
+
 calEntryBox= Entry(root)
+
+
+calButton1 = Button(root, text="Cal Temp",background = "Black", fg = "White",
+       height=5, width=15, font = "Arial 16 bold")
+
+calButton2 = Button(root, text="Cal Temp",background = "Black", fg = "White",
+       height=5, width=15, font = "Arial 16 bold")
+
+calButton3 = Button(root, text="Cal Temp",background = "Black", fg = "White",
+       height=5, width=15, font = "Arial 16 bold")
 
 
 
@@ -199,7 +207,9 @@ probeRead_label.grid(row = 5 ,column = 1, columnspan=3)
 calProbeButton.grid(row = 6 ,column = 0)
 
 readProbeButton["state"] = DISABLED
-calProbeButton["state"] = DISABLED
+calButton1["state"] = DISABLED
+calButton2["state"] = DISABLED
+calButton3["state"] = DISABLED
 
 
 if(sensors[0].isProbeConnected()):
