@@ -110,7 +110,8 @@ def readECClicked():
 def clearReading():	
     probeRead_label["text"]= ""
  
-	
+def calButton1TempClicked():	
+    calResult_label["text"]= "Completed"	
 def calButton2TempClicked():	
     calResult_label["text"]= "Completed"
 def calPHClicked():	
