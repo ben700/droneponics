@@ -172,7 +172,10 @@ def readTempClicked():
 
 def readPHClicked():	
     probe = AtlasI2C(99)
-    probeOldRead_label["text"] =probeRead_label["text"].split(":")[1].split(",")[0].strip().rstrip('\x00')
+    try:
+        probeOldRead_label["text"] =probeRead_label["text"].split(":")[1].split(",")[0].strip().rstrip('\x00')
+    except:
+        probeOldRead_label["text"] =""
     probeRead_label["text"]= probe.query("R").strip().rstrip('\x00')
 
 def readECClicked():	
@@ -182,7 +185,10 @@ def readECClicked():
     v2 = rawReading.split(":")[1].split(",")[1].strip().rstrip('\x00')
     v3 = rawReading.split(":")[1].split(",")[2].strip().rstrip('\x00')
     v4 = rawReading.split(":")[1].split(",")[3].strip().rstrip('\x00')	
-    probeOldRead_label["text"] =probeRead_label["text"]
+    try:
+        probeOldRead_label["text"] =probeRead_label["text"].split(" = ")[1]
+    except:
+        probeOldRead_label["text"] =""
     probeRead_label["text"]= "Conductivity = " + str(v1) + '\n' + "Total Dissolved Solids = " + str(v2)+ '\n' + "Salinity = " + str(v3)+ '\n' + "Specific Gravity = " + str(v4)
 
 
