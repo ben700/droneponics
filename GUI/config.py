@@ -160,8 +160,7 @@ exitButton = Button(root, text="Exit", background = "#C06C84",
 tempCalButton = Button(root, text="Cal Temp",background = "Black", fg = "White",
       command=tempCalClicked, height=5, width=15, font = "Arial 16 bold")
 
-probeRead_label = Button(root, text="",background = "#C06C84", 
-      command=tempCalClicked, height=5, width=15, font = "Arial 16 bold")
+probeRead_label = Label(root, text="",background = "#C06C84", height=5, width=15, font = "Arial 16 bold")
 
 
 phCalButton = Button(root, text="Cal pH",background = "Red", 
@@ -193,7 +192,7 @@ doCalButton.grid(row = 4 ,column = 3)
 orpCalButton.grid(row = 4 ,column = 4)
 
 readProbeButton.grid(row = 5 ,column = 0)
-probeRead_label.grid(row = 5 ,column = 1, rowspan=3)
+probeRead_label.grid(row = 5 ,column = 1, columnspan=3)
 calProbeButton.grid(row = 6 ,column = 0)
 calEntryBox.grid(row = 6 ,column = 1)
 
