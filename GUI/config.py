@@ -166,7 +166,7 @@ def readTempClicked():
     probe = AtlasI2C(102)
     try:
         probeOldRead_label["text"] =probeRead_label["text"].split(":")[1].split(",")[0].strip().rstrip('\x00')
-    except
+    except:
         probeOldRead_label["text"] =""
     probeRead_label["text"]= probe.query("R").strip().rstrip('\x00')
 
