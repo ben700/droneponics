@@ -48,6 +48,11 @@ def clearCalButtons():
     calButton5["text"]= ""
     calButton5["state"] = DISABLED
     calResult_label["text"]=""
+    calButton1["background"] = "#C06C84"
+    calButton2["background"] = "#C06C84"
+    calButton3["background"] = "#C06C84"
+    calButton4["background"] = "#C06C84"
+    calButton5["background"] = "#C06C84"
 	
 def tempCalClicked():	
     clearCalButtons()
@@ -67,6 +72,11 @@ def tempCalClicked():
     calButton2["text"]= "Cal,clear"
     calButton2["command"]= tempCalButton2Clicked
     calButton2["state"] = NORMAL
+    calButton1["background"] = "Black"
+    calButton2["background"] = "Black"
+    calButton3["background"] = "Black"
+    calButton4["background"] = "Black"
+    calButton5["background"] = "Black"
 
     clearReading()
 	
@@ -94,6 +104,11 @@ def phCalClicked():
     calButton4["text"]= "Cal,clear"
     calButton4["command"]= phCalButton4Clicked
     calButton4["state"] = NORMAL
+    calButton1["background"] = "Red"
+    calButton2["background"] = "Red"
+    calButton3["background"] = "Red"
+    calButton4["background"] = "Red"
+    calButton5["background"] = "Red"
     clearReading()
 
 
@@ -124,6 +139,11 @@ def ecCalClicked():
     calButton5["text"]= "Cal,clear"
     calButton5["command"]= ecCalButton5Clicked
     calButton5["state"] = NORMAL
+    calButton1["background"] = "Green"
+    calButton2["background"] = "Green"
+    calButton3["background"] = "Green"
+    calButton4["background"] = "Green"
+    calButton5["background"] = "Green"
     clearReading()
 
 def readTempClicked():	
