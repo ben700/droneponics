@@ -160,7 +160,11 @@ exitButton = Button(root, text="Exit", background = "#C06C84",
 tempCalButton = Button(root, text="Cal Temp",background = "Black", fg = "White",
       command=tempCalClicked, height=5, width=15, font = "Arial 16 bold")
 
-probeRead_label = Label(root, text="",background = "#C06C84", height=5, width=15, font = "Arial 16 bold")
+probeRead_label = Label(root, text="", font="Verdana 26 bold",
+			fg="#000",
+			bg="#99B898",
+			pady = 1,
+			padx = 1)
 
 
 phCalButton = Button(root, text="Cal pH",background = "Red", 
@@ -197,7 +201,6 @@ calProbeButton.grid(row = 6 ,column = 0)
 calEntryBox.grid(row = 6 ,column = 1)
 
 readProbeButton["state"] = DISABLED
-probeRead_label["state"] = DISABLED
 calProbeButton["state"] = DISABLED
 calEntryBox["state"] = DISABLED
 
