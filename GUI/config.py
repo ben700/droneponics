@@ -51,6 +51,7 @@ def tempCalClicked():
     calProbeButton["text"]= "Cal Temp"
     calProbeButton["command"]= calTempClicked
     calProbeButton["state"] = NORMAL
+    calEntryBox["state"] = DISABLED
 	
     clearReading()
 	
@@ -176,6 +177,9 @@ doCalButton = Button(root, text="Cal DO",background = "Yellow",
 orpCalButton= Button(root, text="Cal DO",background = "Light Blue", 
       command=ecCalClicked, height=5, width=15, font = "Arial 16 bold")
 
+calEntryBox= Entry(root, height=5, width=15, font = "Arial 16 bold")
+
+
 
 label_1.grid(row=0, column=1, columnspan=4)
 label_info.grid(row=1, column=1, columnspan=3)
@@ -191,11 +195,13 @@ orpCalButton.grid(row = 4 ,column = 4)
 readProbeButton.grid(row = 5 ,column = 0)
 probeRead_label.grid(row = 5 ,column = 1)
 calProbeButton.grid(row = 6 ,column = 0)
+calEntryBox.grid(row = 6 ,column = 1)
 
 readProbeButton["state"] = DISABLED
 probeRead_label["state"] = DISABLED
 calProbeButton["state"] = DISABLED
-	
+calEntryBox["state"] = DISABLED
+
 
 if(sensors[0].isProbeConnected()):
 	tempCalButton["text"]= "Cal Temp \nConnected"
