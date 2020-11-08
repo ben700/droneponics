@@ -18,7 +18,7 @@ consoleHandler.setFormatter(logFormatter)
 _log.addHandler(consoleHandler)
 _log.setLevel(logging.DEBUG)
 
-restartCode = {'P': "powered off", 'S':"software reset",'B':"brown out",'W':"watchdog",'U':"unknown"}
+restartCode = {'P': "Powered Off", 'S':"Software Reset",'B':"Brown Out",'W':"Watchdog",'U':"Unknown"}
 
 
 root = Tk()				# create the root object
@@ -44,7 +44,7 @@ def tempCalClicked():
     calInfo = probe.query("cal,?")
     label_cal["text"]= "Device Calibrated to " + calInfo.split(":")[1].split(",")[1].strip().rstrip('\x00') + " point(s)"
     statusInfo=probe.query("Status")
-    label_status["text"]= "Reason for restart " + statusInfo.split(":")[1].split(",")[1].strip().rstrip('\x00') + "\nVoltage " +  statusInfo.split(":")[1].split(",")[2].strip().rstrip('\x00')
+    label_status["text"]= "Reason for restart :" + restartCode[statusInfo.split(":")[1].split(",")[1].strip().rstrip('\x00')] + "\nVoltage " +  statusInfo.split(":")[1].split(",")[2].strip().rstrip('\x00')
     readProbeButton["text"]= "Read Temp"
     readProbeButton["command"]= readTempClicked
     calProbeButton["text"]= "Cal Temp"
@@ -58,7 +58,7 @@ def phCalClicked():
     calInfo = probe.query("cal,?")
     label_cal["text"]= "Device Calibrated to " + calInfo.split(":")[1].split(",")[1].strip().rstrip('\x00') + " point(s)"
     statusInfo=probe.query("Status")
-    label_status["text"]= "Reason for restart " + restartCode[statusInfo.split(":")[1].split(",")[1].strip().rstrip('\x00')] + "\nVoltage " +  statusInfo.split(":")[1].split(",")[2].strip().rstrip('\x00')
+    label_status["text"]= "Reason for restart :" + restartCode[statusInfo.split(":")[1].split(",")[1].strip().rstrip('\x00')] + "\nVoltage " +  statusInfo.split(":")[1].split(",")[2].strip().rstrip('\x00')
     readProbeButton["text"]= "Read pH"
     readProbeButton["command"]= readPHClicked
     calProbeButton["text"]= "Cal PH"
@@ -73,7 +73,7 @@ def ecCalClicked():
     calInfo = probe.query("cal,?")
     label_cal["text"]= "Device Calibrated to " + calInfo.split(":")[1].split(",")[1].strip().rstrip('\x00') + " point(s)"
     statusInfo=probe.query("Status")
-    label_status["text"]= "Reason for restart " + statusInfo.split(":")[1].split(",")[1].strip().rstrip('\x00') + "\nVoltage " +  statusInfo.split(":")[1].split(",")[2].strip().rstrip('\x00')
+    label_status["text"]= "Reason for restart :" + restartCode[statusInfo.split(":")[1].split(",")[1].strip().rstrip('\x00')] + "\nVoltage " +  statusInfo.split(":")[1].split(",")[2].strip().rstrip('\x00')
     readProbeButton["text"]= "Read EC"
     readProbeButton["command"]= readECClicked
     calProbeButton["text"]= "Cal EC"
