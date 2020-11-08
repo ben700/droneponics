@@ -64,8 +64,9 @@ def ecCalClicked():
     probe = AtlasI2C(100)
     deviceInfo = probe.query("i")
     label_info["text"]= "Device " +deviceInfo.split(":")[1].split(",")[1].strip().rstrip('\x00') + ' Firmware ' + deviceInfo.split(":")[1].split(",")[2].strip().rstrip('\x00')
-		
-    label_cal["text"]= probe.query("cal,?").strip().rstrip('\x00')
+    calInfo = probe.query("cal,?")
+    label_cal["text"]= "Device Calibrated to " + calInfo.split(":")[1].split(",")[1].strip().rstrip('\x00') + " point"
+    statusInfo=probe.query("Status")
     label_status["text"]= probe.query("Status").strip().rstrip('\x00')
     readProbeButton["text"]= "Read EC"
     readProbeButton["command"]= readECClicked
