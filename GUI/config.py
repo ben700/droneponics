@@ -18,7 +18,7 @@ consoleHandler.setFormatter(logFormatter)
 _log.addHandler(consoleHandler)
 _log.setLevel(logging.DEBUG)
 
-restartCode = = {'P': "powered off", 'S':"software reset",'B':"brown out",'W':"watchdog",'U':"unknown"}
+restartCode = {'P': "powered off", 'S':"software reset",'B':"brown out",'W':"watchdog",'U':"unknown"}
 
 
 root = Tk()				# create the root object
