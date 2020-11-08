@@ -281,7 +281,7 @@ orpCalButton.grid(row = 4 ,column = 4)
 
 readProbeButton.grid(row = 5 ,column = 0)
 probeRead_label.grid(row = 5 ,column = 1, columnspan=3)
-probeOldRead_label(row = 5 ,column = 4)
+probeOldRead_label.grid(row = 5 ,column = 4)
 
 calButton1.grid(row = 6 ,column = 0)
 calButton2.grid(row = 6 ,column = 1)
