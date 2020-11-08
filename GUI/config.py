@@ -183,7 +183,7 @@ orpCalButton.grid(row = 4 ,column = 4)
 
 readProbeButton.grid(row = 5 ,column = 0)
 probeRead_label.grid(row = 5 ,column = 1)
-calProbeButton.grid(row = 5 ,column = 2)
+calProbeButton.grid(row = 6 ,column = 0)
 
 readProbeButton["state"] = DISABLED
 probeRead_label["state"] = DISABLED
