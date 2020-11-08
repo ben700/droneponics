@@ -164,7 +164,10 @@ def ecCalClicked():
 
 def readTempClicked():	
     probe = AtlasI2C(102)
-    probeOldRead_label["text"] =probeRead_label["text"].split(":")[1].split(",")[0].strip().rstrip('\x00')
+    try:
+        probeOldRead_label["text"] =probeRead_label["text"].split(":")[1].split(",")[0].strip().rstrip('\x00')
+    except
+        probeOldRead_label["text"] =""
     probeRead_label["text"]= probe.query("R").strip().rstrip('\x00')
 
 def readPHClicked():	
