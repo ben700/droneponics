@@ -127,10 +127,12 @@ def ecCalClicked():
 
 def readTempClicked():	
     probe = AtlasI2C(102)
+    probeOldRead_label["text"] =probeRead_label["text"]
     probeRead_label["text"]= probe.query("R").strip().rstrip('\x00')
 
 def readPHClicked():	
     probe = AtlasI2C(99)
+    probeOldRead_label["text"] =probeRead_label["text"]
     probeRead_label["text"]= probe.query("R").strip().rstrip('\x00')
 
 def readECClicked():	
@@ -140,7 +142,9 @@ def readECClicked():
     v2 = rawReading.split(":")[1].split(",")[1].strip().rstrip('\x00')
     v3 = rawReading.split(":")[1].split(",")[2].strip().rstrip('\x00')
     v4 = rawReading.split(":")[1].split(",")[3].strip().rstrip('\x00')	
+    probeOldRead_label["text"] =probeRead_label["text"]
     probeRead_label["text"]= "Conductivity = " + str(v1) + '\n' + "Total Dissolved Solids = " + str(v2)+ '\n' + "Salinity = " + str(v3)+ '\n' + "Specific Gravity = " + str(v4)
+
 
 def clearReading():	
     probeRead_label["text"]= ""
@@ -232,6 +236,13 @@ probeRead_label = Label(root, text="", font="Verdana 26 bold",
 			pady = 1,
 			padx = 1)
 
+
+probeOldRead_label = Label(root, text="", font="Verdana 26 bold",
+			fg="#000",
+			bg="#99B898",
+			pady = 1,
+			padx = 1)
+
 calEntryBox= Entry(root)
 
 calResult_label = Label(root, text="", font="Verdana 26 bold",
@@ -270,6 +281,7 @@ orpCalButton.grid(row = 4 ,column = 4)
 
 readProbeButton.grid(row = 5 ,column = 0)
 probeRead_label.grid(row = 5 ,column = 1, columnspan=3)
+probeOldRead_label(row = 5 ,column = 4)
 
 calButton1.grid(row = 6 ,column = 0)
 calButton2.grid(row = 6 ,column = 1)
