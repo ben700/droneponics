@@ -49,10 +49,10 @@ def tempCalClicked():
     readProbeButton["command"]= readTempClicked        
     readProbeButton["state"] = NORMAL
     calButton1["text"]= "Cal,t"
-    calButton1["command"]= calButton1TempClicked
+    calButton1["command"]= tempCalButton1Clicked
     calButton1["state"] = NORMAL
     calButton2["text"]= "Cal,clear"
-    calButton2["command"]= calButton2TempClicked
+    calButton2["command"]= tempCalButton2Clicked
     calButton2["state"] = NORMAL
 
     clearReading()
@@ -68,9 +68,15 @@ def phCalClicked():
     readProbeButton["text"]= "Read pH"
     readProbeButton["command"]= readPHClicked
     readProbeButton["state"] = NORMAL
-    calButton1["text"]= "Cal PH"
-    calButton1["command"]= calPHClicked
+    calButton1["text"]= "Cal,dry"
+    calButton1["command"]= phCalButton1Clicked
     calButton1["state"] = NORMAL
+    calButton2["text"]= "Cal,n"
+    calButton2["command"]= phCalButton2Clicked
+    calButton2["state"] = NORMAL
+    calButton3["text"]= "Cal,clear"
+    calButton3["command"]= phCalButton3Clicked
+    calButton3["state"] = NORMAL
     clearReading()
 
 
@@ -85,9 +91,15 @@ def ecCalClicked():
     readProbeButton["text"]= "Read EC"
     readProbeButton["command"]= readECClicked
     readProbeButton["state"] = NORMAL
-    calButton1["text"]= "Cal EC"
-    calButton1["command"]= calECClicked
+    calButton1["text"]= "Cal,dry"
+    calButton1["command"]= ecCalButton1Clicked
     calButton1["state"] = NORMAL
+    calButton2["text"]= "Cal,n"
+    calButton2["command"]= ecCalButton2Clicked
+    calButton2["state"] = NORMAL
+    calButton3["text"]= "Cal,clear"
+    calButton3["command"]= ecCalButton3Clicked
+    calButton3["state"] = NORMAL
     clearReading()
 
 def readTempClicked():	
@@ -110,14 +122,22 @@ def readECClicked():
 def clearReading():	
     probeRead_label["text"]= ""
  
-def calButton1TempClicked():	
-    calResult_label["text"]= "Completed"	
-def calButton2TempClicked():	
+def tempCalButton1Clicked():	
+    calResult_label["text"]= "calButton1TempClicked Completed"	
+def tempCalButton2Clicked():	
+    calResult_label["text"]= "calButton2TempClicked Completed"
+def phCalButton1Clicked():	
     calResult_label["text"]= "Completed"
-def calPHClicked():	
-    probeRead_label["text"]= "calPHClicked"
-def calECClicked():	
-    probeRead_label["text"]= "calECClicked"
+def phCalButton1Clicked():	
+    calResult_label["text"]= "Completed"
+def phCalButton1Clicked():	
+    calResult_label["text"]= "Completed"
+def ecCalButton1Clicked():	
+    calResult_label["text"]= "ecButton1TempClicked Completed"
+def ecCalButton2Clicked():	
+    calResult_label["text"]= "ecButton2TempClicked Completed"
+def ecCalButton3Clicked():	
+    calResult_label["text"]= "ecButton3TempClicked Completed"
 
 def btnExit():
   	root.destroy()
