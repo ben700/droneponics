@@ -46,9 +46,12 @@ def tempCalClicked():
     statusInfo=probe.query("Status")
     label_status["text"]= "Reason for restart : " + restartCode[statusInfo.split(":")[1].split(",")[1].strip().rstrip('\x00')] + "\nVoltage : " +  statusInfo.split(":")[1].split(",")[2].strip().rstrip('\x00')
     readProbeButton["text"]= "Read Temp"
-    readProbeButton["command"]= readTempClicked
+    readProbeButton["command"]= readTempClicked        
+    readProbeButton["state"] = NORMAL
     calProbeButton["text"]= "Cal Temp"
     calProbeButton["command"]= calTempClicked
+    calProbeButton["state"] = NORMAL
+	
     clearReading()
 	
 def phCalClicked():
@@ -61,8 +64,10 @@ def phCalClicked():
     label_status["text"]= "Reason for restart : " + restartCode[statusInfo.split(":")[1].split(",")[1].strip().rstrip('\x00')] + "\nVoltage : " +  statusInfo.split(":")[1].split(",")[2].strip().rstrip('\x00')
     readProbeButton["text"]= "Read pH"
     readProbeButton["command"]= readPHClicked
+    readProbeButton["state"] = NORMAL
     calProbeButton["text"]= "Cal PH"
     calProbeButton["command"]= calPHClicked
+    calProbeButton["state"] = NORMAL
     clearReading()
 
 
@@ -76,8 +81,10 @@ def ecCalClicked():
     label_status["text"]= "Reason for restart : " + restartCode[statusInfo.split(":")[1].split(",")[1].strip().rstrip('\x00')] + "\nVoltage : " +  statusInfo.split(":")[1].split(",")[2].strip().rstrip('\x00')
     readProbeButton["text"]= "Read EC"
     readProbeButton["command"]= readECClicked
+    readProbeButton["state"] = NORMAL
     calProbeButton["text"]= "Cal EC"
     calProbeButton["command"]= calECClicked
+    calProbeButton["state"] = NORMAL
     clearReading()
 
 def readTempClicked():	
@@ -99,7 +106,7 @@ def readECClicked():
 
 def clearReading():	
     probeRead_label["text"]= ""
-
+ 
 	
 def calTempClicked():	
     probeRead_label["text"]= "calTempClicked"
