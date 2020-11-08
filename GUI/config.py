@@ -188,10 +188,10 @@ def readECClicked():
     v3 = rawReading.split(":")[1].split(",")[2].strip().rstrip('\x00')
     v4 = rawReading.split(":")[1].split(",")[3].strip().rstrip('\x00')	
     try:
-        probeOldRead_label["text"] =probeRead_label["text"].split(" = ")[1]
+        probeOldRead_label["text"] =probeRead_label["text"].split(" = ")[1].split(" ")[0]
     except:
         probeOldRead_label["text"] =""
-    probeRead_label["text"]= "Conductivity = " + str(v1) + '\n' + "Total Dissolved Solids = " + str(v2)+ '\n' + "Salinity = " + str(v3)+ '\n' + "Specific Gravity = " + str(v4)
+    probeRead_label["text"]= "Conductivity = " + str(v1) + ' \n' + "Total Dissolved Solids = " + str(v2)+ ' \n' + "Salinity = " + str(v3)+ ' \n' + "Specific Gravity = " + str(v4) + " "
 
 
 def clearReading():	
