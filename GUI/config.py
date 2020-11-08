@@ -118,10 +118,10 @@ def ecCalClicked():
     calButton3["command"]= ecCalButton3Clicked
     calButton3["state"] = NORMAL
     calButton4["text"]= "Cal,high,n"
-    calButton4["command"]= ecCalButton3Clicked
+    calButton4["command"]= ecCalButton4Clicked
     calButton4["state"] = NORMAL
     calButton5["text"]= "Cal,clear"
-    calButton5["command"]= ecCalButton3Clicked
+    calButton5["command"]= ecCalButton5Clicked
     calButton5["state"] = NORMAL
     clearReading()
 
