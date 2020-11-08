@@ -39,9 +39,12 @@ _log.info("All Monitor Sensors created")
 
 def tempCalClicked():	
     probe = AtlasI2C(102)
-    label_info["text"]= probe.query("i").strip().rstrip('\x00')
-    label_cal["text"]= probe.query("cal,?").strip().rstrip('\x00')
-    label_status["text"]= probe.query("Status").strip().rstrip('\x00')
+    deviceInfo = probe.query("i")
+    label_info["text"]= "Device " +deviceInfo.split(":")[1].split(",")[1].strip().rstrip('\x00') + ' Firmware ' + deviceInfo.split(":")[1].split(",")[2].strip().rstrip('\x00')
+    calInfo = probe.query("cal,?")
+    label_cal["text"]= "Device Calibrated to " + calInfo.split(":")[1].split(",")[1].strip().rstrip('\x00') + " point(s)"
+    statusInfo=probe.query("Status")
+    label_status["text"]= "Reason for restart " + statusInfo.split(":")[1].split(",")[1].strip().rstrip('\x00') + " Voltage " +  statusInfo.split(":")[1].split(",")[2].strip().rstrip('\x00')
     readProbeButton["text"]= "Read Temp"
     readProbeButton["command"]= readTempClicked
     calProbeButton["text"]= "Cal Temp"
@@ -50,9 +53,12 @@ def tempCalClicked():
 	
 def phCalClicked():
     probe = AtlasI2C(99)
-    label_info["text"]= probe.query("i").strip().rstrip('\x00')	
-    label_cal["text"]= probe.query("cal,?").strip().rstrip('\x00')
-    label_status["text"]= probe.query("Status").strip().rstrip('\x00')
+    deviceInfo = probe.query("i")
+    label_info["text"]= "Device " +deviceInfo.split(":")[1].split(",")[1].strip().rstrip('\x00') + ' Firmware ' + deviceInfo.split(":")[1].split(",")[2].strip().rstrip('\x00')
+    calInfo = probe.query("cal,?")
+    label_cal["text"]= "Device Calibrated to " + calInfo.split(":")[1].split(",")[1].strip().rstrip('\x00') + " point(s)"
+    statusInfo=probe.query("Status")
+    label_status["text"]= "Reason for restart " + statusInfo.split(":")[1].split(",")[1].strip().rstrip('\x00') + " Voltage " +  statusInfo.split(":")[1].split(",")[2].strip().rstrip('\x00')
     readProbeButton["text"]= "Read pH"
     readProbeButton["command"]= readPHClicked
     calProbeButton["text"]= "Cal PH"
@@ -65,9 +71,9 @@ def ecCalClicked():
     deviceInfo = probe.query("i")
     label_info["text"]= "Device " +deviceInfo.split(":")[1].split(",")[1].strip().rstrip('\x00') + ' Firmware ' + deviceInfo.split(":")[1].split(",")[2].strip().rstrip('\x00')
     calInfo = probe.query("cal,?")
-    label_cal["text"]= "Device Calibrated to " + calInfo.split(":")[1].split(",")[1].strip().rstrip('\x00') + " point"
+    label_cal["text"]= "Device Calibrated to " + calInfo.split(":")[1].split(",")[1].strip().rstrip('\x00') + " point(s)"
     statusInfo=probe.query("Status")
-    label_status["text"]= probe.query("Status").strip().rstrip('\x00')
+    label_status["text"]= "Reason for restart " + statusInfo.split(":")[1].split(",")[1].strip().rstrip('\x00') + " Voltage " +  statusInfo.split(":")[1].split(",")[2].strip().rstrip('\x00')
     readProbeButton["text"]= "Read EC"
     readProbeButton["command"]= readECClicked
     calProbeButton["text"]= "Cal EC"
