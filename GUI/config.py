@@ -249,7 +249,7 @@ calButton2.grid(row = 6 ,column = 1)
 calButton3.grid(row = 6 ,column = 2)
 calButton4.grid(row = 6 ,column = 3)
 
-calResult_label.grid(row = 7 ,column = 0)
+calResult_label.grid(row = 7 ,column = 0, columnspan=5)
 
 readProbeButton["state"] = DISABLED
 calButton1["state"] = DISABLED
