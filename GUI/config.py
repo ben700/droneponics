@@ -51,9 +51,7 @@ def tempCalClicked():
     calProbeButton["text"]= "Cal Temp"
     calProbeButton["command"]= calTempClicked
     calProbeButton["state"] = NORMAL
-    calEntryBox.grid(row = 6 ,column = 1)
 
-	
     clearReading()
 	
 def phCalClicked():
