@@ -79,9 +79,9 @@ pump1Button.grid(row=2, column=0)
 pump2Button.grid(row=2, column=1)
 pump3Button.grid(row=2, column=2)
 pump4Button.grid(row=2, column=3)
-pump5Button.grid(row=3, column=4)
-pump6Button.grid(row=3, column=5)
-pump7Button.grid(row=3, column=6)
+pump5Button.grid(row=3, column=0)
+pump6Button.grid(row=3, column=1)
+pump7Button.grid(row=3, column=2)
 exitButton.grid(row = 1,column = 0)
 
 
