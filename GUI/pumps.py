@@ -83,7 +83,6 @@ pump5Button.grid(row=2, column=4)
 pump6Button.grid(row=2, column=5)
 pump7Button.grid(row=2, column=6)
 exitButton.grid(row = 1,column = 0, rowspan=3)
-tempCalButton.grid(row = 4 ,column = 0)
 
 
 	
