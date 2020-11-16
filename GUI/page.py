@@ -27,4 +27,4 @@ bt1.grid(row=0,column=1)
 bt2=tk.Button(root,text='page3',command=page3)
 bt2.grid(row=0,column=2)
 
-root.mainloop()`
+root.mainloop()
