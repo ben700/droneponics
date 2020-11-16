@@ -6,3 +6,4 @@ cd i2crelay
 pip3 install --upgrade .
 sudo pip3 install --upgrade .
 cd
+sudo apt-get install libatlas-base-dev
