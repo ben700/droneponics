@@ -75,14 +75,14 @@ exitButton = Button(root, text="Exit", background = "#C06C84",
 	
 
 mainLabel.grid(row=0, column=1, columnspan=4)
-pump1Button.grid(row=3, column=0)
-pump2Button.grid(row=3, column=1)
-pump3Button.grid(row=3, column=2)
-pump4Button.grid(row=3, column=3)
-pump5Button.grid(row=4, column=4)
-pump6Button.grid(row=4, column=5)
-pump7Button.grid(row=4, column=6)
-exitButton.grid(row = 1,column = 0, rowspan=3)
+pump1Button.grid(row=2, column=0)
+pump2Button.grid(row=2, column=1)
+pump3Button.grid(row=2, column=2)
+pump4Button.grid(row=2, column=3)
+pump5Button.grid(row=3, column=4)
+pump6Button.grid(row=3, column=5)
+pump7Button.grid(row=3, column=6)
+exitButton.grid(row = 1,column = 0)
 
 
 	
