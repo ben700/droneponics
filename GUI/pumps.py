@@ -10,6 +10,27 @@ from tkinter import * 			# imports the Tkinter lib
 # pip install pillow
 from PIL import Image, ImageTk
 
+def page1():
+    page2text.pack_forget()
+    page1text.pack()
+
+def page2():
+    page1text.pack_forget()
+    page2text.pack()
+
+window = tkinter.Tk()
+
+page1btn = tkinter.Button(window, text="Page 1", command=page1)
+page2btn = tkinter.Button(window, text="Page 2", command=page2)
+
+page1text = tkinter.Label(window, text="This is page 1")
+page2text = tkinter.Label(window, text="This is page 2")
+
+page1btn.pack()
+page2btn.pack()
+page1text.pack()
+
+
     # tune console logging
 _log = logging.getLogger('BlynkLog')
 logFormatter = logging.Formatter("%(asctime)s [%(levelname)s]  %(message)s")
@@ -21,8 +42,8 @@ _log.setLevel(logging.DEBUG)
 restartCode = {'P': "Powered Off", 'S':"Software Reset",'B':"Brown Out",'W':"Watchdog",'U':"Unknown"}
 
 
-root = Tk()				# create the root object
-root.wm_title("GUI")			# sets title of the window
+#root = Tk()				# create the root object
+#root.wm_title("GUI")			# sets title of the window
 
 load = Image.open("/home/pi/droneponics/pic/store_logo.png")
 render = ImageTk.PhotoImage(load)
@@ -86,5 +107,5 @@ exitButton.grid(row = 1,column = 0)
 
 
 	
-root.bind("<Escape>", end_fullscreen)
-root.mainloop()				# starts the GUI loop
+#root.bind("<Escape>", end_fullscreen)
+#root.mainloop()				# starts the GUI loop
