@@ -35,7 +35,7 @@ def pumpPage7():
     label.place(relx=0.3,rely=0.4)
     
 bt1=tk.Button(root,text='Pump 1',command=pumpPage1)
-bt1.grid(column=1,row=0)
+bt1.grid(row=1,column=0)
 
 bt2=tk.Button(root,text='Pump 2',command=pumpPage2)
 bt2.grid(row=1,column=1)
