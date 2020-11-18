@@ -31,3 +31,29 @@ img.image = render
 img.place(x=0, y=0)
 root.configure(bg="#99B898")		# change the background color 
 root.attributes("-fullscreen", True) 	# set to fullscreen
+
+
+def btnExit():
+  	root.destroy()
+
+# we can exit when we press the escape key
+def end_fullscreen(event):
+	root.attributes("-fullscreen", False)
+
+
+label_1 = Label(root, text="Droneponics Calibration Interface", font="Verdana 26 bold",
+			fg="Black",
+			bg="#99B898",
+			pady = 1,
+			padx = 1)
+
+exitButton = Button(root, text="Exit", background = "#C06C84",
+      command=btnExit, height=5, width=15, font = "Arial 16 bold")
+	
+
+
+label_1.grid(row=0, column=1, columnspan=4)
+exitButton.grid(row = 1,column = 0, rowspan=3)
+	
+root.bind("<Escape>", end_fullscreen)
+root.mainloop()				# starts the GUI loop
