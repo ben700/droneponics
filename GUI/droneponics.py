@@ -69,7 +69,7 @@ def pumpPage3():
     label=tk.Label(actionFrame,text='Calibration')
     label.grid(row=0,column=0, columnspan=4)
     bt1=tk.Button(actionFrame,text='Sensors',command=SensorsCalibrationPage)
-    bt2=tk.Button(actionFrame,text='Dosers',command=pumpPage1)
+    bt2=tk.Button(actionFrame,text='Dosers',command=PumpCalibrationPage)
     bt1.grid(row=1,column=0)
     bt2.grid(row=1,column=1)
     
