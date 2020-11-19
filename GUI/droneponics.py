@@ -37,19 +37,19 @@ frame=tk.Frame(root,bg='lightblue')
 frame.place(relx=0.2,rely=0.2,relheight=0.6,relwidth=0.6)
 
 def pumpPage1():
-    label=tk.Label(frame,text='this is the pump 1')
+    label=tk.Label(root,text='this is the pump 1')
   #  label.place(relx=0.3,rely=0.4)
 
 def pumpPage2():
-    label=tk.Label(frame,text='this is the pump 2')
+    label=tk.Label(root,text='this is the pump 2')
    # label.place(relx=0.3,rely=0.4)
 
 def pumpPage3():
-    label=tk.Label(frame,text='this is the pump 3')
+    label=tk.Label(root,text='this is the pump 3')
     #label.place(relx=0.3,rely=0.4)
 
 def pumpPage4():
-    label=tk.Label(frame,text='this is the pump 4')
+    label=tk.Label(root,text='this is the pump 4')
     #label.place(relx=0.3,rely=0.4)
 	
 
