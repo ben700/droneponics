@@ -72,10 +72,17 @@ label_1 = Label(root, text="Droneponics Calibration Interface", font="Verdana 26
 exitButton = Button(root, text="Exit", background = "#C06C84",
       command=btnExit, height=5, width=15, font = "Arial 16 bold")
 	
-
-
 label_1.grid(row=0, column=1, columnspan=4)
 exitButton.grid(row = 1,column = 0, rowspan=3)
-	
+
+bt1=tk.Button(root,text='Pump 1',command=pumpPage1)
+bt1.grid(row=1,column=0)
+
+bt2=tk.Button(root,text='Pump 2',command=pumpPage2)
+bt2.grid(row=1,column=1)
+
+bt3=tk.Button(root,text='Pump 3',command=pumpPage3)
+bt3.grid(row=1,column=2)
+
 root.bind("<Escape>", end_fullscreen)
 root.mainloop()				# starts the GUI loop
