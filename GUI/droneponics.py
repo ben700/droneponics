@@ -20,8 +20,8 @@ _log.setLevel(logging.DEBUG)
 
 restartCode = {'P': "Powered Off", 'S':"Software Reset",'B':"Brown Out",'W':"Watchdog",'U':"Unknown"}
 
-
-root = Tk()				# create the root object
+import tkinter as tk
+root=tk.Tk()
 root.wm_title("GUI")			# sets title of the window
 
 load = Image.open("/home/pi/droneponics/pic/store_logo.png")
@@ -31,6 +31,28 @@ img.image = render
 img.place(x=0, y=0)
 root.configure(bg="#99B898")		# change the background color 
 root.attributes("-fullscreen", True) 	# set to fullscreen
+
+
+frame=tk.Frame(root,bg='lightblue')
+frame.place(relx=0.2,rely=0.2,relheight=0.6,relwidth=0.6)
+
+def pumpPage1():
+    label=tk.Label(frame,text='this is the pump 1')
+    label.place(relx=0.3,rely=0.4)
+
+def pumpPage2():
+    label=tk.Label(frame,text='this is the pump 2')
+    label.place(relx=0.3,rely=0.4)
+
+def pumpPage3():
+    label=tk.Label(frame,text='this is the pump 3')
+    label.place(relx=0.3,rely=0.4)
+
+def pumpPage4():
+    label=tk.Label(frame,text='this is the pump 4')
+    label.place(relx=0.3,rely=0.4)
+	
+root = Tk()				# create the root object
 
 
 def btnExit():
