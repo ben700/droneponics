@@ -53,12 +53,13 @@ def pumpPage1():
 
 def pumpPage2():
     label=tk.Label(actionFrame,text='this is the Operation')
-    label.place(relx=0.1,rely=0.1)
-
+    label.grid(row=0,column=0, columnspan=4)
+   
 def pumpPage3():
+    actionFrame=tk.Frame(root,bg='lightblue')
     label=tk.Label(actionFrame,text='this is the Calibration')
-    label.place(relx=0.1,rely=0.1)
-
+    label.grid(row=0,column=0, columnspan=4)
+   
 	
 
 def btnExit():
