@@ -52,11 +52,12 @@ def pumpPage1():
     bt4.grid(row=1,column=3)
 
 def pumpPage2():
+    actionFrame.grid_remove()
     label=tk.Label(actionFrame,text='this is the Operation')
     label.grid(row=0,column=0, columnspan=4)
    
 def pumpPage3():
-    actionFrame=tk.Frame(root,bg='lightblue')
+    actionFrame.destroy()
     label=tk.Label(actionFrame,text='this is the Calibration')
     label.grid(row=0,column=0, columnspan=4)
    
