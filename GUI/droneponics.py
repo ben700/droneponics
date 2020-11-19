@@ -41,7 +41,7 @@ btFrame.place(relx=0.2,rely=0.1,relheight=0.1,relwidth=0.6)
 
 def pumpPage1():
     label=tk.Label(frame,text='this is the Set-up')
-    label.grid(row=0,column=0, colspan=4)
+    label.grid(row=0,column=0, columnspan=4)
     bt1=tk.Button(btFrame,text='Sensors',command=pumpPage1)
     bt2=tk.Button(btFrame,text='Dosers',command=pumpPage1)
     bt3=tk.Button(btFrame,text='Timers',command=pumpPage1)
