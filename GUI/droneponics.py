@@ -68,13 +68,27 @@ def pumpPage3():
     actionFrame.place(relx=0.2,rely=0.3,relheight=0.1,relwidth=0.6)
     label=tk.Label(actionFrame,text='Calibration')
     label.grid(row=0,column=0, columnspan=4)
-    bt1=tk.Button(actionFrame,text='Sensors',command=pumpPage1)
+    bt1=tk.Button(actionFrame,text='Sensors',command=SensorsCalibrationPage)
     bt2=tk.Button(actionFrame,text='Dosers',command=pumpPage1)
     bt1.grid(row=1,column=0)
     bt2.grid(row=1,column=1)
     
-	
-
+def SensorsCalibrationPage():	
+    functionFrame=tk.Frame(root,bg='red')
+    functionFrame.place(relx=0.2,rely=0.7,relheight=0.1,relwidth=0.6)
+    label=tk.Label(functionFrame,text='Sensors Calibration')
+    label.grid(row=0,column=0, columnspan=4)
+    sensors = []
+    sensors = drone.buildAllSensors(sensors, _log)
+    _log.info("All Monitor Sensors created")
+    tempCalButton=tk.Button(functionFrame,text='Cal Temp',command=SensorsCalibrationPage)
+    tempCalButton.grid(row=1,column=0)
+    if(sensors[0].isProbeConnected()):
+        tempCalButton["text"]= "Cal Temp \nConnected"
+    else:
+        tempCalButton["text"]= "Cal Temp \nNot Connected"
+	tempCalButton["state"] = DISABLED
+    
 def btnExit():
   	root.destroy()
 
