@@ -75,7 +75,7 @@ def pumpPage3():
     
 def SensorsCalibrationPage():	
     functionFrame=tk.Frame(root,bg='red')
-    functionFrame.place(relx=0.2,rely=0.7,relheight=0.1,relwidth=0.6)
+    functionFrame.place(relx=0.05,rely=0.7,relheight=0.1,relwidth=0.9)
     label=tk.Label(functionFrame,text='Sensors Calibration')
     label.grid(row=0,column=0, columnspan=5)
     sensors = []
