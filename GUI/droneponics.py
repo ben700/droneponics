@@ -36,21 +36,24 @@ root.attributes("-fullscreen", True) 	# set to fullscreen
 frame=tk.Frame(root,bg='lightblue')
 frame.place(relx=0.2,rely=0.2,relheight=0.6,relwidth=0.6)
 
+btFrame=tk.Frame(root,bg='lightblue')
+btFrame.place(relheight=0.3,relwidth=0.6)
+
 def pumpPage1():
-    label=tk.Label(root,text='this is the pump 1')
-  #  label.place(relx=0.3,rely=0.4)
+    label=tk.Label(frame,text='this is the pump 1')
+    label.place(relx=0.3,rely=0.4)
 
 def pumpPage2():
-    label=tk.Label(root,text='this is the pump 2')
-   # label.place(relx=0.3,rely=0.4)
+    label=tk.Label(frame,text='this is the pump 2')
+    label.place(relx=0.3,rely=0.4)
 
 def pumpPage3():
-    label=tk.Label(root,text='this is the pump 3')
-    #label.place(relx=0.3,rely=0.4)
+    label=tk.Label(frame,text='this is the pump 3')
+    label.place(relx=0.3,rely=0.4)
 
 def pumpPage4():
-    label=tk.Label(root,text='this is the pump 4')
-    #label.place(relx=0.3,rely=0.4)
+    label=tk.Label(frame,text='this is the pump 4')
+    label.place(relx=0.3,rely=0.4)
 	
 
 def btnExit():
@@ -61,16 +64,16 @@ def end_fullscreen(event):
 	root.attributes("-fullscreen", False)
 
 
-bt1=tk.Button(root,text='Set-up',command=pumpPage1)
+bt1=tk.Button(btFrame,text='Set-up',command=pumpPage1)
 bt1.grid(row=1,column=0)
 
-bt2=tk.Button(root,text='Operation',command=pumpPage2)
+bt2=tk.Button(btFrame,text='Operation',command=pumpPage2)
 bt2.grid(row=1,column=1)
 
-bt3=tk.Button(root,text='Calibration',command=pumpPage3)
+bt3=tk.Button(btFrame,text='Calibration',command=pumpPage3)
 bt3.grid(row=1,column=2)
 
-exitBt=tk.Button(root,text='Exit',command=btnExit)
+exitBt=tk.Button(btFrame,text='Exit',command=btnExit)
 exitBt.grid(row=1,column=3)
 
 root.bind("<Escape>", end_fullscreen)
