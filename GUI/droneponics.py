@@ -73,6 +73,30 @@ def pumpPage3():
     bt1.grid(row=1,column=0)
     bt2.grid(row=1,column=1)
     
+def PumpCalibrationPage():	
+    functionFrame=tk.Frame(root,bg='red')
+    functionFrame.place(relx=0.05,rely=0.7,relheight=0.1,relwidth=0.9)
+    label=tk.Label(functionFrame,text='Pump Calibration')
+    label.grid(row=0,column=0, columnspan=7)
+    sensors = []
+    sensors = drone.buildAllSensors(sensors, _log)
+    _log.info("All Monitor Sensors created")
+    pump1CalButton=tk.Button(functionFrame,text='Pump 1',command=PumpCalibrationPage)
+    pump2CalButton=tk.Button(functionFrame,text='Pump 2',command=PumpCalibrationPage)
+    pump3CalButton=tk.Button(functionFrame,text='Pump 3',command=PumpCalibrationPage)
+    pump4CalButton=tk.Button(functionFrame,text='Pump 4',command=PumpCalibrationPage)
+    pump5CalButton=tk.Button(functionFrame,text='Pump 5',command=PumpCalibrationPage)
+    pump6CalButton=tk.Button(functionFrame,text='Pump 6',command=PumpCalibrationPage)
+    pump7CalButton=tk.Button(functionFrame,text='Pump 7',command=PumpCalibrationPage)
+
+    pump1CalButton.grid(row=1,column=0)
+    pump2CalButton.grid(row = 1 ,column = 1)
+    pump3CalButton.grid(row = 1 ,column = 2)
+    pump4CalButton.grid(row = 1 ,column = 3)
+    pump5CalButton.grid(row = 1 ,column = 4)
+    pump6CalButton.grid(row = 1 ,column = 5)
+    pump7CalButton.grid(row = 1 ,column = 6)
+
 def SensorsCalibrationPage():	
     functionFrame=tk.Frame(root,bg='red')
     functionFrame.place(relx=0.05,rely=0.7,relheight=0.1,relwidth=0.9)
