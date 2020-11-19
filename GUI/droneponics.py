@@ -77,17 +77,51 @@ def SensorsCalibrationPage():
     functionFrame=tk.Frame(root,bg='red')
     functionFrame.place(relx=0.2,rely=0.7,relheight=0.1,relwidth=0.6)
     label=tk.Label(functionFrame,text='Sensors Calibration')
-    label.grid(row=0,column=0, columnspan=4)
+    label.grid(row=0,column=0, columnspan=5)
     sensors = []
     sensors = drone.buildAllSensors(sensors, _log)
     _log.info("All Monitor Sensors created")
     tempCalButton=tk.Button(functionFrame,text='Cal Temp',command=SensorsCalibrationPage)
+    phCalButton=tk.Button(functionFrame,text='Cal Temp',command=SensorsCalibrationPage)
+    ecCalButton=tk.Button(functionFrame,text='Cal Temp',command=SensorsCalibrationPage)
+    doCalButton=tk.Button(functionFrame,text='Cal Temp',command=SensorsCalibrationPage)
+    orpCalButton=tk.Button(functionFrame,text='Cal Temp',command=SensorsCalibrationPage)
+
     tempCalButton.grid(row=1,column=0)
+    phCalButton.grid(row = 1 ,column = 1)
+    ecCalButton.grid(row = 1 ,column = 2)
+    doCalButton.grid(row = 1 ,column = 3)
+    orpCalButton.grid(row = 1 ,column = 4)
+
     if(sensors[0].isProbeConnected()):
         tempCalButton["text"]= "Cal Temp \nConnected"
     else:
         tempCalButton["text"]= "Cal Temp \nNot Connected"
         tempCalButton["state"] = DISABLED
+	
+    if(sensors[2].isProbeConnected()):
+	phCalButton["text"]= "Cal PH \nConnected"
+    else:
+	phCalButton["text"]= "Cal PH \nNot Connected"
+	phCalButton["state"] = DISABLED
+	
+    if(sensors[1].isProbeConnected()):
+	ecCalButton["text"]= "Cal EC "+'\n'+"Connected"
+    else:
+	ecCalButton["text"]= "Cal EC "+'\n'+"Not Connected"
+	ecCalButton["state"] = DISABLED
+	
+    if(sensors[3].isProbeConnected()):
+	doCalButton["text"]= "Cal DO "+'\n'+"Connected"
+    else:
+	doCalButton["text"]= "DO "+'\n'+"Not Connected"
+	doCalButton["state"] = DISABLED
+	
+    if(sensors[4].isProbeConnected()):
+	orpCalButton["text"]= "Cal ORP "+'\n'+"Connected"
+    else:
+	orpCalButton["text"]= "ORP "+'\n'+"Not Connected"
+	orpCalButton["state"] = DISABLED
     
 def btnExit():
   	root.destroy()
