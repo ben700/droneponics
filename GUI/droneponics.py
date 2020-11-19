@@ -39,8 +39,8 @@ btFrame.place(relx=0.2,rely=0.1,relheight=0.1,relwidth=0.6)
 
 def pumpPage1():
     actionFrame=tk.Frame(root,bg='lightblue')
-    actionFrame.place(relx=0.2,rely=0.3,relheight=0.4,relwidth=0.6)
-    label=tk.Label(actionFrame,text='this is the Set-up')
+    actionFrame.place(relx=0.2,rely=0.3,relheight=0.1,relwidth=0.6)
+    label=tk.Label(actionFrame,text='Set-up')
     label.grid(row=0,column=0, columnspan=4)
     bt1=tk.Button(actionFrame,text='Sensors',command=pumpPage1)
     bt2=tk.Button(actionFrame,text='Dosers',command=pumpPage1)
@@ -53,14 +53,14 @@ def pumpPage1():
 
 def pumpPage2():
     actionFrame=tk.Frame(root,bg='green')
-    actionFrame.place(relx=0.2,rely=0.3,relheight=0.4,relwidth=0.6)
-    label=tk.Label(actionFrame,text='this is the Operation')
+    actionFrame.place(relx=0.2,rely=0.3,relheight=0.1,relwidth=0.6)
+    label=tk.Label(actionFrame,text='Operation')
     label.grid(row=0,column=0, columnspan=4)
    
 def pumpPage3():
     actionFrame=tk.Frame(root,bg='red')
-    actionFrame.place(relx=0.2,rely=0.3,relheight=0.4,relwidth=0.6)
-    label=tk.Label(actionFrame,text='this is the Calibration')
+    actionFrame.place(relx=0.2,rely=0.3,relheight=0.1,relwidth=0.6)
+    label=tk.Label(actionFrame,text='Calibration')
     label.grid(row=0,column=0, columnspan=4)
    
 	
