@@ -52,12 +52,12 @@ def pumpPage1():
     bt4.grid(row=1,column=3)
 
 def pumpPage2():
-    actionFrame.pack_forget()
+    actionFrame.forget()
     label=tk.Label(actionFrame,text='this is the Operation')
     label.grid(row=0,column=0, columnspan=4)
    
 def pumpPage3():
-    actionFrame=tk.Frame(root,bg='lightred')
+    actionFrame=tk.Frame(root,bg='red')
     actionFrame.place(relx=0.2,rely=0.3,relheight=0.4,relwidth=0.6)
 
     label=tk.Label(actionFrame,text='this is the Calibration')
