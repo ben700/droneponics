@@ -34,10 +34,10 @@ root.attributes("-fullscreen", True) 	# set to fullscreen
 
 
 frame=tk.Frame(root,bg='lightblue')
-frame.place(relx=0.2,rely=0.6,relheight=0.4,relwidth=0.6)
+frame.place(relx=0.2,rely=0.4,relheight=0.4,relwidth=0.6)
 
 btFrame=tk.Frame(root,bg='darkblue')
-btFrame.place(relx=0.2,rely=0.2,relheight=0.2,relwidth=0.6)
+btFrame.place(relx=0.2,rely=0.1,relheight=0.2,relwidth=0.6)
 
 def pumpPage1():
     label=tk.Label(frame,text='this is the pump 1')
