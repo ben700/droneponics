@@ -87,7 +87,7 @@ def SensorsCalibrationPage():
         tempCalButton["text"]= "Cal Temp \nConnected"
     else:
         tempCalButton["text"]= "Cal Temp \nNot Connected"
-	tempCalButton["state"] = DISABLED
+        tempCalButton["state"] = DISABLED
     
 def btnExit():
   	root.destroy()
