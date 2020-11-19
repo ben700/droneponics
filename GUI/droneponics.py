@@ -100,28 +100,28 @@ def SensorsCalibrationPage():
         tempCalButton["state"] = DISABLED
 	
     if(sensors[2].isProbeConnected()):
-	phCalButton["text"]= "Cal PH \nConnected"
+        phCalButton["text"]= "Cal PH \nConnected"
     else:
-	phCalButton["text"]= "Cal PH \nNot Connected"
-	phCalButton["state"] = DISABLED
+        phCalButton["text"]= "Cal PH \nNot Connected"
+        phCalButton["state"] = DISABLED
 	
     if(sensors[1].isProbeConnected()):
-	ecCalButton["text"]= "Cal EC "+'\n'+"Connected"
+        ecCalButton["text"]= "Cal EC "+'\n'+"Connected"
     else:
-	ecCalButton["text"]= "Cal EC "+'\n'+"Not Connected"
-	ecCalButton["state"] = DISABLED
+        ecCalButton["text"]= "Cal EC "+'\n'+"Not Connected"
+        ecCalButton["state"] = DISABLED
 	
     if(sensors[3].isProbeConnected()):
-	doCalButton["text"]= "Cal DO "+'\n'+"Connected"
+        doCalButton["text"]= "Cal DO "+'\n'+"Connected"
     else:
-	doCalButton["text"]= "DO "+'\n'+"Not Connected"
-	doCalButton["state"] = DISABLED
+        doCalButton["text"]= "DO "+'\n'+"Not Connected"
+        doCalButton["state"] = DISABLED
 	
     if(sensors[4].isProbeConnected()):
-	orpCalButton["text"]= "Cal ORP "+'\n'+"Connected"
+        orpCalButton["text"]= "Cal ORP "+'\n'+"Connected"
     else:
-	orpCalButton["text"]= "ORP "+'\n'+"Not Connected"
-	orpCalButton["state"] = DISABLED
+        orpCalButton["text"]= "ORP "+'\n'+"Not Connected"
+        orpCalButton["state"] = DISABLED
     
 def btnExit():
   	root.destroy()
