@@ -56,13 +56,23 @@ def pumpPage2():
     actionFrame.place(relx=0.2,rely=0.3,relheight=0.1,relwidth=0.6)
     label=tk.Label(actionFrame,text='Operation')
     label.grid(row=0,column=0, columnspan=4)
+    bt1=tk.Button(actionFrame,text='Sensors',command=pumpPage1)
+    bt2=tk.Button(actionFrame,text='Dosers',command=pumpPage1)
+    bt3=tk.Button(actionFrame,text='Timers',command=pumpPage1)
+    bt1.grid(row=1,column=0)
+    bt2.grid(row=1,column=1)
+    bt3.grid(row=1,column=2)
    
 def pumpPage3():
     actionFrame=tk.Frame(root,bg='red')
     actionFrame.place(relx=0.2,rely=0.3,relheight=0.1,relwidth=0.6)
     label=tk.Label(actionFrame,text='Calibration')
     label.grid(row=0,column=0, columnspan=4)
-   
+    bt1=tk.Button(actionFrame,text='Sensors',command=pumpPage1)
+    bt2=tk.Button(actionFrame,text='Dosers',command=pumpPage1)
+    bt1.grid(row=1,column=0)
+    bt2.grid(row=1,column=1)
+    
 	
 
 def btnExit():
