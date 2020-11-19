@@ -52,8 +52,6 @@ def pumpPage4():
     label=tk.Label(frame,text='this is the pump 4')
     label.place(relx=0.3,rely=0.4)
 	
-root = Tk()				# create the root object
-
 
 def btnExit():
   	root.destroy()
