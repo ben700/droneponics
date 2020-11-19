@@ -38,19 +38,19 @@ frame.place(relx=0.2,rely=0.2,relheight=0.6,relwidth=0.6)
 
 def pumpPage1():
     label=tk.Label(frame,text='this is the pump 1')
-    label.place(relx=0.3,rely=0.4)
+  #  label.place(relx=0.3,rely=0.4)
 
 def pumpPage2():
     label=tk.Label(frame,text='this is the pump 2')
-    label.place(relx=0.3,rely=0.4)
+   # label.place(relx=0.3,rely=0.4)
 
 def pumpPage3():
     label=tk.Label(frame,text='this is the pump 3')
-    label.place(relx=0.3,rely=0.4)
+    #label.place(relx=0.3,rely=0.4)
 
 def pumpPage4():
     label=tk.Label(frame,text='this is the pump 4')
-    label.place(relx=0.3,rely=0.4)
+    #label.place(relx=0.3,rely=0.4)
 	
 
 def btnExit():
@@ -60,15 +60,6 @@ def btnExit():
 def end_fullscreen(event):
 	root.attributes("-fullscreen", False)
 
-
-label_1 = Label(root, text="Droneponics AI Interface", font="Verdana 26 bold",
-			fg="Black",
-			bg="#99B898",
-			pady = 1,
-			padx = 1)
-
-
-label_1.grid(row=0, column=1, columnspan=4)
 
 bt1=tk.Button(root,text='Set-up',command=pumpPage1)
 bt1.grid(row=1,column=0)
