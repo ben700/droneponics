@@ -34,26 +34,31 @@ root.attributes("-fullscreen", True) 	# set to fullscreen
 
 
 frame=tk.Frame(root,bg='lightblue')
-frame.place(relx=0.2,rely=0.4,relheight=0.4,relwidth=0.6)
+frame.place(relx=0.2,rely=0.3,relheight=0.4,relwidth=0.6)
 
 btFrame=tk.Frame(root,bg='darkblue')
-btFrame.place(relx=0.2,rely=0.1,relheight=0.2,relwidth=0.6)
+btFrame.place(relx=0.2,rely=0.1,relheight=0.1,relwidth=0.6)
 
 def pumpPage1():
-    label=tk.Label(frame,text='this is the pump 1')
-    label.place(relx=0.3,rely=0.4)
+    label=tk.Label(frame,text='this is the Set-up')
+    label.grid(row=0,column=0, colspan=4)
+    bt1=tk.Button(btFrame,text='Sensors',command=pumpPage1)
+    bt2=tk.Button(btFrame,text='Dosers',command=pumpPage1)
+    bt3=tk.Button(btFrame,text='Timers',command=pumpPage1)
+    bt4=tk.Button(btFrame,text='Network',command=pumpPage1)
+    bt1.grid(row=1,column=0)
+    bt2.grid(row=1,column=1)
+    bt3.grid(row=1,column=2)
+    bt4.grid(row=1,column=3)
 
 def pumpPage2():
-    label=tk.Label(frame,text='this is the pump 2')
-    label.place(relx=0.3,rely=0.4)
+    label=tk.Label(frame,text='this is the Operation')
+    label.place(relx=0.1,rely=0.1)
 
 def pumpPage3():
-    label=tk.Label(frame,text='this is the pump 3')
-    label.place(relx=0.3,rely=0.4)
+    label=tk.Label(frame,text='this is the Calibration')
+    label.place(relx=0.1,rely=0.1)
 
-def pumpPage4():
-    label=tk.Label(frame,text='this is the pump 4')
-    label.place(relx=0.3,rely=0.4)
 	
 
 def btnExit():
