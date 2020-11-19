@@ -61,7 +61,7 @@ def end_fullscreen(event):
 	root.attributes("-fullscreen", False)
 
 
-label_1 = Label(root, text="Droneponics Calibration Interface", font="Verdana 26 bold",
+label_1 = Label(root, text="Droneponics AI Interface", font="Verdana 26 bold",
 			fg="Black",
 			bg="#99B898",
 			pady = 1,
