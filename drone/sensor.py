@@ -127,6 +127,7 @@ class Sensor:
     self._log.info("Going to update " + str(self.name) + " using pin " + str(self.displayPin) + " with value " + str(self.value))
     try:      
         blynk.set_property(self.displayPin, "label", self.name)
+        self._log.info("Going to update " + str(self.name) + " using pin " + str(self.displayPin) + " with color " + str(self.color)) 
         blynk.set_property(self.displayPin, 'color', self.color)
         blynk.virtual_write(self.displayPin, self.value)
     except:
