@@ -37,7 +37,7 @@ sudo pip3 install configparser
 sudo pip3 install RPLCD
 #used to access I2C for displays 
 sudo pip3 install smbus2
-#another  display used for crystal display
+#Display used for liquid crystal display - this is the one used by display class for droneFeedv2
 pip3 install https://github.com/pl31/python-liquidcrystal_i2c/archive/master.zip
 sudo pip3 install https://github.com/pl31/python-liquidcrystal_i2c/archive/master.zip
 
