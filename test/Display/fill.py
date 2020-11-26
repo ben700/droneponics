@@ -22,6 +22,8 @@ except:
     
 try:
     lcd.autoscroll()
+except NotImplementedError:
+    print("NotImplementedError")
 except:
     print("no lcd to get autoscroll from on bus 1")
     
