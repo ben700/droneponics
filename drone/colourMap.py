@@ -23,6 +23,23 @@ def getTempColour(_log, Temp):
           c = '#0000FF'
      return c
 
+def getCO2Colour(_log, CO2):
+     try:
+          _log.info("getCO2Colour CO2 =" + str(CO2))
+          #normalize item number values to colormap
+          norm = matplotlib.colors.Normalize(vmin=0, vmax=1000)
+
+          #colormap possible values = viridis, jet, spectral
+          rgba_color = cm.winter(norm(CO2),bytes=True) 
+          #rgba_color = cm.RdBu(norm(Temp),bytes=True) 
+     
+          _log.info("rgba_color =" + str(rgba_color))
+          c = Color(rgb=(rgba_color[0]/255,rgba_color[1]/255,rgba_color[2]/255))
+          _log.info("getCO2Colour =" + str(c))
+     except:
+          _log.error("Error in Fx getCO2Colour")
+          c = '#0000FF'
+     return c
 
 def getMoistColour(_log, MoistPer):
      _log.info("getMoistColour(MoistPer) =" + str(MoistPer))
