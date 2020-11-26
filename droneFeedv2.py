@@ -51,7 +51,6 @@ try:
     blynk.run()
     _log.info("Blynk Created")  
     
-    i2CRelayBoard = I2CRelayBoard(1, 0x26) 
     relays=drone.RelaysI2C(_log, blynk)
     relays.addRelay(drone.RelayI2C(5, parser.get('droneFeed', 'Relay1'), 21, 85))
     relays.addRelay(drone.RelayI2C(6, parser.get('droneFeed', 'Relay2'), 22, 86))
@@ -76,10 +75,10 @@ try:
         _log.debug("in v1write_handler staus =" + str(staus))       
         if (staus is "1" ):
            #relays[relay].turnOff(_log)     
-           i2CRelayBoard.switch_on(5)
+           relays.i2CRelayBoard.switch_on(5)
         elif (staus is "2" ):
            #relays[relay].turnOn(_log)
-           i2CRelayBoard.switch_on(5)
+           relays.i2CRelayBoard.switch_on(5)
 
     @blynk.handle_event('write V2')
     def v2write_handler(pin, value):
@@ -89,10 +88,10 @@ try:
         _log.debug("in v2write_handler staus =" + str(staus))       
         if (staus is "1" ):
            #relays[relay].turnOff(_log)
-           i2CRelayBoard.switch_on(6)
+           relays.i2CRelayBoard.switch_on(6)
         elif (staus is "2" ):
            #relays[relay].turnOn(_log)
-           i2CRelayBoard.switch_off(6)
+           relays.i2CRelayBoard.switch_off(6)
            
 
     @blynk.handle_event('write V3')
@@ -102,11 +101,11 @@ try:
         relay = 2
         if (staus is "1" ):
            #relays[relay].turnOff(_log)
-           i2CRelayBoard.switch_on(7)
+           relays.i2CRelayBoard.switch_on(7)
         elif (staus is "2" ):
            _log.debug("in v3write_handler turing on relay")
            #relays[relay].turnOn(_log)
-           i2CRelayBoard.switch_off(7)
+           relays.i2CRelayBoard.switch_off(7)
         
           
     @blynk.handle_event('write V4')
@@ -115,59 +114,59 @@ try:
         staus = value[0]
         relay = 3      
         if (staus is "1" ):
-           i2CRelayBoard.switch_on(8)
+           relays.i2CRelayBoard.switch_on(8)
           # relays[relay].turnOff(_log)
         elif (staus is "2" ):
            #relays[relay].turnOn(_log)
-           i2CRelayBoard.switch_off(8)
+           relays.i2CRelayBoard.switch_off(8)
         
   
     @blynk.handle_event('write V11')
     def v11write_handler(pin, value):
-        relays[0].cycleResetSet(value[0])
-        blynk.virtual_write(relays[0].getInfoPin(), relays[0].info())
+        relays.relays[0].cycleResetSet(value[0])
+        blynk.virtual_write(relays.relays[0].getInfoPin(), relays.relays[0].info())
         turnDisplayOn()
         
     @blynk.handle_event('write V12')
     def v12write_handler(pin, value):
-        relays[0].cycleOffResetSet(value[0])
-        blynk.virtual_write(relays[0].getInfoPin(), relays[0].info())
+        relays.relays[0].cycleOffResetSet(value[0])
+        blynk.virtual_write(relays.relays[0].getInfoPin(), relays.relays[0].info())
         turnDisplayOn()
         
     @blynk.handle_event('write V13')
     def v13write_handler(pin, value):
-        relays[1].cycleResetSet(value[0])
-        blynk.virtual_write(relays[1].getInfoPin(), relays[1].info())
+        relaysrelays.[1].cycleResetSet(value[0])
+        blynk.virtual_write(relays.relays[1].getInfoPin(), relays.relays[1].info())
         turnDisplayOn()
         
     @blynk.handle_event('write V14')
     def v14write_handler(pin, value):
-        relays[1].cycleOffResetSet(value[0])
-        blynk.virtual_write(relays[1].getInfoPin(), relays[1].info())        
+        relays.relays[1].cycleOffResetSet(value[0])
+        blynk.virtual_write(relays.relays[1].getInfoPin(), relays.relays[1].info())        
         turnDisplayOn()
   
     @blynk.handle_event('write V15')
     def v15write_handler(pin, value):
-        relays[2].cycleResetSet(value[0])
-        blynk.virtual_write(relays[2].getInfoPin(), relays[2].info())
+        relays.relays[2].cycleResetSet(value[0])
+        blynk.virtual_write(relays.relays[2].getInfoPin(), relays.relays[2].info())
         turnDisplayOn()
         
     @blynk.handle_event('write V16')
     def v16write_handler(pin, value):
         relays[2].cycleOffResetSet(value[0])
-        blynk.virtual_write(relays[2].getInfoPin(), relays[2].info())
+        blynk.virtual_write(relays.relays[2].getInfoPin(), relays.relays[2].info())
         turnDisplayOn()
         
     @blynk.handle_event('write V17')
     def v17write_handler(pin, value):
-        relays[3].cycleResetSet(value[0])
-        blynk.virtual_write(relays[3].getInfoPin(), relays[3].info())
+        relays.relays[3].cycleResetSet(value[0])
+        blynk.virtual_write(relays.relays[3].getInfoPin(), relays.relays[3].info())
         turnDisplayOn()
         
     @blynk.handle_event('write V18')
     def v18write_handler(pin, value):
-        relays[3].cycleOffResetSet(value[0])
-        blynk.virtual_write(relays[3].getInfoPin(), relays[3].info())
+        relays.relays[3].cycleOffResetSet(value[0])
+        blynk.virtual_write(relays.relays[3].getInfoPin(), relays.relays[3].info())
         turnDisplayOn()
     
     def turnDisplayOn():
@@ -213,7 +212,7 @@ try:
            now = datetime.now()
            blynk.virtual_write(0, now.strftime("%H:%M:%S"))
 
-           for relay in relays:
+           for relay in relays.relays:
                 _log.debug("Seeing if relay " + relay.name + " is automatic")
                 if(relay.isAutomatic()):
                     _log.debug("relay " + relay.name + " is automatic so test cycle")
