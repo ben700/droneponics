@@ -150,9 +150,17 @@ class Display:
 
 class LCD:
    
-    def __init__(self, _log):
+    def __init__(self, _log,*args, **kwargs):
         self._log = _log 
         self.lcd = liquidcrystal_i2c.LiquidCrystal_I2C(0x27, 1, numlines=4)
+        self.lcd.printline(0, "Droneponics"")                   
+        if ( kwargs.get('product', None) is not None:
+            self.lcd.printline(1,  kwargs.get('product', "droneFeed"))                    
+        if ( kwargs.get('productTagLine', None) is not None:
+            self.lcd.printline(2,  kwargs.get('productTagLine', "droneFeed"))                    
+        if ( kwargs.get('ip', None) is not None:
+            self.lcd.printline(3,  kwargs.get('ip')) 
+          
 
 
     def updateLCD (self, r1, r2, r3, r4):
