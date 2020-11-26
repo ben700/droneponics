@@ -302,7 +302,7 @@ try:
     
     def displayOn():
         counter = 0 
-	lcdDisplay.displayOn()
+        lcdDisplay.displayOn()
         blynk.virtual_write(50, 1)
 	
     def displayOff():
