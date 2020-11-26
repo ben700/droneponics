@@ -8,16 +8,22 @@ from i2crelay import I2CRelayBoard
 import drone
 
 class RelaysI2C:
-   def __init__(self, _log, relayNum, Name, *args, **kwargs):
+   def __init__(self, _log, blynk, *args, **kwargs):
        I2C_BUS = 1
        I2C_ADDR = 0x26
        self.i2CRelayBoard = I2CRelayBoard(I2C_BUS, I2C_ADDR) 
        self._log = _log
        self.relays=[]
+       self.blynk = blynk
          
-    def addRelay(self, relayNum, Name)
-       self.relays.append(drone.RelayI2C(self._log, relayNum, Name))
-
+    def addRelay(self, relayNum, Name, InfoPin, LEDPin)
+       relay = drone.RelayI2C(self._log, relayNum, Name)
+       relay.setBlynk(self.blynk)
+       relay.i2CRelayBoard = self.i2CRelayBoard
+       relay.setInfoPin(InfoPin)
+       relay.setLEDPin(LEDPin)
+       self.relays.append(relay)
+       
 class RelayI2C:
 
    def __init__(self, _log, relayNum, Name, *args, **kwargs):
