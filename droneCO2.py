@@ -66,7 +66,7 @@ try:
         try:		
            sensors[0].color = drone.getCO2Colour(_log, int(round(float(sensors[0].value)*10,0)))
            _log.debug("Sensor colour = " + str(sensors[0].color))
-           blynk.set_property(sensors[0].displayPin, 'color', drone.colours['OFFLINE'])		
+           blynk.set_property(sensors[0].displayPin, 'color', 'SpringGreen')		
         except:
            _log.critical("Working out sensor colour crashed")	
 
