@@ -333,7 +333,10 @@ try:
     
     @timer.register(interval=60, run_once=False)
     def blynk_data(): 
-           _log.info("Update Timer Run")
+           global counter
+           counter = counter + 1
+           
+           _log.info("Update Timer Run. Counter = " + str(counter))
            text = ""
            now = datetime.now()
            blynk.virtual_write(0, now.strftime("%H:%M:%S"))
@@ -358,8 +361,7 @@ try:
            except:
               _log.critical("updating LCD crashed loop")
                 
-           counter = counter + 1
-           if (counter > 10):
+           if (counter > 5):
                 displayOff()		
            _log.debug("The End")
      
