@@ -66,7 +66,7 @@ try:
         try:		
            sensors[0].color = drone.getCO2Colour(_log, int(round(float(sensors[0].value)*10,0)))
            _log.debug("Sensor colour = " + str(sensors[0].color))
-           blynk.set_property(sensors[0].displayPin, 'color', 'Red')		
+           blynk.set_property(10, 'color', drone.colours['ONLINE'])		
         except:
            _log.critical("Working out sensor colour crashed")	
 
@@ -104,6 +104,7 @@ try:
            if bootup :
               blynk.virtual_write(250, "Boot")
               blynk.set_property(250, 'color', drone.colours['ONLINE'])	
+              blynk.set_property(10, 'color', drone.colours['ONLINE'])			
               p = subprocess.Popen(['i2cdetect', '-y','1'],stdout=subprocess.PIPE,)
               #cmdout = str(p.communicate())
               for i in range(0,9):
