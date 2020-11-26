@@ -48,9 +48,9 @@ _log.info("info")
 _log.debug("debug")
 
 _log.info("/home/pi/droneponics/config/configMonitor/"+drone.gethostname()+".ini")
-
-sensor = drone.buildCO2Sensors(sensors, _log)
-    
+sensors[]
+sensors = drone.buildCO2Sensors(sensors, _log)
+sensor = sensors[0]
 def updateGoogle(CO2):
     """Shows basic usage of the Sheets API.
     Prints values from a sample spreadsheet.
