@@ -97,7 +97,7 @@ class Sensor:
            if(reading.find("Error") == -1):
                self._log.debug("Reading Sensor  OK") 
            else:
-               self._log.debug("Reading Sensor got an Error")  
+               self._log.critical("Reading Sensor got an Error")  
        except:
            self._log.critial("Error reading raw data from sensor " + self.name)
   
