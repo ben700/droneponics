@@ -69,7 +69,8 @@ try:
                   sensor.color = drone.getCO2Colour(_log, sensor.value)
               except:
                   _log.critical("Working out sensor colour crashed")	
-              try:		
+              try:	
+                  _log.info("CO2 Value is " + str(sensor.value))
                   sensor.display(blynk)
               except:
                   _log.critical("Updating Blynk with sensor data crashed")	
