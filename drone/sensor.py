@@ -93,6 +93,7 @@ class Sensor:
    def read(self):
        try:
            reading = self.sensor.query("R")
+           self._log.debug("CO2 Sensor read " + str(reading))         
        except:
            self._log.critial("Error reading raw data from sensor " + self.name)
   
