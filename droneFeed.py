@@ -115,7 +115,7 @@ try:
            relays[relay].cycleOnReset()
            relays[relay].setOffCycleReset() 
         blynk.virtual_write(relays[relay].getInfoPin(), relays[relay].info())   
-       # blynk.set_property(relay+1, 'color', drone.colours[staus])
+        blynk.set_property(relay+1, 'color', drone.colours[staus])
         try:			
            if lcdDisplay is not None: 
                  lcdDisplay.updateLCDPumps (relays[0].state, relays[1].state, relays[2].state, relays[3].state, relays[0].isManual(), relays[1].isManual(), relays[2].isManual(), relays[3].isManual() )
@@ -154,7 +154,7 @@ try:
            relays[relay].cycleOnReset()
            relays[relay].setOffCycleReset() 
         blynk.virtual_write(relays[relay].getInfoPin(), relays[relay].info())
-        #blynk.set_property(relay+1, 'color', drone.colours[staus])
+        blynk.set_property(relay+1, 'color', drone.colours[staus])
         try:			
            if lcdDisplay is not None: 
                  lcdDisplay.updateLCDPumps (relays[0].state, relays[1].state, relays[2].state, relays[3].state, relays[0].isManual(), relays[1].isManual(), relays[2].isManual(), relays[3].isManual() )
