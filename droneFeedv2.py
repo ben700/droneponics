@@ -19,6 +19,7 @@ import subprocess
 import re
 import json
 import numbers
+from i2crelay import I2CRelayBoard  
 
 parser = ConfigParser()
 parser.read("/home/pi/droneponics/config/configFeed/"+drone.gethostname()+".ini")
