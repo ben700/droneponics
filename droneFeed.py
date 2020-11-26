@@ -309,7 +309,7 @@ try:
 	
     def displayOff():
         lcdDisplay.displayOff()
-        blynk.virtual_write(50, 1)
+        blynk.virtual_write(50, 0)
 
     @blynk.handle_event('write V50')
     def v50write_handler(pin, value):
