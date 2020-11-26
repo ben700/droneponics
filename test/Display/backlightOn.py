@@ -15,11 +15,10 @@ except:
 try:
     lcd.Backlight()
 except:
-    print("no lcd on turn on backloight on bus 1")
+    print("no lcd to turn on backloight on bus 1")
     
 try:
-    print("State of the backlight is now ")
-    print(lcd.getBacklight())
+    print("State of the backlight is now " + str(lcd.getBacklight()))
 except NotImplementedError:
     print("NotImplementedError")
 except:
