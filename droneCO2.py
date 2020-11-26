@@ -54,7 +54,16 @@ try:
 	
 	
     sensors = []
-    sensors = drone.buildCO2Sensors(sensors, _log)
+    try:
+        sensors = drone.buildCO2Sensors(sensors, _log)
+    except:
+        _log.critical("Except: creating CO2 sensor")
+	
+    try:
+        sensors = drone.buildColourSensors(sensors, _log)
+    except:
+        _log.info("Except: creating colour sensor")
+    
     _log.info("All Monitor Sensors created")
 
     
@@ -70,7 +79,7 @@ try:
               except:
                   _log.critical("Working out sensor colour crashed")	
               try:	
-                  _log.info("CO2 Value is " + str(sensor.value))
+                  _log.info(str(sensor.name) + " Value is " + str(sensor.value))
                   sensor.display(blynk)
               except:
                   _log.critical("Updating Blynk with sensor data crashed")	
