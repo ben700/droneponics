@@ -50,7 +50,7 @@ try:
     blynk.run()
     _log.info("Blynk Created")  
     
-
+    i2CRelayBoard = I2CRelayBoard(1, 0x26) 
     relays=[]
     relays.append(drone.RelayI2C(_log, 5, parser.get('droneFeed', 'Relay1')))
     relays.append(drone.RelayI2C(_log, 6, parser.get('droneFeed', 'Relay2')))
@@ -90,9 +90,11 @@ try:
         relay = 0       
         _log.debug("in v1write_handler staus =" + str(staus))       
         if (staus is "1" ):
-           relays[relay].turnOff(_log)     
+           #relays[relay].turnOff(_log)     
+           i2CRelayBoard.switch_on(5)
         elif (staus is "2" ):
-           relays[relay].turnOn(_log)
+           #relays[relay].turnOn(_log)
+           i2CRelayBoard.switch_on(5)
 
     @blynk.handle_event('write V2')
     def v2write_handler(pin, value):
@@ -101,9 +103,11 @@ try:
         relay = 1       
         _log.debug("in v2write_handler staus =" + str(staus))       
         if (staus is "1" ):
-           relays[relay].turnOff(_log)     
+           #relays[relay].turnOff(_log)
+           i2CRelayBoard.switch_on(6)
         elif (staus is "2" ):
-           relays[relay].turnOn(_log)
+           #relays[relay].turnOn(_log)
+           i2CRelayBoard.switch_off(6)
            
 
     @blynk.handle_event('write V3')
@@ -113,11 +117,11 @@ try:
         relay = 2
         if (staus is "1" ):
            #relays[relay].turnOff(_log)
-           relays[2].i2CRelayBoard.switch_on(relays[2].relayNum)
+           i2CRelayBoard.switch_on(7)
         elif (staus is "2" ):
            _log.debug("in v3write_handler turing on relay")
            #relays[relay].turnOn(_log)
-           relays[2].i2CRelayBoard.switch_off(relays[2].relayNum)
+           i2CRelayBoard.switch_off(7)
         
           
     @blynk.handle_event('write V4')
@@ -126,11 +130,11 @@ try:
         staus = value[0]
         relay = 3      
         if (staus is "1" ):
-           #relays[3].i2CRelayBoard.switch_on(relays[3].relayNum)
-           relays[relay].turnOff(_log)
+           i2CRelayBoard.switch_on(8)
+          # relays[relay].turnOff(_log)
         elif (staus is "2" ):
            #relays[relay].turnOn(_log)
-           relays[3].i2CRelayBoard.switch_off(relays[3].relayNum)
+           i2CRelayBoard.switch_off(8)
         
   
     @blynk.handle_event('write V11')
@@ -229,9 +233,13 @@ try:
                 if(relay.isAutomatic()):
                     _log.debug("relay " + relay.name + " is automatic so test cycle")
                     if(relay.whatCycle() == "On"):
-                        relay.turnOn(_log)
+                        #relay.turnOn(_log)
+                        i2CRelayBoard.switch_off(relay.relayNum)
+
                     else:
-                        relay.turnOff(_log)
+                        #relay.turnOff(_log)
+                        i2CRelayBoard.switch_on(relay.relayNum)
+
                     relay.incCycle()
       #     if(relay.hasInfoPin()):
       #          blynk.virtual_write(relay.getInfoPin(), relay.info())
