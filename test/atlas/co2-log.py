@@ -12,6 +12,6 @@ CO2 = AtlasI2C(105)
 while True:
     f = open("/home/pi/co2Data.txt", "a")
     now = datetime.now()
-    f.write( now.strftime("%d/%m/%Y %H:%M:%S") + "     "+ CO2.query("R").rstrip('\x00'))
+    f.write( now.strftime("%d/%m/%Y %H:%M:%S") + "     "+ CO2.query("R").rstrip('\x00') + '\n')
     f.close()
     time.sleep(5)
