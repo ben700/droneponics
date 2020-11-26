@@ -84,7 +84,10 @@ class RelayI2C:
    def turnOn(self, _log): 
        _log.info("Turning on relay " + self.name + " using relay pin " + str(self.relayNum))   
        try:
-          self.i2CRelayBoard.switch_on(self.relayNum)
+ #         self.i2CRelayBoard.switch_on(self.relayNum)
+#pumps wires to NO
+          self.i2CRelayBoard.switch_off(self.relayNum)
+            
           _log.info("Turned on relay " + self.name + " on pin " + str(self.relayNum))
           if(self.blynk is not None):
               _log.info("set ledPin " + str(self.ledPin))     
@@ -101,7 +104,9 @@ class RelayI2C:
    def turnOff(self, _log): 
        _log.info("Turning off relay " + self.name + " using relay pin " + str(self.relayNum))
        try:      
-           self.i2CRelayBoard.switch_off(self.relayNum)
+ #          self.i2CRelayBoard.switch_off(self.relayNum)
+#pumps wires to NO
+           self.i2CRelayBoard.switch_on(self.relayNum)
            _log.info("Turned off relay " + self.name + " on pin " + str(self.relayNum))
  
            if(self.blynk is not None):
