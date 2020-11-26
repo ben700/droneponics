@@ -1,5 +1,4 @@
 # The ID and range of a sample spreadsheet.
-colours = {1: '#00FF00', 0: '#FFFFFF', '0': '#FFFFFF', '1': '#00FF00', 2: '#FF0000', '2': '#FF0000', 3: '#00FFFF', '3': '#00FFFF','OFFLINE': '#0000FF', 'ONLINE': '#00FF00', 'UNAVILABLE': '#002700'}
 systemLED=101
 
 import socket
@@ -79,7 +78,7 @@ try:
     def rebooter(pin, value):
         blynk.virtual_write(98, "User update and reboot button v255"+ '\n')       
         blynk.virtual_write(250, "User Reboot")
-        blynk.set_property(systemLED, 'color', colours['OFFLINE'])
+        blynk.set_property(systemLED, 'color', drone.colours['OFFLINE'])
         os.system('sh /home/pi/updateDroneponics.sh')
         blynk.virtual_write(98, "Updated and now restarting drone")
         os.system('sudo reboot')
@@ -116,11 +115,11 @@ try:
            relays[relay].cycleOnReset()
            relays[relay].setOffCycleReset() 
         blynk.virtual_write(relays[relay].getInfoPin(), relays[relay].info())   
-        blynk.set_property(relay+1, 'color', colours[staus])
+        blynk.set_property(relay+1, 'color', drone.colours[staus])
         try:			
            if lcdDisplay is not None: 
                  lcdDisplay.updateLCDPumps (relays[0].state, relays[1].state, relays[2].state, relays[3].state, relays[0].isManual(), relays[1].isManual(), relays[2].isManual(), relays[3].isManual() )
-                 displayOn()			
+                 turnDisplayOn()			
         except:
            _log.critical("updating LCD crashed v1")
        
@@ -155,11 +154,11 @@ try:
            relays[relay].cycleOnReset()
            relays[relay].setOffCycleReset() 
         blynk.virtual_write(relays[relay].getInfoPin(), relays[relay].info())
-        blynk.set_property(relay+1, 'color', colours[staus])
+        blynk.set_property(relay+1, 'color', drone.colours[staus])
         try:			
            if lcdDisplay is not None: 
                  lcdDisplay.updateLCDPumps (relays[0].state, relays[1].state, relays[2].state, relays[3].state, relays[0].isManual(), relays[1].isManual(), relays[2].isManual(), relays[3].isManual() )
-                 displayOn()
+                 turnDisplayOn()
         except:
            _log.critical("relays[0].state = " + str(relays[0].state))
            _log.critical("relays[1].state = " + str(relays[1].state))
@@ -204,11 +203,11 @@ try:
            relays[relay].cycleOnReset()
            relays[relay].setOffCycleReset() 
         blynk.virtual_write(relays[relay].getInfoPin(), relays[relay].info())       
-        blynk.set_property(relay+1, 'color', colours[staus])
+        blynk.set_property(relay+1, 'color', drone.colours[staus])
         try:			
            if lcdDisplay is not None: 
                  lcdDisplay.updateLCDPumps (relays[0].state, relays[1].state, relays[2].state, relays[3].state, relays[0].isManual(), relays[1].isManual(), relays[2].isManual(), relays[3].isManual() )
-                 displayOn()
+                 turnDisplayOn()
         except:
            _log.critical("updating LCD crashed v3")
        
@@ -243,11 +242,11 @@ try:
            relays[relay].cycleOnReset()
            relays[relay].setOffCycleReset() 
         blynk.virtual_write(relays[relay].getInfoPin(), relays[relay].info())
-        blynk.set_property(relay+1, 'color', colours[staus])
+        blynk.set_property(relay+1, 'color', drone.colours[staus])
         try:			
            if lcdDisplay is not None: 
                  lcdDisplay.updateLCDPumps (relays[0].state, relays[1].state, relays[2].state, relays[3].state, relays[0].isManual(), relays[1].isManual(), relays[2].isManual(), relays[3].isManual() )
-                 displayOn()
+                 turnDisplayOn()
         except:
            _log.critical("updating LCD crashed v4")
   
@@ -256,58 +255,60 @@ try:
     def v11write_handler(pin, value):
         relays[0].cycleResetSet(value[0])
         blynk.virtual_write(relays[0].getInfoPin(), relays[0].info())
-        displayOn()
+        turnDisplayOn()
         
     @blynk.handle_event('write V12')
     def v12write_handler(pin, value):
         relays[0].cycleOffResetSet(value[0])
         blynk.virtual_write(relays[0].getInfoPin(), relays[0].info())
-        displayOn()
+        turnDisplayOn()
         
     @blynk.handle_event('write V13')
     def v13write_handler(pin, value):
         relays[1].cycleResetSet(value[0])
         blynk.virtual_write(relays[1].getInfoPin(), relays[1].info())
-        displayOn()
+        turnDisplayOn()
         
     @blynk.handle_event('write V14')
     def v14write_handler(pin, value):
         relays[1].cycleOffResetSet(value[0])
         blynk.virtual_write(relays[1].getInfoPin(), relays[1].info())        
-        displayOn()
+        turnDisplayOn()
   
     @blynk.handle_event('write V15')
     def v15write_handler(pin, value):
         relays[2].cycleResetSet(value[0])
         blynk.virtual_write(relays[2].getInfoPin(), relays[2].info())
-        displayOn()
+        turnDisplayOn()
         
     @blynk.handle_event('write V16')
     def v16write_handler(pin, value):
         relays[2].cycleOffResetSet(value[0])
         blynk.virtual_write(relays[2].getInfoPin(), relays[2].info())
-        displayOn()
+        turnDisplayOn()
         
     @blynk.handle_event('write V17')
     def v17write_handler(pin, value):
         relays[3].cycleResetSet(value[0])
         blynk.virtual_write(relays[3].getInfoPin(), relays[3].info())
-        displayOn()
+        turnDisplayOn()
         
     @blynk.handle_event('write V18')
     def v18write_handler(pin, value):
         relays[3].cycleOffResetSet(value[0])
         blynk.virtual_write(relays[3].getInfoPin(), relays[3].info())
-        displayOn()
+        turnDisplayOn()
     
-    def displayOn():
+    def turnDisplayOn():
         global counter
+        _log.info("Turn display on")
         if(counter is not 0):		
                 counter = 0 
                 lcdDisplay.displayOn()
                 blynk.virtual_write(50, 1)
 	
-    def displayOff():
+    def turnDisplayOff():
+	_log.info("Turn display off")
         lcdDisplay.displayOff()
         blynk.virtual_write(50, 0)
 
@@ -315,10 +316,10 @@ try:
     def v50write_handler(pin, value):
         if(value[0] == '1'):
             _log.debug("Turn ON LCD display")
-            displayOn()            
+            turnDisplayOn()            
         else:
             _log.debug("Turn OFF LCD display")
-            displayOff()            
+            turnDisplayOff()            
      
     @blynk.handle_event("connect")
     def connect_handler():
@@ -362,7 +363,7 @@ try:
               _log.critical("updating LCD crashed loop")
                 
            if (counter > 5):
-                displayOff()		
+                turnDisplayOff()		
            _log.debug("The End")
      
     while True:
@@ -385,16 +386,16 @@ try:
            blynk.virtual_write(98, "Running"+ '\n')
            _log.info('Just Booted')
            blynk.virtual_write(250, "Running")
-           blynk.set_property(systemLED, 'color', colours['ONLINE'])
-           blynk.set_property(0, 'color', colours['ONLINE'])
-           blynk.set_property(11, 'color', colours['ONLINE'])
-           blynk.set_property(12, 'color', colours['ONLINE'])
-           blynk.set_property(13, 'color', colours['ONLINE'])
-           blynk.set_property(14, 'color', colours['ONLINE'])
-           blynk.set_property(15, 'color', colours['ONLINE'])
-           blynk.set_property(16, 'color', colours['ONLINE'])
-           blynk.set_property(17, 'color', colours['ONLINE'])
-           blynk.set_property(18, 'color', colours['ONLINE'])
+           blynk.set_property(systemLED, 'color', drone.colours['ONLINE'])
+           blynk.set_property(0, 'color', drone.colours['ONLINE'])
+           blynk.set_property(11, 'color', drone.colours['ONLINE'])
+           blynk.set_property(12, 'color', drone.colours['ONLINE'])
+           blynk.set_property(13, 'color', drone.colours['ONLINE'])
+           blynk.set_property(14, 'color', drone.colours['ONLINE'])
+           blynk.set_property(15, 'color', drone.colours['ONLINE'])
+           blynk.set_property(16, 'color', drone.colours['ONLINE'])
+           blynk.set_property(17, 'color', drone.colours['ONLINE'])
+           blynk.set_property(18, 'color', drone.colours['ONLINE'])
             
             
            pins = [1, 2, 3, 4, 11, 12, 13, 14, 15, 16, 17, 18, 50, 1]
@@ -418,9 +419,9 @@ finally:
    blynk = blynklib.Blynk(parser.get('blynk', 'BLYNK_AUTH'))
    blynk.run()
    blynk.virtual_write(250, "Shutdown")
-   blynk.set_property(85, 'color', colours['OFFLINE'])
-   blynk.set_property(86, 'color', colours['OFFLINE'])
-   blynk.set_property(87, 'color', colours['OFFLINE'])
-   blynk.set_property(88, 'color', colours['OFFLINE'])
+   blynk.set_property(85, 'color', drone.colours['OFFLINE'])
+   blynk.set_property(86, 'color', drone.colours['OFFLINE'])
+   blynk.set_property(87, 'color', drone.colours['OFFLINE'])
+   blynk.set_property(88, 'color', drone.colours['OFFLINE'])
           
    
