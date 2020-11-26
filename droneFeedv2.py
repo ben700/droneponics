@@ -135,7 +135,7 @@ try:
         
     @blynk.handle_event('write V13')
     def v13write_handler(pin, value):
-        relaysrelays.[1].cycleResetSet(value[0])
+        relays.relays[1].cycleResetSet(value[0])
         blynk.virtual_write(relays.relays[1].getInfoPin(), relays.relays[1].info())
         turnDisplayOn()
         
