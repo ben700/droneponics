@@ -129,7 +129,7 @@ try:
         staus = value[0]
         relay = 1       
         _log.debug("in v2write_handler staus =" + str(staus))       
-	if (staus is "1" ):
+        if (staus is "1" ):
            try:
                  _log.debug("in v"+str(relay+1)+"write_handler turing off relay " + relays[relay].name)
                  relays[relay].turnOff(_log)
