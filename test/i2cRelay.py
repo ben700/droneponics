@@ -8,7 +8,7 @@ I2C_BUS = 1
 
 # define I2C address of PCF8574 8-Bit I/O expander
 # depends on the hardware pins A0 - A2
-I2C_ADDR = 0x24
+I2C_ADDR = 0x26
 
 r1 = I2CRelayBoard(I2C_BUS, I2C_ADDR)
 
