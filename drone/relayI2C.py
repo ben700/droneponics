@@ -82,7 +82,7 @@ class RelayI2C:
             return self.state
          
    def turnOn(self, _log): 
-       _log.info("Turning on relay " + self.name)   
+       _log.info("Turning on relay " + self.name + " using relay pin " + str(self.relayNum))   
        try:
           self.i2CRelayBoard.switch_on(self.relayNum)
           _log.info("Turned on relay " + self.name + " on pin " + str(self.relayNum))
@@ -99,7 +99,7 @@ class RelayI2C:
           _log.error("Except relayClass: Turning on relay " + self.name)
       
    def turnOff(self, _log): 
-       _log.info("Turning off relay " + self.name)
+       _log.info("Turning off relay " + self.name + " using relay pin " + str(self.relayNum))
        try:      
            self.i2CRelayBoard.switch_off(self.relayNum)
            _log.info("Turned off relay " + self.name + " on pin " + str(self.relayNum))
