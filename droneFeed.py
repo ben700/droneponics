@@ -38,7 +38,7 @@ _log.info("/home/pi/droneponics/config/configFeed/"+drone.gethostname()+".ini")
 
 lcdDisplay= None
 try:
-    lcdDisplay=drone.LCD(_log)
+    lcdDisplay=drone.LCD(_log, Product="droneFeed", productTagLine="Smart Feed Solution", ip=drone.get_ip())
 except:
     lcdDisplay=None
 	
