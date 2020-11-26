@@ -12,7 +12,7 @@ def getTempColour(_log, Temp):
           norm = matplotlib.colors.Normalize(vmin=0, vmax=400)
 
           #colormap possible values = viridis, jet, spectral
-          rgba_color = cm.coolwarm(norm(Temp),bytes=True) 
+          rgba_color = cm.coolwarm(norm(int(Temp)),bytes=True) 
           #rgba_color = cm.RdBu(norm(Temp),bytes=True) 
      
           _log.info("rgba_color =" + str(rgba_color))
@@ -25,15 +25,9 @@ def getTempColour(_log, Temp):
 
 def getCO2Colour(_log, CO2):
      try:
-          _log.info("getCO2Colour CO2 =" + str(CO2))
-          #normalize item number values to colormap
           norm = matplotlib.colors.Normalize(vmin=0, vmax=2000)
-          _log.info("done norm CO2 = " + str(CO2))
-          #colormap possible values = viridis, jet, spectral
           rgba_color = cm.winter(norm(int(CO2)),bytes=True) 
-          _log.info("rgba_color =" + str(rgba_color))
           c = Color(rgb=(rgba_color[0]/255,rgba_color[1]/255,rgba_color[2]/255))
-          _log.info("getCO2Colour =" + str(c))
      except:
           _log.error("Error in Fx getCO2Colour")
           c = '#0000FF'
@@ -45,7 +39,7 @@ def getMoistColour(_log, MoistPer):
      norm = matplotlib.colors.Normalize(vmin=0, vmax=100)
 
      #colormap possible values = viridis, jet, spectral
-     rgba_color = cm.coolwarm(norm(MoistPer),bytes=True) 
+     rgba_color = cm.coolwarm(norm(int(MoistPer)),bytes=True) 
      #rgba_color = cm.RdBu(norm(MoistPer),bytes=True) 
      _log.info("rgba_color =" + str(rgba_color))
 
@@ -61,7 +55,7 @@ def getLightColors(_log, LightPer):
 
           #colormap possible values = viridis, jet, spectral
           #rgba_color = cm.RdBu(norm(LightPer),bytes=True) 
-          rgba_color = cm.autumn(norm(LightPer),bytes=True) 
+          rgba_color = cm.autumn(norm(int(LightPer)),bytes=True) 
      
           _log.info("rgba_color =" + str(rgba_color))
 
@@ -77,7 +71,7 @@ def getPHColour(_log, PH):
      norm = matplotlib.colors.Normalize(vmin=0, vmax=140)
 
      #colormap possible values = viridis, jet, spectral
-     rgba_color = cm.gist_rainbow(norm(PH),bytes=True) 
+     rgba_color = cm.gist_rainbow(norm(int(PH)),bytes=True) 
      _log.info("rgba_color =" + str(rgba_color))
 
      c = Color(rgb=(rgba_color[0]/255,rgba_color[1]/255,rgba_color[2]/255))
@@ -91,7 +85,7 @@ def getECColour(_log, EC):
      norm = matplotlib.colors.Normalize(vmin=0, vmax=2000)
 
      #colormap possible values = viridis, jet, spectral
-     rgba_color = cm.gist_rainbow(norm(EC),bytes=True) 
+     rgba_color = cm.gist_rainbow(norm(int(EC)),bytes=True) 
      _log.info("rgba_color =" + str(rgba_color))
 
      c = Color(rgb=(rgba_color[0]/255,rgba_color[1]/255,rgba_color[2]/255))
