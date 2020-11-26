@@ -209,7 +209,7 @@ try:
            if lcdDisplay is not None: 
                  lcdDisplay.updateLCDPumps (relays[0].state, relays[1].state, relays[2].state, relays[3].state, relays[0].isManual(), relays[1].isManual(), relays[2].isManual(), relays[3].isManual() )
                  displayOn()
-           except:
+        except:
            _log.critical("updating LCD crashed v3")
        
           
@@ -248,7 +248,7 @@ try:
            if lcdDisplay is not None: 
                  lcdDisplay.updateLCDPumps (relays[0].state, relays[1].state, relays[2].state, relays[3].state, relays[0].isManual(), relays[1].isManual(), relays[2].isManual(), relays[3].isManual() )
                  displayOn()
-           except:
+        except:
            _log.critical("updating LCD crashed v4")
   
   
