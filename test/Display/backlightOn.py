@@ -20,6 +20,8 @@ except:
 try:
     print("State of the backlight is now ")
     print(lcd.getBacklight())
+except NotImplementedError:
+    print("NotImplementedError")
 except:
     print("no lcd to get state from on bus 1")
     
