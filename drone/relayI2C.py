@@ -7,10 +7,18 @@ from configparser import ConfigParser
 from i2crelay import I2CRelayBoard  
 import drone
 
+class RelaysI2C:
+   def __init__(self, _log, relayNum, Name, *args, **kwargs):
+       I2C_BUS = 1
+       I2C_ADDR = 0x26
+       self.i2CRelayBoard = I2CRelayBoard(I2C_BUS, I2C_ADDR) 
+       self._log = _log
+       self.relays=[]
+         
+    def addRelay(self, relayNum, Name)
+       self.relays.append(drone.RelayI2C(self._log, relayNum, Name))
+
 class RelayI2C:
-
-
-
 
    def __init__(self, _log, relayNum, Name, *args, **kwargs):
        _log.info("Building Relay object for Relay " + Name)
