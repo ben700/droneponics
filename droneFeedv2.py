@@ -52,27 +52,11 @@ try:
     _log.info("Blynk Created")  
     
     i2CRelayBoard = I2CRelayBoard(1, 0x26) 
-    relays=[]
-    relays.append(drone.RelayI2C(_log, 5, parser.get('droneFeed', 'Relay1')))
-    relays.append(drone.RelayI2C(_log, 6, parser.get('droneFeed', 'Relay2')))
-    relays.append(drone.RelayI2C(_log, 7, parser.get('droneFeed', 'Relay3')))
-    relays.append(drone.RelayI2C(_log, 8, parser.get('droneFeed', 'Relay4')))
- 
-    relays[0].setBlynk(blynk) 
-    relays[1].setBlynk(blynk)
-    relays[2].setBlynk(blynk) 
-    relays[3].setBlynk(blynk) 
-    
-    _log.info("Set info pins")
-    relays[0].setInfoPin(21)
-    relays[1].setInfoPin(22)
-    relays[2].setInfoPin(23)
-    relays[3].setInfoPin(24)
-    
-    relays[0].setLEDPin(85)
-    relays[1].setLEDPin(86)
-    relays[2].setLEDPin(87)
-    relays[3].setLEDPin(88)
+    relays=drone.RelaysI2C(_log, blynk)
+    relays.addRelay(drone.RelayI2C(5, parser.get('droneFeed', 'Relay1'), 21, 85))
+    relays.addRelay(drone.RelayI2C(6, parser.get('droneFeed', 'Relay2'), 22, 86))
+    relays.addRelay(drone.RelayI2C(7, parser.get('droneFeed', 'Relay3'), 23, 87))
+    relays.addRelay(drone.RelayI2C(8, parser.get('droneFeed', 'Relay4'), 24, 88))
            
 
     @blynk.handle_event('write V255')
