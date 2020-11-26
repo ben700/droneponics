@@ -139,7 +139,7 @@ try:
                 
         elif (staus is "2" ):
            try:
-                 _log.debug("in v1write_handler turing on relay")
+                 _log.debug("in v2write_handler turing on relay")
                  relays[relay].turnOn(_log)
                  relays[relay].setManual("On")
                  _log.debug(relays[relay].name + " in now on : v2write_handler completed")                    
@@ -147,7 +147,7 @@ try:
                  _log.error("Except handle_event V"+str(relay+1)+" Turning on")
         else:
            try:
-                 _log.debug("in v1write_handler turing on relay")
+                 _log.debug("in v2write_handler turing on relay")
                  relays[relay].setAutomatic()
            except:
                  _log.error("Except handle_event V"+str(relay+1)+" Turning auto")
