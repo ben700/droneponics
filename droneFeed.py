@@ -128,7 +128,7 @@ try:
     def v2write_handler(pin, value):
         staus = value[0]
         relay = 1       
-         _log.debug("in v2write_handler staus =" + str(staus))       
+        _log.debug("in v2write_handler staus =" + str(staus))       
 	if (staus is "1" ):
            try:
                  _log.debug("in v"+str(relay+1)+"write_handler turing off relay " + relays[relay].name)
