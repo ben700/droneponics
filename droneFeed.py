@@ -301,9 +301,10 @@ try:
         displayOn()
     
     def displayOn():
-        counter = 0 
-        lcdDisplay.displayOn()
-        blynk.virtual_write(50, 1)
+        if(counter is not 0):		
+                counter = 0 
+                lcdDisplay.displayOn()
+                blynk.virtual_write(50, 1)
 	
     def displayOff():
         lcdDisplay.displayOff()
