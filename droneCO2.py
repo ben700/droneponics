@@ -61,19 +61,17 @@ try:
     def processSensors():   
         for sensor in sensors:
            if sensor is not None:
-              sensor.read()
-                            	
-        try:		
-           sensors[0].color = drone.getCO2Colour(_log, int(round(float(sensors[0].value),0)))
-           _log.debug("Sensor colour = " + str(sensors[0].color))
-	
-        except:
-           _log.critical("Working out sensor colour crashed")	
+              sensor.read()              	
+              try:		
+                  sensor.color = drone.getCO2Colour(_log, sensor.value)
+              except:
+                  _log.critical("Working out sensor colour crashed")	
+              try:		
+                  sensor.display(blynk)
+              except:
+                  _log.critical("Updating Blynk with sensor data crashed")	
 
-        for sensor in sensors:
-           if sensor is not None:
-              sensor.display(blynk)
-              
+       
     @blynk.handle_event('write V255')
     def rebooter(pin, value):
         _log.info( "User reboot")
