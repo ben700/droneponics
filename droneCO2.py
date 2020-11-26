@@ -61,7 +61,10 @@ try:
     def processSensors():   
         for sensor in sensors:
            if sensor is not None:
-              sensor.read()              	
+              sensor.read()      
+              while (sensor.value = 255):
+                  _log.critical("Error reading snsor so re-reading")
+                  sensor.read()
               try:		
                   sensor.color = drone.getCO2Colour(_log, sensor.value)
               except:
