@@ -10,11 +10,11 @@ I2C_BUS = 1
 # depends on the hardware pins A0 - A2
 I2C_ADDR = 0x26
 
-r1 = I2CRelayBoard(I2C_BUS, I2C_ADDR)
+i2CRelayBoard = I2CRelayBoard(I2C_BUS, I2C_ADDR)
 
 
 
 for relay in range(5, 9):
-    print("Relay " + str(relay) + " is " + str(r1.is_on(relay)))
+    print("Relay " + str(relay) + " is " + str(i2CRelayBoard.is_on(relay)))
     
    
