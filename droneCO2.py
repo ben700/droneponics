@@ -71,15 +71,15 @@ try:
         for sensor in sensors:
            if sensor is not None:
               sensor.display(blynk)
-              blynk.set_property(sensors[0].displayPin, 'color', colours['OFFLINE'])	
+              blynk.set_property(sensors[0].displayPin, 'color', drone.colours['OFFLINE'])	
       		
     @blynk.handle_event('write V255')
     def rebooter(pin, value):
         _log.info( "User reboot")
         blynk.virtual_write(250, "Reboot")
-        blynk.set_property(250, 'color', colours['OFFLINE'])	
+        blynk.set_property(250, 'color', drone.colours['OFFLINE'])	
         blynk.virtual_write(98, "User Reboot " + '\n')
-        blynk.set_property(systemLED, 'color', colours['OFFLINE'])	
+        blynk.set_property(systemLED, 'color', drone.colours['OFFLINE'])	
         os.system('sh /home/pi/updateDroneponics.sh')
         blynk.virtual_write(98, "System updated and restarting " + '\n')
         os.system('sudo reboot')
