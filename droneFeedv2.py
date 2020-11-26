@@ -90,41 +90,10 @@ try:
         relay = 0       
         _log.debug("in v1write_handler staus =" + str(staus))       
         if (staus is "1" ):
-           try:
-                 _log.debug("in v"+str(relay+1)+"write_handler turing off relay " + relays[relay].name)
-                 relays[relay].turnOff(_log)
-                 relays[relay].setManual("Off")
-                 _log.debug(relays[relay].name + " in now off : v1write_handler completed")
-           except:
-                 _log.error("Except handle_event V"+str(relay+1)+" Turning Off")
-                
+           relays[relay].turnOff(_log)     
         elif (staus is "2" ):
-           try:
-                 _log.debug("in v1write_handler turing on relay")
-                 relays[relay].turnOn(_log)
-                 relays[relay].setManual("On")
-                 _log.debug(relays[relay].name + " in now on : v1write_handler completed")
-                 
-           except:
-                 _log.error("Except handle_event V"+str(relay+1)+" Turning on")
-        else:
-           try:
-                 _log.debug("in v1write_handler turing on relay")
-                 relays[relay].setAutomatic()
-           except:
-                 _log.error("Except handle_event V"+str(relay+1)+" Turning auto")
-           relays[relay].cycleOnReset()
-           relays[relay].setOffCycleReset() 
-        blynk.virtual_write(relays[relay].getInfoPin(), relays[relay].info())   
-        blynk.set_property(relay+1, 'color', drone.colours[staus])
-        try:			
-           if lcdDisplay is not None: 
-                 lcdDisplay.updateLCDPumps (relays[0].state, relays[1].state, relays[2].state, relays[3].state, relays[0].isManual(), relays[1].isManual(), relays[2].isManual(), relays[3].isManual() )
-                 turnDisplayOn()			
-        except:
-           _log.critical("updating LCD crashed v1")
-       
-          
+           relays[relay].turnOn(_log)
+
     @blynk.handle_event('write V2')
     def v2write_handler(pin, value):
         global relays
@@ -132,49 +101,10 @@ try:
         relay = 1       
         _log.debug("in v2write_handler staus =" + str(staus))       
         if (staus is "1" ):
-           try:
-                 _log.debug("in v"+str(relay+1)+"write_handler turing off relay " + relays[relay].name)
-                 relays[relay].turnOff(_log)
-                 relays[relay].setManual("Off")
-                 _log.debug(relays[relay].name + " in now off : v2write_handler completed")
-           except:
-                 _log.error("Except handle_event V"+str(relay+1)+" Turning Off")
-                
+           relays[relay].turnOff(_log)     
         elif (staus is "2" ):
-           try:
-                 _log.debug("in v2write_handler turing on relay")
-                 relays[relay].turnOn(_log)
-                 relays[relay].setManual("On")
-                 _log.debug(relays[relay].name + " in now on : v2write_handler completed")                    
-           except:
-                 _log.error("Except handle_event V"+str(relay+1)+" Turning on")
-        else:
-           try:
-                 _log.debug("in v2write_handler turing on relay")
-                 relays[relay].setAutomatic()
-           except:
-                 _log.error("Except handle_event V"+str(relay+1)+" Turning auto")
-           relays[relay].cycleOnReset()
-           relays[relay].setOffCycleReset() 
-        blynk.virtual_write(relays[relay].getInfoPin(), relays[relay].info())
-        blynk.set_property(relay+1, 'color', drone.colours[staus])
-        try:			
-           if lcdDisplay is not None: 
-                 lcdDisplay.updateLCDPumps (relays[0].state, relays[1].state, relays[2].state, relays[3].state, relays[0].isManual(), relays[1].isManual(), relays[2].isManual(), relays[3].isManual() )
-                 turnDisplayOn()
-        except:
-           _log.critical("relays[0].state = " + str(relays[0].state))
-           _log.critical("relays[1].state = " + str(relays[1].state))
-           _log.critical("relays[2].state = " + str(relays[2].state))
-           _log.critical("relays[3].state = " + str(relays[3].state))
-
-           _log.critical("relays[0].isManual() = " + str(relays[0].isManual()))
-           _log.critical("relays[1].isManual() = " + str(relays[1].isManual()))
-           _log.critical("relays[2].isManual() = " + str(relays[2].isManual()))
-           _log.critical("relays[3].isManual() = " + str(relays[3].isManual()))
-		
-           _log.critical("updating LCD crashed v2")
-  
+           relays[relay].turnOn(_log)
+           
 
     @blynk.handle_event('write V3')
     def v3write_handler(pin, value):
@@ -182,41 +112,13 @@ try:
         staus = value[0]
         relay = 2
         if (staus is "1" ):
-           try:
-                 _log.debug("in v"+str(relay+1)+"write_handler turing off relay " + relays[relay].name)
-                 #relays[relay].turnOff(_log)
-                 relays[2].i2CRelayBoard.switch_on(relays[2].relayNum)
-                 relays[relay].setManual("Off")
-                 _log.debug(relays[relay].name + " in now off : v3write_handler completed")
-           except:
-                 _log.error("Except handle_event V"+str(relay+1)+" Turning Off")
+           #relays[relay].turnOff(_log)
+           relays[2].i2CRelayBoard.switch_on(relays[2].relayNum)
         elif (staus is "2" ):
-           try:
-                 _log.debug("in v3write_handler turing on relay")
-                 #relays[relay].turnOn(_log)
-                 relays[2].i2CRelayBoard.switch_off(relays[2].relayNum)
-                 relays[relay].setManual("On")
-                 _log.debug(relays[relay].name + " in now on : v3write_handler completed")
-                 
-           except:
-                 _log.error("Except handle_event V"+str(relay+1)+" Turning on")
-        else:
-           try:
-                 _log.debug("in v3write_handler turing on relay")
-                 relays[relay].setAutomatic()
-           except:
-                 _log.error("Except handle_event V"+str(relay+1)+" Turning auto")
-           relays[relay].cycleOnReset()
-           relays[relay].setOffCycleReset() 
-        blynk.virtual_write(relays[relay].getInfoPin(), relays[relay].info())       
-        blynk.set_property(relay+1, 'color', drone.colours[staus])
-        try:			
-           if lcdDisplay is not None: 
-                 lcdDisplay.updateLCDPumps (relays[0].state, relays[1].state, relays[2].state, relays[3].state, relays[0].isManual(), relays[1].isManual(), relays[2].isManual(), relays[3].isManual() )
-                 turnDisplayOn()
-        except:
-           _log.critical("updating LCD crashed v3")
-       
+           _log.debug("in v3write_handler turing on relay")
+           #relays[relay].turnOn(_log)
+           relays[2].i2CRelayBoard.switch_off(relays[2].relayNum)
+        
           
     @blynk.handle_event('write V4')
     def v4write_handler(pin, value):
@@ -224,41 +126,12 @@ try:
         staus = value[0]
         relay = 3      
         if (staus is "1" ):
-           try:
-                 _log.debug("in v"+str(relay+1)+"write_handler turing off relay " + relays[relay].name)
-                 relays[3].i2CRelayBoard.switch_on(relays[3].relayNum)
-                 #relays[relay].turnOff(_log)
-                 relays[relay].setManual("Off")
-                 _log.debug(relays[relay].name + " in now off : v4write_handler completed")
-           except:
-                 _log.error("Except handle_event V"+str(relay+1)+" Turning Off")
+           #relays[3].i2CRelayBoard.switch_on(relays[3].relayNum)
+           relays[relay].turnOff(_log)
         elif (staus is "2" ):
-           try:
-                 _log.debug("in v4write_handler turing on relay")
-                 #relays[relay].turnOn(_log)
-                 relays[3].i2CRelayBoard.switch_off(relays[3].relayNum)
-                 relays[relay].setManual("On")
-                 _log.debug(relays[relay].name + " in now on : v4write_handler completed")
-                 
-           except:
-                 _log.error("Except handle_event V"+str(relay+1)+" Turning on")
-        else:
-           try:
-                 _log.debug("in v4write_handler turing on relay")
-                 relays[relay].setAutomatic()
-           except:
-                 _log.error("Except handle_event V"+str(relay+1)+" Turning auto")
-           relays[relay].cycleOnReset()
-           relays[relay].setOffCycleReset() 
-        blynk.virtual_write(relays[relay].getInfoPin(), relays[relay].info())
-        blynk.set_property(relay+1, 'color', drone.colours[staus])
-        try:			
-           if lcdDisplay is not None: 
-                 lcdDisplay.updateLCDPumps (relays[0].state, relays[1].state, relays[2].state, relays[3].state, relays[0].isManual(), relays[1].isManual(), relays[2].isManual(), relays[3].isManual() )
-                 turnDisplayOn()
-        except:
-           _log.critical("updating LCD crashed v4")
-  
+           #relays[relay].turnOn(_log)
+           relays[3].i2CRelayBoard.switch_off(relays[3].relayNum)
+        
   
     @blynk.handle_event('write V11')
     def v11write_handler(pin, value):
