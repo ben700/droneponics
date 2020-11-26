@@ -84,10 +84,10 @@ try:
         os.system('sudo reboot')
               
     @blynk.handle_event('write V1')
-    def write_handler(pin, value):
+    def v1write_handler(pin, value):
         staus = value[0]
         relay = 0       
-	
+	_log.debug("in v1write_handler staus =" + str(staus))       
         if (staus is "1" ):
            try:
                  _log.debug("in v"+str(relay+1)+"write_handler turing off relay " + relays[relay].name)
@@ -125,7 +125,7 @@ try:
        
           
     @blynk.handle_event('write V2')
-    def write_handler(pin, value):
+    def v2write_handler(pin, value):
         staus = value[0]
         relay = 1       
         if (staus is "1" ):
@@ -174,7 +174,7 @@ try:
   
 
     @blynk.handle_event('write V3')
-    def write_handler(pin, value):
+    def v3write_handler(pin, value):
         staus = value[0]
         relay = 2
         if (staus is "1" ):
@@ -213,7 +213,7 @@ try:
        
           
     @blynk.handle_event('write V4')
-    def write_handler(pin, value):
+    def v4write_handler(pin, value):
         staus = value[0]
         relay = 3      
         if (staus is "1" ):
