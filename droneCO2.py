@@ -71,7 +71,7 @@ try:
         for sensor in sensors:
            if sensor is not None:
               sensor.display(blynk)
-              blynk.set_property(sensors[0].displayPin, 'color',sensors[0].color)	
+              blynk.set_property(sensors[0].displayPin, 'color', colours['OFFLINE'])	
       		
     @blynk.handle_event('write V255')
     def rebooter(pin, value):
