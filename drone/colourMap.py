@@ -26,7 +26,8 @@ def getTempColour(_log, Temp):
 def getCO2Colour(_log, CO2):
      try:
           norm = matplotlib.colors.Normalize(vmin=0, vmax=2000)
-          rgba_color = cm.winter(norm(int(CO2)),bytes=True) 
+          #rgba_color = cm.winter(norm(int(CO2)),bytes=True) 
+          rgba_color = cm.spring(norm(int(CO2)),bytes=True)           
           c = Color(rgb=(rgba_color[0]/255,rgba_color[1]/255,rgba_color[2]/255))
      except:
           _log.error("Error in Fx getCO2Colour")
