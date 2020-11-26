@@ -33,6 +33,10 @@ def buildCO2Sensors(sensors, _log):
     sensors.append( Sensor(105, "CO2", 10, _log))
     return sensors
 
+def buildColourSensors(sensors, _log):
+    sensors.append( Sensor(112, "Colour", 11, _log))
+    return sensors
+
 def buildOxySensors(sensors, _log):
     sensors.append( Sensor(97, "Dissolved Oxygen", 30, _log, Target=10))
     return sensors
