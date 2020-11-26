@@ -1,5 +1,4 @@
 [Desktop Entry]
 Type=Application
 Name=DroneponicsFeed
-#Exec=xterm -hold -e '/usr/bin/python3 /home/pi/droneponics/droneFeed.py'
-Exec=xterm -hold -e 'sudo /usr/bin/python3 /home/pi/droneponics/droneFeedv2.py'
+Exec=xterm -hold -e '/usr/bin/python3 /home/pi/droneponics/droneFeed.py'
