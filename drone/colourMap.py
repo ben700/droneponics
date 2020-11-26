@@ -27,7 +27,7 @@ def getCO2Colour(_log, CO2):
      try:
           _log.info("getCO2Colour CO2 =" + str(CO2))
           #normalize item number values to colormap
-          norm = matplotlib.colors.Normalize(vmin=0, vmax=1000)
+          norm = matplotlib.colors.Normalize(vmin=0, vmax=2000)
 
           #colormap possible values = viridis, jet, spectral
           rgba_color = cm.winter(norm(CO2),bytes=True) 
