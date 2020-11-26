@@ -48,7 +48,7 @@ _log.info("info")
 _log.debug("debug")
 
 _log.info("/home/pi/droneponics/config/configMonitor/"+drone.gethostname()+".ini")
-sensors[]
+sensors=[]
 sensors = drone.buildCO2Sensors(sensors, _log)
 sensor = sensors[0]
 def updateGoogle(CO2):
