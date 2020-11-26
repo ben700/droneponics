@@ -308,7 +308,7 @@ try:
                 blynk.virtual_write(50, 1)
 	
     def turnDisplayOff():
-	_log.info("Turn display off")
+        _log.info("Turn display off")
         lcdDisplay.displayOff()
         blynk.virtual_write(50, 0)
 
