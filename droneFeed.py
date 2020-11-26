@@ -25,7 +25,7 @@ parser = ConfigParser()
 parser.read("/home/pi/droneponics/config/configFeed/"+drone.gethostname()+".ini")
 
 bootup = True
-
+counter=0
 
 # tune console logging
 _log = logging.getLogger('BlynkLog')
@@ -88,6 +88,7 @@ try:
     def write_handler(pin, value):
         staus = value[0]
         relay = 0       
+	
         if (staus is "1" ):
            try:
                  _log.debug("in v"+str(relay+1)+"write_handler turing off relay " + relays[relay].name)
@@ -119,6 +120,7 @@ try:
         try:			
            if lcdDisplay is not None: 
                  lcdDisplay.updateLCDPumps (relays[0].state, relays[1].state, relays[2].state, relays[3].state, relays[0].isManual(), relays[1].isManual(), relays[2].isManual(), relays[3].isManual() )
+                 displayOn()			
         except:
            _log.critical("updating LCD crashed v1")
        
@@ -157,6 +159,7 @@ try:
         try:			
            if lcdDisplay is not None: 
                  lcdDisplay.updateLCDPumps (relays[0].state, relays[1].state, relays[2].state, relays[3].state, relays[0].isManual(), relays[1].isManual(), relays[2].isManual(), relays[3].isManual() )
+                 displayOn()
         except:
            _log.critical("relays[0].state = " + str(relays[0].state))
            _log.critical("relays[1].state = " + str(relays[1].state))
@@ -205,7 +208,8 @@ try:
         try:			
            if lcdDisplay is not None: 
                  lcdDisplay.updateLCDPumps (relays[0].state, relays[1].state, relays[2].state, relays[3].state, relays[0].isManual(), relays[1].isManual(), relays[2].isManual(), relays[3].isManual() )
-        except:
+                 displayOn()
+           except:
            _log.critical("updating LCD crashed v3")
        
           
@@ -243,7 +247,8 @@ try:
         try:			
            if lcdDisplay is not None: 
                  lcdDisplay.updateLCDPumps (relays[0].state, relays[1].state, relays[2].state, relays[3].state, relays[0].isManual(), relays[1].isManual(), relays[2].isManual(), relays[3].isManual() )
-        except:
+                 displayOn()
+           except:
            _log.critical("updating LCD crashed v4")
   
   
@@ -251,51 +256,67 @@ try:
     def v11write_handler(pin, value):
         relays[0].cycleResetSet(value[0])
         blynk.virtual_write(relays[0].getInfoPin(), relays[0].info())
+        displayOn()
         
     @blynk.handle_event('write V12')
     def v12write_handler(pin, value):
         relays[0].cycleOffResetSet(value[0])
         blynk.virtual_write(relays[0].getInfoPin(), relays[0].info())
+        displayOn()
         
     @blynk.handle_event('write V13')
     def v13write_handler(pin, value):
         relays[1].cycleResetSet(value[0])
         blynk.virtual_write(relays[1].getInfoPin(), relays[1].info())
+        displayOn()
         
     @blynk.handle_event('write V14')
     def v14write_handler(pin, value):
         relays[1].cycleOffResetSet(value[0])
-        blynk.virtual_write(relays[1].getInfoPin(), relays[1].info())
-        
+        blynk.virtual_write(relays[1].getInfoPin(), relays[1].info())        
+        displayOn()
   
     @blynk.handle_event('write V15')
     def v15write_handler(pin, value):
         relays[2].cycleResetSet(value[0])
         blynk.virtual_write(relays[2].getInfoPin(), relays[2].info())
+        displayOn()
         
     @blynk.handle_event('write V16')
     def v16write_handler(pin, value):
         relays[2].cycleOffResetSet(value[0])
         blynk.virtual_write(relays[2].getInfoPin(), relays[2].info())
+        displayOn()
         
     @blynk.handle_event('write V17')
     def v17write_handler(pin, value):
         relays[3].cycleResetSet(value[0])
         blynk.virtual_write(relays[3].getInfoPin(), relays[3].info())
+        displayOn()
         
     @blynk.handle_event('write V18')
     def v18write_handler(pin, value):
         relays[3].cycleOffResetSet(value[0])
         blynk.virtual_write(relays[3].getInfoPin(), relays[3].info())
-                
+        displayOn()
+    
+    def displayOn():
+        counter = 0 
+	lcdDisplay.displayOn()
+        blynk.virtual_write(50, 1)
+	
+    def displayOff():
+        lcdDisplay.displayOff()
+        blynk.virtual_write(50, 1)
+
     @blynk.handle_event('write V50')
     def v50write_handler(pin, value):
         if(value[0] == '1'):
             _log.debug("Turn ON LCD display")
-            lcdDisplay.displayOn()            
+            displayOn()            
         else:
             _log.debug("Turn OFF LCD display")
-            lcdDisplay.displayOff()            
+            displayOff()            
      
     @blynk.handle_event("connect")
     def connect_handler():
@@ -335,7 +356,9 @@ try:
            except:
               _log.critical("updating LCD crashed loop")
                 
-                
+           counter = counter + 1
+           if (counter > 10):
+                displayOff()		
            _log.debug("The End")
      
     while True:
