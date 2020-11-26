@@ -301,6 +301,7 @@ try:
         displayOn()
     
     def displayOn():
+        global counter
         if(counter is not 0):		
                 counter = 0 
                 lcdDisplay.displayOn()
