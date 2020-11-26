@@ -5,6 +5,5 @@ git clone -b master --single-branch https://github.com/oweidner/i2crelay.git
 cd i2crelay
 pip3 install --upgrade .
 sudo pip3 install --upgrade .
-sudo apt autoremove
 cd
 sudo apt-get install libatlas-base-dev
