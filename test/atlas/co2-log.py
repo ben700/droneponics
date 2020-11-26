@@ -11,5 +11,8 @@ CO2 = AtlasI2C(105)
 
 f = open("/home/pi/co2Data.txt", "a")
 f.write(CO2.query("R"))
+f.write('\n')
 f.write(CO2.query("R").strip().rstrip('\x00'))
+f.write('/n')
+
 f.close()
