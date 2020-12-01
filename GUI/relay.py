@@ -7,6 +7,7 @@ import drone
 import logging
 import blynklib
 import blynktimer
+from configparser import ConfigParser
 
 from tkinter import * 			# imports the Tkinter lib
 # pip install pillow
