@@ -61,7 +61,7 @@ try:
     _log.info("info")
     _log.debug("debug")
 
-    _log.info("/home/pi/droneponics/config/configRelay/"+drone.gethostname()+".ini")
+    _log.info("/home/pi/droneponics/config/configDoser/"+drone.gethostname()+".ini")
 
     pH=0
     eC=9999	
