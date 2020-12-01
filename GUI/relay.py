@@ -35,12 +35,12 @@ root.attributes("-fullscreen", True) 	# set to fullscreen
 
 
 btFrame=tk.Frame(root,bg='darkblue')
-btFrame.place(relx=0.2,rely=0.1,relheight=0.1,relwidth=0.6)
+btFrame.place(relx=0.2,rely=0.1,relheight=0.2,relwidth=0.6)
 
 def pumpPage1():
     actionFrame=tk.Frame(root,bg='lightblue')
     actionFrame.place(relx=0.2,rely=0.3,relheight=0.1,relwidth=0.6)
-    label=tk.Label(actionFrame,text='Set-up')
+    label=tk.Label(actionFrame,text='Relay 1')
     label.grid(row=0,column=0, columnspan=4)
     bbt1=tk.Button(actionFrame,text='Stop',command=pumpPage1)
     bbt2=tk.Button(actionFrame,text='Start',command=pumpPage1)
@@ -50,7 +50,7 @@ def pumpPage1():
 def pumpPage2():
     actionFrame=tk.Frame(root,bg='lightblue')
     actionFrame.place(relx=0.2,rely=0.3,relheight=0.1,relwidth=0.6)
-    label=tk.Label(actionFrame,text='Set-up')
+    label=tk.Label(actionFrame,text='Relay 2')
     label.grid(row=0,column=0, columnspan=4)
     bbt1=tk.Button(actionFrame,text='Stop',command=pumpPage1)
     bbt2=tk.Button(actionFrame,text='Start',command=pumpPage1)
@@ -60,7 +60,7 @@ def pumpPage2():
 def pumpPage3():
     actionFrame=tk.Frame(root,bg='lightblue')
     actionFrame.place(relx=0.2,rely=0.3,relheight=0.1,relwidth=0.6)
-    label=tk.Label(actionFrame,text='Set-up')
+    label=tk.Label(actionFrame,text='Relay 3')
     label.grid(row=0,column=0, columnspan=4)
     bbt1=tk.Button(actionFrame,text='Stop',command=pumpPage1)
     bbt2=tk.Button(actionFrame,text='Start',command=pumpPage1)
@@ -70,7 +70,7 @@ def pumpPage3():
 def pumpPage4():
     actionFrame=tk.Frame(root,bg='lightblue')
     actionFrame.place(relx=0.2,rely=0.3,relheight=0.1,relwidth=0.6)
-    label=tk.Label(actionFrame,text='Set-up')
+    label=tk.Label(actionFrame,text='Relay 4')
     label.grid(row=0,column=0, columnspan=4)
     bbt1=tk.Button(actionFrame,text='Stop',command=pumpPage1)
     bbt2=tk.Button(actionFrame,text='Start',command=pumpPage1)
@@ -80,7 +80,7 @@ def pumpPage4():
 def pumpPage5():
     actionFrame=tk.Frame(root,bg='lightblue')
     actionFrame.place(relx=0.2,rely=0.3,relheight=0.1,relwidth=0.6)
-    label=tk.Label(actionFrame,text='Set-up')
+    label=tk.Label(actionFrame,text='Relay 5')
     label.grid(row=0,column=0, columnspan=4)
     bbt1=tk.Button(actionFrame,text='Stop',command=pumpPage1)
     bbt2=tk.Button(actionFrame,text='Start',command=pumpPage1)
@@ -90,7 +90,7 @@ def pumpPage5():
 def pumpPage6():
     actionFrame=tk.Frame(root,bg='lightblue')
     actionFrame.place(relx=0.2,rely=0.3,relheight=0.1,relwidth=0.6)
-    label=tk.Label(actionFrame,text='Set-up')
+    label=tk.Label(actionFrame,text='Relay 6')
     label.grid(row=0,column=0, columnspan=4)
     bbt1=tk.Button(actionFrame,text='Stop',command=pumpPage1)
     bbt2=tk.Button(actionFrame,text='Start',command=pumpPage1)
@@ -100,7 +100,7 @@ def pumpPage6():
 def pumpPage7():
     actionFrame=tk.Frame(root,bg='lightblue')
     actionFrame.place(relx=0.2,rely=0.3,relheight=0.1,relwidth=0.6)
-    label=tk.Label(actionFrame,text='Set-up')
+    label=tk.Label(actionFrame,text='Relay 7')
     label.grid(row=0,column=0, columnspan=4)
     bbt1=tk.Button(actionFrame,text='Stop',command=pumpPage1)
     bbt2=tk.Button(actionFrame,text='Start',command=pumpPage1)
@@ -111,7 +111,7 @@ def pumpPage7():
 def pumpPage8():
     actionFrame=tk.Frame(root,bg='lightblue')
     actionFrame.place(relx=0.2,rely=0.3,relheight=0.1,relwidth=0.6)
-    label=tk.Label(actionFrame,text='Set-up')
+    label=tk.Label(actionFrame,text='Relay 8')
     label.grid(row=0,column=0, columnspan=4)
     bbt1=tk.Button(actionFrame,text='Stop',command=pumpPage1)
     bbt2=tk.Button(actionFrame,text='Start',command=pumpPage1)
