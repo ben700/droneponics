@@ -128,7 +128,7 @@ def end_fullscreen(event):
 
 
 exitBt=tk.Button(btFrame,text='Exit',command=btnExit)
-exitBt.grid(row=1,column=3)
+exitBt.grid(row=1,column=4)
 
 bt1=tk.Button(btFrame,text='Relay 1',command=pumpPage1)
 bt1.grid(row=1,column=0)
