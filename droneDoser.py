@@ -11,7 +11,7 @@ import logging
 import sys
 import os
 import RPi.GPIO as GPIO
-
+sys.path.append('/home/pi/droneponics')
 from AtlasI2C import (
    AtlasI2C
 )
