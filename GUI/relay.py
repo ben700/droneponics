@@ -13,6 +13,10 @@ from tkinter import * 			# imports the Tkinter lib
 # pip install pillow
 from PIL import Image, ImageTk
 
+
+parser = ConfigParser()
+parser.read("/home/pi/droneponics/config/configRelay/"+drone.gethostname()+".ini")
+
     # tune console logging
 _log = logging.getLogger('BlynkLog')
 logFormatter = logging.Formatter("%(asctime)s [%(levelname)s]  %(message)s")
