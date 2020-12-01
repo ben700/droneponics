@@ -5,6 +5,8 @@ sys.path.append('/home/pi/droneponics')
 from AtlasI2C import (AtlasI2C)
 import drone
 import logging
+import blynklib
+import blynktimer
 
 from tkinter import * 			# imports the Tkinter lib
 # pip install pillow
