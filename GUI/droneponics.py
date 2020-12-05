@@ -106,7 +106,7 @@ def PumpCalibrationPage():
 	
 def pump1StartButtonfx():
     resultFrame=tk.Frame(root,bg='green')
-    resultFrame.place(relx=0.05,rely=0.85,relheight=0.1,relwidth=0.9)
+    resultFrame.place(relx=0.05,rely=0.9,relheight=0.05,relwidth=0.9)
     pump1=AtlasI2C(nutrientMix[0].pumpId)
     resultText = pump1.query("D,*")
     label=tk.Label(resultFrame,text=resultText)
