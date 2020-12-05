@@ -131,7 +131,7 @@ def pump1DoseCalButtonfx():
     label=tk.Label(resultFrame,text=resultText)
     label.grid(row=0,column=0, columnspan=7)
 	
-def pump1DoseCalButtonfx():	
+def pump1DoseOverTimeCalButtonfx():	
     resultFrame=tk.Frame(root,bg='green')
     resultFrame.place(relx=0.2,rely=0.8,relheight=0.05,relwidth=0.6)
     pump1=AtlasI2C(nutrientMix[0].pumpId)
@@ -205,7 +205,7 @@ def pump2DoseCalButtonfx():
     label=tk.Label(resultFrame,text=resultText)
     label.grid(row=0,column=0, columnspan=7)
 	
-def pump2DoseCalButtonfx():	
+def pump2DoseOverTimeCalButtonfx():	
     resultFrame=tk.Frame(root,bg='green')
     resultFrame.place(relx=0.2,rely=0.8,relheight=0.05,relwidth=0.6)
     pump1=AtlasI2C(nutrientMix[1].pumpId)
@@ -280,7 +280,7 @@ def pump3DoseCalButtonfx():
     label=tk.Label(resultFrame,text=resultText)
     label.grid(row=0,column=0, columnspan=7)
 	
-def pump3DoseCalButtonfx():	
+def pump3DoseOverTimeCalButtonfx():	
     resultFrame=tk.Frame(root,bg='green')
     resultFrame.place(relx=0.2,rely=0.8,relheight=0.05,relwidth=0.6)
     pump1=AtlasI2C(nutrientMix[2].pumpId)
@@ -354,7 +354,7 @@ def pump4DoseCalButtonfx():
     label=tk.Label(resultFrame,text=resultText)
     label.grid(row=0,column=0, columnspan=7)
 	
-def pump4DoseCalButtonfx():	
+def pump4DoseOverTimeCalButtonfx():	
     resultFrame=tk.Frame(root,bg='green')
     resultFrame.place(relx=0.2,rely=0.8,relheight=0.05,relwidth=0.6)
     pump1=AtlasI2C(nutrientMix[3].pumpId)
@@ -428,7 +428,7 @@ def pump5DoseCalButtonfx():
     label=tk.Label(resultFrame,text=resultText)
     label.grid(row=0,column=0, columnspan=7)
 	
-def pump5DoseCalButtonfx():	
+def pump5DoseOverTimeCalButtonfx():	
     resultFrame=tk.Frame(root,bg='green')
     resultFrame.place(relx=0.2,rely=0.8,relheight=0.05,relwidth=0.6)
     pump1=AtlasI2C(nutrientMix[4].pumpId)
@@ -502,7 +502,7 @@ def pump6DoseCalButtonfx():
     label=tk.Label(resultFrame,text=resultText)
     label.grid(row=0,column=0, columnspan=7)
 	
-def pump6DoseCalButtonfx():	
+def pump6DoseOverTimeCalButtonfx():	
     resultFrame=tk.Frame(root,bg='green')
     resultFrame.place(relx=0.2,rely=0.8,relheight=0.05,relwidth=0.6)
     pump1=AtlasI2C(nutrientMix[5].pumpId)
@@ -576,7 +576,7 @@ def pump2DoseCalButtonfx():
     label=tk.Label(resultFrame,text=resultText)
     label.grid(row=0,column=0, columnspan=7)
 	
-def pump7DoseCalButtonfx():	
+def pump7DoseOverTimeCalButtonfx():	
     resultFrame=tk.Frame(root,bg='green')
     resultFrame.place(relx=0.2,rely=0.8,relheight=0.05,relwidth=0.6)
     pump1=AtlasI2C(nutrientMix[6].pumpId)
