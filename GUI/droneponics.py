@@ -106,7 +106,7 @@ def PumpCalibrationPage():
 
 def Pump1CalibrationPage():	
     functionFrame=tk.Frame(root,bg='red')
-    functionFrame.place(relx=0.05,rely=0.9,relheight=0.1,relwidth=0.9)
+    functionFrame.place(relx=0.05,rely=0.8,relheight=0.1,relwidth=0.9)
     label=tk.Label(functionFrame,text='Pump 1 Calibration')
     label.grid(row=0,column=0, columnspan=7)
     readCalButton=tk.Button(functionFrame,text='Read',command=PumpCalibrationPage)
