@@ -106,7 +106,7 @@ def PumpCalibrationPage():
 	
 def pump1StartButtonfx():	
 	pump1=AtlasI2C(nutrientMix[0].pumpId)
-	pump1.query("D,*")
+	label2.text = pump1.query("D,*")
 	
 def pump1StopCalButtonfx():	
 	pump1=AtlasI2C(nutrientMix[0].pumpId)
@@ -125,7 +125,7 @@ def Pump1CalibrationPage():
     label=tk.Label(functionFrame,text='Pump 1 Calibration')
     label.grid(row=0,column=0, columnspan=7)
     pump1=AtlasI2C(nutrientMix[0].pumpId)
-    label2Text = pump1.query("Cal,?")
+    label2Text = pump1.query("Cal,?").strip().rstrip('\x00')
     label2=tk.Label(functionFrame,text=label2Text)
     label2.grid(row=1,column=5, columnspan=4)
     pump1StartButton=tk.Button(functionFrame,text='Start',command=pump1StartButtonfx)
