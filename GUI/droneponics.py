@@ -44,6 +44,9 @@ root.attributes("-fullscreen", True) 	# set to fullscreen
 
 btFrame=tk.Frame(root,bg='darkblue')
 btFrame.place(relx=0.2,rely=0.1,relheight=0.1,relwidth=0.6)
+entry1 = tk.Entry (root) 
+entry1.grid(row = 1 ,column = 1)
+
 
 def pumpPage1():
     actionFrame=tk.Frame(root,bg='lightblue')
@@ -137,6 +140,8 @@ def pump1SetCalButtonfx():
     resultText = entry1.get()
     label=tk.Label(resultFrame,text=resultText)
     label.grid(row=0,column=0, columnspan=7)
+
+
 	
 def Pump1CalibrationPage():	
     functionFrame=tk.Frame(root,bg='red')
@@ -151,12 +156,11 @@ def Pump1CalibrationPage():
     pump1StopCalButton=tk.Button(functionFrame,text='Stop',command=pump1StopCalButtonfx)
     pump1DoseCalButton=tk.Button(functionFrame,text='Dose',command=pump1DoseCalButtonfx)
     pump1SetCalButton=tk.Button(functionFrame,text='Set',command=pump1SetCalButtonfx)
-    entry1 = tk.Entry (functionFrame) 
+   
     pump1StartButton.grid(row = 1 ,column=0)
     pump1StopCalButton.grid(row = 1 ,column = 1)
     pump1DoseCalButton.grid(row = 1 ,column = 2)
     pump1SetCalButton.grid(row = 1 ,column = 3)	
-    entry1.grid(row = 1 ,column = 4)
 
 	
 def SensorsCalibrationPage():	
