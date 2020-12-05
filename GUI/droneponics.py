@@ -112,9 +112,11 @@ def Pump1CalibrationPage():
     readCalButton=tk.Button(functionFrame,text='Read',command=PumpCalibrationPage)
     pump8mlCalButton=tk.Button(functionFrame,text='Dose',command=PumpCalibrationPage)
     pumpSetCalButton=tk.Button(functionFrame,text='Set',command=PumpCalibrationPage)
+    entry1 = tk.Entry (functionFrame) 
     readCalButton.grid(row = 1 ,column=0)
     pump8mlCalButton.grid(row = 1 ,column = 1)
     pumpSetCalButton.grid(row = 1 ,column = 2)
+    entry1.grid(row = 1 ,column = 3)
 	
 def SensorsCalibrationPage():	
     functionFrame=tk.Frame(root,bg='red')
