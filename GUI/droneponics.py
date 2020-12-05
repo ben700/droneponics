@@ -18,6 +18,14 @@ consoleHandler.setFormatter(logFormatter)
 _log.addHandler(consoleHandler)
 _log.setLevel(logging.DEBUG)
 
+nutrientMix = []
+nutrientMix = drone.buildNutrientMix(nutrientMix, _log)
+_log.info("All Monitor Sensors created")
+	
+sensors = []
+sensors = drone.buildAllSensors(sensors, _log)
+_log.info("All Monitor Sensors created")
+	
 restartCode = {'P': "Powered Off", 'S':"Software Reset",'B':"Brown Out",'W':"Watchdog",'U':"Unknown"}
 
 import tkinter as tk
@@ -78,10 +86,8 @@ def PumpCalibrationPage():
     functionFrame.place(relx=0.05,rely=0.7,relheight=0.1,relwidth=0.9)
     label=tk.Label(functionFrame,text='Pump Calibration')
     label.grid(row=0,column=0, columnspan=7)
-    sensors = []
-    sensors = drone.buildAllSensors(sensors, _log)
-    _log.info("All Monitor Sensors created")
-    pump1CalButton=tk.Button(functionFrame,text='Pump 1',command=PumpCalibrationPage)
+
+    pump1CalButton=tk.Button(functionFrame,text='Pump 1',command=Pump1CalibrationPage)
     pump2CalButton=tk.Button(functionFrame,text='Pump 2',command=PumpCalibrationPage)
     pump3CalButton=tk.Button(functionFrame,text='Pump 3',command=PumpCalibrationPage)
     pump4CalButton=tk.Button(functionFrame,text='Pump 4',command=PumpCalibrationPage)
@@ -89,22 +95,33 @@ def PumpCalibrationPage():
     pump6CalButton=tk.Button(functionFrame,text='Pump 6',command=PumpCalibrationPage)
     pump7CalButton=tk.Button(functionFrame,text='Pump 7',command=PumpCalibrationPage)
 
-    pump1CalButton.grid(row=1,column=0)
+    pump1CalButton.grid(row = 1 ,column=0)
     pump2CalButton.grid(row = 1 ,column = 1)
     pump3CalButton.grid(row = 1 ,column = 2)
     pump4CalButton.grid(row = 1 ,column = 3)
-    pump5CalButton.grid(row = 1 ,column = 4)
-    pump6CalButton.grid(row = 1 ,column = 5)
-    pump7CalButton.grid(row = 1 ,column = 6)
+    pump5CalButton.grid(row = 2 ,column = 0)
+    pump6CalButton.grid(row = 2 ,column = 1)
+    pump7CalButton.grid(row = 2 ,column = 2)
 
+
+def Pump1CalibrationPage():	
+    functionFrame=tk.Frame(root,bg='red')
+    functionFrame.place(relx=0.05,rely=0.9,relheight=0.1,relwidth=0.9)
+    label=tk.Label(functionFrame,text='Pump 1 Calibration')
+    label.grid(row=0,column=0, columnspan=7)
+    readCalButton=tk.Button(functionFrame,text='Pump 1',command=PumpCalibrationPage)
+    pump8mlCalButton=tk.Button(functionFrame,text='Pump 2',command=PumpCalibrationPage)
+    pumpSetCalButton=tk.Button(functionFrame,text='Pump 3',command=PumpCalibrationPage)
+    readCalButton.grid(row = 1 ,column=0)
+    pump8mlCalButton.grid(row = 1 ,column = 1)
+    pumpSetCalButton.grid(row = 1 ,column = 2)
+	
 def SensorsCalibrationPage():	
     functionFrame=tk.Frame(root,bg='red')
     functionFrame.place(relx=0.05,rely=0.7,relheight=0.1,relwidth=0.9)
     label=tk.Label(functionFrame,text='Sensors Calibration')
     label.grid(row=0,column=0, columnspan=5)
-    sensors = []
-    sensors = drone.buildAllSensors(sensors, _log)
-    _log.info("All Monitor Sensors created")
+
     tempCalButton=tk.Button(functionFrame,text='Cal Temp',command=SensorsCalibrationPage)
     phCalButton=tk.Button(functionFrame,text='Cal Temp',command=SensorsCalibrationPage)
     ecCalButton=tk.Button(functionFrame,text='Cal Temp',command=SensorsCalibrationPage)
