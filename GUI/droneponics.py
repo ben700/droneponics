@@ -73,7 +73,7 @@ def pumpPage2():
    
 def pumpPage3():
     actionFrame=tk.Frame(root,bg='red')
-    actionFrame.place(relx=0.15,rely=0.3,relheight=0.1,relwidth=0.6)
+    actionFrame.place(relx=0.1,rely=0.3,relheight=0.1,relwidth=0.6)
     label=tk.Label(actionFrame,text='Calibration')
     label.grid(row=0,column=0, columnspan=4)
     bt1=tk.Button(actionFrame,text='Sensors',command=SensorsCalibrationPage)
@@ -83,7 +83,7 @@ def pumpPage3():
     
 def PumpCalibrationPage():	
     functionFrame=tk.Frame(root,bg='red')
-    functionFrame.place(relx=0.05,rely=0.5,relheight=0.2,relwidth=0.9)
+    functionFrame.place(relx=0.15,rely=0.5,relheight=0.2,relwidth=0.9)
     label=tk.Label(functionFrame,text='Pump Calibration')
     label.grid(row=0,column=0, columnspan=7)
 
