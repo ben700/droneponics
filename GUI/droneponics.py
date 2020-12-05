@@ -83,7 +83,7 @@ def pumpPage3():
     
 def PumpCalibrationPage():	
     functionFrame=tk.Frame(root,bg='red')
-    functionFrame.place(relx=0.05,rely=0.7,relheight=0.2,relwidth=0.9)
+    functionFrame.place(relx=0.05,rely=0.5,relheight=0.2,relwidth=0.9)
     label=tk.Label(functionFrame,text='Pump Calibration')
     label.grid(row=0,column=0, columnspan=7)
 
