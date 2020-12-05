@@ -130,7 +130,7 @@ def pump1DoseCalButton():
 	nutrientMix[0].pump.query("D,8")
 	
 def pump1SetCalButton():	
-	tkinter.messagebox.showinfo(title=None, message=entry1.get(), **options)¶
+	tkinter.messagebox.showinfo(title=None, message=entry1.get(), **options)
 	
 	
 def SensorsCalibrationPage():	
