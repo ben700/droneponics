@@ -45,7 +45,7 @@ root.attributes("-fullscreen", True) 	# set to fullscreen
 btFrame=tk.Frame(root,bg='darkblue')
 btFrame.place(relx=0.2,rely=0.1,relheight=0.1,relwidth=0.6)
 entry1 = tk.Entry (root) 
-entry1.grid(row = 1 ,column = 1)
+entry1.place(x=200, y=0)
 
 
 def pumpPage1():
