@@ -105,16 +105,19 @@ def PumpCalibrationPage():
 
 	
 def pump1StartButtonfx():	
-	nutrientMix[0].pump.query("D,*")
+	pump1=AtlasI2C(nutrientMix[0].pumpId)
+	pump1.query("D,*")
 	
 def pump1StopCalButtonfx():	
-	nutrientMix[0].pump.query("X")
+	pump1=AtlasI2C(nutrientMix[0].pumpId)
+	pump1.query("X")
 
 def pump1DoseCalButtonfx():	
-	nutrientMix[0].pump.query("D,8")
+	pump1=AtlasI2C(nutrientMix[0].pumpId)
+	pump1.query("D,8")
 	
 def pump1SetCalButtonfx():	
-	tkinter.messagebox.showinfo(title=None, message=entry1.get(), **options)
+	tk.messagebox.showinfo(title=None, message=entry1.get(), **options)
 	
 def Pump1CalibrationPage():	
     functionFrame=tk.Frame(root,bg='red')
