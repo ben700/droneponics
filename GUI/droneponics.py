@@ -103,35 +103,35 @@ def PumpCalibrationPage():
     pump6CalButton.grid(row = 2 ,column = 1)
     pump7CalButton.grid(row = 2 ,column = 2)
 
+	
+def pump1StartButtonfx():	
+	nutrientMix[0].pump.query("D,*")
+	
+def pump1StopCalButtonfx():	
+	nutrientMix[0].pump.query("X")
 
+def pump1DoseCalButtonfx():	
+	nutrientMix[0].pump.query("D,8")
+	
+def pump1SetCalButtonfx():	
+	tkinter.messagebox.showinfo(title=None, message=entry1.get(), **options)
+	
 def Pump1CalibrationPage():	
     functionFrame=tk.Frame(root,bg='red')
     functionFrame.place(relx=0.05,rely=0.8,relheight=0.1,relwidth=0.9)
     label=tk.Label(functionFrame,text='Pump 1 Calibration')
     label.grid(row=0,column=0, columnspan=7)
-    pump1StartButton=tk.Button(functionFrame,text='Start',command=pump1StartButton)
-    pump1StopCalButton=tk.Button(functionFrame,text='Stop',command=pump1StopCalButton)
-    pump1DoseCalButton=tk.Button(functionFrame,text='Dose',command=pump1DoseCalButton)
-    pump1SetCalButton=tk.Button(functionFrame,text='Set',command=pump1SetCalButton)
+    pump1StartButton=tk.Button(functionFrame,text='Start',command=pump1StartButtonfx)
+    pump1StopCalButton=tk.Button(functionFrame,text='Stop',command=pump1StopCalButtonfx)
+    pump1DoseCalButton=tk.Button(functionFrame,text='Dose',command=pump1DoseCalButtonfx)
+    pump1SetCalButton=tk.Button(functionFrame,text='Set',command=pump1SetCalButtonfx)
     entry1 = tk.Entry (functionFrame) 
     pump1StartButton.grid(row = 1 ,column=0)
     pump1StopCalButton.grid(row = 1 ,column = 1)
     pump1DoseCalButton.grid(row = 1 ,column = 2)
     pump1SetCalButton.grid(row = 1 ,column = 3)	
     entry1.grid(row = 1 ,column = 4)
-	
-def pump1StartButton():	
-	nutrientMix[0].pump.query("D,*")
-	
-def pump1StopCalButton():	
-	nutrientMix[0].pump.query("X")
 
-def pump1DoseCalButton():	
-	nutrientMix[0].pump.query("D,8")
-	
-def pump1SetCalButton():	
-	tkinter.messagebox.showinfo(title=None, message=entry1.get(), **options)
-	
 	
 def SensorsCalibrationPage():	
     functionFrame=tk.Frame(root,bg='red')
