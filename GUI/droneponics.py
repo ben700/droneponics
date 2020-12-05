@@ -130,7 +130,15 @@ def pump1DoseCalButtonfx():
     resultText = pump1.query("D,8")
     label=tk.Label(resultFrame,text=resultText)
     label.grid(row=0,column=0, columnspan=7)
-
+	
+def pump1DoseCalButtonfx():	
+    resultFrame=tk.Frame(root,bg='green')
+    resultFrame.place(relx=0.2,rely=0.8,relheight=0.05,relwidth=0.6)
+    pump1=AtlasI2C(nutrientMix[0].pumpId)
+    resultText = pump1.query("D,8,1")
+    label=tk.Label(resultFrame,text=resultText)
+    label.grid(row=0,column=0, columnspan=7)
+	
 def pump1ClearCalButtonfx():	
     resultFrame=tk.Frame(root,bg='green')
     resultFrame.place(relx=0.2,rely=0.8,relheight=0.05,relwidth=0.6)
@@ -164,6 +172,7 @@ def Pump1CalibrationPage():
     pump1StopCalButton=tk.Button(functionFrame,text='Stop',command=pump1StopCalButtonfx)
     pump1ClearCalButton=tk.Button(functionFrame,text='Clear',command=pump1ClearCalButtonfx)
     pump1DoseCalButton=tk.Button(functionFrame,text='Dose',command=pump1DoseCalButtonfx)
+    pump1DoseOverTimeCalButton=tk.Button(functionFrame,text='Dose/Time',command=pump1DoseOverTimeCalButtonfx)	
     pump1SetCalButton=tk.Button(functionFrame,text='Set',command=pump1SetCalButtonfx)
    
     pump1StartButton.grid(row = 1 ,column=0)
