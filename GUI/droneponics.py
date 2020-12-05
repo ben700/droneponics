@@ -129,7 +129,6 @@ def pump1DoseCalButtonfx():
     label.grid(row=0,column=0, columnspan=7)
 	
 def pump1SetCalButtonfx():	
-    print(entry1.get())	
 	
     resultFrame=tk.Frame(root,bg='green')
     resultFrame.place(relx=0.2,rely=0.8,relheight=0.05,relwidth=0.6)
