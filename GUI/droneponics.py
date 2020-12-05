@@ -113,15 +113,31 @@ def pump1StartButtonfx():
     label.grid(row=0,column=0, columnspan=7)
 	
 def pump1StopCalButtonfx():	
-	pump1=AtlasI2C(nutrientMix[0].pumpId)
-	pump1.query("X")
+    resultFrame=tk.Frame(root,bg='green')
+    resultFrame.place(relx=0.2,rely=0.8,relheight=0.05,relwidth=0.6)
+    pump1=AtlasI2C(nutrientMix[0].pumpId)
+    resultText = pump1.query("X")
+    label=tk.Label(resultFrame,text=resultText)
+    label.grid(row=0,column=0, columnspan=7)
 
 def pump1DoseCalButtonfx():	
-	pump1=AtlasI2C(nutrientMix[0].pumpId)
-	pump1.query("D,8")
+    resultFrame=tk.Frame(root,bg='green')
+    resultFrame.place(relx=0.2,rely=0.8,relheight=0.05,relwidth=0.6)
+    pump1=AtlasI2C(nutrientMix[0].pumpId)
+    resultText = pump1.query("D,8")
+    label=tk.Label(resultFrame,text=resultText)
+    label.grid(row=0,column=0, columnspan=7)
 	
 def pump1SetCalButtonfx():	
-	tk.messagebox.showinfo(title=None, message=entry1.get(), **options)
+    print(entry1.get())	
+	
+    resultFrame=tk.Frame(root,bg='green')
+    resultFrame.place(relx=0.2,rely=0.8,relheight=0.05,relwidth=0.6)
+    pump1=AtlasI2C(nutrientMix[0].pumpId)
+    #resultText = pump1.query("CAL,*")
+    resultText = entry1.get()
+    label=tk.Label(resultFrame,text=resultText)
+    label.grid(row=0,column=0, columnspan=7)
 	
 def Pump1CalibrationPage():	
     functionFrame=tk.Frame(root,bg='red')
