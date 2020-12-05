@@ -106,7 +106,7 @@ def PumpCalibrationPage():
 	
 def pump1StartButtonfx():	
 	pump1=AtlasI2C(nutrientMix[0].pumpId)
-	functionFrame.label2.text = pump1.query("D,*")
+	label2['text'] = pump1.query("D,*")
 	
 def pump1StopCalButtonfx():	
 	pump1=AtlasI2C(nutrientMix[0].pumpId)
