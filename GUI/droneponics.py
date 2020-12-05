@@ -177,8 +177,10 @@ def Pump1CalibrationPage():
    
     pump1StartButton.grid(row = 1 ,column=0)
     pump1StopCalButton.grid(row = 1 ,column = 1)
-    pump1DoseCalButton.grid(row = 1 ,column = 2)
-    pump1SetCalButton.grid(row = 1 ,column = 3)	
+    pump1ClearCalButton.grid(row = 1 ,column = 2)
+    pump1DoseCalButton.grid(row = 1 ,column = 3)
+    pump1DoseOverTimeCalButton.grid(row = 1 ,column = 4)
+    pump1SetCalButton.grid(row = 1 ,column = 5)	
 
 	
 def pump2StartButtonfx():
@@ -251,8 +253,10 @@ def Pump2CalibrationPage():
    
     pump1StartButton.grid(row = 1 ,column=0)
     pump1StopCalButton.grid(row = 1 ,column = 1)
-    pump1DoseCalButton.grid(row = 1 ,column = 2)
-    pump1SetCalButton.grid(row = 1 ,column = 3)	
+    pump1ClearCalButton.grid(row = 1 ,column = 2)
+    pump1DoseCalButton.grid(row = 1 ,column = 3)
+    pump1DoseOverTimeCalButton.grid(row = 1 ,column = 4)
+    pump1SetCalButton.grid(row = 1 ,column = 5)	
 
 
 
@@ -326,8 +330,10 @@ def Pump3CalibrationPage():
    
     pump1StartButton.grid(row = 1 ,column=0)
     pump1StopCalButton.grid(row = 1 ,column = 1)
-    pump1DoseCalButton.grid(row = 1 ,column = 2)
-    pump1SetCalButton.grid(row = 1 ,column = 3)	
+    pump1ClearCalButton.grid(row = 1 ,column = 2)
+    pump1DoseCalButton.grid(row = 1 ,column = 3)
+    pump1DoseOverTimeCalButton.grid(row = 1 ,column = 4)
+    pump1SetCalButton.grid(row = 1 ,column = 5)	
 
 
 def pump4StartButtonfx():
@@ -400,8 +406,10 @@ def Pump4CalibrationPage():
    
     pump1StartButton.grid(row = 1 ,column=0)
     pump1StopCalButton.grid(row = 1 ,column = 1)
-    pump1DoseCalButton.grid(row = 1 ,column = 2)
-    pump1SetCalButton.grid(row = 1 ,column = 3)	
+    pump1ClearCalButton.grid(row = 1 ,column = 2)
+    pump1DoseCalButton.grid(row = 1 ,column = 3)
+    pump1DoseOverTimeCalButton.grid(row = 1 ,column = 4)
+    pump1SetCalButton.grid(row = 1 ,column = 5)	
 
 
 def pump5StartButtonfx():
@@ -474,8 +482,10 @@ def Pump5CalibrationPage():
    
     pump1StartButton.grid(row = 1 ,column=0)
     pump1StopCalButton.grid(row = 1 ,column = 1)
-    pump1DoseCalButton.grid(row = 1 ,column = 2)
-    pump1SetCalButton.grid(row = 1 ,column = 3)	
+    pump1ClearCalButton.grid(row = 1 ,column = 2)
+    pump1DoseCalButton.grid(row = 1 ,column = 3)
+    pump1DoseOverTimeCalButton.grid(row = 1 ,column = 4)
+    pump1SetCalButton.grid(row = 1 ,column = 5)	
 
 
 def pump6StartButtonfx():
@@ -548,8 +558,10 @@ def Pump6CalibrationPage():
    
     pump1StartButton.grid(row = 1 ,column=0)
     pump1StopCalButton.grid(row = 1 ,column = 1)
-    pump1DoseCalButton.grid(row = 1 ,column = 2)
-    pump1SetCalButton.grid(row = 1 ,column = 3)	
+    pump1ClearCalButton.grid(row = 1 ,column = 2)
+    pump1DoseCalButton.grid(row = 1 ,column = 3)
+    pump1DoseOverTimeCalButton.grid(row = 1 ,column = 4)
+    pump1SetCalButton.grid(row = 1 ,column = 5)		
 
 
 def pump7StartButtonfx():
@@ -622,8 +634,10 @@ def Pump7CalibrationPage():
    
     pump1StartButton.grid(row = 1 ,column=0)
     pump1StopCalButton.grid(row = 1 ,column = 1)
-    pump1DoseCalButton.grid(row = 1 ,column = 2)
-    pump1SetCalButton.grid(row = 1 ,column = 3)	
+    pump1ClearCalButton.grid(row = 1 ,column = 2)
+    pump1DoseCalButton.grid(row = 1 ,column = 3)
+    pump1DoseOverTimeCalButton.grid(row = 1 ,column = 4)
+    pump1SetCalButton.grid(row = 1 ,column = 5)	
 	
 def SensorsCalibrationPage():	
     functionFrame=tk.Frame(root,bg='red')
