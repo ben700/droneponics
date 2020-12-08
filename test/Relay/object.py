@@ -1,3 +1,6 @@
+import sys
+import os
+sys.path.append('/home/pi/droneponics')
 import drone
 import blynklib
 import blynktimer
