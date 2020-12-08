@@ -63,8 +63,9 @@ except:
     _log.critical("except setting up relay bus")
 
 try:
+    relayBus._log.debug("-------------------------------------Relay 1 setup" + relayBus.relays)
     relayBus.addRelay(5, parser.get('droneFeed', 'Relay1'), 21, 85)
-    _log.debug("Relay 1 setup")
+    _log.debug("-------------------------------------Relay 1 setup")
     relayBus.addRelay(6, parser.get('droneFeed', 'Relay2'), 22, 86)
     _log.debug("Relay 2 setup")
     relayBus.addRelay(7, parser.get('droneFeed', 'Relay3'), 23, 87)
