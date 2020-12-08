@@ -3,7 +3,7 @@ systemLED=101
 
 import socket
 import drone
-from drone import Alarm, OpenWeather
+from drone import OpenWeather
 from datetime import datetime, date
 #import date
 import time
