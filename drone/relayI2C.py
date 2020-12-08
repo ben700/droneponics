@@ -22,17 +22,17 @@ class RelaysI2C:
       
    def addRelay(self, relayNum, relayName, relayInfoPin, relayLEDPin):
        print("-------------------Start addRelay for " + relayName)      
-       relay = drone.RelayI2C(self._log, relayNum, Name)
+       relay = RelayI2C(self._log, relayNum, Name)
        print("-------------------created Relay obj for " + name)
-       relay.i2CRelayBoard = self.i2CRelayBoard
-       print("-------------------set i2CRelayBoard for Relay for " + name)
-       relay.setBlynk(self.blynk)
-       print("-------------------added blynk to Relay for " + name)
-       relay.setInfoPin(InfoPin)
-       print("-------------------set info pin for Relay for " + name)
-       relay.setLEDPin(LEDPin)
-       print("-------------------set LED for Relay for " + name)
-       self.relays.append(relay)
+     #  relay.i2CRelayBoard = self.i2CRelayBoard
+    #   print("-------------------set i2CRelayBoard for Relay for " + name)
+   #    relay.setBlynk(self.blynk)
+  #     print("-------------------added blynk to Relay for " + name)
+       #relay.setInfoPin(InfoPin)
+      # print("-------------------set info pin for Relay for " + name)
+     #  relay.setLEDPin(LEDPin)
+    #   print("-------------------set LED for Relay for " + name)
+   #    self.relays.append(relay)
       # print(self.relays)
        print("-------------------completed addRelay for " + name)
       
