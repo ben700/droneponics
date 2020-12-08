@@ -69,7 +69,7 @@ try:
 except:
     _log.critical("except setting up relays")
        
-
+try:
     @blynk.handle_event('write V255')
     def rebooter(pin, value):
         blynk.virtual_write(98, "User update and reboot button v255"+ '\n')       
