@@ -20,12 +20,10 @@ class RelaysI2C:
       
    def addRelay(self, relayNum, relayName, relayInfoPin, relayLEDPin):
        self._log.debug("-------------------Start addRelay for " + relayName)      
-       relay = RelayI2C(self._log, relayNum, relayName)
+       relay = RelayI2C(self._log, self.blynk, relayNum, relayName)
        self._log.debug("-------------------created Relay obj for " + relayName)
        relay.i2CRelayBoard = self.i2CRelayBoard
        self._log.debug("-------------------set i2CRelayBoard for Relay for " + relayName)
-       relay.setBlynk(self.blynk)
-       self._log.debug("-------------------added blynk to Relay for " + relayName)
        relay.setInfoPin(relayInfoPin)
        self._log.debug("-------------------set info pin for Relay for " + relayName)
        relay.setLEDPin(relayLEDPin)
@@ -36,7 +34,7 @@ class RelaysI2C:
        
 class RelayI2C:
 
-   def __init__(self, _log, relayNum, Name, *args, **kwargs):
+   def __init__(self, _log, BLYNK, relayNum, Name, *args, **kwargs):
        _log.info("Building RelayI2C object for Relay " + Name)
        self._log = _log
        self.relayNum = relayNum
@@ -54,7 +52,7 @@ class RelayI2C:
        self.days = None
        self.infoPin = None
        self.ledPin = None
-       self.blynk = None
+       self.blynk = BLYNK
        self.turnOff(_log)
        _log.info("Completed building RelayI2C object for Relay " + Name)
       
