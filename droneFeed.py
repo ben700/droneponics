@@ -58,6 +58,7 @@ except:
 relayBus=None
 try:
     relayBus=drone.RelaysI2C(_log, blynk)
+    relayBus.testRelay()
 except:
     relayBus=None
     _log.critical("except setting up relay bus")
