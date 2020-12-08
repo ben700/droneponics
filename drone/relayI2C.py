@@ -20,25 +20,24 @@ class RelaysI2C:
       
    def addRelay(self, relayNum, relayName, relayInfoPin, relayLEDPin):
        self._log.debug("-------------------Start addRelay for " + relayName)      
-#       relay = RelayI2C(self._log, relayNum, Name)
+       relay = RelayI2C(self._log, relayNum, Name)
        self._log.debug("-------------------created Relay obj for " + name)
-     #  relay.i2CRelayBoard = self.i2CRelayBoard
-    #   print("-------------------set i2CRelayBoard for Relay for " + name)
-   #    relay.setBlynk(self.blynk)
-  #     print("-------------------added blynk to Relay for " + name)
-       #relay.setInfoPin(InfoPin)
-      # print("-------------------set info pin for Relay for " + name)
-     #  relay.setLEDPin(LEDPin)
-    #   print("-------------------set LED for Relay for " + name)
-   #    self.relays.append(relay)
-      # print(self.relays)
-       print("-------------------completed addRelay for " + name)
+       relay.i2CRelayBoard = self.i2CRelayBoard
+       self._log.debug("-------------------set i2CRelayBoard for Relay for " + name)
+       relay.setBlynk(self.blynk)
+       self._log.debug("-------------------added blynk to Relay for " + name)
+       relay.setInfoPin(InfoPin)
+       self._log.debug("-------------------set info pin for Relay for " + name)
+       relay.setLEDPin(LEDPin)
+       self._log.debug("-------------------set LED for Relay for " + name)
+       self._log.debug.relays.append(relay)
+       self._log.debug("-------------------completed addRelay for " + name)
       
        
 class RelayI2C:
 
    def __init__(self, _log, relayNum, Name, *args, **kwargs):
-       _log.info("Building Relay object for Relay " + Name)
+       _log.info("Building RelayI2C object for Relay " + Name)
        self._log = _log
        self.relayNum = relayNum
        self.name = Name
@@ -57,7 +56,7 @@ class RelayI2C:
        self.ledPin = None
        self.blynk = None
        self.turnOff(_log)
-       _log.info("Completed building Relay object for Relay " + Name)
+       _log.info("Completed building RelayI2C object for Relay " + Name)
       
    def setBlynk(self, BLYNK): 
         self.blynk = BLYNK
