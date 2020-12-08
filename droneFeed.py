@@ -143,7 +143,7 @@ try:
         global relayBus
         _log.debug("start v11write_handler")
         _log.debug("start v11write_handler value[0] =" + str(value[0]))
-	print(relayBus.relays)
+        print(relayBus.relays)
 #        _log.debug("start v11write_handler relayBus.relays[0].name =" + str(relayBus.relays[0].name))
 	
         relayBus.relays[0].cycleResetSet(value[0])
