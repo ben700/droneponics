@@ -86,7 +86,7 @@ try:
               
     @blynk.handle_event('write V1')
     def v1write_handler(pin, value):
-        global relays
+        global relayBus
         staus = value[0]
         relay = 0       
         _log.debug("in v1write_handler staus =" + str(staus))       
@@ -99,7 +99,7 @@ try:
 
     @blynk.handle_event('write V2')
     def v2write_handler(pin, value):
-        global relays
+        global relayBus
         staus = value[0]
         relay = 1       
         _log.debug("in v2write_handler staus =" + str(staus))       
@@ -113,7 +113,7 @@ try:
 
     @blynk.handle_event('write V3')
     def v3write_handler(pin, value):
-        global relays
+        global relayBus
         staus = value[0]
         relay = 2
         if (staus is "1" ):
@@ -127,7 +127,7 @@ try:
           
     @blynk.handle_event('write V4')
     def v4write_handler(pin, value):
-        global relays		
+        global relayBus		
         staus = value[0]
         relay = 3      
         if (staus is "1" ):
@@ -140,9 +140,12 @@ try:
   
     @blynk.handle_event('write V11')
     def v11write_handler(pin, value):
+        global relayBus
+        _log.debug("start v11write_handler")
         relayBus.relays[0].cycleResetSet(value[0])
         blynk.virtual_write(relayBus.relays[0].getInfoPin(), relayBus.relays[0].info())
         turnDisplayOn()
+        _log.debug("End v11write_handler")
         
     @blynk.handle_event('write V12')
     def v12write_handler(pin, value):
