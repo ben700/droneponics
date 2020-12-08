@@ -15,6 +15,7 @@ class RelaysI2C:
        self._log = _log
        self.relays=[]
        self.blynk = blynk
+       self._log.debug("-------------------__init__ RelaysI2C completed")
          
    def addRelay(self, relayNum, Name, InfoPin, LEDPin):
        self._log.debug("-------------------Start addRelay for " + name)      
