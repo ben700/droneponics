@@ -32,7 +32,7 @@ consoleHandler = logging.StreamHandler()
 consoleHandler.setFormatter(logFormatter)
 _log.addHandler(consoleHandler)
 _log.setLevel(parser.get('logging', 'logLevel', fallback=logging.DEBUG))
-_log.info("/home/pi/droneponics/config/configFeed/"+drone.gethostname()+".ini")
+_log.info("/home/pi/droneponics/config/configRelay/"+drone.gethostname()+".ini")
 
 lcdDisplay= None
 try:
