@@ -149,42 +149,56 @@ try:
         
     @blynk.handle_event('write V12')
     def v12write_handler(pin, value):
+        global relayBus
+        _log.debug("start v12write_handler")
         relayBus.relays[0].cycleOffResetSet(value[0])
         blynk.virtual_write(relayBus.relays[0].getInfoPin(), relayBus.relays[0].info())
         turnDisplayOn()
         
     @blynk.handle_event('write V13')
     def v13write_handler(pin, value):
+        global relayBus
+        _log.debug("start v13write_handler")
         relayBus.relays[1].cycleResetSet(value[0])
         blynk.virtual_write(relayBus.relays[1].getInfoPin(), relayBus.relays[1].info())
         turnDisplayOn()
         
     @blynk.handle_event('write V14')
     def v14write_handler(pin, value):
+        global relayBus
+        _log.debug("start v14write_handler")
         relayBus.relays[1].cycleOffResetSet(value[0])
         blynk.virtual_write(relayBus.relays[1].getInfoPin(), relayBus.relays[1].info())        
         turnDisplayOn()
   
     @blynk.handle_event('write V15')
     def v15write_handler(pin, value):
+        global relayBus
+        _log.debug("start v15write_handler")
         relayBus.relays[2].cycleResetSet(value[0])
         blynk.virtual_write(relayBus.relays[2].getInfoPin(), relayBus.relays[2].info())
         turnDisplayOn()
         
     @blynk.handle_event('write V16')
     def v16write_handler(pin, value):
+        global relayBus
+        _log.debug("start v16write_handler")
         relayBus.relays[2].cycleOffResetSet(value[0])
         blynk.virtual_write(relayBus.relays[2].getInfoPin(), relayBus.relays[2].info())
         turnDisplayOn()
         
     @blynk.handle_event('write V17')
     def v17write_handler(pin, value):
+        global relayBus
+        _log.debug("start v17write_handler")
         relayBus.relays[3].cycleResetSet(value[0])
         blynk.virtual_write(relayBus.relays[3].getInfoPin(), relayBus.relays[3].info())
         turnDisplayOn()
         
     @blynk.handle_event('write V18')
     def v18write_handler(pin, value):
+        global relayBus
+        _log.debug("start v18write_handler")
         relayBus.relays[3].cycleOffResetSet(value[0])
         blynk.virtual_write(relayBus.relays[3].getInfoPin(), relayBus.relays[3].info())
         turnDisplayOn()
