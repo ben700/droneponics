@@ -41,7 +41,7 @@ class RelayI2C:
        self._log = _log
        self.relayNum = relayNum
        self.name = Name
-       self.i2CRelayBoard = I2CRelayBoard(I2C_BUS, I2C_ADDR) 
+       self.i2CRelayBoard = None
        self.automatic = False
        self.cycle=1
        self.cycleReset=0
