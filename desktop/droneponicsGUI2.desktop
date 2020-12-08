@@ -1,8 +1,0 @@
-[Desktop Entry]
-Name=Droneponics GUI
-Version=v1.0
-Icon=favicon.ico
-X-Icon-Path=/home/pi/droneponics/pic/
-Exec=python /home/pi/droneponics/GUI/droneponics.py
-Terminal=false
-Type=Application
