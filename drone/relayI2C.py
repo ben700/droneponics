@@ -17,21 +17,21 @@ class RelaysI2C:
        self.blynk = blynk
        self._log.debug("-------------------__init__ RelaysI2C completed")
          
-   def addRelay(self, relayNum, Name, InfoPin, LEDPin):
-       print("-------------------Start addRelay for " + name)      
-       relay = drone.RelayI2C(self._log, relayNum, Name)
-       print("-------------------created Relay obj for " + name)
-       relay.i2CRelayBoard = self.i2CRelayBoard
-       print("-------------------set i2CRelayBoard for Relay for " + name)
-       relay.setBlynk(self.blynk)
-       print("-------------------added blynk to Relay for " + name)
-       relay.setInfoPin(InfoPin)
-       print("-------------------set info pin for Relay for " + name)
-       relay.setLEDPin(LEDPin)
-       print("-------------------set LED for Relay for " + name)
-       self.relays.append(relay)
-       print(self.relays)
-       print("-------------------completed addRelay for " + name)
+   def addRelay(self, relayNum, relayName, relayInfoPin, relayLEDPin):
+       print("-------------------Start addRelay for " + relayName)      
+ #      relay = drone.RelayI2C(self._log, relayNum, Name)
+ #      print("-------------------created Relay obj for " + name)
+ #      relay.i2CRelayBoard = self.i2CRelayBoard
+ #      print("-------------------set i2CRelayBoard for Relay for " + name)
+#       relay.setBlynk(self.blynk)
+#       print("-------------------added blynk to Relay for " + name)
+#       relay.setInfoPin(InfoPin)
+#       print("-------------------set info pin for Relay for " + name)
+#       relay.setLEDPin(LEDPin)
+#       print("-------------------set LED for Relay for " + name)
+#       self.relays.append(relay)
+#       print(self.relays)
+#       print("-------------------completed addRelay for " + name)
       
        
 class RelayI2C:
