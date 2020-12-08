@@ -34,6 +34,6 @@ except:
     _log.info("except : Creating Blynk") 
     
     
-relays=drone.RelaysI2C(_log, blynk)
+relays=drone.RelaysI2C(_log, blynk, iI2C_ADDR = 0x24)
 relays.addRelay(1, "Relay1", 21, 85)
    
