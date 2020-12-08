@@ -62,7 +62,7 @@ try:
     _log.debug("-------------------------------------build Relay"+parser.get('droneFeed', 'Relay1'))	
 	
 	
-    relay = drone.RelayI2C(5, blynk, parser.get('droneFeed', 'Relay1'), 21, 85)
+    relay = drone.RelayI2C(_log, blynk, 5,  parser.get('droneFeed', 'Relay1'))
     _log.debug("-------------------------------------append Relay")	
     relayBus.relays.append(relay)
     _log.debug("-------------------------------------Relay 1 setup")
