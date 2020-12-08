@@ -51,14 +51,24 @@ try:
     timer = blynktimer.Timer()
     _log.debug("start blynk")
     blynk.run()
-    _log.info("Blynk Created")  
-    
+    _log.info("Blynk Created")
+except:
+    _log.critical("except setting up blynk")
+
+try:
     relays=drone.RelaysI2C(_log, blynk)
+except:
+    relays=None
+    _log.critical("except setting up relay bus")
+
+try:
     relays.addRelay(drone.RelayI2C(5, parser.get('droneFeed', 'Relay1'), 21, 85))
     relays.addRelay(drone.RelayI2C(6, parser.get('droneFeed', 'Relay2'), 22, 86))
     relays.addRelay(drone.RelayI2C(7, parser.get('droneFeed', 'Relay3'), 23, 87))
     relays.addRelay(drone.RelayI2C(8, parser.get('droneFeed', 'Relay4'), 24, 88))
-           
+except:
+    _log.critical("except setting up relays")
+       
 
     @blynk.handle_event('write V255')
     def rebooter(pin, value):
