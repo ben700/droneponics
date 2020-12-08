@@ -41,6 +41,8 @@ try:
     lcdDisplay=drone.LCD(_log, Product="droneFeed", productTagLine="Smart Feed Solution", ip=drone.get_ip())
 except:
     lcdDisplay=None
+    _log.critical("except setting LCD to default")
+
 	
         
 try:
