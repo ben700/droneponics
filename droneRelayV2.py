@@ -497,7 +497,7 @@ try:
            now = datetime.now()
            blynk.virtual_write(0, now.strftime("%H:%M:%S"))
 
-           for relay in relays:
+           for relay in relayBus.relays:
                 _log.debug("Seeing if relay " + relay.name + " is automatic")
                 if(relay.isAutomatic()):
                     _log.debug("relay " + relay.name + " is automatic so test cycle")
@@ -511,11 +511,11 @@ try:
       #     else:
       #          text = text + self.name + " is " + relay.whatCycle() + " "
            
-           try:			
-                if lcdDisplay is not None: 
-                    lcdDisplay.updateLCDPumps (relays[0].state, relays[1].state, relays[2].state, relays[3].state, relays[0].isManual(), relays[1].isManual(), relays[2].isManual(), relays[3].isManual() )
-           except:
-              _log.critical("updating LCD crashed loop")
+     #      try:			
+     #           if lcdDisplay is not None: 
+     #               lcdDisplay.updateLCDPumps (relays[0].state, relays[1].state, relays[2].state, relays[3].state, relays[0].isManual(), relays[1].isManual(), relays[2].isManual(), relays[3].isManual() )
+     #      except:
+     #         _log.critical("updating LCD crashed loop")
                 
            if (counter > 5):
                 turnDisplayOff()		
@@ -567,7 +567,6 @@ except:
    blynk.virtual_write(250, "Crashed")
    drone.turnLEDsOffline(blynk)
    drone.turnButtonsOffline(blynk)
-   GPIO.cleanup()
    os.system('sh /home/pi/updateDroneponics.sh')
  #  os.system('sudo reboot')
 finally:
