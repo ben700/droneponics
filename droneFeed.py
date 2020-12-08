@@ -63,13 +63,13 @@ except:
     _log.critical("except setting up relay bus")
 
 try:
-    relayBus.addRelay(drone.RelayI2C(5, parser.get('droneFeed', 'Relay1'), 21, 85))
+    relayBus.addRelay(5, parser.get('droneFeed', 'Relay1'), 21, 85)
     _log.debug("Relay 1 setup")
-    relayBus.addRelay(drone.RelayI2C(6, parser.get('droneFeed', 'Relay2'), 22, 86))
+    relayBus.addRelay(6, parser.get('droneFeed', 'Relay2'), 22, 86)
     _log.debug("Relay 2 setup")
-    relayBus.addRelay(drone.RelayI2C(7, parser.get('droneFeed', 'Relay3'), 23, 87))
+    relayBus.addRelay(7, parser.get('droneFeed', 'Relay3'), 23, 87)
     _log.debug("Relay 3 setup")
-    relayBus.addRelay(drone.RelayI2C(8, parser.get('droneFeed', 'Relay4'), 24, 88))
+    relayBus.addRelay(8, parser.get('droneFeed', 'Relay4'), 24, 88)
     _log.debug("Relay 4 setup")
 except:
     _log.critical("except setting up relays")
