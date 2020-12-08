@@ -58,8 +58,9 @@ except:
 relayBus=None
 try:
     relayBus=drone.RelaysI2C(_log, blynk)
-    relayBus.testRelay(5, "Relay1", 21, 85)
-  
+    relay = drone.RelayI2C(5, parser.get('droneFeed', 'Relay1'), 21, 85)
+    _log.debug("-------------------------------------append Relay")	
+    relayBus.relays.append(relay)
     _log.debug("-------------------------------------Relay 1 setup")
     relayBus.addRelay(5, parser.get('droneFeed', 'Relay1'), 21, 85)
     _log.debug("-------------------------------------Relay 1 setup")
