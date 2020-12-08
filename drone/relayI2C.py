@@ -39,7 +39,7 @@ class RelaysI2C:
        
 class RelayI2C:
 
-   def __init__(_log, relayNum, Name, *args, **kwargs):
+   def __init__(self, _log, relayNum, Name, *args, **kwargs):
        _log.info("Building Relay object for Relay " + Name)
        self._log = _log
        self.relayNum = relayNum
