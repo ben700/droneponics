@@ -17,13 +17,11 @@ class RelaysI2C:
        self.blynk = blynk
        self._log.debug("-------------------__init__ RelaysI2C completed")
 
-   def testRelay(self, relayNum, relayName, relayInfoPin, relayLEDPin):
-       self._log.debug("-------------------Start testRelay")  
       
    def addRelay(self, relayNum, relayName, relayInfoPin, relayLEDPin):
-       print("-------------------Start addRelay for " + relayName)      
-       relay = RelayI2C(self._log, relayNum, Name)
-       print("-------------------created Relay obj for " + name)
+       self._log.debug("-------------------Start addRelay for " + relayName)      
+#       relay = RelayI2C(self._log, relayNum, Name)
+       self._log.debug("-------------------created Relay obj for " + name)
      #  relay.i2CRelayBoard = self.i2CRelayBoard
     #   print("-------------------set i2CRelayBoard for Relay for " + name)
    #    relay.setBlynk(self.blynk)
