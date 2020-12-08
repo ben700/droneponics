@@ -172,6 +172,7 @@ class LCD:
   
     def updateLCDPumps (self, p1Mode, p2Mode, p3Mode, p4Mode, p1Status, p2Status, p3Status, p4Status):
         self._log.debug  ("updateLCD")
+        self.lcd.clear()  
         self.lcd.printline(0, "Pump 1 " + str(p1Mode) + " " + str(p1Status))
         self.lcd.printline(1, "Pump 2 " + str(p2Mode) + " " + str(p2Status))
         self.lcd.printline(2, "Pump 3 " + str(p3Mode) + " " + str(p3Status))
@@ -180,6 +181,7 @@ class LCD:
   
     def update8LCDPumps (self, p1Mode, p2Mode, p3Mode, p4Mode, p5Mode, p6Mode, p7Mode, p8Mode, p1Status, p2Status, p3Status, p4Status, p5Status, p6Status, p7Status, p8Status):
         self._log.debug  ("updateLCD")
+        self.lcd.clear()
         self.lcd.printline(0, "Pump 1 " + str(p1Mode) + " " + str(p1Status))
         self.lcd.printline(1, "Pump 2 " + str(p2Mode) + " " + str(p2Status))
         self.lcd.printline(2, "Pump 3 " + str(p3Mode) + " " + str(p3Status))
