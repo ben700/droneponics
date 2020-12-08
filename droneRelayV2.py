@@ -415,7 +415,7 @@ try:
     @blynk.handle_event('write V12')
     def v12write_handler(pin, value):
         relayBus.relays[0].cycleOffResetSet(value[0])
-        blynk.virtual_write(relays[0].getInfoPin(), relayBus.relays[0].info())
+        blynk.virtual_write(relayBus.relays[0].getInfoPin(), relayBus.relays[0].info())
         turnDisplayOn()
         
     @blynk.handle_event('write V13')
