@@ -28,6 +28,7 @@ class RelaysI2C:
        self._log.debug("-------------------set info pin for Relay for " + relayName)
        relay.setLEDPin(relayLEDPin)
        self._log.debug("-------------------set LED for Relay for " + relayName)
+       relay.turnOff(self._log)
        self._log.debug.relays.append(relay)
        self._log.debug("-------------------completed addRelay for " + relayName)
       
@@ -53,7 +54,7 @@ class RelayI2C:
        self.infoPin = None
        self.ledPin = None
        self.blynk = BLYNK
-       self.turnOff(_log)
+     #  self.turnOff(_log)
        _log.info("Completed building RelayI2C object for Relay " + Name)
       
    def setBlynk(self, BLYNK):
