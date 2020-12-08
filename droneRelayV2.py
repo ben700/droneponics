@@ -84,7 +84,7 @@ try:
         status = value[0]
         index = 0       
         _log.debug("in v1write_handler staus =" + str(status))       
-        if (staus is "1" ):
+        if (status is "1" ):
            try:
                  _log.debug("in v"+str(index+1)+"write_handler turing off relay " + relayBus.relays[index].name)
                  relayBus.relays[index].turnOff(_log)
@@ -93,7 +93,7 @@ try:
            except:
                  _log.error("Except handle_event V"+str(index+1)+" Turning Off")
                 
-        elif (staus is "2" ):
+        elif (status is "2" ):
            try:
                  _log.debug("in v"+str(index+1)+"write_handler turing on relay")
                  relayBus.relays[index].turnOn(_log)
@@ -125,7 +125,7 @@ try:
         status = value[0]
         index = 1       
         _log.debug("in v1write_handler staus =" + str(status))       
-        if (staus is "1" ):
+        if (status is "1" ):
            try:
                  _log.debug("in v"+str(index+1)+"write_handler turing off relay " + relays.relays[index].name)
                  relays.relays[index].turnOff(_log)
@@ -134,7 +134,7 @@ try:
            except:
                  _log.error("Except handle_event V"+str(index+1)+" Turning Off")
                 
-        elif (staus is "2" ):
+        elif (status is "2" ):
            try:
                  _log.debug("in v"+str(index+1)+"write_handler turing on relay")
                  relays.relays[index].turnOn(_log)
@@ -166,7 +166,7 @@ try:
         status = value[0]
         index = 2       
         _log.debug("in v1write_handler staus =" + str(status))       
-        if (staus is "1" ):
+        if (status is "1" ):
            try:
                  _log.debug("in v"+str(index+1)+"write_handler turing off relay " + relays.relays[index].name)
                  relays.relays[index].turnOff(_log)
@@ -175,7 +175,7 @@ try:
            except:
                  _log.error("Except handle_event V"+str(index+1)+" Turning Off")
                 
-        elif (staus is "2" ):
+        elif (status is "2" ):
            try:
                  _log.debug("in v"+str(index+1)+"write_handler turing on relay")
                  relays.relays[index].turnOn(_log)
@@ -207,7 +207,7 @@ try:
         status = value[0]
         index = 3      
         _log.debug("in v1write_handler staus =" + str(status))       
-        if (staus is "1" ):
+        if (status is "1" ):
            try:
                  _log.debug("in v"+str(index+1)+"write_handler turing off relay " + relays.relays[index].name)
                  relays.relays[index].turnOff(_log)
@@ -216,7 +216,7 @@ try:
            except:
                  _log.error("Except handle_event V"+str(index+1)+" Turning Off")
                 
-        elif (staus is "2" ):
+        elif (status is "2" ):
            try:
                  _log.debug("in v"+str(index+1)+"write_handler turing on relay")
                  relays.relays[index].turnOn(_log)
@@ -248,7 +248,7 @@ try:
         status = value[0]
         index = 4      
         _log.debug("in v1write_handler staus =" + str(status))       
-        if (staus is "1" ):
+        if (status is "1" ):
            try:
                  _log.debug("in v"+str(index+1)+"write_handler turing off relay " + relays.relays[index].name)
                  relays.relays[index].turnOff(_log)
@@ -257,7 +257,7 @@ try:
            except:
                  _log.error("Except handle_event V"+str(index+1)+" Turning Off")
                 
-        elif (staus is "2" ):
+        elif (status is "2" ):
            try:
                  _log.debug("in v"+str(index+1)+"write_handler turing on relay")
                  relays.relays[index].turnOn(_log)
@@ -289,7 +289,7 @@ try:
         status = value[0]
         index = 5    
         _log.debug("in v1write_handler staus =" + str(status))       
-        if (staus is "1" ):
+        if (status is "1" ):
            try:
                  _log.debug("in v"+str(index+1)+"write_handler turing off relay " + relays.relays[index].name)
                  relays.relays[index].turnOff(_log)
@@ -298,7 +298,7 @@ try:
            except:
                  _log.error("Except handle_event V"+str(index+1)+" Turning Off")
                 
-        elif (staus is "2" ):
+        elif (status is "2" ):
            try:
                  _log.debug("in v"+str(index+1)+"write_handler turing on relay")
                  relays.relays[index].turnOn(_log)
@@ -330,7 +330,7 @@ try:
         status = value[0]
         index = 6      
         _log.debug("in v1write_handler staus =" + str(status))       
-        if (staus is "1" ):
+        if (status is "1" ):
            try:
                  _log.debug("in v"+str(index+1)+"write_handler turing off relay " + relays.relays[index].name)
                  relays.relays[index].turnOff(_log)
@@ -339,7 +339,7 @@ try:
            except:
                  _log.error("Except handle_event V"+str(index+1)+" Turning Off")
                 
-        elif (staus is "2" ):
+        elif (status is "2" ):
            try:
                  _log.debug("in v"+str(index+1)+"write_handler turing on relay")
                  relays.relays[index].turnOn(_log)
@@ -371,7 +371,7 @@ try:
         status = value[0]
         index = 7      
         _log.debug("in v1write_handler staus =" + str(status))       
-        if (staus is "1" ):
+        if (status is "1" ):
            try:
                  _log.debug("in v"+str(index+1)+"write_handler turing off relay " + relays.relays[index].name)
                  relays.relays[index].turnOff(_log)
@@ -380,7 +380,7 @@ try:
            except:
                  _log.error("Except handle_event V"+str(index+1)+" Turning Off")
                 
-        elif (staus is "2" ):
+        elif (status is "2" ):
            try:
                  _log.debug("in v"+str(index+1)+"write_handler turing on relay")
                  relays.relays[index].turnOn(_log)
