@@ -142,6 +142,9 @@ try:
     def v11write_handler(pin, value):
         global relayBus
         _log.debug("start v11write_handler")
+        _log.debug("start v11write_handler value[0] =" + str(value[0]))
+        _log.debug("start v11write_handler relayBus.relays[0].name =" + str(relayBus.relays[0].name))
+	
         relayBus.relays[0].cycleResetSet(value[0])
         blynk.virtual_write(relayBus.relays[0].getInfoPin(), relayBus.relays[0].info())
         turnDisplayOn()
