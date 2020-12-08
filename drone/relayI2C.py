@@ -9,8 +9,8 @@ import drone
 
 class RelaysI2C:
    def __init__(self, _log, blynk, *args, **kwargs):
-       I2C_BUS = 1
-       I2C_ADDR = 0x26
+       I2C_BUS = kwargs.get('iI2C_BUS', 1)
+       I2C_ADDR = kwargs.get('iI2C_ADDR', 0x26)
        self.i2CRelayBoard = I2CRelayBoard(I2C_BUS, I2C_ADDR) 
        self._log = _log
        self.relays=[]
