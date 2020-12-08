@@ -3,7 +3,6 @@ systemLED=101
 
 import socket
 import drone
-from drone import Alarm, OpenWeather
 from datetime import datetime, date
 #import date
 import time
@@ -49,8 +48,10 @@ try:
     _log.debug("start blynk")
     blynk.run()
     _log.info("Blynk Created")  
-    
+except:
+    _log.info("except : Creating Blynk") 
 
+try:
     relays=drone.RelaysI2C(_log, blynk)
     relays.addRelay(1, parser.get('droneFeed', 'Relay1'), 21, 85)
     relays.addRelay(2, parser.get('droneFeed', 'Relay2'), 22, 86)
@@ -60,6 +61,10 @@ try:
     relays.addRelay(6, parser.get('droneFeed', 'Relay6'), 26, 90)
     relays.addRelay(7, parser.get('droneFeed', 'Relay7'), 27, 91)
     relays.addRelay(8, parser.get('droneFeed', 'Relay8'), 28, 92)
+except:
+    _log.info("except : Creating Relays") 
+
+try:
            
 
     @blynk.handle_event('write V255')
