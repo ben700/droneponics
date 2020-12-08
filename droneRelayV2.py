@@ -52,15 +52,18 @@ except:
     _log.info("except : Creating Blynk") 
 
 try:
-    relays=drone.RelaysI2C(_log, blynk)
-    relays.addRelay(1, parser.get('droneFeed', 'Relay1'), 21, 85)
-    relays.addRelay(2, parser.get('droneFeed', 'Relay2'), 22, 86)
-    relays.addRelay(3, parser.get('droneFeed', 'Relay3'), 23, 87)
-    relays.addRelay(4, parser.get('droneFeed', 'Relay4'), 24, 88)
-    relays.addRelay(5, parser.get('droneFeed', 'Relay5'), 25, 89)
-    relays.addRelay(6, parser.get('droneFeed', 'Relay6'), 26, 90)
-    relays.addRelay(7, parser.get('droneFeed', 'Relay7'), 27, 91)
-    relays.addRelay(8, parser.get('droneFeed', 'Relay8'), 28, 92)
+    relayBus=drone.RelaysI2C(_log, blynk)
+    _log.debug("-------------------------------------build Relay")
+    relayBus.addRelay(1, parser.get('droneFeed', 'Relay1'), 21, 85)
+    _log.debug("-------------------------------------Relay1 completed going to do relay 2")
+    relayBus.addRelay(2, parser.get('droneFeed', 'Relay2'), 22, 86)
+    relayBus.addRelay(3, parser.get('droneFeed', 'Relay3'), 23, 87)
+    relayBus.addRelay(4, parser.get('droneFeed', 'Relay4'), 24, 88)
+    relayBus.addRelay(5, parser.get('droneFeed', 'Relay5'), 25, 89)
+    relayBus.addRelay(6, parser.get('droneFeed', 'Relay6'), 26, 90)
+    relayBus.addRelay(7, parser.get('droneFeed', 'Relay7'), 27, 91)
+    relayBus.addRelay(8, parser.get('droneFeed', 'Relay8'), 28, 92)
+    _log.debug("------------------------------------- 4 Relays have been setup")
 except:
     _log.info("except : Creating Relays") 
 
