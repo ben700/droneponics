@@ -29,7 +29,7 @@ class RelaysI2C:
        relay.setLEDPin(relayLEDPin)
        self._log.debug("-------------------set LED for Relay for " + relayName)
        relay.turnOff(self._log)
-       self._log.debug.relays.append(relay)
+       self.relays.append(relay)
        self._log.debug("-------------------completed addRelay for " + relayName)
       
        
