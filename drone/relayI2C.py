@@ -22,8 +22,9 @@ class RelaysI2C:
        relay.i2CRelayBoard = self.i2CRelayBoard
        relay.setInfoPin(InfoPin)
        relay.setLEDPin(LEDPin)
+       self._log.debug("-------------------Relay for " + name)
        self.relays.append(relay)
-        
+       self._log.debug(self.relays)
        
 class RelayI2C:
 
