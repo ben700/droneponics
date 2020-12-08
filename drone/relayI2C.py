@@ -16,7 +16,11 @@ class RelaysI2C:
        self.relays=[]
        self.blynk = blynk
        self._log.debug("-------------------__init__ RelaysI2C completed")
-         
+
+   def testRelay(self):
+       print("-------------------Start testRelay")  
+       self._log.debug("-------------------Start testRelay")  
+      
    def addRelay(self, relayNum, relayName, relayInfoPin, relayLEDPin):
        print("-------------------Start addRelay for " + relayName)      
  #      relay = drone.RelayI2C(self._log, relayNum, Name)
