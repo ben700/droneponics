@@ -22,7 +22,7 @@ _log.setLevel(parser.get('logging', 'logLevel', fallback=logging.DEBUG))
 _log.info("/home/pi/droneponics/config/configRelay/"+drone.gethostname()+".ini")
 
 
-
+blynk=None
 try:
     # Initialize Blynk
     blynk = blynklib.Blynk(parser.get('blynk', 'BLYNK_AUTH'), log=_log.info) 
