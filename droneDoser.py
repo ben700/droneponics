@@ -466,7 +466,6 @@ try:
         global nutrientMix
         print("-------------------------------------------")
         print(value)
-        print(param)
         print(pin)
         print("-------------------------------------------")
         nutrientMix[6].dose = value[0]
