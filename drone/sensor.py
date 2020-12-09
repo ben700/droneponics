@@ -97,7 +97,7 @@ class Sensor:
    def read(self):
        try:
            reading = self.sensor.query("R")
-           self._log.debug("CO2 Sensor read " + str(reading)) 
+           self._log.debug(self.name + " Sensor read " + str(reading)) 
            if(reading.find("Error") == -1):
                self._log.debug("Reading Sensor  OK") 
            else:
