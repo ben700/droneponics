@@ -593,12 +593,6 @@ try:
               blynk.virtual_write(98, "System now updated and restarted " + '\n')
               blynk.virtual_write(255, 0)
               _log.info('Just Booted')
-              y = 70
-              for dose in nutrientMix:
-                   _log.info(dose.name)
-                   blynk.virtual_write(y, dose.name)
-                   blynk.virtual_write(y-10, dose.dose)			
-                   y = y + 1		       
   
               _log.info("Now look as sensors")
               blynk.virtual_write(98,"Temp Cal " + sensors[0].sensor.query("Cal,?")+ '\n')
@@ -615,16 +609,18 @@ try:
               blynk.set_property(39, "label", "EC Mode")
               blynk.set_property(49, "label", "pH Mode")
 	
-           
-	
               u=41
               labelPin = 70
+              y=60
               for dosage in nutrientMix:
                    blynk.set_property(u, "label", dosage.name + " Fill")
                    blynk.set_property(labelPin, 'label', dosage.name)
                    blynk.virtual_write(labelPin, dosage.name)
+                   blynk.virtual_write(y, dose.name)
                    u = u+1
                    labelPin = labelPin + 1
+                   y = y + 1
+
               pins = [ 1, 10, 11, 12, 13, 14, 15, 16, 27, 38,39,41,42,43,44,45,46,47,48,49, 60, 61, 62, 63, 64, 65, 66, 90, 91, 92, 93, 94, 95, 96, 1]
               for pin in pins:
                    _log.info('Syncing virtual buttons {}'.format(pin))
