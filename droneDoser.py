@@ -426,36 +426,43 @@ try:
 		
     @blynk.handle_event('write V60')
     def v60write_handler(pin, value):
+        global nutrientMix
         nutrientMix[0].dose = value[0]
         blynk.virtual_write(98, nutrientMix[0].name + " dose volume set to " + str(nutrientMix[0].dose)+ '\n')
  	 	
     @blynk.handle_event('write V61')
     def v61write_handler(pin, value):
+        global nutrientMix
         nutrientMix[1].dose = value[0]
         blynk.virtual_write(98, nutrientMix[1].name + " dose volume set to " + str(nutrientMix[1].dose)+ '\n')
     
     @blynk.handle_event('write V62')
     def v62write_handler(pin, value):
+        global nutrientMix
         nutrientMix[2].dose = value[0]
         blynk.virtual_write(98, nutrientMix[2].name + " dose volume set to " + str(nutrientMix[2].dose)+ '\n')
     
     @blynk.handle_event('write V63')
     def v63write_handler(pin, value):
+        global nutrientMix
         nutrientMix[3].dose = value[0]
         blynk.virtual_write(98, nutrientMix[3].name + " dose volume set to " + str(nutrientMix[3].dose)+ '\n')
     
     @blynk.handle_event('write V64')
     def v64write_handler(pin, value):
+        global nutrientMix
         nutrientMix[4].dose = value[0]
         blynk.virtual_write(98, nutrientMix[4].name + " dose volume set to " + str(nutrientMix[4].dose)+ '\n')
 
     @blynk.handle_event('write V65')
     def v65write_handler(pin, value):
+        global nutrientMix
         nutrientMix[5].dose = value[0]
         blynk.virtual_write(98, nutrientMix[5].name + " dose volume set to " + str(nutrientMix[5].dose)+ '\n')
 
     @blynk.handle_event('write V66')
     def v66write_handler(pin, value):
+        global nutrientMix
         nutrientMix[6].dose = value[0]
         blynk.virtual_write(98, nutrientMix[6].name + " dose volume set to " + str(nutrientMix[6].dose)+ '\n')
 
