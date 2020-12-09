@@ -429,6 +429,7 @@ try:
         global nutrientMix
         nutrientMix[0].dose = value[0]
         blynk.virtual_write(98, nutrientMix[0].name + " dose volume set to " + str(nutrientMix[0].dose)+ '\n')
+        _log.info(nutrientMix[0].name + " dose volume set to " + str(nutrientMix[0].dose)+ '\n')
  	 	
     @blynk.handle_event('write V61')
     def v61write_handler(pin, value):
@@ -465,6 +466,7 @@ try:
         global nutrientMix
         nutrientMix[6].dose = value[0]
         blynk.virtual_write(98, nutrientMix[6].name + " dose volume set to " + str(nutrientMix[6].dose)+ '\n')
+        _log.info(nutrientMix[6].name + " dose volume set to " + str(nutrientMix[6].dose)+ '\n')
 
     @blynk.handle_event('write V90')
     def v90write_handler(pin, value):
