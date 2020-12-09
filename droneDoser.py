@@ -622,7 +622,7 @@ try:
                    blynk.set_property(u, "label", dosage.name + " Fill")
                    blynk.set_property(labelPin, 'label', dosage.name)
                    blynk.virtual_write(labelPin, dosage.name)
-                   blynk.virtual_write(y, dosage.name)
+                   blynk.virtual_write(y, 'label', dosage.name)
                    u = u+1
                    labelPin = labelPin + 1
                    y = y + 1
