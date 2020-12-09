@@ -617,16 +617,13 @@ try:
 	
               u=41
               labelPin = 70
-              y=60
               for dosage in nutrientMix:
                    blynk.set_property(u, "label", dosage.name + " Fill")
                    blynk.set_property(labelPin, 'label', dosage.name)
                    blynk.virtual_write(labelPin, dosage.name)
-                   blynk.virtual_write(y, 'label', dosage.name)
                    u = u+1
                    labelPin = labelPin + 1
-                   y = y + 1
-
+              
               pins = [ 1, 10, 11, 12, 13, 14, 15, 16, 27, 38,39,41,42,43,44,45,46,47,48,49, 60, 61, 62, 63, 64, 65, 66, 90, 91, 92, 93, 94, 95, 96, 1]
               for pin in pins:
                    _log.info('Syncing virtual buttons {}'.format(pin))
