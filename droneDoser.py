@@ -58,13 +58,6 @@ try:
     _log.info("all senses created")
 	
 	
-    try:
-        lcdDisplay=drone.Display(_log)
-    except:
-        lcdDisplay=None
-	
-    _log.info("all senses created")
-		
 
     # Initialize Blynk
     blynk = blynklib.Blynk(parser.get('droneDoser', 'BLYNK_AUTH'))        
@@ -204,12 +197,7 @@ try:
         for sensor in sensors:
            if sensor is not None:
               sensor.display(blynk)
-        try:			
-           if lcdDisplay is not None: 
-              lcdDisplay.updateLCDProbe (sensors[2].value, sensors[1].value, sensors[0].value)
-        except:
-           _log.critical("updating LCD crashed")
-		
+   
 	
 
     @blynk.handle_event('write V27')
