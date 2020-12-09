@@ -79,9 +79,12 @@ try:
     # Initialize the sensor.
     try:
        # Create the I2C bus
+       labelPin = 70
        for dosage in nutrientMix:
            dosage.pump = AtlasI2C(dosage.pumpId)
            _log.info("Created Pump" + str(dosage.pumpId))
+           blynk.set_property(labelPin, 'label', dosage.name)
+           labelPin = labelPin + 1
        blynk.virtual_write(98, "Pumps created" + '\n') 
        for sensor in sensors:
            sensor.sensor = AtlasI2C(sensor.sensorId)
