@@ -157,7 +157,7 @@ try:
                    _log.info(now.strftime("%d/%m/%Y %H:%M:%S") + " Going to Dose pH")
                  #  dosage.volume = dosage.pump.query("TV,?").split("TV,")[1].strip().rstrip('\x00')
                    blynk.set_property(dosage.LED, 'color', colours[0])
-                   if (float(sensors[2].target) < float(sensors[2].read())): #ph
+                   if (float(sensors[2].target) > float(sensors[2].read())): #ph
                         _log.critical("Ph target is " + str(float(sensors[2].target)) + " and dosing but ph read is " + str(float(sensors[2].read())))
                         break			
                    dosage.pump.query("D,"+str(dosage.dose))
