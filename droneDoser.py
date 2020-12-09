@@ -202,7 +202,7 @@ try:
 
     @blynk.handle_event('write V27')
     def v27write_handler(pin, value):
-        global rowIndex
+        global rowIndex, nutrientMix
         rowIndex = 0
         for dosage in nutrientMix:
              dosage.volume =0
