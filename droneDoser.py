@@ -10,7 +10,6 @@ import time
 import logging
 import sys
 import os
-import RPi.GPIO as GPIO
 sys.path.append('/home/pi/droneponics')
 from AtlasI2C import (
    AtlasI2C
@@ -523,7 +522,7 @@ try:
     def connect_handler():
         _log.warning("Connected")
         blynk.virtual_write(250, "Connected")
-        pins = [ 35, 36, 90, 91, 92, 93, 94, 95, 96, 1, 2, 3, 4, 8, 28, 29,30,31,32,35,36,38,39,41,42,43,44,45,46,47,48,49, 60, 61, 62, 63, 64, 65, 66, 1]
+        pins = [ 1, 10, 11, 12, 13, 14, 15, 16, 27, 38,39,41,42,43,44,45,46,47,48,49, 60, 61, 62, 63, 64, 65, 66, 90, 91, 92, 93, 94, 95, 96, 1]
         for pin in pins:
            _log.info('Syncing virtual buttons {}'.format(pin))
            blynk.virtual_sync(pin)
@@ -621,12 +620,17 @@ try:
               blynk.set_property(39, "label", "EC Mode")
               blynk.set_property(49, "label", "pH Mode")
 	
+           
 	
               u=41
+              labelPin = 70
               for dosage in nutrientMix:
                    blynk.set_property(u, "label", dosage.name + " Fill")
-                   u = u+1	
-              pins = [ 35, 36, 90, 91, 92, 93, 94, 95, 96, 1, 2, 3, 4, 8, 28, 29,30,31,32,35,36,38,39,41,42,43,44,45,46,47,48,49, 60, 61, 62, 63, 64, 65, 66, 1]
+                   blynk.set_property(labelPin, 'label', dosage.name)
+                   blynk.virtual_write(labelPin, dosage.name)
+                   u = u+1
+                   labelPin = labelPin + 1
+              pins = [ 1, 10, 11, 12, 13, 14, 15, 16, 27, 38,39,41,42,43,44,45,46,47,48,49, 60, 61, 62, 63, 64, 65, 66, 90, 91, 92, 93, 94, 95, 96, 1]
               for pin in pins:
                    _log.info('Syncing virtual buttons {}'.format(pin))
                    blynk.virtual_sync(pin)
@@ -645,7 +649,7 @@ try:
                 blynk.set_property(l, 'color', colours['OFFLINE'])
            blynk.set_property(systemLED, 'color', colours['OFFLINE'])
            os.system('sh /home/pi/updateDroneponics.sh')
-   #        os.system('sudo reboot') 
+           os.system('sudo reboot') 
   
    
 except KeyboardInterrupt:
@@ -653,19 +657,17 @@ except KeyboardInterrupt:
    blynkErr = blynklib.Blynk(parser.get('droneDoser', 'BLYNK_AUTH'))
    blynkErr.run()
    blynkErr.virtual_write(250, "Keyboard Interrupt")
-   for l in LED:
-        blynkErr.set_property(l, 'color', colours['OFFLINE'])
+   blynkErr.set_property(systemLED, 'color', colours['OFFLINE'])
    blynkErr.virtual_write(98, "System has error" + '\n')
    os.system('sh /home/pi/updateDroneponics.sh')
-  # os.system('sudo reboot')
+   os.system('sudo reboot')
 
 except:
-   _log.critical('Unexpected error')
+   _log.critical('Final except: Unexpected error')
    blynkErr = blynklib.Blynk(parser.get('droneDoser', 'BLYNK_AUTH'))
    blynkErr.run()
    blynkErr.virtual_write(250, "Crash")
-   for l in LED:
-        blynkErr.set_property(l, 'color', colours['OFFLINE'])
+   blynkErr.set_property(systemLED, 'color', colours['OFFLINE'])
    blynkErr.virtual_write(98, "System has error" + '\n')
    os.system('sh /home/pi/updateDroneponics.sh')
- #  os.system('sudo reboot')
+   os.system('sudo reboot')
