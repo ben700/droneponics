@@ -38,7 +38,6 @@ try:
     consoleHandler.setFormatter(logFormatter)
     _log.addHandler(consoleHandler)
     _log.setLevel(parser.get('logging', 'logLevel', fallback=logging.DEBUG))
-
     _log.critical("critical")
     _log.error("error")
     _log.warning("warning")
@@ -480,36 +479,43 @@ try:
 
     @blynk.handle_event('write V90')
     def v90write_handler(pin, value):
+        global nutrientMix
         nutrientMix[0].volume = float(value[0])
         _log.info("Loading passed volume for " + nutrientMix[0].name + " value[0] is " + str(value[0]))
 
     @blynk.handle_event('write V91')
     def v91write_handler(pin, value):
+        global nutrientMix
         nutrientMix[1].volume = float(value[0])
         _log.info("Loading passed volume for " + nutrientMix[1].name + " value[0] is " + str(value[0]))
 	
     @blynk.handle_event('write V92')
     def v92write_handler(pin, value):
+        global nutrientMix
         nutrientMix[2].volume = float(value[0])
         _log.info("Loading passed volume for " + nutrientMix[2].name + " value[0] is " + str(value[0]))
 	
     @blynk.handle_event('write V93')
     def v93write_handler(pin, value):
+        global nutrientMix
         nutrientMix[3].volume = float(value[0])
         _log.info("Loading passed volume for " + nutrientMix[3].name + " value[0] is " + str(value[0]))
 	
     @blynk.handle_event('write V94')
     def v94write_handler(pin, value):
+        global nutrientMix
         nutrientMix[4].volume = float(value[0])
         _log.info("Loading passed volume for " + nutrientMix[4].name + " value[0] is " + str(value[0]))
 	
     @blynk.handle_event('write V95')
     def v95write_handler(pin, value):
+        global nutrientMix
         nutrientMix[5].volume = float(value[0])
         _log.info("Loading passed volume for " + nutrientMix[5].name + " value[0] is " + str(value[0]))
 	
     @blynk.handle_event('write V96')
     def v96write_handler(pin, value):
+        global nutrientMix
         nutrientMix[6].volume = float(value[0])
         _log.info("Loading passed volume for " + nutrientMix[6].name + " value[0] is " + str(value[0]))
 
