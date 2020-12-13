@@ -264,7 +264,7 @@ try:
            try:			
                 if lcdDisplay is not None: 
                     _log.critical("++++++++++++++++++++++++++++++++++++Going to update LCD")
-                    lcdDisplay.updateLCDPumps (relayBus.relays[0].state, relayBus.relays[1].state, relayBus.relays[2].state, relayBus.relays[3].state, relayBus.relays[0].isManual(), relayBus.relays[1].isManual(), relayBus.relays[2].isManual(), relayBus.relays[3].isManual() )
+                    lcdDisplay.updateLCDPumps (relayBus.relays[0].state, relayBus.relays[1].state, relayBus.relays[2].state, relayBus.relays[3].state, relayBus.relays[0].isManual(), relayBus.relays[1].isManual(), relayBus.relays[2].isManual(), relayBus.relays[3].isManual(), counter )
            except:
               _log.critical("updating LCD crashed loop")
                 
