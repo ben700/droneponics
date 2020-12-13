@@ -98,10 +98,10 @@ try:
         relay = 1       
         _log.debug("in v2write_handler staus =" + str(staus))       
         if (staus is "1" ):
-           relayBus.relays.turnOff(_log)
+           relayBus.relays[relay].turnOff(_log)
            #relayBus.i2CRelayBoard.switch_on(6)
         elif (staus is "2" ):
-           relayBus.relays.turnOn(_log)
+           relayBus.relays[relay].turnOn(_log)
            #relayBus.i2CRelayBoard.switch_off(6)
         turnDisplayOn()
            
@@ -112,11 +112,11 @@ try:
         staus = value[0]
         relay = 2
         if (staus is "1" ):
-           relayBus.relays.turnOff(_log)
+           relayBus.relays[relay].turnOff(_log)
            #relayBus.i2CRelayBoard.switch_on(7)
         elif (staus is "2" ):
            _log.debug("in v3write_handler turing on relay")
-           relayBus.relays.turnOn(_log)
+           relayBus.relays[relay].turnOn(_log)
            #relayBus.i2CRelayBoard.switch_off(7)
         turnDisplayOn()
         
@@ -128,9 +128,9 @@ try:
         relay = 3      
         if (staus is "1" ):
            #relayBus.i2CRelayBoard.switch_on(8)
-           relayBus.relays.turnOff(_log)
+           relayBus.relays[relay].turnOff(_log)
         elif (staus is "2" ):
-           relayBus.relays.turnOn(_log)
+           relayBus.relays[relay].turnOn(_log)
            #relayBus.i2CRelayBoard.switch_off(8)
         turnDisplayOn()
         
