@@ -84,12 +84,13 @@ try:
         relay = 0       
         _log.debug("in v1write_handler staus =" + str(staus))       
         if (staus is "1" ):
-           #relays[relay].turnOff(_log)     
-           relayBus.i2CRelayBoard.switch_on(5)
+           relayBus[relay].turnOff(_log)     
+#           relayBus.i2CRelayBoard.switch_on(5)
         elif (staus is "2" ):
-           #relays[relay].turnOn(_log)
-           relayBus.i2CRelayBoard.switch_on(5)
-
+           relayBus[relay].turnOn(_log)
+           #relayBus.i2CRelayBoard.switch_on(5)
+        turnDisplayOn()
+	
     @blynk.handle_event('write V2')
     def v2write_handler(pin, value):
         global relayBus
