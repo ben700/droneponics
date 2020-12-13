@@ -268,7 +268,7 @@ try:
            except:
               _log.critical("updating LCD crashed loop")
                 
-           if (counter > 5):
+           if (counter == 5):
                 turnDisplayOff()		
            _log.debug("The End")
      
