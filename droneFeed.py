@@ -84,10 +84,10 @@ try:
         relay = 0       
         _log.debug("in v1write_handler staus =" + str(staus))       
         if (staus is "1" ):
-           relayBus[relay].turnOff(_log)     
+           relayBus.relay[relay].turnOff(_log)     
 #           relayBus.i2CRelayBoard.switch_on(5)
         elif (staus is "2" ):
-           relayBus[relay].turnOn(_log)
+           relayBus.relay[relay].turnOn(_log)
            #relayBus.i2CRelayBoard.switch_on(5)
         turnDisplayOn()
 	
