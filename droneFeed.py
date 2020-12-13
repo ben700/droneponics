@@ -85,10 +85,8 @@ try:
         _log.debug("in v1write_handler staus =" + str(staus))       
         if (staus is "1" ):
            relayBus.relays[relay].turnOff(_log)     
-#           relayBus.i2CRelayBoard.switch_on(5)
         elif (staus is "2" ):
            relayBus.relays[relay].turnOn(_log)
-           #relayBus.i2CRelayBoard.switch_on(5)
         turnDisplayOn()
 	
     @blynk.handle_event('write V2')
@@ -99,10 +97,8 @@ try:
         _log.debug("in v2write_handler staus =" + str(staus))       
         if (staus is "1" ):
            relayBus.relays[relay].turnOff(_log)
-           #relayBus.i2CRelayBoard.switch_on(6)
         elif (staus is "2" ):
            relayBus.relays[relay].turnOn(_log)
-           #relayBus.i2CRelayBoard.switch_off(6)
         turnDisplayOn()
            
 
@@ -113,11 +109,9 @@ try:
         relay = 2
         if (staus is "1" ):
            relayBus.relays[relay].turnOff(_log)
-           #relayBus.i2CRelayBoard.switch_on(7)
         elif (staus is "2" ):
            _log.debug("in v3write_handler turing on relay")
            relayBus.relays[relay].turnOn(_log)
-           #relayBus.i2CRelayBoard.switch_off(7)
         turnDisplayOn()
         
           
@@ -127,22 +121,15 @@ try:
         staus = value[0]
         relay = 3      
         if (staus is "1" ):
-           #relayBus.i2CRelayBoard.switch_on(8)
            relayBus.relays[relay].turnOff(_log)
         elif (staus is "2" ):
            relayBus.relays[relay].turnOn(_log)
-           #relayBus.i2CRelayBoard.switch_off(8)
         turnDisplayOn()
         
   
     @blynk.handle_event('write V11')
     def v11write_handler(pin, value):
         global relayBus
-        _log.debug("start v11write_handler")
-        _log.debug("start v11write_handler value[0] =" + str(value[0]))
-        print(relayBus.relays)
-#        _log.debug("start v11write_handler relayBus.relays[0].name =" + str(relayBus.relays[0].name))
-	
         relayBus.relays[0].cycleResetSet(value[0])
         blynk.virtual_write(relayBus.relays[0].getInfoPin(), relayBus.relays[0].info())
         turnDisplayOn()
@@ -252,18 +239,16 @@ try:
                 if(relay.isAutomatic()):
                     _log.debug("relay " + relay.name + " is automatic so test cycle")
                     if(relay.whatCycle() == "On"):
-                        #relay.turnOn(_log)
-                        i2CRelayBoard.switch_off(relay.relayNum)
+                        relay.turnOn(_log)
+                        #i2CRelayBoard.switch_off(relay.relayNum)
 
                     else:
-                        #relay.turnOff(_log)
-                        i2CRelayBoard.switch_on(relay.relayNum)
+                        relay.turnOff(_log)
+                        #i2CRelayBoard.switch_on(relay.relayNum)
 
                     relay.incCycle()
-      #     if(relay.hasInfoPin()):
-      #          blynk.virtual_write(relay.getInfoPin(), relay.info())
-      #     else:
-      #          text = text + self.name + " is " + relay.whatCycle() + " "
+           if(relay.hasInfoPin()):
+                blynk.virtual_write(relay.getInfoPin(), relay.info())
            
            try:			
                 if lcdDisplay is not None: 
@@ -288,7 +273,7 @@ try:
  
            try:			
                 if lcdDisplay is not None: 
-                    _log.critical("++++++++++++++++++++++++++++++++++++Going to update LCD. Counter=" + str(counter))
+                    _log.info("++++++++++++++++++++++++++++++++++++Going to update LCD. Counter=" + str(counter))
                     lcdDisplay.updateLCDPumps (relayBus.relays[0].state, relayBus.relays[1].state, relayBus.relays[2].state, relayBus.relays[3].state, relayBus.relays[0].isManual(), relayBus.relays[1].isManual(), relayBus.relays[2].isManual(), relayBus.relays[3].isManual(), counter )
            except:
               _log.critical("updating LCD crashed loop")
