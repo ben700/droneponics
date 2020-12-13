@@ -98,11 +98,12 @@ try:
         relay = 1       
         _log.debug("in v2write_handler staus =" + str(staus))       
         if (staus is "1" ):
-           #relays[relay].turnOff(_log)
-           relayBus.i2CRelayBoard.switch_on(6)
+           relayBus.relays.turnOff(_log)
+           #relayBus.i2CRelayBoard.switch_on(6)
         elif (staus is "2" ):
-           #relays[relay].turnOn(_log)
-           relayBus.i2CRelayBoard.switch_off(6)
+           relayBus.relays.turnOn(_log)
+           #relayBus.i2CRelayBoard.switch_off(6)
+        turnDisplayOn()
            
 
     @blynk.handle_event('write V3')
@@ -111,12 +112,13 @@ try:
         staus = value[0]
         relay = 2
         if (staus is "1" ):
-           #relays[relay].turnOff(_log)
-           relayBus.i2CRelayBoard.switch_on(7)
+           relayBus.relays.turnOff(_log)
+           #relayBus.i2CRelayBoard.switch_on(7)
         elif (staus is "2" ):
            _log.debug("in v3write_handler turing on relay")
-           #relays[relay].turnOn(_log)
-           relayBus.i2CRelayBoard.switch_off(7)
+           relayBus.relays.turnOn(_log)
+           #relayBus.i2CRelayBoard.switch_off(7)
+        turnDisplayOn()
         
           
     @blynk.handle_event('write V4')
@@ -125,11 +127,12 @@ try:
         staus = value[0]
         relay = 3      
         if (staus is "1" ):
-           relayBus.i2CRelayBoard.switch_on(8)
-          # relays[relay].turnOff(_log)
+           #relayBus.i2CRelayBoard.switch_on(8)
+           relayBus.relays.turnOff(_log)
         elif (staus is "2" ):
-           #relays[relay].turnOn(_log)
-           relayBus.i2CRelayBoard.switch_off(8)
+           relayBus.relays.turnOn(_log)
+           #relayBus.i2CRelayBoard.switch_off(8)
+        turnDisplayOn()
         
   
     @blynk.handle_event('write V11')
@@ -283,6 +286,13 @@ try:
            blynk.set_property(251, "label",drone.gethostname())
            blynk.virtual_write(251, drone.get_ip())
  
+           try:			
+                if lcdDisplay is not None: 
+                    _log.critical("++++++++++++++++++++++++++++++++++++Going to update LCD. Counter=" + str(counter))
+                    lcdDisplay.updateLCDPumps (relayBus.relays[0].state, relayBus.relays[1].state, relayBus.relays[2].state, relayBus.relays[3].state, relayBus.relays[0].isManual(), relayBus.relays[1].isManual(), relayBus.relays[2].isManual(), relayBus.relays[3].isManual(), counter )
+           except:
+              _log.critical("updating LCD crashed loop")
+               
            
            bootup = False
            _log.debug("Just about to complete Booting")
