@@ -19,6 +19,7 @@ import drone
 
 bootup = True
 systemLED=101
+rowIndex =0 
 
 parser = ConfigParser()
 parser.read("/home/pi/droneponics/config/configOxy/"+drone.gethostname()+".ini")
@@ -108,6 +109,7 @@ def fillLinePump1(pin, value):
 @blynk.handle_event('write V42')
 def fillLinePump2(pin, value):
     global rowIndex
+    _log.info( "Fill Line 2 " + str(value[0]) + '\n')
     now = datetime.now()
     blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))    
     blynk.set_property(nutrientMix[x].LED, 'color', colours[value[0]])
