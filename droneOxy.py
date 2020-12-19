@@ -161,6 +161,8 @@ while True:
            blynk.virtual_write(98, "System now updated and restarted " + '\n')
            blynk.virtual_write(255, 0)
            blynk.virtual_write(9, 255)
+           blynk.virtual_write(nutrientMix[0].LED, 255)
+	
            _log.info('Just Booted')
     
            _log.info("Boot Completed")
