@@ -108,14 +108,16 @@ def fillLinePump1(pin, value):
 
 @blynk.handle_event('write V42')
 def fillLinePump2(pin, value):
-    global rowIndex
+    global rowIndex, relay
     _log.info( "Fill Line 2 " + str(value[0]) + '\n')
     now = datetime.now()
     blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))    
     blynk.set_property(nutrientMix[x].LED, 'color', colours[value[0]])
     if(value[0] == '1'):
+        _log.info("Turn Off") 
         relay.turnOff(_log)
     elif(value[0] == '2'):
+        _log.info("Turn On") 
         relay.turnOn(_log)
     else:
         _log.info("Relay is Auto")
