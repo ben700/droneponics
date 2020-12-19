@@ -52,6 +52,9 @@ sensors = drone.buildMonitorSensors(sensors, _log)
 _log.info("All Monitor Sensors created")
 
 
+relay = drone.Relay(_log, 21, "Ozone")
+relay.turnOff(_log)
+
 def processSensors():   
     for sensor in sensors:
        if sensor is not None:
@@ -105,28 +108,15 @@ def fillLinePump1(pin, value):
 @blynk.handle_event('write V42')
 def fillLinePump2(pin, value):
     global rowIndex
-    x=1
-    _log.info( "Fill Line 2 " + str(value[0]) + '\n')
-    lVolume= nutrientMix[x].volume
     now = datetime.now()
     blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))    
     blynk.set_property(nutrientMix[x].LED, 'color', colours[value[0]])
     if(value[0] == '1'):
-         _log.info("Pump for " +nutrientMix[x].name +" = " + nutrientMix[x].pump.query("X") + '\n')
-         dosed = nutrientMix[x].pump.query("R").split(":")[1].strip().rstrip('\x00')
-        #    volumeThisTime = nutrientMix[x].pump.query("TV,?").split("TV,")[1]
-         if (float(dosed) > 0) :
-              nutrientMix[x].volume = float(nutrientMix[x].volume) + float(dosed)
-              blynk.virtual_write(98, "255 " + now.strftime("%d/%m/%Y %H:%M:%S") + " :- Had used " + str(lVolume) + " ml| Now Dosed :"+ str(nutrientMix[x].volume) + "ml" + '\n') 
-              blynk.virtual_write(98, "256 " + now.strftime("%d/%m/%Y %H:%M:%S") + " :- Pump for " + nutrientMix[x].name + ":- STOPPED"  + " Dosed :"+ str(dosed) + "ml" + '\n') 
-              blynk.virtual_write(28, "add", rowIndex, nutrientMix[x].name + " dosed " + str(dosed) + " ml", now.strftime("%d/%m/%Y %H:%M:%S"))
-              rowIndex = rowIndex+1
-              blynk.virtual_write(29,rowIndex)  
-         blynk.virtual_write(nutrientMix[x].volumePin, nutrientMix[x].volume )
+        relay.turnOff(_log)
+    elif(value[0] == '2'):
+        relay.turnOn(_log)
     else:
-         _log.info("Pump for " +nutrientMix[x].name +" = " + nutrientMix[x].pump.query("D,*") + '\n') 
-         blynk.virtual_write(98, "263 " + now.strftime("%d/%m/%Y %H:%M:%S") + " :- Pump for " + nutrientMix[x].name + ":- STARTED" + '\n') 
-
+	 _log.info("Relay is Auto")
 		
 			
 	
