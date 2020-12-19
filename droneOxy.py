@@ -116,7 +116,7 @@ def fillLinePump2(pin, value):
     elif(value[0] == '2'):
         relay.turnOn(_log)
     else:
-	_log.info("Relay is Auto")
+        _log.info("Relay is Auto")
 		
 			
 	
