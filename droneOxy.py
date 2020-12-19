@@ -112,7 +112,7 @@ def fillLinePump2(pin, value):
     _log.info( "Fill Line 2 " + str(value[0]) + '\n')
     now = datetime.now()
     blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))    
-   # blynk.set_property(9, 'color', colours[value[0]])
+    blynk.set_property(9, 'color', drone.colours[value[0]])
     if(value[0] == '1'):
         _log.info("Turn Off") 
         relay.turnOff(_log)
