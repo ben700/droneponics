@@ -96,9 +96,11 @@ def fillLinePump1(pin, value):
     now = datetime.now()
     blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))    
     if(value[0] == '1'):
+         _log.info("Stop Pump for " +nutrientMix[x].name )
+         nutrientMix[x].pump.query("X")		
+    if(value[0] == '2'):	
          _log.info("Pump for " +nutrientMix[x].name +" = " + nutrientMix[x].pump.query("X") + '\n')
          dosed = nutrientMix[x].pump.query("R").split(":")[1].strip().rstrip('\x00')
-        #    volumeThisTime = nutrientMix[x].pump.query("TV,?").split("TV,")[1]
          if (float(dosed) > 0) :
               nutrientMix[x].volume = float(nutrientMix[x].volume) + float(dosed)
               blynk.virtual_write(98, "255 " + now.strftime("%d/%m/%Y %H:%M:%S") + " :- Had used " + str(lVolume) + " ml| Now Dosed :"+ str(nutrientMix[x].volume) + "ml" + '\n') 
