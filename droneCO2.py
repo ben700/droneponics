@@ -140,7 +140,7 @@ try:
            blynk.set_property(sensors[0].displayPin, 'color', drone.colours['OFFLINE'])			
            blynk.set_property(systemLED, 'color', drone.colours['OFFLINE'])
            os.system('sh /home/pi/updateDroneponics.sh')
-           os.system('sudo reboot') 
+   #        os.system('sudo reboot') 
   
    
 except KeyboardInterrupt:
@@ -150,7 +150,7 @@ except KeyboardInterrupt:
    blynkErr.set_property(sensors[0].displayPin, 'color', drone.colours['OFFLINE'])			
    blynkErr.virtual_write(250, "Keyboard Interrupt")
    os.system('sh /home/pi/updateDroneponics.sh')
-   os.system('sudo reboot')
+  # os.system('sudo reboot')
 
 except:
    _log.info('Unexpected error')
@@ -159,4 +159,4 @@ except:
    blynkErr.set_property(sensors[0].displayPin, 'color', drone.colours['OFFLINE'])			
    blynkErr.virtual_write(98, "System has error" + '\n')
    os.system('sh /home/pi/updateDroneponics.sh')
-   os.system('sudo reboot')
+ #  os.system('sudo reboot')
