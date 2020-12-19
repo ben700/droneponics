@@ -47,7 +47,12 @@ timer = blynktimer.Timer()
 blynk.run()
 blynk.set_property(systemLED, 'color', drone.colours['ONLINE'])
 _log.info("Blynk created")
-	
+
+
+nutrientMix = []
+_log.info("drone.buildNutrientMix")
+nutrientMix = drone.buildOxyMix(nutrientMix, _log)
+
 sensors = []
 sensors = drone.buildMonitorSensors(sensors, _log)
 _log.info("All Monitor Sensors created")
