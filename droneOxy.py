@@ -165,7 +165,26 @@ def fillLinePump2(pin, value):
         _log.info("Relay is Auto")
 		
 			
+@blynk.handle_event('write V27')
+def v27write_handler(pin, value):
+        global rowIndex, nutrientMix
+        rowIndex = 0
+        for dosage in nutrientMix:
+             dosage.volume =0
+             dosage.pump.query("clear")
+             blynk.virtual_write(dosage.volumePin, dosage.volume )
+             _log.info("reset TVP for " + dosage.name + " to " + str(dosage.volume) + " using pin " + str(dosage.volumePin))
+        blynk.virtual_write(29, rowIndex)
+        blynk.virtual_write(28, "clr")
+        blynk.virtual_write(27, 0)
+        blynk.virtual_write(98, "209 Reset the pump volume counters"+'\n')
+      
 	
+@blynk.handle_event('write V29')
+def v29write_handler(pin, value):
+        global rowIndex
+        rowIndex = int(value[0])
+        	
 	
 @timer.register(interval=30, run_once=False)
 def blynk_data():
