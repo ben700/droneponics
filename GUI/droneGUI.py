@@ -1,3 +1,7 @@
+import tkinter as tk
+from tkinter import ttk
+
+
 class PageOne(tk.Frame):
 
     def __init__(self, parent, controller):
