@@ -74,7 +74,38 @@ def processSensors():
     for sensor in sensors:
        if sensor is not None:
           sensor.display(blynk)
-      		
+
+		
+ def doSingleDose():   
+        global rowIndex
+        now = datetime.now()
+        blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
+        for dosage in nutrientMix:		
+           if(dosage.pump is not None and dosage.name == "pH"):
+                   _log.info(now.strftime("%d/%m/%Y %H:%M:%S") + " Going to Dose pH")
+                 #  dosage.volume = dosage.pump.query("TV,?").split("TV,")[1].strip().rstrip('\x00')
+                   blynk.set_property(dosage.LED, 'color', colours[0])
+                   if (float(sensors[2].target) > float(sensors[2].read())): #ph
+                        _log.critical("Ph target is " + str(float(sensors[2].target)) + " and dosing but ph read is " + str(float(sensors[2].read())))
+                        break			
+                   dosage.pump.query("D,"+str(dosage.dose))
+                   while (True):
+                        dosed = dosage.pump.query("R").split(":")[1].split(",")[0].strip().rstrip('\x00')
+                        if (float(dosed) >= float(dosage.dose)):
+                            break	
+                   blynk.set_property(dosage.LED, 'color', colours[1])
+                  # dosage.volume = dosage.pump.query("TV,?").split("TV,")[1].strip().rstrip('\x00')
+                   dosage.volume = float(dosage.volume) + float(dosed)
+                   blynk.virtual_write(98, "159 Dose pH with " + str(dosage.dose) + "ml total volume now " + str(dosage.volume) + "ml" + '\n')
+                   blynk.virtual_write(28, "add", rowIndex, dosage.name + " dosed " + str(dosage.dose) + " ml", now.strftime("%d/%m/%Y %H:%M:%S"))
+                   rowIndex = rowIndex+1
+                   blynk.virtual_write(29,rowIndex)  
+                   blynk.virtual_write(dosage.volumePin, dosage.volume )
+                   if (int(float(dosage.volume)) >= int(float(dosage.bottleSize))):
+                        blynk.notify(dosage.name + " has pumped " + str(dosage.volume) + ", so may need topup")      
+    
+		
+		
 @blynk.handle_event('write V255')
 def rebooter(pin, value):
     _log.info( "User reboot")
@@ -143,13 +174,29 @@ def blynk_data():
     now = datetime.now()
     blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
     processSensors()
-   
-    _log.info("Completed Timer Function") 
 
+  if (float(sensors[1].target) > float(sensors[1].value) and (int(sensors[1].mode) == 3)): #DO
+        _log.info("Do a dose")     
+        doSingleDose()     
+        blynk.virtual_write(98,"150 Auto dose h2o2"+ '\n')
+       
+
+  if(int(sensors[2].mode) == 3):
+    if (float(sensors[1].target) > float(sensors[1].value)):                  
+      _log.info("Turn on Oxy")
+      relay.turnOn(_log) 
+      blynk.virtual_write(98,"157 Auto Turn On Ozone"+ '\n')
+    else:
+      relay.turnOff(_log)
+      blynk.virtual_write(98,"160 Auto Turn Off Ozone"+ '\n')
+
+	
+    _log.info("Completed Timer Function") 
+  
 while True:
-    try:
+   ry:
         blynk.run()
-        timer.run()
+     60 timer.ruff()
         if bootup :
            blynk.virtual_write(250, "Boot")
            blynk.set_property(250, 'color', drone.colours['ONLINE'])	
