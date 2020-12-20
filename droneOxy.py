@@ -81,13 +81,10 @@ def processSensors():
         now = datetime.now()
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
         for dosage in nutrientMix:		
-           if(dosage.pump is not None and dosage.name == "pH"):
-                   _log.info(now.strftime("%d/%m/%Y %H:%M:%S") + " Going to Dose pH")
+           if(dosage.pump is not None):
+                   _log.info(now.strftime("%d/%m/%Y %H:%M:%S") + " Going to Dose " + dosage.name)
                  #  dosage.volume = dosage.pump.query("TV,?").split("TV,")[1].strip().rstrip('\x00')
                    blynk.set_property(dosage.LED, 'color', colours[0])
-                   if (float(sensors[2].target) > float(sensors[2].read())): #ph
-                        _log.critical("Ph target is " + str(float(sensors[2].target)) + " and dosing but ph read is " + str(float(sensors[2].read())))
-                        break			
                    dosage.pump.query("D,"+str(dosage.dose))
                    while (True):
                         dosed = dosage.pump.query("R").split(":")[1].split(",")[0].strip().rstrip('\x00')
@@ -96,7 +93,7 @@ def processSensors():
                    blynk.set_property(dosage.LED, 'color', colours[1])
                   # dosage.volume = dosage.pump.query("TV,?").split("TV,")[1].strip().rstrip('\x00')
                    dosage.volume = float(dosage.volume) + float(dosed)
-                   blynk.virtual_write(98, "159 Dose pH with " + str(dosage.dose) + "ml total volume now " + str(dosage.volume) + "ml" + '\n')
+                   blynk.virtual_write(98, "96 Dose " +dosage.name+" with " + str(dosage.dose) + "ml total volume now " + str(dosage.volume) + "ml" + '\n')
                    blynk.virtual_write(28, "add", rowIndex, dosage.name + " dosed " + str(dosage.dose) + " ml", now.strftime("%d/%m/%Y %H:%M:%S"))
                    rowIndex = rowIndex+1
                    blynk.virtual_write(29,rowIndex)  
