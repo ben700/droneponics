@@ -12,6 +12,11 @@ class Dose:
        self.volume = 0	
        self.bottleSize = BottleSize
        self.notify = False
+       self.I2CRelay = None
+       self.I2CRelayId = kwargs.get('I2CRelayId', None)
+       self.relay = None
+       self.relayId = kwargs.get('relayId', None)
+         
          
       
    
