@@ -196,7 +196,13 @@ def v29write_handler(pin, value):
         global rowIndex
         rowIndex = int(value[0])
         	
-	
+@blynk.handle_event('write V60')
+def v60write_handler(pin, value):
+        global nutrientMix
+        nutrientMix[0].dose = value[0]
+        blynk.virtual_write(98, "203 " + nutrientMix[0].name + " dose volume set to " + str(nutrientMix[0].dose)+ '\n')
+        _log.info(nutrientMix[0].name + " dose volume set to " + str(nutrientMix[0].dose)+ '\n')
+		
 @timer.register(interval=30, run_once=False)
 def blynk_data():
     _log.info("Update Timer Run")
