@@ -151,6 +151,8 @@ def fillLinePump1(pin, value):
 def fillLinePump2(pin, value):
     global rowIndex, relay
     sensors[2].mode = value[0]
+    now = datetime.now()
+    blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))   
     _log.info( "Fill Line 2 " + str(value[0]) + '\n')
     now = datetime.now()
     blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))    
@@ -158,13 +160,25 @@ def fillLinePump2(pin, value):
     if(value[0] == '1'):
         _log.info("Turn Off") 
         relay.turnOff(_log)
+        blynk.virtual_write(28, "add", rowIndex, "Ozone turned off", now.strftime("%d/%m/%Y %H:%M:%S"))
     elif(value[0] == '2'):
         _log.info("Turn On") 
         relay.turnOn(_log)
+        blynk.virtual_write(28, "add", rowIndex, "Ozone turned on", now.strftime("%d/%m/%Y %H:%M:%S"))
     else:
         _log.info("Relay is Auto")
 		
-			
+    
+@blynk.handle_event('write V43')
+def v43write_handler(pin, value): 
+        sensors[1].target = float(value[0])
+        blynk.virtual_write(98, "171: DO Trigger Level set to " + str(sensors[1].target)+ '\n') 
+			    
+@blynk.handle_event('write V44')
+def v44write_handler(pin, value): 
+        sensors[2].target = float(value[0])
+        blynk.virtual_write(98, "176: Ozone Trigger Level set to " + str(sensors[2].target) + '\n') 
+		
 @blynk.handle_event('write V27')
 def v27write_handler(pin, value):
         global rowIndex, nutrientMix
