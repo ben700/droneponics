@@ -203,6 +203,13 @@ def v60write_handler(pin, value):
         blynk.virtual_write(98, "203 " + nutrientMix[0].name + " dose volume set to " + str(nutrientMix[0].dose)+ '\n')
         _log.info(nutrientMix[0].name + " dose volume set to " + str(nutrientMix[0].dose)+ '\n')
 		
+@blynk.handle_event('write V61')
+def v61write_handler(pin, value):
+        global nutrientMix
+        nutrientMix[0].bottleSize = value[0]
+        blynk.virtual_write(98, "219 " + nutrientMix[0].name + " bottleSize volume set to " + str(nutrientMix[0].dose)+ '\n')
+        _log.info(nutrientMix[0].name + " bottleSize volume set to " + str(nutrientMix[0].dose)+ '\n')
+		
 @timer.register(interval=30, run_once=False)
 def blynk_data():
     _log.info("Update Timer Run")
