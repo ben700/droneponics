@@ -21,6 +21,10 @@ class StartPage(tk.Frame):
                             command=lambda: controller.show_frame(OperationalDataPage))
         button3.pack()
         
+        quitButton = ttk.Button(self, text="Disagree",
+                            command=quit)
+        quitButton.pack()
+        
 class CalibrationPage(tk.Frame):
 
     def __init__(self, parent, controller):
