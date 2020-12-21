@@ -17,6 +17,17 @@ import pandas as pd
 import numpy as np
 from droneGUI import *
 import droneGUI
+import sys
+import os
+sys.path.append('/home/pi/droneponics')
+from AtlasI2C import (AtlasI2C)
+import drone
+
+
+nutrientMix = []
+nutrientMix = drone.buildOxyMix(nutrientMix, _log)
+droneGUI.pumpId = nutrientMix[0].pumpId
+_log.info("All Monitor Sensors created")
 
 LARGE_FONT= ("Verdana", 12)
 style.use("ggplot")
