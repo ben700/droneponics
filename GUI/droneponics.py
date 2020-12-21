@@ -15,7 +15,7 @@ import json
 
 import pandas as pd
 import numpy as np
-import droneGUI
+from droneGUI import *
 
 LARGE_FONT= ("Verdana", 12)
 style.use("ggplot")
