@@ -71,7 +71,16 @@ class CalibrationPage(tk.Frame):
         PMPButton.pack()
         
 
-
+def pointsCalDO(i):       
+    print(i)
+    v = i.strip().rstrip('\x00').split(",")[1]
+    if(str(v) ==str(1)):
+        return "one point calibration"
+    elif(str(v) ==str(2)):
+        return "two point calibration"
+    else:
+        return "uncalibrated"
+    
 class DOCalPage(tk.Frame):
 
     def __init__(self, parent, controller):
@@ -82,11 +91,12 @@ class DOCalPage(tk.Frame):
         button1 = ttk.Button(self, text="Back to Home", command=lambda: controller.show_frame(StartPage))
         button1.pack()
         
-        calibrationLabel = tk.Label(self, text=sensors[1].sensor.query("Cal,?"), font=LARGE_FONT)
+        calibrationLabel = tk.Label(self, text=pointsCalDO(sensors[1].sensor.query("Cal,?")), font=LARGE_FONT)
         calibrationLabel.pack(pady=10,padx=10)
        
-        
         # Cal atmospheric, Cal,0 Zero , Cal,clear
+        infoButton = ttk.Button(self, text="Info", command=lambda:infoPump(self))
+        infoButton.pack()
         
         clearCalDOButton = ttk.Button(self, text="Reset Calibration", command=lambda:clearCalibrationButton(self))
         clearCalDOButton.pack()
