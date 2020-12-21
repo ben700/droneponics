@@ -138,11 +138,7 @@ class PageThree(tk.Frame):
         button1 = ttk.Button(self, text="Back to Home",
                             command=lambda: controller.show_frame(StartPage))
         button1.pack()
-        
-        f = Figure(figsize=(5,4), dpi=100)
-        
-        
-        a = f.add_subplot(111)
+
                 
         t = np.arange(0.0,3.0,0.01)
         print (np.sin(np.pi))
