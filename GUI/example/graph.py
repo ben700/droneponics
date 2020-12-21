@@ -148,35 +148,31 @@ class PageThree(tk.Frame):
         x = np.arange(0,4*np.pi-1,0.1)   # start,stop,step
         y = np.sin(x)
         z = np.cos(x)
-        a.plot(x,y,x,z)
-      #  a.xlabel('x values from 0 to 4pi')  # string must be enclosed with quotes '  '
-      #  a.ylabel('sin(x) and cos(x)')
-      #  a.title('Plot of sin and cos from 0 to 4pi')
-      #  a.legend(['sin(x)', 'cos(x)'])      # legend entries as seperate strings in a list
-      #  a.show()
-        
-        #t = arange(0.0,3.0,0.01)
-        #print (math.sin(math.pi))
-        #print (math.sin(2*math.pi*t))
-        #s = sin(2*math.pi*t)
+#        a.plot(x,y,x,z)
 
-        #a.plot(t,s)
+        
+        t = arange(0.0,3.0,0.01)
+        print (math.sin(math.pi))
+        print (math.sin(2*math.pi*t))
+        s = sin(t)
+
+        a.plot(t,s)
         
         
         
         print("pre FigureCanvasTk")
-        #canvas = FigureCanvasTk(f, self)
-        #canvas.draw()
-        #canvas.get_tk_widget().pack(side=tk.BOTTOM, fill=tk.BOTH, expand=True)
+        canvas = FigureCanvasTk(f, self)
+        canvas.draw()
+        canvas.get_tk_widget().pack(side=tk.BOTTOM, fill=tk.BOTH, expand=True)
         print("post FigureCanvasTk")
         
-        #toolbar = NavigationToolbar2Tk(canvas, self)
-        #toolbar.update()
-        #canvas._tkcanvas.pack(side=tk.TOP, fill=tk.BOTH, expand=True)
+        toolbar = NavigationToolbar2Tk(canvas, self)
+        toolbar.update()
+        canvas._tkcanvas.pack(side=tk.TOP, fill=tk.BOTH, expand=True)
 
 
 app = SeaofBTCapp()
 print("pre animation")
-#ani = animation.FuncAnimation(f, animate, interval=1000)
+ani = animation.FuncAnimation(f, animate, interval=1000)
 print("post animation")
 app.mainloop()
