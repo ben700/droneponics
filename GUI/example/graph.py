@@ -17,7 +17,7 @@ a = f.add_subplot(111)
 
 
 def animate(i):
-    pullData = open("sampleText.txt","r").read()
+    pullData = open("/home/pi/droneponics/GUI/example/sampleText.txt","r").read()
     dataList = pullData.split('\n')
     xList = []
     yList = []
@@ -138,11 +138,11 @@ class PageThree(tk.Frame):
 
         
 
-        canvas = FigureCanvasTkAgg(f, self)
-        canvas.show()
+        canvas = FigureCanvasTk(f, self)
+        canvas.draw()
         canvas.get_tk_widget().pack(side=tk.BOTTOM, fill=tk.BOTH, expand=True)
 
-        toolbar = NavigationToolbar2TkAgg(canvas, self)
+        toolbar = NavigationToolbar2Tk(canvas, self)
         toolbar.update()
         canvas._tkcanvas.pack(side=tk.TOP, fill=tk.BOTH, expand=True)
 
