@@ -17,6 +17,7 @@ LARGE_FONT= ("Verdana", 12)
 f=None
 pumpId=None
 nutrientMix = []
+calibrationEntry=None
 
 class StartPage(tk.Frame):
 
@@ -110,8 +111,8 @@ def infoPump(fr):
     label.pack()
     
 def calibrationButton(fr):
-    global nutrientMix
-    resultText = "calibrationEntry = " + str(calibrationEntry)
+    global nutrientMix, calibrationEntry
+    resultText = "calibrationEntry = " + str(calibrationEntry.get())
     #resultText="resultText"
     resultLabel = tk.Label(fr, text=resultText, font=LARGE_FONT)
     resultLabel.pack(pady=10,padx=10)
@@ -121,7 +122,7 @@ class PMPCalPage(tk.Frame):
 
             
     def __init__(self, parent, controller):
-        global pumpId
+        global pumpId, calibrationEntry
         tk.Frame.__init__(self, parent)
         label = tk.Label(self, text="Dose Pump Calibration Page!!!", font=LARGE_FONT)
         label.pack(pady=10,padx=10)
