@@ -263,7 +263,7 @@ while True:
     
            _log.info("Boot Completed")
 
-    except:
+   except:
         _log.info('Unexpected error')
         blynk.virtual_write(250, "Crash")
         blynk.virtual_write(98, "System has main loop error" + '\n')
