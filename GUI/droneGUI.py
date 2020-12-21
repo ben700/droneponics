@@ -106,7 +106,7 @@ def infoPump(fr):
     resultLabel = tk.Label(fr, text=resultText, font=LARGE_FONT)
     resultLabel.pack(pady=10,padx=10)
     label2Text = nutrientMix[0].pump.query("Cal,?").strip().rstrip('\x00')
-    label = tk.Label(self, text=label2Text, font=LARGE_FONT)
+    label = tk.Label(fr, text=label2Text, font=LARGE_FONT)
     label.pack()
     
 class PMPCalPage(tk.Frame):
