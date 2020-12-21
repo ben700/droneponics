@@ -130,7 +130,7 @@ def clearCalibrationButton(fr):
 def calibrationButton(fr):
     global nutrientMix, calibrationEntry, resultLabel
     userValue= calibrationEntry.get()
-    
+    calibrationLabel.config(text="New Cal")
     resultText = "calibrationEntry = " + str(userValue)
     
     MsgBox = tk.messagebox.askquestion ('Save Calibration','Are you sure you want to calibrate pump using ' + str(userValue) + 'ml' ,icon = 'warning')
