@@ -18,6 +18,7 @@ LARGE_FONT= ("Verdana", 12)
 f=None
 pumpId=None
 nutrientMix = []
+sensors = []
 calibrationEntry=None
 calibrationLabel=None
 resultLabel=None
@@ -74,11 +75,17 @@ class CalibrationPage(tk.Frame):
 class DOCalPage(tk.Frame):
 
     def __init__(self, parent, controller):
+        global sensors
         tk.Frame.__init__(self, parent)
         label = tk.Label(self, text="DO Probe Calibration Page!!!", font=LARGE_FONT)
         label.pack(pady=10,padx=10)
         button1 = ttk.Button(self, text="Back to Home", command=lambda: controller.show_frame(StartPage))
         button1.pack()
+        
+        calibrationLabel = tk.Label(self, text=sensors[1].sensor.query("Cal,?"), font=LARGE_FONT)
+        calibrationLabel.pack(pady=10,padx=10)
+       
+        
         # Cal atmospheric, Cal,0 Zero , Cal,clear
         
         clearCalDOButton = ttk.Button(self, text="Reset Calibration", command=lambda:clearCalibrationButton(self))
