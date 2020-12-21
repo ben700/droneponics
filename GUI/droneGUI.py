@@ -140,6 +140,7 @@ class ORPCalPage(tk.Frame):
 def reduceUserValue (v):
     global calibrationEntry
     userValue = calibrationEntry.get()
+    print("reduceUserValue" + str(float(userValue)-1))
     calibrationEntry.set(float(userValue)-1)
 #    calibrationEntry.delete(0, END)
 #    calibrationEntry.insert(0, float(userValue)-1)
@@ -147,6 +148,7 @@ def reduceUserValue (v):
 def increaseUserValue (v):
     global calibrationEntry
     userValue = calibrationEntry.get()
+    print("increaseUserValue" + str(float(userValue)+1))
     calibrationEntry.delete(0, 'END')
     calibrationEntry.insert(0, float(userValue)+1)
     
@@ -181,9 +183,7 @@ class TempCalPage(tk.Frame):
         userCalDOUpButton = ttk.Button(self, text="+", command=lambda:increaseUserValue(self))
         userCalDOUpButton.pack()
         
-        calibrationEntry = tk.StringVar()      
-        calibrationEntry.set("10.0")
-        calibrationEntryForm = ttk.Entry (self, text="Temp Value", textvariable=calibrationEntry ) 
+        calibrationEntry = ttk.Entry (self, text="Temp Value") 
         calibrationEntry.set("10.0")
         calibrationEntryForm.pack()
         
