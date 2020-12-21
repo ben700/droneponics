@@ -11,6 +11,7 @@ from math import *
 
 LARGE_FONT= ("Verdana", 12)
 f=None
+pumpId=None
 
 class StartPage(tk.Frame):
 
@@ -84,11 +85,20 @@ class ORPCalPage(tk.Frame):
 class PMPCalPage(tk.Frame):
 
     def __init__(self, parent, controller):
+        global pumpId
         tk.Frame.__init__(self, parent)
         label = tk.Label(self, text="Dose Pump Calibration Page!!!", font=LARGE_FONT)
         label.pack(pady=10,padx=10)
         button1 = ttk.Button(self, text="Back to Home", command=lambda: controller.show_frame(StartPage))
         button1.pack()
+        
+        pump1=AtlasI2C(pumpId)
+        label2Text = pump1.query("Cal,?").strip().rstrip('\x00')
+        label = tk.Label(self, text=label2Text, font=LARGE_FONT)
+        label.pack(pady=10,padx=10)
+        
+        
+        
         
 class ConfigurationPage(tk.Frame):
 
