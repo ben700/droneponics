@@ -98,9 +98,10 @@ class ConfigurationPage(tk.Frame):
         command=lambda: controller.show_frame(StartPage))
         button1.pack()
 
-class OperationalDataPage(tk.Frame, f):
+class OperationalDataPage(tk.Frame):
 
     def __init__(self, parent, controller):
+        global f        
         tk.Frame.__init__(self, parent)
         label = tk.Label(self, text="Operational Data Page!!!", font=LARGE_FONT)
         label.pack(pady=10,padx=10)
