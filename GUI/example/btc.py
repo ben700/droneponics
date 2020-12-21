@@ -23,7 +23,7 @@ import numpy as np
 LARGE_FONT= ("Verdana", 12)
 style.use("ggplot")
 
-f = Figure(figsize=(10,6), dpi=100)
+f = Figure(figsize=(5,3), dpi=100)
 a = f.add_subplot(111)
 
 
@@ -42,6 +42,9 @@ def animate(i):
     a.legend(bbox_to_anchor=(0, 1.02, 1, .102), loc=3,
              ncol=2, borderaxespad=0)
 
+    print(btcArr["bpi"])
+    print(btcArr["bpi"]["time"])
+    print(btcArr["bpi"]["time"]["updated"])
     title = "BTC Close Prices in USD: "+str(btcArr["bpi"]["time"]["updated"])
     a.set_title(title)        
 
