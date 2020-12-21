@@ -95,6 +95,7 @@ def pointsCalPump(i):
     v = i.strip().rstrip('\x00').split(",")[1]
     print("[" + str(v) + "]")
     if(str(v) ==1):
+        print("fixed volume")
         return "fixed volume"
     elif(str(v) ==2):
         return "volume/time"
