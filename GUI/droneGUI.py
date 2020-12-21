@@ -61,7 +61,7 @@ class CalibrationPage(tk.Frame):
                             command=lambda: controller.show_frame(DOCalPage))
         ORPButton = ttk.Button(self, text="ORP Probe",
                             command=lambda: controller.show_frame(ORPCalPage))
-        TempButton = ttk.Button(self, text="ORP Probe",
+        TempButton = ttk.Button(self, text="Temp Probe",
                             command=lambda: controller.show_frame(TempCalPage))
         PMPButton = ttk.Button(self, text="Dose Pump",
                             command=lambda: controller.show_frame(PMPCalPage))
