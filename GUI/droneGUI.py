@@ -137,12 +137,12 @@ class ORPCalPage(tk.Frame):
         calibrationEntry.insert(0, "10.0")
         calibrationEntry.pack()
         
- def reduceUserValue (v):
+def reduceUserValue (v):
     global calibrationEntry
     userValue = calibrationEntry.get()
     calibrationEntry.insert(0, userValue-1)
         
- def increaseUserValue (v):
+def increaseUserValue (v):
     global calibrationEntry
     userValue = calibrationEntry.get()
     calibrationEntry.insert(0, userValue+1)
