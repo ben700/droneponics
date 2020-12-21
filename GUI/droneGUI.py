@@ -168,7 +168,7 @@ def reduceUserValue (v):
     
 def increaseUserValue (v):
     global calibrationEntry, calibrationLabel
-    print(calibrationEntry)                                
+    calibrationEntry.pack()                                
     calibrationEntry.delete(0,"end")
     calibrationEntry.insert(0,"20.0")
     userValue = calibrationEntry.get()
