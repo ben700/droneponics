@@ -15,7 +15,11 @@ style.use("ggplot")
 
 f = Figure(figsize=(5,5), dpi=100)
 a = f.add_subplot(111)
-
+                
+t = np.arange(0.0,3.0,0.01)
+s = np.sin(2*np.pi*t)
+a.plot(t,s)
+print("Done Plot")
 
 def animate(i):
     print("in animate")
@@ -139,13 +143,7 @@ class PageThree(tk.Frame):
                             command=lambda: controller.show_frame(StartPage))
         button1.pack()
 
-                
-        t = np.arange(0.0,3.0,0.01)
-        print (np.sin(np.pi))
-        print (np.sin(2*np.pi*t))
-        s = np.sin(2*np.pi*t)
 
-        a.plot(t,s)
         
         
         
