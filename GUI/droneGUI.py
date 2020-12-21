@@ -16,6 +16,7 @@ from AtlasI2C import (AtlasI2C)
 LARGE_FONT= ("Verdana", 12)
 f=None
 pumpId=None
+nutrientMix = []
 
 class StartPage(tk.Frame):
 
@@ -96,12 +97,18 @@ class PMPCalPage(tk.Frame):
         button1 = ttk.Button(self, text="Back to Home", command=lambda: controller.show_frame(StartPage))
         button1.pack()
         
-        pump1=AtlasI2C(pumpId)
+        pump1=AtlasI2C(nutrientMix[0].pumpId)
         label2Text = pump1.query("Cal,?").strip().rstrip('\x00')
         label = tk.Label(self, text=label2Text, font=LARGE_FONT)
         label.pack(pady=10,padx=10)
         
+        doseButton = ttk.Button(self, text="Dose 10ml", command=(dosePump)))
+        doseButton.pack()
         
+        def dosePump()
+            resultText = pump1.query("D,10")
+            resultLabel = tk.Label(self, text=resultText, font=LARGE_FONT)
+            resultLabel.pack(pady=10,padx=10)
         
         
 class ConfigurationPage(tk.Frame):
