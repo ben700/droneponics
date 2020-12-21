@@ -157,8 +157,9 @@ class PMPCalPage(tk.Frame):
 
         
         calibrationEntry = ttk.Entry (self, text="Pumped Volume") 
+        calibrationEntry.insert(0, "10.0")
         calibrationEntry.pack()
-        #self.create_window(200, 140, window=calibrationEntry)
+        
         
 class ConfigurationPage(tk.Frame):
 
