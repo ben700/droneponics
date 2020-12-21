@@ -15,8 +15,6 @@ import json
 
 import pandas as pd
 import numpy as np
-from droneGUI import *
-import droneGUI
 import sys
 import os
 sys.path.append('/home/pi/droneponics')
@@ -24,6 +22,9 @@ from AtlasI2C import (AtlasI2C)
 import drone
 from configparser import ConfigParser
 import logging
+sys.path.append('/home/pi/droneponics/GUI')
+from droneGUI import *
+import droneGUI
 
 parser = ConfigParser()
 parser.read("/home/pi/droneponics/config/configOxy/"+drone.gethostname()+".ini")
