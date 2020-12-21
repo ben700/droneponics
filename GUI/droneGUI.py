@@ -87,7 +87,7 @@ class ORPCalPage(tk.Frame):
         button1.pack()
         
 
-def dosePump():
+def dosePump(tk.Frame):
     global nutrientMix
     resultText = nutrientMix[0].pump.query("D,10")
     resultLabel = tk.Label(self, text=resultText, font=LARGE_FONT)
