@@ -22,7 +22,10 @@ style.use("ggplot")
 
 f = Figure(figsize=(5,3), dpi=100)
 a = f.add_subplot(111)
-
+t = np.arange(0.0,3.0,0.01)
+s = np.sin(2*np.pi*t)
+a.plot(t,s)
+print("Done Plot")
 
 
 
