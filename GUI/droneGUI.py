@@ -111,7 +111,7 @@ def infoPump(fr):
     
 def calibrationButton(fr):
     global nutrientMix
-    resultText = nutrientMix[0].pump.query("X")
+    resultText = "calibrationEntry = " + str(calibrationEntry)
     resultLabel = tk.Label(fr, text=resultText, font=LARGE_FONT)
     resultLabel.pack(pady=10,padx=10)
     
