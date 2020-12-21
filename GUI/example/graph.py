@@ -177,6 +177,6 @@ class PageThree(tk.Frame):
 
 app = SeaofBTCapp()
 print("pre animation")
-ani = animation.FuncAnimation(f, animate, interval=1000)
+#ani = animation.FuncAnimation(f, animate, interval=1000)
 print("post animation")
 app.mainloop()
