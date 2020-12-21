@@ -10,6 +10,7 @@ import numpy as np
 from math import *
 import sys
 import os
+sys.path.append('/home/pi/droneponics')
 from AtlasI2C import (AtlasI2C)
 
 LARGE_FONT= ("Verdana", 12)
