@@ -83,6 +83,15 @@ def pointsCalDO(i):
         return "two point calibration"
     else:
         return "uncalibrated"
+  
+
+def pointsCalTemp(i):       
+    print(i)
+    v = i.strip().rstrip('\x00').split(",")[1]
+    if(str(v) ==str(1)):
+        return "Calibrated"
+    else:
+        return "uncalibrated"
     
 class DOCalPage(tk.Frame):
 
@@ -136,11 +145,21 @@ class ORPCalPage(tk.Frame):
         calibrationEntry = ttk.Entry (self, text="ORP Value") 
         calibrationEntry.insert(0, "10.0")
         calibrationEntry.pack()
+
+def infoTemp(fr):
+    global nutrientMix, resultLabel, calibrationLabel
+    resultText = sensors[0].sensor.query("I")
+    if(resultLabel == None):
+        resultLabel = tk.Label(fr, text=resultText, font=LARGE_FONT)
+        resultLabel.pack(pady=10,padx=10)
+    else:
+        resultLabel.config(text=resultText)
         
+    calibrationLabel.config(text=pointsCalTemp(sensors[0].sensor.query("Cal,?")))
+
 def reduceUserValue (v):
     global calibrationEntry
     userValue = calibrationEntry.get()
-    print("reduceUserValue" + str(float(userValue)-1))
     calibrationEntry.delete(0, 'end')
     calibrationEntry.insert(0, float(userValue)-1)
         
@@ -151,7 +170,7 @@ def increaseUserValue (v):
     print("increaseUserValue" + str(float(userValue)+1))
     calibrationEntry.delete(0, 'end')
     print("calibrationEntry.delete" + str(float(userValue)+1))
-    calibrationEntry.insert(1, float(userValue)+1)
+    calibrationEntry.insert(0, float(userValue)+1)
     print("calibrationEntry.insert" + str(float(userValue)+1))
     
 class TempCalPage(tk.Frame):
@@ -166,7 +185,7 @@ class TempCalPage(tk.Frame):
         button1 = ttk.Button(self, text="Back to Home", command=lambda: controller.show_frame(StartPage))
         button1.pack()
              
-        calibrationLabel = tk.Label(self, text=pointsCalDO(sensors[0].sensor.query("Cal,?")), font=LARGE_FONT)
+        calibrationLabel = tk.Label(self, text=pointsCalTemp(sensors[0].sensor.query("Cal,?")), font=LARGE_FONT)
         calibrationLabel.pack(pady=10,padx=10)
        
         # Cal atmospheric, Cal,0 Zero , Cal,clear
