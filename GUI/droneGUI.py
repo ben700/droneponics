@@ -147,10 +147,12 @@ def reduceUserValue (v):
 def increaseUserValue (v):
     global calibrationEntry, calibrationLabel
     userValue = calibrationEntry.get()
-    calibrationLabel.config(text=str(float(userValue)+1))
+    calibrationLabel.config(text="calibrationLabel")
     print("increaseUserValue" + str(float(userValue)+1))
     calibrationEntry.delete(0, 'end')
+    print("calibrationEntry.delete" + str(float(userValue)+1))
     calibrationEntry.insert(1, float(userValue)+1)
+    print("calibrationEntry.insert" + str(float(userValue)+1))
     
 class TempCalPage(tk.Frame):
 
