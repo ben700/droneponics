@@ -57,7 +57,7 @@ class SeaofBTCapp(tk.Tk):
         
         tk.Tk.__init__(self, *args, **kwargs)
 
-        tk.Tk.iconbitmap(self, default="clienticon.ico")
+        tk.Tk.iconbitmap(self, default="/home/pi/droneponics/pic/favicon.ico")
         tk.Tk.wm_title(self, "Sea of BTC client")
         
         
