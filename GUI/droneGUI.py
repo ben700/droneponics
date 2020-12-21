@@ -90,7 +90,18 @@ class ORPCalPage(tk.Frame):
         button1 = ttk.Button(self, text="Back to Home", command=lambda: controller.show_frame(StartPage))
         button1.pack()
         
-
+def pointsCalPump(i):       
+    v = i.strip().rstrip('\x00').split(",")[1]
+    if(v ==1):
+        return "fixed volume"
+    elif(v ==2):
+        return "volume/time"
+    elif(v ==3):
+        return "Both"
+    else:
+        return "uncalibrated"
+    
+    
 def dosePump(fr):
     global nutrientMix
     resultText = nutrientMix[0].pump.query("D,10")
@@ -118,7 +129,7 @@ def infoPump(fr):
     else:
         resultLabel.config(text=resultText)
         
-    calibrationLabel.config(text="New:"+nutrientMix[0].pump.query("Cal,?").strip().rstrip('\x00').split(",")[1])
+    calibrationLabel.config(text="New:"+pointsCalPump(nutrientMix[0].pump.query("Cal,?")))
     
 def clearCalibrationButton(fr):
     global nutrientMix, calibrationEntry, resultLabel, calibrationLabel
@@ -126,7 +137,7 @@ def clearCalibrationButton(fr):
     MsgBox = tk.messagebox.askquestion ('Save Calibration','Are you sure you want to clear calibration' ,icon = 'warning')
     if MsgBox == 'yes':
         print(nutrientMix[0].pump.query("Cal,clear"))
-        label2Text = nutrientMix[0].pump.query("Cal,?").strip().rstrip('\x00').split(",")[1]
+        label2Text = pointsCalPump(nutrientMix[0].pump.query("Cal,?"))
         calibrationLabel.config(text=label2Text)
         
     else:
@@ -143,7 +154,7 @@ def calibrationButton(fr):
             resultLabel.pack(pady=10,padx=10)
             print("Cal,"+str(userValue))
             nutrientMix[0].pump.query("Cal,"+str(userValue))
-            label2Text = nutrientMix[0].pump.query("Cal,?").strip().rstrip('\x00').split(",")[1]
+            label2Text = pointsCalPump(nutrientMix[0].pump.query("Cal,?"))
             calibrationLabel.config(text=label2Text)
         else:
             resultLabel.config(text=resultText)
@@ -167,7 +178,7 @@ class PMPCalPage(tk.Frame):
         button1.pack()
         
         nutrientMix[0].pump=AtlasI2C(nutrientMix[0].pumpId)
-        label2Text = nutrientMix[0].pump.query("Cal,?").strip().rstrip('\x00').split(",")[1]
+        label2Text = pointsCalPump(nutrientMix[0].pump.query("Cal,?"))
         calibrationLabel = tk.Label(self, text=label2Text, font=LARGE_FONT)
         calibrationLabel.pack(pady=10,padx=10)
         
