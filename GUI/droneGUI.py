@@ -100,7 +100,7 @@ def stopPump(fr):
     resultLabel = tk.Label(fr, text=resultText, font=LARGE_FONT)
     resultLabel.pack(pady=10,padx=10)
 
-def stopPump(fr):
+def infoPump(fr):
     global nutrientMix
     resultText = nutrientMix[0].pump.query("I")
     resultLabel = tk.Label(fr, text=resultText, font=LARGE_FONT)
