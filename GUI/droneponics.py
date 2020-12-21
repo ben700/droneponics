@@ -46,8 +46,7 @@ _log.debug("debug")
 _log.info("/home/pi/droneponics/config/configOxy/"+drone.gethostname()+".ini")
 
 
-nutrientMix = []
-nutrientMix = drone.buildOxyMix(nutrientMix, _log)
+droneGUI.nutrientMix = drone.buildOxyMix(nutrientMix, _log)
 droneGUI.pumpId = nutrientMix[0].pumpId
 _log.info("All Monitor Sensors created")
 
