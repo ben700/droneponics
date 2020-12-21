@@ -137,10 +137,23 @@ class ORPCalPage(tk.Frame):
         calibrationEntry.insert(0, "10.0")
         calibrationEntry.pack()
         
+ def reduceUserValue (v):
+    global calibrationEntry
+    userValue = calibrationEntry.get()
+    calibrationEntry.insert(0, userValue-1)
+        
+ def increaseUserValue (v):
+    global calibrationEntry
+    userValue = calibrationEntry.get()
+    calibrationEntry.insert(0, userValue+1)
+    
 class TempCalPage(tk.Frame):
 
     def __init__(self, parent, controller):
+        global nutrientMix, calibrationEntry, resultLabel, calibrationLabel
+  
         tk.Frame.__init__(self, parent)
+        
         label = tk.Label(self, text="Temp Probe Calibration Page!!!", font=LARGE_FONT)
         label.pack(pady=10,padx=10)
         button1 = ttk.Button(self, text="Back to Home", command=lambda: controller.show_frame(StartPage))
@@ -156,8 +169,14 @@ class TempCalPage(tk.Frame):
         clearCalDOButton = ttk.Button(self, text="Reset Calibration", command=lambda:clearCalibrationButton(self))
         clearCalDOButton.pack()
 
+        userCalDODownButton = ttk.Button(self, text="-", command=lambda:reduceUserValue(self))
+        userCalDODownButton.pack()
+        
         userCalDOButton = ttk.Button(self, text="Calibration", command=lambda:infoPump(self))
         userCalDOButton.pack()
+        
+        userCalDOUpButton = ttk.Button(self, text="+", command=lambda:increaseUserValue(self))
+        userCalDOUpButton.pack()
         
                 
         calibrationEntry = ttk.Entry (self, text="Temp Value") 
