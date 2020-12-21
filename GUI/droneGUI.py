@@ -145,8 +145,9 @@ def reduceUserValue (v):
     calibrationEntry.insert(0, float(userValue)-1)
         
 def increaseUserValue (v):
-    global calibrationEntry
+    global calibrationEntry, calibrationLabel
     userValue = calibrationEntry.get()
+    calibrationLabel.config(text=str(float(userValue)+1))
     print("increaseUserValue" + str(float(userValue)+1))
     calibrationEntry.delete(0, 'end')
     calibrationEntry.insert(1, float(userValue)+1)
