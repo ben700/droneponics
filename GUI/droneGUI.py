@@ -18,6 +18,8 @@ f=None
 pumpId=None
 nutrientMix = []
 calibrationEntry=None
+calibrationLabel=None
+resultLabel=None
 
 class StartPage(tk.Frame):
 
@@ -102,13 +104,15 @@ def stopPump(fr):
     resultLabel.pack(pady=10,padx=10)
 
 def infoPump(fr):
-    global nutrientMix
+    global nutrientMix, resultLabel, calibrationLabel
     resultText = nutrientMix[0].pump.query("I")
-    resultLabel = tk.Label(fr, text=resultText, font=LARGE_FONT)
-    resultLabel.pack(pady=10,padx=10)
-    label2Text = nutrientMix[0].pump.query("Cal,?").strip().rstrip('\x00')
-    label = tk.Label(fr, text=label2Text, font=LARGE_FONT)
-    label.pack()
+    if(resultLabel == None):
+        resultLabel = tk.Label(fr, text=resultText, font=LARGE_FONT)
+        resultLabel.pack(pady=10,padx=10)
+    else:
+        resultLabel.config(text=resultText)
+        
+    calibrationLabel.config(text=nutrientMix[0].pump.query("Cal,?").strip().rstrip('\x00'))
     
 def calibrationButton(fr):
     global nutrientMix, calibrationEntry
@@ -122,7 +126,7 @@ class PMPCalPage(tk.Frame):
 
             
     def __init__(self, parent, controller):
-        global pumpId, calibrationEntry
+        global pumpId, calibrationEntry, calibrationLabel
         tk.Frame.__init__(self, parent)
         label = tk.Label(self, text="Dose Pump Calibration Page!!!", font=LARGE_FONT)
         label.pack(pady=10,padx=10)
@@ -131,8 +135,8 @@ class PMPCalPage(tk.Frame):
         
         nutrientMix[0].pump=AtlasI2C(nutrientMix[0].pumpId)
         label2Text = nutrientMix[0].pump.query("Cal,?").strip().rstrip('\x00')
-        label = tk.Label(self, text=label2Text, font=LARGE_FONT)
-        label.pack(pady=10,padx=10)
+        calibrationLabel = tk.Label(self, text=label2Text, font=LARGE_FONT)
+        calibrationLabel.pack(pady=10,padx=10)
         
         doseButton = ttk.Button(self, text="Dose 10ml", command=lambda:dosePump(self))
         doseButton.pack()
