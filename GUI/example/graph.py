@@ -149,11 +149,11 @@ class PageThree(tk.Frame):
         y = np.sin(x)
         z = np.cos(x)
         a.plot(x,y,x,z)
-        a.xlabel('x values from 0 to 4pi')  # string must be enclosed with quotes '  '
-        a.ylabel('sin(x) and cos(x)')
-        a.title('Plot of sin and cos from 0 to 4pi')
-        a.legend(['sin(x)', 'cos(x)'])      # legend entries as seperate strings in a list
-        a.show()
+      #  a.xlabel('x values from 0 to 4pi')  # string must be enclosed with quotes '  '
+      #  a.ylabel('sin(x) and cos(x)')
+      #  a.title('Plot of sin and cos from 0 to 4pi')
+      #  a.legend(['sin(x)', 'cos(x)'])      # legend entries as seperate strings in a list
+      #  a.show()
         
         #t = arange(0.0,3.0,0.01)
         #print (math.sin(math.pi))
