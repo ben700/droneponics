@@ -121,7 +121,7 @@ def calibrationButton(fr):
     
     resultText = "calibrationEntry = " + str(userValue)
     
-     MsgBox = tk.messagebox.askquestion ('Save Calibration','Are you sure you want to calibrate pump using ' + str(userValue) + 'ml' ,icon = 'warning')
+    MsgBox = tk.messagebox.askquestion ('Save Calibration','Are you sure you want to calibrate pump using ' + str(userValue) + 'ml' ,icon = 'warning')
     if MsgBox == 'yes':
         if(resultLabel == None):
             resultLabel = tk.Label(fr, text=resultText, font=LARGE_FONT)
