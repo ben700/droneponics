@@ -5,7 +5,6 @@ from matplotlib.backends.backend_tkagg import FigureCanvasTk, NavigationToolbar2
 from matplotlib.figure import Figure
 import matplotlib.animation as animation
 from matplotlib import style
-
 import tkinter as tk
 from tkinter import ttk
 
@@ -42,7 +41,6 @@ class SeaofBTCapp(tk.Tk):
 
         
         img = tk.PhotoImage(file='/home/pi/droneponics/pic/favicon.ico')
-        root.tk.call('wm', 'iconphoto', root._w, img)
         
        # tk.Tk.iconbitmap(self, default="/home/pi/droneponics/pic/favicon.ico")
         
@@ -53,7 +51,8 @@ class SeaofBTCapp(tk.Tk):
         container.pack(side="top", fill="both", expand = True)
         container.grid_rowconfigure(0, weight=1)
         container.grid_columnconfigure(0, weight=1)
-
+        container.tk.call('wm', 'iconphoto', root._w, img)
+       
         self.frames = {}
 
         for F in (StartPage, PageOne, PageTwo, PageThree):
