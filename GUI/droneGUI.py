@@ -105,7 +105,7 @@ class PMPCalPage(tk.Frame):
         doseButton = ttk.Button(self, text="Dose 10ml", command=(dosePump))
         doseButton.pack()
         
-        def dosePump()
+        def dosePump():
             resultText = pump1.query("D,10")
             resultLabel = tk.Label(self, text=resultText, font=LARGE_FONT)
             resultLabel.pack(pady=10,padx=10)
