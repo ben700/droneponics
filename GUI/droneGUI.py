@@ -141,16 +141,15 @@ def reduceUserValue (v):
     global calibrationEntry
     userValue = calibrationEntry.get()
     print("reduceUserValue" + str(float(userValue)-1))
-    calibrationEntry.set(float(userValue)-1)
-#    calibrationEntry.delete(0, END)
-#    calibrationEntry.insert(0, float(userValue)-1)
+    calibrationEntry.delete(0, 'end')
+    calibrationEntry.insert(0, float(userValue)-1)
         
 def increaseUserValue (v):
     global calibrationEntry
     userValue = calibrationEntry.get()
     print("increaseUserValue" + str(float(userValue)+1))
-    calibrationEntry.delete(0, 'END')
-    calibrationEntry.insert(0, float(userValue)+1)
+    calibrationEntry.delete(0, 'end')
+    calibrationEntry.insert(1, float(userValue)+1)
     
 class TempCalPage(tk.Frame):
 
