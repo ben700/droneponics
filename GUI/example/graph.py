@@ -17,6 +17,7 @@ a = f.add_subplot(111)
 
 
 def animate(i):
+    print("in animate")
     pullData = open("/home/pi/droneponics/GUI/example/sampleText.txt","r").read()
     dataList = pullData.split('\n')
     xList = []
@@ -26,6 +27,7 @@ def animate(i):
             x, y = eachLine.split(',')
             xList.append(int(x))
             yList.append(int(y))
+            print("x = " + str(x) + " y = " + str(y))
 
     a.clear()
     a.plot(xList, yList)
@@ -34,9 +36,10 @@ def animate(i):
             
 
 class SeaofBTCapp(tk.Tk):
+    
 
     def __init__(self, *args, **kwargs):
-        
+        print("SeaofBTCapp __init__")        
         tk.Tk.__init__(self, *args, **kwargs)
 
         
