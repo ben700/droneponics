@@ -184,7 +184,7 @@ class TempCalPage(tk.Frame):
         userCalDOUpButton.pack()
         
         calibrationEntry = ttk.Entry (self, text="Temp Value") 
-        calibrationEntry.set("10.0")
+        calibrationEntry.insert("10.0")
         calibrationEntryForm.pack()
         
         
