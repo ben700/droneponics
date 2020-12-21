@@ -7,6 +7,7 @@ import matplotlib.animation as animation
 from matplotlib import style
 import tkinter as tk
 from tkinter import ttk
+import numpy as np
 
 
 LARGE_FONT= ("Verdana", 12)
