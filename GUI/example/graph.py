@@ -142,7 +142,9 @@ class PageThree(tk.Frame):
         f = Figure(figsize=(5,4), dpi=100)
         a = f.add_subplot(111)
         t = arange(0.0,3.0,0.01)
-        s = sin(2*pi*t)
+        print (math.sin(math.pi))
+        print (math.sin(2*math.pi*t))
+        s = sin(2*math.pi*t)
 
         a.plot(t,s)
         
