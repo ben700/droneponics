@@ -41,7 +41,7 @@ class SeaofBTCapp(tk.Tk):
         tk.Tk.__init__(self, *args, **kwargs)
 
         
-        img = PhotoImage(file='/home/pi/droneponics/pic/favicon.ico')
+        img = tk.PhotoImage(file='/home/pi/droneponics/pic/favicon.ico')
         root.tk.call('wm', 'iconphoto', root._w, img)
         
        # tk.Tk.iconbitmap(self, default="/home/pi/droneponics/pic/favicon.ico")
