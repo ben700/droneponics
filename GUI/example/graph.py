@@ -140,13 +140,27 @@ class PageThree(tk.Frame):
         button1.pack()
         
         f = Figure(figsize=(5,4), dpi=100)
+        
+        
         a = f.add_subplot(111)
-        t = arange(0.0,3.0,0.01)
-        print (math.sin(math.pi))
-        print (math.sin(2*math.pi*t))
-        s = sin(2*math.pi*t)
+        
+        
+        x = np.arange(0,4*np.pi-1,0.1)   # start,stop,step
+        y = np.sin(x)
+        z = np.cos(x)
+        a.plot(x,y,x,z)
+        a.xlabel('x values from 0 to 4pi')  # string must be enclosed with quotes '  '
+        a.ylabel('sin(x) and cos(x)')
+        a.title('Plot of sin and cos from 0 to 4pi')
+        a.legend(['sin(x)', 'cos(x)'])      # legend entries as seperate strings in a list
+        a.show()
+        
+        #t = arange(0.0,3.0,0.01)
+        #print (math.sin(math.pi))
+        #print (math.sin(2*math.pi*t))
+        #s = sin(2*math.pi*t)
 
-        a.plot(t,s)
+        #a.plot(t,s)
         
         
         
