@@ -51,7 +51,7 @@ class SeaofBTCapp(tk.Tk):
         container.pack(side="top", fill="both", expand = True)
         container.grid_rowconfigure(0, weight=1)
         container.grid_columnconfigure(0, weight=1)
-        container.tk.call('wm', 'iconphoto', root._w, img)
+        container.tk.call('wm', 'iconphoto', self._w, img)
        
         self.frames = {}
 
