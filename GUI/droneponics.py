@@ -65,7 +65,7 @@ class SeaofBTCapp(tk.Tk):
 
         self.frames = {}
 
-        for F in (StartPage, CalibrationPage, ConfigurationPage):
+        for F in (StartPage, CalibrationPage, ConfigurationPage, OperationalDataPage):
 
             frame = F(container, self)
 
