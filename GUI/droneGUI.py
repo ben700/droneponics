@@ -146,8 +146,8 @@ class PMPCalPage(tk.Frame):
         calibrationButton = ttk.Button(self, text="Info", command=lambda:calibrationButton(self))
         calibrationButton.pack()
         
-        calibrationEntry = tk.Entry (fr) 
-        fr.create_window(200, 140, window=calibrationEntry)
+        calibrationEntry = tk.Entry (self) 
+        self.create_window(200, 140, window=calibrationEntry)
         
 class ConfigurationPage(tk.Frame):
 
