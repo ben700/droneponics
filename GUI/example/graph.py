@@ -137,15 +137,25 @@ class PageThree(tk.Frame):
         button1 = ttk.Button(self, text="Back to Home",
                             command=lambda: controller.show_frame(StartPage))
         button1.pack()
+        
+        f = Figure(figsize=(5,4), dpi=100)
+        a = f.add_subplot(111)
+        t = arange(0.0,3.0,0.01)
+        s = sin(2*pi*t)
+
+        a.plot(t,s)
+        
+        
+        
         print("pre FigureCanvasTk")
-        canvas = FigureCanvasTk(f, self)
-        canvas.draw()
-        canvas.get_tk_widget().pack(side=tk.BOTTOM, fill=tk.BOTH, expand=True)
+        #canvas = FigureCanvasTk(f, self)
+        #canvas.draw()
+        #canvas.get_tk_widget().pack(side=tk.BOTTOM, fill=tk.BOTH, expand=True)
         print("post FigureCanvasTk")
         
-        toolbar = NavigationToolbar2Tk(canvas, self)
-        toolbar.update()
-        canvas._tkcanvas.pack(side=tk.TOP, fill=tk.BOTH, expand=True)
+        #toolbar = NavigationToolbar2Tk(canvas, self)
+        #toolbar.update()
+        #canvas._tkcanvas.pack(side=tk.TOP, fill=tk.BOTH, expand=True)
 
 
 app = SeaofBTCapp()
