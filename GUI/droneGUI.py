@@ -118,7 +118,7 @@ def infoPump(fr):
     else:
         resultLabel.config(text=resultText)
         
-    calibrationLabel.config(text="New:"+nutrientMix[0].pump.query("Cal,?").strip().rstrip('\x00'))
+    calibrationLabel.config(text="New:"+nutrientMix[0].pump.query("Cal,?").strip().rstrip('\x00').split(,)[1])
     
 def clearCalibrationButton(fr):
     global nutrientMix, calibrationEntry, resultLabel, calibrationLabel
@@ -126,7 +126,7 @@ def clearCalibrationButton(fr):
     MsgBox = tk.messagebox.askquestion ('Save Calibration','Are you sure you want to clear calibration' ,icon = 'warning')
     if MsgBox == 'yes':
         print(nutrientMix[0].pump.query("Cal,clear"))
-        label2Text = nutrientMix[0].pump.query("Cal,?").strip().rstrip('\x00')
+        label2Text = nutrientMix[0].pump.query("Cal,?").strip().rstrip('\x00').split(,)[1]
         calibrationLabel.config(text=label2Text)
         
     else:
@@ -143,7 +143,7 @@ def calibrationButton(fr):
             resultLabel.pack(pady=10,padx=10)
             print("Cal,"+str(userValue))
             nutrientMix[0].pump.query("Cal,"+str(userValue))
-            label2Text = nutrientMix[0].pump.query("Cal,?").strip().rstrip('\x00')
+            label2Text = nutrientMix[0].pump.query("Cal,?").strip().rstrip('\x00').split(,)[1]
             calibrationLabel.config(text=label2Text)
         else:
             resultLabel.config(text=resultText)
@@ -167,7 +167,7 @@ class PMPCalPage(tk.Frame):
         button1.pack()
         
         nutrientMix[0].pump=AtlasI2C(nutrientMix[0].pumpId)
-        label2Text = nutrientMix[0].pump.query("Cal,?").strip().rstrip('\x00')
+        label2Text = nutrientMix[0].pump.query("Cal,?").strip().rstrip('\x00').split(,)[1]
         calibrationLabel = tk.Label(self, text=label2Text, font=LARGE_FONT)
         calibrationLabel.pack(pady=10,padx=10)
         
