@@ -84,7 +84,7 @@ class SeaofBTCapp(tk.Tk):
         logo = tk.PhotoImage(file='/home/pi/droneponics/pic/favicon.ico')
         self.call('wm', 'iconphoto', self._w, logo)
     
-        tk.Tk.wm_title(self, "Sea of BTC client")
+        tk.Tk.wm_title(self, "Droneponics")
         
         
         container = tk.Frame(self)
