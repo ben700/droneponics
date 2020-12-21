@@ -149,13 +149,14 @@ def calibrationButton(fr):
     resultText = "Calibrated to " +  str(userValue)
     MsgBox = tk.messagebox.askquestion ('Save Calibration','Are you sure you want to calibrate pump using ' + str(userValue) + 'ml' ,icon = 'warning')
     if MsgBox == 'yes':
+        print("Cal,"+str(userValue))
+        print(nutrientMix[0].pump.query("Cal,"+str(userValue)))
+        label2Text = pointsCalPump(nutrientMix[0].pump.query("Cal,?"))
+        calibrationLabel.config(text=label2Text)
+
         if(resultLabel == None):
             resultLabel = tk.Label(fr, text=resultText, font=LARGE_FONT)
             resultLabel.pack(pady=10,padx=10)
-            print("Cal,"+str(userValue))
-            nutrientMix[0].pump.query("Cal,"+str(userValue))
-            label2Text = pointsCalPump(nutrientMix[0].pump.query("Cal,?"))
-            calibrationLabel.config(text=label2Text)
         else:
             resultLabel.config(text=resultText)
             calibrationLabel.config(text=nutrientMix[0].pump.query("Cal,?").strip().rstrip('\x00'))
