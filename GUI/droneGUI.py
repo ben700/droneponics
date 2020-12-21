@@ -18,7 +18,7 @@ class StartPage(tk.Frame):
         button2.pack()
 
         button3 = ttk.Button(self, text="Graph Page",
-                            command=lambda: controller.show_frame(PageThree))
+                            command=lambda: controller.show_frame(OperationalDataPage))
         button3.pack()
         
 class CalibrationPage(tk.Frame):
@@ -53,6 +53,9 @@ class DOCalPage(tk.Frame):
         tk.Frame.__init__(self, parent)
         label = tk.Label(self, text="DO Probe Calibration Page!!!", font=LARGE_FONT)
         label.pack(pady=10,padx=10)
+        button1 = ttk.Button(self, text="Back to Home",
+        command=lambda: controller.show_frame(StartPage))
+        button1.pack()
         
         
 class ORPCalPage(tk.Frame):
@@ -61,6 +64,9 @@ class ORPCalPage(tk.Frame):
         tk.Frame.__init__(self, parent)
         label = tk.Label(self, text="ORP Probe Calibration Page!!!", font=LARGE_FONT)
         label.pack(pady=10,padx=10)
+        button1 = ttk.Button(self, text="Back to Home",
+        command=lambda: controller.show_frame(StartPage))
+        button1.pack()
         
         
 class PMPCalPage(tk.Frame):
@@ -69,6 +75,9 @@ class PMPCalPage(tk.Frame):
         tk.Frame.__init__(self, parent)
         label = tk.Label(self, text="Dose Pump Calibration Page!!!", font=LARGE_FONT)
         label.pack(pady=10,padx=10)
+        button1 = ttk.Button(self, text="Back to Home",
+        command=lambda: controller.show_frame(StartPage))
+        button1.pack()
         
 class ConfigurationPage(tk.Frame):
 
@@ -76,3 +85,16 @@ class ConfigurationPage(tk.Frame):
         tk.Frame.__init__(self, parent)
         label = tk.Label(self, text="Configuration Page!!!", font=LARGE_FONT)
         label.pack(pady=10,padx=10)
+        button1 = ttk.Button(self, text="Back to Home",
+        command=lambda: controller.show_frame(StartPage))
+        button1.pack()
+
+class OperationalDataPage(tk.Frame):
+
+    def __init__(self, parent, controller):
+        tk.Frame.__init__(self, parent)
+        label = tk.Label(self, text="Operational Data Page!!!", font=LARGE_FONT)
+        label.pack(pady=10,padx=10)
+        button1 = ttk.Button(self, text="Back to Home",
+        command=lambda: controller.show_frame(StartPage))
+        button1.pack()
