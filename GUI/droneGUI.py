@@ -79,7 +79,16 @@ class DOCalPage(tk.Frame):
         label.pack(pady=10,padx=10)
         button1 = ttk.Button(self, text="Back to Home", command=lambda: controller.show_frame(StartPage))
         button1.pack()
+        # Cal atmospheric, Cal,0 Zero , Cal,clear
         
+        clearCalDOButton = ttk.Button(self, text="Reset Calibration", command=lambda:clearCalibrationButton(self))
+        clearCalDOButton.pack()
+
+        atmosphericCalDOButton = ttk.Button(self, text="Atmospheric", command=lambda:infoPump(self))
+        atmosphericCalDOButton.pack()
+        
+        zeroCalDOButton = ttk.Button(self, text="Zero", command=lambda:calibrationButton(self))
+        zeroCalDOButton.pack()
         
 class ORPCalPage(tk.Frame):
 
