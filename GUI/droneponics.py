@@ -22,6 +22,28 @@ import os
 sys.path.append('/home/pi/droneponics')
 from AtlasI2C import (AtlasI2C)
 import drone
+from configparser import ConfigParser
+import logging
+
+parser = ConfigParser()
+parser.read("/home/pi/droneponics/config/configOxy/"+drone.gethostname()+".ini")
+
+
+
+# tune console logging
+_log = logging.getLogger('BlynkLog')
+logFormatter = logging.Formatter("%(asctime)s [%(levelname)s]  %(message)s")
+consoleHandler = logging.StreamHandler()
+consoleHandler.setFormatter(logFormatter)
+_log.addHandler(consoleHandler)
+_log.setLevel(parser.get('logging', 'logLevel', fallback=logging.DEBUG))
+_log.critical("critical")
+_log.error("error")
+_log.warning("warning")
+_log.info("info")
+_log.debug("debug")
+
+_log.info("/home/pi/droneponics/config/configOxy/"+drone.gethostname()+".ini")
 
 
 nutrientMix = []
