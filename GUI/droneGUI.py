@@ -120,7 +120,7 @@ def clearCalibrationButton(fr):
     
     MsgBox = tk.messagebox.askquestion ('Save Calibration','Are you sure you want to clear calibration' ,icon = 'warning')
     if MsgBox == 'yes':
-        nutrientMix[0].pump.query("Cal,clear")
+        print(nutrientMix[0].pump.query("Cal,clear"))
         label2Text = nutrientMix[0].pump.query("Cal,?").strip().rstrip('\x00')
         calibrationLabel.config(text=label2Text)
         
@@ -130,20 +130,19 @@ def clearCalibrationButton(fr):
 def calibrationButton(fr):
     global nutrientMix, calibrationEntry, resultLabel
     userValue= calibrationEntry.get()
-    calibrationLabel.config(text="New Cal")
-    resultText = "calibrationEntry = " + str(userValue)
     
     MsgBox = tk.messagebox.askquestion ('Save Calibration','Are you sure you want to calibrate pump using ' + str(userValue) + 'ml' ,icon = 'warning')
     if MsgBox == 'yes':
         if(resultLabel == None):
             resultLabel = tk.Label(fr, text=resultText, font=LARGE_FONT)
             resultLabel.pack(pady=10,padx=10)
-            print(nutrientMix[0].pump.query("Cal,"+userValue))
+            print("Cal,"+str(userValue))
+            nutrientMix[0].pump.query("Cal,"+str(userValue))
             label2Text = nutrientMix[0].pump.query("Cal,?").strip().rstrip('\x00')
             calibrationLabel.config(text=label2Text)
         else:
             resultLabel.config(text=resultText)
-            calibrationLabel.config(text=label2Text)
+            calibrationLabel.config(text=nutrientMix[0].pump.query("Cal,?").strip().rstrip('\x00'))
     else:
         tk.messagebox.showinfo('Return','You will now return to the calibration screen')
    
@@ -178,7 +177,7 @@ class PMPCalPage(tk.Frame):
         infoButton = ttk.Button(self, text="Info", command=lambda:infoPump(self))
         infoButton.pack()
         
-        clearCalPumpButton = ttk.Button(self, text="Calibration", command=lambda:clearCalibrationButton(self))
+        clearCalPumpButton = ttk.Button(self, text="Reset Calibration", command=lambda:clearCalibrationButton(self))
         clearCalPumpButton.pack()
 
         calPumpButton = ttk.Button(self, text="Calibration", command=lambda:calibrationButton(self))
