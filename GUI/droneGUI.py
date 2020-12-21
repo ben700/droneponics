@@ -205,7 +205,7 @@ class TempCalPage(tk.Frame):
         calibrationEntry.insert(0,"10.0")
         calibrationEntry.pack()
         
-        calibrationEntry.delete(o,"end2)
+        calibrationEntry.delete(o,"end")
         calibrationEntry.insert(0,"12.0")
                                 
         
