@@ -48,6 +48,8 @@ _log.info("/home/pi/droneponics/config/configOxy/"+drone.gethostname()+".ini")
 
 droneGUI.nutrientMix = drone.buildOxyMix(nutrientMix, _log)
 droneGUI.pumpId = nutrientMix[0].pumpId
+droneGUI.sensors = drone.buildMonitorSensors(sensors, _log)
+
 _log.info("All Monitor Sensors created")
 
 LARGE_FONT= ("Verdana", 12)
