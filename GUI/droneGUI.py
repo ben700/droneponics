@@ -111,8 +111,8 @@ def infoPump(fr):
     
 def calibrationButton(fr):
     global nutrientMix
-    #resultText = "calibrationEntry = " + str(calibrationEntry)
-    resultText="resultText"
+    resultText = "calibrationEntry = " + str(calibrationEntry)
+    #resultText="resultText"
     resultLabel = tk.Label(fr, text=resultText, font=LARGE_FONT)
     resultLabel.pack(pady=10,padx=10)
     
