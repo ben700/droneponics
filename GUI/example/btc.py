@@ -42,10 +42,7 @@ def animate(i):
     a.legend(bbox_to_anchor=(0, 1.02, 1, .102), loc=3,
              ncol=2, borderaxespad=0)
 
-    print(btcArr["bpi"])
-    print(btcArr["bpi"]["time"])
-    print(btcArr["bpi"]["time"]["updated"])
-    title = "BTC Close Prices in USD: "+str(btcArr["bpi"]["time"]["updated"])
+    title = "BTC Close Prices in USD: "+str(btcArr["time"]["updated"])
     a.set_title(title)        
 
 class SeaofBTCapp(tk.Tk):
