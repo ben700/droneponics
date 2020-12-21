@@ -38,6 +38,8 @@ def animate(i):
    # data = btcData.json()
 
     print(btcArr)
+    print(btcArr["bpi"])
+    
     
 #    data = data["bpi"]
 #    data = pd.DataFrame(data)
