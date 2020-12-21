@@ -21,7 +21,7 @@ class StartPage(tk.Frame):
                             command=lambda: controller.show_frame(OperationalDataPage))
         button3.pack()
         
-        quitButton = ttk.Button(self, text="Disagree",
+        quitButton = ttk.Button(self, text="Quit",
                             command=quit)
         quitButton.pack()
         
