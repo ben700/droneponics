@@ -185,7 +185,7 @@ class TempCalPage(tk.Frame):
         
         calibrationEntry = ttk.Entry (self, text="Temp Value") 
         calibrationEntry.insert(0,"10.0")
-        calibrationEntryForm.pack()
+        calibrationEntry.pack()
         
         
 def pointsCalPump(i):       
