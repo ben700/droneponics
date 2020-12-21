@@ -12,6 +12,7 @@ import tkinter as tk
 from tkinter import ttk
 
 import urllib
+import urllib.request
 import json
 
 import pandas as pd
