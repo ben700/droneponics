@@ -160,16 +160,13 @@ def infoTemp(fr):
 def reduceUserValue (v):
     global calibrationEntry
     userValue = calibrationEntry.get()
-    calibrationEntry.delete(0, 'end')
+    calibrationEntry.delete(0, "end")
     calibrationEntry.insert(0, float(userValue)-1)
         
 def increaseUserValue (v):
     global calibrationEntry, calibrationLabel
     userValue = calibrationEntry.get()
-    calibrationLabel.config(text="calibrationLabel")
-    print("increaseUserValue" + str(float(userValue)+1))
-    calibrationEntry.delete(0, 'end')
-    print("calibrationEntry.delete" + str(float(userValue)+1))
+    calibrationEntry.delete(0, "end")
     calibrationEntry.insert(0, float(userValue)+1)
     print("calibrationEntry.insert" + str(float(userValue)+1))
     
