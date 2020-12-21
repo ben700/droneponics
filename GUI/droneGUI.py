@@ -87,12 +87,19 @@ class ORPCalPage(tk.Frame):
         button1.pack()
         
 
-def dosePump(tk.Frame):
+def dosePump(fr):
     global nutrientMix
     resultText = nutrientMix[0].pump.query("D,10")
-    resultLabel = tk.Label(self, text=resultText, font=LARGE_FONT)
+    resultLabel = tk.Label(fr, text=resultText, font=LARGE_FONT)
     resultLabel.pack(pady=10,padx=10)
             
+
+def stopPump(fr):
+    global nutrientMix
+    resultText = nutrientMix[0].pump.query("X")
+    resultLabel = tk.Label(fr, text=resultText, font=LARGE_FONT)
+    resultLabel.pack(pady=10,padx=10)
+        
 class PMPCalPage(tk.Frame):
 
             
@@ -109,10 +116,13 @@ class PMPCalPage(tk.Frame):
         label = tk.Label(self, text=label2Text, font=LARGE_FONT)
         label.pack(pady=10,padx=10)
         
-        doseButton = ttk.Button(self, text="Dose 10ml", command=dosePump)
+        doseButton = ttk.Button(self, text="Dose 10ml", command=lambda:dosePump(self))
         doseButton.pack()
         
 
+        stopButton = ttk.Button(self, text="Dose 10ml", command=lambda:stopPump(self))
+        stopButton.pack()
+        
         
         
 class ConfigurationPage(tk.Frame):
