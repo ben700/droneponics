@@ -109,6 +109,13 @@ def infoPump(fr):
     label = tk.Label(fr, text=label2Text, font=LARGE_FONT)
     label.pack()
     
+def calibrationButton(fr):
+    global nutrientMix
+    resultText = nutrientMix[0].pump.query("X")
+    resultLabel = tk.Label(fr, text=resultText, font=LARGE_FONT)
+    resultLabel.pack(pady=10,padx=10)
+    
+    
 class PMPCalPage(tk.Frame):
 
             
@@ -135,6 +142,12 @@ class PMPCalPage(tk.Frame):
         
         infoButton = ttk.Button(self, text="Info", command=lambda:infoPump(self))
         infoButton.pack()
+        
+        calibrationButton = ttk.Button(self, text="Info", command=lambda:calibrationButton(self))
+        calibrationButton.pack()
+        
+        calibrationEntry = tk.Entry (fr) 
+        fr.create_window(200, 140, window=calibrationEntry)
         
 class ConfigurationPage(tk.Frame):
 
