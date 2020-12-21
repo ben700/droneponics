@@ -99,7 +99,13 @@ def stopPump(fr):
     resultText = nutrientMix[0].pump.query("X")
     resultLabel = tk.Label(fr, text=resultText, font=LARGE_FONT)
     resultLabel.pack(pady=10,padx=10)
-        
+
+def stopPump(fr):
+    global nutrientMix
+    resultText = nutrientMix[0].pump.query("I")
+    resultLabel = tk.Label(fr, text=resultText, font=LARGE_FONT)
+    resultLabel.pack(pady=10,padx=10)
+    
 class PMPCalPage(tk.Frame):
 
             
@@ -120,10 +126,12 @@ class PMPCalPage(tk.Frame):
         doseButton.pack()
         
 
-        stopButton = ttk.Button(self, text="Dose 10ml", command=lambda:stopPump(self))
+        stopButton = ttk.Button(self, text="Stop", command=lambda:stopPump(self))
         stopButton.pack()
         
         
+        infoButton = ttk.Button(self, text="Info", command=lambda:infoPump(self))
+        infoButton.pack()
         
 class ConfigurationPage(tk.Frame):
 
