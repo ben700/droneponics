@@ -28,7 +28,7 @@ a = f.add_subplot(111)
 
 
 def animate(i):
-    
+    print("----------------------------------animate")
     btcData = requests.get("https://api.coindesk.com/v1/bpi/historical/close.json")    
     btcArr = btcData.json()
     btcList = btcArr["bpi"]    
