@@ -115,6 +115,26 @@ class ORPCalPage(tk.Frame):
         label.pack(pady=10,padx=10)
         button1 = ttk.Button(self, text="Back to Home", command=lambda: controller.show_frame(StartPage))
         button1.pack()
+             
+        calibrationLabel = tk.Label(self, text=pointsCalDO(sensors[2].sensor.query("Cal,?")), font=LARGE_FONT)
+        calibrationLabel.pack(pady=10,padx=10)
+       
+        # Cal atmospheric, Cal,0 Zero , Cal,clear
+        infoButton = ttk.Button(self, text="Info", command=lambda:infoPump(self))
+        infoButton.pack()
+        
+        clearCalDOButton = ttk.Button(self, text="Reset Calibration", command=lambda:clearCalibrationButton(self))
+        clearCalDOButton.pack()
+
+        userCalDOButton = ttk.Button(self, text="Calibration", command=lambda:infoPump(self))
+        userCalDOButton.pack()
+        
+                
+        calibrationEntry = ttk.Entry (self, text="ORP Value") 
+        calibrationEntry.insert(0, "10.0")
+        calibrationEntry.pack()
+        
+        
         
 def pointsCalPump(i):       
     print(i)
