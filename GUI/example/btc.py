@@ -31,42 +31,13 @@ def animate(i):
     
     btcData = requests.get("https://api.coindesk.com/v1/bpi/historical/close.json")    
     btcArr = btcData.json()
-    btcList = btcArr["bpi"]
-    
-    
+    btcList = btcArr["bpi"]    
     key_list = list(btcList.keys())
     val_list = list(btcList.values())
-    print(key_list)
-    
-    #position = val_list.index(1)
-    #print("---------------------------------------------------------------")
-    #print(key_list[position])
-
-
-   # dataLink = 'https://api.coindesk.com/v1/bpi/historical/close.json'
-   # btcData = urllib.request.urlopen(dataLink)
-#    data = data.readall().decode("utf-8")
-   # data = btcData.json()
-
-    
-#    data = data["bpi"]
-#    data = pd.DataFrame(data)
-
-  #  print(data)
-    
- #   buys = data[(data['type']=="bid")]
- #   buys["datestamp"] = np.array(buys["timestamp"]).astype("datetime64[s]")
- #   buyDates = (buys["datestamp"]).tolist()
-    
-
-   # sells = data[(data['type']=="ask")]
-   # sells["datestamp"] = np.array(sells["timestamp"]).astype("datetime64[s]")
-   # sellDates = (sells["datestamp"]).tolist()
 
     a.clear()
 
-  #  a.plot_date(buyDates, buys["price"])
-  #a.plot_date(sellDates, sells["price"])
+    a.plot_date(key_list, val_list)
 
           
 
