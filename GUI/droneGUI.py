@@ -1,5 +1,13 @@
+import matplotlib
+matplotlib.use("TkAgg")
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2Tk
+from matplotlib.figure import Figure
+import matplotlib.animation as animation
+from matplotlib import style
 import tkinter as tk
 from tkinter import ttk
+import numpy as np
+from math import *
 LARGE_FONT= ("Verdana", 12)
 
 class StartPage(tk.Frame):
@@ -99,3 +107,11 @@ class OperationalDataPage(tk.Frame):
         button1 = ttk.Button(self, text="Back to Home",
         command=lambda: controller.show_frame(StartPage))
         button1.pack()
+        
+        canvas = FigureCanvasTkAgg(f, self)
+        canvas.draw()
+        canvas.get_tk_widget().pack(side=tk.BOTTOM, fill=tk.BOTH, expand=True)
+        
+        toolbar = NavigationToolbar2Tk(canvas, self)
+        toolbar.update()
+        canvas._tkcanvas.pack(side=tk.TOP, fill=tk.BOTH, expand=True)
