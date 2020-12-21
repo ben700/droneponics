@@ -151,10 +151,10 @@ class PageThree(tk.Frame):
 #        a.plot(x,y,x,z)
 
         
-        t = arange(0.0,3.0,0.01)
-        print (math.sin(math.pi))
-        print (math.sin(2*math.pi*t))
-        s = sin(t)
+        t = np.arange(0.0,3.0,0.01)
+        print (np.sin(np.pi))
+        print (np.sin(2*np.pi*t))
+        s = np.sin(t)
 
         a.plot(t,s)
         
