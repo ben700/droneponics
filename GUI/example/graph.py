@@ -143,18 +143,11 @@ class PageThree(tk.Frame):
         
         
         a = f.add_subplot(111)
-        
-        
-        x = np.arange(0,4*np.pi-1,0.1)   # start,stop,step
-        y = np.sin(x)
-        z = np.cos(x)
-#        a.plot(x,y,x,z)
-
-        
+                
         t = np.arange(0.0,3.0,0.01)
         print (np.sin(np.pi))
         print (np.sin(2*np.pi*t))
-        s = np.sin(t)
+        s = np.sin(2*np.pi*t)
 
         a.plot(t,s)
         
