@@ -19,7 +19,7 @@ f=None
 pumpId=None
 nutrientMix = []
 sensors = []
-calibrationEntry=None
+calibrationEntry=ttk.Entry (self, text="Temp Value") 
 calibrationLabel=None
 resultLabel=None
 
@@ -164,7 +164,7 @@ def reduceUserValue (v):
     userValue = calibrationEntry.get()
     calibrationEntry.delete(0, "end")
     calibrationEntry.insert(0, float(userValue)-1)
-    print("calibrationEntry.insert" + str(float(userValue)+1))
+    print("calibrationEntry.insert" + str(float(userValue)-1))
     
 def increaseUserValue (v):
     global calibrationEntry, calibrationLabel
@@ -206,7 +206,7 @@ class TempCalPage(tk.Frame):
         userCalDOUpButton = ttk.Button(self, text="+", command=lambda:increaseUserValue(self))
         userCalDOUpButton.pack()
         
-        calibrationEntry = ttk.Entry (self, text="Temp Value") 
+       # calibrationEntry = ttk.Entry (self, text="Temp Value") 
         calibrationEntry.insert(0,"10.0")
         calibrationEntry.pack()
         
