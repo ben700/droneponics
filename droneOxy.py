@@ -218,28 +218,28 @@ def blynk_data():
     blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
     processSensors()
 
-  if (float(sensors[1].target) > float(sensors[1].value) and (int(sensors[1].mode) == 3)): #DO
+    if (float(sensors[1].target) > float(sensors[1].value) and (int(sensors[1].mode) == 3)): #DO
         _log.info("Do a dose")     
         doSingleDose()     
         blynk.virtual_write(98,"150 Auto dose h2o2"+ '\n')
        
 
-  if(int(sensors[2].mode) == 3):
-    if (float(sensors[1].target) > float(sensors[1].value)):                  
-      _log.info("Turn on Oxy")
-      relay.turnOn(_log) 
-      blynk.virtual_write(98,"157 Auto Turn On Ozone"+ '\n')
-    else:
-      relay.turnOff(_log)
-      blynk.virtual_write(98,"160 Auto Turn Off Ozone"+ '\n')
+    if(int(sensors[2].mode) == 3):
+        if (float(sensors[1].target) > float(sensors[1].value)):                  
+            _log.info("Turn on Oxy")
+            relay.turnOn(_log) 
+            blynk.virtual_write(98,"157 Auto Turn On Ozone"+ '\n')
+        else:
+            relay.turnOff(_log)
+            blynk.virtual_write(98,"160 Auto Turn Off Ozone"+ '\n')
 
 	
     _log.info("Completed Timer Function") 
   
 while True:
-   ry:
+   try:
         blynk.run()
-     60 timer.ruff()
+        timer.run()
         if bootup :
            blynk.virtual_write(250, "Boot")
            blynk.set_property(250, 'color', drone.colours['ONLINE'])	
