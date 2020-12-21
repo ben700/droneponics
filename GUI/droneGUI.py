@@ -115,18 +115,21 @@ def infoPump(fr):
     calibrationLabel.config(text=nutrientMix[0].pump.query("Cal,?").strip().rstrip('\x00'))
     
 def calibrationButton(fr):
-    global nutrientMix, calibrationEntry
+    global nutrientMix, calibrationEntry, resultLabel
     resultText = "calibrationEntry = " + str(calibrationEntry.get())
-    #resultText="resultText"
-    resultLabel = tk.Label(fr, text=resultText, font=LARGE_FONT)
-    resultLabel.pack(pady=10,padx=10)
+    if(resultLabel == None):
+        resultLabel = tk.Label(fr, text=resultText, font=LARGE_FONT)
+        resultLabel.pack(pady=10,padx=10)
+    else:
+        resultLabel.config(text=resultText)
+    
     
     
 class PMPCalPage(tk.Frame):
 
             
     def __init__(self, parent, controller):
-        global pumpId, calibrationEntry, calibrationLabel
+        global pumpId, calibrationEntry, calibrationLabel,resultLabel
         tk.Frame.__init__(self, parent)
         label = tk.Label(self, text="Dose Pump Calibration Page!!!", font=LARGE_FONT)
         label.pack(pady=10,padx=10)
