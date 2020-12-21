@@ -150,7 +150,8 @@ def calibrationButton(fr):
     MsgBox = tk.messagebox.askquestion ('Save Calibration','Are you sure you want to calibrate pump using ' + str(userValue) + 'ml' ,icon = 'warning')
     if MsgBox == 'yes':
         print("Cal,"+str(userValue))
-        print(nutrientMix[0].pump.query("Cal,"+str(userValue)))
+        action = nutrientMix[0].pump.query("Cal,"+str(userValue))
+        print(action)
         label2Text = pointsCalPump(nutrientMix[0].pump.query("Cal,?"))
         calibrationLabel.config(text=label2Text)
 
