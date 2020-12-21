@@ -96,7 +96,12 @@ def dosePump(fr):
     resultText = nutrientMix[0].pump.query("D,10")
     resultLabel = tk.Label(fr, text=resultText, font=LARGE_FONT)
     resultLabel.pack(pady=10,padx=10)
-            
+ 
+def doseOverTimePump(fr):
+    global nutrientMix
+    resultText = nutrientMix[0].pump.query("D,10,1")
+    resultLabel = tk.Label(fr, text=resultText, font=LARGE_FONT)
+    resultLabel.pack(pady=10,padx=10)
 
 def stopPump(fr):
     global nutrientMix
@@ -169,7 +174,9 @@ class PMPCalPage(tk.Frame):
         doseButton = ttk.Button(self, text="Dose 10ml", command=lambda:dosePump(self))
         doseButton.pack()
         
-
+        doseOverTimeButton = ttk.Button(self, text="Dose 10ml/Min", command=lambda:doseOverTimePump(self))
+        doseOverTimeButton.pack()#
+        
         stopButton = ttk.Button(self, text="Stop", command=lambda:stopPump(self))
         stopButton.pack()
         
