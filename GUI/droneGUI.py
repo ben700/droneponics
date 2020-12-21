@@ -146,8 +146,9 @@ class PMPCalPage(tk.Frame):
         calibrationButton = ttk.Button(self, text="Info", command=lambda:calibrationButton(self))
         calibrationButton.pack()
         
-        calibrationEntry = tk.Entry (self) 
-        self.create_window(200, 140, window=calibrationEntry)
+        calibrationEntry = ttk.Entry (self, text="Pumped Volume") 
+        calibrationEntry.pack()
+        #self.create_window(200, 140, window=calibrationEntry)
         
 class ConfigurationPage(tk.Frame):
 
