@@ -144,7 +144,7 @@ class PMPCalPage(tk.Frame):
         infoButton = ttk.Button(self, text="Info", command=lambda:infoPump(self))
         infoButton.pack()
         
-        calPumpButton = ttk.Button(self, text="Calibration", command=lambda:infoPump(self))
+        calPumpButton = ttk.Button(self, text="Calibration", command=lambda:calibrationButton(self))
         calPumpButton.pack()
 
         
