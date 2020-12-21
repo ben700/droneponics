@@ -98,7 +98,7 @@ class ConfigurationPage(tk.Frame):
         command=lambda: controller.show_frame(StartPage))
         button1.pack()
 
-class OperationalDataPage(tk.Frame):
+class OperationalDataPage(tk.Frame, f):
 
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
