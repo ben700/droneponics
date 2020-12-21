@@ -36,9 +36,11 @@ def animate(i):
     
     key_list = list(btcList.keys())
     val_list = list(btcList.values())
-    position = val_list.index(1)
-    print("---------------------------------------------------------------")
-    print(key_list[position])
+    print(key_list)
+    
+    #position = val_list.index(1)
+    #print("---------------------------------------------------------------")
+    #print(key_list[position])
 
 
    # dataLink = 'https://api.coindesk.com/v1/bpi/historical/close.json'
