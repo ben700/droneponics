@@ -8,7 +8,9 @@ import tkinter as tk
 from tkinter import ttk
 import numpy as np
 from math import *
+
 LARGE_FONT= ("Verdana", 12)
+f=None
 
 class StartPage(tk.Frame):
 
