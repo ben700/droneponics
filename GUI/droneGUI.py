@@ -6,6 +6,7 @@ import matplotlib.animation as animation
 from matplotlib import style
 import tkinter as tk
 from tkinter import ttk
+from tkinter import messagebox
 import numpy as np
 from math import *
 import sys
@@ -116,14 +117,23 @@ def infoPump(fr):
     
 def calibrationButton(fr):
     global nutrientMix, calibrationEntry, resultLabel
-    resultText = "calibrationEntry = " + str(calibrationEntry.get())
-    if(resultLabel == None):
-        resultLabel = tk.Label(fr, text=resultText, font=LARGE_FONT)
-        resultLabel.pack(pady=10,padx=10)
+    userValue= calibrationEntry.get()
+    
+    resultText = "calibrationEntry = " + str(userValue)
+    
+     MsgBox = tk.messagebox.askquestion ('Save Calibration','Are you sure you want to calibrate pump using ' + str(userValue) + 'ml' ,icon = 'warning')
+    if MsgBox == 'yes':
+        if(resultLabel == None):
+            resultLabel = tk.Label(fr, text=resultText, font=LARGE_FONT)
+            resultLabel.pack(pady=10,padx=10)
+        else:
+            resultLabel.config(text=resultText)
     else:
-        resultLabel.config(text=resultText)
+        tk.messagebox.showinfo('Return','You will now return to the calibration screen')
+   
+
     
-    
+        
     
 class PMPCalPage(tk.Frame):
 
