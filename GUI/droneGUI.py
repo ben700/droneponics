@@ -115,6 +115,18 @@ def infoPump(fr):
         
     calibrationLabel.config(text=nutrientMix[0].pump.query("Cal,?").strip().rstrip('\x00'))
     
+def clearCalibrationButton(fr):
+    global nutrientMix, calibrationEntry, resultLabel, calibrationLabel
+    
+    MsgBox = tk.messagebox.askquestion ('Save Calibration','Are you sure you want to clear calibration' ,icon = 'warning')
+    if MsgBox == 'yes':
+        nutrientMix[0].pump.query("Cal,clear")
+        label2Text = nutrientMix[0].pump.query("Cal,?").strip().rstrip('\x00')
+        calibrationLabel.config(text=label2Text)
+        
+    else:
+        tk.messagebox.showinfo('Return','You will now return to the calibration screen')
+   
 def calibrationButton(fr):
     global nutrientMix, calibrationEntry, resultLabel
     userValue= calibrationEntry.get()
@@ -126,6 +138,9 @@ def calibrationButton(fr):
         if(resultLabel == None):
             resultLabel = tk.Label(fr, text=resultText, font=LARGE_FONT)
             resultLabel.pack(pady=10,padx=10)
+            nutrientMix[0].pump.query("Cal,"+userValue).strip().rstrip('\x00')
+            label2Text = nutrientMix[0].pump.query("Cal,?").strip().rstrip('\x00')
+            calibrationLabel.config(text=label2Text)
         else:
             resultLabel.config(text=resultText)
     else:
