@@ -14,7 +14,8 @@ class SeaofBTCapp(tk.Tk):
         
         tk.Tk.__init__(self, *args, **kwargs)
 
-        tk.Tk.iconbitmap(self,default='clienticon.ico')
+        logo = tk.PhotoImage(file='/home/pi/droneponics/pic/favicon.ico')
+        self.call('wm', 'iconphoto', self._w, logo)
         tk.Tk.wm_title(self, "Sea of BTC Client")
 
         container = tk.Frame(self)
