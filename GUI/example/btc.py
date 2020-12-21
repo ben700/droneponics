@@ -13,6 +13,7 @@ from tkinter import ttk
 
 import urllib
 import urllib.request
+import shlex, requests
 import json
 
 import pandas as pd
@@ -27,17 +28,21 @@ a = f.add_subplot(111)
 
 
 def animate(i):
-    dataLink = 'https://api.coindesk.com/v1/bpi/historical/close.json'
-    btcData = urllib.request.urlopen(dataLink)
+    
+    btcData = requests.get("https://api.coindesk.com/v1/bpi/historical/close.json")    
+    btcArr = btcData.json()
+    
+   # dataLink = 'https://api.coindesk.com/v1/bpi/historical/close.json'
+   # btcData = urllib.request.urlopen(dataLink)
 #    data = data.readall().decode("utf-8")
-    data = btcData.json()
+   # data = btcData.json()
 
-    print(data)
+    print(btcArr)
     
 #    data = data["bpi"]
 #    data = pd.DataFrame(data)
 
-    print(data)
+  #  print(data)
     
  #   buys = data[(data['type']=="bid")]
  #   buys["datestamp"] = np.array(buys["timestamp"]).astype("datetime64[s]")
