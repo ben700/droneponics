@@ -61,6 +61,8 @@ class CalibrationPage(tk.Frame):
                             command=lambda: controller.show_frame(DOCalPage))
         ORPButton = ttk.Button(self, text="ORP Probe",
                             command=lambda: controller.show_frame(ORPCalPage))
+        TempButton = ttk.Button(self, text="ORP Probe",
+                            command=lambda: controller.show_frame(TempCalPage))
         PMPButton = ttk.Button(self, text="Dose Pump",
                             command=lambda: controller.show_frame(PMPCalPage))
         
@@ -68,6 +70,7 @@ class CalibrationPage(tk.Frame):
         
         DOButton.pack()
         ORPButton.pack()
+        TempButton.pack()
         PMPButton.pack()
         
 
@@ -134,6 +137,32 @@ class ORPCalPage(tk.Frame):
         calibrationEntry.insert(0, "10.0")
         calibrationEntry.pack()
         
+class TempCalPage(tk.Frame):
+
+    def __init__(self, parent, controller):
+        tk.Frame.__init__(self, parent)
+        label = tk.Label(self, text="Temp Probe Calibration Page!!!", font=LARGE_FONT)
+        label.pack(pady=10,padx=10)
+        button1 = ttk.Button(self, text="Back to Home", command=lambda: controller.show_frame(StartPage))
+        button1.pack()
+             
+        calibrationLabel = tk.Label(self, text=pointsCalDO(sensors[0].sensor.query("Cal,?")), font=LARGE_FONT)
+        calibrationLabel.pack(pady=10,padx=10)
+       
+        # Cal atmospheric, Cal,0 Zero , Cal,clear
+        infoButton = ttk.Button(self, text="Info", command=lambda:infoPump(self))
+        infoButton.pack()
+        
+        clearCalDOButton = ttk.Button(self, text="Reset Calibration", command=lambda:clearCalibrationButton(self))
+        clearCalDOButton.pack()
+
+        userCalDOButton = ttk.Button(self, text="Calibration", command=lambda:infoPump(self))
+        userCalDOButton.pack()
+        
+                
+        calibrationEntry = ttk.Entry (self, text="Temp Value") 
+        calibrationEntry.insert(0, "10.0")
+        calibrationEntry.pack()
         
         
 def pointsCalPump(i):       
