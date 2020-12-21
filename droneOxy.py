@@ -76,8 +76,8 @@ def processSensors():
           sensor.display(blynk)
 
 		
- def doSingleDose():   
-        global rowIndex
+def doSingleDose():   
+        global rowIndex, nutrientMix
         now = datetime.now()
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
         for dosage in nutrientMix:		
