@@ -102,7 +102,7 @@ class PMPCalPage(tk.Frame):
         label = tk.Label(self, text=label2Text, font=LARGE_FONT)
         label.pack(pady=10,padx=10)
         
-        doseButton = ttk.Button(self, text="Dose 10ml", command=(dosePump)))
+        doseButton = ttk.Button(self, text="Dose 10ml", command=(dosePump))
         doseButton.pack()
         
         def dosePump()
