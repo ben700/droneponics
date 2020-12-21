@@ -183,7 +183,11 @@ class PMPCalPage(tk.Frame):
         button1.pack()
         
         nutrientMix[0].pump=AtlasI2C(nutrientMix[0].pumpId)
-        label2Text = pointsCalPump(nutrientMix[0].pump.query("Cal,?"))
+        pumpCalStatus = nutrientMix[0].pump.query("Cal,?")
+        print("pumpCalStatus = " + pumpCalStatus)
+        pumpCalText = pointsCalPump(nutrientMix[0].pump.query("Cal,?"))
+        print("pumpCalText = " + pumpCalText)
+        label2Text = "org" + pumpCalText
         calibrationLabel = tk.Label(self, text=label2Text, font=LARGE_FONT)
         calibrationLabel.pack(pady=10,padx=10)
         
