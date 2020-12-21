@@ -8,6 +8,9 @@ import tkinter as tk
 from tkinter import ttk
 import numpy as np
 from math import *
+import sys
+import os
+from AtlasI2C import (AtlasI2C)
 
 LARGE_FONT= ("Verdana", 12)
 f=None
