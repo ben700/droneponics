@@ -91,6 +91,7 @@ class ORPCalPage(tk.Frame):
         button1.pack()
         
 def pointsCalPump(i):       
+    print(i)
     v = i.strip().rstrip('\x00').split(",")[1]
     if(v ==1):
         return "fixed volume"
