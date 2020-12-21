@@ -89,6 +89,11 @@ class ORPCalPage(tk.Frame):
         
 class PMPCalPage(tk.Frame):
 
+    def dosePump(self):
+            resultText = pump1.query("D,10")
+            resultLabel = tk.Label(self, text=resultText, font=LARGE_FONT)
+            resultLabel.pack(pady=10,padx=10)
+            
     def __init__(self, parent, controller):
         global pumpId
         tk.Frame.__init__(self, parent)
@@ -102,13 +107,10 @@ class PMPCalPage(tk.Frame):
         label = tk.Label(self, text=label2Text, font=LARGE_FONT)
         label.pack(pady=10,padx=10)
         
-        doseButton = ttk.Button(self, text="Dose 10ml", command=(dosePump))
+        doseButton = ttk.Button(self, text="Dose 10ml", command=dosePump)
         doseButton.pack()
         
-        def dosePump():
-            resultText = pump1.query("D,10")
-            resultLabel = tk.Label(self, text=resultText, font=LARGE_FONT)
-            resultLabel.pack(pady=10,padx=10)
+
         
         
 class ConfigurationPage(tk.Frame):
