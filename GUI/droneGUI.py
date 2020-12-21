@@ -57,8 +57,7 @@ class DOCalPage(tk.Frame):
         tk.Frame.__init__(self, parent)
         label = tk.Label(self, text="DO Probe Calibration Page!!!", font=LARGE_FONT)
         label.pack(pady=10,padx=10)
-        button1 = ttk.Button(self, text="Back to Home",
-        command=lambda: controller.show_frame(StartPage))
+        button1 = ttk.Button(self, text="Back to Home", command=lambda: controller.show_frame(StartPage))
         button1.pack()
         
         
@@ -68,8 +67,7 @@ class ORPCalPage(tk.Frame):
         tk.Frame.__init__(self, parent)
         label = tk.Label(self, text="ORP Probe Calibration Page!!!", font=LARGE_FONT)
         label.pack(pady=10,padx=10)
-        button1 = ttk.Button(self, text="Back to Home",
-        command=lambda: controller.show_frame(StartPage))
+        button1 = ttk.Button(self, text="Back to Home", command=lambda: controller.show_frame(StartPage))
         button1.pack()
         
         
@@ -79,8 +77,7 @@ class PMPCalPage(tk.Frame):
         tk.Frame.__init__(self, parent)
         label = tk.Label(self, text="Dose Pump Calibration Page!!!", font=LARGE_FONT)
         label.pack(pady=10,padx=10)
-        button1 = ttk.Button(self, text="Back to Home",
-        command=lambda: controller.show_frame(StartPage))
+        button1 = ttk.Button(self, text="Back to Home", command=lambda: controller.show_frame(StartPage))
         button1.pack()
         
 class ConfigurationPage(tk.Frame):
