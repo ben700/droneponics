@@ -140,11 +140,13 @@ class ORPCalPage(tk.Frame):
 def reduceUserValue (v):
     global calibrationEntry
     userValue = calibrationEntry.get()
+    calibrationEntry.delete(0, END)
     calibrationEntry.insert(0, float(userValue)-1)
         
 def increaseUserValue (v):
     global calibrationEntry
     userValue = calibrationEntry.get()
+    calibrationEntry.delete(0, END)
     calibrationEntry.insert(0, float(userValue)+1)
     
 class TempCalPage(tk.Frame):
