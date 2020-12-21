@@ -1,7 +1,7 @@
 
 import matplotlib
 matplotlib.use("TkAgg")
-from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2TkAgg
+from matplotlib.backends.backend_tkagg import FigureCanvasTk, NavigationToolbar2Tk
 from matplotlib.figure import Figure
 import matplotlib.animation as animation
 from matplotlib import style
@@ -40,7 +40,12 @@ class SeaofBTCapp(tk.Tk):
         
         tk.Tk.__init__(self, *args, **kwargs)
 
-        tk.Tk.iconbitmap(self, default="clienticon.ico")
+        
+        img = PhotoImage(file='/home/pi/droneponics/pic/favicon.ico')
+        root.tk.call('wm', 'iconphoto', root._w, img)
+        
+       # tk.Tk.iconbitmap(self, default="/home/pi/droneponics/pic/favicon.ico")
+        
         tk.Tk.wm_title(self, "Sea of BTC client")
         
         
