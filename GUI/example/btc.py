@@ -28,19 +28,20 @@ a = f.add_subplot(111)
 
 def animate(i):
     dataLink = 'https://api.coindesk.com/v1/bpi/historical/close.json'
-    data = urllib.request.urlopen(dataLink)
-    data = data.readall().decode("utf-8")
-    data = json.loads(data)
-
-    
-    data = data["bpi"]
-    data = pd.DataFrame(data)
+    btcData = urllib.request.urlopen(dataLink)
+#    data = data.readall().decode("utf-8")
+    data = btcData.json()
 
     print(data)
     
-    buys = data[(data['type']=="bid")]
-    buys["datestamp"] = np.array(buys["timestamp"]).astype("datetime64[s]")
-    buyDates = (buys["datestamp"]).tolist()
+#    data = data["bpi"]
+#    data = pd.DataFrame(data)
+
+    print(data)
+    
+ #   buys = data[(data['type']=="bid")]
+ #   buys["datestamp"] = np.array(buys["timestamp"]).astype("datetime64[s]")
+ #   buyDates = (buys["datestamp"]).tolist()
     
 
    # sells = data[(data['type']=="ask")]
@@ -49,7 +50,7 @@ def animate(i):
 
     a.clear()
 
-    a.plot_date(buyDates, buys["price"])
+  #  a.plot_date(buyDates, buys["price"])
   #a.plot_date(sellDates, sells["price"])
 
           
