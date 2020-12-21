@@ -159,8 +159,6 @@ def infoTemp(fr):
 
 def reduceUserValue (v):
     global calibrationEntry
-    calibrationEntry.delete(0,"end")
-    calibrationEntry.insert(0,"7.5")        
     userValue = calibrationEntry.get()
     calibrationEntry.delete(0, "end")
     calibrationEntry.insert(0, float(userValue)-1)
@@ -168,9 +166,6 @@ def reduceUserValue (v):
     
 def increaseUserValue (v):
     global calibrationEntry, calibrationLabel
-    calibrationEntry.pack()                                
-    calibrationEntry.delete(0,"end")
-    calibrationEntry.insert(0,"20.0")
     userValue = calibrationEntry.get()
     calibrationEntry.delete(0, "end")
     calibrationEntry.insert(0, float(userValue)+1)
@@ -208,13 +203,10 @@ class TempCalPage(tk.Frame):
         userCalDOUpButton.pack()
         
         calibrationEntry = ttk.Entry (self, text="Temp Value") 
-        calibrationEntry.insert(0,"10.0")
+        calibrationEntry.insert(0,"25.0")
         calibrationEntry.pack()
         
-        calibrationEntry.delete(0,"end")
-        calibrationEntry.insert(0,"12.0")
-        print(calibrationEntry)                                
-        
+     
         
 def pointsCalPump(i):       
     print(i)
