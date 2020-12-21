@@ -31,15 +31,13 @@ def animate(i):
     
     btcData = requests.get("https://api.coindesk.com/v1/bpi/historical/close.json")    
     btcArr = btcData.json()
-    
+    btcList = btcArr.["bpi"].tolist()
+    print(btcList)
    # dataLink = 'https://api.coindesk.com/v1/bpi/historical/close.json'
    # btcData = urllib.request.urlopen(dataLink)
 #    data = data.readall().decode("utf-8")
    # data = btcData.json()
 
-    print(btcArr)
-    print(btcArr["bpi"])
-    
     
 #    data = data["bpi"]
 #    data = pd.DataFrame(data)
