@@ -86,13 +86,14 @@ class ORPCalPage(tk.Frame):
         button1 = ttk.Button(self, text="Back to Home", command=lambda: controller.show_frame(StartPage))
         button1.pack()
         
-        
+
+def dosePump():
+    resultText = pump1.query("D,10")
+    resultLabel = tk.Label(self, text=resultText, font=LARGE_FONT)
+    resultLabel.pack(pady=10,padx=10)
+            
 class PMPCalPage(tk.Frame):
 
-    def dosePump(self):
-            resultText = pump1.query("D,10")
-            resultLabel = tk.Label(self, text=resultText, font=LARGE_FONT)
-            resultLabel.pack(pady=10,padx=10)
             
     def __init__(self, parent, controller):
         global pumpId
