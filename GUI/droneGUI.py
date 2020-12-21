@@ -132,16 +132,15 @@ def infoPump(fr):
     else:
         resultLabel.config(text=resultText)
         
-    calibrationLabel.config(text="New:"+pointsCalPump(nutrientMix[0].pump.query("Cal,?")))
+    calibrationLabel.config(text=pointsCalPump(nutrientMix[0].pump.query("Cal,?")))
     
 def clearCalibrationButton(fr):
     global nutrientMix, calibrationEntry, resultLabel, calibrationLabel
     
     MsgBox = tk.messagebox.askquestion ('Save Calibration','Are you sure you want to clear calibration' ,icon = 'warning')
     if MsgBox == 'yes':
-        print(nutrientMix[0].pump.query("Cal,clear"))
-        label2Text = pointsCalPump(nutrientMix[0].pump.query("Cal,?"))
-        calibrationLabel.config(text=label2Text)
+        nutrientMix[0].pump.query("Cal,clear")
+        calibrationLabel.config(text=pointsCalPump(nutrientMix[0].pump.query("Cal,?")))
         
     else:
         tk.messagebox.showinfo('Return','You will now return to the calibration screen')
@@ -152,18 +151,14 @@ def calibrationButton(fr):
     resultText = "Calibrated to " +  str(userValue)
     MsgBox = tk.messagebox.askquestion ('Save Calibration','Are you sure you want to calibrate pump using ' + str(userValue) + 'ml' ,icon = 'warning')
     if MsgBox == 'yes':
-        print("Cal,"+str(userValue))
-        action = nutrientMix[0].pump.query("Cal,"+str(userValue))
-        print(action)
-        label2Text = pointsCalPump(nutrientMix[0].pump.query("Cal,?"))
-        calibrationLabel.config(text=label2Text)
+        calibrationLabel.config(text=pointsCalPump(nutrientMix[0].pump.query("Cal,?")))
 
         if(resultLabel == None):
             resultLabel = tk.Label(fr, text=resultText, font=LARGE_FONT)
             resultLabel.pack(pady=10,padx=10)
         else:
             resultLabel.config(text=resultText)
-            calibrationLabel.config(text=nutrientMix[0].pump.query("Cal,?").strip().rstrip('\x00'))
+            calibrationLabel.config(text=pointsCalPump(nutrientMix[0].pump.query("Cal,?")))
     else:
         tk.messagebox.showinfo('Return','You will now return to the calibration screen')
    
@@ -183,12 +178,7 @@ class PMPCalPage(tk.Frame):
         button1.pack()
         
         nutrientMix[0].pump=AtlasI2C(nutrientMix[0].pumpId)
-        pumpCalStatus = nutrientMix[0].pump.query("Cal,?")
-        print("pumpCalStatus = " + pumpCalStatus)
-        pumpCalText = pointsCalPump(nutrientMix[0].pump.query("Cal,?"))
-        print("pumpCalText = " + pumpCalText)
-        label2Text = "org" + pumpCalText
-        calibrationLabel = tk.Label(self, text=label2Text, font=LARGE_FONT)
+        calibrationLabel = tk.Label(self, text=pointsCalPump(nutrientMix[0].pump.query("Cal,?")), font=LARGE_FONT)
         calibrationLabel.pack(pady=10,padx=10)
         
         doseButton = ttk.Button(self, text="Dose 10ml", command=lambda:dosePump(self))
