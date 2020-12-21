@@ -157,18 +157,25 @@ def infoTemp(fr):
         
     calibrationLabel.config(text=pointsCalTemp(sensors[0].sensor.query("Cal,?")))
 
+
+def setcalibrationEntry(calibrationEntry, value):
+    calibrationEntry.delete(0,"end")
+    calibrationEntry.insert(0,value)    
+    
 def reduceUserValue (v):
     global calibrationEntry
     userValue = calibrationEntry.get()
-    calibrationEntry.delete(0, "end")
-    calibrationEntry.insert(0, float(userValue)-1)
+    setcalibrationEntry(calibrationEntry, float(userValue)-1)
+#    calibrationEntry.delete(0, "end")
+ #   calibrationEntry.insert(0, float(userValue)-1)
     print("calibrationEntry.insert" + str(float(userValue)-1))
     
 def increaseUserValue (v):
     global calibrationEntry, calibrationLabel
     userValue = calibrationEntry.get()
-    calibrationEntry.delete(0, "end")
-    calibrationEntry.insert(0, float(userValue)+1)
+    setcalibrationEntry(calibrationEntry, float(userValue)+1)
+#    calibrationEntry.delete(0, "end")
+#    calibrationEntry.insert(0, float(userValue)+1)
     print("calibrationEntry.insert" + str(float(userValue)+1))
     
 class TempCalPage(tk.Frame):
@@ -203,10 +210,11 @@ class TempCalPage(tk.Frame):
         userCalDOUpButton.pack()
         
         calibrationEntry = ttk.Entry (self, text="Temp Value") 
-        calibrationEntry.insert(0,"25.0")
+        setcalibrationEntry(calibrationEntry, "25.0")
         calibrationEntry.pack()
         
-     
+        
+    
         
 def pointsCalPump(i):       
     print(i)
