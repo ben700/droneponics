@@ -138,11 +138,12 @@ def calibrationButton(fr):
         if(resultLabel == None):
             resultLabel = tk.Label(fr, text=resultText, font=LARGE_FONT)
             resultLabel.pack(pady=10,padx=10)
-            nutrientMix[0].pump.query("Cal,"+userValue).strip().rstrip('\x00')
+            print(nutrientMix[0].pump.query("Cal,"+userValue))
             label2Text = nutrientMix[0].pump.query("Cal,?").strip().rstrip('\x00')
             calibrationLabel.config(text=label2Text)
         else:
             resultLabel.config(text=resultText)
+            calibrationLabel.config(text=label2Text)
     else:
         tk.messagebox.showinfo('Return','You will now return to the calibration screen')
    
