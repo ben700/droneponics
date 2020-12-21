@@ -212,6 +212,7 @@ class TempCalPage(tk.Frame):
         calibrationEntry = ttk.Entry (self, text="Temp Value") 
         setcalibrationEntry(calibrationEntry, "25.0")
         calibrationEntry.pack()
+        setcalibrationEntry(calibrationEntry, "10.0")
         
         
     
