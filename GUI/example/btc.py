@@ -37,9 +37,13 @@ def animate(i):
 
     a.clear()
 
-    a.plot_date(key_list, val_list)
+    a.plot_date(key_list, val_list,"#00A3E0", label="Value")
+        
+    a.legend(bbox_to_anchor=(0, 1.02, 1, .102), loc=3,
+             ncol=2, borderaxespad=0)
 
-          
+    title = "BTC Close Prices in USD: "+str(btcArr["bpi"]["time"]["updated"])
+    a.set_title(title)        
 
 class SeaofBTCapp(tk.Tk):
 
