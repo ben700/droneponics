@@ -184,7 +184,7 @@ class TempCalPage(tk.Frame):
              
         calibrationLabel = tk.Label(self, text=pointsCalTemp(sensors[0].sensor.query("Cal,?")), font=LARGE_FONT)
         calibrationLabel.pack(pady=10,padx=10)
-       
+    
         # Cal atmospheric, Cal,0 Zero , Cal,clear
         infoButton = ttk.Button(self, text="Info", command=lambda:infoPump(self))
         infoButton.pack()
@@ -204,6 +204,10 @@ class TempCalPage(tk.Frame):
         calibrationEntry = ttk.Entry (self, text="Temp Value") 
         calibrationEntry.insert(0,"10.0")
         calibrationEntry.pack()
+        
+        calibrationEntry.delete(o,"end2)
+        calibrationEntry.insert(0,"12.0")
+                                
         
         
 def pointsCalPump(i):       
