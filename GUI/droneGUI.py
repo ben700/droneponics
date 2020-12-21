@@ -94,12 +94,12 @@ def pointsCalPump(i):
     print(i)
     v = i.strip().rstrip('\x00').split(",")[1]
     print("[" + str(v) + "]")
-    if(str(v) ==1):
+    if(str(v) ==str(1)):
         print("fixed volume")
         return "fixed volume"
-    elif(str(v) ==2):
+    elif(str(v) ==str(2)):
         return "volume/time"
-    elif(str(v) ==3):
+    elif(str(v) ==str(3)):
         return "Both"
     else:
         return "uncalibrated"
