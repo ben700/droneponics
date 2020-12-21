@@ -23,16 +23,8 @@ style.use("ggplot")
 
 droneGUI.f = Figure(figsize=(5,3), dpi=100)
 a = droneGUI.f.add_subplot(111)
-t = np.arange(0.0,3.0,0.01)
-s = np.sin(2*np.pi*t)
-a.plot(t,s)
-print("Done Plot")
-
-
-
 
 def animate(i):
-    print("----------------------------------animate")
     btcData = requests.get("https://api.coindesk.com/v1/bpi/historical/close.json")    
     btcArr = btcData.json()
     btcList = btcArr["bpi"]    
@@ -58,7 +50,6 @@ class SeaofBTCapp(tk.Tk):
         logo = tk.PhotoImage(file='/home/pi/droneponics/pic/favicon.ico')
         self.call('wm', 'iconphoto', self._w, logo)
     
-        #tk.Tk.iconbitmap(self, default="/home/pi/droneponics/pic/favicon.ico")
         tk.Tk.wm_title(self, "Sea of BTC client")
         
         
@@ -88,5 +79,5 @@ class SeaofBTCapp(tk.Tk):
 
 
 app = SeaofBTCapp()
-ani = animation.FuncAnimation(f, animate, interval=1000)
+ani = animation.FuncAnimation(droneGUI.f, animate, interval=1000)
 app.mainloop()
