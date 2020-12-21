@@ -113,7 +113,7 @@ def infoPump(fr):
     else:
         resultLabel.config(text=resultText)
         
-    calibrationLabel.config(text=nutrientMix[0].pump.query("Cal,?").strip().rstrip('\x00'))
+    calibrationLabel.config(text="New:"+nutrientMix[0].pump.query("Cal,?").strip().rstrip('\x00'))
     
 def clearCalibrationButton(fr):
     global nutrientMix, calibrationEntry, resultLabel, calibrationLabel
