@@ -421,7 +421,32 @@ class PMPCalPage(tk.Frame):
         calibrationEntry = ttk.Entry (self, text="Pumped Volume") 
         calibrationEntry.insert(0, "10.0")
         calibrationEntry.pack()
+ 
+class DOConfigPage(tk.Frame):
+     ConfigPage(tk.Frame)
         
+class ORPConfigPage(tk.Frame):
+     ConfigPage(tk.Frame)
+        
+class TempConfigPage(tk.Frame):
+     ConfigPage(tk.Frame)
+        
+class PMPConfigPage(tk.Frame):
+     ConfigPage(tk.Frame)
+            
+        
+class ConfigPage(tk.Frame):
+
+    def __init__(self, parent, controller):
+        global nutrientMix, calibrationEntry, resultLabel, calibrationLabel
+  
+        tk.Frame.__init__(self, parent)
+        
+        label = tk.Label(self, text="Temp Probe Calibration Page!!!", font=LARGE_FONT)
+        label.pack(pady=10,padx=10)
+        button1 = ttk.Button(self, text="Back to Home", command=lambda: controller.show_frame(StartPage))
+        button1.pack()
+             
         
 class ConfigurationPage(tk.Frame):
 
@@ -432,6 +457,24 @@ class ConfigurationPage(tk.Frame):
         button1 = ttk.Button(self, text="Back to Home",
         command=lambda: controller.show_frame(StartPage))
         button1.pack()
+        
+        
+        DOButton = ttk.Button(self, text="DO Trigger Levels",
+                            command=lambda: controller.show_frame(DOConfigPage))
+        ORPButton = ttk.Button(self, text="ORP Trigger Levels",
+                            command=lambda: controller.show_frame(ORPConfigPage))
+        TempButton = ttk.Button(self, text="Temp Trigger Levels",
+                            command=lambda: controller.show_frame(TempConfigPage))
+        PMPButton = ttk.Button(self, text="Dose Pump Dosage",
+                            command=lambda: controller.show_frame(PMPConfigPage))
+        
+        
+        
+        DOButton.pack()
+        ORPButton.pack()
+        TempButton.pack()
+        PMPButton.pack()
+        
 
 class OperationalDataPage(tk.Frame):
 
