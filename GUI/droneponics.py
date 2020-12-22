@@ -75,7 +75,7 @@ def animate(i):
     title = "BTC Close Prices to: "+str(btcArr["time"]["updated"])
     a.set_title(title)        
 
-class SeaofBTCapp(tk.Tk):
+class droneponicsHeader(tk.Tk):
 
     def __init__(self, *args, **kwargs):
         
@@ -112,6 +112,6 @@ class SeaofBTCapp(tk.Tk):
         
 
 
-app = SeaofBTCapp()
+app = droneponicsHeader()
 ani = animation.FuncAnimation(droneGUI.f, animate, interval=1000)
 app.mainloop()
