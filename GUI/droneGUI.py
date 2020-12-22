@@ -107,16 +107,16 @@ class DOCalPage(tk.Frame):
         calibrationLabel.pack(pady=10,padx=10)
        
         # Cal atmospheric, Cal,0 Zero , Cal,clear
-        infoButton = ttk.Button(self, text="Info", command=lambda:infoPump(self))
+        infoButton = ttk.Button(self, text="Info", command=lambda:infoDO(self))
         infoButton.pack()
         
-        clearCalDOButton = ttk.Button(self, text="Reset Calibration", command=lambda:clearCalibrationButton(self))
+        clearCalDOButton = ttk.Button(self, text="Reset Calibration", command=lambda:clearCalibrationDOButton(self))
         clearCalDOButton.pack()
 
-        atmosphericCalDOButton = ttk.Button(self, text="Atmospheric", command=lambda:infoPump(self))
+        atmosphericCalDOButton = ttk.Button(self, text="Atmospheric", command=lambda:calibrationDOButtonAtmos(self))
         atmosphericCalDOButton.pack()
         
-        zeroCalDOButton = ttk.Button(self, text="Zero", command=lambda:calibrationButton(self))
+        zeroCalDOButton = ttk.Button(self, text="Zero", command=lambda:calibrationDOButtonZero(self))
         zeroCalDOButton.pack()
         
 class ORPCalPage(tk.Frame):
@@ -132,13 +132,13 @@ class ORPCalPage(tk.Frame):
         calibrationLabel.pack(pady=10,padx=10)
        
         # Cal atmospheric, Cal,0 Zero , Cal,clear
-        infoButton = ttk.Button(self, text="Info", command=lambda:infoPump(self))
+        infoButton = ttk.Button(self, text="Info", command=lambda:infoORP(self))
         infoButton.pack()
         
-        clearCalDOButton = ttk.Button(self, text="Reset Calibration", command=lambda:clearCalibrationButton(self))
+        clearCalDOButton = ttk.Button(self, text="Reset Calibration", command=lambda:clearCalibrationORPButton(self))
         clearCalDOButton.pack()
 
-        userCalDOButton = ttk.Button(self, text="Calibration", command=lambda:infoPump(self))
+        userCalDOButton = ttk.Button(self, text="Calibration", command=lambda:calibrationORPButton(self))
         userCalDOButton.pack()
         
                 
@@ -146,16 +146,6 @@ class ORPCalPage(tk.Frame):
         calibrationEntry.insert(0, "10.0")
         calibrationEntry.pack()
 
-def infoTemp(fr):
-    global nutrientMix, resultLabel, calibrationLabel
-    resultText = sensors[0].sensor.query("I")
-    if(resultLabel == None):
-        resultLabel = tk.Label(fr, text=resultText, font=LARGE_FONT)
-        resultLabel.pack(pady=10,padx=10)
-    else:
-        resultLabel.config(text=resultText)
-        
-    calibrationLabel.config(text=pointsCalTemp(sensors[0].sensor.query("Cal,?")))
 
 
 def setcalibrationEntry(calibrationEntry, value):
@@ -177,6 +167,102 @@ def increaseUserValue (v):
 #    calibrationEntry.delete(0, "end")
 #    calibrationEntry.insert(0, float(userValue)+1)
     print("calibrationEntry.insert" + str(float(userValue)+1))
+
+def infoTemp(fr):
+    infoDevice(fr,Sensors[0].sensor)
+def readDO(fr):
+    infoDevice(fr,Sensors[0].sensor)
+def readORP(fr):
+    infoDevice(fr,Sensors[0].sensor)
+    
+def infoDevice(fr, device):
+    global nutrientMix, resultLabel, calibrationLabel
+    resultText = device.query("I")
+    if(resultLabel == None):
+        resultLabel = tk.Label(fr, text=resultText, font=LARGE_FONT)
+        resultLabel.pack(pady=10,padx=10)
+    else:
+        resultLabel.config(text=resultText)
+        
+    calibrationLabel.config(text=device.query("Cal,?"))
+
+def readTemp(fr):
+    readDevice(fr,Sensors[0].sensor)
+def readDO(fr):
+    readDevice(fr,Sensors[0].sensor)
+def readORP(fr):
+    readDevice(fr,Sensors[0].sensor)
+    
+def readDevice(fr, device):
+    global nutrientMix, resultLabel, calibrationLabel
+    resultText = device.query("R")
+    if(resultLabel == None):
+        resultLabel = tk.Label(fr, text=resultText, font=LARGE_FONT)
+        resultLabel.pack(pady=10,padx=10)
+    else:
+        resultLabel.config(text=resultText)
+        
+    calibrationLabel.config(text=device.query("Cal,?"))
+
+def clearCalibrationTempButton(fr):
+    clearCalibrationButton(fr,Sensors[0].sensor)
+def clearCalibrationDOButton(fr):
+    clearCalibrationButton(fr,Sensors[1].sensor)
+def clearCalibrationORPButton(fr):
+    clearCalibrationButton(fr,Sensors[2].sensor)
+    
+def clearCalibrationButton(fr, device):
+    global nutrientMix, calibrationEntry, resultLabel, calibrationLabel
+    MsgBox = tk.messagebox.askquestion ('Clear Calibration','Are you sure you want to clear calibration' ,icon = 'warning')
+    if MsgBox == 'yes':
+        device.query("Cal,clear")
+        calibrationLabel.config(text=device.query("Cal,?"))
+        
+    else:
+        tk.messagebox.showinfo('Return','You will now return to the calibration screen')
+
+def calibrationTempButton(fr):
+    calibrationButton(fr,Sensors[0].sensor, calibrationEntry.get())
+def calibrationDOButtonZero(fr):
+    calibrationButton(fr,Sensors[1].sensor,0)
+def calibrationORPButton(fr):
+    calibrationButton(fr,Sensors[2].sensor)
+    
+def calibrationButton(fr, device, value):
+    global nutrientMix, calibrationEntry, resultLabel
+
+    resultText = "Calibrated to " +  str(value)
+    MsgBox = tk.messagebox.askquestion ('Save Calibration','Are you sure you want to calibrate using ' + str(value) ,icon = 'warning')
+    if MsgBox == 'yes':
+        device.query("Cal,"+str(value))
+        calibrationLabel.config(text=device.query("Cal,?"))
+        if(resultLabel == None):
+            resultLabel = tk.Label(fr, text=resultText, font=LARGE_FONT)
+            resultLabel.pack(pady=10,padx=10)
+        else:
+            resultLabel.config(text=resultText)
+            calibrationLabel.config(text=device.query("Cal,?"))
+    else:
+        tk.messagebox.showinfo('Return','You will now return to the calibration screen')
+
+
+def calibrationDOButtonAtmos(fr, device, value):
+    global nutrientMix, calibrationEntry, resultLabel
+
+    resultText = "Calibrated to " +  str(value)
+    MsgBox = tk.messagebox.askquestion ('Save Calibration','Are you sure you want to calibrate using Atmos' ,icon = 'warning')
+    if MsgBox == 'yes':
+        device.query("Cal"))
+        calibrationLabel.config(text=device.query("Cal,?"))
+        if(resultLabel == None):
+            resultLabel = tk.Label(fr, text=resultText, font=LARGE_FONT)
+            resultLabel.pack(pady=10,padx=10)
+        else:
+            resultLabel.config(text=resultText)
+            calibrationLabel.config(text=device.query("Cal,?"))
+    else:
+        tk.messagebox.showinfo('Return','You will now return to the calibration screen')
+   
     
 class TempCalPage(tk.Frame):
 
@@ -194,16 +280,19 @@ class TempCalPage(tk.Frame):
         calibrationLabel.pack(pady=10,padx=10)
     
         # Cal atmospheric, Cal,0 Zero , Cal,clear
-        infoButton = ttk.Button(self, text="Info", command=lambda:infoPump(self))
+        infoButton = ttk.Button(self, text="Info", command=lambda:infoTemp(self))
         infoButton.pack()
         
-        clearCalDOButton = ttk.Button(self, text="Reset Calibration", command=lambda:clearCalibrationButton(self))
+        readButton = ttk.Button(self, text="Info", command=lambda:readTemp(self))
+        readButton.pack()
+        
+        clearCalDOButton = ttk.Button(self, text="Reset Calibration", command=lambda:clearTempCalibrationButton(self))
         clearCalDOButton.pack()
 
         userCalDODownButton = ttk.Button(self, text="-", command=lambda:reduceUserValue(self))
         userCalDODownButton.pack()
         
-        userCalDOButton = ttk.Button(self, text="Calibration", command=lambda:infoPump(self))
+        userCalDOButton = ttk.Button(self, text="Calibration", command=lambda:calibrationTempButton(self))
         userCalDOButton.pack()
         
         userCalDOUpButton = ttk.Button(self, text="+", command=lambda:increaseUserValue(self))
@@ -261,7 +350,7 @@ def infoPump(fr):
         
     calibrationLabel.config(text=pointsCalPump(nutrientMix[0].pump.query("Cal,?")))
     
-def clearCalibrationButton(fr):
+def clearCalibrationPMPButton(fr):
     global nutrientMix, calibrationEntry, resultLabel, calibrationLabel
     
     MsgBox = tk.messagebox.askquestion ('Save Calibration','Are you sure you want to clear calibration' ,icon = 'warning')
@@ -272,12 +361,13 @@ def clearCalibrationButton(fr):
     else:
         tk.messagebox.showinfo('Return','You will now return to the calibration screen')
    
-def calibrationButton(fr):
+def calibrationPMPButton(fr):
     global nutrientMix, calibrationEntry, resultLabel
     userValue= calibrationEntry.get()
     resultText = "Calibrated to " +  str(userValue)
     MsgBox = tk.messagebox.askquestion ('Save Calibration','Are you sure you want to calibrate pump using ' + str(userValue) + 'ml' ,icon = 'warning')
     if MsgBox == 'yes':
+        nutrientMix[0].pump.query("Cal,"+str(userValue))
         calibrationLabel.config(text=pointsCalPump(nutrientMix[0].pump.query("Cal,?")))
 
         if(resultLabel == None):
@@ -321,10 +411,10 @@ class PMPCalPage(tk.Frame):
         infoButton = ttk.Button(self, text="Info", command=lambda:infoPump(self))
         infoButton.pack()
         
-        clearCalPumpButton = ttk.Button(self, text="Reset Calibration", command=lambda:clearCalibrationButton(self))
+        clearCalPumpButton = ttk.Button(self, text="Reset Calibration", command=lambda:clearCalibrationPMPButton(self))
         clearCalPumpButton.pack()
 
-        calPumpButton = ttk.Button(self, text="Calibration", command=lambda:calibrationButton(self))
+        calPumpButton = ttk.Button(self, text="Calibration", command=lambda:calibrationPMPButton(self))
         calPumpButton.pack()
 
         
