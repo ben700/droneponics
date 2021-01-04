@@ -3,25 +3,12 @@ import socket
 import blynklib
 from configparser import ConfigParser
 import drone
-from binascii import hexlify
-
+from getmac import get_mac_address
 # get mac address
 def get_mac(interface="wlan0", p=0):
-    encoding = 'utf-8'
-    # create dummy socket
-    s = socket.socket(socket.AF_PACKET, socket.SOCK_RAW)
-
-    # bind it with interface name
-    s.bind((interface,p))
-
-    # extract mac address
-    mac =  hexlify(s.getsockname()[4])
-
-    # close socket
-    s.close()
-
     #return value
-    return mac.decode(encoding)
+    return get_mac_address(interface)
+
 
 def gethostname():
     return socket.gethostname()
@@ -38,17 +25,6 @@ def get_ip():
         s.close()
     return IP
 
-def get_ipmac():
-    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-    try:
-        # doesn't even have to be reachable
-        s.connect(('10.255.255.255', 1))
-        IP = s.getsockname()[4]
-    except:
-        IP = '127.0.0.1'
-    finally:
-        s.close()
-    return IP
 
 def setFormBlynkLogObjects(*args, **kwargs):
    blynk = kwargs.get('blynkObj', None)
