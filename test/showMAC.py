@@ -16,3 +16,7 @@ macAddress = drone.get_mac()
 print(macAddress)
   
    
+
+ipmacAddress = drone.get_ipmac()
+print(ipmacAddress)
+  
