@@ -12,11 +12,15 @@ from AtlasI2C import (
 )
 import drone 
 
-macAddress = drone.get_mac()
-print(macAddress)
+
+from getmac import get_mac_address
+eth_mac = get_mac_address(interface="wlan0")
+
+#macAddress = drone.get_mac()
+print(eth_mac)
   
    
 
-ipmacAddress = drone.get_ipmac()
-print(ipmacAddress)
+#ipmacAddress = drone.get_ipmac()
+#print(ipmacAddress)
   
