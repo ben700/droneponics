@@ -13,7 +13,7 @@ from AtlasI2C import (
 import drone 
 
 
-print("{0}: {1}".format("wlan0", drone.get_mac("wlan0")))
+print(drone.get_mac("wlan0"))
   
 # list all available network interfaces
 #def list_all_netifaces():
