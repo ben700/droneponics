@@ -38,6 +38,18 @@ def get_ip():
         s.close()
     return IP
 
+def get_ipmac():
+    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    try:
+        # doesn't even have to be reachable
+        s.connect(('10.255.255.255', 1))
+        IP = s.getsockname()[4]
+    except:
+        IP = '127.0.0.1'
+    finally:
+        s.close()
+    return IP
+
 def setFormBlynkLogObjects(*args, **kwargs):
    blynk = kwargs.get('blynkObj', None)
    _log = kwargs.get('loggerObj', None)
