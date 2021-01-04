@@ -12,20 +12,7 @@ from AtlasI2C import (
 )
 import drone 
 
-hex_string = drone.get_mac("wlan0")
-print(hex_string)
-  
-   
-encoding = 'utf-8'
-macAddress = hex_string.decode(encoding)
+macAddress = drone.get_mac()
 print(macAddress)
-   
-# list all available network interfaces
-#def list_all_netifaces():
-#	return psutil.net_if_addrs().keys()
-
-# print them all
-#for ifaces in list_all_netifaces():
-#	print("{0}: {1}".format(ifaces, drone.get_mac(ifaces)))
   
- 
+   
