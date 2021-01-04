@@ -12,9 +12,13 @@ from AtlasI2C import (
 )
 import drone 
 
-
-print(drone.get_mac("wlan0"))
+hex_string = drone.get_mac("wlan0")
+print(hex_string)
   
+bytes_object = bytes.fromhex(hex_string)
+ascii_string = bytes_object.decode("ASCII")
+print(ascii_string)
+   
 # list all available network interfaces
 #def list_all_netifaces():
 #	return psutil.net_if_addrs().keys()
