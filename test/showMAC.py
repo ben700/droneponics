@@ -1,3 +1,5 @@
+import socket, psutil
+from binascii import hexlify
 from configparser import ConfigParser
 from datetime import datetime
 import time
