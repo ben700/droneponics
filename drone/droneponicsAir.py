@@ -6,8 +6,8 @@ import drone
 from binascii import hexlify
 
 # get mac address
-def get_mac(interface, p=0):
-
+def get_mac(interface="wlan0", p=0):
+    encoding = 'utf-8'
     # create dummy socket
     s = socket.socket(socket.AF_PACKET, socket.SOCK_RAW)
 
@@ -21,7 +21,7 @@ def get_mac(interface, p=0):
     s.close()
 
     #return value
-    return mac
+    return mac.decode(encoding)
 
 def gethostname():
     return socket.gethostname()
