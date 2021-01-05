@@ -66,9 +66,9 @@ def buildAllSensors(sensors, _log):
 
 def buildPayload(sensors, _log, payload):
     if(sensors[1].name == "EC"):
-        payload = '{{ "ts": {}, "deviceMAC": {}, "temperature": {}, "conductivity": {}, "totaldissolvedsolids": {}, "salinity": {}, "specificgravity": {}, "pH": {}}}'.format(int(time.time()), drone.get_mac(), sensors[0].value, sensors[1].value, sensors[1].value2, sensors[1].value3, sensors[1].value4, sensors[2].value )
+        payload = '{{ "ts": {}, "devicemac": {}, "temperature": {}, "conductivity": {}, "totaldissolvedsolids": {}, "salinity": {}, "specificgravity": {}, "pH": {}}}'.format(int(time.time()), drone.get_mac(), sensors[0].value, sensors[1].value, sensors[1].value2, sensors[1].value3, sensors[1].value4, sensors[2].value )
     elif(sensors[1].name == "Dissolved Oxygen"):
-        payload = '{{ "ts": {}, "deviceMAC": {}, "temperature": {}, "dissolvedoxygen": {}, "saturation": {}, "oxidationreductionpotential": {}}}'.format(int(time.time()), drone.get_mac(), sensors[0].value, sensors[1].value, sensors[1].value2, sensors[2].value )
+        payload = '{{ "ts": {}, "devicemac": {}, "temperature": {}, "dissolvedoxygen": {}, "saturation": {}, "oxidationreductionpotential": {}}}'.format(int(time.time()), drone.get_mac(), sensors[0].value, sensors[1].value, sensors[1].value2, sensors[2].value )
     return payload    
    
 class Sensor:
