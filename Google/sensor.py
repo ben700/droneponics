@@ -108,24 +108,25 @@ client.connect('mqtt.googleapis.com', 8883)
 
 client.loop_start()
 
-  # Droneponics Start
-  for sensor in sensors:
-      if sensor is not None:
+# Droneponics Start
+for sensor in sensors:
+     if sensor is not None:
           _log.debug("Going to read the " + sensor.name)    
           sensor.read()
           _log.debug("The " + sensor.name + " is " + str(sensor.value))
 
-  payload = ''
-  payload = drone.buildPayload(sensors, _log, payload)
+_log.debug("Going to buildPayload")      
+payload = ''
+payload = drone.buildPayload(sensors, _log, payload)
 
+
+# Uncomment following line when ready to publish
+#client.publish(_MQTT_TOPIC, payload, qos=1)
+
+_log.info("{}\n".format(payload))
 # Droneponics End
 
-  # Uncomment following line when ready to publish
-  client.publish(_MQTT_TOPIC, payload, qos=1)
-
-  _log.info("{}\n".format(payload))
-
-  time.sleep(1)
+time.sleep(30)
 
 client.loop_stop()
 
