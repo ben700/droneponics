@@ -9,6 +9,7 @@ from AtlasI2C import (
 )
 import datetime
 import time
+import drone 
 
 def buildSensors(sensors, _log):
     _log.debug("in built sensors function")
