@@ -121,12 +121,10 @@ payload = drone.buildPayload(sensors, _log, payload)
 
 
 # Uncomment following line when ready to publish
-#client.publish(_MQTT_TOPIC, payload, qos=1)
+client.publish(_MQTT_TOPIC, payload, qos=1)
 
 _log.info("{}\n".format(payload))
 # Droneponics End
-
-time.sleep(30)
 
 client.loop_stop()
 
