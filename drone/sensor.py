@@ -7,6 +7,8 @@ import RPi.GPIO as GPIO
 from AtlasI2C import (
    AtlasI2C
 )
+import datetime
+import time
 
 def buildSensors(sensors, _log):
     _log.debug("in built sensors function")
@@ -59,6 +61,18 @@ def buildAllSensors(sensors, _log):
     sensors.append( Sensor(98, "Oxidation Reduction Potential", 34, _log))
     _log.debug("built ORP sensor")
     return sensors
+
+
+def buildPayload(sensors, _log, payload):
+
+if(sensors[1].name = "EC"):
+    payload = '{{ "ts": {}, "temperature": {}, "conductivity": {}, "totaldissolvedsolids": {}, "salinity": {}, "specificgravity": {}, "pH": {}}}'.format(int(time.time()), sensors[0].value, sensors[1].value, sensors[1].value2, sensors[1].value3, sensors[1].value4, sensors[2].value )
+elif(sensors[1].name = "Dissolved Oxygen")
+    payload = '{{ "ts": {}, "temperature": {}, "dissolvedoxygen": {}, "saturation": {}, "oxidationreductionpotential": {}}}'.format(int(time.time()),  sensors[0].value, sensors[1].value, sensors[1].value2, sensors[2].value )
+return payload    
+   
+
+
 
 
 class Sensor:
@@ -190,7 +204,7 @@ class Sensor:
         self._log.info("Error updating value 4 on " + self.name)           
          
 
-
+ 
 
    def currenCalibration(self):
        self._log.info ("currenCalibration")
