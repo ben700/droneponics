@@ -25,6 +25,7 @@ _log.warning("warning")
 _log.info("info")
 _log.debug("debug")
 
+_log.info("ConfigParser path = /home/pi/droneponics/config/configOxy/"+drone.gethostname()+".ini")
 
 sensors = []
 sensors = drone.buildMonitorSensors(sensors, _log)
