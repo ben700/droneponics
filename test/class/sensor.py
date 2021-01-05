@@ -36,7 +36,6 @@ for sensor in sensors:
         _log.critical("Going to read the " + sensor.name)    
         sensor.read()
         _log.critical("The " + sensor.name + " is " + str(sensor.value))
-        _log.critical("The " + sensor.name + " probe is connected =" + str(sensor.isProbeConnected()))
         _log.critical("The " + sensor.name + " probe calibration is  " + str(sensor.currenCalibration()))
 
 try:		
