@@ -35,3 +35,11 @@ for sensor in sensors:
         _log.critical("Going to read the " + sensor.name)    
         sensor.read()
         _log.critical("The " + sensor.name + " is " + str(sensor.value))
+        _log.critical("The " + sensor.name + " probe is connected =" + str(sensor.isProbeConnected()))
+        _log.critical("The " + sensor.name + " probe calibration is  " + str(sensor.currenCalibration()))
+
+try:		
+    _log.info("Going to call drone.getTempColour")    
+    sensors[0].color = drone.getTempColour(_log, int(round(float(sensors[0].value)*10,0)))
+except:
+    _log.critical("Working out sensor colour crashed")
