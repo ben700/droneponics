@@ -43,3 +43,11 @@ try:
     sensors[0].color = drone.getTempColour(_log, int(round(float(sensors[0].value)*10,0)))
 except:
     _log.critical("Working out sensor colour crashed")
+    
+    
+
+_log.info("Going to call drone.getTempColour")   
+payload = ''
+payload = drone.buildPayload(sensors, _log, payload)
+_log.info("payload for google is = " + payload)
+    
