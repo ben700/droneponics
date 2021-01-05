@@ -34,13 +34,6 @@ import logging
 # Define some project-based variables to be used below. This should be the only
 # block of variables that you need to edit in order to run this script
 
-ssl_private_key_filepath = '/home/pi/.ssh/rsa_private.pem'
-ssl_algorithm = 'RS256' # Either RS256 or ES256
-root_cert_filepath = '/home/pi/.ssh/roots.pem'
-project_id = 'droneponics'
-gcp_location = 'europe-west1'
-registry_id = 'droneOxy'
-device_id = 'droneOxy'
 
 # end of user-variables
 
@@ -61,6 +54,17 @@ _log.warning("warning")
 _log.info("info")
 _log.debug("debug")
 _log.info("ConfigParser path = /home/pi/droneponics/config/configOxy/"+drone.gethostname()+".ini")
+
+
+
+ssl_private_key_filepath = parser.get('Google', 'ssl_private_key_filepath')
+ssl_algorithm = parser.get('Google', 'ssl_algorithm')
+root_cert_filepath = parser.get('Google', 'root_cert_filepath')
+project_id = parser.get('Google', 'project_id')
+gcp_location = parser.get('Google', 'gcp_location')
+registry_id = parser.get('Google', 'registry_id')
+device_id = parser.get('Google', 'device_id')
+
 
 sensors = []
 sensors = drone.buildMonitorSensors(sensors, _log)
