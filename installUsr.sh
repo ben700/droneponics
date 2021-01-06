@@ -42,6 +42,7 @@ pip3 install https://github.com/pl31/python-liquidcrystal_i2c/archive/master.zip
 sudo pip3 install https://github.com/pl31/python-liquidcrystal_i2c/archive/master.zip
 #getmac used to get device Id for Google Firestore
 pip3 install getmac
+sudo pip3 install getmac
 #green soil moisture
 pip3 install adafruit-circuitpython-seesaw
 #This script updates all submodules to the latest tag  https://github.com/adafruit/Adafruit_CircuitPython_Bundle/blob/master/update-submodules.sh
