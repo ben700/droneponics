@@ -62,7 +62,7 @@ ssl_algorithm = parser.get('Google', 'ssl_algorithm')
 root_cert_filepath = parser.get('Google', 'root_cert_filepath')
 project_id = parser.get('Google', 'project_id')
 gcp_location = parser.get('Google', 'gcp_location')
-registry_id = parser.get('Google', 'registry_id')
+registry_id = parser.get('Google', 'sensor_registry_id')
 device_id = parser.get('Google', 'device_id')
 device_sensor_type = parser.get('Google', 'device_sensor_type')
 
