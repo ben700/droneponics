@@ -17,7 +17,7 @@ import subprocess
 import re
 import drone
 
-from drone import Alarm, OpenWeather
+from drone import OpenWeather
 
 bootup = True
 systemLED=101
