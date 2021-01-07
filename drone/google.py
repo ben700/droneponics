@@ -63,7 +63,7 @@ def on_publish(unused_client, unused_userdata, unused_mid):
 
 
 
-def pubToGoolgeCloud(sensors, _log):
+def pubSensorReadingsToGoolgeCloud(sensors, _log):
 
     # Droneponics Start
     parser = ConfigParser()
@@ -77,6 +77,66 @@ def pubToGoolgeCloud(sensors, _log):
     project_id = parser.get('Google', 'project_id')
     gcp_location = parser.get('Google',     'gcp_location')
     registry_id = parser.get('Google', 'registry_id')
+    device_id = parser.get('Google', 'device_id')
+    device_sensor_type = parser.get('Google', 'device_sensor_type')
+
+    _log.info('-------------------- device_sensor_type = ' + str(device_sensor_type))
+    _log.info("ssl_private_key_filepath = " + str(ssl_private_key_filepath))
+    _log.info("ssl_algorithm = " + str(ssl_algorithm))
+    _log.info("root_cert_filepath = " + str(root_cert_filepath))
+    _log.info("project_id = " + str(project_id))
+    _log.info("gcp_location = " + str(gcp_location))
+    _log.info("registry_id = " + str(sensor_registry_id))
+    _log.info("device_id = " + str(device_id))
+
+
+    _CLIENT_ID = 'projects/{}/locations/{}/registries/{}/devices/{}'.format(project_id, gcp_location, registry_id, device_id)
+    _MQTT_TOPIC = '/devices/{}/events'.format(device_id)
+
+    client = mqtt.Client(client_id=_CLIENT_ID)
+    # authorization is handled purely with JWT, no user/pass, so username can be whatever
+    client.username_pw_set(
+        username='unused',
+        password=create_jwt(project_id, ssl_private_key_filepath, ssl_algorithm))
+    
+    client.on_connect = on_connect
+    client.on_publish = on_publish
+
+    client.tls_set(ca_certs=root_cert_filepath) # Replace this with 3rd party cert if that was used when creating registry
+    client.connect('mqtt.googleapis.com', 8883)
+
+    client.loop_start()
+
+
+    _log.debug("Going to buildPayload")      
+    payload = ''
+    payload = drone.buildPayload(sensors, _log, payload)
+
+
+    # Uncomment following line when ready to publish
+    client.publish(_MQTT_TOPIC, payload, qos=1)
+
+    _log.info("{}\n".format(payload))
+    # Droneponics End
+
+    client.loop_stop()
+    return True
+
+   
+   def pubDoseVolumeToGoolgeCloud(dose, _log):
+
+    # Droneponics Start
+    parser = ConfigParser()
+    parser.read("/home/pi/droneponics/config/Google/"+drone.gethostname()+".ini")
+    _log.info("ConfigParser path = /home/pi/droneponics/config/Google/"+drone.gethostname()+".ini")
+
+
+    ssl_private_key_filepath = parser.get('Google', 'ssl_private_key_filepath')
+    ssl_algorithm = parser.get('Google', 'ssl_algorithm')
+    root_cert_filepath = parser.get('Google', 'root_cert_filepath')
+    project_id = parser.get('Google', 'project_id')
+    gcp_location = parser.get('Google',     'gcp_location')
+    registry_id = parser.get('Google', 'dose_registry_id')
     device_id = parser.get('Google', 'device_id')
     device_sensor_type = parser.get('Google', 'device_sensor_type')
 
@@ -110,7 +170,7 @@ def pubToGoolgeCloud(sensors, _log):
 
     _log.debug("Going to buildPayload")      
     payload = ''
-    payload = drone.buildPayload(sensors, _log, payload)
+    payload = dose.buildPayload(payload)
 
 
     # Uncomment following line when ready to publish
