@@ -1,4 +1,8 @@
 from drone import * 
+import datetime
+import time
+import drone 
+
 class Dose:
    def __init__(self, PumpId, Dose, Led, name, volumePin, BottleSize, *args, **kwargs):
      #  print("Building object")
@@ -16,8 +20,9 @@ class Dose:
        self.I2CRelayId = kwargs.get('I2CRelayId', None)
        self.relay = None
        self.relayId = kwargs.get('relayId', None)
-         
-         
+      
+ def buildPayload(self, payload): 
+       payload = '{{ "ts": {}, "devicemac": {}, "doseliquid": {}, "volume": {}}}'.format(int(time.time()), drone.get_mac(),self.name, self.dose  )
       
    
    def blynkMe(self, blynk, colours):
