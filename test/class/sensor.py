@@ -59,6 +59,6 @@ _log.info("payload for google is = " + payload)
 
 
 _log.info("Going to call drone.pubToGoolgeCloud")   
-drone.pubToGoolgeCloud(sensors, _log)
+drone.pubSensorReadingsToGoolgeCloud(sensors, _log)
 _log.info("Completed call drone.pubToGoolgeCloud")   
     
