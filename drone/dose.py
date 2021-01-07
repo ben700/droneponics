@@ -23,7 +23,7 @@ class Dose:
       
  def buildPayload(self, payload): 
        payload = '{{ "ts": {}, "devicemac": {}, "doseliquid": {}, "volume": {}}}'.format(int(time.time()), drone.get_mac(),self.name, self.dose  )
-      
+       return payload
    
    def blynkMe(self, blynk, colours):
        print("Building Sensor")
