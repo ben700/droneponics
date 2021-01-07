@@ -64,7 +64,9 @@ project_id = parser.get('Google', 'project_id')
 gcp_location = parser.get('Google', 'gcp_location')
 registry_id = parser.get('Google', 'registry_id')
 device_id = parser.get('Google', 'device_id')
+device_sensor_type = parser.get('Google', 'device_sensor_type')
 
+_log.info('-------------------- device_sensor_type = ' + str(device_sensor_type))
 _log.info("ssl_private_key_filepath = " + str(ssl_private_key_filepath))
 _log.info("ssl_algorithm = " + str(ssl_algorithm))
 _log.info("root_cert_filepath = " + str(root_cert_filepath))
@@ -74,7 +76,7 @@ _log.info("registry_id = " + str(registry_id))
 _log.info("device_id = " + str(device_id))
 
 sensors = []
-if(parser.get('Google', 'device_sensor_type') == "PH"):
+if(str(device_sensor_type) == "PH"):
     sensors = drone.buildSensors(sensors, _log)
 else:
     sensors = drone.buildMonitorSensors(sensors, _log)
