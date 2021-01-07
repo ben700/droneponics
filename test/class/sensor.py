@@ -8,7 +8,7 @@ import logging
 
 
 parser = ConfigParser()
-parser.read("/home/pi/droneponics/config/configOxy/"+drone.gethostname()+".ini")
+parser.read("/home/pi/droneponics/config/Google/"+drone.gethostname()+".ini")
 
 
 
@@ -25,10 +25,13 @@ _log.warning("warning")
 _log.info("info")
 _log.debug("debug")
 
-_log.info("ConfigParser path = /home/pi/droneponics/config/configOxy/"+drone.gethostname()+".ini")
+_log.info("ConfigParser path = /home/pi/droneponics/config/Google/"+drone.gethostname()+".ini")
 
 sensors = []
-sensors = drone.buildMonitorSensors(sensors, _log)
+if(str(device_sensor_type) == "PH"):
+    sensors = drone.buildSensors(sensors, _log)
+else:
+    sensors = drone.buildMonitorSensors(sensors, _log)
 _log.info("All Monitor Sensors created")
 
 for sensor in sensors:
