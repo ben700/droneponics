@@ -172,7 +172,7 @@ try:
               sensor.read()
 
 	try:		
-           drone.pubToGoolgeCloud(sensors, _log)
+           drone.pubSensorReadingsToGoolgeCloud(sensors, _log)
         except:
            _log.critical("except logging readings to Google")	
                             	
