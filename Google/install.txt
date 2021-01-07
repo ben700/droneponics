@@ -2,6 +2,15 @@ curl -O https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-
 ./google-cloud-sdk/install.sh
 ./google-cloud-sdk/bin/gcloud init
 
+
+
+-------------------------
+sudo add-apt-repository ppa:mongoose-os/mos
+mos build
+mos wifi Frameworks Fr@m3works
+
+
+
 sudo apt-get install build-essential
 sudo apt-get install libssl-dev
 sudo apt-get install python-dev
