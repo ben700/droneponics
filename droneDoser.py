@@ -126,7 +126,7 @@ try:
                   # dosage.volume = dosage.pump.query("TV,?").split("TV,")[1].strip().rstrip('\x00')
                    dosage.volume = float(dosage.volume) + float(dosed)
                    blynk.virtual_write(dosage.volumePin, dosage.volume )
-                   blynk.virtual_write(98, "140:  " + dosage.name + " with " + str(dosage.dose) + "ml total volume now " + str(dosage.volume) + "ml" + '\n')
+                   blynk.virtual_write(98, now.strftime("%d/%m/%Y %H:%M:%S") + "129:  " + dosage.name + " with " + str(dosage.dose) + "ml total volume now " + str(dosage.volume) + "ml" + '\n')
                    blynk.virtual_write(28, "add", rowIndex, dosage.name + " dosed " + str(dosage.dose) + " ml", now.strftime("%d/%m/%Y %H:%M:%S"))
                    rowIndex = rowIndex+1
                    blynk.virtual_write(29,rowIndex)  
@@ -158,7 +158,7 @@ try:
                    blynk.set_property(dosage.LED, 'color', colours[1])
                   # dosage.volume = dosage.pump.query("TV,?").split("TV,")[1].strip().rstrip('\x00')
                    dosage.volume = float(dosage.volume) + float(dosed)
-                   blynk.virtual_write(98, "159 Dose pH with " + str(dosage.dose) + "ml total volume now " + str(dosage.volume) + "ml" + '\n')
+                   blynk.virtual_write(98, now.strftime("%d/%m/%Y %H:%M:%S") + "161 Dose pH with " + str(dosage.dose) + "ml total volume now " + str(dosage.volume) + "ml" + '\n')
                    blynk.virtual_write(28, "add", rowIndex, dosage.name + " dosed " + str(dosage.dose) + " ml", now.strftime("%d/%m/%Y %H:%M:%S"))
                    rowIndex = rowIndex+1
                    blynk.virtual_write(29,rowIndex)  
@@ -170,6 +170,11 @@ try:
         for sensor in sensors:
            if sensor is not None:
               sensor.read()
+
+	try:		
+           drone.pubToGoolgeCloud(sensors, _log)
+        except:
+           _log.critical("except logging readings to Google")	
                             	
         try:		
            sensors[0].color = drone.getTempColour(_log, int(round(float(sensors[0].value)*10,0)))
@@ -549,7 +554,7 @@ try:
              if (int(sensors[1].mode) == 3):
                   _log.info("Do a dose")     
                   doneDose = True
-                  blynk.virtual_write(98,"550 " + "Automatic dose nutrient "+ '\n') 
+                  blynk.virtual_write(98,now.strftime("%d/%m/%Y %H:%M:%S") + "552 " + "Automatic dose nutrient "+ '\n') 
                   doSingleDose()
 		
         _log.debug("float(sensors[2].target) < float(sensors[2].value) = " + str(float(sensors[2].target)) + " < " + str(float(sensors[2].value)))	
@@ -558,7 +563,7 @@ try:
                   _log.info("Would do ph dose; mode is " + str(sensors[2].mode))
                   if (int(sensors[2].mode) == 3):                  
                       _log.info("Do a ph dose as target is " + str(float(sensors[2].target))  + " and value is " + str(float(sensors[2].value))) 
-                      blynk.virtual_write(98,"559 Automatic dose Ph"+ '\n')
+                      blynk.virtual_write(98,now.strftime("%d/%m/%Y %H:%M:%S") + "561 Automatic dose Ph"+ '\n')
                       doSinglePHDose()
                       #blynk.notify("Ben has stopped ph pump. Is adding ph now correct!")      
 			
