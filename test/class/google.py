@@ -65,7 +65,9 @@ project_id = parser.get('Google', 'project_id')
 gcp_location = parser.get('Google', 'gcp_location')
 registry_id = parser.get('Google', 'registry_id')
 device_id = parser.get('Google', 'device_id')
+device_sensor_type = parser.get('Google', 'device_sensor_type')
 
+_log.info('-------------------- device_sensor_type = ' + str(device_sensor_type))
 _log.info("ssl_private_key_filepath = " + str(ssl_private_key_filepath))
 _log.info("ssl_algorithm = " + str(ssl_algorithm))
 _log.info("root_cert_filepath = " + str(root_cert_filepath))
@@ -75,10 +77,10 @@ _log.info("registry_id = " + str(registry_id))
 _log.info("device_id = " + str(device_id))
 
 sensors = []
-if(drone.gethostname() == "droneOxy"):
-     sensors = drone.buildMonitorSensors(sensors, _log)
+if(str(device_sensor_type) == "PH"):
+    sensors = drone.buildSensors(sensors, _log)
 else:
-     sensors = drone.buildSensors(sensors, _log)
+    sensors = drone.buildMonitorSensors(sensors, _log)
 
 _log.info("All Monitor Sensors created")
 # Droneponics End
@@ -126,10 +128,10 @@ client.loop_start()
      
 payload = ''
 
-if(drone.gethostname() == "droneOxy"):
-    payload = '{{ "ts": {}, "devicemac": {}, "temperature": {}, "dissolvedoxygen": {}, "saturation": {}, "oxidationreductionpotential": {}}}'.format(int(time.time()), drone.get_mac(), 25, 0.07, .1, 327.2)
-else:
+if(str(device_sensor_type) == "PH"):
     payload = '{{ "ts": {}, "devicemac": {}, "temperature": {}, "conductivity": {}, "totaldissolvedsolids": {}, "salinity": {}, "specificgravity": {}, "pH": {}}}'.format(int(time.time()), drone.get_mac(), 25, 1250, 860, 0.81, 1.001,  5.5 )
+else:
+    payload = '{{ "ts": {}, "devicemac": {}, "temperature": {}, "dissolvedoxygen": {}, "saturation": {}, "oxidationreductionpotential": {}}}'.format(int(time.time()), drone.get_mac(), 25, 0.07, .1, 327.2)
 
 _log.info("{}\n".format(payload))
   
