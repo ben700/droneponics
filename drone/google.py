@@ -123,7 +123,7 @@ def pubSensorReadingsToGoolgeCloud(sensors, _log):
     return True
 
    
-   def pubDoseVolumeToGoolgeCloud(dose, _log):
+def pubDoseVolumeToGoolgeCloud(dose, _log):
 
     # Droneponics Start
     parser = ConfigParser()
