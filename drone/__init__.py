@@ -12,3 +12,4 @@ from drone.display import *
 from drone.chirp import *
 from drone.solenoid import *
 from drone.colourMap import *
+from drone.google import *
