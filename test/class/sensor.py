@@ -53,4 +53,9 @@ _log.info("Going to call drone.getTempColour")
 payload = ''
 payload = drone.buildPayload(sensors, _log, payload)
 _log.info("payload for google is = " + payload)
+
+
+_log.info("Going to call drone.pubToGoolgeCloud")   
+drone.pubToGoolgeCloud(sensors, _log)
+_log.info("Completed call drone.pubToGoolgeCloud")   
     
