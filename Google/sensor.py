@@ -39,7 +39,7 @@ import logging
 
 # Droneponics Start
 parser = ConfigParser()
-parser.read("/home/pi/droneponics/config/configOxy/"+drone.gethostname()+".ini")
+parser.read("/home/pi/droneponics/config/Google/"+drone.gethostname()+".ini")
 
 # tune console logging
 _log = logging.getLogger('GoogleLog')
@@ -53,7 +53,7 @@ _log.error("error")
 _log.warning("warning")
 _log.info("info")
 _log.debug("debug")
-_log.info("ConfigParser path = /home/pi/droneponics/config/configOxy/"+drone.gethostname()+".ini")
+_log.info("ConfigParser path = /home/pi/droneponics/config/Google/"+drone.gethostname()+".ini")
 
 
 
