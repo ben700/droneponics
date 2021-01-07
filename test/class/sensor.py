@@ -27,6 +27,9 @@ _log.debug("debug")
 
 _log.info("ConfigParser path = /home/pi/droneponics/config/Google/"+drone.gethostname()+".ini")
 
+device_sensor_type = parser.get('Google', 'device_sensor_type')
+_log.info('-------------------- device_sensor_type = ' + str(device_sensor_type))
+    
 sensors = []
 if(str(device_sensor_type) == "PH"):
     sensors = drone.buildSensors(sensors, _log)
