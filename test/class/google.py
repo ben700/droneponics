@@ -81,7 +81,11 @@ _log.info("registry_id = " + str(registry_id))
 _log.info("device_id = " + str(device_id))
 
 sensors = []
-sensors = drone.buildMonitorSensors(sensors, _log)
+if(drone.gethostname() == "droneOxy"):
+     sensors = drone.buildMonitorSensors(sensors, _log)
+else:
+     sensors = drone.buildSensors(sensors, _log)
+
 _log.info("All Monitor Sensors created")
 # Droneponics End
 
