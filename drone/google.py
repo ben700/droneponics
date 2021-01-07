@@ -63,7 +63,7 @@ def on_publish(unused_client, unused_userdata, unused_mid):
 
 
 
-def pubToGoolgeCloud:(sensor, _log):
+def pubToGoolgeCloud(sensor, _log):
 
     # Droneponics Start
     parser = ConfigParser()
