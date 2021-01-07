@@ -38,7 +38,7 @@ import logging
 # end of user-variables
 
 
-def create_jwt():
+def create_jwt(project_id, ssl_private_key_filepath, ssl_algorithm):
     cur_time = datetime.datetime.utcnow()
     token = {
       'iat': cur_time,
@@ -97,7 +97,7 @@ def pubToGoolgeCloud(sensor, _log):
     # authorization is handled purely with JWT, no user/pass, so username can be whatever
     client.username_pw_set(
         username='unused',
-        password=create_jwt())
+        password=create_jwt(project_id, ssl_private_key_filepath, ssl_algorithm))
     
     client.on_connect = on_connect
     client.on_publish = on_publish
