@@ -5,7 +5,14 @@ curl -O https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-
 
 
 -------------------------
+sudo apt-get install software-properties-common
 sudo add-apt-repository ppa:mongoose-os/mos
+sudo apt-get update
+sudo apt-get install mos
+mos
+
+
+mos clone https://github.com/mongoose-os-apps/demo-js app1
 mos build
 mos wifi Frameworks Fr@m3works
 
