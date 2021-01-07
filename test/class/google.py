@@ -73,7 +73,7 @@ _log.info("ssl_algorithm = " + str(ssl_algorithm))
 _log.info("root_cert_filepath = " + str(root_cert_filepath))
 _log.info("project_id = " + str(project_id))
 _log.info("gcp_location = " + str(gcp_location))
-_log.info("registry_id = " + str(registry_id))
+_log.info("registry_id = " + str(dose_registry_id))
 _log.info("device_id = " + str(device_id))
 
 sensors = []
