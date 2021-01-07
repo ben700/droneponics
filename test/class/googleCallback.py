@@ -34,6 +34,11 @@ import logging
 # Define some project-based variables to be used below. This should be the only
 # block of variables that you need to edit in order to run this script
 
+
+# Droneponics Start
+parser = ConfigParser()
+parser.read("/home/pi/droneponics/config/Google/"+drone.gethostname()+".ini")
+
 # tune console logging
 _log = logging.getLogger('GoogleLog')
 logFormatter = logging.Formatter("%(asctime)s [%(levelname)s]  %(message)s")
@@ -46,7 +51,7 @@ _log.error("error")
 _log.warning("warning")
 _log.info("info")
 _log.debug("debug")
-_log.info("ConfigParser path = /home/pi/droneponics/config/configOxy/"+drone.gethostname()+".ini")
+_log.info("ConfigParser path = /home/pi/droneponics/config/Google/"+drone.gethostname()+".ini")
 
 
 
@@ -57,7 +62,9 @@ project_id = parser.get('Google', 'project_id')
 gcp_location = parser.get('Google', 'gcp_location')
 registry_id = parser.get('Google', 'registry_id')
 device_id = parser.get('Google', 'device_id')
+device_sensor_type = parser.get('Google', 'device_sensor_type')
 
+_log.info('-------------------- device_sensor_type = ' + str(device_sensor_type))
 _log.info("ssl_private_key_filepath = " + str(ssl_private_key_filepath))
 _log.info("ssl_algorithm = " + str(ssl_algorithm))
 _log.info("root_cert_filepath = " + str(root_cert_filepath))
@@ -67,7 +74,10 @@ _log.info("registry_id = " + str(registry_id))
 _log.info("device_id = " + str(device_id))
 
 sensors = []
-sensors = drone.buildMonitorSensors(sensors, _log)
+if(str(device_sensor_type) == "PH"):
+    sensors = drone.buildSensors(sensors, _log)
+else:
+    sensors = drone.buildMonitorSensors(sensors, _log)
 _log.info("All Monitor Sensors created")
 # Droneponics End
 # end of user-variables
@@ -178,8 +188,12 @@ client.subscribe(_MQTT_COMMANDS_TOPIC, qos=1)
 client.loop_start()
    
 payload = ''
-#payload = '{{ "ts": {}, "devicemac": {}, "temperature": {}, "conductivity": {}, "totaldissolvedsolids": {}, "salinity": {}, "specificgravity": {}, "pH": {}}}'.format(int(time.time()), drone.get_mac(), 25, 1250, 860, 0.81, 1.001,  5.5 )
-payload = '{{ "ts": {}, "devicemac": {}, "temperature": {}, "dissolvedoxygen": {}, "saturation": {}, "oxidationreductionpotential": {}}}'.format(int(time.time()), drone.get_mac(), 25, 0.07, .1, 327.2)
+
+if(str(device_sensor_type) == "PH"):
+    payload = '{{ "ts": {}, "devicemac": {}, "temperature": {}, "conductivity": {}, "totaldissolvedsolids": {}, "salinity": {}, "specificgravity": {}, "pH": {}}}'.format(int(time.time()), drone.get_mac(), 25, 1250, 860, 0.81, 1.001,  5.5 )
+else:
+    payload = '{{ "ts": {}, "devicemac": {}, "temperature": {}, "dissolvedoxygen": {}, "saturation": {}, "oxidationreductionpotential": {}}}'.format(int(time.time()), drone.get_mac(), 25, 0.07, .1, 327.2)
+  
 _log.info("{}\n".format(payload))
   
   
