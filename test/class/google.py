@@ -131,8 +131,12 @@ client.connect('mqtt.googleapis.com', 8883)
 client.loop_start()
      
 payload = ''
-#payload = '{{ "ts": {}, "devicemac": {}, "temperature": {}, "conductivity": {}, "totaldissolvedsolids": {}, "salinity": {}, "specificgravity": {}, "pH": {}}}'.format(int(time.time()), drone.get_mac(), 25, 1250, 860, 0.81, 1.001,  5.5 )
-payload = '{{ "ts": {}, "devicemac": {}, "temperature": {}, "dissolvedoxygen": {}, "saturation": {}, "oxidationreductionpotential": {}}}'.format(int(time.time()), drone.get_mac(), 25, 0.07, .1, 327.2)
+
+if(drone.gethostname() == "droneOxy"):
+    payload = '{{ "ts": {}, "devicemac": {}, "temperature": {}, "dissolvedoxygen": {}, "saturation": {}, "oxidationreductionpotential": {}}}'.format(int(time.time()), drone.get_mac(), 25, 0.07, .1, 327.2)
+else:
+    payload = '{{ "ts": {}, "devicemac": {}, "temperature": {}, "conductivity": {}, "totaldissolvedsolids": {}, "salinity": {}, "specificgravity": {}, "pH": {}}}'.format(int(time.time()), drone.get_mac(), 25, 1250, 860, 0.81, 1.001,  5.5 )
+
 _log.info("{}\n".format(payload))
   
 # Uncomment following line when ready to publish
