@@ -147,6 +147,8 @@ try:
                    blynk.set_property(dosage.LED, 'color', colours[0])
                    if (float(sensors[2].target) > float(sensors[2].read())): #ph
                         _log.critical("Ph target is " + str(float(sensors[2].target)) + " and dosing but ph read is " + str(float(sensors[2].read())))
+			blynk.notify("pH Error - Inform Ben Line 150 error at " + now.strftime("%d/%m/%Y %H:%M:%S") + ":- Ph target is " + str(float(sensors[2].target)) + " but when checking ph before dosing read was " + str(float(sensors[2].read())))
+			blynk.email("benslittlebitsandbobs@gmail.com", "{DEVICE_NAME} : pH Alarm", "pH Error - Inform Ben Line 150 error at " + now.strftime("%d/%m/%Y %H:%M:%S") + ":- Ph target is " + str(float(sensors[2].target)) + " but when checking ph before dosing read was " + str(float(sensors[2].read())))			
                         break			
                    dosage.pump.query("D,"+str(dosage.dose))
                    while (True):
