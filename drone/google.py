@@ -76,7 +76,7 @@ def pubSensorReadingsToGoolgeCloud(sensors, _log):
     root_cert_filepath = parser.get('Google', 'root_cert_filepath')
     project_id = parser.get('Google', 'project_id')
     gcp_location = parser.get('Google',     'gcp_location')
-    registry_id = parser.get('Google', 'registry_id')
+    registry_id = parser.get('Google', 'sensor_registry_id')
     device_id = parser.get('Google', 'device_id')
     device_sensor_type = parser.get('Google', 'device_sensor_type')
 
@@ -86,7 +86,7 @@ def pubSensorReadingsToGoolgeCloud(sensors, _log):
     _log.info("root_cert_filepath = " + str(root_cert_filepath))
     _log.info("project_id = " + str(project_id))
     _log.info("gcp_location = " + str(gcp_location))
-    _log.info("registry_id = " + str(sensor_registry_id))
+    _log.info("registry_id = " + str(registry_id))
     _log.info("device_id = " + str(device_id))
 
 
