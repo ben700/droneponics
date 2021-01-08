@@ -217,15 +217,18 @@ def blynk_data():
     now = datetime.now()
     blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
     processSensors()
+    _log.debug("Completed processSensors Function")
 
     if (float(sensors[1].target) > float(sensors[1].value) and (int(sensors[1].mode) == 3)): #DO
         _log.info("Do a dose")     
         doSingleDose()     
         blynk.virtual_write(98,"150 Auto dose h2o2"+ '\n')
+
+    _log.debug("Completed dosing h2o2")
        
 
     if(int(sensors[2].mode) == 3):
-        if (float(sensors[1].target) > float(sensors[1].value)):                  
+        if (float(sensors[2].target) > float(sensors[2].value)):                  
             _log.info("Turn on Oxy")
             relay.turnOn(_log) 
             blynk.virtual_write(98,"157 Auto Turn On Ozone"+ '\n')
