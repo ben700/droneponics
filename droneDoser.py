@@ -171,7 +171,7 @@ try:
            if sensor is not None:
               sensor.read()
 
-	try:		
+        try:		
            drone.pubSensorReadingsToGoolgeCloud(sensors, _log)
         except:
            _log.critical("except logging readings to Google")	
