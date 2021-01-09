@@ -145,10 +145,12 @@ try:
                    _log.info(now.strftime("%d/%m/%Y %H:%M:%S") + " Going to Dose pH")
                  #  dosage.volume = dosage.pump.query("TV,?").split("TV,")[1].strip().rstrip('\x00')
                    blynk.set_property(dosage.LED, 'color', colours[0])
-                   if (float(sensors[2].target) > float(sensors[2].read())): #ph
-                        _log.critical("Ph target is " + str(float(sensors[2].target)) + " and dosing but ph read is " + str(float(sensors[2].read())))
-                        blynk.notify("pH Error - Inform Ben Line 150 error at " + now.strftime("%d/%m/%Y %H:%M:%S") + ":- Ph target is " + str(float(sensors[2].target)) + " but when checking ph before dosing read was " + str(float(sensors[2].read())))
-                        blynk.email("benslittlebitsandbobs@gmail.com", "{DEVICE_NAME} : pH Alarm", "pH Error - Inform Ben Line 150 error at " + now.strftime("%d/%m/%Y %H:%M:%S") + ":- Ph target is " + str(float(sensors[2].target)) + " but when checking ph before dosing read was " + str(float(sensors[2].read())))			
+                   oldPH = sensors[2].value				
+                   realtimePH = sensors[2].read()	
+                   if (float(sensors[2].target) > float(realtimePH)): #ph
+                        _log.critical("Ph target is " + str(float(sensors[2].target)) + " but when checking ph before dosing realTime read was " + str(float(realtimePH)) + " The PH when processing was " + str(float(oldPH)))
+                        blynk.notify("pH Error - Inform Ben Line 150 error at " + now.strftime("%d/%m/%Y %H:%M:%S") + ":- Ph target is " + str(float(sensors[2].target)) + " but when checking ph before dosing realTime read was " + str(float(realtimePH)) + " The PH when processing was " + str(float(oldPH)))
+                        blynk.email("benslittlebitsandbobs@gmail.com", "{DEVICE_NAME} : pH Alarm", "pH Error - Inform Ben Line 150 error at " + now.strftime("%d/%m/%Y %H:%M:%S") + ":- Ph target is " + str(float(sensors[2].target)) + " but when checking ph before dosing realTime read was " + str(float(realtimePH)) + " The PH when processing was " + str(float(oldPH)))			
                         break			
                    dosage.pump.query("D,"+str(dosage.dose))
                    while (True):
