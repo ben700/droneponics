@@ -14,7 +14,7 @@ const String pass = "33HartleyAvenue";                             //Your WiFi n
 const long myChannelNumber = 1280631;                            //Your Thingspeak channel number
 const char * myWriteAPIKey = "74NEO0MNO4J3OYNI";                 //Your ThingSpeak Write API Key
 const long myCalibrateChannelNumber = 1280631;                            //Your Thingspeak channel number
-const char * myCalibrateReadAPIKey = "74NEO0MNO4J3OYNI";                 //Your ThingSpeak Write API Key
+const char * myCalibrateReadAPIKey = "JI1M8THRXABRXKAG";                 //Your ThingSpeak Write API Key
 
 
 //------------------------------------------------------------------
