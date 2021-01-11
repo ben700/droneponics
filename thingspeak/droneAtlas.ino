@@ -3,6 +3,9 @@
 #include <ESP8266WiFi.h>                                         //include esp8266 wifi library 
 #include "ThingSpeak.h"                                          //include thingspeak library
 
+#define MAX 2 //index!!! //2 is the number of outputs
+char *title[MAX] = {"lamp", "lights"}; //these are my TweetControl triggers
+
 WiFiClient  client;                                              //declare that this device connects to a Wi-Fi network,create a connection to a specified internet IP address
 
 //----------------Fill in your Wi-Fi / ThingSpeak Credentials-------
@@ -10,6 +13,10 @@ const String ssid = "HartleyAvenue";                                 //The name 
 const String pass = "33HartleyAvenue";                             //Your WiFi network password
 const long myChannelNumber = 1280631;                            //Your Thingspeak channel number
 const char * myWriteAPIKey = "74NEO0MNO4J3OYNI";                 //Your ThingSpeak Write API Key
+const long myCalibrateChannelNumber = 1280631;                            //Your Thingspeak channel number
+const char * myCalibrateReadAPIKey = "74NEO0MNO4J3OYNI";                 //Your ThingSpeak Write API Key
+
+
 //------------------------------------------------------------------
 
 
@@ -37,7 +44,7 @@ Ezo_board* default_board = &device_list[0]; //used to store the board were talki
 //gets the length of the array automatically so we dont have to change the number every time we add new boards
 const uint8_t device_list_len = sizeof(device_list) / sizeof(device_list[0]);
 
-enum reading_step {REQUEST_TEMP, READ_TEMP_AND_COMPENSATE, REQUEST_DEVICES, READ_RESPONSE };          //the readings are taken in 3 steps
+enum reading_step {REQUEST_TEMP, READ_TEMP_AND_COMPENSATE, REQUEST_DEVICES, READ_RESPONSE, CALIBRATION };          //the readings are taken in 3 steps
 //step 1 tell the temp sensor to take a reading
 //step 2 consume the temp reading and send it to the devices
 //step 4 tell the devices to take a reading based on the temp reading we just received
@@ -220,8 +227,26 @@ void loop() {
           }
 
           next_step_time =  millis() + poll_delay;
-          current_step = REQUEST_TEMP;                                                          //switch back to asking for readings
+          current_step = CALIBRATION;                                                          //switch back to asking for readings
         }
+        
+        
+      case CALIBRATION:                             //if were in the receiving phase
+        if (millis() >= next_step_time) {  //and its time to get the response
+        
+          for (int i = 0; i < MAX; i++) {
+            String readString = " " + ThingSpeak.readStringField(myCalibrateChannelNumber, i+1, myCalibrateReadAPIKey); //(Channel ID, Field i+1, Channel's Read API Key)
+            Serial.println(readString);
+
+            if (readString.indexOf("#thingspeak #" + String(title[i]) + " #turn_on") > 0) {
+                Serial.print("Pin "); Serial.print(i); Serial.println(" turned on");
+            } else if (readString.indexOf("#thingspeak #" + String(title[i]) + " #turn_off") > 0) {
+                Serial.print("Pin "); Serial.print(i); Serial.println(" turned off");
+            }
+          }        
+          next_step_time =  millis() + poll_delay;
+          current_step = REQUEST_TEMP;                                                          //switch back to asking for readings
+        }        
         break;
     }
   }
