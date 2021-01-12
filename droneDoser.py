@@ -149,10 +149,12 @@ try:
                    realtimePH = sensors[2].read()	
                    if (float(sensors[2].target) > float(realtimePH)): #ph
                         _log.critical("Ph target is " + str(float(sensors[2].target)) + " but when checking ph before dosing realTime read was " + str(float(realtimePH)) + " The PH when processing was " + str(float(oldPH)))
-                        blynk.notify("pH Error - Inform Ben Line 150 error at " + now.strftime("%d/%m/%Y %H:%M:%S") + ":- Ph target is " + str(float(sensors[2].target)) + " but when checking ph before dosing realTime read was " + str(float(realtimePH)) + " The PH when processing was " + str(float(oldPH)))
-                        blynk.email("benslittlebitsandbobs@gmail.com", "{DEVICE_NAME} : pH Alarm", "pH Error - Inform Ben Line 150 error at " + now.strftime("%d/%m/%Y %H:%M:%S") + ":- Ph target is " + str(float(sensors[2].target)) + " but when checking ph before dosing realTime read was " + str(float(realtimePH)) + " The PH when processing was " + str(float(oldPH)))			
+                        if (float(sensors[2].target) > (float(realtimePH)+0.1)): #ph
+                            blynk.notify("pH Error - Inform Ben Line 150 error at " + now.strftime("%d/%m/%Y %H:%M:%S") + ":- Ph target is " + str(float(sensors[2].target)) + " but when checking ph before dosing realTime read was " + str(float(realtimePH)) + " The PH when processing was " + str(float(oldPH)))
+                            blynk.email("benslittlebitsandbobs@gmail.com", "{DEVICE_NAME} : pH Alarm", "pH Error - Inform Ben Line 150 error at " + now.strftime("%d/%m/%Y %H:%M:%S") + ":- Ph target is " + str(float(sensors[2].target)) + " but when checking ph before dosing realTime read was " + str(float(realtimePH)) + " The PH when processing was " + str(float(oldPH)))			
                         break			
-                   dosage.pump.query("D,"+str(dosage.dose))
+                   else:
+                        dosage.pump.query("D,"+str(dosage.dose))
                    while (True):
                         dosed = dosage.pump.query("R").split(":")[1].split(",")[0].strip().rstrip('\x00')
                         if (float(dosed) >= float(dosage.dose)):
