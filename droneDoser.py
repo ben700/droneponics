@@ -118,6 +118,10 @@ try:
                    #dosage.volume = dosage.pump.query("TV,?").split("TV,")[1].strip().rstrip('\x00')
                    blynk.set_property(dosage.LED, 'color', colours[0])
                    dosage.pump.query("D,"+str(dosage.dose))
+                   try:
+                        dosage.pubDoseVolumeToGoolgeCloud(dosage, _log)
+                   except:
+                        _log.critical("except logging dose to Google")		
                    while (True):
                         dosed = dosage.pump.query("R").split(":")[1].split(",")[0].strip().rstrip('\x00')
                         if (float(dosed) >= float(dosage.dose)):
@@ -155,6 +159,10 @@ try:
                         break			
                    else:
                         dosage.pump.query("D,"+str(dosage.dose))
+                        try:
+                            dosage.pubDoseVolumeToGoolgeCloud(dosage, _log)
+                        except:
+                            _log.critical("except logging dose to Google")	 
                    while (True):
                         dosed = dosage.pump.query("R").split(":")[1].split(",")[0].strip().rstrip('\x00')
                         if (float(dosed) >= float(dosage.dose)):
