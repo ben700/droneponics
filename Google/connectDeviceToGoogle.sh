@@ -1,3 +1,7 @@
+curl -O https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-321.0.0-linux-x86.tar.gz
+./google-cloud-sdk/install.sh
+./google-cloud-sdk/bin/gcloud init
+
 mkdir .ssh
 cd .ssh
 openssl req -x509 -newkey rsa:2048 -keyout droneponics_private.pem -nodes -out droneponics.pub -subj '/CN=unused'
