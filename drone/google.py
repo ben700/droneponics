@@ -191,18 +191,18 @@ def pubDoseVolumeToGoolgeCloud(dose, _log):
 def pubSensorReadingsToThingSpeak(sensors, _log):
    
    r =requests.get("https://api.thingspeak.com/update?api_key=OFS8JOTQUXNIEXLI&field1=" + str(sensors[0].value))
-   _log.info("----------------------------" + str(r))
-   while (r is not "<Response [200]>"):
+   _log.info("----------------------------[" + str(r) + "]")
+   while (r.status_code is not 200):
       r =requests.get("https://api.thingspeak.com/update?api_key=OFS8JOTQUXNIEXLI&field1=" + str(sensors[0].value))
       _log.info(str(r))
        
    r =requests.get("https://api.thingspeak.com/update?api_key=OFS8JOTQUXNIEXLI&field2=" + str(sensors[1].value))
-   while (r is not "<Response [200]>"):
+   while (r.status_code is not 200):
       r =requests.get("https://api.thingspeak.com/update?api_key=OFS8JOTQUXNIEXLI&field1=" + str(sensors[0].value))
       _log.info(str(r))
       
    r =requests.get("https://api.thingspeak.com/update?api_key=OFS8JOTQUXNIEXLI&field3=" + str(sensors[2].value))
-   while (r is not "<Response [200]>"):
+   while (r.status_code is not 200):
       r =requests.get("https://api.thingspeak.com/update?api_key=OFS8JOTQUXNIEXLI&field1=" + str(sensors[0].value))
       _log.info(str(r))
    return True
