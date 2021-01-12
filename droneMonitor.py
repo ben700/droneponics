@@ -113,6 +113,7 @@ try:
            timer.run()
            if bootup :
               blynk.virtual_write(250, "Boot")
+              drone.pubDeviceBootToGoolgeCloud()
               blynk.set_property(250, 'color', drone.colours['ONLINE'])	
               p = subprocess.Popen(['i2cdetect', '-y','1'],stdout=subprocess.PIPE,)
               #cmdout = str(p.communicate())
