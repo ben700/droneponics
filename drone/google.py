@@ -63,12 +63,11 @@ def on_publish(unused_client, unused_userdata, unused_mid):
 
 
 
-def pubDeviceBootToGoolgeCloud(sensors, _log):
+def pubDeviceBootToGoolgeCloud():
 
     # Droneponics Start
     parser = ConfigParser()
     parser.read("/home/pi/droneponics/config/Google/"+drone.gethostname()+".ini")
-    _log.info("ConfigParser path = /home/pi/droneponics/config/Google/"+drone.gethostname()+".ini")
 
 
     ssl_private_key_filepath = parser.get('Google', 'ssl_private_key_filepath')
@@ -99,14 +98,12 @@ def pubDeviceBootToGoolgeCloud(sensors, _log):
     client.loop_start()
 
 
-    _log.debug("Going to buildPayload")      
     payload = '{{ "deviceTime": "{}", "deviceMAC": "{}", "deviceName": "{}", "deviceIP": "{}"}}'.format(int(time.time()), drone.get_mac(), drone.gethostname(), drone.get_ip())
 
 
     # Uncomment following line when ready to publish
     client.publish(_MQTT_TOPIC, payload, qos=1)
 
-    _log.info("{}\n".format(payload))
     # Droneponics End
 
     client.loop_stop()
