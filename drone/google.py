@@ -185,3 +185,11 @@ def pubDoseVolumeToGoolgeCloud(dose, _log):
 
     client.loop_stop()
     return True 
+   
+
+def pubSensorReadingsToThingSpeak(sensors, _log):
+   
+   r =requests.get("https://api.thingspeak.com/update?api_key=74NEO0MNO4J3OYNI&field1=" + str(sensors[0].value))   
+   r =requests.get("https://api.thingspeak.com/update?api_key=74NEO0MNO4J3OYNI&field2=" + str(sensors[1].value))
+   r =requests.get("https://api.thingspeak.com/update?api_key=74NEO0MNO4J3OYNI&field3=" + str(sensors[2].value))
+   return True
