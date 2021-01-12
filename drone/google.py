@@ -191,18 +191,20 @@ def pubDoseVolumeToGoolgeCloud(dose, _log):
 def pubSensorReadingsToThingSpeak(sensors, _log):
    
    r =requests.get("https://api.thingspeak.com/update?api_key=OFS8JOTQUXNIEXLI&field1=" + str(sensors[0].value))
-   _log.info("----------------------------[" + str(r) + "]")
+   _log.info("Status Code =" + str(r.status_code) + " from GET https://api.thingspeak.com/update?api_key=OFS8JOTQUXNIEXLI&field1=" + str(sensors[0].value))
    while (r.status_code is not 200):
       r =requests.get("https://api.thingspeak.com/update?api_key=OFS8JOTQUXNIEXLI&field1=" + str(sensors[0].value))
-      _log.info(str(r))
+      _log.info("Status Code =" + str(r.status_code) + " from GET https://api.thingspeak.com/update?api_key=OFS8JOTQUXNIEXLI&field1=" + str(sensors[0].value))
        
    r =requests.get("https://api.thingspeak.com/update?api_key=OFS8JOTQUXNIEXLI&field2=" + str(sensors[1].value))
+   _log.info("Status Code =" + str(r.status_code) + " from GET https://api.thingspeak.com/update?api_key=OFS8JOTQUXNIEXLI&field2=" + str(sensors[1].value))
    while (r.status_code is not 200):
       r =requests.get("https://api.thingspeak.com/update?api_key=OFS8JOTQUXNIEXLI&field1=" + str(sensors[0].value))
-      _log.info(str(r))
+      _log.info("Status Code =" + str(r.status_code) + " from GET https://api.thingspeak.com/update?api_key=OFS8JOTQUXNIEXLI&field2=" + str(sensors[1].value))
       
    r =requests.get("https://api.thingspeak.com/update?api_key=OFS8JOTQUXNIEXLI&field3=" + str(sensors[2].value))
+   _log.info("Status Code =" + str(r.status_code) + " from GET https://api.thingspeak.com/update?api_key=OFS8JOTQUXNIEXLI&field3=" + str(sensors[2].value))
    while (r.status_code is not 200):
       r =requests.get("https://api.thingspeak.com/update?api_key=OFS8JOTQUXNIEXLI&field1=" + str(sensors[0].value))
-      _log.info(str(r))
+      _log.info("Status Code =" + str(r.status_code) + " from GET https://api.thingspeak.com/update?api_key=OFS8JOTQUXNIEXLI&field3=" + str(sensors[1].value))
    return True
