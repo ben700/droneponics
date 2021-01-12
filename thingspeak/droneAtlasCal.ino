@@ -13,8 +13,8 @@ const String ssid = "HartleyAvenue";                                 //The name 
 const String pass = "33HartleyAvenue";                             //Your WiFi network password
 const long myChannelNumber = 1280631;                            //Your Thingspeak channel number
 const char * myWriteAPIKey = "74NEO0MNO4J3OYNI";                 //Your ThingSpeak Write API Key
-const long myCalibrateChannelNumber = 1280631;                            //Your Thingspeak channel number
 const char * myCalibrateReadAPIKey = "JI1M8THRXABRXKAG";                 //Your ThingSpeak Write API Key
+const long myCalibrateChannelNumber = myChannelNumber;                            //Your Thingspeak channel number
 
 
 //------------------------------------------------------------------
@@ -205,10 +205,6 @@ void loop() {
             ThingSpeak.setField(4, String(DO.get_last_received_reading(), 2));                 //assign DO readings to the fourth column of thingspeak channel
           }
 
-          Serial.println();
-
-          ThingSpeak.setField(5, print_help());                 //assign calibration instructions to the fifth column of thingspeak channel
-
           if (send_to_thingspeak == true) {                                                    //if we're datalogging
 
             if (WiFi.status() == WL_CONNECTED) {                                               //and we're connected to the wifi
@@ -217,10 +213,10 @@ void loop() {
               return_code = ThingSpeak.writeFields(myChannelNumber, myWriteAPIKey);                 //upload the data to thingspeak, read the return code
 
               if (return_code == 200) {                                                             //check thingspeak return code if it is 200 then the upload was a success
-                Serial.println("success");                                                          //print "success"
+                Serial.println("READ_RESPONSE success");                                                          //print "success"
               }
               else {                                                                                //if the thingspeak return code was not 200
-                Serial.println("upload error, code: " + String(return_code));                       //print "upload error, code:" and whatever number is in the return_code var
+                Serial.println("READ_RESPONSE upload error, code: " + String(return_code));                       //print "upload error, code:" and whatever number is in the return_code var
               }
               Serial.println();                                                                     //print a new line so the output string on the serial monitor is easy to read
             } else {
@@ -235,14 +231,131 @@ void loop() {
         
       case CALIBRATION:                             //if were in the receiving phase
         if (millis() >= next_step_time) {  //and its time to get the response
-            String readString = " " + ThingSpeak.readStringField(myCalibrateChannelNumber, 6, myCalibrateReadAPIKey); //(Channel ID, Field i+1, Channel's Read API Key)
+
+            int calibrationAction = ThingSpeak.readIntField(myCalibrateChannelNumber, 6, myCalibrateReadAPIKey); //(Channel ID, Field i+1, Channel's Read API Key)
+            float calibrationTemp = ThingSpeak.readFloatField(myCalibrateChannelNumber, 8, myCalibrateReadAPIKey); //(Channel ID, Field i+1, Channel's Read API Key)
+            float calibrationMode = ThingSpeak.readStringField(myCalibrateChannelNumber, 5, myCalibrateReadAPIKey); //(Channel ID, Field i+1, Channel's Read API Key)
+
+            Serial.println("ThingSpeak.readIntField returned calibrationAction = " + String(calibrationAction));
+            if (calibrationAction == 0){
+              
+              next_step_time =  millis() + poll_delay;
+              current_step = REQUEST_TEMP;
+              break;
+            }
+
+            Serial.println("ThingSpeak.readFloatField returned calibrationTemp = " + String(calibrationTemp));
+
+            String calibrationReply = "";
+            switch (calibrationAction) {                                                         //selects what to do based on what reading_step we are in
+               case '1':
+                    calibrationReply = "string rtd:cal,clear"; 
+                    if(calibrationMode == "Live"){
+                      RTD.send_cmd("cal,clear");
+                    }
+                    break;     
+               case 2:
+                    calibrationReply = "rtd:cal," + String(calibrationTemp);
+                    if(calibrationMode == "Live"){
+                      RTD.send_cmd("cal," + String(calibrationTemp));
+                    }
+                    break;
+               case 3:
+                    calibrationReply = "ec:cal,clear";
+                    if(calibrationMode == "Live"){
+                      EC.send_cmd("cal,clear");
+                    }
+                    break;
+               case 4:
+                    calibrationReply = "ec:k,10";
+                    if(calibrationMode == "Live"){
+                      EC.send_cmd("k,10");
+                    }
+                    break;
+               case 5:
+                    calibrationReply = "ec:k,1";
+                    if(calibrationMode == "Live"){
+                      EC.send_cmd("k,1");
+                    }
+                    break;
+               case 6:
+                    calibrationReply = "ec:k,0.1";
+                    if(calibrationMode == "Live"){
+                      EC.send_cmd("k,0.1");
+                    }
+                    break;
+               case 7:
+                    calibrationReply = "ec:cal,dry";
+                    if(calibrationMode == "Live"){
+                      EC.send_cmd("cal,dry");
+                    }
+                    break;
+               case 8:
+                    calibrationReply = "ec:cal,2760";
+                    if(calibrationMode == "Live"){
+                      EC.send_cmd("cal,2760");
+                    }
+                    break;
+               case 9:
+                    calibrationReply = "ph:cal,clear";
+                    if(calibrationMode == "Live"){
+                     PH.send_cmd("cal,clear");
+                    }
+                    break;
+               case 10:
+                    calibrationReply = "ph:cal,mid,7";
+                    if(calibrationMode == "Live"){
+                     PH.send_cmd("cal,mid,7");
+                    }
+                    break;
+               case 11:
+                    calibrationReply = "ph:cal,low,4";
+                    if(calibrationMode == "Live"){
+                     PH.send_cmd("cal,low,4");
+                    }
+                    break;
+               case 12:
+                    calibrationReply = "ph:cal,high,10"; 
+                    if(calibrationMode == "Live"){
+                     PH.send_cmd("cal,high,10");
+                    }
+                    break;
+               case 13:
+                    calibrationReply = "do:cal,clear";
+                    if(calibrationMode == "Live"){
+                     DO.send_cmd("cal,clear");
+                    }
+                    break;
+               case 14:
+                    calibrationReply = "do:cal";
+                    if(calibrationMode == "Live"){
+                     DO.send_cmd("cal");
+                    }
+                    break;
+               case 15:
+                    calibrationReply = "do:cal,0";
+                    if(calibrationMode == "Live"){
+                     DO.send_cmd("cal,0");
+                    }
+                    break;
+               default:
+                    calibrationReply = "No calibration action to process";
+                    break;
+            };
             
-            switch (readString): 
-                {
-                case REQUEST_TEMP:
-                    ThingSpeak.setField(7, String(readString));
-                    return_code = ThingSpeak.writeFields(myChannelNumber, myWriteAPIKey);                 //upload the data to thingspeak, read the return code
-                }
+            Serial.print("ThingSpeak will now be updated calibrationReply = ");
+            Serial.println(calibrationReply);
+            
+            ThingSpeak.setField(6, (int)0);
+            ThingSpeak.setField(7, calibrationReply); 
+            return_code = ThingSpeak.writeFields(myChannelNumber, myWriteAPIKey);                 //upload the data to thingspeak, read the return code
+            while (return_code != 200){
+                Serial.println("CALIBRATION upload error, code: " + String(return_code));                       //print "upload error, code:" and whatever number is in the return_code var
+                return_code = ThingSpeak.writeFields(myChannelNumber, myWriteAPIKey);                 //upload the data to thingspeak, read the return code
+             }
+            
+            Serial.println("CALIBRATION success");                                                          //print "success"
+            
             next_step_time =  millis() + poll_delay;
             current_step = REQUEST_TEMP;                                                          //switch back to asking for readings
         }        
@@ -435,8 +548,8 @@ void receive_reading(Ezo_board &Device) {              // function to decode the
   print_error_type(Device, String(Device.get_last_received_reading(), 2).c_str());  //print either the reading or an error message
 }
 
-string print_help() {  
-  helpText = "";
+String print_help() {  
+  String helpText = "";
   get_ec_k_value();
   helpText = helpText + F("Atlas Scientific I2C hydroponics kit") + '\n';
   helpText = helpText + F("Commands:") + '\n';
