@@ -98,7 +98,7 @@ def pubDeviceBootToGoolgeCloud():
     client.loop_start()
 
 
-    payload = '{{ "deviceTime": "{}", "deviceMAC": "{}", "deviceName": "{}", "deviceIP": "{}"}}'.format(int(time.time()), drone.get_mac(), drone.gethostname(), drone.get_ip())
+    payload = '{{ "bootTime": "{}", "deviceMAC": "{}", "deviceName": "{}", "deviceIP": "{}"}}'.format(int(time.time()), drone.get_mac(), drone.gethostname(), drone.get_ip())
 
 
     # Uncomment following line when ready to publish
