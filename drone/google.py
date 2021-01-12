@@ -95,7 +95,7 @@ def pubSensorReadingsToGoolgeCloud(sensors, _log):
     if(str(device_sensor_type) == "PH"):
         _MQTT_TOPIC = '/devices/{}/events/dronePH'.format(device_id)
     else:
-        _MQTT_TOPIC = '/devices/{}/events/droneOxy'.format(device_id)
+        _MQTT_TOPIC = '/devices/{}/events/'.format(device_id)
 
 
     client = mqtt.Client(client_id=_CLIENT_ID)
