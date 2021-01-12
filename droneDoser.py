@@ -106,7 +106,7 @@ try:
             
 	
     def doSingleDose():        
-        global rowIndex
+        global rowIndex, nutrientMix, sensors
         now = datetime.now()
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
         _log.info(now.strftime("%d/%m/%Y %H:%M:%S") + " Going to Dose nutrients")
@@ -141,7 +141,7 @@ try:
                              dosage.notify = True
     
     def doSinglePHDose():   
-        global rowIndex
+        global rowIndex, nutrientMix, sensors
         now = datetime.now()
         blynk.virtual_write(0, now.strftime("%d/%m/%Y %H:%M:%S"))
         for dosage in nutrientMix:		
@@ -179,6 +179,7 @@ try:
                         blynk.notify(dosage.name + " has pumped " + str(dosage.volume) + ", so may need topup")      
     
     def processSensors():   
+        global rowIndex, nutrientMix, sensors
         for sensor in sensors:
            if sensor is not None:
               sensor.read()
@@ -216,7 +217,7 @@ try:
 
     @blynk.handle_event('write V27')
     def v27write_handler(pin, value):
-        global rowIndex, nutrientMix
+        global rowIndex, nutrientMix, sensors
         rowIndex = 0
         for dosage in nutrientMix:
              dosage.volume =0
@@ -231,35 +232,39 @@ try:
 	
     @blynk.handle_event('write V29')
     def v29write_handler(pin, value):
-        global rowIndex
+        global rowIndex, nutrientMix, sensors
         rowIndex = int(value[0])
         
 
     
     @blynk.handle_event('write V38')
     def v38write_handler(pin, value): 
+        global rowIndex, nutrientMix, sensors
         sensors[1].target = float(value[0])
         blynk.virtual_write(98, "222: EC Trigger Level set to " + str(sensors[1].target)+ '\n') 
 			    
     @blynk.handle_event('write V39')
     def v39write_handler(pin, value):
+        global rowIndex, nutrientMix, sensors
         sensors[1].mode = value[0]
         blynk.virtual_write(98, "227: EC Mode set to " + str(sensors[1].mode)+ '\n')
     
     @blynk.handle_event('write V48')
     def v48write_handler(pin, value): 
+        global rowIndex, nutrientMix, sensors
         sensors[2].target = float(value[0])
         blynk.virtual_write(98, "232: pH Trigger Level set to " + str(sensors[2].target) + '\n') 
 		
     @blynk.handle_event('write V49')
     def v49write_handler(pin, value):
+        global rowIndex, nutrientMix, sensors
         sensors[2].mode = value[0]
         blynk.virtual_write(98, "237: pH Mode set to " + str(sensors[2].mode)+ '\n')
  	
      
     @blynk.handle_event('write V41')
     def fillLinePump1(pin, value):
-        global rowIndex
+        global rowIndex, nutrientMix, sensors
         x=0
         _log.info( "Fill Line 1 " + str(value[0]) + '\n')
         lVolume= nutrientMix[x].volume
@@ -284,7 +289,7 @@ try:
 
     @blynk.handle_event('write V42')
     def fillLinePump2(pin, value):
-        global rowIndex
+        global rowIndex, nutrientMix, sensors
         x=1
         _log.info( "Fill Line 2 " + str(value[0]) + '\n')
         lVolume= nutrientMix[x].volume
@@ -308,7 +313,7 @@ try:
 
     @blynk.handle_event('write V43')
     def fillLinePump3(pin, value):
-        global rowIndex
+        global rowIndex, nutrientMix, sensors
         x=2
         _log.info( "Fill Line 3 " + str(value[0]) + '\n')
         lVolume= nutrientMix[x].volume
@@ -332,7 +337,7 @@ try:
 
     @blynk.handle_event('write V44')
     def fillLinePump4(pin, value):
-        global rowIndex
+        global rowIndex, nutrientMix, sensors
         x=3
         _log.info( "Fill Line 4 " + str(value[0]) + '\n')
         lVolume= nutrientMix[x].volume
@@ -356,7 +361,7 @@ try:
 
     @blynk.handle_event('write V45')
     def fillLinePump5(pin, value):
-        global rowIndex
+        global rowIndex, nutrientMix, sensors
         x=4
         _log.info( "Fill Line 5 " + str(value[0]) + '\n')
         lVolume= nutrientMix[x].volume
@@ -380,7 +385,7 @@ try:
             
     @blynk.handle_event('write V46')
     def fillLinePump6(pin, value):
-        global rowIndex
+        global rowIndex, nutrientMix, sensors
         x=5
         _log.info( "Fill Line 6 " + str(value[0]) + '\n')
         lVolume= nutrientMix[x].volume
@@ -416,7 +421,7 @@ try:
 		
     @blynk.handle_event('write V47')
     def fillLinePump7(pin, value):
-        global rowIndex
+        global rowIndex, nutrientMix, sensors
         x=6
         _log.info( "Fill Line 7 " + str(value[0]) + '\n')
         lVolume= nutrientMix[x].volume
@@ -440,44 +445,44 @@ try:
 		
     @blynk.handle_event('write V60')
     def v60write_handler(pin, value):
-        global nutrientMix
+        global rowIndex, nutrientMix, sensors
         nutrientMix[0].dose = value[0]
         blynk.virtual_write(98, "425 " + nutrientMix[0].name + " dose volume set to " + str(nutrientMix[0].dose)+ '\n')
         _log.info(nutrientMix[0].name + " dose volume set to " + str(nutrientMix[0].dose)+ '\n')
  	 	
     @blynk.handle_event('write V61')
     def v61write_handler(pin, value):
-        global nutrientMix
+        global rowIndex, nutrientMix, sensors
         nutrientMix[1].dose = value[0]
         blynk.virtual_write(98,"432 " +  nutrientMix[1].name + " dose volume set to " + str(nutrientMix[1].dose)+ '\n')
     
     @blynk.handle_event('write V62')
     def v62write_handler(pin, value):
-        global nutrientMix
+        global rowIndex, nutrientMix, sensors
         nutrientMix[2].dose = value[0]
         blynk.virtual_write(98, "438 " + nutrientMix[2].name + " dose volume set to " + str(nutrientMix[2].dose)+ '\n')
     
     @blynk.handle_event('write V63')
     def v63write_handler(pin, value):
-        global nutrientMix
+        global rowIndex, nutrientMix, sensors
         nutrientMix[3].dose = value[0]
         blynk.virtual_write(98, "444 " + nutrientMix[3].name + " dose volume set to " + str(nutrientMix[3].dose)+ '\n')
     
     @blynk.handle_event('write V64')
     def v64write_handler(pin, value):
-        global nutrientMix
+        global rowIndex, nutrientMix, sensors
         nutrientMix[4].dose = value[0]
         blynk.virtual_write(98, "450 " + nutrientMix[4].name + " dose volume set to " + str(nutrientMix[4].dose)+ '\n')
 
     @blynk.handle_event('write V65')
     def v65write_handler(pin, value):
-        global nutrientMix
+        global rowIndex, nutrientMix, sensors
         nutrientMix[5].dose = value[0]
         blynk.virtual_write(98, "456 " + nutrientMix[5].name + " dose volume set to " + str(nutrientMix[5].dose)+ '\n')
 
     @blynk.handle_event('write V66')
     def v66write_handler(pin, value):
-        global nutrientMix
+        global rowIndex, nutrientMix, sensors
         print("-------------------------------------------")
         print(value)
         print(pin)
@@ -488,49 +493,50 @@ try:
 
     @blynk.handle_event('write V90')
     def v90write_handler(pin, value):
-        global nutrientMix
+        global rowIndex, nutrientMix, sensors
         nutrientMix[0].volume = float(value[0])
         _log.info("Loading passed volume for " + nutrientMix[0].name + " value[0] is " + str(value[0]))
 
     @blynk.handle_event('write V91')
     def v91write_handler(pin, value):
-        global nutrientMix
+        global rowIndex, nutrientMix, sensors
         nutrientMix[1].volume = float(value[0])
         _log.info("Loading passed volume for " + nutrientMix[1].name + " value[0] is " + str(value[0]))
 	
     @blynk.handle_event('write V92')
     def v92write_handler(pin, value):
-        global nutrientMix
+        global rowIndex, nutrientMix, sensors
         nutrientMix[2].volume = float(value[0])
         _log.info("Loading passed volume for " + nutrientMix[2].name + " value[0] is " + str(value[0]))
 	
     @blynk.handle_event('write V93')
     def v93write_handler(pin, value):
-        global nutrientMix
+        global rowIndex, nutrientMix, sensors
         nutrientMix[3].volume = float(value[0])
         _log.info("Loading passed volume for " + nutrientMix[3].name + " value[0] is " + str(value[0]))
 	
     @blynk.handle_event('write V94')
     def v94write_handler(pin, value):
-        global nutrientMix
+        global rowIndex, nutrientMix, sensors
         nutrientMix[4].volume = float(value[0])
         _log.info("Loading passed volume for " + nutrientMix[4].name + " value[0] is " + str(value[0]))
 	
     @blynk.handle_event('write V95')
     def v95write_handler(pin, value):
-        global nutrientMix
+        global rowIndex, nutrientMix, sensors
         nutrientMix[5].volume = float(value[0])
         _log.info("Loading passed volume for " + nutrientMix[5].name + " value[0] is " + str(value[0]))
 	
     @blynk.handle_event('write V96')
     def v96write_handler(pin, value):
-        global nutrientMix
+        global rowIndex, nutrientMix, sensors
         nutrientMix[6].volume = float(value[0])
         _log.info("Loading passed volume for " + nutrientMix[6].name + " value[0] is " + str(value[0]))
 
 	
     @blynk.handle_event('write V255')
     def rebooter(pin, value):
+        global rowIndex, nutrientMix, sensors
         _log.critical( "User reboot")
         blynk.virtual_write(250, "Reboot")
         blynk.set_property(250, 'color', colours['OFFLINE'])	
@@ -542,6 +548,7 @@ try:
 	
     @blynk.handle_event("connect")
     def connect_handler():
+        global rowIndex, nutrientMix, sensors
         _log.warning("Connected")
         blynk.virtual_write(250, "Connected")
         pins = [ 1, 10, 11, 12, 13, 14, 15, 16, 27, 38,39,41,42,43,44,45,46,47,48,49, 60, 61, 62, 63, 64, 65, 66, 90, 91, 92, 93, 94, 95, 96, 1]
@@ -552,6 +559,7 @@ try:
         
     @timer.register(interval=60, run_once=False)
     def blynk_data():
+        global rowIndex, nutrientMix, sensors
         _log.info("Update Timer Run")
         blynk.virtual_write(250, "Running")
         blynk.set_property(250, 'color', colours['ONLINE'])
