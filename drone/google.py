@@ -190,7 +190,7 @@ def pubDoseVolumeToGoolgeCloud(dose, _log):
 
 def pubSensorReadingsToThingSpeak(sensors, _log):
    
-   r =requests.get("https://api.thingspeak.com/update?api_key=OFS8JOTQUXNIEXLI&field1=" + str(sensors[0].value) + "&field2=' + str(sensors[1].value) + "&field3=' + str(sensors[2].value))
+   r =requests.get("https://api.thingspeak.com/update?api_key=OFS8JOTQUXNIEXLI&field1=" + str(sensors[0].value) + "&field2=" + str(sensors[1].value) + "&field3=" + str(sensors[2].value))
    _log.info("Status Code =" + str(r.status_code) + " from GET https://api.thingspeak.com/update?api_key=OFS8JOTQUXNIEXLI&field1=" + str(sensors[0].value))
    while (r.status_code is not 200):
       r =requests.get("https://api.thingspeak.com/update?api_key=OFS8JOTQUXNIEXLI&field1=" + str(sensors[0].value))
