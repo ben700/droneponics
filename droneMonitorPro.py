@@ -82,7 +82,13 @@ try:
         for sensor in sensors:
            if sensor is not None:
               sensor.read()
-                            	
+
+        try:		
+           drone.pubSensorReadingsToGoolgeCloud(sensors, _log)
+        except:
+           _log.critical("except logging readings to Google")	
+     
+
         try:		
            sensors[0].color = drone.getTempColour(_log, int(round(float(sensors[0].value)*10,0)))
         except:
