@@ -28,6 +28,7 @@ sys.path.append('/home/pi/droneponics')
 import drone
 from configparser import ConfigParser
 import logging
+import requests
 # Droneponics End
 
 
