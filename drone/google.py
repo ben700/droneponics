@@ -109,7 +109,50 @@ def pubDeviceBootToGoolgeCloud():
     client.loop_stop()
     return True
 
+def pubEnviromentalReadingsToGoolgeCloud(dronePayload):
 
+    # Droneponics Start
+    parser = ConfigParser()
+    parser.read("/home/pi/droneponics/config/Google/"+drone.gethostname()+".ini")
+
+
+    ssl_private_key_filepath = parser.get('Google', 'ssl_private_key_filepath')
+    ssl_algorithm = parser.get('Google', 'ssl_algorithm')
+    root_cert_filepath = parser.get('Google', 'root_cert_filepath')
+    project_id = parser.get('Google', 'project_id')
+    gcp_location = parser.get('Google',     'gcp_location')
+    registry_id = parser.get('Google', 'registry_id')
+    device_id = parser.get('Google', 'device_id')
+    device_sensor_type = parser.get('Google', 'device_sensor_type')
+
+
+    _CLIENT_ID = 'projects/{}/locations/{}/registries/{}/devices/{}'.format(project_id, gcp_location, registry_id, device_id)
+    _MQTT_TOPIC = '/devices/{}/events/environmentalData'.format(device_id)
+    
+    client = mqtt.Client(client_id=_CLIENT_ID)
+    # authorization is handled purely with JWT, no user/pass, so username can be whatever
+    client.username_pw_set(
+        username='unused',
+        password=create_jwt(project_id, ssl_private_key_filepath, ssl_algorithm))
+    
+    client.on_connect = on_connect
+    client.on_publish = on_publish
+
+    client.tls_set(ca_certs=root_cert_filepath) # Replace this with 3rd party cert if that was used when creating registry
+    client.connect('mqtt.googleapis.com', 8883)
+
+    client.loop_start()
+
+    # Uncomment following line when ready to publish
+    client.publish(_MQTT_TOPIC, dronePayload.get(), qos=1)
+
+    # Droneponics End
+
+    client.loop_stop()
+    return True
+
+
+   
 def pubSensorReadingsToGoolgeCloud(sensors, _log):
 
     # Droneponics Start
