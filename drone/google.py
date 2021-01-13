@@ -56,10 +56,10 @@ def error_str(rc):
     return '{}: {}'.format(rc, mqtt.error_string(rc))
 
 def on_connect(unusued_client, unused_userdata, unused_flags, rc):
-    print('on_connect', error_str(rc))
+    #print('on_connect', error_str(rc))
 
 def on_publish(unused_client, unused_userdata, unused_mid):
-    print('on_publish')
+    #print('on_publish')
 
 
 def pubGoolgeCloud(_MQTT_TOPIC, payload):
