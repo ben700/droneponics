@@ -285,21 +285,9 @@ def blynk_data():
         payload.add("sensorType", "mh_z19")
         payload.add("CO2", mhz19b['co2'])
         drone.pubGasiousReadingsToGoolgeCloud(payload)        
-     
         blynk.virtual_write(10, '{0:d}'.format(mhz19b['co2']))
         _log.info('CO2: {0:d}'.format(mhz19b['co2']))
         drone.setMHZFormOnlineColours(blynkObj=blynk, loggerObj=_log)
-        _log.info("blynkBridge BLYNK_AUTH = " + parser.get('blynkBridge', 'BLYNK_AUTH', fallback="Fallback"))
-        if (parser.get('blynkBridge', 'BLYNK_AUTH', fallback=None) is not None):
-            _log.warning("Send CO2 data via blynkBridge")
-            blynkBridge = blynklib.Blynk(parser.get('blynkBridge', 'BLYNK_AUTH'))
-            blynkBridge.run()
-            CO2_VPIN = parser.get('blynkBridge', 'CO2_VPIN', fallback=10)
-            blynkBridge.virtual_write(CO2_VPIN, '{0:d}'.format(mhz19b['co2']))
-            blynkBridge.set_property(CO2_VPIN, 'label', "from " + drone.gethostname())
-            blynkBridge.virtual_sync(10)
-        #    blynkBridge.virtual_write(CO2_VPIN+1, now)
-            _log.info("blynkBridge CO2 data sent")
     else:
         blynk.virtual_write(98, 'Unexpected error: mhz19b' + '\n')
         _log.error('Unexpected error: mhz19b')
