@@ -29,11 +29,9 @@ _log.info("ConfigParser path = /home/pi/droneponics/config/Google/"+drone.gethos
 
 
 
-_log.critical('{{ "bootTime": "{}", "deviceMAC": "{}", "deviceName": "{}", "deviceIP": "{}"}}'.format(int(time.time()), drone.get_mac(), drone.gethostname(), drone.get_ip()))
+_log.critical('{{ "ts": "{}", "deviceMAC": "{}", "deviceName": "{}", "deviceIP": "{}"}}'.format(int(time.time()), drone.get_mac(), drone.gethostname(), drone.get_ip()))
 
 payload = drone.dronePayload(_log)
-payload.add("bootTime", int(time.time()))
-payload.add("deviceMAC", drone.get_mac())
 payload.add("deviceName",  drone.gethostname())
 payload.add("deviceIP", drone.get_ip())
 payload.add("TestNone", None)
