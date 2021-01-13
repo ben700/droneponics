@@ -130,6 +130,16 @@ def pubEnviromentalReadingsToGoolgeCloud(dronePayload):
     return pubGoolgeCloud(_MQTT_TOPIC, dronePayload.get())
  
 
+def pubLightReadingsToGoolgeCloud(dronePayload):
+
+    # Droneponics Start
+    parser = ConfigParser()
+    parser.read("/home/pi/droneponics/config/Google/"+drone.gethostname()+".ini")
+    device_id = parser.get('Google', 'device_id')
+
+    _MQTT_TOPIC = '/devices/{}/events/lightData'.format(device_id)
+      
+    return pubGoolgeCloud(_MQTT_TOPIC, dronePayload.get())
    
 def pubSensorReadingsToGoolgeCloud(sensors, _log):
 
