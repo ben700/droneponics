@@ -246,9 +246,9 @@ class dronePayloadItem:
 
    def get(self):
      if (self.value is None):
-         retutn ""
+         return ""
      else:
-         retutn '"{}": "{}",'.format(self.key, self.value)
+         return '"{}": "{}",'.format(self.key, self.value)
       
       
 class dronePayload:
