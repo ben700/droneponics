@@ -253,9 +253,18 @@ def blynk_data():
         drone.setBME280FormColours(bme280, blynkObj=blynk, loggerObj=_log)          
 
     drone.pubEnviromentalReadingsToGoolgeCloud(payload)        
-        
+     
+    payload = drone.dronePayload(_log)
+    
     _log.debug("Now work on TSL2591 sensor")
     if (tsl is not None):
+        payload.add("sensorType", "TSL2591")
+        payload.add("lux", lux)
+        payload.add("infrared", infrared)
+        payload.add("visible", visible)
+        payload.add("full_spectrum", full_spectrum)
+        drone.pubLightReadingsToGoolgeCloud(payload)        
+     
         _log.debug('Total light: {0:.2f}lux'.format(tsl.lux))
         _log.debug('Infrared light: {0:d}'.format(tsl.infrared))
         _log.debug('Visible light: {0:d}'.format(tsl.visible))
@@ -269,9 +278,14 @@ def blynk_data():
     else:
         drone.setTSLFormOfflineColours(blynkObj=blynk, loggerObj=_log)
 
+    payload = drone.dronePayload(_log)
     _log.debug("Now work on mhz19b sensor")
     mhz19b = mh_z19.read()  
     if mhz19b is not None:
+        payload.add("sensorType", "mh_z19")
+        payload.add("CO2", mhz19b['co2'])
+        drone.pubGasiousReadingsToGoolgeCloud(payload)        
+     
         blynk.virtual_write(10, '{0:d}'.format(mhz19b['co2']))
         _log.info('CO2: {0:d}'.format(mhz19b['co2']))
         drone.setMHZFormOnlineColours(blynkObj=blynk, loggerObj=_log)
