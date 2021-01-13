@@ -14,5 +14,5 @@ wget https://pki.google.com/roots.pem
 
 
 
-gcloud iot devices create droneMonitorPro --region=europe-west1  --registry=droneMonitorSmall --public-key path=/home/pi/.ssh/droneponics.pub,type=rsa-x509-pem
+./google-cloud-sdk/bin/gcloud iot devices create droneMonitorBig --region=europe-west1  --registry=droneMonitor --public-key path=/home/pi/.ssh/droneponics.pub,type=rsa-x509-pem
 cd
