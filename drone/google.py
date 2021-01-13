@@ -240,7 +240,7 @@ def pubSensorReadingsToThingSpeak(sensors, _log):
    return True
 
 class dronePayloadItem:
- def __init__(self, key, value):
+   def __init__(self, key, value):
      self.key = key
      self.value = value
 
