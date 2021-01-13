@@ -9,10 +9,12 @@ sudo pip3 install cryptography
 curl -O https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-321.0.0-linux-x86.tar.gz
 tar -xf google-cloud-sdk-321.0.0-linux-x86.tar.gz
 rm -f google-cloud-sdk-321.0.0-linux-x86.tar.gz
-./google-cloud-sdk/install.sh --disable-prompts 
-./google-cloud-sdk/bin/gcloud init --no-launch-browser --account
+./google-cloud-sdk/install.sh --quiet 
 
-#4/1AY0e-g67mG0kFmGRFUu0-dI3QHUg8HPawRIuMFGDCxpi_QenCIdCSRrUP9E
+#./google-cloud-sdk/bin/gcloud config set account ben@droneponics.com
+#./google-cloud-sdk/bin/gcloud config set project droneponics-301222
+
+./google-cloud-sdk/bin/gcloud init --no-launch-browser --account ben@droneponics.com
 
 
 mkdir .ssh
