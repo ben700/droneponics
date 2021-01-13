@@ -264,5 +264,5 @@ class dronePayload:
      for pItem in self.objects:
           payloadString = payloadString + pItem.get()
 
-     payloadString =  payloadString[:-1] + '}}'
+     payloadString =  payloadString[:-1] + '}'
      return payloadString
