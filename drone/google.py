@@ -238,3 +238,31 @@ def pubSensorReadingsToThingSpeak(sensors, _log):
       r =requests.get("https://api.thingspeak.com/update?api_key=OFS8JOTQUXNIEXLI&field1=" + str(sensors[0].value))
       _log.info("Status Code =" + str(r.status_code) + " from GET https://api.thingspeak.com/update?api_key=OFS8JOTQUXNIEXLI&field1=" + str(sensors[0].value))
    return True
+
+class dronePayloadItem:
+ def __init__(self, key, value):
+     self.key = key
+     self.value = value
+
+   def get(self):
+     if (self.value is None):
+         retutn ""
+     else:
+         retutn '"{}": "{}",'.format(self.key, self.value)
+      
+      
+class dronePayload:
+   def __init__(self, _log, *args, **kwargs):
+     self._log = _log
+     self.objects = []
+     
+   def add(self, key, value):
+     self.objects.append( dronePayloadItem(key, value)
+    
+   def get(self):
+     payloadString = '{{ "ts": "{}", "deviceMAC": "{}",'.format(int(time.time()), drone.get_mac())
+     for pItem in self.objects:
+          payloadString = payloadString + pItem.get()
+
+     payloadString =  payloadString[:-1] + '}}'
+     return payloadString
