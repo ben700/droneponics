@@ -259,10 +259,10 @@ def blynk_data():
     _log.debug("Now work on TSL2591 sensor")
     if (tsl is not None):
         payload.add("sensorType", "TSL2591")
-        payload.add("lux", tsl.lux)
-        payload.add("infrared", tsl.infrared)
-        payload.add("visible", tsl.visible)
-        payload.add("full_spectrum", tsl.full_spectrum)
+        payload.add("lux", '{0:d}'.format(tsl.lux))
+        payload.add("infrared", '{0:d}'.format(tsl.infrared))
+        payload.add("visible", '{0:d}'.format(tsl.visible))
+        payload.add("full_spectrum", '{0:d}'.format(tsl.full_spectrum))
         drone.pubLightReadingsToGoolgeCloud(payload)        
      
         _log.debug('Total light: {0:.2f}lux'.format(tsl.lux))
@@ -283,7 +283,7 @@ def blynk_data():
     mhz19b = mh_z19.read()  
     if mhz19b is not None:
         payload.add("sensorType", "mh_z19")
-        payload.add("CO2", mhz19b['co2'])
+        payload.add("CO2", '{0:d}'.format(mhz19b['co2']))
         drone.pubGasiousReadingsToGoolgeCloud(payload)        
         blynk.virtual_write(10, '{0:d}'.format(mhz19b['co2']))
         _log.info('CO2: {0:d}'.format(mhz19b['co2']))
