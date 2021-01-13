@@ -183,7 +183,7 @@ def blynk_data():
   #      bme680 = None
     _log.debug("bme680 = " + str(bme680))
     _log.debug("bme280 = " + str(bme280))
-    
+    payload = drone.dronePayload(_log)
     
     _log.info("Start of timer.register fx")
     blynk.set_property(systemLED, 'color', colours[1])
@@ -204,8 +204,10 @@ def blynk_data():
         _log.debug("bme680 is not None so going to set pressure")
         bme680.sea_level_pressure = openWeather.getPressure()
         _log.debug("Going to send bme680 data to blynk app")
+        payload.add("gas", bme680.gas)
         blynk.virtual_write(2, bme680.gas)
         _log.info("bme680.gas =" + str(bme680.gas))
+        payload.add("temperature", bme680.temperature)
         blynk.virtual_write(1, bme680.temperature)
         _log.info("bme680.temperature =" + str(bme680.temperature))
         blynk.virtual_write(3, bme680.humidity)
@@ -219,7 +221,8 @@ def blynk_data():
         dewPoint = dew_point(temperature=t, humidity=bme680.humidity)
         blynk.virtual_write(11, dewPoint)
         _log.info("bme680.dew_point =" + str(dewPoint))
-        drone.setBME680FormColours(bme680, blynkObj=blynk, loggerObj=_log)     
+        drone.setBME680FormColours(bme680, blynkObj=blynk, loggerObj=_log)  
+        _log.critical("@@@@@@@@@@@@@@@@@@@@@@@" + payload.get()
     elif(bme280 is not None):           
         _log.debug("Going to send bme280 data to blynk app")
         blynk.virtual_write(2, "BME280")
