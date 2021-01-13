@@ -281,6 +281,7 @@ def blynk_data():
 _log.info("Created all the objects. Now starting the drone")        
 blynk.run() #need to call here so you can update app outside main while loop    
 blynk.virtual_write(250, "Start-up")
+drone.pubDeviceBootToGoolgeCloud()
 blynk.virtual_write(251, drone.gethostname())
 blynk.virtual_write(252, drone.get_ip())        
 blynk.virtual_write(98, "clr")
