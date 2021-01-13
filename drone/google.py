@@ -257,7 +257,7 @@ class dronePayload:
      self.objects = []
      
    def add(self, key, value):
-     self.objects.append( dronePayloadItem(key, value)
+     self.objects.append( dronePayloadItem(key, value))
     
    def get(self):
      payloadString = '{{ "ts": "{}", "deviceMAC": "{}",'.format(int(time.time()), drone.get_mac())
