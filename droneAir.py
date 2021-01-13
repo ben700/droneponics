@@ -227,7 +227,6 @@ def blynk_data():
         blynk.virtual_write(11, dewPoint)
         _log.info("bme680.dew_point =" + str(dewPoint))
         drone.setBME680FormColours(bme680, blynkObj=blynk, loggerObj=_log)  
-        _log.critical("@@@@@@@@@@@@@@@@@@@@@@@" + payload.get())
     elif(bme280 is not None):           
         _log.debug("Going to send bme280 data to blynk app")
         payload.add("sensorType", "bme280")
