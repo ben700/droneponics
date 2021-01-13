@@ -13,6 +13,6 @@ openssl req -x509 -newkey rsa:2048 -keyout droneponics_private.pem -nodes -out d
 wget https://pki.google.com/roots.pem
 
 
-
-./google-cloud-sdk/bin/gcloud iot devices create droneMonitorBig --region=europe-west1  --registry=droneMonitor --public-key path=/home/pi/.ssh/droneponics.pub,type=rsa-x509-pem
 cd
+./google-cloud-sdk/bin/gcloud iot devices create $HOSTNAME --region=europe-west1  --registry=droneAir --public-key path=/home/pi/.ssh/droneponics.pub,type=rsa-x509-pem
+
