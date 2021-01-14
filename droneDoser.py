@@ -185,8 +185,12 @@ try:
               sensor.read()
 
         try:		
+           _log.critical("-------------------------------------------main pubSensorReadingsToGoolgeCloud")
+
            drone.pubSensorReadingsToGoolgeCloud(sensors, _log)
-           drone.pubSensorReadingsToThingSpeak(sensors, _log)
+           _log.critical("-------------------------------------------main pubSensorReadingsToThingSpeak")
+
+	drone.pubSensorReadingsToThingSpeak(sensors, _log)
         except:
            _log.critical("except logging readings to Google")	
                             	
