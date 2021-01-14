@@ -71,7 +71,8 @@ def buildPayloadField(sString):
          return str(sString)
       
    
-def buildSensorPayload(sensors, _log, payload):
+def buildSensorPayload(sensors, _log):
+    print(   "----------------------------------- buildSensorPayload")
     if(sensors[1].name == "EC"):
         _log_critical("----------------------------------- GOING TO BUILD payload")         
         payload = '{{ "ts": "{}", "devicemac": "{}", "temperature": "{}", "conductivity": "{}", "totaldissolvedsolids": "{}", "salinity": "{}", "specificgravity": "{}", "pH": "{}"}}'.format(int(time.time()), drone.get_mac(), buildPayloadField(sensors[0].value), buildPayloadField(sensors[1].value), buildPayloadField(sensors[1].value2), buildPayloadField(sensors[1].value3), buildPayloadField(sensors[1].value4), buildPayloadField(sensors[2].value) )
