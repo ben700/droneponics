@@ -65,7 +65,8 @@ def on_publish(unused_client, unused_userdata, unused_mid):
 
 
 def pubGoolgeCloud(_MQTT_TOPIC, payload):
-
+    _log.critical("-------------------------------------------pubGoolgeCloud start line")
+    
     # Droneponics Start
     parser = ConfigParser()
     parser.read("/home/pi/droneponics/config/Google/"+drone.gethostname()+".ini")
@@ -102,6 +103,7 @@ def pubGoolgeCloud(_MQTT_TOPIC, payload):
     client.publish(_MQTT_TOPIC, payload, qos=1)
 
     # Droneponics End
+    _log.critical("-------------------------------------------pubGoolgeCloud final line")
 
     client.loop_stop()
     return True
@@ -161,8 +163,11 @@ def pubSensorReadingsToGoolgeCloud(sensors, _log):
     parser.read("/home/pi/droneponics/config/Google/"+drone.gethostname()+".ini")
     device_id = parser.get('Google', 'device_id')
     _MQTT_TOPIC = '/devices/{}/events'.format(device_id)
+    payload = ""
+    payload = drone.buildSensorPayload(sensors, _log, payload)
+    _log.critical(payload)
     _log.critical("-------------------------------------------pubSensorReadingsToGoolgeCloud final line")
-    return pubGoolgeCloud(_MQTT_TOPIC, drone.buildSensorPayload(sensors, _log, ""))
+    return pubGoolgeCloud(_MQTT_TOPIC, payload )
 
    
 def pubDoseVolumeToGoolgeCloud(dose, _log):
