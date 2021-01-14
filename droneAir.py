@@ -259,10 +259,10 @@ def blynk_data():
     _log.debug("Now work on TSL2591 sensor")
     if (tsl is not None):
         payload.add("sensorType", "TSL2591")
-        payload.add("lux", '{0:d}'.format(tsl.lux))
-        payload.add("infrared", '{0:d}'.format(tsl.infrared))
-        payload.add("visible", '{0:d}'.format(tsl.visible))
-        payload.add("full_spectrum", '{0:d}'.format(tsl.full_spectrum))
+        payload.add("lux", "{0:d}".format(tsl.lux))
+        payload.add("infrared", "{0:d}".format(tsl.infrared))
+        payload.add("visible", "{0:d}".format(tsl.visible))
+        payload.add("full_spectrum", "{0:d}".format(tsl.full_spectrum))
         drone.pubLightReadingsToGoolgeCloud(payload)        
      
         _log.debug('Total light: {0:.2f}lux'.format(tsl.lux))
