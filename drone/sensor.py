@@ -64,7 +64,7 @@ def buildAllSensors(sensors, _log):
     return sensors
 
 def buildPayloadField(sString):
-   _log_critical("buildPayloadField = " + str(sString))
+    _log_critical("buildPayloadField = " + str(sString))
     if(sString is None):
          return ""
     else:
