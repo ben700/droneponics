@@ -26,3 +26,5 @@ wget https://pki.google.com/roots.pem
 cd
 ./google-cloud-sdk/bin/gcloud iot devices create $HOSTNAME --region=europe-west1  --registry=droneOxy --public-key path=/home/pi/.ssh/droneponics.pub,type=rsa-x509-pem
 
+#https://europe-west2-droneponics-301222.cloudfunctions.net/tFunction
+#https://europe-west2-droneponics-301222.cloudfunctions.net/tFunction
