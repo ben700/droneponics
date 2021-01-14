@@ -70,7 +70,7 @@ def buildPayloadField(sString):
          return str(sString)
       
    
-def buildPayload(sensors, _log, payload):
+def buildSensorPayload(sensors, _log, payload):
     if(sensors[1].name == "EC"):
         payload = '{{ "ts": "{}", "devicemac": "{}", "temperature": "{}", "conductivity": "{}", "totaldissolvedsolids": "{}", "salinity": "{}", "specificgravity": "{}", "pH": "{}"}}'.format(int(time.time()), drone.get_mac(), buildPayloadField(sensors[0].value), buildPayloadField(sensors[1].value), buildPayloadField(sensors[1].value2), buildPayloadField(sensors[1].value3), buildPayloadField(sensors[1].value4), buildPayloadField(sensors[2].value) )
     elif(sensors[1].name == "Dissolved Oxygen"):      
