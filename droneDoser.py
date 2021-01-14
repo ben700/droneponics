@@ -607,7 +607,7 @@ try:
                    blynk.virtual_sync(pin)
                    blynk.read_response(timeout=0.5)
 	
-              _log.critical("Boot Completed")
+              _log.warning("Boot Completed")
               blynk.virtual_write(250, "Started")
               blynk.set_property(250, 'color', colours['ONLINE'])
               blynk.set_property(systemLED, 'color', colours['ONLINE'])
