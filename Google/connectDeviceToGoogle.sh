@@ -24,5 +24,5 @@ wget https://pki.google.com/roots.pem
 
 
 cd
-./google-cloud-sdk/bin/gcloud iot devices create $HOSTNAME --region=europe-west1  --registry=droneAir --public-key path=/home/pi/.ssh/droneponics.pub,type=rsa-x509-pem
+./google-cloud-sdk/bin/gcloud iot devices create $HOSTNAME --region=europe-west1  --registry=droneOxy --public-key path=/home/pi/.ssh/droneponics.pub,type=rsa-x509-pem
 
