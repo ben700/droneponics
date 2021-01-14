@@ -65,7 +65,7 @@ def on_publish(unused_client, unused_userdata, unused_mid):
 
 
 def pubGoolgeCloud(_MQTT_TOPIC, payload):
-    _log.critical("-------------------------------------------pubGoolgeCloud start line")
+    print("-------------------------------------------pubGoolgeCloud start line")
     
     # Droneponics Start
     parser = ConfigParser()
@@ -103,7 +103,7 @@ def pubGoolgeCloud(_MQTT_TOPIC, payload):
     client.publish(_MQTT_TOPIC, payload, qos=1)
 
     # Droneponics End
-    _log.critical("-------------------------------------------pubGoolgeCloud final line")
+    print("-------------------------------------------pubGoolgeCloud final line")
 
     client.loop_stop()
     return True
