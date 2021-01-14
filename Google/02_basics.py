@@ -26,14 +26,13 @@ import re
 # Define some project-based variables to be used below. This should be the only
 # block of variables that you need to edit in order to run this script
 
-ssl_private_key_filepath = '<ssl-private-key-filepath>'
-ssl_algorithm = '<algorithm>' # Either RS256 or ES256
-root_cert_filepath = '<root-certificate-filepath>'
-project_id = '<GCP project id>'
-gcp_location = '<GCP location>'
-registry_id = '<IoT Core registry id>'
-device_id = '<IoT Core device id>'
-
+ssl_private_key_filepath = '/home/pi/.ssh/droneponics_private.pem'
+ssl_algorithm = 'RS256' # Either RS256 or ES256
+root_cert_filepath = '/home/pi/.ssh/roots.pem'
+project_id = 'droneponics-301222'
+gcp_location = 'europe-west1'
+registry_id = 'droneOxy'
+device_id = 'droneOxy'
 # end of user-variables
 
 cur_time = datetime.datetime.utcnow()
