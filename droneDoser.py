@@ -112,7 +112,7 @@ try:
         _log.info(now.strftime("%d/%m/%Y %H:%M:%S") + " Going to Dose nutrients")
         for dosage in nutrientMix:
            if(dosage.pump is not None and dosage.name != "pH"):
-                   if(str(dosage.dose) == "0.0" or dosage.dose <= 0):
+                   if(str(dosage.dose)[0:3] == "0.0"):
                         continue
                    blynk.virtual_write(98,"117 " + now.strftime("%d/%m/%Y %H:%M:%S") + " Going to Dose " +str (dosage.name)+ '\n')
                    #dosage.volume = dosage.pump.query("TV,?").split("TV,")[1].strip().rstrip('\x00')
