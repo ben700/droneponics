@@ -260,7 +260,8 @@ def blynk_data():
     if (tsl is not None):
         payload.add("sensorType", "TSL2591")
         _log.debug("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@Going to process lux =" + str(tsl.lux))
-        payload.add("lux", "{0:d}".format(tsl.lux))
+        _log.debug("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@Going to process lux =" + str("{0:.0f}".format(tsl.lux)))
+        payload.add("lux", "{0:.0f}".format(tsl.lux))
         payload.add("infrared", "{0:d}".format(tsl.infrared))
         payload.add("visible", "{0:d}".format(tsl.visible))
         payload.add("full_spectrum", "{0:d}".format(tsl.full_spectrum))
