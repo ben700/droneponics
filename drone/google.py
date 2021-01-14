@@ -167,7 +167,7 @@ def pubSensorReadingsToGoolgeCloud(sensors, _log):
 
    
 def pubDoseVolumeToGoolgeCloud(dose, _log):
-    if(dose.dose <= 0):
+    if(str(dose.dose)[0:3] == "0.0"):
         return True
  
     # Droneponics Start
