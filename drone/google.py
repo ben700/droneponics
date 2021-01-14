@@ -162,7 +162,7 @@ def pubSensorReadingsToGoolgeCloud(sensors, _log):
     device_id = parser.get('Google', 'device_id')
     _MQTT_TOPIC = '/devices/{}/events'.format(device_id)
 
-    return pubGoolgeCloud(_MQTT_TOPIC, drone.buildPayload(sensors, _log, payload))
+    return pubGoolgeCloud(_MQTT_TOPIC, drone.buildSensorPayload(sensors, _log, payload))
 
    
 def pubDoseVolumeToGoolgeCloud(dose, _log):
@@ -175,7 +175,7 @@ def pubDoseVolumeToGoolgeCloud(dose, _log):
 
     _MQTT_TOPIC = '/devices/{}/events/dosed'.format(device_id)
     payload = ''
-    payload = dose.buildPayload(payload)
+    payload = dose.buildDosePayload(payload)
 
     return pubGoolgeCloud( _MQTT_TOPIC, payload)
    
