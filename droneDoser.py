@@ -119,7 +119,7 @@ try:
                    blynk.set_property(dosage.LED, 'color', colours[0])
                    dosage.pump.query("D,"+str(dosage.dose))
                    try:
-                        dosage.pubDoseVolumeToGoolgeCloud(dosage, _log)
+                        drone.pubDoseVolumeToGoolgeCloud(dosage, _log)
                    except:
                         _log.critical("except logging dose to Google")		
                    while (True):
@@ -160,7 +160,7 @@ try:
                    else:
                         dosage.pump.query("D,"+str(dosage.dose))
                         try:
-                            dosage.pubDoseVolumeToGoolgeCloud(dosage, _log)
+                            drone.pubDoseVolumeToGoolgeCloud(dosage, _log)
                         except:
                             _log.critical("except logging dose to Google")	 
                    while (True):
@@ -575,7 +575,7 @@ try:
              if (int(sensors[1].mode) == 3):
                   _log.info("Do a dose")     
                   doneDose = True
-                  blynk.virtual_write(98,now.strftime("%d/%m/%Y %H:%M:%S") + "552 " + "Automatic dose nutrient "+ '\n') 
+                  blynk.virtual_write(98,now.strftime("%d/%m/%Y %H:%M:%S") + "578 " + "Automatic dose nutrient "+ '\n') 
                   doSingleDose()
 		
         if (doneDose is False): #don't auto dose ph same time as food
@@ -583,7 +583,7 @@ try:
                   _log.info("Would do ph dose; mode is " + str(sensors[2].mode))
                   if (int(sensors[2].mode) == 3):                  
                       _log.info("Main Loop:- Do a ph dose as target is " + str(float(sensors[2].target))  + " and value is " + str(float(sensors[2].value))) 
-                      blynk.virtual_write(98,now.strftime("%d/%m/%Y %H:%M:%S") + "561 Automatic dose Ph"+ '\n')
+                      blynk.virtual_write(98,now.strftime("%d/%m/%Y %H:%M:%S") + "586 Automatic dose Ph"+ '\n')
                       doSinglePHDose()
                       #blynk.notify("Ben has stopped ph pump. Is adding ph now correct!")      
 			
