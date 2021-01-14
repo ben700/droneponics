@@ -65,7 +65,6 @@ def on_publish(unused_client, unused_userdata, unused_mid):
 
 
 def pubGoolgeCloud(_MQTT_TOPIC, payload):
-    print("-------------------------------------------pubGoolgeCloud start line")
     
     # Droneponics Start
     parser = ConfigParser()
@@ -163,11 +162,8 @@ def pubSensorReadingsToGoolgeCloud(sensors, _log):
     device_id = parser.get('Google', 'device_id')
     _MQTT_TOPIC = '/devices/{}/events'.format(device_id)
     payload = ""
-    _log.critical("-------------------------------------------pubSensorReadingsToGoolgeCloud payload build")
     payload = drone.buildSensorPayload(sensors, _log)
     
-    _log.critical(payload)
-    _log.critical("-------------------------------------------pubSensorReadingsToGoolgeCloud final line")
     return pubGoolgeCloud(_MQTT_TOPIC, payload )
 
    
