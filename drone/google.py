@@ -102,8 +102,7 @@ def pubGoolgeCloud(_MQTT_TOPIC, payload):
     client.publish(_MQTT_TOPIC, payload, qos=1)
 
     # Droneponics End
-    print("-------------------------------------------pubGoolgeCloud final line")
-
+    
     client.loop_stop()
     return True
 
