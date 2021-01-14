@@ -483,10 +483,6 @@ try:
     @blynk.handle_event('write V66')
     def v66write_handler(pin, value):
         global rowIndex, nutrientMix, sensors
-        print("-------------------------------------------")
-        print(value)
-        print(pin)
-        print("-------------------------------------------")
         nutrientMix[6].dose = value[0]
         blynk.virtual_write(98, "466 " + nutrientMix[6].name + " dose volume set to " + str(nutrientMix[6].dose)+ '\n')
         _log.info(nutrientMix[6].name + " dose volume set to " + str(nutrientMix[6].dose)+ '\n')
