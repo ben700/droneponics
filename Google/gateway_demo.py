@@ -45,6 +45,8 @@ registry_id = parser.get('Google', 'registry_id')
 device_id = parser.get('Google', 'device_id')
 device_sensor_type = parser.get('Google', 'device_sensor_type')
 log_path = parser.get('Google', 'log_path')
+os.environ['GOOGLE_CLOUD_PROJECT']=project_id
+os.environ['GOOGLE_APPLICATION_CREDENTIALS']=service_account_json
     
 
 
