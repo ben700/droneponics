@@ -1,1 +1,1 @@
-pip3 install -r requirements.txt --user
+pip3 install -r /home/pi/droneponics/Google/requirements.txt --user
