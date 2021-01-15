@@ -8,5 +8,4 @@ os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = '/home/pi/droneponics/config/Goog
 # Get the value of 
 # Added environment variable  
 print("GCLOUD_PROJECT:", os.environ['GCLOUD_PROJECT'])
-print('\n')
 print("GOOGLE_APPLICATION_CREDENTIALS:", os.environ['GOOGLE_APPLICATION_CREDENTIALS']) 
