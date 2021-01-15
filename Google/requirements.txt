@@ -1,0 +1,14 @@
+cryptography==3.3.1
+google-api-python-client==1.12.8
+google-auth-httplib2==0.0.4
+google-auth==1.24.0
+google-cloud-pubsub==2.2.0
+google-cloud-iot==2.0.1
+grpc-google-iam-v1==0.12.3
+pyjwt==2.0.0
+paho-mqtt==1.5.1
+atlas-i2c==0.3.1
+getmac==0.8.2
+configparser==5.0.1
+colour==0.1.5
+meteocalc==1.1.0
