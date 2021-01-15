@@ -19,36 +19,37 @@ import logging
 import os
 import sys
 import time
+from configparser import ConfigParser
 
 sys.path.append(os.path.join(os.path.dirname(__file__), "..", "manager"))  # noqa
 import cloudiot_mqtt_example  # noqa
 import manager  # noqa
 
+# Droneponics Start
+parser = ConfigParser()
+parser.read("/home/pi/droneponics/config/Google/"+drone.gethostname()+".ini")
+
+
+rsa_private_path = parser.get('Google', 'ssl_private_key_filepath')
+service_account_json = parser.get('Google', 'service_account_json')
+ssl_algorithm = parser.get('Google', 'ssl_algorithm')
+ca_cert_path = parser.get('Google', 'root_cert_filepath')
+rsa_cert_path = parser.get('Google', 'rsa_cert_path')
+project_id = parser.get('Google', 'project_id')
+cloud_region = parser.get('Google','gcp_location')
+gateway_id=parser.get('Google', 'gateway_id')
+registry_id = parser.get('Google', 'registry_id')
+device_id = parser.get('Google', 'device_id')
+device_sensor_type = parser.get('Google', 'device_sensor_type')
+log_path = parser.get('Google', 'log_path')
+    
+
 
 logging.getLogger("googleapiclient.discovery_cache").setLevel(logging.CRITICAL)
 
-    cloud_region = "us-central1"
-device_id_template = "test-device-{}"
-gateway_id_template = "test-gateway-{}"
-topic_id = "test-device-events-topic-{}".format(int(time.time()))
-
-ca_cert_path = "resources/roots.pem"
-log_path = "config_log.csv"
-rsa_cert_path = "resources/rsa_cert.pem"
-rsa_private_path = "resources/rsa_private.pem"
-
-if (
-    "GOOGLE_CLOUD_PROJECT" not in os.environ
-    or "GOOGLE_APPLICATION_CREDENTIALS" not in os.environ
-):
-    print("You must set GCLOUD_PROJECT and GOOGLE_APPLICATION_CREDENTIALS")
-    quit()
-
-project_id = os.environ["GOOGLE_CLOUD_PROJECT"]
-service_account_json = os.environ["GOOGLE_APPLICATION_CREDENTIALS"]
-
+topic_id = "device-events-topic"
 pubsub_topic = "projects/{}/topics/{}".format(project_id, topic_id)
-registry_id = "test-registry-{}".format(int(time.time()))
+
 
 base_url = "https://console.cloud.google.com/iot/locations/{}".format(cloud_region)
 edit_template = "{}/registries/{}?project={}".format(base_url, "{}", "{}")
@@ -68,8 +69,6 @@ listen_time = 30
 if __name__ == "__main__":
     print("Running demo")
 
-    gateway_id = device_id_template.format("RS256")
-    device_id = device_id_template.format("noauthbind")
 
     # [START iot_gateway_demo_create_registry]
     print("Creating registry: {}".format(registry_id))
@@ -88,7 +87,7 @@ if __name__ == "__main__":
         None,
         gateway_id,
         rsa_cert_path,
-        "RS256",
+        ssl_algorithm,
     )
     # [END iot_gateway_demo_create_gateway]
 
@@ -148,7 +147,7 @@ if __name__ == "__main__":
         gateway_id,
         num_messages,
         rsa_private_path,
-        "RS256",
+        ssl_algorithm,
         ca_cert_path,
         mqtt_bridge_hostname,
         mqtt_bridge_port,
@@ -170,12 +169,12 @@ if __name__ == "__main__":
         gateway_id,
         num_messages,
         rsa_private_path,
-        "RS256",
+        ssl_algorithm,
         ca_cert_path,
         mqtt_bridge_hostname,
         mqtt_bridge_port,
         jwt_exp_time,
-        "Hello from gateway_demo.py",
+        "This is a message payload from gateway_demo.py",
     )
 
     print("You can read the state messages for your device at this URL:")
