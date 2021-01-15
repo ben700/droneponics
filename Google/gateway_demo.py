@@ -76,24 +76,24 @@ if __name__ == "__main__":
 
 
     # [START iot_gateway_demo_create_registry]
-    print("Creating registry: {}".format(registry_id))
-    manager.create_registry(
-        service_account_json, project_id, cloud_region, pubsub_topic, registry_id
-    )
+ #   print("Creating registry: {}".format(registry_id))
+ #   manager.create_registry(
+  #      service_account_json, project_id, cloud_region, pubsub_topic, registry_id
+  #  )
     # [END iot_gateway_demo_create_registry]
 
     # [START iot_gateway_demo_create_gateway]
-    print("Creating gateway: {}".format(gateway_id))
-    manager.create_gateway(
-        service_account_json,
-        project_id,
-        cloud_region,
-        registry_id,
-        None,
-        gateway_id,
-        rsa_cert_path,
-        ssl_algorithm,
-    )
+  #  print("Creating gateway: {}".format(gateway_id))
+   # manager.create_gateway(
+    #    service_account_json,
+  #      project_id,
+   #     cloud_region,
+    #    registry_id,
+ #       None,
+   #     gateway_id,
+    #    rsa_cert_path,
+   #     ssl_algorithm,
+   # )
     # [END iot_gateway_demo_create_gateway]
 
     # [START iot_gateway_demo_create_bound_device]
