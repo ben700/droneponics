@@ -21,8 +21,8 @@ import sys
 import time
 from configparser import ConfigParser
 
-sys.path.append(os.path.join(os.path.dirname(__file__), "..", "manager"))  # noqa
-sys.path.append('/home/pi/droneponics/python-docs-samples/iot/api-client/mqtt_example/')
+sys.path.append('/home/pi/python-docs-samples/iot/api-client/mqtt_example/')
+sys.path.append('/home/pi/python-docs-samples/iot/api-client/manager/')
 import cloudiot_mqtt_example  # noqa
 import manager  # noqa
 
