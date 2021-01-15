@@ -25,6 +25,7 @@ sys.path.append('/home/pi/python-docs-samples/iot/api-client/mqtt_example/')
 sys.path.append('/home/pi/python-docs-samples/iot/api-client/manager/')
 import cloudiot_mqtt_example  # noqa
 import manager  # noqa
+sys.path.append('/home/pi/droneponics/')
 import drone 
 
 # Droneponics Start
