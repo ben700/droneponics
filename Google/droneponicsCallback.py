@@ -53,10 +53,10 @@ def logDroneponicsCallback(client):
         if(message.topic ==  "/devices/{}/commands".format(device_id)):
             command = message.payload.decode("utf-8") 
             if(command == "updateState"):
-                connect.detach_device(client, device_id)
+                client.disconnect()
                 print("droneponicsSaveDeviceState()")
                 droneponicsSaveDeviceState()
-                clientReconnect = connect.get_client(
+                client = connect.get_client(
                                         project_id,
                                         cloud_region,
                                         registry_id,
@@ -67,7 +67,6 @@ def logDroneponicsCallback(client):
                                         mqtt_bridge_hostname,
                                         mqtt_bridge_port,
                                     )
-                connect.attach_device(clientReconnect, device_id, "")
                 print("Waiting for device to attach.")
 
             elif(command == "state"):
@@ -76,6 +75,9 @@ def logDroneponicsCallback(client):
                 droneponicsSaveDeviceState()
                 client.connect(mqtt_bridge_hostname, mqtt_bridge_port)
 
+                device_command_topic = "/devices/{}/commands/#".format(device_id)
+                client.subscribe(device_command_topic, qos=1)
+    
                 print("Waiting for device to attach.")
                 
             elif(command == "update"):
