@@ -173,7 +173,7 @@ def deviceCalibrationCommand(sDevice, sCommand):
         print("response.address = " + str(response.sensor_address))
         print("response.atlas_i2c.CommandResponse = " + str(response.atlas_i2c.CommandResponse))
         
-        if(response.status_code is None or response.status_code != 1):    
+        if(response.status_code is None or str(response.status_code) != "1"):    
             return 0
         else:
             return 1
