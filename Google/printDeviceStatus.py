@@ -155,7 +155,7 @@ log_path = parser.get('Google', 'log_path')
 mqtt_bridge_hostname = "mqtt.googleapis.com"
 mqtt_bridge_port = 8883
 jwt_expires_minutes=5
-listen_time=5
+listen_time=500
 
 
 connect.send_data_from_bound_device(
