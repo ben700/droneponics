@@ -58,7 +58,8 @@ def logDroneponicsCallback(client):
             elif(command == "updateReboot"):
                 unused_client.publish("/devices/{}/state".format(device_id), "{} : {}".format(device_id, "Update and reboot" ))
                 subprocess.call(['sh', '/home/pi/updateDroneponics.sh'])
-                os.system('sudo reboot')
+                print("os.system('sudo reboot')")
+               # os.system('sudo reboot')
             else: # update Device State
                 unused_client.publish("/devices/{}/state".format(device_id), "{} : {}".format(device_id, getDeviceStatePayload()))
                 
