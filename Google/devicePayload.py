@@ -38,6 +38,9 @@ class CalAction(Command):
 
     @classmethod
     def format_command(cls, arg) -> str:
+        print("arg = [" + str(arg) + "]")
+        print("cls = [" + str(cls) + "]")
+        print("cls.arguments = [" + str(cls.arguments) + "]")
         return f"{arg}"
     
 class Cal(Command):
