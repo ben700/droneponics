@@ -68,6 +68,9 @@ for device in list_i2c_devices():
     response = sensor.query(commands.LED, arguments="?")
     payloadSub.add("LED",ledStatus[response.data.decode("utf-8").split("L,")[1]])
     
+    response = sensor.query(commands.READ)
+    payloadSub.add("Reading",response.data)
+    
     payload.add(sensor.name, payloadSub.getSub())
     
 stateJson = json.loads(payload.getWithSub())
