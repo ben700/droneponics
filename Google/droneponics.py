@@ -5,6 +5,7 @@ import paho.mqtt.client as mqtt
 import re
 from devicePayload import  getDeviceStatePayload
 from droneponicsCallback import logDroneponicsCallback
+from droneponicsPostToGoogle import droneponicsSaveDeviceState
 import sys
 import os
 sys.path.append('/home/pi/droneponics')
@@ -31,23 +32,6 @@ mqtt_bridge_port = 8883
 jwt_expires_minutes=5
 listen_time=500
 
-def droneponicsSaveDeviceState():
-    connect.send_data_from_bound_device(
-        service_account_json,
-        project_id,
-        cloud_region,
-        registry_id,
-        device_id,
-        gateway_id,
-        num_messages,
-        rsa_private_path,
-        algorithm,
-        ca_certs,
-        mqtt_bridge_hostname,
-        mqtt_bridge_port,
-        jwt_expires_minutes,
-        getDeviceStatePayload(),
-    )
 
 droneponicsSaveDeviceState()
 
