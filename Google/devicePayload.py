@@ -235,7 +235,6 @@ def calibrationHelpPayload(sError):
           "deviceID": "17" \
        } \
     }}'
-   # payloadStr = payloadStr.replace(" ", "")
     stateJson = json.loads(payloadStr)
     serializedState= json.dumps(stateJson, sort_keys=False, indent=5)
     print(serializedState)
