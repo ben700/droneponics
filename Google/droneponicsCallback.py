@@ -64,7 +64,7 @@ def logDroneponicsCallback(client):
                 if(deviceCalibrationCommand(calDevice, calCommand): 
                     unused_client.publish("/devices/{}/state".format(device_id), "{} : {}".format(device_id, "Calbration of " + calDevice + " with command " + calCommand))  
                 else: 
-                    unused_client.publish("/devices/{}/state".format(device_id), "{} : {}".format(device_id, "Calbration not formated correctly: should be cal#device#command" ))  
+                    unused_client.publish("/devices/{}/state".format(device_id), "{} : {}".format(device_id, "Calbration not formated correctly: should be cal#device#command like cal#102#Cal,t" ))  
             
         elif(command == "updateReboot"):
             infot = unused_client.publish("/devices/{}/state".format(device_id), "{} : {}".format(device_id, "Update and reboot" ), qos=1)
