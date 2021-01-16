@@ -62,8 +62,7 @@ for device in list_i2c_devices():
     
 print(payload.getWithSub())
 
-
-
-##convert object to json
-serialized= json.dumps(myDictObj, sort_keys=True, indent=3)
-print(serialized)
+from io import StringIO
+io = StringIO()
+json.dump(['streaming API'], io)
+print(io.getvalue())
