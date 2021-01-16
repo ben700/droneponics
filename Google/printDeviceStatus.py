@@ -31,6 +31,7 @@ def list_i2c_devices():
   
 for device in list_i2c_devices():
     sensor = sensors.Sensor(deviceName[device], device)
+    sensor.connect()
     response = sensor.query(Cal)
     print("returned status_code = " + str(response.status_code))
     print(" data = " + str(response.data.decode("utf-8")))
