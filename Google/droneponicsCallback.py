@@ -61,7 +61,7 @@ def logDroneponicsCallback(client):
                                         cloud_region,
                                         registry_id,
                                         gateway_id,
-                                        private_key_file,
+                                        rsa_private_path,
                                         algorithm,
                                         ca_certs,
                                         mqtt_bridge_hostname,
