@@ -71,8 +71,11 @@ serialized= json.dumps(outputString, sort_keys=False, indent=3)
 stringer = {"Sensor Type": "Oxidation Reduction Potential","Calibration Points": "0","Status Code": "1"}
 serializeds= json.dumps(stringer, sort_keys=False, indent=3)
 
+full = { "ts": "1610770467", "deviceMAC": "dc:a6:32:8a:39:53","Temperature" {"Sensor Type": "Temperature","Calibration Points": "0","Status Code": "1"},"Dissolved Oxygen" {"Sensor Type": "Dissolved Oxygen","Calibration Points": "2","Status Code": "1"},"Oxidation Reduction Potential" {"Sensor Type": "Oxidation Reduction Potential","Calibration Points": "0","Status Code": "1"}}
+serializedfull= json.dumps(full, sort_keys=False, indent=3)
+
 print(outputString)
 print(io.getvalue())
 print(serialized)
 print(serializeds)
-
+print(serializedfull)
