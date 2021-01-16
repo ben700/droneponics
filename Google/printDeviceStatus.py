@@ -19,7 +19,11 @@ class Cal(Command):
 sensor = sensors.Sensor("Temperature", 102)
 sensor.connect()
 response = sensor.query(Cal)
-
+print(sensor.name + " returned status_code = " + str(response.status_code))
+print(sensor.name + " data = " + str(response.data.decode("utf-8")))
+    
+    
+    
 RTD = atlas_i2c.AtlasI2C(102)
 DO =  atlas_i2c.AtlasI2C(97)
 ORP = atlas_i2c.AtlasI2C(102)
@@ -28,7 +32,7 @@ device_list = [RTD,DO,ORP]
 
 
 for device in device_list:
-    response = dev.query("cal,?", processing_delay=1500)
+    response = device.query("cal,?", processing_delay=1500)
     print("returned status_code = " + str(response.status_code))
     print(" data = " + str(response.data.decode("utf-8")))
     
