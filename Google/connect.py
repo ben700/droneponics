@@ -365,7 +365,7 @@ def send_data_from_bound_device(
             minimum_backoff_time *= 2
             client.connect(mqtt_bridge_hostname, mqtt_bridge_port)
 
-        payload = "{}/{}-{}-payload-{}".format(registry_id, gateway_id, device_id, i)
+       # payload = "{}/{}-{}-payload-{}".format(registry_id, gateway_id, device_id, i)
 
         print(
             "Publishing message {}/{}: '{}' to {}".format(
