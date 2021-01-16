@@ -31,24 +31,25 @@ mqtt_bridge_port = 8883
 jwt_expires_minutes=5
 listen_time=500
 
+def droneponicsSaveDeviceState():
+    connect.send_data_from_bound_device(
+        service_account_json,
+        project_id,
+        cloud_region,
+        registry_id,
+        device_id,
+        gateway_id,
+        num_messages,
+        rsa_private_path,
+        algorithm,
+        ca_certs,
+        mqtt_bridge_hostname,
+        mqtt_bridge_port,
+        jwt_expires_minutes,
+        getDeviceStatePayload(),
+    )
 
-connect.send_data_from_bound_device(
-    service_account_json,
-    project_id,
-    cloud_region,
-    registry_id,
-    device_id,
-    gateway_id,
-    num_messages,
-    rsa_private_path,
-    algorithm,
-    ca_certs,
-    mqtt_bridge_hostname,
-    mqtt_bridge_port,
-    jwt_expires_minutes,
-    getDeviceStatePayload(),
-)
-
+droneponicsSaveDeviceState()
 
 def log_callback(client):
     print("@@@@@@@@@@@@@@@@@@@@@--client")
