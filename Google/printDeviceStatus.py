@@ -12,7 +12,7 @@ import json
 
 deviceName ={102: "Temperature", 97: "Dissolved Oxygen", 98: "Oxidation Reduction Potential", 99: "pH", 100:"Conductivity", 105:"Gaseous CO2", 111:"Humidity"}
 restartCodes={"P":"Powered Off","S":"Software Reset","B":"Brown Out","W":"Watchdog","U":"Unknown"}
-ledStatus={1:"On",0:"Off"}
+ledStatus={"1":"On","0":"Off"}
 
 parser = ConfigParser()
 parser.read("/home/pi/droneponics/config/configDoser/"+drone.gethostname()+".ini")
@@ -69,7 +69,7 @@ for device in list_i2c_devices():
     payloadSub.add("LED",ledStatus[response.data.decode("utf-8").split("L,")[1]])
     
     response = sensor.query(commands.READ)
-    payloadSub.add("Reading",response.data)
+    payloadSub.add("Reading",response.data.decode("utf-8"))
     
     payload.add(sensor.name, payloadSub.getSub())
     
