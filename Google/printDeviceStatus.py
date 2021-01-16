@@ -2,6 +2,22 @@ from atlas_i2c import sensors
 from atlas_i2c import commands
 from atlas_i2c import atlas_i2c
 
+class Cal(Command):
+    """Get info about a device."""
+
+    arguments: None = None
+    name: str = "cal,?"
+    processing_delay: int = 300
+
+    @classmethod
+    def format_command(cls) -> str:
+        return f"{cls.name}"
+    
+    
+    
+sensor = sensors.Sensor("Temperature", 102)
+sensor.connect()
+response = sensor.query(Cal)
 
 RTD = atlas_i2c.AtlasI2C(102)
 DO =  atlas_i2c.AtlasI2C(97)
