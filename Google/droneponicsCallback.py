@@ -35,7 +35,6 @@ mqtt_bridge_port = 8883
 
 def logDroneponicsCallback(client):
     myClient = client
-    print(myClient)
     def log_on_message(unused_client, unused_userdata, message):
         if not os.path.exists(log_path):
             with open(log_path, "w") as csvfile:
@@ -76,7 +75,7 @@ def logDroneponicsCallback(client):
                # client.disconnect()
                 print("droneponicsSaveDeviceState()")
                 myClient.publish("/devices/{}/state".format(device_id), "{} : {}".format(device_id, getDeviceStatePayload()))
-            elif(command == "state"):
+            elif(command == "s"):
                 print("droneponicsSaveDeviceState()")
                 unused_client.publish("/devices/{}/state".format(device_id), "{} : {}".format(device_id, getDeviceStatePayload()))
 
