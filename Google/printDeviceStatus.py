@@ -6,9 +6,21 @@ import sys
 import os
 sys.path.append('/home/pi/droneponics')
 import drone
+from configparser import ConfigParser
+import logging
 
 deviceName ={102: "Temperature", 97: "Dissolved Oxygen", 98: "Oxidation Reduction Potential", 99: "pH", 100:"Conductivity", 105:"Gaseous CO2", 111:"Humidity"}
 
+parser = ConfigParser()
+parser.read("/home/pi/droneponics/config/configDoser/"+drone.gethostname()+".ini")
+
+_log = logging.getLogger('BlynkLog')
+logFormatter = logging.Formatter("%(asctime)s [%(levelname)s]  %(message)s")
+consoleHandler = logging.StreamHandler()
+consoleHandler.setFormatter(logFormatter)
+_log.addHandler(consoleHandler)
+_log.setLevel(parser.get('logging', 'logLevel', fallback=logging.DEBUG))
+    
 class Cal(Command):
     """Get info about a device."""
 
@@ -32,7 +44,7 @@ def list_i2c_devices():
             pass
     return i2c_devices_attached
 
-payload = drone.dronePayload()
+payload = drone.dronePayload(_log)
   
 for device in list_i2c_devices():
     sensor = sensors.Sensor(deviceName[device], device)
