@@ -150,7 +150,7 @@ def deviceCalibrationCommand(sDevice, sCommand):
     response = sensor.query(Cal, sCommand)
     if(response.status_code is None or response.status_code != 1):
         return False
-    else
+    else:
         return True
         
     
