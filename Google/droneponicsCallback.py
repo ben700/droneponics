@@ -49,8 +49,8 @@ def logDroneponicsCallback(client):
             )
             
         if(message.topic ==  "/devices/{}/commands".format(device_id)):
-            print("message.topic ==  /devices/{}/commands".format(device_id))
             if(message.payload == "updateState"):
+                print("droneponicsSaveDeviceState()")
                 droneponicsSaveDeviceState()
             elif(message.payload == "update"):
                 os.system('sh /home/pi/updateDroneponics.sh')
