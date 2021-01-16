@@ -154,6 +154,6 @@ def deviceCalibrationCommand(sDevice, sCommand):
     if(response.status_code is None or response.status_code != 1):
         return False, "status_code"
     else:
-        return True
+        return True, "ok"
         
     
