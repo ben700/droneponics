@@ -62,7 +62,7 @@ def create_jwt():
       'aud': project_id
   }
 
-  with open(ssl_private_key_filepath, 'r') as f:
+  with open(rsa_private_path, 'r') as f:
     private_key = f.read()
 
   return jwt.encode(token, private_key, ssl_algorithm)
