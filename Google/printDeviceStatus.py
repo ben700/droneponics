@@ -35,6 +35,6 @@ for device in list_i2c_devices():
     response = sensor.query(Cal)
     print(sensor.name + " returned status_code = " + str(response.status_code))
     print(sensor.name + " data = " + str(response.data.decode("utf-8")))
-    print(sensor.name + " Calibration Points = " + str(response.data.decode("utf-8").split("?CAL,)[1]))
+    print(sensor.name + " Calibration Points = " + str(response.data.decode("utf-8").split("?CAL,")[1]))
     
     
