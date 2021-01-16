@@ -27,7 +27,8 @@ def list_i2c_devices():
         except IOError:
             pass
     return i2c_devices_attached
-    
+
+payload = drone.dronePayload()
   
 for device in list_i2c_devices():
     sensor = sensors.Sensor(deviceName[device], device)
@@ -36,5 +37,6 @@ for device in list_i2c_devices():
     print(sensor.name + " returned status_code = " + str(response.status_code))
     print(sensor.name + " data = " + str(response.data.decode("utf-8")))
     print(sensor.name + " Calibration Points = " + str(response.data.decode("utf-8").split("?CAL,")[1]))
+    payload.add(sensor.name, response.data.decode("utf-8").split("?CAL,")[1])
     
-    
+print(payload.get())
