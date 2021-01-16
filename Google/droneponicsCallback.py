@@ -30,6 +30,8 @@ rsa_private_path = parser.get('Google', 'rsa_private_path')
 algorithm = parser.get('Google', 'ssl_algorithm')
 ca_certs = parser.get('Google', 'root_cert_filepath')
 log_path = parser.get('Google', 'log_path')
+mqtt_bridge_hostname = "mqtt.googleapis.com"
+mqtt_bridge_port = 8883
 
 def logDroneponicsCallback(client):
     def log_on_message(unused_client, unused_userdata, message):
@@ -54,9 +56,28 @@ def logDroneponicsCallback(client):
                 connect.detach_device(client, device_id)
                 print("droneponicsSaveDeviceState()")
                 droneponicsSaveDeviceState()
-                connect.attach_device(client, device_id, "")
+                clientReconnect = get_client(
+                                        project_id,
+                                        cloud_region,
+                                        registry_id,
+                                        gateway_id,
+                                        private_key_file,
+                                        algorithm,
+                                        ca_certs,
+                                        mqtt_bridge_hostname,
+                                        mqtt_bridge_port,
+                                    )
+                connect.attach_device(clientReconnect, device_id, "")
                 print("Waiting for device to attach.")
 
+            elif(command == "state"):
+                client.disconnect()
+                print("droneponicsSaveDeviceState()")
+                droneponicsSaveDeviceState()
+                client.connect(args.mqtt_bridge_hostname, args.mqtt_bridge_port)
+
+                print("Waiting for device to attach.")
+                
             elif(command == "update"):
                 os.system('sh /home/pi/updateDroneponics.sh')
                 os.system('sudo reboot')
