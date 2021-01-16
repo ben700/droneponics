@@ -4,6 +4,7 @@ import jwt
 import paho.mqtt.client as mqtt
 import re
 from devicePayload import  getDeviceStatePayload
+from droneponics import droneponicsSaveDeviceState
 import sys
 import os
 sys.path.append('/home/pi/droneponics')
@@ -40,3 +41,9 @@ def logDroneponicsCallback(client):
     print("@@@@@@@@@@@@@@@@@@@@@-------retain")
     print(message.retain)
         
+    if(message.topic ==  "/devices/{}/commands/#".format(device_id)):
+        if(message.payload == "updateState"):
+            droneponicsSaveDeviceState()
+        elif(message.payload == "update"):
+            os.system('sh /home/pi/updateDroneponics.sh')
+            os.system('sudo reboot')
