@@ -12,7 +12,7 @@ device_list = [RTD,DO,ORP]
 
 for device in device_list:
     device.connect()
-    response = device.query(commands.Status)
+    response = device.query(commands.Status).decode("utf-8") 
     print(device.name + " returned status_code = " + str(response.status_code))
     print(device.name + " data = " + str(response.data))
     
