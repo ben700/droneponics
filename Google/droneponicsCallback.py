@@ -54,8 +54,9 @@ def logDroneponicsCallback(client):
         if(message.topic ==  "/devices/{}/commands".format(device_id)):
             command = message.payload.decode("utf-8") 
             if(command[0:3] == "cal"):
-                unused_client.publish("/devices/{}/state".format(device_id), "{} : {}".format(device_id, "Calbration" )))                
+                unused_client.publish("/devices/{}/state".format(device_id), "{} : {}".format(device_id, "Calbration" ))                
             elif(command == "updateDevice"):
+                unused_client.publish("/devices/{}/state".format(device_id), "{} : {}".format(device_id, "Update and reboot" ))
                 os.system('sh /home/pi/updateDroneponics.sh')
                 os.system('sudo reboot')
             else: # update Device State
