@@ -141,7 +141,7 @@ if __name__ == "__main__":
 
         client.on_message = log_on_message
 
-    cloudiot_mqtt_example.listen_for_messages(
+    mqtt.listen_for_messages(
         service_account_json,
         project_id,
         cloud_region,
@@ -163,7 +163,7 @@ if __name__ == "__main__":
     # [START iot_gateway_demo_publish]
     print("Publishing messages demo")
     print("Publishing: {} messages".format(num_messages))
-    cloudiot_mqtt_example.send_data_from_bound_device(
+    mqtt.send_data_from_bound_device(
         service_account_json,
         project_id,
         cloud_region,
