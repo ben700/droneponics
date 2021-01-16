@@ -177,64 +177,64 @@ def deviceCalibrationCommand(sDevice, sCommand):
         
     
 def calibrationHelpPayload(sError):
-    payloadStr = '{"Error":sError, "Calibration Commands":{  "Temperature": {
-          "deviceID": "102",
-          "Clear": "Cal,clear",
-          "Set to t": "Cal,t"
-       },
-       "Dissolved Oxygen": {
-          "deviceID": "97",
-          "Clear": "Cal,clear",
-          "Atmospheric": "Cal",
-          "Solution": "Cal,0",
+    payloadStr = '{"Error":sError, "Calibration Commands":{  "Temperature": { \
+          "deviceID": "102", \
+          "Clear": "Cal,clear", \
+          "Set to t": "Cal,t" \
+       }, \
+       "Dissolved Oxygen": { \
+          "deviceID": "97", \
+          "Clear": "Cal,clear", \
+          "Atmospheric": "Cal", \
+          "Solution": "Cal,0", \
           
-       },
-       "Oxidation Reduction Potential": {
-          "deviceID": "98",
-          "Clear": "Cal,clear",
-          "Set to n" : "Cal,n"
-       },
-       "Conductivity": {
-          "deviceID": "100",
-          "Clear": "Cal,clear",
-          "Atmospheric": "Cal,dry",
-          "Single Point": "Cal,n",
-          "Low": "Cal,low,n",
-          "High": "Cal,high,n",
-          "probe Type": "K,n"   
-       },
-       "pH": {
-          "deviceID": "99",
-          "Clear": "Cal,clear",
-          "Mid": "Cal,mid,7",
-          "Low": "Cal,low,4",
-          "High": "Cal,high,10",    
-       },
-       "Dose Pump": {
-          "deviceID": "103",
-       },
-       "Dose Pump 1": {
-          "deviceID": "11",
-       },
-       "Dose Pump 2": {
-          "deviceID": "12",
-       },
-       "Dose Pump 3": {
-          "deviceID": "13",
-       },
-       "Dose Pump 4": {
-          "deviceID": "14",
-       },
-       "Dose Pump 5": {
-          "deviceID": "15",
-       },
-       "Dose Pump 6": {
-          "deviceID": "16",
-       },
-       "Dose Pump 7": {
-          "deviceID": "17",
-       }
-    }}'
+       }, \
+       "Oxidation Reduction Potential": { \
+          "deviceID": "98", \
+          "Clear": "Cal,clear", \
+          "Set to n" : "Cal,n" \
+       }, \
+       "Conductivity": { \
+          "deviceID": "100", \
+          "Clear": "Cal,clear", \
+          "Atmospheric": "Cal,dry", \
+          "Single Point": "Cal,n", \
+          "Low": "Cal,low,n", \
+          "High": "Cal,high,n", \
+          "probe Type": "K,n"    \
+       }, \
+       "pH": { \
+          "deviceID": "99", \
+          "Clear": "Cal,clear", \
+          "Mid": "Cal,mid,7", \
+          "Low": "Cal,low,4", \
+          "High": "Cal,high,10", \    
+       }, \
+       "Dose Pump": { \
+          "deviceID": "103", \
+       }, \
+       "Dose Pump 1": { \
+          "deviceID": "11", \
+       }, \
+       "Dose Pump 2": { \
+          "deviceID": "12", \
+       }, \
+       "Dose Pump 3": { \
+          "deviceID": "13", \
+       }, \
+       "Dose Pump 4": { \
+          "deviceID": "14", \
+       }, \
+       "Dose Pump 5": { \
+          "deviceID": "15", \
+       }, \
+       "Dose Pump 6": { \
+          "deviceID": "16", \
+       }, \
+       "Dose Pump 7": { \
+          "deviceID": "17", \
+       } \
+    }}' 
     print(payloadStr)
     stateJson = json.loads(payloadStr)
     serializedState= json.dumps(stateJson, sort_keys=False, indent=3)
