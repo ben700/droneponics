@@ -98,7 +98,7 @@ def list_i2c_devices():
             pass
     return i2c_devices_attached
 
-def getDevcieStatePayload():
+def getDeviceStatePayload():
 
     payload = drone.dronePayload(_log)
   
