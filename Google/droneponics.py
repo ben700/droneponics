@@ -11,6 +11,8 @@ import os
 sys.path.append('/home/pi/droneponics')
 import drone
 from configparser import ConfigParser
+import connect
+
 
 parser = ConfigParser()
 parser.read("/home/pi/droneponics/config/Google/"+drone.gethostname()+".ini")
