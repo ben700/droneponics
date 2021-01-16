@@ -154,8 +154,8 @@ ca_certs = parser.get('Google', 'root_cert_filepath')
 log_path = parser.get('Google', 'log_path')
 mqtt_bridge_hostname = "mqtt.googleapis.com"
 mqtt_bridge_port = 8883
-jwt_expires_minutes = 20
-listen_time=30
+jwt_expires_minutes=5
+listen_time=5
 
 
 connect.send_data_from_bound_device(
