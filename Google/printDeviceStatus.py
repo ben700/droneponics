@@ -58,6 +58,17 @@ class TotalVolume(Command):
     def format_command(cls) -> str:
         return f"{cls.name}"
     
+class AbsoluteTotalVolume(Command):
+    """Get info about a device."""
+
+    arguments: None = None
+    name: str = "TV,?"
+    processing_delay: int = 300
+
+    @classmethod
+    def format_command(cls) -> str:
+        return f"{cls.name}"
+    
 class Parameters(Command):
     """Get info about a device."""
 
@@ -110,6 +121,8 @@ for device in list_i2c_devices():
         payloadSub.add("Pump Voltage",response.data.decode("utf-8").split("PV,")[1])
         response = sensor.query(TotalVolume)
         payloadSub.add("Total Volume",response.data.decode("utf-8").split("TV,")[1])
+        response = sensor.query(AbsoluteTotalVolume)
+        payloadSub.add("Absolute Total Volume",response.data.decode("utf-8").split("ATV,")[1])
         response = sensor.query(Parameters)
         payloadSub.add("Parameters",response.data.decode("utf-8").split("O,")[1])
     else:
