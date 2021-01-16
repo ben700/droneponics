@@ -258,6 +258,11 @@ def listen_for_messages(
     # The topic gateways receive error updates on. QoS must be 0.
     error_topic = "/devices/{}/errors".format(gateway_id)
     client.subscribe(error_topic, qos=0)
+    
+    # The topic devices receive command updates on.
+    device_command_topic = "/devices/{}/commands/#".format(device_id)
+    client.subscribe(device_command_topic, qos=1)
+    
 
     # Wait for about a minute for config messages.
     for i in range(1, duration):
