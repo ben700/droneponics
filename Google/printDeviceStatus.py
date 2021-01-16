@@ -47,12 +47,16 @@ def list_i2c_devices():
 payload = drone.dronePayload(_log)
   
 for device in list_i2c_devices():
+    payloadSub = drone.dronePayload(_log)
     sensor = sensors.Sensor(deviceName[device], device)
     sensor.connect()
     response = sensor.query(Cal)
     print(sensor.name + " returned status_code = " + str(response.status_code))
     print(sensor.name + " data = " + str(response.data.decode("utf-8")))
     print(sensor.name + " Calibration Points = " + str(response.data.decode("utf-8").split("?CAL,")[1]))
-    payload.add(sensor.name, response.data.decode("utf-8").split("?CAL,")[1])
+    payloadSub.add("Sensor Type",sensor.name)
+    payloadSub.add("Calibration Points", response.data.decode("utf-8").split("?CAL,")[1])
+    payloadSub.add("Status Code",response.status_code)    
+    payload.add(sensor.name, payloadSub.getSub())
     
 print(payload.get())
