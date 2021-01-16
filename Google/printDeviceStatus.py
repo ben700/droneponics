@@ -178,7 +178,7 @@ connect.send_data_from_bound_device(
 
 def log_callback(client):
     def log_on_message(unused_client, unused_userdata, message):
-        print(message.payload)
+        print(message.payload.decode("utf-8"))
         if not os.path.exists(log_path):
             with open(log_path, "w") as csvfile:
                 logwriter = csv.writer(csvfile, dialect="excel")
