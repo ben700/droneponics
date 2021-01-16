@@ -51,8 +51,12 @@ def logDroneponicsCallback(client):
         if(message.topic ==  "/devices/{}/commands".format(device_id)):
             command = message.payload.decode("utf-8") 
             if(command == "updateState"):
+                connect.detach_device(client, device_id)
                 print("droneponicsSaveDeviceState()")
                 droneponicsSaveDeviceState()
+                connect.attach_device(client, device_id, "")
+                print("Waiting for device to attach.")
+
             elif(command == "update"):
                 os.system('sh /home/pi/updateDroneponics.sh')
                 os.system('sudo reboot')
