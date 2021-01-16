@@ -77,9 +77,8 @@ def logDroneponicsCallback(client):
                 print("droneponicsSaveDeviceState()")
                 myClient.publish("/devices/{}/state".format(device_id), "{} : {}".format(device_id, getDeviceStatePayload()))
             elif(command == "state"):
-                global client
                 print("droneponicsSaveDeviceState()")
-                client.publish("/devices/{}/state".format(device_id), "{} : {}".format(device_id, getDeviceStatePayload()))
+                unused_client.publish("/devices/{}/state".format(device_id), "{} : {}".format(device_id, getDeviceStatePayload()))
 
                 #droneponicsSaveDeviceState()
                # client.connect(mqtt_bridge_hostname, mqtt_bridge_port)
