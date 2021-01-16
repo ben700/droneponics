@@ -22,6 +22,10 @@ import jwt
 import paho.mqtt.client as mqtt
 import re
 import devicePayload
+import sys
+import os
+sys.path.append('/home/pi/droneponics')
+import drone
 from configparser import ConfigParser
 
 parser = ConfigParser()
