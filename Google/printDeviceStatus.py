@@ -64,5 +64,5 @@ print(payload.getWithSub())
 
 from io import StringIO
 io = StringIO()
-json.dump(['streaming API'], io)
+json.dump(payloadSub.getSub(), io)
 print(io.getvalue())
