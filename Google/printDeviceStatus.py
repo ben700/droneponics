@@ -60,15 +60,9 @@ for device in list_i2c_devices():
     payloadSub.add("Status Code",response.status_code)    
     payload.add(sensor.name, payloadSub.getSub())
     
-output = payload.getWithSub()
-
-full = { "ts": "1610771426", "deviceMAC": "dc:a6:32:8a:39:53","Temperature":{"Sensor Type": "Temperature","Calibration Points": "0","Status Code": "1"},"Dissolved Oxygen":{"Sensor Type": "Dissolved Oxygen","Calibration Points": "2","Status Code": "1"},"Oxidation Reduction Potential":{"Sensor Type": "Oxidation Reduction Potential","Calibration Points": "0","Status Code": "1"}}
-serialized= json.dumps(full, sort_keys=False, indent=3)
-print(serialized)
-
-y = json.loads(output)
-serializedfull= json.dumps(y, sort_keys=False, indent=3)
-print(serializedfull)
+stateJson = json.loads(payload.getWithSub())
+serializedState= json.dumps(stateJson, sort_keys=False, indent=3)
+print(serializedState)
 
 
 
