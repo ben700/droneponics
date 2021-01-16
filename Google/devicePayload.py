@@ -237,7 +237,7 @@ def calibrationHelpPayload(sError):
     print(payloadStr)
     payloadStr = payloadStr.replace(" ", "")
     print(payloadStr)
-    #stateJson = json.loads(payloadStr)
+    stateJson = json.loads(payloadStr)
     serializedState= json.dumps(payloadStr, sort_keys=False, indent=3)
     print(serializedState)
     return serializedState
