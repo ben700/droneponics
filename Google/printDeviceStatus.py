@@ -1,6 +1,6 @@
 from atlas_i2c import sensors
 from atlas_i2c import commands
-from commands import Command
+from atlas_i2c.commands import Command
 from atlas_i2c import atlas_i2c
 
 class Cal(Command):
