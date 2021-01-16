@@ -28,6 +28,17 @@ consoleHandler.setFormatter(logFormatter)
 _log.addHandler(consoleHandler)
 _log.setLevel(parser.get('logging', 'logLevel', fallback=logging.DEBUG))
     
+class CalAction(Command):
+    """Get info about a device."""
+
+    arguments: Any
+    name: str = "cal,"
+    processing_delay: int = 300
+
+    @classmethod
+    def format_command(cls) -> str:
+        return f"{cls.name}"
+    
 class Cal(Command):
     """Get info about a device."""
 
@@ -143,18 +154,18 @@ def getDeviceStatePayload():
 
 def deviceCalibrationCommand(sDevice, sCommand):
     try:
-        device_name = deviceName[sDevice]
+        device_name = deviceName[int(sDevice)]
     except:
         return -1
     if(device_name is None):
         return -1
     try:
-        sensor = sensors.Sensor(device_name, sDevice)
+        sensor = sensors.Sensor(device_name, int(sDevice))
         sensor.connect()
     except:
         return -1
     try:        
-        response = sensor.query(Cal, sCommand)
+        response = sensor.query(CalAction, sCommand)
         if(response.status_code is None or response.status_code != 1):
             return 0
         else:
