@@ -8,6 +8,7 @@ sys.path.append('/home/pi/droneponics')
 import drone
 from configparser import ConfigParser
 import logging
+import json
 
 deviceName ={102: "Temperature", 97: "Dissolved Oxygen", 98: "Oxidation Reduction Potential", 99: "pH", 100:"Conductivity", 105:"Gaseous CO2", 111:"Humidity"}
 
@@ -60,3 +61,7 @@ for device in list_i2c_devices():
     payload.add(sensor.name, payloadSub.getSub())
     
 print(payload.getWithSub())
+
+
+serialized= json.dumps(payload.getWithSub(), sort_keys=True, indent=3)
+print(serialized)
