@@ -64,5 +64,9 @@ print(payload.getWithSub())
 
 from io import StringIO
 io = StringIO()
-json.dump(payloadSub.getSub(), io)
+outputString = payloadSub.getSub()
+json.dump(outputString, io)
+jsonoutputString = json.dump(outputString, sort_keys=False, indent=4)
+print(outputString)
 print(io.getvalue())
+print(jsonoutputString)
