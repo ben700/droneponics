@@ -47,19 +47,9 @@ def logDroneponicsCallback(client):
                     message.payload,
                 ]
             )
-
-        print("@@@@@@@@@@@@@@@@@@@@@------message")
-        print(message.payload)
-        print("@@@@@@@@@@@@@@@@@@@@@------message decode")
-        print(message.payload.decode("utf-8"))
-        print("@@@@@@@@@@@@@@@@@@@@@-------topic")
-        print(message.topic)
-        print("@@@@@@@@@@@@@@@@@@@@@-------qos")
-        print(message.qos)
-        print("@@@@@@@@@@@@@@@@@@@@@-------retain")
-        print(message.retain)
-        
-        if(message.topic ==  "/devices/{}/commands/#".format(device_id)):
+            
+        if(message.topic ==  "/devices/{}/commands".format(device_id)):
+            print("message.topic ==  /devices/{}/commands".format(device_id))
             if(message.payload == "updateState"):
                 droneponicsSaveDeviceState()
             elif(message.payload == "update"):
