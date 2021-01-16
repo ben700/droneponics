@@ -184,13 +184,12 @@ def calibrationHelpPayload(sError):
     serializedState= json.dumps(payloadStr, sort_keys=False, indent=5)
     print(serializedState)
     
-    payloadStr = '{  "Temperature": { \
-          "deviceID": "102", \
-          "Clear": "Cal,clear", \
-          "Set to t": "Cal,t" \
-       }}'
-
-    payloadStr = payloadStr.replace(" ", "")
+    payloadSub = drone.dronePayload(_log)
+    payloadSub.add("deviceID", 102)
+    payloadSub.add("Clear", "Cal,clear")
+    payloadSub.add("Set to t", "Cal,t")
+    
+    payloadStr = payloadSub.getSub()
     stateJson = json.loads(payloadStr)
     serializedState= json.dumps(payloadStr, sort_keys=False, indent=5)
     print(serializedState)
