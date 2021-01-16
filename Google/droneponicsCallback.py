@@ -58,6 +58,7 @@ def logDroneponicsCallback(client):
                 try:
                     calDevice = command.split("#")[1]
                     calCommand = command.split("#")[2]
+                    print("Calibrating device [" + str(calDevice) + "] with command [" + calCommand + "]")
                 except:
                    calDevice = None
                    calCommand = None
