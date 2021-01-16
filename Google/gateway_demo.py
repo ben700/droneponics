@@ -76,10 +76,10 @@ if __name__ == "__main__":
 
 
     # [START iot_gateway_demo_create_registry]
- #   print("Creating registry: {}".format(registry_id))
- #   manager.create_registry(
-  #      service_account_json, project_id, cloud_region, pubsub_topic, registry_id
-  #  )
+    print("Creating registry: {}".format(registry_id))
+    manager.create_registry(
+        service_account_json, project_id, cloud_region, pubsub_topic, registry_id
+    )
     # [END iot_gateway_demo_create_registry]
 
     # [START iot_gateway_demo_create_gateway]
