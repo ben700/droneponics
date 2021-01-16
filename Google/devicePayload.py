@@ -143,17 +143,23 @@ def getDeviceStatePayload():
 
 def deviceCalibrationCommand(sDevice, sCommand):
     try:
-        deviceIndex = list_i2c_devices()[sDevice]
+        device_name = deviceName[sDevice]
     except:
         return -1
-    if(deviceIndex is None):
+    if(device_name is None):
         return -1
-    sensor = sensors.Sensor(deviceName[deviceIndex], deviceIndex)
-    sensor.connect()
-    response = sensor.query(Cal, sCommand)
-    if(response.status_code is None or response.status_code != 1):
+    try:
+        sensor = sensors.Sensor(device_name, sDevice)
+        sensor.connect()
+    except:
+        return -1
+    try:        
+        response = sensor.query(Cal, sCommand)
+        if(response.status_code is None or response.status_code != 1):
+            return 0
+        else:
+            return 1
+    except:
         return 0
-    else:
-        return 1
         
     
