@@ -38,9 +38,7 @@ class CalAction(Command):
 
     @classmethod
     def format_command(cls, arg) -> str:
-        print("arg = [" + str(arg) + "]")
-        print("cls = [" + str(cls) + "]")
-        print("cls.arguments = [" + str(cls.arguments) + "]")
+        print("arg = [" + str(f"{arg}") + "]")
         return f"{arg}"
     
 class Cal(Command):
@@ -170,11 +168,12 @@ def deviceCalibrationCommand(sDevice, sCommand):
         return -1
     try:        
         response = sensor.query(CalAction, sCommand)
-        if(response.status_code is None or response.status_code != 1):
-            print("response.commands = " + str(response.commands))
-            print("response.address = " + str(response.address))
-            print("response.atlas_i2c.CommandResponse = " + str(response.atlas_i2c.CommandResponse))
-            
+        print("response.status_code = " + str(response.status_code))
+        print("response.commands = " + str(response.commands))
+        print("response.address = " + str(response.address))
+        print("response.atlas_i2c.CommandResponse = " + str(response.atlas_i2c.CommandResponse))
+        
+        if(response.status_code is None or response.status_code != 1):    
             return 0
         else:
             return 1
