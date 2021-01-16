@@ -39,6 +39,7 @@ device_id = parser.get('Google', 'device_id')
 gateway_id =parser.get('Google', 'gateway_id')
 num_messages = 1
 rsa_private_path = parser.get('Google', 'rsa_private_path')
+rsa_cert_path = parser.get('Google', 'rsa_cert_path')
 algorithm = parser.get('Google', 'ssl_algorithm')
 ca_certs = parser.get('Google', 'root_cert_filepath')
 log_path = parser.get('Google', 'log_path')
@@ -65,7 +66,7 @@ def create_jwt():
   with open(rsa_private_path, 'r') as f:
     private_key = f.read()
 
-  return jwt.encode(token, rsa_private_path, algorithm)
+  return jwt.encode(token, rsa_cert_path, algorithm)
 
 _CLIENT_ID = 'projects/{}/locations/{}/registries/{}/devices/{}'.format(project_id, cloud_region, registry_id, device_id)
 _MQTT_TELEMETRY_TOPIC = '/devices/{}/events'.format(device_id)
