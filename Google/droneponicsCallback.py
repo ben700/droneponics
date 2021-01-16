@@ -67,6 +67,8 @@ def logDroneponicsCallback(client):
                                         mqtt_bridge_port,
                                     )
                 print("Waiting for device to attach.")
+                device_command_topic = "/devices/{}/commands/#".format(device_id)
+                client.subscribe(device_command_topic, qos=1)
 
             elif(command == "state"):
                # client.disconnect()
