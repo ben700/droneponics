@@ -57,9 +57,9 @@ def logDroneponicsCallback(client):
             if(command[0:3] == "cal"):
                 unused_client.publish("/devices/{}/state".format(device_id), "{} : {}".format(device_id, "Calbration" ))                
             elif(command == "updateReboot"):
-                infot = unused_client.publish("/devices/{}/state".format(device_id), "{} : {}".format(device_id, "Update and reboot" ), qos=1)
+                infot = unused_client.publish("/devices/{}/state".format(device_id), "{} : {}".format(device_id, "Update and reboot" ), qos=1, retain=True)
                 #infot.wait_for_publish()
-                print(infot)
+                print("infot.rc" + str(infot.rc))
                 time.sleep(5)
                 subprocess.call(['sh', '/home/pi/updateDroneponics.sh'])
                 print("os.system('sudo reboot')")
