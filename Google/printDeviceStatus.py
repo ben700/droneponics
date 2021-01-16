@@ -37,8 +37,9 @@ import os
 sys.path.append('/home/pi/droneponics')
 from AtlasI2C import (AtlasI2C)
 
-deviceName ={102: "Temp", 97: "DO", 98: "ORP}
-devicesAttached = AtlasI2C.list_i2c_devices()
+deviceName ={102: "Temp", 97: "DO", 98: "ORP"}
+b =AtlasI2C()
+devicesAttached = b.list_i2c_devices()
              
 print("devicesAttached =" +str(devicesAttached))
 for device in devicesAttached:
