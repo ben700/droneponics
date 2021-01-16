@@ -32,14 +32,12 @@ _log.setLevel(parser.get('logging', 'logLevel', fallback=logging.DEBUG))
     
 class CalAction(Command):
     """Get info about a device."""
-
     arguments: Any
     name: str 
     processing_delay: int = 300
 
     @classmethod
     def format_command(cls, arg) -> str:
-        print("arg = [" + str(f"{arg}") + "]")
         return f"{arg}"
     
 class Cal(Command):
