@@ -145,15 +145,15 @@ def deviceCalibrationCommand(sDevice, sCommand):
     try:
         deviceIndex = list_i2c_devices()[sDevice]
     except:
-        return False
+        return -1
     if(deviceIndex is None):
-        return False, "deviceIndex"
+        return -1
     sensor = sensors.Sensor(deviceName[deviceIndex], deviceIndex)
     sensor.connect()
     response = sensor.query(Cal, sCommand)
     if(response.status_code is None or response.status_code != 1):
-        return False, "status_code"
+        return 0
     else:
-        return True, "ok"
+        return 1
         
     
