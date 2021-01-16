@@ -106,14 +106,12 @@ for device in list_i2c_devices():
     payloadSub.add("LED",ledStatus[response.data.decode("utf-8").split("L,")[1]])
     
     if (deviceType == "PMP"):
-        response = sensor.query(commands.PumpVoltage)
+        response = sensor.query(PumpVoltage)
         payloadSub.add("Pump Voltage",response.data.decode("utf-8").split("PV,")[1])
-        response = sensor.query(commands.TotalVolume)
+        response = sensor.query(TotalVolume)
         payloadSub.add("Total Volume",response.data.decode("utf-8").split("TV,")[1])
-        response = sensor.query(commands.Parameters)
+        response = sensor.query(Parameters)
         payloadSub.add("Parameters",response.data.decode("utf-8").split("O,")[1])
-        
-        
     else:
         response = sensor.query(commands.READ)
         payloadSub.add("Reading",response.data.decode("utf-8"))
