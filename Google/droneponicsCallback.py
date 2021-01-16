@@ -51,20 +51,21 @@ def logDroneponicsCallback(client):
                     message.payload,
                 ]
             )
-            
-        if(message.topic ==  "/devices/{}/commands".format(device_id)):
-            command = message.payload.decode("utf-8") 
-            if(command[0:3] == "cal"):
-                unused_client.publish("/devices/{}/state".format(device_id), "{} : {}".format(device_id, "Calbration" ))                
-            elif(command == "updateReboot"):
-                infot = unused_client.publish("/devices/{}/state".format(device_id), "{} : {}".format(device_id, "Update and reboot" ), qos=1)
-                print("error_string :" + mqtt.error_string(infot.rc))
-                subprocess.call(['sh', '/home/pi/updateDroneponics.sh'])
-                os.system('sudo reboot')
-            else: # update Device State
-                unused_client.publish("/devices/{}/state".format(device_id), "{} : {}".format(device_id, getDeviceStatePayload()))
+    client.on_message = log_on_message
+    
+    if(message.topic ==  "/devices/{}/commands".format(device_id)):
+        command = message.payload.decode("utf-8") 
+        if(command[0:3] == "cal"):
+            unused_client.publish("/devices/{}/state".format(device_id), "{} : {}".format(device_id, "Calbration" ))                
+        elif(command == "updateReboot"):
+            infot = unused_client.publish("/devices/{}/state".format(device_id), "{} : {}".format(device_id, "Update and reboot" ), qos=1)
+            print("error_string :" + mqtt.error_string(infot.rc))
+            subprocess.call(['sh', '/home/pi/updateDroneponics.sh'])
+            os.system('sudo reboot')
+        else: # update Device State
+            unused_client.publish("/devices/{}/state".format(device_id), "{} : {}".format(device_id, getDeviceStatePayload()))
                 
 
                 
                 
-    client.on_message = log_on_message
+    
