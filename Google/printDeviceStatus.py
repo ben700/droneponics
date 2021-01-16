@@ -16,7 +16,7 @@ restartCodes={"P":"Powered Off","S":"Software Reset","B":"Brown Out","W":"Watchd
 ledStatus={"1":"On","0":"Off"}
 
 parser = ConfigParser()
-parser.read("/home/pi/droneponics/config/configDoser/"+drone.gethostname()+".ini")
+parser.read("/home/pi/droneponics/config/Google/"+drone.gethostname()+".ini")
 
 _log = logging.getLogger('BlynkLog')
 logFormatter = logging.Formatter("%(asctime)s [%(levelname)s]  %(message)s")
