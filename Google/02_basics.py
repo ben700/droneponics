@@ -55,18 +55,42 @@ listen_time=500
 # end of user-variables
 
 cur_time = datetime.datetime.utcnow()
+def create_jwt(project_id, private_key_file, algorithm):
+    """Creates a JWT (https://jwt.io) to establish an MQTT connection.
+    Args:
+     project_id: The cloud project ID this device belongs to
+     private_key_file: A path to a file containing either an RSA256 or
+             ES256 private key.
+     algorithm: The encryption algorithm to use. Either 'RS256' or 'ES256'
+    Returns:
+        A JWT generated from the given project_id and private key, which
+        expires in 20 minutes. After 20 minutes, your client will be
+        disconnected, and a new JWT will have to be generated.
+    Raises:
+        ValueError: If the private_key_file does not contain a known key.
+    """
 
-def create_jwt():
-  token = {
-      'iat': cur_time,
-      'exp': cur_time + datetime.timedelta(minutes=60),
-      'aud': project_id
-  }
+    token = {
+        # The time that the token was issued at
+        "iat": datetime.datetime.utcnow(),
+        # The time the token expires.
+        "exp": datetime.datetime.utcnow() + datetime.timedelta(minutes=20),
+        # The audience field should always be set to the GCP project id.
+        "aud": project_id,
+    }
 
-  with open(rsa_private_path, 'r') as f:
-    private_key = f.read()
+    # Read the private key file.
+    with open(private_key_file, "r") as f:
+        private_key = f.read()
 
-  return jwt.encode(token, private_key, algorithm)
+    print(
+        "Creating JWT using {} from private key file {}".format(
+            algorithm, private_key_file
+        )
+    )
+
+    return jwt.encode(token, private_key, algorithm=algorithm)
+
 
 _CLIENT_ID = 'projects/{}/locations/{}/registries/{}/devices/{}'.format(project_id, cloud_region, registry_id, device_id)
 _MQTT_TELEMETRY_TOPIC = '/devices/{}/events'.format(device_id)
@@ -79,8 +103,10 @@ client = mqtt.Client(client_id=_CLIENT_ID)
 # authorization is handled purely with JWT, no user/pass, so username can be whatever
 client.username_pw_set(
     username='unused',
-    password=create_jwt())
+    password=create_jwt(project_id, private_key_file, algorithm))
 
+
+ 
 regExp = re.compile('1')
 
 def error_str(rc):
