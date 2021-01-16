@@ -235,6 +235,8 @@ def calibrationHelpPayload(sError):
           "deviceID": "17",
        }
     }}'
+    print(payloadStr)
     stateJson = json.loads(payloadStr)
     serializedState= json.dumps(stateJson, sort_keys=False, indent=3)
+    print(serializedState)
     return serializedState
