@@ -3,20 +3,17 @@ from atlas_i2c import commands
 from atlas_i2c import atlas_i2c
 
 
-RTD = sensors.Sensor("Temperature", 102)
-DO =  sensors.Sensor("dissolvedOxygen", 97)
-ORP =  sensors.Sensor("oxidationReductionPotential", 102)
+RTD = atlas_i2c.AtlasI2C(102)
+DO =  atlas_i2c.AtlasI2C(97)
+ORP = atlas_i2c.AtlasI2C(102)
 
 device_list = [RTD,DO,ORP]
 
 
 for device in device_list:
-    device.connect()
-    calCommand = commands.Command
-    calCommand.name = "cal,?"
-    response = device.query(calCommand) 
-    print(device.name + " returned status_code = " + str(response.status_code))
-    print(device.name + " data = " + str(response.data.decode("utf-8")))
+    response = dev.query("cal,?", processing_delay=1500)
+    print("returned status_code = " + str(response.status_code))
+    print(" data = " + str(response.data.decode("utf-8")))
     
     
 import sys
