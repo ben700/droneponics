@@ -134,4 +134,5 @@ for device in list_i2c_devices():
 stateJson = json.loads(payload.getWithSub())
 serializedState= json.dumps(stateJson, sort_keys=False, indent=3)
 print(serializedState)
+print("The length of the json is " + str(len(serializedState)))
 
