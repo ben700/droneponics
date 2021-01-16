@@ -138,14 +138,14 @@ print(serializedState)
 print("The length of the json is " + str(len(serializedState)))
 
 
-service_account_json =parser.get('Google', 'ssl_private_key_filepath')
+service_account_json =parser.get('Google', 'service_account_json')
 project_id =parser.get('Google', 'project_id')
 cloud_region = parser.get('Google','gcp_location')
 registry_id =parser.get('Google', 'registry_id')
 device_id = parser.get('Google', 'device_id')
 gateway_id =parser.get('Google', 'gateway_id')
 num_messages = 1
-private_key_file = parser.get('Google', 'ssl_private_key_filepath')
+rsa_private_path = parser.get('Google', 'rsa_private_path')
 algorithm = parser.get('Google', 'ssl_algorithm')
 ca_certs = parser.get('Google', 'root_cert_filepath')
 mqtt_bridge_hostname = "mqtt.googleapis.com"
@@ -161,7 +161,7 @@ connect.send_data_from_bound_device(
     device_id,
     gateway_id,
     num_messages,
-    private_key_file,
+    rsa_private_path,
     algorithm,
     ca_certs,
     mqtt_bridge_hostname,
