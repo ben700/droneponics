@@ -65,7 +65,7 @@ def create_jwt():
   with open(rsa_private_path, 'r') as f:
     private_key = f.read()
 
-  return jwt.encode(token, private_key, ssl_algorithm)
+  return jwt.encode(token, ca_certs, algorithm)
 
 _CLIENT_ID = 'projects/{}/locations/{}/registries/{}/devices/{}'.format(project_id, cloud_region, registry_id, device_id)
 _MQTT_TELEMETRY_TOPIC = '/devices/{}/events'.format(device_id)
