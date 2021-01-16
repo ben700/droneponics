@@ -38,8 +38,6 @@ listen_time=500
 droneponicsSaveDeviceState()
 
 def log_callback(client):
-    print("@@@@@@@@@@@@@@@@@@@@@--client")
-    print(client)
     logDroneponicsCallback(client)
     
 connect.listen_for_messages(
