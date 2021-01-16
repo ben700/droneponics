@@ -142,7 +142,10 @@ def getDeviceStatePayload():
     return serializedState
 
 def deviceCalibrationCommand(sDevice, sCommand):
-    deviceIndex = list_i2c_devices().index(sDevice)
+    try:
+        deviceIndex = list_i2c_devices()[sDevice]
+    except:
+        return False
     if(deviceIndex is None):
         return False
     sensor = sensors.Sensor(deviceName[deviceIndex], deviceIndex)
