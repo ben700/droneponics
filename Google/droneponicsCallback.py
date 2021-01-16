@@ -64,10 +64,14 @@ def logDroneponicsCallback(client):
                 if(calDevice is None or calCommand is None):
                     unused_client.publish("/devices/{}/state".format(device_id), "{} : {}".format(device_id, "Calbration not formated correctly: should be cal#device#command" ))  
                 else:
-                    if(deviceCalibrationCommand(calDevice, calCommand)): 
+                    success, reason = deviceCalibrationCommand(calDevice, calCommand)
+                    if(success == True): 
                         unused_client.publish("/devices/{}/state".format(device_id), "{} : {}".format(device_id, "Calbration of " + calDevice + " with command " + calCommand))  
-                    else: 
-                        unused_client.publish("/devices/{}/state".format(device_id), "{} : {}".format(device_id, "Calbration not formated correctly: should be cal#device#command like cal#102#Cal,t" ))          
+                    else:
+                        if(reason == "deviceIndex"):
+                            unused_client.publish("/devices/{}/state".format(device_id), "{} : {}".format(device_id, "Calbration Device Not Found: should be cal#device#command like cal#102#Cal,clear" ))          
+                        else:
+                            unused_client.publish("/devices/{}/state".format(device_id), "{} : {}".format(device_id, "Calbration Command Not Found: should be cal#device#command like cal#102#Cal,clear" ))          
             elif(command == "updateReboot"):
                 infot = unused_client.publish("/devices/{}/state".format(device_id), "{} : {}".format(device_id, "Update and reboot" ), qos=1)
                 print("error_string :" + mqtt.error_string(infot.rc))
