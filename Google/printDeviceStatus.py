@@ -14,8 +14,23 @@ class Cal(Command):
     def format_command(cls) -> str:
         return f"{cls.name}"
     
+ def list_i2c_devices():
+        i2c_devices = []
+        dev = atlas_i2c.AtlasI2C()
+        for i in range(0, 128):
+            try:
+                dev.set_i2c_address(i)
+                dev.read("R")
+                i2c_devices.append(i)
+            except IOError:
+                pass
+        return i2c_devices
     
-    
+  
+
+
+print(list_i2c_devices())
+
 sensor = sensors.Sensor("Temperature", 102)
 sensor.connect()
 response = sensor.query(Cal)
