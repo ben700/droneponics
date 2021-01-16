@@ -169,8 +169,8 @@ def deviceCalibrationCommand(sDevice, sCommand):
     try:        
         response = sensor.query(CalAction, sCommand)
         print("response.status_code = " + str(response.status_code))
-        print("response.commands = " + str(response))
-        print("response.address = " + str(response.address))
+        print("response.commands = " + str(response.original_cmd))
+        print("response.address = " + str(response.sensor_address))
         print("response.atlas_i2c.CommandResponse = " + str(response.atlas_i2c.CommandResponse))
         
         if(response.status_code is None or response.status_code != 1):    
