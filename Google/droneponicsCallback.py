@@ -53,37 +53,13 @@ def logDroneponicsCallback(client):
             
         if(message.topic ==  "/devices/{}/commands".format(device_id)):
             command = message.payload.decode("utf-8") 
-            if(command == "updateState"):
-                print("droneponicsSaveDeviceState()")
-                droneponicsSaveDeviceState()
-                client = connect.get_client(
-                                        project_id,
-                                        cloud_region,
-                                        registry_id,
-                                        gateway_id,
-                                        rsa_private_path,
-                                        algorithm,
-                                        ca_certs,
-                                        mqtt_bridge_hostname,
-                                        mqtt_bridge_port,
-                                    )
-                print("Waiting for device to attach.")
-                device_command_topic = "/devices/{}/command/#".format(device_id)
-                client.subscribe(device_command_topic, qos=1)
-
-            elif(command == "state"):
-               # client.disconnect()
-                print("state()")
-                unused_client.publish("/devices/{}/state".format(device_id), "{} : {}".format(device_id, getDeviceStatePayload()))
-            elif(command == "s"):
-                print("s()")
-                unused_client.publish("/devices/{}/state".format(device_id), "{} : {}".format(device_id, base64.b64encode(str.encode(getDeviceStatePayload()))))                
-            elif(command[0:3] == "cal"):
-                print("cal" + str(command))
-                payload = '{event : "Calbration"}'
-                unused_client.publish("/devices/{}/event".format(device_id),  "{} : {}".format(device_id, payload))                
-            elif(command == "update"):
+            if(command[0:3] == "cal"):
+                unused_client.publish("/devices/{}/state".format(device_id), "{} : {}".format(device_id, "Calbration" )))                
+            elif(command == "updateDevice"):
                 os.system('sh /home/pi/updateDroneponics.sh')
                 os.system('sudo reboot')
+            else: # update Device State
+                unused_client.publish("/devices/{}/state".format(device_id), "{} : {}".format(device_id, getDeviceStatePayload()))
+                
 
     client.on_message = log_on_message
