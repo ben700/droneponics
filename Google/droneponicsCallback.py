@@ -56,7 +56,16 @@ def logDroneponicsCallback(client):
     if(message.topic ==  "/devices/{}/commands".format(device_id)):
         command = message.payload.decode("utf-8") 
         if(command[0:3] == "cal"):
-            unused_client.publish("/devices/{}/state".format(device_id), "{} : {}".format(device_id, "Calbration" ))                
+            calDevice = command.split("#")[1]
+            calCommand = command.split("#")[2]
+            if(calDevice is None or calCommand is None):
+                unused_client.publish("/devices/{}/state".format(device_id), "{} : {}".format(device_id, "Calbration not formated correctly: should be cal#device#command" ))  
+            else:
+                if(deviceCalibrationCommand(calDevice, calCommand): 
+                    unused_client.publish("/devices/{}/state".format(device_id), "{} : {}".format(device_id, "Calbration of " + calDevice + " with command " + calCommand))  
+                else: 
+                    unused_client.publish("/devices/{}/state".format(device_id), "{} : {}".format(device_id, "Calbration not formated correctly: should be cal#device#command" ))  
+            
         elif(command == "updateReboot"):
             infot = unused_client.publish("/devices/{}/state".format(device_id), "{} : {}".format(device_id, "Update and reboot" ), qos=1)
             print("error_string :" + mqtt.error_string(infot.rc))
