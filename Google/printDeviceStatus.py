@@ -9,6 +9,7 @@ import drone
 from configparser import ConfigParser
 import logging
 import json
+import connect
 
 deviceName ={102: "Temperature", 97: "Dissolved Oxygen", 98: "Oxidation Reduction Potential", 99: "pH", 100:"Conductivity", 105:"Gaseous CO2", 111:"Humidity", 103:"Dose Pump", 11:"Dose Pump 1", 12:"Dose Pump 2", 13:"Dose Pump 3", 14:"Dose Pump 4", 15:"Dose Pump 5", 16:"Dose Pump 6", 17:"Dose Pump 7"}
 restartCodes={"P":"Powered Off","S":"Software Reset","B":"Brown Out","W":"Watchdog","U":"Unknown"}
@@ -135,4 +136,22 @@ stateJson = json.loads(payload.getWithSub())
 serializedState= json.dumps(stateJson, sort_keys=False, indent=3)
 print(serializedState)
 print("The length of the json is " + str(len(serializedState)))
+
+
+connect.send_data_from_bound_device(
+    parser.get('Google', 'ssl_private_key_filepath'),
+    parser.get('Google', 'project_id'),
+    parser.get('Google','gcp_location'),
+    parser.get('Google', 'registry_id'),
+    parser.get('Google', 'device_id'),
+    parser.get('Google', 'gateway_id'),
+    1,
+    parser.get('Google', 'ssl_private_key_filepath'),
+    parser.get('Google', 'ssl_algorithm'),
+    parser.get('Google', 'root_cert_filepath'),
+    "mqtt.googleapis.com",
+    8883,
+    20,
+    serializedState,
+)
 
