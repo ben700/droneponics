@@ -51,7 +51,7 @@ class TotalVolume(Command):
     """Get info about a device."""
 
     arguments: None = None
-    name: str = "PV,?"
+    name: str = "TV,?"
     processing_delay: int = 300
 
     @classmethod
