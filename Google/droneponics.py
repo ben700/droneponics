@@ -4,7 +4,7 @@ import jwt
 import paho.mqtt.client as mqtt
 import re
 from devicePayload import  getDeviceStatePayload
-from logCallback import logDroneponicsCallback
+from droneponicsCallback import logDroneponicsCallback
 import sys
 import os
 sys.path.append('/home/pi/droneponics')
