@@ -5,6 +5,7 @@ import paho.mqtt.client as mqtt
 import re
 from devicePayload import  getDeviceStatePayload
 from droneponicsPostToGoogle import droneponicsSaveDeviceState
+import subprocess
 import sys
 import os
 sys.path.append('/home/pi/droneponics')
