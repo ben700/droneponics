@@ -14,6 +14,7 @@ import json
 import connect
 import csv
 
+import base64
 
 
 parser = ConfigParser()
@@ -77,7 +78,7 @@ def logDroneponicsCallback(client):
                 myClient.publish("/devices/{}/state".format(device_id), "{} : {}".format(device_id, getDeviceStatePayload()))
             elif(command == "s"):
                 print("droneponicsSaveDeviceState()")
-                unused_client.publish("/devices/{}/state".format(device_id), "{} : {}".format(device_id, getDeviceStatePayload()))
+                unused_client.publish("/devices/{}/state".format(device_id), "{} : {}".format(device_id, base64.b64encode(getDeviceStatePayload())))
 
                 #droneponicsSaveDeviceState()
                # client.connect(mqtt_bridge_hostname, mqtt_bridge_port)
