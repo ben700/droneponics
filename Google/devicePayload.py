@@ -2,6 +2,7 @@ from atlas_i2c import sensors
 from atlas_i2c import commands
 from atlas_i2c.commands import Command
 from atlas_i2c import atlas_i2c
+from typing import Any
 import sys
 import os
 sys.path.append('/home/pi/droneponics')
@@ -32,12 +33,12 @@ class CalAction(Command):
     """Get info about a device."""
 
     arguments: Any
-    name: str = "cal,"
+    name: str 
     processing_delay: int = 300
 
     @classmethod
-    def format_command(cls) -> str:
-        return f"{cls.name}"
+    def format_command(cls, arg) -> str:
+        return f"{arg}"
     
 class Cal(Command):
     """Get info about a device."""
