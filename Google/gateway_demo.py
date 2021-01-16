@@ -21,8 +21,7 @@ import sys
 import time
 from configparser import ConfigParser
 
-sys.path.append('/home/pi/python-docs-samples/iot/api-client/manager/')
-import cloudiot_mqtt_example  # noqa
+import mqtt  # noqa
 import manager  # noqa
 sys.path.append('/home/pi/droneponics/')
 import drone 
