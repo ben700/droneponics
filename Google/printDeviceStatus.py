@@ -12,7 +12,9 @@ device_list = [RTD,DO,ORP]
 
 for device in device_list:
     device.connect()
-    response = device.query(f"cal,?") 
+    calCommand = commands.Command
+    calCommand.name = "cal,?"
+    response = device.query(calCommand) 
     print(device.name + " returned status_code = " + str(response.status_code))
     print(device.name + " data = " + str(response.data.decode("utf-8")))
     
