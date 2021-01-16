@@ -68,6 +68,11 @@ outputString = payloadSub.getSub()
 json.dump(outputString, io)
 serialized= json.dumps(outputString, sort_keys=False, indent=3)
 
+stringer = {"Sensor Type": "Oxidation Reduction Potential","Calibration Points": "0","Status Code": "1"}
+serializeds= json.dumps(stringer, sort_keys=False, indent=3)
+
 print(outputString)
 print(io.getvalue())
 print(serialized)
+print(serializeds)
+
