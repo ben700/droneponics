@@ -51,30 +51,29 @@ def logDroneponicsCallback(client):
                     message.payload,
                 ]
             )
-    client.on_message = log_on_message
     
-    if(client.message.topic ==  "/devices/{}/commands".format(device_id)):
-        command = client.message.payload.decode("utf-8") 
-        if(command[0:3] == "cal"):
-            calDevice = command.split("#")[1]
-            calCommand = command.split("#")[2]
-            if(calDevice is None or calCommand is None):
-                unused_client.publish("/devices/{}/state".format(device_id), "{} : {}".format(device_id, "Calbration not formated correctly: should be cal#device#command" ))  
-            else:
-                if(deviceCalibrationCommand(calDevice, calCommand)): 
-                    unused_client.publish("/devices/{}/state".format(device_id), "{} : {}".format(device_id, "Calbration of " + calDevice + " with command " + calCommand))  
-                else: 
-                    unused_client.publish("/devices/{}/state".format(device_id), "{} : {}".format(device_id, "Calbration not formated correctly: should be cal#device#command like cal#102#Cal,t" ))  
-            
-        elif(command == "updateReboot"):
-            infot = unused_client.publish("/devices/{}/state".format(device_id), "{} : {}".format(device_id, "Update and reboot" ), qos=1)
-            print("error_string :" + mqtt.error_string(infot.rc))
-            subprocess.call(['sh', '/home/pi/updateDroneponics.sh'])
-            os.system('sudo reboot')
-        else: # update Device State
-            unused_client.publish("/devices/{}/state".format(device_id), "{} : {}".format(device_id, getDeviceStatePayload()))
+        if(client.message.topic ==  "/devices/{}/commands".format(device_id)):
+            command = client.message.payload.decode("utf-8") 
+            if(command[0:3] == "cal"):
+                calDevice = command.split("#")[1]
+                calCommand = command.split("#")[2]
+                if(calDevice is None or calCommand is None):
+                    unused_client.publish("/devices/{}/state".format(device_id), "{} : {}".format(device_id, "Calbration not formated correctly: should be cal#device#command" ))  
+                else:
+                    if(deviceCalibrationCommand(calDevice, calCommand)): 
+                        unused_client.publish("/devices/{}/state".format(device_id), "{} : {}".format(device_id, "Calbration of " + calDevice + " with command " + calCommand))  
+                    else: 
+                        unused_client.publish("/devices/{}/state".format(device_id), "{} : {}".format(device_id, "Calbration not formated correctly: should be cal#device#command like cal#102#Cal,t" ))          
+            elif(command == "updateReboot"):
+                infot = unused_client.publish("/devices/{}/state".format(device_id), "{} : {}".format(device_id, "Update and reboot" ), qos=1)
+                print("error_string :" + mqtt.error_string(infot.rc))
+                subprocess.call(['sh', '/home/pi/updateDroneponics.sh'])
+                os.system('sudo reboot')
+            else: # update Device State
+                unused_client.publish("/devices/{}/state".format(device_id), "{} : {}".format(device_id, getDeviceStatePayload()))
                 
 
+    client.on_message = log_on_message
                 
                 
     
