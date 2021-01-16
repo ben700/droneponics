@@ -11,6 +11,7 @@ import logging
 import json
 
 deviceName ={102: "Temperature", 97: "Dissolved Oxygen", 98: "Oxidation Reduction Potential", 99: "pH", 100:"Conductivity", 105:"Gaseous CO2", 111:"Humidity"}
+restartCodes={"P":"Powered Off","S":"Software Reset","B":"Brown Out","W":"Watchdog","U":"Unknown"}
 
 parser = ConfigParser()
 parser.read("/home/pi/droneponics/config/configDoser/"+drone.gethostname()+".ini")
@@ -51,19 +52,22 @@ for device in list_i2c_devices():
     payloadSub = drone.dronePayload(_log)
     sensor = sensors.Sensor(deviceName[device], device)
     sensor.connect()
+    
+    response = sensor.query(commands.INFO)
+    payloadSub.add("Device",response.data.decode("utf-8").split(",")[1])
+    payloadSub.add("Firmware",response.data.decode("utf-8").split(",")[2])
+    
     response = sensor.query(Cal)
-    payloadSub.add("Sensor Type",sensor.name)
     payloadSub.add("Calibration Points", response.data.decode("utf-8").split("?CAL,")[1])
-    payloadSub.add("Status Code",response.status_code)    
+    payloadSub.add("Status Code",response.status_code)
+    
+    response = sensor.query(commands.STATUS)
+    payloadSub.add("Reason for restart",restartCodes[response.data.decode("utf-8").split(",")[1]])
+    payloadSub.add("VoltageatVcc",response.data.decode("utf-8").split(",")[2])
+        
     payload.add(sensor.name, payloadSub.getSub())
     
 stateJson = json.loads(payload.getWithSub())
 serializedState= json.dumps(stateJson, sort_keys=False, indent=3)
 print(serializedState)
 
-
-response = sensor.query(commands.INFO)
-print(response)
-
-response = sensor.query(commands.STATUS)
-print(response)
