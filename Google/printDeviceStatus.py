@@ -59,4 +59,4 @@ for device in list_i2c_devices():
     payloadSub.add("Status Code",response.status_code)    
     payload.add(sensor.name, payloadSub.getSub())
     
-print(payload.get())
+print(payload.getWithSub())
