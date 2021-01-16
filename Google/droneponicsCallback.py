@@ -3,7 +3,7 @@ import time
 import jwt
 import paho.mqtt.client as mqtt
 import re
-from devicePayload import  getDeviceStatePayload
+from devicePayload import  getDeviceStatePayload, deviceCalibrationCommand
 from droneponicsPostToGoogle import droneponicsSaveDeviceState
 import subprocess
 import sys
