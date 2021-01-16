@@ -22,7 +22,7 @@ def list_i2c_devices():
     dev = atlas_i2c.AtlasI2C()
     for device in deviceName:
         try:
-            dev.set_i2c_address(device[1])
+            dev.set_i2c_address(device[0])
             dev.read("R")
             i2c_devices_attached.append(device)
         except IOError:
