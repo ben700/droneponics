@@ -207,7 +207,7 @@ def calibrationHelpPayload(sError):
           "Clear": "Cal,clear", \
           "Mid": "Cal,mid,7", \
           "Low": "Cal,low,4", \
-          "High": "Cal,high,10", \    
+          "High": "Cal,high,10", \
        }, \
        "Dose Pump": { \
           "deviceID": "103", \
@@ -233,7 +233,7 @@ def calibrationHelpPayload(sError):
        "Dose Pump 7": { \
           "deviceID": "17", \
        } \
-    }}' 
+    }}'
     print(payloadStr)
     stateJson = json.loads(payloadStr)
     serializedState= json.dumps(stateJson, sort_keys=False, indent=3)
