@@ -74,7 +74,7 @@ def logDroneponicsCallback(client):
                 client.disconnect()
                 print("droneponicsSaveDeviceState()")
                 droneponicsSaveDeviceState()
-                client.connect(args.mqtt_bridge_hostname, args.mqtt_bridge_port)
+                client.connect(mqtt_bridge_hostname, mqtt_bridge_port)
 
                 print("Waiting for device to attach.")
                 
