@@ -35,7 +35,6 @@ mqtt_bridge_hostname = "mqtt.googleapis.com"
 mqtt_bridge_port = 8883
 
 def logDroneponicsCallback(client):
-    myClient = client
     def log_on_message(unused_client, unused_userdata, message):
         if not os.path.exists(log_path):
             with open(log_path, "w") as csvfile:
@@ -74,20 +73,13 @@ def logDroneponicsCallback(client):
 
             elif(command == "state"):
                # client.disconnect()
-                print("droneponicsSaveDeviceState()")
-                myClient.publish("/devices/{}/state".format(device_id), "{} : {}".format(device_id, getDeviceStatePayload()))
+                print("state()")
+                 unused_client.publish("/devices/{}/state".format(device_id), "{} : {}".format(device_id, getDeviceStatePayload()))
             elif(command == "s"):
-                print("droneponicsSaveDeviceState()")
-                unused_client.publish("/devices/{}/state".format(device_id), "{} : {}".format(device_id, base64.b64encode(getDeviceStatePayload())))
-
-                #droneponicsSaveDeviceState()
-               # client.connect(mqtt_bridge_hostname, mqtt_bridge_port)
-
-               # device_command_topic = "/devices/{}/commands/#".format(device_id)
-               # client.subscribe(device_command_topic, qos=1)
-    
-               # print("Waiting for device to attach.")
-                
+                print("s()")
+                unused_client.publish("/devices/{}/state".format(device_id), "{} : {}".format(device_id, base64.b64encode(str.encode(getDeviceStatePayload()))))                
+            elif(command == "Cal"):
+                print("s()")
             elif(command == "update"):
                 os.system('sh /home/pi/updateDroneponics.sh')
                 os.system('sudo reboot')
