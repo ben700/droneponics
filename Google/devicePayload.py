@@ -186,7 +186,7 @@ def calibrationHelpPayload(sError):
           "deviceID": "97", \
           "Clear": "Cal,clear", \
           "Atmospheric": "Cal", \
-          "Solution": "Cal,0", \ 
+          "Solution": "Cal,0", \
        }, \
        "Oxidation Reduction Potential": { \
           "deviceID": "98", \
