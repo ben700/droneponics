@@ -10,6 +10,7 @@ from configparser import ConfigParser
 import logging
 import json
 import connect
+import csv
 
 deviceName ={102: "Temperature", 97: "Dissolved Oxygen", 98: "Oxidation Reduction Potential", 99: "pH", 100:"Conductivity", 105:"Gaseous CO2", 111:"Humidity", 103:"Dose Pump", 11:"Dose Pump 1", 12:"Dose Pump 2", 13:"Dose Pump 3", 14:"Dose Pump 4", 15:"Dose Pump 5", 16:"Dose Pump 6", 17:"Dose Pump 7"}
 restartCodes={"P":"Powered Off","S":"Software Reset","B":"Brown Out","W":"Watchdog","U":"Unknown"}
