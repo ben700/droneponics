@@ -40,7 +40,7 @@ droneponicsSaveDeviceState()
 def log_callback(client):
     print("@@@@@@@@@@@@@@@@@@@@@--client")
     print(client)
-    logDroneponicsCallback(clinet)
+    logDroneponicsCallback(client)
     
 connect.listen_for_messages(
     service_account_json,
