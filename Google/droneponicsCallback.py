@@ -52,8 +52,8 @@ def logDroneponicsCallback(client):
                 ]
             )
     
-        if(client.message.topic ==  "/devices/{}/commands".format(device_id)):
-            command = client.message.payload.decode("utf-8") 
+        if(message.topic ==  "/devices/{}/commands".format(device_id)):
+            command = message.payload.decode("utf-8") 
             if(command[0:3] == "cal"):
                 calDevice = command.split("#")[1]
                 calCommand = command.split("#")[2]
