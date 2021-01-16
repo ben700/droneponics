@@ -3,7 +3,7 @@ import time
 import jwt
 import paho.mqtt.client as mqtt
 import re
-from devicePayload import  getDeviceStatePayload, deviceCalibrationCommand
+from devicePayload import  getDeviceStatePayload, deviceCalibrationCommand, calibrationHelpPayload
 from droneponicsPostToGoogle import droneponicsSaveDeviceState
 import subprocess
 import sys
@@ -62,16 +62,16 @@ def logDroneponicsCallback(client):
                    calDevice = None
                    calCommand = None
                 if(calDevice is None or calCommand is None):
-                    unused_client.publish("/devices/{}/state".format(device_id), "{} : {}".format(device_id, "Calibration not formated correctly: should be cal#device#command" ))  
+                    unused_client.publish("/devices/{}/state".format(device_id), "{} : {}".format(device_id, calibrationHelpPayload("Calibration not formated correctly: should be cal#device#command" )))  
                 else:
                     success = deviceCalibrationCommand(calDevice, calCommand)
                     if(success == 1): 
                         unused_client.publish("/devices/{}/state".format(device_id), "{} : {}".format(device_id, "Success :- Calibrated of " + str(calDevice) + " with command " + calCommand))  
                     else:
                         if(success == -1):
-                            unused_client.publish("/devices/{}/state".format(device_id), "{} : {}".format(device_id, "Calibration Device "+ str(calDevice) +" Not Found: should be command like cal#102#Cal,clear" ))          
+                            unused_client.publish("/devices/{}/state".format(device_id), "{} : {}".format(device_id, calibrationHelpPayload("Calibration Device "+ str(calDevice) +" Not Found" )))          
                         else:
-                            unused_client.publish("/devices/{}/state".format(device_id), "{} : {}".format(device_id, "Calibration Command "+ str(calCommand) +" Not Found: should be command like cal#102#Cal,clear" ))          
+                            unused_client.publish("/devices/{}/state".format(device_id), "{} : {}".format(device_id, calibrationHelpPayload("Calibration Command "+ str(calCommand) +" Not Found" )))          
             elif(command == "updateReboot"):
                 infot = unused_client.publish("/devices/{}/state".format(device_id), "{} : {}".format(device_id, "Update and reboot" ), qos=1)
                 time.sleep(10)
