@@ -35,6 +35,42 @@ class Cal(Command):
     def format_command(cls) -> str:
         return f"{cls.name}"
     
+    
+class PumpVoltage(Command):
+    """Get info about a device."""
+
+    arguments: None = None
+    name: str = "PV,?"
+    processing_delay: int = 300
+
+    @classmethod
+    def format_command(cls) -> str:
+        return f"{cls.name}"
+    
+class TotalVolume(Command):
+    """Get info about a device."""
+
+    arguments: None = None
+    name: str = "PV,?"
+    processing_delay: int = 300
+
+    @classmethod
+    def format_command(cls) -> str:
+        return f"{cls.name}"
+    
+class Parameters(Command):
+    """Get info about a device."""
+
+    arguments: None = None
+    name: str = "O,?"
+    processing_delay: int = 300
+
+    @classmethod
+    def format_command(cls) -> str:
+        return f"{cls.name}"
+    
+    
+    
 def list_i2c_devices():
     i2c_devices_attached = []
     dev = atlas_i2c.AtlasI2C()
@@ -55,7 +91,8 @@ for device in list_i2c_devices():
     sensor.connect()
     
     response = sensor.query(commands.INFO)
-    payloadSub.add("Device",response.data.decode("utf-8").split(",")[1])
+    deviceType=response.data.decode("utf-8").split(",")[1]
+    payloadSub.add("Device",deviceType)
     payloadSub.add("Firmware",response.data.decode("utf-8").split(",")[2])
     
     response = sensor.query(Cal)
@@ -68,8 +105,18 @@ for device in list_i2c_devices():
     response = sensor.query(commands.LED, arguments="?")
     payloadSub.add("LED",ledStatus[response.data.decode("utf-8").split("L,")[1]])
     
-    response = sensor.query(commands.READ)
-    payloadSub.add("Reading",response.data.decode("utf-8"))
+    if (deviceType == "PMP"):
+        response = sensor.query(commands.PumpVoltage)
+        payloadSub.add("Pump Voltage",response.data.decode("utf-8").split("PV,")[1])
+        response = sensor.query(commands.TotalVolume)
+        payloadSub.add("Total Volume",response.data.decode("utf-8").split("TV,")[1])
+        response = sensor.query(commands.Parameters)
+        payloadSub.add("Parameters",response.data.decode("utf-8").split("O,")[1])
+        
+        
+    else:
+        response = sensor.query(commands.READ)
+        payloadSub.add("Reading",response.data.decode("utf-8"))
     
     payload.add(sensor.name, payloadSub.getSub())
     
