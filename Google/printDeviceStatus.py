@@ -3,6 +3,9 @@ from atlas_i2c import commands
 from atlas_i2c.commands import Command
 from atlas_i2c import atlas_i2c
 
+deviceName ={102: "Temp", 97: "DO", 98: "ORP"}
+
+
 class Cal(Command):
     """Get info about a device."""
 
@@ -14,17 +17,17 @@ class Cal(Command):
     def format_command(cls) -> str:
         return f"{cls.name}"
     
- def list_i2c_devices():
-        i2c_devices = []
-        dev = atlas_i2c.AtlasI2C()
-        for i in range(0, 128):
-            try:
-                dev.set_i2c_address(i)
-                dev.read("R")
-                i2c_devices.append(i)
-            except IOError:
-                pass
-        return i2c_devices
+def list_i2c_devices():
+    i2c_devices_attached = []
+    dev = atlas_i2c.AtlasI2C()
+    for device in deviceName:
+        try:
+            dev.set_i2c_address(device[1])
+            dev.read("R")
+            i2c_devices_attached.append(device)
+        except IOError:
+            pass
+    return i2c_devices_attached
     
   
 
@@ -57,7 +60,6 @@ import os
 sys.path.append('/home/pi/droneponics')
 from AtlasI2C import (AtlasI2C)
 
-deviceName ={102: "Temp", 97: "DO", 98: "ORP"}
 b =AtlasI2C()
 devicesAttached = b.list_i2c_devices()
              
