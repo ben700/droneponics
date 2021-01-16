@@ -1,6 +1,10 @@
 from devicePayload import  getDeviceStatePayload
 import connect
 from configparser import ConfigParser
+import sys
+import os
+sys.path.append('/home/pi/droneponics')
+import drone
 
 parser = ConfigParser()
 parser.read("/home/pi/droneponics/config/Google/"+drone.gethostname()+".ini")
