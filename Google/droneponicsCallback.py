@@ -58,24 +58,23 @@ def logDroneponicsCallback(client):
                 try:
                     calDevice = command.split("#")[1]
                     calCommand = command.split("#")[2]
-                    print("Calibrating device [" + str(calDevice) + "] with command [" + calCommand + "]")
                 except:
                    calDevice = None
                    calCommand = None
                 if(calDevice is None or calCommand is None):
-                    unused_client.publish("/devices/{}/state".format(device_id), "{} : {}".format(device_id, "Calbration not formated correctly: should be cal#device#command" ))  
+                    unused_client.publish("/devices/{}/state".format(device_id), "{} : {}".format(device_id, "Calibration not formated correctly: should be cal#device#command" ))  
                 else:
                     success = deviceCalibrationCommand(calDevice, calCommand)
                     if(success == 1): 
-                        unused_client.publish("/devices/{}/state".format(device_id), "{} : {}".format(device_id, "Calbration of " + str(calDevice) + " with command " + calCommand))  
+                        unused_client.publish("/devices/{}/state".format(device_id), "{} : {}".format(device_id, "Success :- Calibrated of " + str(calDevice) + " with command " + calCommand))  
                     else:
                         if(success == -1):
-                            unused_client.publish("/devices/{}/state".format(device_id), "{} : {}".format(device_id, "Calbration Device "+ str(calDevice) +" Not Found: should be command like cal#102#Cal,clear" ))          
+                            unused_client.publish("/devices/{}/state".format(device_id), "{} : {}".format(device_id, "Calibration Device "+ str(calDevice) +" Not Found: should be command like cal#102#Cal,clear" ))          
                         else:
-                            unused_client.publish("/devices/{}/state".format(device_id), "{} : {}".format(device_id, "Calbration Command "+ str(calCommand) +" Not Found: should be command like cal#102#Cal,clear" ))          
+                            unused_client.publish("/devices/{}/state".format(device_id), "{} : {}".format(device_id, "Calibration Command "+ str(calCommand) +" Not Found: should be command like cal#102#Cal,clear" ))          
             elif(command == "updateReboot"):
                 infot = unused_client.publish("/devices/{}/state".format(device_id), "{} : {}".format(device_id, "Update and reboot" ), qos=1)
-                print("error_string :" + mqtt.error_string(infot.rc))
+                time.sleep(10)
                 subprocess.call(['sh', '/home/pi/updateDroneponics.sh'])
                 os.system('sudo reboot')
             else: # update Device State
