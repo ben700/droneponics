@@ -103,7 +103,7 @@ client = mqtt.Client(client_id=_CLIENT_ID)
 # authorization is handled purely with JWT, no user/pass, so username can be whatever
 client.username_pw_set(
     username='unused',
-    password=create_jwt(project_id, private_key_file, algorithm))
+    password=create_jwt(project_id, rsa_private_path, algorithm))
 
 
  
