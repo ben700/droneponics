@@ -147,12 +147,12 @@ def deviceCalibrationCommand(sDevice, sCommand):
     except:
         return False
     if(deviceIndex is None):
-        return False
+        return False, "deviceIndex"
     sensor = sensors.Sensor(deviceName[deviceIndex], deviceIndex)
     sensor.connect()
     response = sensor.query(Cal, sCommand)
     if(response.status_code is None or response.status_code != 1):
-        return False
+        return False, "status_code"
     else:
         return True
         
