@@ -191,7 +191,7 @@ def calibrationHelpPayload(sError):
     
     payloadStr = payloadSub.getSub()
     stateJson = json.loads(payloadStr)
-    serializedState= json.dumps(payloadStr, sort_keys=False, indent=5)
+    serializedState= json.dumps(stateJson, sort_keys=False, indent=5)
     print(serializedState)
     
     payloadStr = '{"Error":"' + sError + '", "Calibration Commands":{  "Temperature": { \
@@ -253,6 +253,6 @@ def calibrationHelpPayload(sError):
     }}'
     payloadStr = payloadStr.replace(" ", "")
     stateJson = json.loads(payloadStr)
-    serializedState= json.dumps(payloadStr, sort_keys=False, indent=5)
+    serializedState= json.dumps(stateJson, sort_keys=False, indent=5)
     print(serializedState)
     return serializedState
