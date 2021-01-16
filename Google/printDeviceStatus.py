@@ -66,7 +66,8 @@ from io import StringIO
 io = StringIO()
 outputString = payloadSub.getSub()
 json.dump(outputString, io)
-jsonoutputString = json.dump(outputString, sort_keys=False, indent=4)
+serialized= json.dumps(outputString, sort_keys=False, indent=3)
+
 print(outputString)
 print(io.getvalue())
-print(jsonoutputString)
+print(serialized)
