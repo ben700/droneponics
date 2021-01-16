@@ -140,3 +140,17 @@ def getDeviceStatePayload():
     stateJson = json.loads(payload.getWithSub())
     serializedState= json.dumps(stateJson, sort_keys=False, indent=3)
     return serializedState
+
+def deviceCalibrationCommand(sDevice, sCommand):
+    deviceIndex = list_i2c_devices().index(sDevice)
+    if(deviceIndex is None):
+        return False
+    sensor = sensors.Sensor(deviceName[deviceIndex], deviceIndex)
+    sensor.connect()
+    response = sensor.query(Cal, sCommand)
+    if(response.status_code is None or response.status_code != 1):
+        return False
+    else
+        return True
+        
+    
