@@ -204,7 +204,7 @@ class dronePayloadItem:
      if (self.value is None):
          return ""
      else:
-         return '"{}" {},'.format(self.key, self.value)
+         return '"{}":{},'.format(self.key, self.value)
       
       
 class dronePayload:
