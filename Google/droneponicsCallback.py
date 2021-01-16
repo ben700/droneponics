@@ -64,11 +64,11 @@ def logDroneponicsCallback(client):
                 if(calDevice is None or calCommand is None):
                     unused_client.publish("/devices/{}/state".format(device_id), "{} : {}".format(device_id, "Calbration not formated correctly: should be cal#device#command" ))  
                 else:
-                    success, reason = deviceCalibrationCommand(calDevice, calCommand)
-                    if(success == True): 
+                    success = deviceCalibrationCommand(calDevice, calCommand)
+                    if(success == 1): 
                         unused_client.publish("/devices/{}/state".format(device_id), "{} : {}".format(device_id, "Calbration of " + calDevice + " with command " + calCommand))  
                     else:
-                        if(reason == "deviceIndex"):
+                        if(success == -1):
                             unused_client.publish("/devices/{}/state".format(device_id), "{} : {}".format(device_id, "Calbration Device Not Found: should be cal#device#command like cal#102#Cal,clear" ))          
                         else:
                             unused_client.publish("/devices/{}/state".format(device_id), "{} : {}".format(device_id, "Calbration Command Not Found: should be cal#device#command like cal#102#Cal,clear" ))          
