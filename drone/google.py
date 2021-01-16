@@ -200,6 +200,12 @@ class dronePayloadItem:
      else:
          return '"{}": "{}",'.format(self.key, self.value)
       
+   def getSub(self):
+     if (self.value is None):
+         return ""
+     else:
+         return '"{}": {},'.format(self.key, self.value)
+      
       
 class dronePayload:
    def __init__(self, _log, *args, **kwargs):
@@ -220,7 +226,7 @@ class dronePayload:
    def getSub(self):
      payloadString = '{'
      for pItem in self.objects:
-          payloadString = payloadString + pItem.get()
+          payloadString = payloadString + pItem.getSub()
 
      payloadString =  payloadString[:-1] + '}'
      return payloadString
