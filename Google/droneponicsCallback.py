@@ -34,6 +34,8 @@ mqtt_bridge_hostname = "mqtt.googleapis.com"
 mqtt_bridge_port = 8883
 
 def logDroneponicsCallback(client):
+    myClient = client
+    print(myClient)
     def log_on_message(unused_client, unused_userdata, message):
         if not os.path.exists(log_path):
             with open(log_path, "w") as csvfile:
@@ -67,13 +69,17 @@ def logDroneponicsCallback(client):
                                         mqtt_bridge_port,
                                     )
                 print("Waiting for device to attach.")
-                device_command_topic = "/devices/{}/commands/#".format(device_id)
+                device_command_topic = "/devices/{}/command/#".format(device_id)
                 client.subscribe(device_command_topic, qos=1)
 
             elif(command == "state"):
                # client.disconnect()
                 print("droneponicsSaveDeviceState()")
-                client.publish(device_command_topic, "{} : {}".format(device_id, getDeviceStatePayload()))
+                myClient.publish("/devices/{}/state".format(device_id), "{} : {}".format(device_id, getDeviceStatePayload()))
+            elif(command == "state"):
+                global client
+                print("droneponicsSaveDeviceState()")
+                client.publish("/devices/{}/state".format(device_id), "{} : {}".format(device_id, getDeviceStatePayload()))
 
                 #droneponicsSaveDeviceState()
                # client.connect(mqtt_bridge_hostname, mqtt_bridge_port)
