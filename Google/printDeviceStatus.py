@@ -2,6 +2,10 @@ from atlas_i2c import sensors
 from atlas_i2c import commands
 from atlas_i2c.commands import Command
 from atlas_i2c import atlas_i2c
+import sys
+import os
+sys.path.append('/home/pi/droneponics')
+import drone
 
 deviceName ={102: "Temperature", 97: "Dissolved Oxygen", 98: "Oxidation Reduction Potential", 99: "pH", 100:"Conductivity", 105:"Gaseous CO2", 111:"Humidity"}
 
