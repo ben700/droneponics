@@ -50,13 +50,7 @@ listen_time=500
 # Define some project-based variables to be used below. This should be the only
 # block of variables that you need to edit in order to run this script
 
-ssl_private_key_filepath = '/home/pi/.ssh/droneponics_private.pem'
-ssl_algorithm = 'RS256' # Either RS256 or ES256
-root_cert_filepath = '/home/pi/.ssh/roots.pem'
-project_id = 'droneponics-301222'
-gcp_location = 'europe-west1'
-registry_id = 'droneOxy'
-device_id = 'droneOxy'
+
 # end of user-variables
 
 cur_time = datetime.datetime.utcnow()
