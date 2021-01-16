@@ -177,23 +177,7 @@ def deviceCalibrationCommand(sDevice, sCommand):
         
     
 def calibrationHelpPayload(sError):
-    payloadStr = '{"Error":"' + sError + '", "Calibration Commands":"test"}'
 
-    payloadStr = payloadStr.replace(" ", "")
-    stateJson = json.loads(payloadStr)
-    serializedState= json.dumps(payloadStr, sort_keys=False, indent=5)
-    print(serializedState)
-    
-    payloadSub = drone.dronePayload(_log)
-    payloadSub.add("deviceID", 102)
-    payloadSub.add("Clear", "Cal,clear")
-    payloadSub.add("Set to t", "Cal,t")
-    
-    payloadStr = payloadSub.getSub()
-    stateJson = json.loads(payloadStr)
-    serializedState= json.dumps(stateJson, sort_keys=False, indent=5)
-    print(serializedState)
-    
     payloadStr = '{"Error":"' + sError + '", "Calibration Commands":{  "Temperature": { \
           "deviceID": "102", \
           "Clear": "Cal,clear", \
@@ -251,7 +235,7 @@ def calibrationHelpPayload(sError):
           "deviceID": "17" \
        } \
     }}'
-    payloadStr = payloadStr.replace(" ", "")
+   # payloadStr = payloadStr.replace(" ", "")
     stateJson = json.loads(payloadStr)
     serializedState= json.dumps(stateJson, sort_keys=False, indent=5)
     print(serializedState)
