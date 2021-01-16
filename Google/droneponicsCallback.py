@@ -49,10 +49,11 @@ def logDroneponicsCallback(client):
             )
             
         if(message.topic ==  "/devices/{}/commands".format(device_id)):
-            if(message.payload == "updateState"):
+            command = message.payload.decode("utf-8") 
+            if(command == "updateState"):
                 print("droneponicsSaveDeviceState()")
                 droneponicsSaveDeviceState()
-            elif(message.payload == "update"):
+            elif(command == "update"):
                 os.system('sh /home/pi/updateDroneponics.sh')
                 os.system('sudo reboot')
 
