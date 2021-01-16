@@ -21,6 +21,7 @@ import time
 import jwt
 import paho.mqtt.client as mqtt
 import re
+import devicePayload
 
 
 # Define some project-based variables to be used below. This should be the only
@@ -53,6 +54,8 @@ _CLIENT_ID = 'projects/{}/locations/{}/registries/{}/devices/{}'.format(project_
 _MQTT_TELEMETRY_TOPIC = '/devices/{}/events'.format(device_id)
 _MQTT_CONFIG_TOPIC = '/devices/{}/config'.format(device_id)
 _MQTT_COMMANDS_TOPIC = '/devices/{}/commands/#'.format(device_id)
+_MQTT_STATE_TOPIC = '/devices/{}/state'.format(device_id)
+
 
 client = mqtt.Client(client_id=_CLIENT_ID)
 # authorization is handled purely with JWT, no user/pass, so username can be whatever
@@ -61,7 +64,6 @@ client.username_pw_set(
     password=create_jwt())
 
 regExp = re.compile('1')
-sense = SenseHat()
 
 def error_str(rc):
     return '{}: {}'.format(rc, mqtt.error_string(rc))
@@ -90,41 +92,16 @@ def truncate(f, n):
     i, p, d = s.partition('.')
     return '.'.join([i, (d+'0'*n)[:n]])
 
-rC = [255,0,0]
-oC = [255,69,0]
-yC = [255,255,0]
-gC = [0,255,0]
-bC = [0,0,255]
-pC = [128,0,128]
-wC = [255,255,255]
-blC = [0,0,0]
 
 # Method which handles parsing the text message coming back from the Cloud
 # This is where you could add your own messages to play with different
 # actions based on messages coming back from the Cloud
 def respondToMsg(msg):
-    if msg == "red":
-        sense.clear(255,0,0)
-    elif msg == "green":
-        sense.clear(0,255,0)
-    elif msg == "blue":
-        sense.clear(0,0,255)
-    elif msg == "rainbow":
-        rainbow = [
-        rC, rC, oC, yC, gC, bC, pC, pC,
-        rC, rC, oC, yC, gC, bC, pC, pC,
-        rC, rC, oC, yC, gC, bC, pC, pC,
-        rC, rC, oC, yC, gC, bC, pC, pC,
-        rC, rC, oC, yC, gC, bC, pC, pC,
-        rC, rC, oC, yC, gC, bC, pC, pC,
-        rC, rC, oC, yC, gC, bC, pC, pC,
-        rC, rC, oC, yC, gC, bC, pC, pC
-        ]
-        sense.set_pixels(rainbow)
-    elif msg == "temp":
-        sense.show_message(truncate((sense.get_temperature() * (9/5)) + 32, 1))
+    if msg == "state":
+        client.publish(_MQTT_STATE_TOPIC, getDeviceStatePayload(), qos=1)
     else:
-        sense.clear()
+        client.publish(_MQTT_TELEMETRY_TOPIC, {"event":"respondToMsg"}, qos=1)
+
 
 def on_message(unused_client, unused_userdata, message):
     payload = str(message.payload)
@@ -141,38 +118,15 @@ client.subscribe(_MQTT_CONFIG_TOPIC, qos=1)
 client.subscribe(_MQTT_COMMANDS_TOPIC, qos=1)
 client.loop_start()
 
-# Could set this granularity to whatever we want based on device, monitoring needs, etc
-temperature = 0
-humidity = 0
-pressure = 0
 
 # Send 5 seconds worth of data back up to IoT Core
-for i in range(1, 6):
-#  cur_temp = sense.get_temperature()
-#  cur_pressure = sense.get_pressure()
-#  cur_humidity = sense.get_humidity()
+payload = getDeviceStatePayload()
+# Uncomment following line when ready to publish to IoT Core
+client.publish(_MQTT_STATE_TOPIC, payload, qos=1)
 
-#  if cur_temp == temperature and cur_humidity == humidity and cur_pressure == pressure:
-#    time.sleep(1)
-#    continue
+print("{}\n".format(payload))
 
-temperature = 25
-humidity = 50
-pressure = 1001
-
-
-  temperature = cur_temp
-  pressure = cur_pressure
-  humidity = cur_humidity
-
-  payload = '{{ "ts": {}, "temperature": {}, "pressure": {}, "humidity": {} }}'.format(int(time.time()), temperature, pressure, humidity)
-
-  # Uncomment following line when ready to publish to IoT Core
-  #client.publish(_MQTT_TELEMETRY_TOPIC, payload, qos=1)
-
-  print("{}\n".format(payload))
-
-  time.sleep(1)
+time.sleep(1)
 
 # This is sleeping for an arbitrarily long time because it has to be connected
 # in order to receive the command/config messages. Well, the config messages would
