@@ -186,7 +186,7 @@ def calibrationHelpPayload(sError):
           "deviceID": "97", \
           "Clear": "Cal,clear", \
           "Atmospheric": "Cal", \
-          "Solution": "Cal,0", \
+          "Solution": "Cal,0" \
        }, \
        "Oxidation Reduction Potential": { \
           "deviceID": "98", \
@@ -207,31 +207,31 @@ def calibrationHelpPayload(sError):
           "Clear": "Cal,clear", \
           "Mid": "Cal,mid,7", \
           "Low": "Cal,low,4", \
-          "High": "Cal,high,10", \
+          "High": "Cal,high,10" \
        }, \
        "Dose Pump": { \
-          "deviceID": "103", \
+          "deviceID": "103" \
        }, \
        "Dose Pump 1": { \
-          "deviceID": "11", \
+          "deviceID": "11" \
        }, \
        "Dose Pump 2": { \
-          "deviceID": "12", \
+          "deviceID": "12" \
        }, \
        "Dose Pump 3": { \
-          "deviceID": "13", \
+          "deviceID": "13" \
        }, \
        "Dose Pump 4": { \
-          "deviceID": "14", \
+          "deviceID": "14" \
        }, \
        "Dose Pump 5": { \
-          "deviceID": "15", \
+          "deviceID": "15" \
        }, \
        "Dose Pump 6": { \
-          "deviceID": "16", \
+          "deviceID": "16" \
        }, \
        "Dose Pump 7": { \
-          "deviceID": "17", \
+          "deviceID": "17" \
        } \
     }}'
     payloadStr = payloadStr.replace(" ", "")
