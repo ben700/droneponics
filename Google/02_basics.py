@@ -67,7 +67,7 @@ def create_jwt():
 
   return jwt.encode(token, private_key, ssl_algorithm)
 
-_CLIENT_ID = 'projects/{}/locations/{}/registries/{}/devices/{}'.format(project_id, gcp_location, registry_id, device_id)
+_CLIENT_ID = 'projects/{}/locations/{}/registries/{}/devices/{}'.format(project_id, cloud_region, registry_id, device_id)
 _MQTT_TELEMETRY_TOPIC = '/devices/{}/events'.format(device_id)
 _MQTT_CONFIG_TOPIC = '/devices/{}/config'.format(device_id)
 _MQTT_COMMANDS_TOPIC = '/devices/{}/commands/#'.format(device_id)
