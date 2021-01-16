@@ -20,7 +20,7 @@ class Cal(Command):
 def list_i2c_devices():
     i2c_devices_attached = []
     dev = atlas_i2c.AtlasI2C()
-    for device in deviceName:
+    for device in deviceName.keys():
         try:
             dev.set_i2c_address(device[0])
             dev.read("R")
