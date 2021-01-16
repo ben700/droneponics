@@ -80,6 +80,8 @@ def logDroneponicsCallback(client):
                 unused_client.publish("/devices/{}/state".format(device_id), "{} : {}".format(device_id, base64.b64encode(str.encode(getDeviceStatePayload()))))                
             elif(command[0:3] == "cal"):
                 print("cal" + str(command))
+                payload = '{event : "Calbration"}'
+                unused_client.publish("/devices/{}/event".format(device_id),  "{} : {}".format(device_id, payload))                
             elif(command == "update"):
                 os.system('sh /home/pi/updateDroneponics.sh')
                 os.system('sudo reboot')
