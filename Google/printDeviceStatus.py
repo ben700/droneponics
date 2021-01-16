@@ -148,6 +148,7 @@ num_messages = 1
 rsa_private_path = parser.get('Google', 'rsa_private_path')
 algorithm = parser.get('Google', 'ssl_algorithm')
 ca_certs = parser.get('Google', 'root_cert_filepath')
+log_path = parser.get('Google', 'log_path')
 mqtt_bridge_hostname = "mqtt.googleapis.com"
 mqtt_bridge_port = 8883
 jwt_expires_minutes = 20
