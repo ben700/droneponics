@@ -177,7 +177,7 @@ def deviceCalibrationCommand(sDevice, sCommand):
         
     
 def calibrationHelpPayload(sError):
-    payloadStr = '{"Error":"' + sError + '", "Calibration Commands":{  "Temperature": { \
+    payloadStr = '{{"Error":"' + sError + '", "Calibration Commands":{  "Temperature": { \
           "deviceID": "102", \
           "Clear": "Cal,clear", \
           "Set to t": "Cal,t" \
@@ -233,7 +233,7 @@ def calibrationHelpPayload(sError):
        "Dose Pump 7": { \
           "deviceID": "17" \
        } \
-    }}'
+    }}}'
     payloadStr = payloadStr.replace(" ", "")
     stateJson = json.loads(payloadStr)
     serializedState= json.dumps(payloadStr, sort_keys=False, indent=5)
