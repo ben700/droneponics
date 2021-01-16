@@ -56,7 +56,7 @@ def logDroneponicsCallback(client):
                 connect.detach_device(client, device_id)
                 print("droneponicsSaveDeviceState()")
                 droneponicsSaveDeviceState()
-                clientReconnect = get_client(
+                clientReconnect = connect.get_client(
                                         project_id,
                                         cloud_region,
                                         registry_id,
