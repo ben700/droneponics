@@ -31,22 +31,22 @@ def logDroneponicsCallback(client):
                 ]
             )
 
-    client.on_message = log_on_message
-
-    print("@@@@@@@@@@@@@@@@@@@@@------message")
-    print(message.payload)
-    print("@@@@@@@@@@@@@@@@@@@@@------message decode")
-    print(message.payload.decode("utf-8"))
-    print("@@@@@@@@@@@@@@@@@@@@@-------topic")
-    print(message.topic)
-    print("@@@@@@@@@@@@@@@@@@@@@-------qos")
-    print(message.qos)
-    print("@@@@@@@@@@@@@@@@@@@@@-------retain")
-    print(message.retain)
+        print("@@@@@@@@@@@@@@@@@@@@@------message")
+        print(message.payload)
+        print("@@@@@@@@@@@@@@@@@@@@@------message decode")
+        print(message.payload.decode("utf-8"))
+        print("@@@@@@@@@@@@@@@@@@@@@-------topic")
+        print(message.topic)
+        print("@@@@@@@@@@@@@@@@@@@@@-------qos")
+        print(message.qos)
+        print("@@@@@@@@@@@@@@@@@@@@@-------retain")
+        print(message.retain)
         
-    if(message.topic ==  "/devices/{}/commands/#".format(device_id)):
-        if(message.payload == "updateState"):
-            droneponicsSaveDeviceState()
-        elif(message.payload == "update"):
-            os.system('sh /home/pi/updateDroneponics.sh')
-            os.system('sudo reboot')
+        if(message.topic ==  "/devices/{}/commands/#".format(device_id)):
+            if(message.payload == "updateState"):
+                droneponicsSaveDeviceState()
+            elif(message.payload == "update"):
+                os.system('sh /home/pi/updateDroneponics.sh')
+                os.system('sudo reboot')
+
+    client.on_message = log_on_message
