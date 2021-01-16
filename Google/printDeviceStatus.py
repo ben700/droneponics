@@ -205,7 +205,7 @@ connect.listen_for_messages(
     ca_certs,
     mqtt_bridge_hostname,
     mqtt_bridge_port,
-    jwt_exp_time,
+    jwt_expires_minutes,
     listen_time,
     log_callback,
 )
