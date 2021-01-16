@@ -74,7 +74,7 @@ def logDroneponicsCallback(client):
             elif(command == "state"):
                # client.disconnect()
                 print("state()")
-                 unused_client.publish("/devices/{}/state".format(device_id), "{} : {}".format(device_id, getDeviceStatePayload()))
+                unused_client.publish("/devices/{}/state".format(device_id), "{} : {}".format(device_id, getDeviceStatePayload()))
             elif(command == "s"):
                 print("s()")
                 unused_client.publish("/devices/{}/state".format(device_id), "{} : {}".format(device_id, base64.b64encode(str.encode(getDeviceStatePayload()))))                
