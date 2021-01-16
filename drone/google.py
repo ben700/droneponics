@@ -226,7 +226,16 @@ class dronePayload:
    def getSub(self):
      payloadString = '{'
      for pItem in self.objects:
+          payloadString = payloadString + pItem.get()
+
+     payloadString =  payloadString[:-1] + '}'
+     return payloadString
+    
+   def getWithSub(self):
+     payloadString = '{{ "ts": "{}", "deviceMAC": "{}",'.format(int(time.time()), drone.get_mac())
+     for pItem in self.objects:
           payloadString = payloadString + pItem.getSub()
 
      payloadString =  payloadString[:-1] + '}'
      return payloadString
+    
