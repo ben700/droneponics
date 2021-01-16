@@ -16,4 +16,10 @@ for device in device_list:
     print(device.name + " returned status_code = " + str(response.status_code))
     print(device.name + " data = " + str(response.data.decode("utf-8")))
     
+    
+import sys
+import os
+sys.path.append('/home/pi/droneponics')
+from AtlasI2C import (AtlasI2C)
+print(AtlasI2C.list_i2c_devices())
 
