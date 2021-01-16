@@ -66,12 +66,12 @@ def logDroneponicsCallback(client):
                 else:
                     success = deviceCalibrationCommand(calDevice, calCommand)
                     if(success == 1): 
-                        unused_client.publish("/devices/{}/state".format(device_id), "{} : {}".format(device_id, "Calbration of " + calDevice + " with command " + calCommand))  
+                        unused_client.publish("/devices/{}/state".format(device_id), "{} : {}".format(device_id, "Calbration of " + str(calDevice) + " with command " + calCommand))  
                     else:
                         if(success == -1):
-                            unused_client.publish("/devices/{}/state".format(device_id), "{} : {}".format(device_id, "Calbration Device Not Found: should be cal#device#command like cal#102#Cal,clear" ))          
+                            unused_client.publish("/devices/{}/state".format(device_id), "{} : {}".format(device_id, "Calbration Device "+ str(calDevice) +" Not Found: should be cal#device#command like cal#102#Cal,clear" ))          
                         else:
-                            unused_client.publish("/devices/{}/state".format(device_id), "{} : {}".format(device_id, "Calbration Command Not Found: should be cal#device#command like cal#102#Cal,clear" ))          
+                            unused_client.publish("/devices/{}/state".format(device_id), "{} : {}".format(device_id, "Calbration Command "+ str(calCommand) +" Not Found: should be cal#device#command like cal#102#Cal,clear" ))          
             elif(command == "updateReboot"):
                 infot = unused_client.publish("/devices/{}/state".format(device_id), "{} : {}".format(device_id, "Update and reboot" ), qos=1)
                 print("error_string :" + mqtt.error_string(infot.rc))
