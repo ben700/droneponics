@@ -157,7 +157,7 @@ def pubGasiousReadingsToGoolgeCloud(dronePayload):
 def pubSensorReadingsToGoolgeCloud(sensors, _log):
     # Droneponics Start
     parser = ConfigParser()
-    parser.read("/home/pi/droneponics/config/Google/"+drone.gethostname()+".ini")
+    parser.read("/home/pi/droneponics/config/Google/sensorReadings"+drone.gethostname()+".ini")
     device_id = parser.get('Google', 'device_id')
     _MQTT_TOPIC = '/devices/{}/events'.format(device_id)
     payload = ""
