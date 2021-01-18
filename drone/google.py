@@ -181,11 +181,9 @@ def pubSensorReadingsToGoolgeCloud(sensors, _log):
     device_id = parser.get('Google', 'device_id')
     _log.info("device_id = {}".format(device_id))
    
-    _MQTT_TOPIC = '/devices/{}/events'.format(device_id)
+    _MQTT_TOPIC = '/devices/{}/events/sensorReading'.format(device_id)
     payload = ""
     
-    _log.info("drone.buildSensorPayload")
-    _log.info(sensors[1].name)
     
     if(sensors[1].name == "EC"):
         _log.info("build payload ec")
@@ -194,9 +192,6 @@ def pubSensorReadingsToGoolgeCloud(sensors, _log):
     elif(sensors[1].name == "Dissolved Oxygen"):      
         payload = '{{ "deviceTime": "{}", "deviceMAC": "{}", "temperature": "{}", "dissolvedOxygen": "{}", "saturation": "{}", "oxidationReductionPotential": "{}"}}'.format(int(time.time()), drone.get_mac(), buildPayloadField(sensors[0].value), buildPayloadField(sensors[1].value), buildPayloadField(sensors[1].value2), buildPayloadField(sensors[2].value) )
   
-    _log.info(payload)
-    
-   # payload = buildSensorPayload(sensors, _log)
     _log.info(payload)
     return pubGoolgeCloud(_MQTT_TOPIC, payload )
 
