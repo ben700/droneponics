@@ -158,8 +158,9 @@ def pubSensorReadingsToGoolgeCloud(sensors, _log):
     # Droneponics Start
     _log.info("pubSensorReadingsToGoolgeCloud")
     parser = ConfigParser()
-    parser.read("/home/pi/droneponics/config/Google/sensorReadings"+drone.gethostname()+".ini")
+    parser.read("/home/pi/droneponics/config/Google/"+drone.gethostname()+".ini")
     _log.info("parser.read")
+    
    
     device_id = parser.get('Google', 'device_id')
     _log.info("device_id = {}".format(device_id))
