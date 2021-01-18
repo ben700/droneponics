@@ -176,6 +176,7 @@ def pubDoseVolumeToGoolgeCloud(dose, _log):
     _MQTT_TOPIC = '/devices/{}/events/dosed'.format(parser.get('Google', 'device_id'))
     payload = ''
     payload = dose.buildDosePayload(payload)
+    _log.info(payload)
 
     return pubGoolgeCloud( _MQTT_TOPIC, payload)
    
