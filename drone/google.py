@@ -169,6 +169,8 @@ def pubSensorReadingsToGoolgeCloud(sensors, _log):
     payload = ""
     
     _log.info("drone.buildSensorPayload")
+    _log.info(sensors[1].name)
+    
     payload = drone.buildSensorPayload(sensors, _log)
     _log.info(payload)
     return pubGoolgeCloud(_MQTT_TOPIC, payload )
