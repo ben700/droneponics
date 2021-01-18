@@ -162,6 +162,8 @@ def pubSensorReadingsToGoolgeCloud(sensors, _log):
     device_id = parser.get('Google', 'device_id')
     _MQTT_TOPIC = '/devices/{}/events'.format(device_id)
     payload = ""
+    
+    _log.info("drone.buildSensorPayload")
     payload = drone.buildSensorPayload(sensors, _log)
     _log.info(payload)
     return pubGoolgeCloud(_MQTT_TOPIC, payload )
