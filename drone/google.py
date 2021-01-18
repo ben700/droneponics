@@ -49,7 +49,7 @@ def buildSensorPayload(sensors, _log):
     _log(sensors[1].name)
    
     if(sensors[1].name == "EC"):
-        payload = '{{ "deviceTime": "{}", "devicemac": "{}", "temperature": "{}", "pH": "{}", "conductivity": "{}", "totalDissolvedSolids": "{}", "salinity": "{}", "specificGravity": "{}"}}'.format(int(time.time()), drone.get_mac(), buildPayloadField(sensors[0].value), buildPayloadField(sensors[2].value), buildPayloadField(sensors[1].value), buildPayloadField(sensors[1].value2), buildPayloadField(sensors[1].value3), buildPayloadField(sensors[1].value4) )
+        payload = '{{ "deviceTime": "{}", "deviceMAC": "{}", "temperature": "{}", "pH": "{}", "conductivity": "{}", "totalDissolvedSolids": "{}", "salinity": "{}", "specificGravity": "{}"}}'.format(int(time.time()), drone.get_mac(), buildPayloadField(sensors[0].value), buildPayloadField(sensors[2].value), buildPayloadField(sensors[1].value), buildPayloadField(sensors[1].value2), buildPayloadField(sensors[1].value3), buildPayloadField(sensors[1].value4) )
     elif(sensors[1].name == "Dissolved Oxygen"):      
         payload = '{{ "deviceTime": "{}", "deviceMAC": "{}", "temperature": "{}", "dissolvedOxygen": "{}", "saturation": "{}", "oxidationReductionPotential": "{}"}}'.format(int(time.time()), drone.get_mac(), buildPayloadField(sensors[0].value), buildPayloadField(sensors[1].value), buildPayloadField(sensors[1].value2), buildPayloadField(sensors[2].value) )
     return payload   
@@ -247,7 +247,7 @@ class dronePayload:
      self.objects.append( dronePayloadItem(key, value))
     
    def get(self):
-     payloadString = '{{ "ts": "{}", "deviceMAC": "{}",'.format(int(time.time()), drone.get_mac())
+     payloadString = '{{ "deviceTime": "{}", "deviceMAC": "{}",'.format(int(time.time()), drone.get_mac())
      for pItem in self.objects:
           payloadString = payloadString + pItem.get()
 
@@ -263,7 +263,7 @@ class dronePayload:
      return payloadString
     
    def getWithSub(self):
-     payloadString = '{{ "ts": "{}", "deviceMAC": "{}",'.format(int(time.time()), drone.get_mac())
+     payloadString = '{{ "deviceTime": "{}", "deviceMAC": "{}",'.format(int(time.time()), drone.get_mac())
      for pItem in self.objects:
           payloadString = payloadString + pItem.getSub()
 
