@@ -49,9 +49,9 @@ def buildSensorPayload(sensors, _log):
     _log(sensors[1].name)
    
     if(sensors[1].name == "EC"):
-        payload = '{{ "deviceTime": "{}", "deviceMAC": "{}", "temperature": "{}", "pH": "{}", "conductivity": "{}", "totalDissolvedSolids": "{}", "salinity": "{}", "specificGravity": "{}"}}'.format(int(time.time()), drone.get_mac(), buildPayloadField(sensors[0].value), buildPayloadField(sensors[2].value), buildPayloadField(sensors[1].value), buildPayloadField(sensors[1].value2), buildPayloadField(sensors[1].value3), buildPayloadField(sensors[1].value4) )
+        payload = '{ "deviceTime": "{}", "deviceMAC": "{}", "temperature": "{}", "pH": "{}", "conductivity": "{}", "totalDissolvedSolids": "{}", "salinity": "{}", "specificGravity": "{}"}'.format(int(time.time()), drone.get_mac(), buildPayloadField(sensors[0].value), buildPayloadField(sensors[2].value), buildPayloadField(sensors[1].value), buildPayloadField(sensors[1].value2), buildPayloadField(sensors[1].value3), buildPayloadField(sensors[1].value4) )
     elif(sensors[1].name == "Dissolved Oxygen"):      
-        payload = '{{ "deviceTime": "{}", "deviceMAC": "{}", "temperature": "{}", "dissolvedOxygen": "{}", "saturation": "{}", "oxidationReductionPotential": "{}"}}'.format(int(time.time()), drone.get_mac(), buildPayloadField(sensors[0].value), buildPayloadField(sensors[1].value), buildPayloadField(sensors[1].value2), buildPayloadField(sensors[2].value) )
+        payload = '{ "deviceTime": "{}", "deviceMAC": "{}", "temperature": "{}", "dissolvedOxygen": "{}", "saturation": "{}", "oxidationReductionPotential": "{}"}'.format(int(time.time()), drone.get_mac(), buildPayloadField(sensors[0].value), buildPayloadField(sensors[1].value), buildPayloadField(sensors[1].value2), buildPayloadField(sensors[2].value) )
     return payload   
    
 
@@ -131,7 +131,7 @@ def pubDeviceBootToGoolgeCloud():
     device_id = parser.get('Google', 'device_id')
 
     _MQTT_TOPIC = '/devices/{}/events/deviceBoot'.format(device_id)
-    payload = '{{ "bootTime": "{}", "deviceMAC": "{}", "deviceName": "{}", "deviceIP": "{}"}}'.format(int(time.time()), drone.get_mac(), drone.gethostname(), drone.get_ip())
+    payload = '{ "bootTime": "{}", "deviceMAC": "{}", "deviceName": "{}", "deviceIP": "{}"}'.format(int(time.time()), drone.get_mac(), drone.gethostname(), drone.get_ip())
 
     return pubGoolgeCloud(_MQTT_TOPIC, payload)
  
@@ -188,9 +188,9 @@ def pubSensorReadingsToGoolgeCloud(sensors, _log):
     if(sensors[1].name == "EC"):
         _log.info("build payload ec")
 #        payload = '{{ "deviceTime": "{}", "deviceMAC": "{}", "temperature": "{}", "pH": "{}", "conductivity": "{}", "totalDissolvedSolids": "{}", "salinity": "{}", "specificGravity": "{}"}}'.format(int(time.time()), drone.get_mac(), buildPayloadField(sensors[0].value), buildPayloadField(sensors[2].value), buildPayloadField(sensors[1].value), buildPayloadField(sensors[1].value2), buildPayloadField(sensors[1].value3), buildPayloadField(sensors[1].value4) )
-        payload = '{{ "deviceTime": "{}", "deviceMAC": "{}", "temperature": "{}", "pH": "{}", "conductivity": "{}", "totalDissolvedSolids": "{}", "salinity": "{}", "specificGravity": "{}"}}'.format(int(time.time()), drone.get_mac(), sensors[0].value, sensors[2].value, sensors[1].value, sensors[1].value2, sensors[1].value3, sensors[1].value4 )
+        payload = '{ "deviceTime": "{}", "deviceMAC": "{}", "temperature": "{}", "pH": "{}", "conductivity": "{}", "totalDissolvedSolids": "{}", "salinity": "{}", "specificGravity": "{}"}'.format(int(time.time()), drone.get_mac(), sensors[0].value, sensors[2].value, sensors[1].value, sensors[1].value2, sensors[1].value3, sensors[1].value4 )
     elif(sensors[1].name == "Dissolved Oxygen"):      
-        payload = '{{ "deviceTime": "{}", "deviceMAC": "{}", "temperature": "{}", "dissolvedOxygen": "{}", "saturation": "{}", "oxidationReductionPotential": "{}"}}'.format(int(time.time()), drone.get_mac(), buildPayloadField(sensors[0].value), buildPayloadField(sensors[1].value), buildPayloadField(sensors[1].value2), buildPayloadField(sensors[2].value) )
+        payload = '{ "deviceTime": "{}", "deviceMAC": "{}", "temperature": "{}", "dissolvedOxygen": "{}", "saturation": "{}", "oxidationReductionPotential": "{}"}'.format(int(time.time()), drone.get_mac(), buildPayloadField(sensors[0].value), buildPayloadField(sensors[1].value), buildPayloadField(sensors[1].value2), buildPayloadField(sensors[2].value) )
   
     _log.info(payload)
     return pubGoolgeCloud(_MQTT_TOPIC, payload )
@@ -247,7 +247,7 @@ class dronePayload:
      self.objects.append( dronePayloadItem(key, value))
     
    def get(self):
-     payloadString = '{{ "deviceTime": "{}", "deviceMAC": "{}",'.format(int(time.time()), drone.get_mac())
+     payloadString = '{ "deviceTime": "{}", "deviceMAC": "{}",'.format(int(time.time()), drone.get_mac())
      for pItem in self.objects:
           payloadString = payloadString + pItem.get()
 
@@ -263,7 +263,7 @@ class dronePayload:
      return payloadString
     
    def getWithSub(self):
-     payloadString = '{{ "deviceTime": "{}", "deviceMAC": "{}",'.format(int(time.time()), drone.get_mac())
+     payloadString = '{ "deviceTime": "{}", "deviceMAC": "{}",'.format(int(time.time()), drone.get_mac())
      for pItem in self.objects:
           payloadString = payloadString + pItem.getSub()
 
