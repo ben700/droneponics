@@ -63,22 +63,7 @@ def buildAllSensors(sensors, _log):
     _log.debug("built ORP sensor")
     return sensors
 
-def buildPayloadField(sString):
-    if(sString is None):
-         return ""
-    else:
-         return str(sString)
-      
-   
-def buildSensorPayload(sensors, _log):
-    _log("buildSensorPayload")
-    _log(sensors[1].name)
-   
-    if(sensors[1].name == "EC"):
-        payload = '{{ "deviceTime": "{}", "devicemac": "{}", "temperature": "{}", "pH": "{}", "conductivity": "{}", "totalDissolvedSolids": "{}", "salinity": "{}", "specificGravity": "{}"}}'.format(int(time.time()), drone.get_mac(), buildPayloadField(sensors[0].value), buildPayloadField(sensors[2].value), buildPayloadField(sensors[1].value), buildPayloadField(sensors[1].value2), buildPayloadField(sensors[1].value3), buildPayloadField(sensors[1].value4) )
-    elif(sensors[1].name == "Dissolved Oxygen"):      
-        payload = '{{ "deviceTime": "{}", "deviceMAC": "{}", "temperature": "{}", "dissolvedOxygen": "{}", "saturation": "{}", "oxidationReductionPotential": "{}"}}'.format(int(time.time()), drone.get_mac(), buildPayloadField(sensors[0].value), buildPayloadField(sensors[1].value), buildPayloadField(sensors[1].value2), buildPayloadField(sensors[2].value) )
-    return payload    
+ 
    
 class Sensor:
    def __init__(self, SensorId, name, DisplayPin, _log, *args, **kwargs):
