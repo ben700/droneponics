@@ -256,7 +256,7 @@ class dronePayload:
      for pItem in self.objects:
           payloadString = payloadString + pItem.get()
 
-     payloadString =  payloadString[:-1] + '}}'
+     payloadString =  payloadString[:-1] + '}'
      return payloadString
     
    def getSub(self):
@@ -272,6 +272,6 @@ class dronePayload:
      for pItem in self.objects:
           payloadString = payloadString + pItem.getSub()
 
-     payloadString =  payloadString[:-1] + '}}'
+     payloadString =  payloadString[:-1] + '}'
      return payloadString
     
