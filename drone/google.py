@@ -201,7 +201,7 @@ def pubSensorReadingsToGoolgeCloud(sensors, _log):
     return pubGoolgeCloud(_MQTT_TOPIC, payload )
 
    
-def pubDoseVolumeToGoolgeCloud(dose, _log):
+def pubDoseVolumeToGoolgeCloud(dose, Target, Reading, _log):
     if(str(dose.dose)[0:3] == "0.0"):
         return True
     _log.info("------------------str(dose.dose)[0:3] = [" + str(dose.dose)[0:3]+"]\n")
@@ -211,7 +211,7 @@ def pubDoseVolumeToGoolgeCloud(dose, _log):
     parser.read("/home/pi/droneponics/config/Google/"+drone.gethostname()+".ini")
     _MQTT_TOPIC = '/devices/{}/events/dosed'.format(parser.get('Google', 'device_id'))
     payload = ''
-    payload = dose.buildDosePayload(payload)
+    payload = dose.buildDosePayload(payload, Target, Reading)
     _log.info(payload)
 
     return pubGoolgeCloud( _MQTT_TOPIC, payload)
