@@ -119,7 +119,7 @@ try:
                    blynk.set_property(dosage.LED, 'color', colours[0])
                    dosage.pump.query("D,"+str(dosage.dose))
                    try:
-                        drone.pubDoseVolumeToGoolgeCloud(dosage, _log)
+                        drone.pubDoseVolumeToGoolgeCloud(dosage,float(sensors[1].target), float(sensors[1].value), _log)
                    except:
                         _log.critical("except logging dose to Google")		
                    while (True):
@@ -152,7 +152,7 @@ try:
                    else:
                         dosage.pump.query("D,"+str(dosage.dose))
                         try:
-                            drone.pubDoseVolumeToGoolgeCloud(dosage, _log)
+                            drone.pubDoseVolumeToGoolgeCloud(dosage,float(sensors[2].target), float(sensors[2].value),  _log)
                         except:
                             _log.critical("except logging dose to Google")	 
                    while (True):
