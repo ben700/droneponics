@@ -144,8 +144,10 @@ def pubEnviromentalReadingsToGoolgeCloud(dronePayload):
     device_id = parser.get('Google', 'device_id')
 
     _MQTT_TOPIC = '/devices/{}/events/environmentalData'.format(device_id)
-      
-    return pubGoolgeCloud(_MQTT_TOPIC, dronePayload.get())
+    
+    payload = dronePayload.get()
+    print(payload)
+    return pubGoolgeCloud(_MQTT_TOPIC, payload)
  
 
 def pubLightReadingsToGoolgeCloud(dronePayload):
@@ -156,9 +158,11 @@ def pubLightReadingsToGoolgeCloud(dronePayload):
     device_id = parser.get('Google', 'device_id')
 
     _MQTT_TOPIC = '/devices/{}/events/lightData'.format(device_id)
-      
-    return pubGoolgeCloud(_MQTT_TOPIC, dronePayload.get())
- 
+     
+    payload = dronePayload.get()
+    print(payload)
+    return pubGoolgeCloud(_MQTT_TOPIC, payload)
+    
 def pubGasiousReadingsToGoolgeCloud(dronePayload):
 
     # Droneponics Start
@@ -167,9 +171,10 @@ def pubGasiousReadingsToGoolgeCloud(dronePayload):
     device_id = parser.get('Google', 'device_id')
 
     _MQTT_TOPIC = '/devices/{}/events/gasious'.format(device_id)
-      
-    return pubGoolgeCloud(_MQTT_TOPIC, dronePayload.get())
-   
+    payload = dronePayload.get()
+    print(payload)
+    return pubGoolgeCloud(_MQTT_TOPIC, payload)
+    
 def pubSensorReadingsToGoolgeCloud(sensors, _log):
     # Droneponics Start
     _log.info("pubSensorReadingsToGoolgeCloud")
