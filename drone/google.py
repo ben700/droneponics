@@ -131,7 +131,7 @@ def pubDeviceBootToGoolgeCloud():
     device_id = parser.get('Google', 'device_id')
 
     _MQTT_TOPIC = '/devices/{}/events/deviceBoot'.format(device_id)
-    payload = '{ "bootTime": "{}", "deviceMAC": "{}", "deviceName": "{}", "deviceIP": "{}"}'.format(int(time.time()), drone.get_mac(), drone.gethostname(), drone.get_ip())
+    payload = '{{ "bootTime": "{}", "deviceMAC": "{}", "deviceName": "{}", "deviceIP": "{}"}}'.format(int(time.time()), drone.get_mac(), drone.gethostname(), drone.get_ip())
 
     return pubGoolgeCloud(_MQTT_TOPIC, payload)
  
