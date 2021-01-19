@@ -204,6 +204,7 @@ def pubSensorReadingsToGoolgeCloud(sensors, _log):
 def pubDoseVolumeToGoolgeCloud(dose, _log):
     if(str(dose.dose)[0:3] == "0.0"):
         return True
+    _log.info("------------------str(dose.dose)[0:3] = [" + str(dose.dose)[0:3]+"]\n")
  
     # Droneponics Start
     parser = ConfigParser()
