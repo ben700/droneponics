@@ -10,6 +10,11 @@
 #include <Ezo_i2c.h>                                             //include the EZO I2C library from https://github.com/Atlas-Scientific/Ezo_I2c_lib
 #include <WiFiUdp.h>
 #include <NTPClient.h>
+#include <EEPROM.h>
+
+
+#include <ESP8266WebServer.h>
+ESP8266WebServer server(80);
 
 WiFiClient  client;                                              //declare that this device connects to a Wi-Fi network,create a connection to a specified internet IP address
 
@@ -19,10 +24,10 @@ WiFiUDP ntpUDP;
 NTPClient timeClient(ntpUDP);
 
 
-Ezo_board PH = Ezo_board(99, "PH");       //create a PH circuit object, who's address is 99 and name is "PH"
-Ezo_board EC = Ezo_board(100, "EC");      //create an EC circuit object who's address is 100 and name is "EC"
-Ezo_board RTD = Ezo_board(102, "RTD");    //create an RTD circuit object who's address is 102 and name is "RTD"
-Ezo_board DO = Ezo_board(97, "DO");    //create a DO circuit object who's address is 97 and name is "DO"
+//Ezo_board PH = Ezo_board(99, "PH");       //create a PH circuit object, who's address is 99 and name is "PH"
+//Ezo_board EC = Ezo_board(100, "EC");      //create an EC circuit object who's address is 100 and name is "EC"
+//Ezo_board RTD = Ezo_board(102, "RTD");    //create an RTD circuit object who's address is 102 and name is "RTD"
+//Ezo_board DO = Ezo_board(97, "DO");    //create a DO circuit object who's address is 97 and name is "DO"
 
 //array of ezo boards, add any new boards in here for the commands to work with them
 Ezo_board device_list[] = {
@@ -67,6 +72,115 @@ const unsigned long long_delay = 1200;              //how long we wait for comma
 
 float k_val = 0;                                    //holds the k value of the ec circuit
 
+#include <CertStoreBearSSL.h>
+BearSSL::CertStore certStore;
+
+/* Set up values for your repository and binary names */
+#define GHOTA_USER "ben700"
+#define GHOTA_REPO "droneponics"
+#define GHOTA_CURRENT_TAG "0.0.0"
+#define GHOTA_BIN_FILE "droneponics.ino.adafruit.bin"
+#define GHOTA_ACCEPT_PRERELEASE true
+
+#include <ESP_OTA_GitHub.h>
+// Initialise Update Code
+ESPOTAGitHub ESPOTAGitHub(&certStore, GHOTA_USER, GHOTA_REPO, GHOTA_CURRENT_TAG, GHOTA_BIN_FILE, GHOTA_ACCEPT_PRERELEASE);
+
+
+void write_read_connection_string(String Ssid, String Password){
+
+  int _sizes = Ssid.length();
+  int _sizep = Password.length();
+  
+  int i,p;
+  for(i=0;i<_sizes;i++){
+    EEPROM.write(addressEEPROM+i,Ssid[i]);
+  }
+  EEPROM.write(addressEEPROM+_sizes,'\0');   //Add termination null character for String Data
+  
+  for(p=0;p<_sizep;p++){
+    EEPROM.write(addressEEPROM+_sizes+p,Password[p]);
+  }
+  EEPROM.write(addressEEPROM+_sizes+_sizep,'\0');   //Add termination null character for String Data
+  
+  
+  EEPROM.commit();
+}
+
+
+void read_connection_string(String Ssid, String Password){
+
+  int add=0;
+  int len=0;
+  int i=0;
+  unsigned char k;
+  k=EEPROM.read(addressEEPROM);
+  while(k != '\0' && len<500){    
+    k=EEPROM.read(addressEEPROM+len);
+    Ssid[len]=k;
+    len++;
+  }
+  Ssid[len]='\0';
+  
+  k=EEPROM.read(addressEEPROM);
+  while(k != '\0' && len<500){    
+    k=EEPROM.read(addressEEPROM+len);
+    Password[len]=k;
+    len++;
+  }
+  Password[len]='\0';
+ 
+ 
+  Serial.print("Ssid =" + Ssid  +"\n");
+  Serial.print("Password =" + Password  +"\n");
+}
+
+
+String webPage(){
+  
+
+  String web; 
+  
+  web += "<!DOCTYPE html><html>";
+  web += "<head><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"><title>SMART WIFI RELAY</title>";
+  web += "<link rel=\"icon\" type=\"image/x-icon\" />";
+  web += "<style>html { font-family: Helvetica; display: inline-block; margin: 0px auto; text-align: center;}";
+  web += "td {padding: 5px; height: 60px;}";
+  web += "table.TOP_HEAD { width: 480px; height: 70px; background-color: #00c5fc; border-radius: 10px; font-size: 30px; font-weight: bold; box-shadow: 0px 0px 5px 1px grey; }";
+  web += "table.SPACER { width: 480px; height: 5px; background-color: white; }";
+  web += ".buttonON { width: 230px; height: 50px; align: center; border-radius: 10px; border: 0px solid black; background-color: #00c5fc; font-size: 20px; font-weight: bold; box-shadow: 0px 0px 5px 1px grey; }";
+  web += ".buttonOFF { width: 230px; height: 50px; align: center; border-radius: 10px; border: 0px solid black; background-color: lightgrey; font-size: 20px; font-weight: bold; box-shadow: 0px 0px 5px 1px grey; }";
+  web += ".buttonBOTTOM { width: 150px; height: 50px; align: center; border-radius: 10px; background-color: grey; background-position: center; background-repeat: no-repeat; border: 0px solid black; font-size: 20px; font-weight: bold; box-shadow: 0px 0px 5px 1px grey; }";
+  
+  web += "</style></head>";
+
+  web += "<table class=\"TOP_HEAD\" align=\"center\"> <tbody> <tr><td align=\"center\">16 CHANNEL WIFI RELAY</td></tr> </tbody> </table>";
+  web += "<p></p>";
+  web += "<table class=\"SPACER\" align=\"center\"><tbody> <tr></tr> </tbody> </table>";
+  web += "<p></p>";
+  
+  web += "<table width=\"500px\" align=\"center\"> <tbody>";
+  web += "<tr>";
+                 if (1 == 0)
+                { web += "<td align=\"left\"><input type=\"button\" class=\"buttonOFF\" value=\"RELAY #1 OFF\" onclick=\"location.href='/1_on';\"></td>"; }
+                 else 
+                  { web += "<td align=\"left\"><input type=\"button\" class=\"buttonON\" value=\"RELAY #1 ON\" onclick=\"location.href='/1_off';\"></td>"; }
+
+
+  web += "</tr>";
+  web += "</tbody> </table>";                                   
+  
+  web += "<table width=\"500px\" align=\"center\"> <tbody> <tr>";
+  web += "<td align=\"left\"><input type=\"button\" class=\"buttonBOTTOM\"\"></td>";
+  web += "<td align=\"center\"><input type=\"button\" class=\"buttonBOTTOM\" value=\"\"\"></td>";
+  web += "<td align=\"right\"><input type=\"button\" class=\"buttonBOTTOM\" </td>";
+  web += "</tr> </tbody> </table>"; 
+  web += "</body></html>";
+
+  return web;
+  
+}
+
 void setup() {
   setupCloudIoT(); // Creates globals for MQTT
   pinMode(EN_PH, OUTPUT);                                                         //set enable pins as outputs
@@ -97,9 +211,46 @@ void setup() {
 
     if (WiFi.status() == WL_CONNECTED) {
       Serial.println("Wifi connected");            //once connected print "connected"
+      server.begin();
+      Serial.println("HTTP server started");
+      Serial.print("Address: http://" + WiFi.localIP().toString() + "/");
+      server.on("/",      []() { server.send(200, "text/html", webPage()); });
+      Serial.println("HTTP server Ready");
+  
     } else {
       Serial.println("Failed to connect to Wifi");
     }
+
+
+  // Start SPIFFS and retrieve certificates.
+  LittleFS.begin();
+  int numCerts = certStore.initCertStore(LittleFS, PSTR("/certs.idx"), PSTR("/certs.ar"));
+  Serial.print(F("Number of CA certs read: "));
+  Serial.println(numCerts);
+  if (numCerts == 0) {
+    Serial.println(F("No certs found. Did you run certs-from-mozill.py and upload the SPIFFS directory before running?"));
+    return; // Can't connect to anything w/o certs!
+  }
+
+    
+
+   /* This is the actual code to check and upgrade */
+    Serial.println("Checking for update...");
+    if (ESPOTAGitHub.checkUpgrade()) {
+      Serial.print("Upgrade found at: ");
+      Serial.println(ESPOTAGitHub.getUpgradeURL());
+      if (ESPOTAGitHub.doUpgrade()) {
+        Serial.println("Upgrade complete."); //This should never be seen as the device should restart on successful upgrade.
+      } else {
+       Serial.print("Unable to upgrade: ");
+       Serial.println(ESPOTAGitHub.getLastError());
+      }
+    } else {
+      Serial.print("Not proceeding to upgrade: ");
+      Serial.println(ESPOTAGitHub.getLastError());
+    }
+    /* End of check and upgrade code */
+  
     print_help();                           //print our options on startup
 
     Serial.println("---------------------------------------------");
@@ -130,6 +281,24 @@ void loop() {
       if (WiFi.status() == WL_CONNECTED) {
         Serial.println("Wifi connected");            //once connected print "connected"
            timeClient.update();
+
+
+
+String Ssid = "";
+String Password = "";
+
+read_connection_string(Ssid, Password);
+Serial.print("Ssid =" + Ssid +"\n");
+Serial.print("Password =" + Password  +"\n");
+if (Ssid.length()== 0){
+write_read_connection_string(ssid,password);
+}
+read_connection_string(Ssid, Password);
+Serial.print("Ssid =" + Ssid +"\n");
+Serial.print("Password =" + Password  +"\n");
+  
+
+
   
     String outputStr = "{ \"bootTime\": \"" + String(timeClient.getEpochTime())+ "\", \"deviceMAC\": \"" +  WiFi.macAddress(); 
     outputStr =outputStr + "\",\"deviceName\": \""+device_id+ "\", \"deviceIP\": \"" +  WiFi.localIP().toString() + "\"}";
@@ -140,7 +309,7 @@ void loop() {
     }
   }
 
-  user_commands();                        //function which handles all the user commands
+//  user_commands();                        //function which handles all the user commands
 
   if (polling == true) {                                                            //if we enabled polling
     switch (current_step) {                                                         //selects what to do based on what reading_step we are in
