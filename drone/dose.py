@@ -22,7 +22,7 @@ class Dose:
        self.relayId = kwargs.get('relayId', None)
       
    def buildDosePayload(self, payload, Target, Reading): 
-       payload = '{{ "deviceTime": "{}", "deviceMAC": "{}", "doseLiquid": "{}", "volume": "{}", "targetReading": "{}", "reading": "{}"  }}'.format(int(time.time()), drone.get_mac(),self.name, self.dose, Target, Reading  )
+       payload = '{{ "deviceTime": "{}", "deviceMAC": "{}", "doseLiquid": "{}", "volume": "{}", "targetReading": "{}", "lastReading": "{}"  }}'.format(int(time.time()), drone.get_mac(),self.name, self.dose, Target, Reading  )
        return payload
    
    def blynkMe(self, blynk, colours):
