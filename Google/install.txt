@@ -28,6 +28,10 @@ sudo pip3 install cryptography
 
 openssl req -x509 -newkey rsa:2048 -keyout demo_private.pem -nodes -out demo.pub -subj “/CN=unused”
 
+openssl ecparam -genkey -name prime256v1 -noout -out drone_private.pem
+openssl ec -in drone_private.pem -pubout -out drone_public.pem
+openssl ec -in drone_private.pem -noout -text
+
 cat demo.pub
 
 wget https://pki.google.com/roots.pem
