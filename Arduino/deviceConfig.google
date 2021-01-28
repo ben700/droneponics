@@ -1,0 +1,12 @@
+channel1 : {
+  liquid: pH
+  volume: 1
+},
+channel2 : {
+  liquid: Part A
+  volume: 6
+},
+channel3 : {
+  liquid: Part b
+  volume: 6
+}
