@@ -1,0 +1,15 @@
+
+#Create a bucket
+ gsutil mb -l europe-west2 -p drone-302200 gs://droneponics
+ 
+ # grant read acces
+gsutil defacl set public-read gs://droneponics
+
+
+#upload files 
+gsutil -m rsync -r ./static gs://droneponics/static
+
+#test
+https://storage.googleapis.com/droneponics/static/
+https://storage.googleapis.com/droneponics/static/store_logo.png
+
