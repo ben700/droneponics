@@ -31,7 +31,7 @@ You can then run the example with
 
   $ python cloudiot_pubsub_example_server.py \
     --project_id=drone-302200 \
-    --pubsub_subscription=nutrientReadingTopic-sub \
+    --pubsub_subscription=deviceEventsSubscription \
 """
 
 import argparse
@@ -85,9 +85,12 @@ class Server(object):
                               data):
         """Push the data to the given device as configuration."""
         config_data = None
+#        print(data)
+
+ #       print("ph = ")
+ #       print(data['pH'])
         print('The device ({}) has a pH '
-              'of: {} and conductivity level of : {}'.format(device_id, data['pH'], data['conductivity']))
-        
+             'of: {:.2f} and conductivity level of : {}'.format(device_id, data['pH'], data['conductivity']))        
         
         if data['pH'] < 5.6:
             # Turn off the fan.
@@ -95,13 +98,13 @@ class Server(object):
             print('Setting pH dose state for device', device_id, 'to off.')
         elif data['pH'] > 5.8:
             # Turn on the fan
-            pH_config_data = True
+            pH_config_data =  True
             print('Setting pH dose state for device', device_id, 'to on.')
         else:
             # pH is OK, don't need to push a new config.
             return
 
-        if data['conductivity'] > 1000:
+        if data['conductivity'] > 1500:
             # Turn off the fan.
             ec_config_data = False
             print('Setting conductivity dose state for device', device_id, 'to off.')
@@ -112,10 +115,11 @@ class Server(object):
         else:
             # pH is OK, don't need to push a new config.
             return
-        
-        config_data = "{'pH_dose': " + pH_config_data + ", 'ec_dose': " +ec_config_data+"}"
-        
-        config_data_json = json.dumps(config_data)
+
+
+#        config_data = "{" + "'pH_dose': {%s}  , 'ec_dose': {%s}".format(pH_config_data, ec_config_data) + "}"
+        print('pH_dose' + str(pH_config_data) +   'ec_dose' + str(ec_config_data))
+        config_data_json = json.dumps({ 'pH_dose': pH_config_data , 'ec_dose': ec_config_data })
         body = {
             # The device configuration specifies a version to update, which
             # can be used to avoid having configuration updates race. In this
