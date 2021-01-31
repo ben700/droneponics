@@ -1,0 +1,23 @@
+gcloud sql instances create wordpress --activation-policy=ALWAYS --tier=db-n1-standard-1 --region=europe-west2
+
+gcloud sql databases create wordpress --instance wordpress
+
+gcloud sql users set-password root --host=% --instance wordpress --password=Dr0n3p0nics
+
+composer require google/cloud-
+php vendor/bin/wp-gae
+php vendor/bin/wp-gae create
+gcloud sql instances describe wordpress | grep region
+ 
+ 
+ cd my-wordpress-project
+ gcloud app deploy app.yaml cron.yaml
+ gsutil defacl ch -u AllUsers:R gs://drone-302200.appspot.com
+ 
+ 
+ https://drone-302200.appspot.com/wp-admin
+ 
+ 
+./cloud_sql_proxy -instances=drone-302200:europe-west2:wordpress=tcp:3306 -credential_file=/home/benslittlebitsandbobs/.ssh/droneponicsserviceaccount_service_account.json &
+ 
+ 
