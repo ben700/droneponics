@@ -31,7 +31,6 @@ _log.addHandler(consoleHandler)
 _log.setLevel(parser.get('logging', 'logLevel', fallback=logging.DEBUG))
     
 class CalAction(Command):
-    """Get info about a device."""
     arguments: Any
     name: str 
     processing_delay: int = 300
@@ -106,7 +105,7 @@ for device in deviceName.keys():
         print(dev.read("I"))
     except IOError:
         pass
-return i2c_devices_attached
+
 
 
     
