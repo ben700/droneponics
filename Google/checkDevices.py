@@ -95,17 +95,13 @@ class Parameters(Command):
     def format_command(cls) -> str:
         return f"{cls.name}"
     
+
+
+for device in list_i2c_devices():
+    sensor = sensors.Sensor(deviceName[device], device)
+    sensor.connect()
     
+    response = sensor.query(commands.INFO)
+    print(response.data.decode("utf-8"))
     
-dev = atlas_i2c.AtlasI2C()
-for device in deviceName.keys():
-    try:
-        print("Now checking device " + str(device))
-        dev.set_i2c_address(device)
-        print(dev.read("I"))
-    except IOError:
-        pass
-
-
-
     
