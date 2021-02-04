@@ -104,14 +104,14 @@ def list_i2c_devices():
             dev.read("R")
             i2c_devices_attached.append(device)
         except IOError:
-            pass
+            print("Didn't find " + str(device))
     return i2c_devices_attached
 
 for device in list_i2c_devices():
-    sensor = sensors.Sensor(deviceName[device], device)
-    sensor.connect()
-    
-    response = sensor.query(commands.INFO)
-    print(response.data.decode("utf-8"))
-    
-    
+    try:
+        sensor = sensors.Sensor(deviceName[device], device)
+        sensor.connect()
+        response = sensor.query(commands.INFO)
+        print(response.data.decode("utf-8"))
+    except:
+        print("Error on device " + str(device))
