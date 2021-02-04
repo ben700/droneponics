@@ -111,8 +111,17 @@ def list_i2c_devices():
 for device in list_i2c_devices():
     try:
         sensor = sensors.Sensor(deviceName[device], device)
+    except:
+        print("Error creating sensor " + str(deviceName[device]))
+    try:    
         sensor.connect()
+    except:
+        print("Error connecting sensor " + str(deviceName[device]))
+    try:    
         response = sensor.query(commands.INFO)
+    except:
+        print("Error query sensor " + str(deviceName[device]))
+    try:    
         print(response.data.decode("utf-8"))
     except:
-        print("Error on device " + str(device))
+        print("Error on decode data " + str(deviceName[device]))
