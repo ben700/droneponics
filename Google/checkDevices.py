@@ -103,8 +103,9 @@ def list_i2c_devices():
             dev.set_i2c_address(device)
             dev.read("R")
             i2c_devices_attached.append(device)
+            print("Found " + str(deviceName[device]))
         except IOError:
-            print("Didn't find " + str(device))
+            pass
     return i2c_devices_attached
 
 for device in list_i2c_devices():
