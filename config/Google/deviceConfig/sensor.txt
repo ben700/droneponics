@@ -1,0 +1,6 @@
+{
+  RTD:{LED:"On", SCALE:"Celsius"},
+  pH:{LED:"On"},
+  EC:{LED:"On", PROBE:"K10", EC:true, TDS:true, S:true, SG:true},
+  DO:{LED:"On"}
+}
