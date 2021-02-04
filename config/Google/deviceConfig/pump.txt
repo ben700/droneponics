@@ -1,0 +1,22 @@
+{
+  Relay_1:{
+    liquid:"pH Down",
+    dose:1
+  },
+  Relay_2:{
+    liquid:"BASIS A",
+    dose:3.5
+  },
+  Relay_3:{
+    liquid:"BASIS B",
+    dose:3.5
+  },
+  Relay_4:{
+    liquid:"C-4",
+    dose:1
+  },
+  Relay_5:{
+    liquid:"ULTIMATE PK",
+    dose:2
+  }
+}
