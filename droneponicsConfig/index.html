@@ -1,0 +1,228 @@
+<html>
+  <head>
+    <title>Droneponics WiFi Configuration Page</title>
+    <link rel="icon" href="favicon.ico">
+    <style>
+      @font-face{
+        font-family: 'digi';
+        src: url('DS-DIGI.TTF') format("truetype");
+      }
+      *{
+        margin: 0;
+        padding: 0;
+        border: 0;
+        outline: 0;
+        box-shadow: 0;
+        box-sizing: border-box;
+      }
+
+      .ui-widget {
+        font-family: Lucida Grande, Lucida Sans, Arial, sans-serif;
+        font-size: 1.1em
+      }
+
+      .ui-widget-header {
+        border: 1px solid #4297d7;
+        background: #5c9ccc url(ui-bg_gloss-wave_55_5c9ccc_500x100.png) 50% 50% repeat-x;
+        color: #fff;
+        font-weight: bold
+      }
+
+      .ui-widget-header a {
+        color: #fff
+      }
+
+      .ui-button {
+        display: inline-block;
+        position: relative;
+        padding: 0;
+        line-height: normal;
+        margin-right: .1em;
+        cursor: pointer;
+        vertical-align: middle;
+        text-align: center;
+        overflow: visible
+      }
+      
+      .ui-button,
+      .ui-button:link,
+      .ui-button:visited,
+      .ui-button:hover,
+      .ui-button:active {
+        text-decoration: none
+      }
+
+      .ui-state-default {
+        border: 1px solid #c5dbec;
+        background: #dfeffc url(ui-bg_glass_85_dfeffc_1x400.png) 50% 50% repeat-x;
+        font-weight: bold;
+        color: #2e6e9e
+      }
+
+      .ui-priority-primary {
+        font-weight: bold
+      }
+
+      .ui-priority-secondary {
+        opacity: .7;
+        filter: Alpha(Opacity=70);
+        font-weight: normal
+      }
+
+      .container_24 {
+        margin-left: auto;
+        margin-right: auto;
+        width: 960px
+      }
+
+      .container_24 .grid_24 {
+        width: 950px
+      }
+
+      .container_24 .grid_16 {
+        width: 630px
+      }
+
+      .container_24 .push_4 {
+        left: 160px
+      }
+
+      .push_4 {
+        position: relative
+      }
+
+      .grid_16 {
+        display: inline;
+        float: left;
+        margin-left: 5px;
+        margin-right: 5px
+      }
+
+      #header {
+        height: 60px;
+      }
+
+      #storeLogo {
+        float: left;
+        margin-top: 5px;
+      }
+
+      .infoBoxHeading {
+        padding: 2px;
+        font-size: 11px;
+      }
+
+      .infoBoxHeading a{
+        text-decoration: none;
+      }
+
+      .contentContainer {
+        padding-bottom: 10px;
+      }
+
+      .holder{
+        width: 100%;
+        border: 1px solid #cdcdcd;
+        margin: 25px auto 50px auto;
+        padding: 20px;
+        max-width: 100%;
+        font-family: 'digi', sans-serif;
+        color: #333;
+      }
+      .header{
+        margin-top: 25px;
+        font-size: 30px;
+        font-weight: normal;
+        font-family: 'digi', sans-serif;
+      }
+      .main-form{
+        display: block;
+      }
+      .field-wrap{
+        display: block;
+        margin-top: 20px;
+      }
+      .field-wrap:first-child{
+        margin-top: 0;
+      }
+      .field-wrap > span{
+        display: block;
+        font-size: 16px;
+        margin-bottom: 5px;
+      }
+      .field-wrap > input,
+      .field-wrap > select{
+        width: 300px;
+        height: 34px;
+        line-height: 34px;
+        font-size: 16px;
+        padding: 0 10px;
+        border: 1px solid #999;
+        font-family: 'digi', sans-serif;
+        max-width: 100%;
+      }
+      .main-form button{
+        display: inline-block;
+        margin-right: 16px;
+        line-height: 26px;
+        padding: 0 20px;
+        font-size: 14px;
+        margin-top: 18px;
+        cursor: pointer;
+        letter-spacing: 1px;
+        border-radius: 4px;
+        font-family: 'digi', sans-serif;
+      }
+      .main-form button:hover{
+        border: 1px solid #79b7e7;
+        background: #d0e5f5 url(https://www.droneponics.com/images/ui-bg_glass_75_d0e5f5_1x400.png) 50% 50% repeat-x;
+        color: #1d5987;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="bodyWrapper" class="container_24">
+      <div id="header" class="grid_24">
+        <div id="storeLogo">
+          <a href="https://www.droneponics.com/index.php">
+            <img src="store_logo.png" alt="Droneponics" title="Droneponics">
+          </a>
+        </div>
+      </div>
+
+      <div class="grid_24 ui-widget infoBoxContainer">
+        <div class="ui-widget-header infoBoxHeading">&nbsp;&nbsp;<a href="https://www.droneponics.com" class="headerNavigation">Top</a> » <a href="https://www.droneponics.com/index.php" class="headerNavigation">Catalog</a></div>
+      </div>
+
+      <div id="bodyContent" class="grid_16 push_4">
+        <div class="contentContainer">
+          <h1 class="header">WIFI Configuration</h1>
+          <div class="holder">
+            <form class="main-form" action="droneponics.html" method="post">
+              <label class="field-wrap">
+                <span>ssid:</span>
+                <select id="ssidList" name="ssidList" required="">
+                   <option value="ssid1">ssid1</option>
+                   <option value="ssid2">ssid2</option>
+                   <option value="ssid3">ssid3</option>                    
+                   <option value="disabled" selected="" hidden="">Please Choose...</option>
+                </select>
+              </label>
+              <label class="field-wrap">
+                <span for="ssid">ssid:</span>
+                <input type="text" id="ssid" name="ssid" value="ssid">
+              </label>
+              <label class="field-wrap">
+                <span for="password">Password:</span>
+                <input type="text" id="password" name="password" value="password">
+              </label>
+              <button class="ui-button ui-widget ui-state-default ui-corner-all ui-priority-primary" type="submit" value="Submit">Submit</button>
+              <button class="ui-button ui-widget ui-state-default ui-priority-secondary" type="reset" value="Reset">Reset</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
