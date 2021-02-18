@@ -132,14 +132,14 @@ def get_client(
     client.on_message = on_message
 
     # Connect to the Google MQTT bridge.
-    if(client.connect(mqtt_bridge_hostname, mqtt_bridge_port) != MQTT_ERR_SUCCESS):
+    if(client.connect(mqtt_bridge_hostname, mqtt_bridge_port) != mqtt.MQTT_ERR_SUCCESS):
       print("Failed to connect with private_key_file")
       print("Try to connect with private_key_file_backup = " + private_key_file_backup + " and algorithm = " + algorithm_backup)
       client.username_pw_set(
             username='unused',
             password=create_jwt(
                     project_id, private_key_file_backup, algorithm_backup))
-      if(client.connect(mqtt_bridge_hostname, mqtt_bridge_port) != MQTT_ERR_SUCCESS):
+      if(client.connect(mqtt_bridge_hostname, mqtt_bridge_port) != mqtt.MQTT_ERR_SUCCESS):
         print("Failed to connect with private_key_file_backup")
       else:
         print("Connect with private_key_file_backup")    
@@ -210,15 +210,13 @@ def main():
     # Process network events on new thread
     client.loop_start()
 
-    while True:
         
-        if connected:
-            print('connected would publishing data now on ' + mqtt_topic)
+    if connected:
+        print('connected would publishing data now on ' + mqtt_topic)
 
 
-        # Send events every second. limit to 1 per second due to fs limits
-        time.sleep(10)
 
+    print('Sucess!!')
 
 
 if __name__ == '__main__':
