@@ -184,8 +184,8 @@ with open(appFolder / "config/device_config.json") as f:
     dconfig = json.loads(str(f.read()))
 
 device_id = dconfig['DEVICE']['DEVICE_ID']
-private_key_file = dconfig['DEVICE']['PRIVATE_KEY']
-private_key_file_backup = dconfig['DEVICE']['PRIVATE_KEY_BACKUP']
+private_key_file =appFolder /  dconfig['DEVICE']['PRIVATE_KEY']
+private_key_file_backup =appFolder /  dconfig['DEVICE']['PRIVATE_KEY_BACKUP']
 algorithm = dconfig['DEVICE']['ALGORITHM']
 algorithm_backup = dconfig['DEVICE']['ALGORITHM_BACKUP']
 
