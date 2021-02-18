@@ -184,10 +184,6 @@ ca_certs = dconfig['DEVICE']['CA_CERTS']
 # This is the topic that the device will receive configuration updates on.
 mqtt_config_topic = '/devices/{}/config'.format(device_id)
 
-
-print("this is where to setup GPIO for led status");
-
-
 def main():
     global minimum_backoff_time
     global connected
