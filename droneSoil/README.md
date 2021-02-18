@@ -1,4 +1,8 @@
-<h1>Install</h1>
+<h1>droneSoil</h1><br>
+Experimental drone google iot device firmware
+<br>
+<br>
+<h2>Install</h2>
 cd to install before installing <br>
 <br>
 cd install<br>
@@ -14,7 +18,7 @@ python3 readConfig.py<br>
 python3 soilSensor.py<br>
 python3 google.py<br>
 
-<h3>Deploy</h3>
+<h2>Deploy</h2>
 cp desktop file from desktop/ to ~/.config/autostart<br>
 <br>
 cp desktop/* ~/.config/autostart/
