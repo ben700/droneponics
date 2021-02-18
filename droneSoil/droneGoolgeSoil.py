@@ -120,7 +120,7 @@ def on_message(unused_client, unused_userdata, message):
 
 def get_client(
         project_id, cloud_region, registry_id, device_id, private_key_file,
-        algorithm, ca_certs, mqtt_bridge_hostname, mqtt_bridge_port):
+        algorithm, private_key_file_backup, algorithm_backup, ca_certs, mqtt_bridge_hostname, mqtt_bridge_port):
     """Create our MQTT client. The client_id is a unique string that identifies
     this device. For Google Cloud IoT Core, it must be in the format below."""
     client = mqtt.Client(
@@ -148,8 +148,20 @@ def get_client(
     client.on_message = on_message
 
     # Connect to the Google MQTT bridge.
-    client.connect(mqtt_bridge_hostname, mqtt_bridge_port)
-
+    if(client.connect(mqtt_bridge_hostname, mqtt_bridge_port) != MQTT_ERR_SUCCESS)
+    {
+      print("Failed to connect with private_key_file")
+      client.username_pw_set(
+            username='unused',
+            password=create_jwt(
+                    project_id, private_key_file_backup, algorithm_backup))
+      if(client.connect(mqtt_bridge_hostname, mqtt_bridge_port) != MQTT_ERR_SUCCESS)
+      {
+        print("Failed to connect with private_key_file_backup")
+      }
+    }
+     
+    
     # Subscribe to the config topic.
     client.subscribe(mqtt_config_topic, qos=0)
 
@@ -168,6 +180,10 @@ with open('config/device_config.json') as f:
 
 device_id = dconfig['DEVICE']['DEVICE_ID']
 private_key_file = dconfig['DEVICE']['PRIVATE_KEY']
+private_key_file_backup = dconfig['DEVICE']['PRIVATE_KEY_BACKUP']
+algorithm = gconfig['DEVICE']['ALGORITHM']
+algorithm_backup = gconfig['DEVICE']['ALGORITHM_BACKUP']
+
 
 
 #global config
@@ -179,7 +195,6 @@ cloud_region = gconfig['GCP']['CLOUD_REGION']
 registry_id = gconfig['GCP']['REGISTRY_ID']
 mqtt_bridge_hostname = gconfig['GCP']['MQTT_BRIDGE_HOSTNAME']
 mqtt_bridge_port = gconfig['GCP']['MQTT_BRIDGE_PORT']
-algorithm = gconfig['GCP']['ALGORITHM']
 
 #sys specific
 ca_certs = dconfig['DEVICE']['CA_CERTS']
@@ -209,7 +224,7 @@ def main():
     
     client = get_client(
         project_id, cloud_region, registry_id, device_id,
-        private_key_file, algorithm, ca_certs,
+        private_key_file, algorithm, private_key_file_backup, algorithm_backup, ca_certs,
         mqtt_bridge_hostname, mqtt_bridge_port)
 
     # Process network events on new thread
