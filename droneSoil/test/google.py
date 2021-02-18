@@ -216,7 +216,7 @@ def main():
 
 
 
-    print('Sucess!!')
+    print('Success!!')
 
 
 if __name__ == '__main__':
