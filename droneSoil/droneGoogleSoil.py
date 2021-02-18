@@ -131,7 +131,7 @@ def get_client(
 
     # With Google Cloud IoT Core, the username field is ignored, and the
     # password field is used to transmit a JWT to authorize the device.
-    print("Try to connect with private_key_file = " + private_key_file + " and algorithm = " + algorithm)
+    print("Try to connect with private_key_file = " + str(private_key_file) + " and algorithm = " + algorithm)
     try:
         client.username_pw_set(
                 username='unused',
@@ -139,12 +139,12 @@ def get_client(
                         project_id, private_key_file, algorithm))
     except:
       print("Failed to connect with private_key_file")
-      print("Try to connect with private_key_file_backup = " + private_key_file_backup + " and algorithm = " + algorithm_backup)
+      print("Try to connect with private_key_file_backup = " + str(private_key_file_backup) + " and algorithm = " + algorithm_backup)
       client.username_pw_set(
               username='unused',
               password=create_jwt(
                       project_id, private_key_file_backup, algorithm_backup))
-      print("Success: Connect with private_key_file_backup = " + private_key_file_backup + " and algorithm = " + algorithm_backup)
+      print("Success: Connect with private_key_file_backup = " + str(private_key_file_backup) + " and algorithm = " + algorithm_backup)
 
 
     # Enable SSL/TLS support.
@@ -234,7 +234,7 @@ def main():
 
     # Process network events on new thread
     client.loop_start()
-
+    var serializedPayload
     while True:
         try:
             chirp.trigger()
@@ -248,7 +248,7 @@ def main():
             payload["timestamp"] = int(datetime.datetime.now().strftime("%s")) * 1000
 
             serializedPayload= json.dumps(payload, sort_keys=False, indent=2)
-            print(serializedPayload)
+            print(str(serializedPayload))
             
         except KeyboardInterrupt:
             print('\nCtrl-C Pressed! Exiting.\n')
