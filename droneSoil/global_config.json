@@ -1,0 +1,10 @@
+{
+  "GCP": {
+    "PROJECT_ID": "drone-302200",
+    "CLOUD_REGION": "europe-west1",
+    "REGISTRY_ID": "droneDevice",
+    "MQTT_BRIDGE_HOSTNAME": "mqtt.googleapis.com",
+    "MQTT_BRIDGE_PORT": 8883,
+    "ALGORITHM": "RS256"
+  }
+}

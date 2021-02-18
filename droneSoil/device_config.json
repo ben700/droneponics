@@ -1,0 +1,9 @@
+{
+  "DEVICE": {
+    "DEVICE_ID": "Pixelbook3",
+    "PRIVATE_KEY": "/home/benslittlebitsandbobs/.ssh/pixelbook_private.pem",
+    "SERIAL_PORT": "/dev/ttyAMA0",
+    "TYPE": "SYS-PI",
+    "CA_CERTS": "/home/benslittlebitsandbobs/.ssh/cacert.pem"
+  }
+}
