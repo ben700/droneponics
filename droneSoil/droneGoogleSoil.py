@@ -234,6 +234,8 @@ def main():
 
     # Process network events on new thread
     client.loop_start()
+    payload["timestamp"] = int(datetime.datetime.now().strftime("%s")) * 1000
+            
     while True:
         try:
             chirp.trigger()
@@ -243,7 +245,6 @@ def main():
             payload["rootLight"] = chirp.light
             payload["minMoist"] = min_moist
             payload["maxMoist"] = max_moist
-            payload["timestamp"] = int(datetime.datetime.now().strftime("%s")) * 1000
             
         except KeyboardInterrupt:
             print('\nCtrl-C Pressed! Exiting.\n')
@@ -259,7 +260,7 @@ def main():
 
 
         # Send events every second. limit to 1 per second due to fs limits
-        time.sleep(1)
+        time.sleep(60)
 
 
 
