@@ -204,7 +204,7 @@ ca_certs = dconfig['DEVICE']['CA_CERTS']
 mqtt_config_topic = '/devices/{}/config'.format(device_id)
 
 
-print("this is where to setup GPIO for led status");
+#print("this is where to setup GPIO for led status")
 
 
 def main():
