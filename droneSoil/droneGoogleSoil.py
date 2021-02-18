@@ -234,35 +234,33 @@ def main():
 
     # Process network events on new thread
     client.loop_start()
-    payload["timestamp"] = int(datetime.datetime.now().strftime("%s")) * 1000
             
     while True:
-        try:
-            chirp.trigger()
-            payload["moisture"] = chirp.moist
-            payload["moisturePercent"] = chirp.moist_percent 
-            payload["rootTemp"] = chirp.temp
-            payload["rootLight"] = chirp.light
-            payload["minMoist"] = min_moist
-            payload["maxMoist"] = max_moist
+      payload = {}
+      try:
+          chirp.trigger()
+          payload["moisture"] = chirp.moist
+          payload["moisturePercent"] = chirp.moist_percent 
+          payload["rootTemp"] = chirp.temp
+          payload["rootLight"] = chirp.light
+          payload["minMoist"] = min_moist
+          payload["maxMoist"] = max_moist
+          payload["timestamp"] = int(datetime.datetime.now().strftime("%s")) * 1000
             
-        except KeyboardInterrupt:
-            print('\nCtrl-C Pressed! Exiting.\n')
-        except :
-            print('\nExcept! Reading moisture Exiting.\n')            
+      except KeyboardInterrupt:
+          print('\nCtrl-C Pressed! Exiting.\n')
+      except :
+          print('\nExcept! Reading moisture Exiting.\n')            
         
-        serializedPayload= json.dumps(payload, sort_keys=False, indent=2)
-        print(str(serializedPayload))
+      serializedPayload= json.dumps(payload, sort_keys=False, indent=2)
+      print(str(serializedPayload))
     
-        if connected:
-            print('publishing ' + str(serializedPayload) + ' on ' + mqtt_topic)
-            print(client.publish(mqtt_topic, serializedPayload, qos=0))
+      if connected:
+          print('publishing ' + str(serializedPayload) + ' on ' + mqtt_topic)
+          print(client.publish(mqtt_topic, serializedPayload, qos=0))
 
-
-        # Send events every second. limit to 1 per second due to fs limits
-        time.sleep(60)
-
-
+      # Send events every second. limit to 1 per second due to fs limits
+      time.sleep(60)
 
 if __name__ == '__main__':
     main()
