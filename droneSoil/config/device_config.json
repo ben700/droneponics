@@ -1,0 +1,8 @@
+{
+  "DEVICE": {
+    "DEVICE_ID": "droneSoil",
+    "PRIVATE_KEY": "certs/pixelbook_private.pem",
+    "TYPE": "SYS-PI",
+    "CA_CERTS": "certs/cacert.pem"
+  }
+}
