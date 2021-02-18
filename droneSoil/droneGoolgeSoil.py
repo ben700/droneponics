@@ -168,7 +168,6 @@ with open('config/device_config.json') as f:
 
 device_id = dconfig['DEVICE']['DEVICE_ID']
 private_key_file = dconfig['DEVICE']['PRIVATE_KEY']
-sys_type = dconfig['DEVICE']['TYPE']
 
 
 #global config
