@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 # Copyright 2018 Google Inc.
 #
@@ -163,7 +163,7 @@ def toggle_led(status):
 ###CONFIG###
 
 # device specific config
-with open('../../device/device_config.json') as f:
+with open('config/device_config.json') as f:
     dconfig = json.loads(str(f.read()))
 
 device_id = dconfig['DEVICE']['DEVICE_ID']
@@ -172,7 +172,7 @@ sys_type = dconfig['DEVICE']['TYPE']
 
 
 #global config
-with open('startup_utils/global_config.json') as f:
+with open('config/global_config.json') as f:
     gconfig = json.loads(str(f.read()))
 
 project_id = gconfig['GCP']['PROJECT_ID']
