@@ -2,7 +2,9 @@
   "DEVICE": {
     "DEVICE_ID": "droneSoil",
     "PRIVATE_KEY": "certs/droneSoil_private_RSA.pem",
+    "ALGORITHM": "RS256"
     "PRIVATE_KEY_BACKUP": "certs/droneSoil_private.pem",
+    "ALGORITHM_BACKUP": "ES256"
     "CA_CERTS": "certs/cacert.pem"
   }
 }
