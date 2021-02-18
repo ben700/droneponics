@@ -121,26 +121,18 @@ def get_client(
     client.on_message = on_message
 
     # Connect to the Google MQTT bridge.
-    if(client.connect(mqtt_bridge_hostname, mqtt_bridge_port) != MQTT_ERR_SUCCESS)
-    {
+    if(client.connect(mqtt_bridge_hostname, mqtt_bridge_port) != MQTT_ERR_SUCCESS):
       print("Failed to connect with private_key_file")
       client.username_pw_set(
             username='unused',
             password=create_jwt(
                     project_id, private_key_file_backup, algorithm_backup))
-      if(client.connect(mqtt_bridge_hostname, mqtt_bridge_port) != MQTT_ERR_SUCCESS)
-      {
+      if(client.connect(mqtt_bridge_hostname, mqtt_bridge_port) != MQTT_ERR_SUCCESS):
         print("Failed to connect with private_key_file_backup")
-      }
-      else
-      {
+      else:
         print("Connect with private_key_file_backup")    
-      }
-    }
-    else
-    {
+    else:
       print("Connect with private_key_file")    
-    }
      
     
     # Subscribe to the config topic.
@@ -162,8 +154,8 @@ with open('../config/device_config.json') as f:
 device_id = dconfig['DEVICE']['DEVICE_ID']
 private_key_file = dconfig['DEVICE']['PRIVATE_KEY']
 private_key_file_backup = dconfig['DEVICE']['PRIVATE_KEY_BACKUP']
-algorithm = gconfig['DEVICE']['ALGORITHM']
-algorithm_backup = gconfig['DEVICE']['ALGORITHM_BACKUP']
+algorithm = dconfig['DEVICE']['ALGORITHM']
+algorithm_backup = dconfig['DEVICE']['ALGORITHM_BACKUP']
 
 
 
