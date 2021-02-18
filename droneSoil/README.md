@@ -1,6 +1,5 @@
-
 <h1>Install</h1>
-cd to install before installing 
+cd to install before installing <br>
 
 cd install<br>
 chmod +x install.sh<br>
