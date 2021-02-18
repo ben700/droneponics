@@ -1,7 +1,8 @@
 {
   "DEVICE": {
     "DEVICE_ID": "droneSoil",
-    "PRIVATE_KEY": "certs/droneSoil_private.pem",
+    "PRIVATE_KEY": "certs/droneSoil_private_RSA.pem",
+    "PRIVATE_KEY_BACKUP": "certs/droneSoil_private.pem",
     "CA_CERTS": "certs/cacert.pem"
   }
 }
