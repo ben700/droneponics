@@ -106,6 +106,7 @@ def get_client(
 
     # With Google Cloud IoT Core, the username field is ignored, and the
     # password field is used to transmit a JWT to authorize the device.
+    print("Try to connect with private_key_file = " + private_key_file + " and algorithm = " + algorithm)
     client.username_pw_set(
             username='unused',
             password=create_jwt(
@@ -123,6 +124,7 @@ def get_client(
     # Connect to the Google MQTT bridge.
     if(client.connect(mqtt_bridge_hostname, mqtt_bridge_port) != MQTT_ERR_SUCCESS):
       print("Failed to connect with private_key_file")
+      print("Try to connect with private_key_file_backup = " + private_key_file_backup + " and algorithm = " + algorithm_backup)
       client.username_pw_set(
             username='unused',
             password=create_jwt(
@@ -152,8 +154,8 @@ with open('../config/device_config.json') as f:
     dconfig = json.loads(str(f.read()))
 
 device_id = dconfig['DEVICE']['DEVICE_ID']
-private_key_file = dconfig['DEVICE']['PRIVATE_KEY']
-private_key_file_backup = dconfig['DEVICE']['PRIVATE_KEY_BACKUP']
+private_key_file = "../" + dconfig['DEVICE']['PRIVATE_KEY']
+private_key_file_backup =  "../" + dconfig['DEVICE']['PRIVATE_KEY_BACKUP']
 algorithm = dconfig['DEVICE']['ALGORITHM']
 algorithm_backup = dconfig['DEVICE']['ALGORITHM_BACKUP']
 
@@ -170,7 +172,7 @@ mqtt_bridge_hostname = gconfig['GCP']['MQTT_BRIDGE_HOSTNAME']
 mqtt_bridge_port = gconfig['GCP']['MQTT_BRIDGE_PORT']
 
 #sys specific
-ca_certs = dconfig['DEVICE']['CA_CERTS']
+ca_certs =  "../" + dconfig['DEVICE']['CA_CERTS']
 
 
 # This is the topic that the device will receive configuration updates on.
