@@ -253,9 +253,8 @@ def main():
           print('\nExcept! Reading moisture Exiting.\n')            
         
       serializedPayload= json.dumps(payload, sort_keys=False, indent=2)
-      print(str(serializedPayload))
     
-      if connected:
+      if connected && serializedPayload.length() > 0:
           print('publishing ' + str(serializedPayload) + ' on ' + mqtt_topic)
           print(client.publish(mqtt_topic, serializedPayload, qos=0))
 
