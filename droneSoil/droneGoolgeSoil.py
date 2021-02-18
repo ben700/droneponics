@@ -25,11 +25,7 @@ import io
 
 import jwt
 import paho.mqtt.client as mqtt
-import json
-import sys
-sys.path.append('/home/pi/droneponics')
 import chirp
-import time
 
 # These values needs to be calibrated for the percentage to work!
 # The highest and lowest value the individual sensor outputs.
