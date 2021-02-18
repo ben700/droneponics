@@ -234,11 +234,9 @@ def main():
 
     # Process network events on new thread
     client.loop_start()
-    var serializedPayload
     while True:
         try:
             chirp.trigger()
-        
             payload["moisture"] = chirp.moist
             payload["moisturePercent"] = chirp.moist_percent 
             payload["rootTemp"] = chirp.temp
@@ -246,17 +244,15 @@ def main():
             payload["minMoist"] = min_moist
             payload["maxMoist"] = max_moist
             payload["timestamp"] = int(datetime.datetime.now().strftime("%s")) * 1000
-
-            serializedPayload= json.dumps(payload, sort_keys=False, indent=2)
-            print(str(serializedPayload))
             
         except KeyboardInterrupt:
             print('\nCtrl-C Pressed! Exiting.\n')
         except :
             print('\nExcept! Reading moisture Exiting.\n')            
-        finally:
-            print('Bye!')
         
+        serializedPayload= json.dumps(payload, sort_keys=False, indent=2)
+        print(str(serializedPayload))
+    
         if connected:
             print('publishing ' + str(serializedPayload) + ' on ' + mqtt_topic)
             print(client.publish(mqtt_topic, serializedPayload, qos=0))
