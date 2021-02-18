@@ -13,10 +13,9 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-import sys
-import os
-sys.path.append('/home/pi/droneponics/droneSoil/')
-    
+from pathlib import Path
+appFolder = Path("/home/pi/droneponics/droneSoil/")
+
 import argparse
 import datetime
 import os
@@ -181,19 +180,19 @@ def toggle_led(status):
 ###CONFIG###
 
 # device specific config
-with open('config/device_config.json') as f:
+with open(appFolder / "config/device_config.json") as f:
     dconfig = json.loads(str(f.read()))
 
 device_id = dconfig['DEVICE']['DEVICE_ID']
 private_key_file = dconfig['DEVICE']['PRIVATE_KEY']
 private_key_file_backup = dconfig['DEVICE']['PRIVATE_KEY_BACKUP']
-algorithm = gconfig['DEVICE']['ALGORITHM']
-algorithm_backup = gconfig['DEVICE']['ALGORITHM_BACKUP']
+algorithm = dconfig['DEVICE']['ALGORITHM']
+algorithm_backup = dconfig['DEVICE']['ALGORITHM_BACKUP']
 
 
 
 #global config
-with open('config/global_config.json') as f:
+with open(appFolder / "config/global_config.json") as f:
     gconfig = json.loads(str(f.read()))
 
 project_id = gconfig['GCP']['PROJECT_ID']
@@ -203,7 +202,7 @@ mqtt_bridge_hostname = gconfig['GCP']['MQTT_BRIDGE_HOSTNAME']
 mqtt_bridge_port = gconfig['GCP']['MQTT_BRIDGE_PORT']
 
 #sys specific
-ca_certs = dconfig['DEVICE']['CA_CERTS']
+ca_certs = appFolder / dconfig['DEVICE']['CA_CERTS']
 
 
 # This is the topic that the device will receive configuration updates on.
