@@ -35,8 +35,8 @@ with open('../config/device_config.json') as f:
 device_id = dconfig['DEVICE']['DEVICE_ID']
 private_key_file = dconfig['DEVICE']['PRIVATE_KEY']
 private_key_file_backup = dconfig['DEVICE']['PRIVATE_KEY_BACKUP']
-algorithm = gconfig['DEVICE']['ALGORITHM']
-algorithm_backup = gconfig['DEVICE']['ALGORITHM_BACKUP']
+algorithm = dconfig['DEVICE']['ALGORITHM']
+algorithm_backup = dconfig['DEVICE']['ALGORITHM_BACKUP']
 
 
 
