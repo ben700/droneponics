@@ -155,18 +155,14 @@ def get_client(
     client.on_message = on_message
 
     # Connect to the Google MQTT bridge.
-    if(client.connect(mqtt_bridge_hostname, mqtt_bridge_port) != mqtt.MQTT_ERR_SUCCESS)
-    {
+    if(client.connect(mqtt_bridge_hostname, mqtt_bridge_port) != mqtt.MQTT_ERR_SUCCESS):
       print("Failed to connect with private_key_file")
       client.username_pw_set(
             username='unused',
             password=create_jwt(
                     project_id, private_key_file_backup, algorithm_backup))
-      if(client.connect(mqtt_bridge_hostname, mqtt_bridge_port) != mqtt.MQTT_ERR_SUCCESS)
-      {
+      if(client.connect(mqtt_bridge_hostname, mqtt_bridge_port) != mqtt.MQTT_ERR_SUCCESS):
         print("Failed to connect with private_key_file_backup")
-      }
-    }
      
     
     # Subscribe to the config topic.
