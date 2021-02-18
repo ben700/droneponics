@@ -254,7 +254,7 @@ def main():
         
       serializedPayload= json.dumps(payload, sort_keys=False, indent=2)
     
-      if (connected and serializedPayload.length() > 0):
+      if (connected and serializedPayload.len() > 0):
           print('publishing ' + str(serializedPayload) + ' on ' + mqtt_topic)
           print(client.publish(mqtt_topic, serializedPayload, qos=0))
 
