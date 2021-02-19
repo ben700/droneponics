@@ -11,18 +11,15 @@ while (complete is not True):
     try:
         co2 = AtlasI2C(105)
         time.sleep(1)
-        print("CO2 Read starting config :" + co2.query("O,?"))     
-        print("CO2 Read starting Plock :" + co2.query("Plock,?"))     
+        print("CO2 Read starting config :" + co2.query("O,?"))        
         print("CO2 info :" + co2.query("I"))     
-        
-        
     except:
         complete = False
         co2 = None
         print("Failed : No CO2 sensor")
     try:
         if(co2 is not None):
-            print("CO2 Turn on temp :" + co2.query("O,t,1"))
+            print("CO2 Turn on temp :" + co2.query("O,t,0")) # use temp from Humidity
             print("CO2 Read ending config :" + co2.query("O,?")) 
             print("Success : Processing CO2 commands")
             complete = True
@@ -30,6 +27,7 @@ while (complete is not True):
         print("Failed : Processing CO2 commands")
         complete = False
 
+        
     try:
         hum = AtlasI2C(111)
         time.sleep(1)
@@ -39,8 +37,6 @@ while (complete is not True):
         complete = False
         hum = None
         print("Failed : No Humidity sensor")
-        
-        
     try:
         if(hum is not None):
             print("Humidity Turn on Humidity :" + hum.query("O,HUM,1"))
@@ -51,7 +47,9 @@ while (complete is not True):
     except:
         print("Failed : Processing Humidity commands")
         complete = False
-    
+
     if(complete is not True):
         print("")
+    else:
+        print("Success : All command ran check logs to confirm success")
     time.sleep(5) #give time to read
