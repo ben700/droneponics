@@ -21,14 +21,14 @@ class SensorList:
     i=0
     for device in devList:
       try:
-        print("testing " + device.name)
+        print("Testing to see is "+device.name+" is connected")
         if (device.connected()):
           self.sensorlist.append(device)
-          print("Success found " + device.name)          
+          print("Success " + device.name + " is connected")          
       except:
           print("Didn't find " + device.name)
         
-    print("len sensorlist " + str(len(self.sensorlist)))
+    print("Found total of " + str(len(self.sensorlist)) + " devices connected.")
     
   def payload(self, _payload):
     for sensor in self.sensorlist:
