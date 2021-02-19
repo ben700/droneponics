@@ -31,12 +31,7 @@ import paho.mqtt.client as mqtt
 import time
 import sys
 import os
-sys.path.append('/home/pi/droneponics/droneAirAtlas')
-from AtlasI2C import (AtlasI2C)
-
-I2C_CO2 = 105
-I2C_HUM = 111
-
+import drone
 
 # [START iot_mqtt_jwt]
 def create_jwt(project_id, private_key_file, algorithm):
