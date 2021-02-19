@@ -1,3 +1,6 @@
+import sys
+import os
+sys.path.append('/home/pi/droneponics/droneAtlas/drone')
 from AtlasI2C import (AtlasI2C)
 import datetime
 import time
