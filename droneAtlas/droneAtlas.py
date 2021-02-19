@@ -237,6 +237,7 @@ def main():
         print("Waiting to be connected")
         time.sleep(1)
         
+    print("Success : Connected")
     if (connected):
         print('publishing boot data ' + str(serializedPayload) + ' on ' + mqtt_topic + '/deviceBoot')
         print(client.publish(mqtt_topic+'/deviceBoot', serializedPayload, qos=0))
