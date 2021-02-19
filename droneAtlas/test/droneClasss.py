@@ -1,6 +1,6 @@
 import sys
 import os
-sys.path.append('/home/pi/droneponics/droneAirAtlas/drone')
+sys.path.append('/home/pi/droneponics/droneAir/drone')
 import drone
     
 hum = drone.Sensor(111, "Humidity")
