@@ -1,11 +1,13 @@
 
 import socket
+import time
 from getmac import get_mac_address
 
 # get mac address
 def get_mac(interface="wlan0", p=0):
     #return value
     return get_mac_address(interface)
+
 def gethostname():
     return socket.gethostname()
 
@@ -20,3 +22,9 @@ def get_ip():
     finally:
         s.close()
     return IP
+
+def payload(payload):
+    payload["bootTime"] = int(time.time())
+    payload["deviceMAC"] = drone.get_mac()
+    payload["deviceIP"] = drone.get_ip()
+    payload["gethostname"] = drone.gethostname()
