@@ -1,0 +1,11 @@
+{
+  "DEVICE": {
+    "DEVICE_ID": "droneAir",
+    "PRIVATE_KEY": "certs/droneAir_private_RSA.pem",
+    "ALGORITHM": "RS256",
+    "PRIVATE_KEY_BACKUP": "certs/droneAir_private.pem",
+    "ALGORITHM_BACKUP": "ES256",
+    "CA_CERTS": "certs/cacert.pem",
+    "deviceType" : "BME680"
+  }
+}
