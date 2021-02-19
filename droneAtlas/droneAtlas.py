@@ -262,6 +262,9 @@ def main():
                 print(client.publish(mqtt_topic, serializedPayload, qos=0))
             elif (len(serializedPayload) < 4):
                 print("Error: No payload Data")
+                print("Going to fix it")
+                drone.fixMe()
+                
                 
                 
             time.sleep(60)
