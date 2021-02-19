@@ -26,7 +26,7 @@ for i in device_address_list:
      print("Error reading")
 
    try:
-     moduletype = idevice.query("I").split(",")[1]
-     print("Device type " + moduletype) 
+     cal = idevice.query("cal,?").split(",")[1]
+     print("Device calibration " + cal) 
    except:
-     print("Error query info")
+     print("Error query cal")
