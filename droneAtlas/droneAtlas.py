@@ -232,6 +232,11 @@ def main():
     
     serializedPayload = json.dumps(payload, sort_keys=False, indent=2)
         
+        
+    while(connected is not True):
+        print("Waiting to be connected")
+        time.sleep(1)
+        
     if (connected):
         print('publishing boot data ' + str(serializedPayload) + ' on ' + mqtt_topic + '/deviceBoot')
         print(client.publish(mqtt_topic+'/deviceBoot', serializedPayload, qos=0))
