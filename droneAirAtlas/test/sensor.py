@@ -30,3 +30,5 @@ for i in device_address_list:
      print("Device parameters " + cal) 
    except:
      print("Error query cal")
+        
+    print(idevice.query("Factory"))
