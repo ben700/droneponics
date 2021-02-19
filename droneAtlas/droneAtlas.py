@@ -223,7 +223,7 @@ def main():
 
     # Process network events on new thread
     client.loop_start()
-    
+    payload = {}
     payload["bootTime"] = int(time.time())
     payload["deviceMAC"] = drone.get_mac()
     payload["deviceIP"] = drone.get_ip()
