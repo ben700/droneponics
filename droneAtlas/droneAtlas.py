@@ -227,18 +227,7 @@ def main():
     while True:
         try:
             payload = {}
-            try:
-                payload["CO2"] = AtlasI2C(I2C_CO2).query("R")
-            except:
-                payload["CO2"] = "Sensor Failed"
-                pass 
-                 
-            try:
-                payload["humidity"] = AtlasI2C(I2C_HUM).query("R")
-            except:
-                payload["humidity"] = "Sensor Failed"
-                pass 
-        
+            sensorList.payload(payload)
             serializedPayload = json.dumps(payload, sort_keys=False, indent=2)
         
             if (connected and len(serializedPayload) > 0):
