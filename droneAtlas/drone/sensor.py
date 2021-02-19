@@ -114,7 +114,7 @@ class Sensor:
         _payload[self.value2PayloadName] = self.value 
       if(self.value3 != None):
         _payload[self.value3PayloadName] = self.value 
-      if(self.value3 != None):
+      if(self.value4 != None):
         _payload[self.value4PayloadName] = self.value 
          
 
