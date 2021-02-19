@@ -223,6 +223,7 @@ def main():
 
     # Process network events on new thread
     client.loop_start()
+    print("Sending Boot data over to Goolge")
     payload = {}
     payload["bootTime"] = int(time.time())
     payload["deviceMAC"] = drone.get_mac()
@@ -231,11 +232,9 @@ def main():
     
     serializedPayload = json.dumps(payload, sort_keys=False, indent=2)
         
-    if (connected and len(serializedPayload) > 3): # this is because we have the {}
+    if (connected):
         print('publishing boot data ' + str(serializedPayload) + ' on ' + mqtt_topic + '/deviceBoot')
         print(client.publish(mqtt_topic+'/deviceBoot', serializedPayload, qos=0))
-    elif (len(serializedPayload) < 4):
-        print("Error: No Boot payload Data")
          
         
     while True:
