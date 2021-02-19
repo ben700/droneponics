@@ -10,6 +10,7 @@ while (complete is not True):
     complete = True
     try:
         co2 = AtlasI2C(105)
+        time.sleep(1)
         print(co2.query("O,?"))     
     except:
         complete = False
@@ -27,6 +28,7 @@ while (complete is not True):
 
     try:
         hum = AtlasI2C(111)
+        time.sleep(1)
         print(hum.query("O,?")) 
     except:
         complete = False
