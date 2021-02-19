@@ -142,7 +142,7 @@ except:
 
     
     payload = {}
-    payload.add("devicetime", time.time())
+    payload["devicetime"] = time.time()
     if(bme680 is not None):            
         payload["sensorType"] = "bme680"
         payload["voc"] = "{0:.4f}".format(bme680.gas)
