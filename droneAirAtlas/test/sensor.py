@@ -32,5 +32,5 @@ while(True):
          print("Device parameters " + cal) 
       except:
          print("Error query cal")
-   print('\n')
-   print('\n')
+
+   print('---------------------\n')
