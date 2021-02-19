@@ -31,7 +31,8 @@ class SensorList:
     except:   
         print("Except creating hum")
         
-        
+    for y in self.sensorlist[i]
+        print("Found " + i.name)    
         
   def devicesConnected(self):
         device_address_list = AtlasI2C().list_i2c_devices()
