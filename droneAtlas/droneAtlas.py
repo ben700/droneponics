@@ -227,6 +227,7 @@ def main():
     while True:
         try:
             payload = {}
+            sensorList = drone.SensorList()
             sensorList.payload(payload)
             serializedPayload = json.dumps(payload, sort_keys=False, indent=2)
         
