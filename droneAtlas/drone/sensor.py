@@ -26,6 +26,8 @@ class SensorList:
           print("connected " + device.name)
           print("counter " + str(i))
           self.sensorlist[0] = device
+          print("Added to sensorlist[0]")
+          
           self.sensorlist[i] = device
           print("Added to sensorlist")
           i = i + 1
