@@ -26,7 +26,7 @@ for i in device_address_list:
      print("Error reading")
 
    try:
-     cal = idevice.query("Cal,?")
-     print("Device calibration " + cal) 
+     cal = idevice.query("O,?")
+     print("Device parameters " + cal) 
    except:
      print("Error query cal")
