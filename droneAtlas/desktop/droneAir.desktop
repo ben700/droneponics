@@ -1,4 +1,4 @@
 [Desktop Entry]
 Type=Application
 Name=droneAir  
-Exec=xterm -hold -e '/usr/bin/python3 /home/pi/droneponics/droneAtlas/droneAir.py'
+Exec=xterm -hold -e 'sudo /usr/bin/python3 /home/pi/droneponics/droneAtlas/droneAir.py'
