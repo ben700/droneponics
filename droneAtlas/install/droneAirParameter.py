@@ -17,6 +17,7 @@ while (complete is not True):
         complete = True
     except:
         print("Fail CO2")
+        AtlasI2C(105).query("Factory")
         complete = False
 
     try:
@@ -29,6 +30,7 @@ while (complete is not True):
         print("Success HUM")
     except:
         print("Failed hum")
+        AtlasI2C(111).query("Factory")
         complete = False
     
     if(complete is not True):
