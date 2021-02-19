@@ -16,7 +16,7 @@ while (complete is not True):
         co2 = None
         print("Failed : No CO2 sensor")
     try:
-        if(co is not None):
+        if(co2 is not None):
             print(co2.query("O,t,1"))
             print(co2.query("O,?")) 
             print("Success CO2")
