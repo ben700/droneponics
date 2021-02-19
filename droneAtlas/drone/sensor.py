@@ -26,7 +26,8 @@ class SensorList:
           print("connected " + device.name)
           print("counter " + str(i))
           sensorlist[i] = device
-          i = i +1
+          print("Added to sensorlist")
+          i = i + 1
           print("Success find " + device.name)          
       except:
           print("Didn't find " + device.name)
