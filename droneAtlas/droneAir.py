@@ -240,11 +240,11 @@ def main():
     
     #First log the boot to firebase
     print("Sending Boot data over to Goolge")
-    payload = {}
-    drone.payload(payload)
-    if(len(payload) > 0):
-        payload["deviceTime"]  =  int(time.time())
-    serializedPayload = json.dumps(payload, sort_keys=False, indent=2)
+    _payload = {}
+    drone.payload(_payload)
+    if(len(_payload) > 0):
+        _payload["deviceTime"]  =  int(time.time())
+    serializedPayload = json.dumps(_payload, sort_keys=False, indent=2)
     if (connected):
         print('publishing boot data ' + str(serializedPayload) + ' on ' + mqtt_topic + '/deviceBoot')
         print(client.publish(mqtt_topic+'/deviceBoot', serializedPayload, qos=0))
