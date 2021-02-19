@@ -9,6 +9,7 @@ device = AtlasI2C()
 device_address_list = device.list_i2c_devices()
 print("Found " + str(len(device_address_list)) + " devices" + '\n')
 for i in device_address_list:
+   print("Device at address " + str(i) + '\n')  
    idevice = AtlasI2C(i)
    print("Device Name " + '\n') 
    print(idevice.query("name,?").split(",")[1])
