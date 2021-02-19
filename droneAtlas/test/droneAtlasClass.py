@@ -7,7 +7,7 @@ import json
 
 
 
-sensorList = drone.SensorList()
+sensorList = drone.AtlasSensorList()
 payload = {}
 sensorList.payload(payload)
 serializedPayload= json.dumps(payload, sort_keys=False, indent=2)
