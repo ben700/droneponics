@@ -34,6 +34,9 @@ class SensorList:
     for y in self.sensorlist:
         print("Found " + i.name)    
         
+    print("Completed List")
+    
+    
   def devicesConnected(self):
         device_address_list = AtlasI2C().list_i2c_devices()
         print("Found " + str(len(device_address_list)) + " devices" + '\n')
