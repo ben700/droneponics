@@ -233,9 +233,10 @@ def main():
     serializedPayload = json.dumps(payload, sort_keys=False, indent=2)
         
         
-    while(connected is not True):
+    while not connected:
         print("Waiting to be connected")
         time.sleep(1)
+        continue
         
     print("Success : Connected")
     if (connected):
