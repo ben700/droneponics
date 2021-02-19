@@ -32,6 +32,7 @@ import time
 import sys
 import os
 import drone
+refreshRate = 60
 
 # [START iot_mqtt_jwt]
 def create_jwt(project_id, private_key_file, algorithm):
@@ -94,8 +95,7 @@ def on_publish(unused_client, unused_userdata, unused_mid):
 
 def on_message(unused_client, unused_userdata, message):
     """Callback when the device receives a message on a subscription."""
-    global  ph_Dose
-    global  ec_Dose
+    global  refreshRate
     payload = message.payload.decode('utf-8')
     print('Received message \'{}\' on topic \'{}\' with Qos {}'.format(
             payload, message.topic, str(message.qos)))
@@ -103,7 +103,12 @@ def on_message(unused_client, unused_userdata, message):
     if not payload:
       return
 
-
+    data = json.loads(payload)
+    
+    if "refreshRate" in data:
+        refreshRate = data["refreshRate"]
+        print("Success: Refresh Rate set to " + str(refreshRate))
+        
 
 def get_client(
         project_id, cloud_region, registry_id, device_id, private_key_file,
@@ -267,7 +272,7 @@ def main():
                 
                 
                 
-            time.sleep(60)
+            time.sleep(refreshRate)
         
         except KeyboardInterrupt:
                 print('\nCtrl-C Pressed! Exiting.\n')
