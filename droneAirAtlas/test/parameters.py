@@ -13,7 +13,7 @@ CO2.write("R")
 time.sleep(2)
 print(CO2.read())
 
-timr.sleep(1)
+time.sleep(1)
 
 print(CO2.query("R"))
 
