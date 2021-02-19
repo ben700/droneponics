@@ -23,13 +23,14 @@ while (complete is not True):
     except:
         print("Fail CO2")
         complete = False
-    except:
-        print("Failed : No Humidity sensor")
 
     try:
         hum = AtlasI2C(111)
         print("Processing Humidity")
         print(hum.query("O,?")) 
+    except:
+        print("Failed : No Humidity sensor")
+        
         
     try:
         if(hum is not None):
