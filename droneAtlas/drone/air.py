@@ -163,7 +163,6 @@ except:
         dewPoint = dew_point(temperature=t, humidity=bme280.humidity)
         payload["dewPoint"] = dewPoint
    
-    payload = drone.dronePayload(_log)
     if (tsl is not None):
         payload["lux"] = "{0:.0f}".format(tsl.lux)
         payload["infrared"] = "{0:d}".format(tsl.infrared)
