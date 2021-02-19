@@ -21,7 +21,7 @@ class SensorList:
     i=0
     for device in devList:
       try:
-        print("Testing to see is "+device.name+" is connected")
+        print("Testing to see if "+device.name+" sensor is connected")
         if (device.connected()):
           self.sensorlist.append(device)
           print("Success " + device.name + " is connected")          
