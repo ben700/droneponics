@@ -12,6 +12,9 @@ while (complete is not True):
         co2 = AtlasI2C(105)
         time.sleep(1)
         print("CO2 Read starting config :" + co2.query("O,?"))     
+        print("CO2 Read starting config :" + co2.query("Plock,?"))     
+        
+        
     except:
         complete = False
         co2 = None
