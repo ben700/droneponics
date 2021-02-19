@@ -231,11 +231,7 @@ def main():
     
     print("Sending Boot data over to Goolge")
     payload = {}
-    payload["bootTime"] = int(time.time())
-    payload["deviceMAC"] = drone.get_mac()
-    payload["deviceIP"] = drone.get_ip()
-    payload["gethostname"] = drone.gethostname()
-    
+    drone.payload(payload)    
     serializedPayload = json.dumps(payload, sort_keys=False, indent=2)
   
     if (connected):
