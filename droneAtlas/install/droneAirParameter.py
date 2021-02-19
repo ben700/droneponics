@@ -19,10 +19,10 @@ while (complete is not True):
         if(co2 is not None):
             print(co2.query("O,t,1"))
             print(co2.query("O,?")) 
-            print("Success CO2")
+            print("Success : CO2")
             complete = True
     except:
-        print("Fail CO2")
+        print("Failed : Config CO2 sensor")
         complete = False
 
     try:
@@ -40,9 +40,9 @@ while (complete is not True):
             print(hum.query("O,Dew,1"))
             print(hum.query("O,T,1"))
             print(hum.query("O,?")) 
-            print("Success HUM")
+            print("Success : Humidity")
     except:
-        print("Failed hum")
+        print("Failed : Config Humidity sensor")
         complete = False
     
     if(complete is not True):
