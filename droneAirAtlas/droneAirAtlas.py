@@ -242,12 +242,16 @@ def main():
             except:
                 pass 
         
-        serializedPayload= json.dumps(payload, sort_keys=False, indent=2)
-        if (connected and len(serializedPayload) > 0):
-            print('publishing ' + str(serializedPayload) + ' on ' + mqtt_topic)
-            print(client.publish(mqtt_topic, serializedPayload, qos=0))
-            
-        time.sleep(60)
+            serializedPayload = json.dumps(payload, sort_keys=False, indent=2)
+        
+            if (connected and len(serializedPayload) > 0):
+                print('publishing ' + str(serializedPayload) + ' on ' + mqtt_topic)
+                print(client.publish(mqtt_topic, serializedPayload, qos=0))
+            else if (len(serializedPayload) > 0):
+                print("Error: no payload Data")
+                
+                
+            time.sleep(60)
         
         except KeyboardInterrupt:
                 print('\nCtrl-C Pressed! Exiting.\n')
