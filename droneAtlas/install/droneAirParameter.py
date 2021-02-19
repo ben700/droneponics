@@ -10,9 +10,10 @@ while (complete is not True):
     complete = True
     try:
         co2 = AtlasI2C(105)
-        print("Processing CO2")
         print(co2.query("O,?"))     
     except:
+        complete = False
+        co2 = None
         print("Failed : No CO2 sensor")
     try:
         if(co is not None):
@@ -26,9 +27,10 @@ while (complete is not True):
 
     try:
         hum = AtlasI2C(111)
-        print("Processing Humidity")
         print(hum.query("O,?")) 
     except:
+        complete = False
+        hum = None
         print("Failed : No Humidity sensor")
         
         
