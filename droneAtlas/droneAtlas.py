@@ -248,7 +248,7 @@ def main():
     while True:
         try:
             payload = {}
-            sensorList = drone.SensorList()
+            sensorList = drone.AtlasSensorList()
         except :
             print('Except! Building SensorList.')            
         try:            
