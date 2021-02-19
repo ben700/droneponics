@@ -8,3 +8,6 @@ hum.read()
 
 co2 = drone.Sensor(105, "CO2")
 co2.read()
+
+
+drone.SensorList()
