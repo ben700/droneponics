@@ -230,20 +230,22 @@ def main():
     client.loop_start()
             
     while True:
-      payload = {}
-      try:
-        payload["CO2"] = AtlasI2C(I2C_CO2).query("R").split(":")[1]
-      except:
-        pass 
-      try:
-       payload["humidity"] = AtlasI2C(I2C_HUM).query("R").split(":")[1]
-      except:
-        pass 
+        try:
+            payload = {}
+            try:
+                payload["CO2"] = AtlasI2C(I2C_CO2).query("R").split(":")[1]
+            except:
+                pass 
+                 
+            try:
+                payload["humidity"] = AtlasI2C(I2C_HUM).query("R").split(":")[1]
+            except:
+                pass 
         
-      except KeyboardInterrupt:
-          print('\nCtrl-C Pressed! Exiting.\n')
-      except :
-          print('\nExcept! Reading moisture Exiting.\n')            
+         except KeyboardInterrupt:
+                print('\nCtrl-C Pressed! Exiting.\n')
+         except :
+            print('\nExcept! Reading moisture Exiting.\n')            
         
       serializedPayload= json.dumps(payload, sort_keys=False, indent=2)
     
