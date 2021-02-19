@@ -11,9 +11,9 @@ while (complete is not True):
     try:
         co2 = AtlasI2C(105)
         time.sleep(1)
-        print("CO2 info :" + co2.query("I"))     
         print("CO2 Read starting config :" + co2.query("O,?"))     
         print("CO2 Read starting Plock :" + co2.query("Plock,?"))     
+        print("CO2 info :" + co2.query("I"))     
         
         
     except:
@@ -33,8 +33,8 @@ while (complete is not True):
     try:
         hum = AtlasI2C(111)
         time.sleep(1)
-        print("Humidity info :" + co2.query("I"))
         print("Humidity Read starting config :" + hum.query("O,?")) 
+        print("Humidity info :" + co2.query("I"))
     except:
         complete = False
         hum = None
