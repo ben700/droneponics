@@ -242,9 +242,9 @@ def main():
             except:
                 pass 
         
-         except KeyboardInterrupt:
+        except KeyboardInterrupt:
                 print('\nCtrl-C Pressed! Exiting.\n')
-         except :
+        except :
             print('\nExcept! Reading moisture Exiting.\n')            
         
       serializedPayload= json.dumps(payload, sort_keys=False, indent=2)
