@@ -1,12 +1,7 @@
-#from colour import Color
-from AtlasI2C import (
-   AtlasI2C
-)
+from AtlasI2C import (AtlasI2C)
 import datetime
 import time
-    
- 
-   
+  
 class Sensor:
    def __init__(self, SensorId, name="", *args, **kwargs):
        self.sensor = AtlasI2C(SensorId)
