@@ -17,31 +17,20 @@ class SensorList:
         HUM = Sensor(112, "Humitity")
     except:   
         print("Except creating list")
-    i=0    
-    try:
-      if (RTD.connected()):
-        self.sensorlist[i] = RTD
-        i = i +1
-    except:   
-        print("Except creating temp")
-    try:
-      if (HUM.connected()):
-        self.sensorlist[i] = HUM
-        i = i +1
-    except:   
-        print("Except creating hum")
-        
-    for y in self.sensorlist:
-        print("Found " + y.name)    
+    devList = [RTD,  EC, PH, DO, ORP, CO2, HUM]
+    i=0
+    for device in devList:
+      try:
+        if (device.connected()):
+          self.sensorlisti] = device
+          i = i +1
+          print("Success find " + device.name)          
+        except:
+          print("Didn't find " + device.name)
         
     print("Completed List " + str(i))
     
-    
-  def devicesConnected(self):
-        device_address_list = AtlasI2C().list_i2c_devices()
-        print("Found " + str(len(device_address_list)) + " devices" + '\n')
-        for i in device_address_list:
-          print("Device at address " + str(i)) 
+
   
 class Sensor:
    def __init__(self, SensorId, name="", *args, **kwargs):
