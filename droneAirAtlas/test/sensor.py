@@ -1,7 +1,7 @@
 ##!/usr/bin/env python3 
 import sys
 import os
-sys.path.append('/home/pi/droneponics')
+sys.path.append('/home/pi/droneponics/droneAirAtlas')
 from AtlasI2C import (AtlasI2C)
     
 try:
