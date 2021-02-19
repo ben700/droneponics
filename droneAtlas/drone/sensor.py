@@ -4,17 +4,17 @@ sys.path.append('/home/pi/droneponics/droneAtlas/drone')
 from AtlasI2C import (AtlasI2C)
 import datetime
 import time
-class SensorList:
+class AtlasSensorList:
   def __init__(self):
     self.sensorlist = []
     try:
-        RTD = Sensor(102, "Temperature", "temperature")
-        EC = Sensor(100, "EC", "conductivity", "totalDissolvedSolids", "salinity", "specificGravity")
-        PH = Sensor(99, "pH", "PH")
-        DO = Sensor(97, "Dissolved Oxygen", "DO", "saturation")
-        ORP = Sensor(98, "Oxidation Reduction Potential", "oxidationReductionPotential")
-        CO2 = Sensor(105, "CO2", "CO2", "temperature")
-        HUM = Sensor(111, "Humitity", "humidity", "temperature", "dewPoint")
+        RTD = AtlasSensor(102, "Temperature", "temperature")
+        EC = AtlasSensor(100, "EC", "conductivity", "totalDissolvedSolids", "salinity", "specificGravity")
+        PH = AtlasSensor(99, "pH", "PH")
+        DO = AtlasSensor(97, "Dissolved Oxygen", "DO", "saturation")
+        ORP = AtlasSensor(98, "Oxidation Reduction Potential", "oxidationReductionPotential")
+        CO2 = AtlasSensor(105, "CO2", "CO2", "temperature")
+        HUM = AtlasSensor(111, "Humitity", "humidity", "temperature", "dewPoint")
     except:   
         print("Except creating list")
     devList = [RTD,  EC, PH, DO, ORP, CO2, HUM]
@@ -38,7 +38,7 @@ class SensorList:
       sensor.payload(_payload);
     return _payload
   
-class Sensor:
+class AtlasSensor:
    def __init__(self, SensorId, name="", 
                 _valuePayloadName = None,
                 _value2PayloadName = None,
