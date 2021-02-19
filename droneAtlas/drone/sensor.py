@@ -8,10 +8,10 @@ class SensorList:
   def __init__(self):
     self.sensorlist = []
     try:
-        RTD = Sensor(102, "Temperature")
-        EC = Sensor(100, "EC")
-        PH = Sensor(99, "pH")
-        DO = Sensor(97, "Dissolved Oxygen")
+        RTD = Sensor(102, "Temperature", "Temperature")
+        EC = Sensor(100, "EC", "conductivity", "totalDissolvedSolids", "salinity", "specificGravity")
+        PH = Sensor(99, "pH", "PH")
+        DO = Sensor(97, "Dissolved Oxygen", "DO", "saturation")
         ORP = Sensor(98, "Oxidation Reduction Potential")
         CO2 = Sensor(105, "CO2")
         HUM = Sensor(112, "Humitity")
@@ -33,7 +33,12 @@ class SensorList:
 
   
 class Sensor:
-   def __init__(self, SensorId, name="", *args, **kwargs):
+   def __init__(self, SensorId, name="", 
+                _valuePayloadName = None,
+                _value2PayloadName = None,
+                _value3PayloadName = None,
+                _value4PayloadName = None                
+               ):
        self.sensor = AtlasI2C(SensorId)
        self.sensorId = SensorId
        self.name = name
@@ -41,17 +46,16 @@ class Sensor:
        self.value2 = None
        self.value3 = None
        self.value4 = None
+       self.valuePayloadName = _valuePayloadName
+       self.value2PayloadName = _value2PayloadName
+       self.value3PayloadName = _value3PayloadName
+       self.value4PayloadName = _value4PayloadName
        self.Cal= None
        self.CalPoint= None
-       self.HighCalPoint= None
-       self.MidCalPoint= None
-       self.LowCalPoint= None
-       print("Build sensor " + self.name )
         
         
    def connected(self):
        try:
-          print("testing connected")
           self.sensor.query("R")
           return True
        except:
