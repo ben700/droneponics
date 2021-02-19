@@ -17,7 +17,7 @@ while (complete is not True):
         print("Failed : No CO2 sensor")
     try:
         if(co2 is not None):
-            print(co2.query("O,t,1"))
+            print("CO2 Turn on temp :" + co2.query("O,t,1"))
             print(co2.query("O,?")) 
             print("Success : CO2")
             complete = True
@@ -36,9 +36,9 @@ while (complete is not True):
         
     try:
         if(hum is not None):
-            print(hum.query("O,HUM,1"))
-            print(hum.query("O,Dew,1"))
-            print(hum.query("O,T,1"))
+            print("Humidity Turn on Humidity :" + hum.query("O,HUM,1"))
+            print("Humidity Turn on dew :" + hum.query("O,Dew,1"))
+            print("Humidity Turn on temp :" + hum.query("O,T,1"))
             print(hum.query("O,?")) 
             print("Success : Humidity")
     except:
