@@ -30,11 +30,9 @@ class SensorList:
         
     print("len sensorlist " + str(len(self.sensorlist)))
     
-  def payload(self):
-    _payload = "{"
+  def payload(self, _payload):
     for sensor in self.sensorlist:
-      _payload = _payload + sensor.name + " {" + sensor.payload() + "}";
-    _payload =  _payload + "}"
+      sensor.payload(_payload);
     return _payload
   
 class Sensor:
@@ -105,18 +103,16 @@ class Sensor:
        print("Read for sensor " + self.name +" sensorId = " + str(self.sensorId) + " was " + str(self.value))      
        return self.value
    
-   def payload(self):
-      _payload=""
+   def payload(self, _payload):
       self.read()
       if(self.value != None):
-        _payload = _payload + self.valuePayloadName + " : " + self.value 
+        _payload[self.valuePayloadName] = self.value 
       if(self.value2 != None):
-        _payload = _payload + self.value2PayloadName + " : " + self.value 
+        _payload[self.value2PayloadName] = self.value 
       if(self.value3 != None):
-        _payload = _payload + self.value3PayloadName + " : " + self.value 
+        _payload[self.value3PayloadName] = self.value 
       if(self.value3 != None):
-        _payload = _payload + self.value4PayloadName + " : " + self.value 
-      return _payload
+        _payload[self.value4PayloadName] = self.value 
          
 
  
