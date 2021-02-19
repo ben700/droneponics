@@ -25,7 +25,7 @@ class SensorList:
           self.sensorlist[i] = device
           i = i +1
           print("Success find " + device.name)          
-        except:
+      except:
           print("Didn't find " + device.name)
         
     print("Completed List " + str(i))
