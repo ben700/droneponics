@@ -31,7 +31,7 @@ class SensorList:
     except:   
         print("Except creating hum")
         
-    for y in self.sensorlist
+    for y in self.sensorlist:
         print("Found " + i.name)    
         
   def devicesConnected(self):
