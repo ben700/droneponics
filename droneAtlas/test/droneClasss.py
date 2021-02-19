@@ -2,15 +2,10 @@ import sys
 import os
 sys.path.append('/home/pi/droneponics/droneAtlas')
 import drone
-    
-hum = drone.Sensor(111, "Humidity")
-hum.read()
-
-co2 = drone.Sensor(105, "CO2")
-co2.read()
-
+import json
 
 sensorList = drone.SensorList()
-
-print(sensorList.payload())
-
+_payload = {}
+sensorList.payload(_payload)
+serializedPayload= json.dumps(payload, sort_keys=False, indent=2)
+print('publishing ' + str(serializedPayload))
