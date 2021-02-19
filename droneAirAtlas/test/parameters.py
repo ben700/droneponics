@@ -10,4 +10,10 @@ CO2 = AtlasI2C(105)
 HUM = AtlasI2C(111)
 
 CO2.write("R")
+time.sleep(2)
 print(CO2.read())
+
+timr.sleep(1)
+
+print(CO2.query("R"))
+
