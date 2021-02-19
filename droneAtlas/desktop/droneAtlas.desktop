@@ -1,0 +1,4 @@
+[Desktop Entry]
+Type=Application
+Name=droneAtlas
+Exec=xterm -hold -e '/usr/bin/python3 /home/pi/droneponics/droneAtlas/droneAtlas.py'

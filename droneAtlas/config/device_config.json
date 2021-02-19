@@ -1,0 +1,10 @@
+{
+  "DEVICE": {
+    "DEVICE_ID": "droneAirAtlas",
+    "PRIVATE_KEY": "certs/droneAirAtlas_private_RSA.pem",
+    "ALGORITHM": "RS256",
+    "PRIVATE_KEY_BACKUP": "certs/droneAirAtlas_private.pem",
+    "ALGORITHM_BACKUP": "ES256",
+    "CA_CERTS": "certs/cacert.pem"
+  }
+}
