@@ -235,7 +235,8 @@ def main():
     if (connected):
         print('publishing boot data ' + str(serializedPayload) + ' on ' + mqtt_topic + '/deviceBoot')
         print(client.publish(mqtt_topic+'/deviceBoot', serializedPayload, qos=0))
-         
+    else:
+        print("Failed : Wasn't connected after boot")
         
     while True:
         try:
