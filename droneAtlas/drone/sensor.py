@@ -33,7 +33,7 @@ class SensorList:
   def payload(self):
     _payload = "{"
     for sensor in self.sensorlist:
-      _payload = _payload + sensor.name + " {" sensor.payload() + "}";
+      _payload = _payload + sensor.name + " {" + sensor.payload() + "}";
     _payload =  _payload + "}"
     return _payload
   
