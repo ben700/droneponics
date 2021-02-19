@@ -20,12 +20,14 @@ class SensorList:
     i=0    
     try:
       if (RTD.connected()):
-        self.sensorlist[i++] = RTD
+        self.sensorlist[i] = RTD
+        i = i +1
     except:   
         print("Except creating temp")
     try:
       if (HUM.connected()):
-        self.sensorlist[i++] = HUM
+        self.sensorlist[i] = HUM
+        i = i +1
     except:   
         print("Except creating hum")
         
