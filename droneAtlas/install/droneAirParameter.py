@@ -1,7 +1,7 @@
 ##!/usr/bin/env python3 
 import sys
 import os
-sys.path.append('/home/pi/droneponics/droneAtlas')
+sys.path.append('/home/pi/droneponics/droneAtlas/drone')
 from AtlasI2C import (AtlasI2C)
 
 complete = False
