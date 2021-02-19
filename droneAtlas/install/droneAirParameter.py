@@ -49,7 +49,7 @@ while (complete is not True):
         complete = False
 
     if(complete is not True):
-        print("")
+        time.sleep(5) #give time to read
     else:
         print("Success : All command ran check logs to confirm success")
-    time.sleep(5) #give time to read
+
