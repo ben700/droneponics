@@ -12,9 +12,9 @@ class SensorList:
         EC = Sensor(100, "EC", "conductivity", "totalDissolvedSolids", "salinity", "specificGravity")
         PH = Sensor(99, "pH", "PH")
         DO = Sensor(97, "Dissolved Oxygen", "DO", "saturation")
-        ORP = Sensor(98, "Oxidation Reduction Potential")
-        CO2 = Sensor(105, "CO2")
-        HUM = Sensor(112, "Humitity")
+        ORP = Sensor(98, "Oxidation Reduction Potential", "oxidationReductionPotential")
+        CO2 = Sensor(105, "CO2", "CO2")
+        HUM = Sensor(112, "Humitity", "humidity")
     except:   
         print("Except creating list")
     devList = [RTD,  EC, PH, DO, ORP, CO2, HUM]
