@@ -242,19 +242,17 @@ def main():
             except:
                 pass 
         
+        serializedPayload= json.dumps(payload, sort_keys=False, indent=2)
+        if (connected and len(serializedPayload) > 0):
+            print('publishing ' + str(serializedPayload) + ' on ' + mqtt_topic)
+            print(client.publish(mqtt_topic, serializedPayload, qos=0))
+            
+        time.sleep(60)
+        
         except KeyboardInterrupt:
                 print('\nCtrl-C Pressed! Exiting.\n')
         except :
             print('\nExcept! Reading moisture Exiting.\n')            
         
-      serializedPayload= json.dumps(payload, sort_keys=False, indent=2)
-    
-      if (connected and len(serializedPayload) > 0):
-          print('publishing ' + str(serializedPayload) + ' on ' + mqtt_topic)
-          print(client.publish(mqtt_topic, serializedPayload, qos=0))
-
-      # Send events every second. limit to 1 per second due to fs limits
-      time.sleep(60)
-
 if __name__ == '__main__':
     main()
