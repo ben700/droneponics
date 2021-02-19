@@ -25,6 +25,7 @@ class SensorList:
         if (device.connected()):
           print("connected " + device.name)
           print("counter " + str(i))
+          print ("sensorlist len " + str(len(self.sensorlist)))
           self.sensorlist[0] = device
           print("Added to sensorlist[0]")
           
