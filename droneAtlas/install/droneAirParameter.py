@@ -30,6 +30,6 @@ while (complete is not True):
         print("Failed hum")
         complete = False
     
-    if(!complete):
+    if(complete is not True):
         print("Something Failed will retry")
  
