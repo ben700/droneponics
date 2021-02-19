@@ -118,8 +118,8 @@ class Sensor:
  
 
    def currenCalibration(self):
-       self.print ("currenCalibration")
+       print ("currenCalibration")
        self.Cal = self.sensor.query("Cal,?").split(":")[1].strip().rstrip('\x00')
-       self.print("Read Calibration for sensor " + self.name +" sensorId = " + str(self.sensorId) + " was " + str(self.Cal))      
+       print("Read Calibration for sensor " + self.name +" sensorId = " + str(self.sensorId) + " was " + str(self.Cal))      
        
       
