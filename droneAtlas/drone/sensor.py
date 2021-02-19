@@ -4,6 +4,37 @@ sys.path.append('/home/pi/droneponics/droneAtlas/drone')
 from AtlasI2C import (AtlasI2C)
 import datetime
 import time
+class SensorList:
+  def __init__(self):
+    try:
+        RTD = Sensor(102, "Temperature")
+        EC = Sensor(100, "EC")
+        PH = Sensor(99, "pH")
+        DO = Sensor(97, "Dissolved Oxygen")
+        ORP = Sensor(98, "Oxidation Reduction Potential")
+        CO2 = Sensor(105, "CO2")
+        HUM = Sensor(112, "Humitity")
+    except:   
+        print("Except creating list")
+        
+    try:
+      if (RTD.connected()):
+        self.sensorlist["Temperature"] = RTD
+    except:   
+        print("Except creating list")
+    try:
+      if (HUM.connected()):
+        self.sensorlist["Humitity"] = HUM
+    except:   
+        print("Except creating list")
+        
+        
+        
+  def devicesConnected(self):
+        device_address_list = AtlasI2C().list_i2c_devices()
+        print("Found " + str(len(device_address_list)) + " devices" + '\n')
+        for i in device_address_list:
+          print("Device at address " + str(i)) 
   
 class Sensor:
    def __init__(self, SensorId, name="", *args, **kwargs):
@@ -20,7 +51,13 @@ class Sensor:
        self.MidCalPoint= None
        self.LowCalPoint= None
       
-       
+   def connected():
+       try:
+          self.sensor.query("R")
+          return True
+       except:
+           return False
+        
    def read(self):
        try:
            reading = self.sensor.query("R")
