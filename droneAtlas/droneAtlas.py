@@ -238,10 +238,10 @@ def main():
         try:
             serializedPayload = json.dumps(payload, sort_keys=False, indent=2)
         
-            if (connected and len(serializedPayload) > 0):
+            if (connected and len(serializedPayload) > 3): # this is because we have the {}
                 print('publishing ' + str(serializedPayload) + ' on ' + mqtt_topic)
                 print(client.publish(mqtt_topic, serializedPayload, qos=0))
-            elif (len(serializedPayload) > 0):
+            elif (len(serializedPayload) < 4):
                 print("Error: no payload Data")
                 
                 
