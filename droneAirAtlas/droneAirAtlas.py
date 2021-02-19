@@ -233,13 +233,15 @@ def main():
         try:
             payload = {}
             try:
-                payload["CO2"] = AtlasI2C(I2C_CO2).query("R").split(":")[1]
+                payload["CO2"] = AtlasI2C(I2C_CO2).query("R")
             except:
+                payload["CO2"] = "Sensor Failed"
                 pass 
                  
             try:
-                payload["humidity"] = AtlasI2C(I2C_HUM).query("R").split(":")[1]
+                payload["humidity"] = AtlasI2C(I2C_HUM).query("R")
             except:
+                payload["humidity"] = "Sensor Failed"
                 pass 
         
             serializedPayload = json.dumps(payload, sort_keys=False, indent=2)
