@@ -235,7 +235,6 @@ def main():
         
     while not connected:
         print("Waiting to be connected")
-        time.sleep(1)
         continue
         
     print("Success : Connected")
