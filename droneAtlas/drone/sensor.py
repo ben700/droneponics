@@ -97,6 +97,9 @@ class Sensor:
        try:	
            self.value4 = reading.split(":")[1].split(",")[3].strip().rstrip('\x00')
            print("4th value from " + self.name + " is " + str(self.value4))
+           if (self.value3 == "Dew"):
+              self.value3 = self.value4
+              self.value4 = None        
        except:
            self.value3 = None
             
