@@ -6,6 +6,7 @@ import datetime
 import time
 class SensorList:
   def __init__(self):
+    self.sensorlist = []
     try:
         RTD = Sensor(102, "Temperature")
         EC = Sensor(100, "EC")
@@ -16,17 +17,17 @@ class SensorList:
         HUM = Sensor(112, "Humitity")
     except:   
         print("Except creating list")
-        
+    i=0    
     try:
       if (RTD.connected()):
-        self.sensorlist["Temperature"] = RTD
+        self.sensorlist[i++] = RTD
     except:   
-        print("Except creating list")
+        print("Except creating temp")
     try:
       if (HUM.connected()):
-        self.sensorlist["Humitity"] = HUM
+        self.sensorlist[i++] = HUM
     except:   
-        print("Except creating list")
+        print("Except creating hum")
         
         
         
@@ -53,6 +54,7 @@ class Sensor:
       
    def connected():
        try:
+          print("testing connected")
           self.sensor.query("R")
           return True
        except:
