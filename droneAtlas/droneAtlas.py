@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 from pathlib import Path
-appFolder = Path("/home/pi/droneponics/droneSoil/")
+appFolder = Path("/home/pi/droneponics/droneAtlas/")
 
 import argparse
 import datetime
@@ -228,7 +228,14 @@ def main():
         try:
             payload = {}
             sensorList = drone.SensorList()
+        except :
+            print('Except! Building SensorList.')            
+        try:            
             sensorList.payload(payload)
+        except :
+            print('Except! Building payload.')    
+            
+        try:
             serializedPayload = json.dumps(payload, sort_keys=False, indent=2)
         
             if (connected and len(serializedPayload) > 0):
