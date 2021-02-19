@@ -5,7 +5,7 @@ import os
 sys.path.append('/home/pi/droneponics/droneAirAtlas')
 from AtlasI2C import (AtlasI2C)
     
-while(true):
+while(True):
    device = AtlasI2C()
    device_address_list = device.list_i2c_devices()
    print("Found " + str(len(device_address_list)) + " devices" + '\n')
