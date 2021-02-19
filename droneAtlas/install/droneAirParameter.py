@@ -1,6 +1,7 @@
 ##!/usr/bin/env python3 
 import sys
 import os
+import time
 sys.path.append('/home/pi/droneponics/droneAtlas/drone')
 from AtlasI2C import (AtlasI2C)
 
@@ -32,4 +33,4 @@ while (complete is not True):
     
     if(complete is not True):
         print("Something Failed will retry")
- 
+    time.sleep(5) #give time to read
