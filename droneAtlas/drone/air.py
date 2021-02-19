@@ -15,6 +15,7 @@ import adafruit_bme280
 class SensorList:
   def __init__(self, deviceType="BME280"): #deviceType BME280 or BME680
     self.sensorlist = []
+    self.deviceType = deviceType
     try:
         RTD = Sensor(102, "Temperature", "temperature")
         EC = Sensor(100, "EC", "conductivity", "totalDissolvedSolids", "salinity", "specificGravity")
@@ -143,33 +144,33 @@ except:
     payload = {}
     payload.add("devicetime", time.time())
     if(bme680 is not None):            
-        payload.add("sensorType", "bme680")
-        payload.add("voc",  "{0:.4f}".format(bme680.gas))
-        payload.add("temperature",  "{0:.4f}".format(bme680.temperature))
-        payload.add("humidity", "{0:.4f}".format(bme680.gas))
-        payload.add("pressure", "{0:.4f}".format(bme680.pressure))
-        payload.add("altitude", "{0:.4f}".format(bme680.altitude))
+        payload["sensorType"] = "bme680"
+        payload["voc"] = "{0:.4f}".format(bme680.gas)
+        payload["temperature"] = "{0:.4f}".format(bme680.temperature)
+        payload["humidity"] = "{0:.4f}".format(bme680.gas)
+        payload["pressure"] = "{0:.4f}".format(bme680.pressure)
+        payload["altitude"] = "{0:.4f}".format(bme680.altitude)
         t = Temp(bme680.temperature, 'c')
         dewPoint = dew_point(temperature=t, humidity=bme680.humidity)
-        payload.add("dewPoint", dewPoint)
+        payload["dewPoint"] = dewPoint
     elif(bme280 is not None):           
-        payload.add("sensorType", "bme280")
-        payload.add("temperature", "{0:.4f}".format(bme280.temperature))
-        payload.add("humidity", "{0:.4f}".format(bme280.humidity))
-        payload.add("pressure", "{0:.4f}".format(bme280.pressure))
-        payload.add("altitude", "{0:.4f}".format(bme280.altitude))
+        payload["sensorType"] = "bme280"
+        payload["temperature"] = "{0:.4f}".format(bme280.temperature)
+        payload["humidity"] = "{0:.4f}".format(bme280.gas)
+        payload["pressure"] = "{0:.4f}".format(bme280.pressure)
+        payload["altitude"] = "{0:.4f}".format(bme280.altitude)
         t = Temp(bme280.temperature, 'c')
         dewPoint = dew_point(temperature=t, humidity=bme280.humidity)
-        payload.add("dewPoint", dewPoint)
+        payload["dewPoint"] = dewPoint
    
     payload = drone.dronePayload(_log)
     if (tsl is not None):
-        payload.add("lux", "{0:.0f}".format(tsl.lux))
-        payload.add("infrared", "{0:d}".format(tsl.infrared))
-        payload.add("visible", "{0:d}".format(tsl.visible))
-        payload.add("full_spectrum", "{0:d}".format(tsl.full_spectrum))
+        payload["lux"] = "{0:.0f}".format(tsl.lux)
+        payload["infrared"] = "{0:d}".format(tsl.infrared)
+        payload["visible"] = "{0:d}".format(tsl.visible)
+        payload["full_spectrum"] = "{0:d}".format(tsl.full_spectrum)
   
     mhz19b = mh_z19.read()  
     if mhz19b is not None:
-        payload.add("CO2", '{0:d}'.format(mhz19b['co2']))
+        payload["CO2"] = '{0:d}'.format(mhz19b['co2'])
   
