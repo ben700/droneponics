@@ -22,7 +22,7 @@ class SensorList:
     for device in devList:
       try:
         if (device.connected()):
-          self.sensorlisti] = device
+          self.sensorlist[i] = device
           i = i +1
           print("Success find " + device.name)          
         except:
