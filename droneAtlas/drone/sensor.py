@@ -6,7 +6,7 @@ import datetime
 import time
 class SensorList:
   def __init__(self):
-    this.sensorlist = []
+    self.sensorlist = []
     try:
         RTD = Sensor(102, "Temperature")
         EC = Sensor(100, "EC")
@@ -25,7 +25,8 @@ class SensorList:
         if (device.connected()):
           print("connected " + device.name)
           print("counter " + str(i))
-          this.sensorlist[0] = device
+          self.sensorlist[0] = device
+          self.sensorlist[i] = device
           print("Added to sensorlist")
           i = i + 1
           print("Success find " + device.name)          
@@ -33,7 +34,7 @@ class SensorList:
           print("Didn't find " + device.name)
         
     print("Completed List " + str(i))
-    print("len sensorlist " + str(len(sensorlist)))
+    print("len sensorlist " + str(len(self.sensorlist)))
     
 
   
