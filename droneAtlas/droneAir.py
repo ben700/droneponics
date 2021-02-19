@@ -174,7 +174,7 @@ def toggle_led(status):
 ###CONFIG###
 
 # device specific config
-print(str(appFolder) / "config/device_config."+str(drone.gethostname())+".json")
+print(str(appFolder) + "config/device_config."+str(drone.gethostname())+".json")
 with open(appFolder / "config/device_config."+str(drone.gethostname())+".json") as f:
     dconfig = json.loads(str(f.read()))
 
