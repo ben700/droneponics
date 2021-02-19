@@ -27,6 +27,7 @@ import io
 
 import jwt
 import paho.mqtt.client as mqtt
+import drone
 import chirp
 
 # These values needs to be calibrated for the percentage to work!
@@ -234,7 +235,23 @@ def main():
 
     # Process network events on new thread
     client.loop_start()
-            
+    
+    while not connected:
+        print("Failed : Waiting to be connected")
+        continue
+    print("Success : Connected")
+    
+    print("Sending Boot data over to Goolge")
+    payload = {}
+    drone.payload(payload)    
+    serializedPayload = json.dumps(payload, sort_keys=False, indent=2)
+  
+    if (connected):
+        print('publishing boot data ' + str(serializedPayload) + ' on ' + mqtt_topic + '/deviceBoot')
+        print(client.publish(mqtt_topic+'/deviceBoot', serializedPayload, qos=0))
+    else:
+        print("Failed : Wasn't connected after boot")
+        
     while True:
       payload = {}
       try:
