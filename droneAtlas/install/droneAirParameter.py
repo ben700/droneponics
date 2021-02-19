@@ -33,7 +33,7 @@ while (complete is not True):
     try:
         hum = AtlasI2C(111)
         time.sleep(1)
-        print("Humidity info :" + co2.query("I")
+        print("Humidity info :" + co2.query("I"))
         print("Humidity Read starting config :" + hum.query("O,?")) 
     except:
         complete = False
