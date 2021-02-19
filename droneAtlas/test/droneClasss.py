@@ -13,5 +13,5 @@ sensorList.payload(payload)
 serializedPayload= json.dumps(payload, sort_keys=False, indent=2)
 if (len(serializedPayload) > 0):
   print('publishing ' + str(serializedPayload))
-else
+else:
   print("Did have a payload to publish")
