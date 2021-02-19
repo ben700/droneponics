@@ -11,6 +11,6 @@ print("Found " + str(len(device_address_list)) + " devices" + '/n')
 for i in device_address_list:
    idevice = AtlasI2C(i) 
    print(idevice.get_device_info())
-   print(idevice.query("I"))
+ #  print(idevice.query("I"))
    time.sleep(1)
    print(idevice.query("R"))
