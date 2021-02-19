@@ -1,4 +1,5 @@
 ##!/usr/bin/env python3 
+import time
 import sys
 import os
 sys.path.append('/home/pi/droneponics/droneAirAtlas')
@@ -11,5 +12,5 @@ for i in device_address_list:
    idevice = AtlasI2C(i) 
    print(idevice.get_device_info())
    print(idevice.query("I"))
-   delay(1000)
+   time.sleep(1)
    print(idevice.query("R"))
