@@ -247,7 +247,7 @@ def main():
             if (connected and len(serializedPayload) > 0):
                 print('publishing ' + str(serializedPayload) + ' on ' + mqtt_topic)
                 print(client.publish(mqtt_topic, serializedPayload, qos=0))
-            else if (len(serializedPayload) > 0):
+            elif (len(serializedPayload) > 0):
                 print("Error: no payload Data")
                 
                 
