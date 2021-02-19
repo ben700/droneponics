@@ -53,8 +53,10 @@ class Sensor:
        self.HighCalPoint= None
        self.MidCalPoint= None
        self.LowCalPoint= None
-      
-   def connected():
+       print("Build sensor " + self.name )
+        
+        
+   def connected(self):
        try:
           print("testing connected")
           self.sensor.query("R")
