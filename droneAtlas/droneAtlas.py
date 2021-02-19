@@ -223,6 +223,12 @@ def main():
 
     # Process network events on new thread
     client.loop_start()
+    
+    while not connected:
+        print("Failed : Waiting to be connected")
+        continue
+    print("Success : Connected")
+    
     print("Sending Boot data over to Goolge")
     payload = {}
     payload["bootTime"] = int(time.time())
@@ -231,13 +237,7 @@ def main():
     payload["gethostname"] = drone.gethostname()
     
     serializedPayload = json.dumps(payload, sort_keys=False, indent=2)
-        
-        
-    while not connected:
-        print("Waiting to be connected")
-        continue
-        
-    print("Success : Connected")
+  
     if (connected):
         print('publishing boot data ' + str(serializedPayload) + ' on ' + mqtt_topic + '/deviceBoot')
         print(client.publish(mqtt_topic+'/deviceBoot', serializedPayload, qos=0))
