@@ -174,6 +174,7 @@ def toggle_led(status):
 ###CONFIG###
 
 # device specific config
+print(appFolder / "config/device_config."+str(drone.gethostname())+".json")
 with open(appFolder / "config/device_config."+str(drone.gethostname())+".json") as f:
     dconfig = json.loads(str(f.read()))
 
@@ -184,6 +185,7 @@ algorithm = dconfig['DEVICE']['ALGORITHM']
 algorithm_backup = dconfig['DEVICE']['ALGORITHM_BACKUP']
 if(dconfig['DEVICE']['DEVICE_TYPE']):
     deviceType = dconfig['DEVICE']['DEVICE_TYPE']
+    print("dconfig['DEVICE']['DEVICE_TYPE'] = " + str(deviceType))
 else:
     deviceType = "BME280"  #BME280 by detault
 
@@ -252,6 +254,7 @@ def main():
     while True:
         try:
             payload = {}
+            print("deviceType = " + str(deviceType))
             sensorList = drone.SensorList(deviceType)
         except :
             print('Except! Building SensorList.')            
