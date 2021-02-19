@@ -32,7 +32,7 @@ import time
 import sys
 import os
 import drone
-refreshRate = 60
+refreshRate = 60 #How often to update firebase with a sensor measurement i.e every 60 second
 
 # [START iot_mqtt_jwt]
 def create_jwt(project_id, private_key_file, algorithm):
@@ -182,8 +182,10 @@ private_key_file =appFolder /  dconfig['DEVICE']['PRIVATE_KEY']
 private_key_file_backup =appFolder /  dconfig['DEVICE']['PRIVATE_KEY_BACKUP']
 algorithm = dconfig['DEVICE']['ALGORITHM']
 algorithm_backup = dconfig['DEVICE']['ALGORITHM_BACKUP']
-
-
+if(dconfig['DEVICE']['DEVICE_TYPE']):
+    deviceType = dconfig['DEVICE']['DEVICE_TYPE']
+else:
+    deviceType = "BME280"  #BME280 by detault
 
 #global config
 with open(appFolder / "config/global_config.json") as f:
@@ -234,11 +236,13 @@ def main():
         continue
     print("Success : Connected")
     
+    #First log the boot to firebase
     print("Sending Boot data over to Goolge")
     payload = {}
-    drone.payload(payload)    
+    drone.payload(payload)
+    if(len(payload) > 0):
+        payload["deviceTime"]  =  int(time.time())
     serializedPayload = json.dumps(payload, sort_keys=False, indent=2)
-  
     if (connected):
         print('publishing boot data ' + str(serializedPayload) + ' on ' + mqtt_topic + '/deviceBoot')
         print(client.publish(mqtt_topic+'/deviceBoot', serializedPayload, qos=0))
@@ -248,7 +252,7 @@ def main():
     while True:
         try:
             payload = {}
-            sensorList = drone.SensorList()
+            sensorList = drone.SensorList(deviceType)
         except :
             print('Except! Building SensorList.')            
         try:            
