@@ -46,5 +46,5 @@ while (complete is not True):
         complete = False
     
     if(complete is not True):
-        print("Something Failed will retry")
+        print("")
     time.sleep(5) #give time to read
