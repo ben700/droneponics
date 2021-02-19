@@ -21,6 +21,12 @@ exports.telemetryToFirestore = (message, context, callback) => {
   const telemetry = JSON.parse(payload);
   const attributes = message.attributes;
   const deviceId = attributes.deviceId;
+  
+  if (!telemetry.timestamp){
+    if(!telemetry.deviceTime) {
+      throw new Error('No data timestamp was provided!');
+    }
+  }
 
   _timestamp = admin.database.ServerValue.TIMESTAMP;
   if (telemetry.timestamp) {_timestamp = telemetry.timestamp;}
