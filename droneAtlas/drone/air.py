@@ -102,7 +102,7 @@ class SensorList:
         __payload["sensorType"] = "bme680"
         __payload["voc"] = "{0:.0f}".format(self.bme680.gas)
         __payload["temperature"] = "{0:.1f}".format(self.bme680.temperature)
-        __payload["humidity"] = "{0:.0f}".format(self.bme680.gas)
+        __payload["humidity"] = "{0:.0f}".format(self.bme680.humidity)
         __payload["pressure"] = "{0:.0f}".format(self.bme680.pressure)
         __payload["altitude"] = "{0:.0f}".format(self.bme680.altitude)
         t = Temp(self.bme680.temperature, 'c')
@@ -112,7 +112,7 @@ class SensorList:
         print("payload for BME280")
         __payload["sensorType"] = "bme280"
         __payload["temperature"] = "{0:.1f}".format(self.bme280.temperature)
-        __payload["humidity"] = "{0:.0f}".format(self.bme280.gas)
+        __payload["humidity"] = "{0:.0f}".format(self.bme280.humidity)
         __payload["pressure"] = "{0:.0f}".format(self.bme280.pressure)
         __payload["altitude"] = "{0:.0f}".format(self.bme280.altitude)
         t = Temp(self.bme280.temperature, 'c')
