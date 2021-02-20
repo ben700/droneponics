@@ -100,14 +100,14 @@ class SensorList:
       __payload["devicetime"] = time.time()
       if(self.bme680 is not None):
         __payload["sensorType"] = "bme680"
-        __payload["voc"] = "{0:.4f}".format(self.bme680.gas)
-        __payload["temperature"] = "{0:.4f}".format(self.bme680.temperature)
-        __payload["humidity"] = "{0:.4f}".format(self.bme680.gas)
-        __payload["pressure"] = "{0:.4f}".format(self.bme680.pressure)
-        __payload["altitude"] = "{0:.4f}".format(self.bme680.altitude)
-       # t = Temp(self.bme680.temperature, 'c')
-       # dewPoint = dew_point(temperature=t, humidity=self.bme680.humidity)
-      #  __payload["dewPoint"] = dewPoint
+        __payload["voc"] = "{0:.2f}".format(self.bme680.gas)
+        __payload["temperature"] = "{0:.1f}".format(self.bme680.temperature)
+        __payload["humidity"] = "{0:.0f}".format(self.bme680.gas)
+        __payload["pressure"] = "{0:.0f}".format(self.bme680.pressure)
+        __payload["altitude"] = "{0:.0f}".format(self.bme680.altitude)
+        t = Temp(self.bme680.temperature, 'c')
+        dewPoint = dew_point(temperature=t, humidity=self.bme680.humidity)
+        __payload["dewPoint"] = dewPoint
       elif(bme280 is not None):           
         print("payload for BME280")
         __payload["sensorType"] = "bme280"
