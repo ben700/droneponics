@@ -267,25 +267,26 @@ def main():
             print('Except! Building payload.')    
             
         try:
-            print(payload)    
             serializedPayload = json.dumps(payload, sort_keys=False, indent=2)
-            print(serializedPayload)
-            if (connected and len(serializedPayload) > 3): # this is because we have the {}
+            try:
+              if (connected and len(serializedPayload) > 3): # this is because we have the {}
                 print('publishing ' + str(serializedPayload) + ' on ' + mqtt_topic)
                 print(client.publish(mqtt_topic, serializedPayload, qos=0))
-            elif (len(serializedPayload) < 4):
+              elif (len(serializedPayload) < 4):
                 print(serializedPayload)
                 print("Error: No payload Data")
                 print("Going to fix it")
                 drone.fixMe()
-                              
+            except:                 
+              print("Failed : publishing " + serializedPayload)
+            
             print("refreshRate = "+str(refreshRate))
             time.sleep(refreshRate)
         
         except KeyboardInterrupt:
                 print('\nCtrl-C Pressed! Exiting.\n')
         except :
-            print('\nExcept! Reading moisture Exiting.\n')            
+            print('\nExcept! Processing Sensors Exiting.\n')            
         
 if __name__ == '__main__':
     main()
