@@ -94,10 +94,11 @@ class SensorList:
         self.bme680 = None
         self.bme280 = None
 
-  def payload(self, _payload):
+  def payload(self, payload):
     payload = {}
     payload["devicetime"] = time.time()
-    if(self.bme680 is not None):            
+    if(self.bme680 is not None):
+        print("payload for BME680")
         payload["sensorType"] = "bme680"
         payload["voc"] = "{0:.4f}".format(self.bme680.gas)
         payload["temperature"] = "{0:.4f}".format(self.bme680.temperature)
@@ -108,6 +109,7 @@ class SensorList:
         dewPoint = dew_point(temperature=t, humidity=self.bme680.humidity)
         payload["dewPoint"] = dewPoint
     elif(bme280 is not None):           
+        print("payload for BME280")
         payload["sensorType"] = "bme280"
         payload["temperature"] = "{0:.4f}".format(self.bme280.temperature)
         payload["humidity"] = "{0:.4f}".format(self.bme280.gas)
@@ -118,6 +120,7 @@ class SensorList:
         payload["dewPoint"] = dewPoint
    
     if (self.tsl is not None):
+        print("payload for tsl")
         payload["lux"] = "{0:.0f}".format(self.tsl.lux)
         payload["infrared"] = "{0:d}".format(self.tsl.infrared)
         payload["visible"] = "{0:d}".format(self.tsl.visible)
