@@ -267,7 +267,7 @@ def main():
             print('Except! Building payload.')    
             
         try:
-            print("serializedPayload")
+            print("serializedPayload len(payload)=" + str(len(payload)))
             serializedPayload = json.dumps(payload, sort_keys=False, indent=2)
             print(serializedPayload)
             try:
