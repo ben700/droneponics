@@ -236,7 +236,7 @@ def main():
     
     print("Sending Boot data over to Goolge")
     payload = {}
-    drone.payload(payload)    
+    drone.getBootPayload(payload)    
     serializedPayload = json.dumps(payload, sort_keys=False, indent=2)
   
     if (connected):
