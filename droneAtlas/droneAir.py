@@ -241,7 +241,10 @@ def main():
     #First log the boot to firebase
     print("Sending Boot data over to Goolge")
     _payload = {}
+    print("Build Boot payload")
+    print("drone.gethostname() = " + drone.gethostname())
     drone.payload(_payload)
+    
     if(len(_payload) > 0):
         _payload["deviceTime"]  =  int(time.time())
     serializedPayload = json.dumps(_payload, sort_keys=False, indent=2)
