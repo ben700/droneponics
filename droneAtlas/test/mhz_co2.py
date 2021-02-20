@@ -1,9 +1,8 @@
 ##!/usr/bin/env python3 
 import mh_z19
-import sys
-import os
+sys.path.append('/home/pi/droneponics/droneAtlas')
+import drone
 
 while True:
-    os.write("sudo chmod 777 /dev/serial0")
-    os.write("sudo chown pi:pi /dev/serial0")
+    drone.noSUDO()
     print(mh_z19.read()) 
