@@ -174,7 +174,6 @@ def toggle_led(status):
 ###CONFIG###
 
 # device specific config
-print(str(appFolder) + "/config/device_config."+str(drone.gethostname())+".json")
 with open(str(appFolder) + "/config/device_config."+str(drone.gethostname())+".json") as f:
     dconfig = json.loads(str(f.read()))
 
@@ -202,6 +201,12 @@ mqtt_bridge_port = gconfig['GCP']['MQTT_BRIDGE_PORT']
 #sys specific
 ca_certs = appFolder / dconfig['DEVICE']['CA_CERTS']
 
+print("Success : Read config from " + str(appFolder) + "/config/device_config."+str(drone.gethostname())+".json")
+print("Success : project_id = " + project_id);
+print("Success : cloud_region = " + cloud_region);
+print("Success : registry_id = " + registry_id);
+print("Success : device_id = " + device_id);
+print("Success : private_key_file = " + private_key_file);
 
 # This is the topic that the device will receive configuration updates on.
 mqtt_config_topic = '/devices/{}/config'.format(device_id)
