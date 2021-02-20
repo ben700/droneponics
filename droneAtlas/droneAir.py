@@ -243,7 +243,7 @@ def main():
     _payload = {}
     print("Build Boot payload")
     print("drone.gethostname() = " + drone.gethostname())
-    drone.payload(_payload)
+    drone.getBootPayload(_payload)
     
     if(len(_payload) > 0):
         _payload["deviceTime"]  =  int(time.time())
