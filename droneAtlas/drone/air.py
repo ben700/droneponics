@@ -107,13 +107,7 @@ class SensorList:
         __payload["altitude"] = "{0:.0f}".format(self.bme680.altitude)
         t = Temp(self.bme680.temperature, 'c')
         dewPoint = dew_point(temperature=t, humidity=self.bme680.humidity)
-        print("dewPoint = " + str(dewPoint))
-        print("float(dewPoint = " + str(float(dewPoint)))
-        print("format dewPoint = {0:.1f}".format(float(dewPoint)))
-        
-        
         __payload["dewPoint"] = "{0:.1f}".format(float(dewPoint))
-        print("Done")
       elif(bme280 is not None):           
         print("payload for BME280")
         __payload["sensorType"] = "bme280"
@@ -129,7 +123,6 @@ class SensorList:
  
     try:
       if (self.tsl is not None):
-        print("payload for tsl")
         __payload["lux"] = "{0:.0f}".format(self.tsl.lux)
         __payload["infrared"] = "{0:d}".format(self.tsl.infrared)
         __payload["visible"] = "{0:d}".format(self.tsl.visible)
@@ -143,4 +136,3 @@ class SensorList:
         __payload["CO2"] = '{0:d}'.format(mhz19b['co2'])
     except:
       pass
-    print("Completed payload")
