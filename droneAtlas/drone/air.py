@@ -131,8 +131,7 @@ class SensorList:
       pass
 
     try:
-      os.write("sudo chmod 777 /dev/serial0")
-      os.write("sudo chown pi:pi /dev/serial0")
+      drone.noSUDO()
       mhz19b = mh_z19.read()  
       if mhz19b is not None:
         __payload["CO2"] = '{0:d}'.format(mhz19b['co2'])
