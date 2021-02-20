@@ -267,7 +267,9 @@ def main():
             print('Except! Building payload.')    
             
         try:
+            print("serializedPayload")
             serializedPayload = json.dumps(payload, sort_keys=False, indent=2)
+            print(serializedPayload)
             try:
               if (connected and len(serializedPayload) > 3): # this is because we have the {}
                 print('publishing ' + str(serializedPayload) + ' on ' + mqtt_topic)
