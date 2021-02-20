@@ -105,9 +105,9 @@ class SensorList:
         __payload["humidity"] = "{0:.0f}".format(self.bme680.gas)
         __payload["pressure"] = "{0:.0f}".format(self.bme680.pressure)
         __payload["altitude"] = "{0:.0f}".format(self.bme680.altitude)
-        t = Temp(self.bme680.temperature, 'c')
-        dewPoint = dew_point(temperature=t, humidity=self.bme680.humidity)
-        __payload["dewPoint"] = dewPoint
+     #   t = Temp(self.bme680.temperature, 'c')
+     #   dewPoint = dew_point(temperature=t, humidity=self.bme680.humidity)
+     #   __payload["dewPoint"] = dewPoint
       elif(bme280 is not None):           
         print("payload for BME280")
         __payload["sensorType"] = "bme280"
