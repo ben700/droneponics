@@ -262,14 +262,11 @@ def main():
             print('Except! Building SensorList.')            
         try:            
             sensorList.payload(payload)
-            print("Back in Main")
         except :
             print('Except! Building payload.')    
             
         try:
-            print("serializedPayload len(payload)=" + str(len(payload)))
             serializedPayload = json.dumps(payload, sort_keys=False, indent=2)
-            print(serializedPayload)
             try:
               if (connected and len(serializedPayload) > 3): # this is because we have the {}
                 print('publishing ' + str(serializedPayload) + ' on ' + mqtt_topic)
