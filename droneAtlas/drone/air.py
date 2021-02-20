@@ -11,6 +11,7 @@ import mh_z19
 import adafruit_tsl2591
 import adafruit_bme680
 import adafruit_bme280
+from meteocalc import Temp, dew_point
 
 class SensorList:
   def __init__(self, deviceType="BME280"): #deviceType BME280 or BME680
