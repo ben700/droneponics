@@ -239,10 +239,7 @@ def main():
     print("Success : Connected")
     
     #First log the boot to firebase
-    print("Sending Boot data over to Goolge")
     _payload = {}
-    print("Build Boot payload")
-    print("drone.gethostname() = " + drone.gethostname())
     drone.getBootPayload(_payload)
     
     if(len(_payload) > 0):
@@ -272,9 +269,9 @@ def main():
                 print('publishing ' + str(serializedPayload) + ' on ' + mqtt_topic)
                 print(client.publish(mqtt_topic, serializedPayload, qos=0))
               elif (len(serializedPayload) < 4):
-                print(serializedPayload)
                 print("Error: No payload Data")
-                print("Going to fix it")
+                print("Going to fix it! In 30 seconds")
+                time.sleep(30)
                 drone.fixMe()
             except:                 
               print("Failed : publishing " + serializedPayload)
