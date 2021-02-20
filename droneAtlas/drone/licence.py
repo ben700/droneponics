@@ -7,7 +7,7 @@ def write_key():
     key = Fernet.generate_key()
 #    with open("key.key", "wb") as key_file:
     with open("key.key", "a") as key_file:
-        key_file.write(str(key))
+        key_file.write(str(key) + "\n")
         print("Success : key = " + str(key))
 write_key()
 print("Success : File saved to disk")
