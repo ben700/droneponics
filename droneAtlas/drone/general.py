@@ -35,4 +35,6 @@ def fixMe():
     os.system('sh /home/pi/updateDroneponics.sh')
     os.system('sudo reboot')
 
-
+def noSUDO():
+    os.write("sudo chmod 777 /dev/serial0")
+    os.write("sudo chown pi:pi /dev/serial0")
