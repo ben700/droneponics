@@ -96,7 +96,6 @@ class SensorList:
         self.bme280 = None
 
   def payload(self, payload):
-    payload = {}
     payload["devicetime"] = time.time()
     if(self.bme680 is not None):
         print("payload for BME680")
@@ -139,5 +138,6 @@ class SensorList:
         payload["CO2"] = '{0:d}'.format(mhz19b['co2'])
      
 
-    
+    print(json.dumps(payload, sort_keys=False, indent=2))
+           
     
