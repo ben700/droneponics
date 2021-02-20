@@ -108,7 +108,11 @@ class SensorList:
         t = Temp(self.bme680.temperature, 'c')
         dewPoint = dew_point(temperature=t, humidity=self.bme680.humidity)
         print("dewPoint = " + str(dewPoint))
-        __payload["dewPoint"] = "{0:.1f}".format(dewPoint)
+        print("float(dewPoint = " + str(float(dewPoint)))
+        print("format dewPoint = {0:.1f}".format(float(dewPoint)))
+        
+        
+        __payload["dewPoint"] = "{0:.1f}".format(float(dewPoint))
         print("Done")
       elif(bme280 is not None):           
         print("payload for BME280")
@@ -119,7 +123,7 @@ class SensorList:
         __payload["altitude"] = "{0:.0f}".format(self.bme280.altitude)
         t = Temp(self.bme280.temperature, 'c')
         dewPoint = dew_point(temperature=t, humidity=self.bme280.humidity)
-        __payload["dewPoint"] = "{0:.1f}".format(dewPoint)
+        __payload["dewPoint"] = "{0:.1f}".format(float(dewPoint))
     except:
       pass
  
