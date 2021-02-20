@@ -262,6 +262,7 @@ def main():
             print('Except! Building SensorList.')            
         try:            
             sensorList.payload(payload)
+            print("Back in Main")
         except :
             print('Except! Building payload.')    
             
