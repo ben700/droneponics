@@ -97,7 +97,7 @@ class SensorList:
 
   def payload(self, __payload):
     try:
-      __payload["devicetime"] = int(time.time())
+      __payload["deviceTime"] = int(time.time())
       if(self.bme680 is not None):
         __payload["sensorType"] = "bme680"
         __payload["voc"] = "{0:.0f}".format(self.bme680.gas)
