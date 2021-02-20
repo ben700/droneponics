@@ -1,14 +1,5 @@
-echo "---------------------------------------------"Update Code---------------------------------------------""
-~/updateDroneponics.sh
-
 echo "---------------------------------------------"Update PI---------------------------------------------""
-sudo apt full-upgrade -y
-sudo apt update
-sudo apt full-upgrade -y
-sudo apt upgrade -y
-sudo apt dist-upgrade -y
-sudo apt autoremove -y
-sudo apt autoclean -y
-
-echo "---------------------------------------------"reboot---------------------------------------------""
-sudo reboot
+sudo apt-get -y upgrade
+sudo apt-get -y dist-upgrade
+sudo apt-get --purge -y autoremove
+sudo apt-get clean
