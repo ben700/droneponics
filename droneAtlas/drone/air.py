@@ -96,26 +96,19 @@ class SensorList:
         self.bme280 = None
 
   def payload(self, payload):
-    payload["devicetime"] = time.time()
-    if(self.bme680 is not None):
-        print("payload for BME680")
+    try:
+      payload["devicetime"] = time.time()
+      if(self.bme680 is not None):
         payload["sensorType"] = "bme680"
-        print("payload for BME680 sensorType = bme680")
-        
         payload["voc"] = "{0:.4f}".format(self.bme680.gas)
-        print("payload for BME680 voc = {0:.4f}".format(self.bme680.gas))
         payload["temperature"] = "{0:.4f}".format(self.bme680.temperature)
         payload["humidity"] = "{0:.4f}".format(self.bme680.gas)
         payload["pressure"] = "{0:.4f}".format(self.bme680.pressure)
         payload["altitude"] = "{0:.4f}".format(self.bme680.altitude)
-        print("payload for BME680 altitude = {0:.4f}".format(self.bme680.altitude))
-        
         t = Temp(self.bme680.temperature, 'c')
-        print("payload for BME680 dewPoint = " + str(dew_point(temperature=t, humidity=self.bme680.humidity)))
         dewPoint = dew_point(temperature=t, humidity=self.bme680.humidity)
         payload["dewPoint"] = dewPoint
-        
-    elif(bme280 is not None):           
+      elif(bme280 is not None):           
         print("payload for BME280")
         payload["sensorType"] = "bme280"
         payload["temperature"] = "{0:.4f}".format(self.bme280.temperature)
@@ -125,19 +118,22 @@ class SensorList:
         t = Temp(self.bme280.temperature, 'c')
         dewPoint = dew_point(temperature=t, humidity=self.bme280.humidity)
         payload["dewPoint"] = dewPoint
-   
-    if (self.tsl is not None):
+    except:
+      pass
+ 
+    try:
+      if (self.tsl is not None):
         print("payload for tsl")
         payload["lux"] = "{0:.0f}".format(self.tsl.lux)
         payload["infrared"] = "{0:d}".format(self.tsl.infrared)
         payload["visible"] = "{0:d}".format(self.tsl.visible)
         payload["full_spectrum"] = "{0:d}".format(self.tsl.full_spectrum)
-  
-    mhz19b = mh_z19.read()  
-    if mhz19b is not None:
-        payload["CO2"] = '{0:d}'.format(mhz19b['co2'])
-     
+    except:
+      pass
 
-    print("payload length is " + str(len(payload)))
-           
-    
+    try:
+      mhz19b = mh_z19.read()  
+      if mhz19b is not None:
+        payload["CO2"] = '{0:d}'.format(mhz19b['co2'])
+    except:
+      pass
