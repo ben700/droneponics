@@ -36,5 +36,5 @@ def fixMe():
     os.system('sudo reboot')
 
 def noSUDO():
-    os.write("sudo chmod 777 /dev/serial0")
-    os.write("sudo chown pi:pi /dev/serial0")
+    os.system("sudo chmod 777 /dev/serial0")
+    os.system("sudo chown pi:pi /dev/serial0")
