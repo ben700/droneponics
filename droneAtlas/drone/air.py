@@ -138,6 +138,6 @@ class SensorList:
         payload["CO2"] = '{0:d}'.format(mhz19b['co2'])
      
 
-    print(json.dumps(payload, sort_keys=False, indent=2))
+    print("payload length is " + str(len(payload)))
            
     
