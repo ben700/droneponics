@@ -25,11 +25,11 @@ def get_ip():
         s.close()
     return IP
 
-def payload(payload):
-    payload["bootTime"] = int(time.time())
-    payload["deviceMAC"] = drone.get_mac()
-    payload["deviceIP"] = drone.get_ip()
-    payload["gethostname"] = drone.gethostname()
+def getBootPayload(__payload):
+    __payload["bootTime"] = int(time.time())
+    __payload["deviceMAC"] = drone.get_mac()
+    __payload["deviceIP"] = drone.get_ip()
+    __payload["gethostname"] = drone.gethostname()
 
 def fixMe():
     os.system('sh /home/pi/updateDroneponics.sh')
