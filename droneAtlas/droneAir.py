@@ -257,7 +257,6 @@ def main():
     while True:
         try:
             payload = {}
-            print("deviceType = " + str(deviceType))
             sensorList = drone.SensorList(deviceType)
         except :
             print('Except! Building SensorList.')            
@@ -267,11 +266,9 @@ def main():
             print('Except! Building payload.')    
             
         try:
-            if(len(payload) > 0):
-                payload["deviceTime"]  =  int(time.time())
                 
             serializedPayload = json.dumps(payload, sort_keys=False, indent=2)
-        
+           
             if (connected and len(serializedPayload) > 3): # this is because we have the {}
                 print('publishing ' + str(serializedPayload) + ' on ' + mqtt_topic)
                 print(client.publish(mqtt_topic, serializedPayload, qos=0))
@@ -279,9 +276,7 @@ def main():
                 print("Error: No payload Data")
                 print("Going to fix it")
                 drone.fixMe()
-                
-                
-                
+                              
             time.sleep(refreshRate)
         
         except KeyboardInterrupt:
