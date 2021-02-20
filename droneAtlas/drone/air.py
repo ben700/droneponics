@@ -97,17 +97,15 @@ class SensorList:
 
   def payload(self, __payload):
     try:
-      __payload["devicetime"] = time.time()
+      __payload["devicetime"] = int(time.time())
       if(self.bme680 is not None):
         __payload["sensorType"] = "bme680"
-        __payload["voc"] = "{0:.2f}".format(self.bme680.gas)
+        __payload["voc"] = "{0:.0f}".format(self.bme680.gas)
         __payload["temperature"] = "{0:.1f}".format(self.bme680.temperature)
         __payload["humidity"] = "{0:.0f}".format(self.bme680.gas)
         __payload["pressure"] = "{0:.0f}".format(self.bme680.pressure)
         __payload["altitude"] = "{0:.0f}".format(self.bme680.altitude)
-        print("self.bme680.temperature = " + str(self.bme680.temperature))
         t = Temp(self.bme680.temperature, 'c')
-        print("t = " + str(t))
         dewPoint = dew_point(temperature=t, humidity=self.bme680.humidity)
         print("dewPoint = " + str(dewPoint))
         __payload["dewPoint"] = "{0:.1f}".format(dewPoint)
@@ -115,13 +113,13 @@ class SensorList:
       elif(bme280 is not None):           
         print("payload for BME280")
         __payload["sensorType"] = "bme280"
-        __payload["temperature"] = "{0:.4f}".format(self.bme280.temperature)
-        __payload["humidity"] = "{0:.4f}".format(self.bme280.gas)
-        __payload["pressure"] = "{0:.4f}".format(self.bme280.pressure)
-        __payload["altitude"] = "{0:.4f}".format(self.bme280.altitude)
+        __payload["temperature"] = "{0:.1f}".format(self.bme280.temperature)
+        __payload["humidity"] = "{0:.0f}".format(self.bme280.gas)
+        __payload["pressure"] = "{0:.0f}".format(self.bme280.pressure)
+        __payload["altitude"] = "{0:.0f}".format(self.bme280.altitude)
         t = Temp(self.bme280.temperature, 'c')
         dewPoint = dew_point(temperature=t, humidity=self.bme280.humidity)
-        __payload["dewPoint"] = dewPoint
+        __payload["dewPoint"] = "{0:.1f}".format(dewPoint)
     except:
       pass
  
