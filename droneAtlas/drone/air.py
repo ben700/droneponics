@@ -95,46 +95,46 @@ class SensorList:
         self.bme680 = None
         self.bme280 = None
 
-  def payload(self, payload):
+  def payload(self, __payload):
     try:
-      payload["devicetime"] = time.time()
+      __payload["devicetime"] = time.time()
       if(self.bme680 is not None):
-        payload["sensorType"] = "bme680"
-        payload["voc"] = "{0:.4f}".format(self.bme680.gas)
-        payload["temperature"] = "{0:.4f}".format(self.bme680.temperature)
-        payload["humidity"] = "{0:.4f}".format(self.bme680.gas)
-        payload["pressure"] = "{0:.4f}".format(self.bme680.pressure)
-        payload["altitude"] = "{0:.4f}".format(self.bme680.altitude)
-        t = Temp(self.bme680.temperature, 'c')
-        dewPoint = dew_point(temperature=t, humidity=self.bme680.humidity)
-        payload["dewPoint"] = dewPoint
+        __payload["sensorType"] = "bme680"
+        __payload["voc"] = "{0:.4f}".format(self.bme680.gas)
+        __payload["temperature"] = "{0:.4f}".format(self.bme680.temperature)
+        __payload["humidity"] = "{0:.4f}".format(self.bme680.gas)
+        __payload["pressure"] = "{0:.4f}".format(self.bme680.pressure)
+        __payload["altitude"] = "{0:.4f}".format(self.bme680.altitude)
+       # t = Temp(self.bme680.temperature, 'c')
+       # dewPoint = dew_point(temperature=t, humidity=self.bme680.humidity)
+      #  __payload["dewPoint"] = dewPoint
       elif(bme280 is not None):           
         print("payload for BME280")
-        payload["sensorType"] = "bme280"
-        payload["temperature"] = "{0:.4f}".format(self.bme280.temperature)
-        payload["humidity"] = "{0:.4f}".format(self.bme280.gas)
-        payload["pressure"] = "{0:.4f}".format(self.bme280.pressure)
-        payload["altitude"] = "{0:.4f}".format(self.bme280.altitude)
+        __payload["sensorType"] = "bme280"
+        __payload["temperature"] = "{0:.4f}".format(self.bme280.temperature)
+        __payload["humidity"] = "{0:.4f}".format(self.bme280.gas)
+        __payload["pressure"] = "{0:.4f}".format(self.bme280.pressure)
+        __payload["altitude"] = "{0:.4f}".format(self.bme280.altitude)
         t = Temp(self.bme280.temperature, 'c')
         dewPoint = dew_point(temperature=t, humidity=self.bme280.humidity)
-        payload["dewPoint"] = dewPoint
+        __payload["dewPoint"] = dewPoint
     except:
       pass
  
     try:
       if (self.tsl is not None):
         print("payload for tsl")
-        payload["lux"] = "{0:.0f}".format(self.tsl.lux)
-        payload["infrared"] = "{0:d}".format(self.tsl.infrared)
-        payload["visible"] = "{0:d}".format(self.tsl.visible)
-        payload["full_spectrum"] = "{0:d}".format(self.tsl.full_spectrum)
+        __payload["lux"] = "{0:.0f}".format(self.tsl.lux)
+        __payload["infrared"] = "{0:d}".format(self.tsl.infrared)
+        __payload["visible"] = "{0:d}".format(self.tsl.visible)
+        __payload["full_spectrum"] = "{0:d}".format(self.tsl.full_spectrum)
     except:
       pass
 
     try:
       mhz19b = mh_z19.read()  
       if mhz19b is not None:
-        payload["CO2"] = '{0:d}'.format(mhz19b['co2'])
+        __payload["CO2"] = '{0:d}'.format(mhz19b['co2'])
     except:
       pass
     print("Completed payload")
