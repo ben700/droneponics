@@ -38,3 +38,20 @@ def fixMe():
 def noSUDO():
     os.system("sudo chmod 777 /dev/serial0")
     os.system("sudo chown pi:pi /dev/serial0")
+    
+def getserial():
+  # Extract serial from cpuinfo file
+  cpuserial = "0000000000000000"
+  try:
+    # p = subprocess.Popen(['i2cdetect', '-y','1'],stdout=subprocess.PIPE,)
+    # str(p.stdout.readline())
+    
+    f = open('/proc/cpuinfo','r')
+    for line in f:
+      if line[0:6]=='Serial':
+        cpuserial = line[10:26]
+    f.close()
+  except:
+    cpuserial = "ERROR000000000"
+
+  return cpuserial
