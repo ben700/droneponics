@@ -137,3 +137,4 @@ class SensorList:
         payload["CO2"] = '{0:d}'.format(mhz19b['co2'])
     except:
       pass
+    print("Completed payload")
