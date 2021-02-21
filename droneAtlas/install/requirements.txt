@@ -3,6 +3,9 @@ paho-mqtt==1.5.1
 cryptography>=3.3.1,<4.0.0
 get-mac==0.2.1
 
+
+google-cloud-error-reporting==1.1.0
+google-cloud-logging==2.2.0
 meteocalc==1.1.0
 adafruit-circuitpython-bme680==3.3.1
 adafruit-circuitpython-bme280==2.5.3
