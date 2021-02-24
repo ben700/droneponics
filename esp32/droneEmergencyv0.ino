@@ -12,6 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *****************************************************************************/
+#include <DroneSensor.h>
 
 #if defined(ARDUINO_SAMD_MKR1000) or defined(ESP8266)
 #define __SKIP_ESP32__
@@ -38,11 +39,13 @@ void loop(){
 
 #ifdef __ESP32_MQTT_H__
 #include "esp32-mqtt.h"
+DroneSensor *sensors;
 void setup() {
   // put your setup code here, to run once:
   Serial.begin(115200);
   pinMode(LED_BUILTIN, OUTPUT);
   setupCloudIoT();
+  sensors = new DroneSensor(WiFi.macAddress(), WiFi.localIP().toString(), device_id.toString());
   pinMode(pushButton, OUTPUT);
 }
 
@@ -54,7 +57,9 @@ void loop() {
   if (!mqttClient->connected()) {
     connect();
   }
-
+ 
+  publishBoot(sensors->bootPayload(String(timeClient.getEpochTime())));
+  
   // TODO: replace with your code
   // publish a message roughly every second.
   if (millis() - lastMillis > 60000) {
