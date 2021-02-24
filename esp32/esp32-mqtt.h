@@ -98,6 +98,14 @@ void connectWifi(){
 ///////////////////////////////
 // Orchestrates various methods from preceeding code.
 ///////////////////////////////
+void publishBoot(String payload)
+{
+
+  Serial.print("Sending Droneponics boot data to goolge ... ");
+  Serial.println(mqtt->publishTelemetry(deviceBootTopic, payload) ? "Ready" : "Failed!");
+
+}
+
 bool publishTelemetry(String data){
   return mqtt->publishTelemetry(data);
 }
