@@ -29,6 +29,16 @@
 void messageReceived(String &topic, String &payload){
   Serial.println("incoming: " + topic + " - " + payload);
 
+    StaticJsonDocument<200> doc;
+  DeserializationError error = deserializeJson(doc, payload);
+  if (error) {
+    Serial.print(F("deserializeJson() failed: "));
+    Serial.println(error.f_str());
+    return;
+  }
+  
+  serializeJsonPretty(doc, Serial);
+    
   
 }
 ///////////////////////////////
