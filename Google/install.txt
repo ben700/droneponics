@@ -28,9 +28,13 @@ sudo pip3 install cryptography
 
 openssl req -x509 -newkey rsa:2048 -keyout demo_private.pem -nodes -out demo.pub -subj “/CN=unused”
 
-openssl ecparam -genkey -name prime256v1 -noout -out drone_private.pem
-openssl ec -in drone_private.pem -pubout -out drone_public.pem
-openssl ec -in drone_private.pem -noout -text
+openssl ecparam -genkey -name prime256v1 -noout -out droneEmergency_private.pem
+openssl ec -in droneEmergency_private.pem -pubout -out droneEmergency_public.pem
+openssl ec -in droneEmergency_private.pem -noout -text
+
+2c:c0:14:04:13:e6:80:ed:bb:08:0e:09:00:92:c1:
+    a7:f6:08:78:e4:a8:71:96:9e:4d:64:9a:36:d1:f7:
+    64:ed
 
 cat demo.pub
 
