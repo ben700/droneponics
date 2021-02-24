@@ -26,6 +26,9 @@ const char* location = "europe-west1";
 const char* registry_id = "droneDevice";
 const char* device_id = "droneEmergency";
 
+const char* deviceBootTopic = "/deviceBoot";
+const char* sensorReadingTopic = "/sensorReading";
+
 
 // Configuration for NTP
 const char* ntp_primary = "pool.ntp.org";
