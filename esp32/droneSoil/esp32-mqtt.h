@@ -47,7 +47,7 @@ Adafruit_seesaw ss;
 String getDefaultSensor(){
   float tempC = ss.getTemp();
   uint16_t capread = ss.touchRead(0);
-  return "temperature: " + String(tempC) + ", capacitive: " + String(capread) ;
+  return "timestamp: " + String(time(nullptr)) + "rootTemp: " + String(tempC) + ", moisture: " + String(capread) ;
 }
 
 String getJwt(){
