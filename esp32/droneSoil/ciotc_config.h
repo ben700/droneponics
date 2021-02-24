@@ -22,7 +22,7 @@ const char* password = "33HartleyAvenue";
 const char* project_id = "drone-302200";
 const char* location = "europe-west1";
 const char* registry_id = "droneDevice";
-const char* device_id = "droneSoil";
+const char* device_id = "droneSoilESP";
 
 const char* deviceBootTopic = "/deviceBoot";
 const char* sensorReadingTopic = "/sensorReading";
