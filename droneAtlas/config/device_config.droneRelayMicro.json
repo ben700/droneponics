@@ -3,8 +3,8 @@
     "DEVICE_ID": "droneRelayMicro",
     "PRIVATE_KEY": "certs/droneRelayMicro_private_RSA.pem",
     "ALGORITHM": "RS256",
-    "PRIVATE_KEY_BACKUP": "certs/droneRelayMicro_private.pem",
-    "ALGORITHM_BACKUP": "ES256",
+    "PRIVATE_KEY_BACKUP": "certs/droneRelayMicro_private_RSA.pem",
+    "ALGORITHM_BACKUP": "RS256",
     "CA_CERTS": "certs/cacert.pem",
     "DEVICE_TYPE" : "droneRelayMicro"
   }
