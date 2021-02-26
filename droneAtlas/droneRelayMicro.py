@@ -263,14 +263,15 @@ def main():
         
     while True:
         try:
+          payload = {}
           state = GPIO.input(18)
           if state:
             print('on')
+            payload["relay1"] = "On"
           else:
             print('off')
-    
-        #//  payload = {"relay1 : " + str(state)}
-        
+            payload["relay1"] = "Off"
+            
         except :
             print('Except! Building payload.')    
             
@@ -282,9 +283,6 @@ def main():
                 print(client.publish(mqtt_topic, serializedPayload, qos=0))
               elif (len(serializedPayload) < 4):
                 print("Error: No payload Data")
-                print("Going to fix it! In 30 seconds")
-                time.sleep(30)
-                drone.fixMe()
             except:                 
               print("Failed : publishing " + serializedPayload)
             
