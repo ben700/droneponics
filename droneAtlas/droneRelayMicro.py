@@ -272,6 +272,8 @@ def main():
             print('off')
             payload["relay1"] = "Off"
             
+           payload["deviceTime"]  =  int(time.time())
+          
         except :
             print('Except! Building payload.')    
             
