@@ -263,13 +263,13 @@ def main():
         
     while True:
         try:
-          state = GPIO.input(26)
+          state = GPIO.input(18)
           if state:
             print('on')
           else:
             print('off')
     
-            payload = {"relay1 : " + str(state)}
+        #//  payload = {"relay1 : " + str(state)}
         
         except :
             print('Except! Building payload.')    
