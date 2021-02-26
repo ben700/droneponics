@@ -33,6 +33,10 @@ import sys
 import os
 import drone
 refreshRate = 60 #How often to update firebase with a sensor measurement i.e every 60 second
+GPIO.setwarnings(False)
+GPIO.setmode(GPIO.BCM)             # choose BCM or BOARD  
+GPIO.setup(18, GPIO.OUT)           # set GPIO24 as an output   
+  
 
 # [START iot_mqtt_jwt]
 def create_jwt(project_id, private_key_file, algorithm):
@@ -258,12 +262,8 @@ def main():
         
     while True:
         try:
-            payload = {}
-            sensorList = drone.SensorList(deviceType)
-        except :
-            print('Except! Building SensorList.')            
-        try:            
-            sensorList.payload(payload)
+            payload = {"relay1 : " + str(GPIO.input(18))}
+        
         except :
             print('Except! Building payload.')    
             
