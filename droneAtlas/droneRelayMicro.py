@@ -32,6 +32,7 @@ import time
 import sys
 import os
 import drone
+import RPi.GPIO as GPIO    
 refreshRate = 60 #How often to update firebase with a sensor measurement i.e every 60 second
 GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BCM)             # choose BCM or BOARD  
