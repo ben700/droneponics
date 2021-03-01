@@ -249,9 +249,8 @@ def main():
 
     # Process network events on new thread
     client.loop_start()
-    
+    print("Google : Waiting to be connected")
     while not connected:
-        print("Failed : Waiting to be connected")
         continue
     print("Success : Connected")
     
@@ -301,7 +300,7 @@ def main():
       except KeyboardInterrupt:
          sys.exit('\nCtrl-C Pressed! Exiting.\n')
       except :
-          print('\nExcept! Reading moisture Exiting.\n')            
+          sys.exit('\nExcept! Reading moisture Exiting.\n')            
         
 if __name__ == '__main__':
     main()
