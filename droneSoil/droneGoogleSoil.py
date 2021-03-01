@@ -266,10 +266,12 @@ def main():
           payload["timestamp"] = int(datetime.datetime.now().strftime("%s")) * 1000
           
           if (chirp.moist > max_moist):
+            print("max_moist update")
             max_moist = chirp.moist
             chirp = chirp.Chirp(address=i2c_address,read_moist=True,read_temp=True,read_light=True,min_moist=min_moist,max_moist=max_moist,temp_scale='celsius',temp_offset=0)
           
           if (chirp.moist < min_moist):
+            print("min_moist update")
             min_moist = chirp.moist
             chirp = chirp.Chirp(address=i2c_address,read_moist=True,read_temp=True,read_light=True,min_moist=min_moist,max_moist=max_moist,temp_scale='celsius',temp_offset=0)
           
