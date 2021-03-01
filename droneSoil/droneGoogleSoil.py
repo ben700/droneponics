@@ -94,7 +94,8 @@ def on_connect(unused_client, unused_userdata, unused_flags, rc):
 def on_disconnect(unused_client, unused_userdata, rc):
     """Paho callback for when a device disconnects."""
     print('on_disconnect', error_str(rc))
-    os.execl('runme.sh', '')
+    os.execv(sys.argv[0], sys.argv)
+    sys.exit(error_str(rc))
     # Since a disconnect occurred, the next loop iteration will wait with
     # exponential backoff.
     global should_backoff
