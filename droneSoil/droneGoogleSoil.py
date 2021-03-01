@@ -117,11 +117,11 @@ def on_message(unused_client, unused_userdata, message):
       return
     
     data = json.loads(payload)
-    if hasattr(data , "minMoist"):
+    if 'minMoist' in data:
       print("New min_moist")
       min_moist  =  data["minMoist"]
       print("min_moist update")
-    if hasattr(data , "maxMoist"): 
+    if 'maxMoist' in data:
       print("New max_moist")
       max_moist  =  data["maxMoist"]
       print("max_moist update")
