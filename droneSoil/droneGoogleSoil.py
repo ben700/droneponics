@@ -107,16 +107,18 @@ def on_publish(unused_client, unused_userdata, unused_mid):
 
 def on_message(unused_client, unused_userdata, message):
     """Callback when the device receives a message on a subscription."""
-    global  ph_Dose
-    global  ec_Dose
+    global  max_moist
+    global  min_moist
     payload = message.payload.decode('utf-8')
     print('Received message \'{}\' on topic \'{}\' with Qos {}'.format(
             payload, message.topic, str(message.qos)))
 
     if not payload:
       return
-
-
+    
+    data = json.loads(payload)
+    min_moist  =  data['minMoist']
+    max_moist  =  data['maxMoist']
 
 def get_client(
         project_id, cloud_region, registry_id, device_id, private_key_file,
