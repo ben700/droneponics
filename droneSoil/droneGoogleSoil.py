@@ -117,10 +117,14 @@ def on_message(unused_client, unused_userdata, message):
       return
     
     data = json.loads(payload)
-    min_moist  =  data['minMoist']
-    print("min_moist update")
-    max_moist  =  data['maxMoist']
-    print("max_moist update")
+    if hasattr(data , 'minMoist'):
+      print("New min_moist")
+      min_moist  =  data['minMoist']
+      print("min_moist update")
+    if hasattr(data , 'maxMoist'): 
+      print("New max_moist")
+      max_moist  =  data['maxMoist']
+      print("max_moist update")
 
 def get_client(
         project_id, cloud_region, registry_id, device_id, private_key_file,
