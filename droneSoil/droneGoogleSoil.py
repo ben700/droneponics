@@ -178,7 +178,7 @@ def get_client(
      
     
     # Subscribe to the config topic.
-    client.subscribe(mqtt_config_topic, qos=0)
+    client.subscribe(mqtt_config_topic, qos=1)
 
     
 
