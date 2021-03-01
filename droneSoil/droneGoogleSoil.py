@@ -118,7 +118,9 @@ def on_message(unused_client, unused_userdata, message):
     
     data = json.loads(payload)
     min_moist  =  data['minMoist']
+    print("min_moist update")
     max_moist  =  data['maxMoist']
+    print("max_moist update")
 
 def get_client(
         project_id, cloud_region, registry_id, device_id, private_key_file,
