@@ -211,7 +211,7 @@ def main():
     global connected
     connected = False
     global hr_limit
-
+    global refreshRate
     #args = parse_command_line_args()
 
     mqtt_topic = '/devices/{}/events'.format(device_id)
@@ -246,6 +246,17 @@ def main():
         print("Failed : Wasn't connected after boot")
         
     while True:
+        seconds_since_issue = (datetime.datetime.utcnow() - jwt_iat).seconds
+        if seconds_since_issue > 60 * jwt_exp_mins:
+            print('Refreshing token after {}s').format(seconds_since_issue)
+            jwt_iat = datetime.datetime.utcnow()
+            client.loop()
+            client.disconnect()
+            client = get_client(
+                project_id, cloud_region, registry_id, device_id,
+                private_key_file, algorithm, private_key_file_backup, algorithm_backup, ca_certs,
+                mqtt_bridge_hostname, mqtt_bridge_port)
+        
         try:
             payload = {}
             sensorList = drone.AtlasSensorList()
@@ -267,8 +278,8 @@ def main():
                 print(client.publish(mqtt_topic, serializedPayload, qos=0))
             elif (len(serializedPayload) < 4):
                 print("Error: No payload Data")
-                print("Going to fix it")
-                drone.fixMe()
+     #           print("Going to fix it")
+     #           drone.fixMe()
                 
                 
                 
