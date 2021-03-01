@@ -35,6 +35,7 @@ import chirp
 # The highest and lowest value the individual sensor outputs.
 min_moist = 240
 max_moist = 790
+sample_Rate = 60
 
 def initializeTheSensor():
   return chirp.Chirp(address=0x20,
@@ -109,6 +110,7 @@ def on_message(unused_client, unused_userdata, message):
     """Callback when the device receives a message on a subscription."""
     global  max_moist
     global  min_moist
+    global sample_Rate
     payload = message.payload.decode('utf-8')
     print('Received message \'{}\' on topic \'{}\' with Qos {}'.format(
             payload, message.topic, str(message.qos)))
@@ -118,14 +120,13 @@ def on_message(unused_client, unused_userdata, message):
     
     data = json.loads(payload)
     if 'minMoist' in data:
-      print("New min_moist")
       min_moist  =  data["minMoist"]
-      print("min_moist update")
     if 'maxMoist' in data:
-      print("New max_moist")
       max_moist  =  data["maxMoist"]
-      print("max_moist update")
+    if 'sampleRate' in data:
+      sample_Rate  =  data["sampleRate"]
 
+   
 def get_client(
         project_id, cloud_region, registry_id, device_id, private_key_file,
         algorithm, private_key_file_backup, algorithm_backup, ca_certs, mqtt_bridge_hostname, mqtt_bridge_port):
@@ -230,6 +231,7 @@ def main():
     global soilSensor
     global min_moist
     global max_moist
+    global sample_Rate
 
     #args = parse_command_line_args()
 
@@ -268,6 +270,16 @@ def main():
       payload = {}
       try:
           soilSensor.trigger()
+          if (soilSensor.moist > max_moist):
+            max_moist = soilSensor.moist
+            soilSensor = initializeTheSensor()
+            soilSensor.trigger()
+            
+          if (soilSensor.moist < min_moist):
+            min_moist = soilSensor.moist
+            soilSensor = initializeTheSensor()
+            soilSensor.trigger()
+       
           payload["moisture"] = soilSensor.moist
           payload["moisturePercent"] = soilSensor.moist_percent 
           payload["rootTemp"] = soilSensor.temp
@@ -276,18 +288,7 @@ def main():
           payload["maxMoist"] = max_moist
           payload["timestamp"] = int(datetime.datetime.now().strftime("%s")) * 1000
           
-          if (soilSensor.moist > max_moist):
-            print("max_moist update")
-            max_moist = soilSensor.moist
-            soilSensor = initializeTheSensor()
-            
-          if (soilSensor.moist < min_moist):
-            print("min_moist update")
-            min_moist = soilSensor.moist
-            soilSensor = initializeTheSensor()
-            
-            
-
+       
           serializedPayload= json.dumps(payload, sort_keys=False, indent=2)
     
           if (connected and len(serializedPayload) > 0):
@@ -295,10 +296,10 @@ def main():
               print(client.publish(mqtt_topic, serializedPayload, qos=0))
 
           # Send events every second. limit to 1 per second due to fs limits
-          time.sleep(60)
+          time.sleep(sample_Rate)
       
       except KeyboardInterrupt:
-          print('\nCtrl-C Pressed! Exiting.\n')
+         sys.exit('\nCtrl-C Pressed! Exiting.\n')
       except :
           print('\nExcept! Reading moisture Exiting.\n')            
         
