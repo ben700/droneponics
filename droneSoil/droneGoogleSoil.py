@@ -46,7 +46,7 @@ def initializeTheSensor():
                     max_moist=max_moist,
                     temp_scale='celsius',
                     temp_offset=0)
-chirp = initializeTheSensor()
+soilSensor = initializeTheSensor()
 # [START iot_mqtt_jwt]
 def create_jwt(project_id, private_key_file, algorithm):
 
@@ -220,6 +220,9 @@ def main():
     global connected
     connected = False
     global hr_limit
+    global soilSensor
+    global min_moist
+    global max_moist
 
     #args = parse_command_line_args()
 
@@ -258,38 +261,39 @@ def main():
       payload = {}
       try:
           chirp.trigger()
-          payload["moisture"] = chirp.moist
-          payload["moisturePercent"] = chirp.moist_percent 
-          payload["rootTemp"] = chirp.temp
-          payload["rootLight"] = chirp.light
+          payload["moisture"] = soilSensor.moist
+          payload["moisturePercent"] = soilSensor.moist_percent 
+          payload["rootTemp"] = soilSensor.temp
+          payload["rootLight"] = soilSensor.light
           payload["minMoist"] = min_moist
           payload["maxMoist"] = max_moist
           payload["timestamp"] = int(datetime.datetime.now().strftime("%s")) * 1000
           
-          if (chirp.moist > max_moist):
+          if (soilSensor.moist > max_moist):
             print("max_moist update")
-            max_moist = chirp.moist
-            chirp = initializeTheSensor()
+            max_moist = soilSensor.moist
+            soilSensor = initializeTheSensor()
             
-          if (chirp.moist < min_moist):
+          if (soilSensor.moist < min_moist):
             print("min_moist update")
-            min_moist = chirp.moist
-            chirp = initializeTheSensor()
+            min_moist = soilSensor.moist
+            soilSensor = initializeTheSensor()
             
             
+
+          serializedPayload= json.dumps(payload, sort_keys=False, indent=2)
+    
+          if (connected and len(serializedPayload) > 0):
+              print('publishing ' + str(serializedPayload) + ' on ' + mqtt_topic)
+              print(client.publish(mqtt_topic, serializedPayload, qos=0))
+
+          # Send events every second. limit to 1 per second due to fs limits
+          time.sleep(60)
+      
       except KeyboardInterrupt:
           print('\nCtrl-C Pressed! Exiting.\n')
       except :
           print('\nExcept! Reading moisture Exiting.\n')            
         
-      serializedPayload= json.dumps(payload, sort_keys=False, indent=2)
-    
-      if (connected and len(serializedPayload) > 0):
-          print('publishing ' + str(serializedPayload) + ' on ' + mqtt_topic)
-          print(client.publish(mqtt_topic, serializedPayload, qos=0))
-
-      # Send events every second. limit to 1 per second due to fs limits
-      time.sleep(60)
-
 if __name__ == '__main__':
     main()
