@@ -36,8 +36,9 @@ import chirp
 i2c_address = 0x20
 min_moist = 240
 max_moist = 790
-# Initialize the sensor.
-chirp = chirp.Chirp(address=i2c_address,
+
+def initializeTheSensor():
+  return chirp.Chirp(address=i2c_address,
                     read_moist=True,
                     read_temp=True,
                     read_light=True,
@@ -45,7 +46,7 @@ chirp = chirp.Chirp(address=i2c_address,
                     max_moist=max_moist,
                     temp_scale='celsius',
                     temp_offset=0)
-
+chirp = initializeTheSensor()
 # [START iot_mqtt_jwt]
 def create_jwt(project_id, private_key_file, algorithm):
 
@@ -268,13 +269,13 @@ def main():
           if (chirp.moist > max_moist):
             print("max_moist update")
             max_moist = chirp.moist
-            chirp = chirp.Chirp(address=i2c_address,read_moist=True,read_temp=True,read_light=True,min_moist=min_moist,max_moist=max_moist,temp_scale='celsius',temp_offset=0)
-          
+            chirp = initializeTheSensor()
+            
           if (chirp.moist < min_moist):
             print("min_moist update")
             min_moist = chirp.moist
-            chirp = chirp.Chirp(address=i2c_address,read_moist=True,read_temp=True,read_light=True,min_moist=min_moist,max_moist=max_moist,temp_scale='celsius',temp_offset=0)
-          
+            chirp = initializeTheSensor()
+            
             
       except KeyboardInterrupt:
           print('\nCtrl-C Pressed! Exiting.\n')
