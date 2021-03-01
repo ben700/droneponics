@@ -30,13 +30,14 @@ import paho.mqtt.client as mqtt
 import drone
 import chirp
 
+
 # These values needs to be calibrated for the percentage to work!
 # The highest and lowest value the individual sensor outputs.
+i2c_address = 0x20
 min_moist = 240
 max_moist = 790
-
 # Initialize the sensor.
-chirp = chirp.Chirp(address=0x20,
+chirp = chirp.Chirp(address=i2c_address,
                     read_moist=True,
                     read_temp=True,
                     read_light=True,
@@ -263,6 +264,15 @@ def main():
           payload["minMoist"] = min_moist
           payload["maxMoist"] = max_moist
           payload["timestamp"] = int(datetime.datetime.now().strftime("%s")) * 1000
+          
+          if (chirp.moist > max_moist):
+            max_moist = chirp.moist
+            chirp = chirp.Chirp(address=i2c_address,read_moist=True,read_temp=True,read_light=True,min_moist=min_moist,max_moist=max_moist,temp_scale='celsius',temp_offset=0)
+          
+          if (chirp.moist < min_moist):
+            min_moist = chirp.moist
+            chirp = chirp.Chirp(address=i2c_address,read_moist=True,read_temp=True,read_light=True,min_moist=min_moist,max_moist=max_moist,temp_scale='celsius',temp_offset=0)
+          
             
       except KeyboardInterrupt:
           print('\nCtrl-C Pressed! Exiting.\n')
