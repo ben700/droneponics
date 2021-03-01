@@ -266,6 +266,17 @@ def main():
         print("Failed : Wasn't connected after boot")
         
     while True:
+      seconds_since_issue = (datetime.datetime.utcnow() - jwt_iat).seconds
+      if seconds_since_issue > 60 * jwt_exp_mins:
+        print('Refreshing token after {}s').format(seconds_since_issue)
+        jwt_iat = datetime.datetime.utcnow()
+        client.loop()
+        client.disconnect()
+        client = get_client(
+          project_id, cloud_region, registry_id, device_id,
+          private_key_file, algorithm, private_key_file_backup, algorithm_backup, ca_certs,
+          mqtt_bridge_hostname, mqtt_bridge_port)
+            
       payload = {}
       try:
           soilSensor.trigger()
