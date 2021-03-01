@@ -33,12 +33,11 @@ import chirp
 
 # These values needs to be calibrated for the percentage to work!
 # The highest and lowest value the individual sensor outputs.
-i2c_address = 0x20
 min_moist = 240
 max_moist = 790
 
 def initializeTheSensor():
-  return chirp.Chirp(address=i2c_address,
+  return chirp.Chirp(address=0x20,
                     read_moist=True,
                     read_temp=True,
                     read_light=True,
@@ -260,7 +259,7 @@ def main():
     while True:
       payload = {}
       try:
-          chirp.trigger()
+          soilSensor.trigger()
           payload["moisture"] = soilSensor.moist
           payload["moisturePercent"] = soilSensor.moist_percent 
           payload["rootTemp"] = soilSensor.temp
