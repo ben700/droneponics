@@ -1,0 +1,119 @@
+{
+  "project_info": {
+    "project_number": "888566925752",
+    "firebase_url": "https://drone-302200-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "drone-302200",
+    "storage_bucket": "drone-302200.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:888566925752:android:d12ab98d629e221eaf274d",
+        "android_client_info": {
+          "package_name": "com.droneponics.devicemanager"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "888566925752-mtad56s1ibd73cfhvopj9bk6f0o6opbl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDIJwAdVB3CEpaws4NS5IHe5wHlI0R590Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "888566925752-kdvrqpt377avvjlfsd8vm4ifvh61qtc8.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "888566925752-6mvkpts1p0mls89b4hkg3g1bmfnf2906.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.droneponics.droneMobile"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:888566925752:android:1db4df3f44aadb5faf274d",
+        "android_client_info": {
+          "package_name": "com.droneponics.dronemanager"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "888566925752-mtad56s1ibd73cfhvopj9bk6f0o6opbl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDIJwAdVB3CEpaws4NS5IHe5wHlI0R590Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "888566925752-kdvrqpt377avvjlfsd8vm4ifvh61qtc8.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "888566925752-6mvkpts1p0mls89b4hkg3g1bmfnf2906.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.droneponics.droneMobile"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:888566925752:android:d0cdadd40298dbbbaf274d",
+        "android_client_info": {
+          "package_name": "com.google.samples.quickstart.config"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "888566925752-mtad56s1ibd73cfhvopj9bk6f0o6opbl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDIJwAdVB3CEpaws4NS5IHe5wHlI0R590Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "888566925752-kdvrqpt377avvjlfsd8vm4ifvh61qtc8.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "888566925752-6mvkpts1p0mls89b4hkg3g1bmfnf2906.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.droneponics.droneMobile"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
