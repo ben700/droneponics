@@ -25,7 +25,7 @@ NTPClient timeClient(ntpUDP);
 
 const char* project_id = "drone-302200";
 const char* location = "europe-west1";
-const char* registry_id = "droneDevice";
+const char* registry_id = "droneDeviceProduction";
 const char* device_id = "droneESPAir";
 
 // Time (seconds) to expire token += 20 minutes for drift
